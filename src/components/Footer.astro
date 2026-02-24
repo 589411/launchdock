@@ -1,0 +1,37 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-surface-lighter bg-surface-light">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">🚀</span>
+        <span class="text-sm text-text-secondary">
+          LaunchDock — 把 AI 技術落地的好助手
+        </span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a
+          href="https://github.com/589411/launchdock"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-text-muted hover:text-text-secondary transition-colors text-sm"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://github.com/589411/launchdock/discussions"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-text-muted hover:text-text-secondary transition-colors text-sm"
+        >
+          討論區
+        </a>
+      </div>
+    </div>
+    <p class="text-center text-text-muted text-xs mt-4">
+      &copy; {year} LaunchDock. Built with Astro.
+    </p>
+  </div>
+</footer>

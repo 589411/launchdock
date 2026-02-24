@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('articles', ({ data }) => !data.archived);
+
+// Group by scene
+const sceneMap = new Map<string, typeof allArticles>();
+for (const article of allArticles) {
+  const scene = article.data.scene;
+  if (!sceneMap.has(scene)) sceneMap.set(scene, []);
+  sceneMap.get(scene)!.push(article);
+}
+
+// Sort articles within each scene by order
+for (const [, articles] of sceneMap) {
+  articles.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+}
+
+const sceneOrder = ['打破資訊孤島', '安裝與設定', '工作流自動化', '知識管理'];
+const sceneIcons: Record<string, string> = {
+  '打破資訊孤島': '🔗',
+  '安裝與設定': '🔧',
+  '工作流自動化': '⚡',
+  '知識管理': '📚',
+};
+---
+
+<BaseLayout title="場景教學">
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold mb-4">場景教學</h1>
+    <p class="text-text-secondary mb-12">
+      從你的問題出發，找到解決方案。每篇文章都是可操作的實戰筆記。
+    </p>
+
+    {sceneOrder.map((sceneName) => {
+      const articles = sceneMap.get(sceneName);
+      if (!articles || articles.length === 0) return null;
+      return (
+        <section class="mb-12">
+          <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+            <span>{sceneIcons[sceneName] || '📄'}</span>
+            {sceneName}
+          </h2>
+          <div class="space-y-3">
+            {articles.map((article) => (
+              <a
+                href={`/articles/${article.id}`}
+                class="block p-5 rounded-lg bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+              >
+                <div class="flex items-center justify-between gap-4">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class={`text-xs px-2 py-0.5 rounded-full ${
+                        article.data.difficulty === '入門' ? 'bg-green-500/20 text-green-400' :
+                        article.data.difficulty === '中級' ? 'bg-yellow-500/20 text-yellow-400' :
+                        'bg-red-500/20 text-red-400'
+                      }`}>
+                        {article.data.difficulty}
+                      </span>
+                    </div>
+                    <h3 class="font-medium group-hover:text-brand-light transition-colors">
+                      {article.data.title}
+                    </h3>
+                    <p class="text-text-muted text-sm mt-1">{article.data.description}</p>
+                  </div>
+                  <span class="text-text-muted group-hover:text-brand-light transition-colors shrink-0">→</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      );
+    })}
+
+    {allArticles.length === 0 && (
+      <div class="text-center py-20">
+        <p class="text-4xl mb-4">🚧</p>
+        <p class="text-text-secondary">教學文章正在準備中，敬請期待！</p>
+        <a
+          href="https://github.com/589411/launchdock/discussions"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block mt-4 text-brand-light hover:text-brand transition-colors"
+        >
+          先到討論區聊聊？
+        </a>
+      </div>
+    )}
+  </div>
+</BaseLayout>

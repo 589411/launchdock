@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SceneCard from '../components/SceneCard.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('articles', ({ data }) => !data.archived);
+
+// Group articles by scene
+const sceneMap = new Map<string, typeof allArticles>();
+for (const article of allArticles) {
+  const scene = article.data.scene;
+  if (!sceneMap.has(scene)) sceneMap.set(scene, []);
+  sceneMap.get(scene)!.push(article);
+}
+
+// Scene metadata
+const scenes = [
+  { key: '打破資訊孤島', icon: '🔗', description: '告別 copy-paste，讓 AI 工具之間的資訊自動流動' },
+  { key: '安裝與設定', icon: '🔧', description: '從零開始安裝 OpenClaw，常見卡關問題全解析' },
+  { key: '工作流自動化', icon: '⚡', description: '把重複性工作變成一鍵完成的自動化流程' },
+  { key: '知識管理', icon: '📚', description: '用 OpenClaw 打造你的個人知識庫' },
+];
+
+// Get latest articles
+const latestArticles = [...allArticles].sort((a, b) =>
+  new Date(b.data.createdAt).getTime() - new Date(a.data.createdAt).getTime()
+).slice(0, 5);
+---
+
+<BaseLayout title="首頁">
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 py-20 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        把 AI 技術
+        <span class="text-brand-light">落地</span>
+        的好助手
+      </h1>
+      <p class="text-xl text-text-secondary max-w-2xl mx-auto mb-8 leading-relaxed">
+        你看了影片、讀了文章，但實作時卡關了？<br />
+        LaunchDock 幫你把散落在各處的 AI 知識串起來，一起學、一起做。
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/articles"
+          class="px-8 py-3 bg-brand hover:bg-brand-dark text-white rounded-lg font-medium transition-colors"
+        >
+          開始探索場景教學
+        </a>
+        <a
+          href="https://github.com/589411/launchdock/discussions"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-8 py-3 border border-surface-lighter hover:border-brand/50 text-text-secondary hover:text-text-primary rounded-lg font-medium transition-all"
+        >
+          💬 加入討論
+        </a>
+      </div>
+    </div>
+
+    <!-- Decorative gradient -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand/5 rounded-full blur-3xl -z-10"></div>
+  </section>
+
+  <!-- Pain Point Section -->
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter">
+        <span class="text-2xl mb-3 block">😵</span>
+        <h3 class="font-semibold mb-2">資訊散落各處</h3>
+        <p class="text-text-secondary text-sm">
+          Gemini、ChatGPT、Notion、Discord… 學到的東西分散在 10 個工具裡，找不到也串不起來。
+        </p>
+      </div>
+      <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter">
+        <span class="text-2xl mb-3 block">🎬</span>
+        <h3 class="font-semibold mb-2">影片教學太線性</h3>
+        <p class="text-text-secondary text-sm">
+          YouTube 影片看完覺得會了，實際操作卻卡在某一步。影片沒辦法針對你的問題回答。
+        </p>
+      </div>
+      <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter">
+        <span class="text-2xl mb-3 block">🔗</span>
+        <h3 class="font-semibold mb-2">工具之間不串聯</h3>
+        <p class="text-text-secondary text-sm">
+          每次都手動 copy-paste。OpenClaw 幫你把工具串成自動化流程，但設定過程需要有人帶。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scene Cards -->
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold mb-2">從場景出發</h2>
+    <p class="text-text-secondary mb-8">找到你的問題，我們一起解決。</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {scenes.map((scene) => (
+        <SceneCard
+          icon={scene.icon}
+          title={scene.key}
+          description={scene.description}
+          href={`/articles?scene=${encodeURIComponent(scene.key)}`}
+          articleCount={sceneMap.get(scene.key)?.length || 0}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Latest Articles -->
+  {latestArticles.length > 0 && (
+    <section class="max-w-6xl mx-auto px-4 py-12">
+      <h2 class="text-2xl font-bold mb-2">最新教學</h2>
+      <p class="text-text-secondary mb-8">剛出爐的實戰筆記。</p>
+      <div class="space-y-4">
+        {latestArticles.map((article) => (
+          <a
+            href={`/articles/${article.id}`}
+            class="block p-6 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+          >
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-xs px-2 py-1 rounded-full bg-brand/20 text-brand-light">
+                    {article.data.scene}
+                  </span>
+                  <span class={`text-xs px-2 py-1 rounded-full ${
+                    article.data.difficulty === '入門' ? 'bg-green-500/20 text-green-400' :
+                    article.data.difficulty === '中級' ? 'bg-yellow-500/20 text-yellow-400' :
+                    'bg-red-500/20 text-red-400'
+                  }`}>
+                    {article.data.difficulty}
+                  </span>
+                </div>
+                <h3 class="font-semibold group-hover:text-brand-light transition-colors">
+                  {article.data.title}
+                </h3>
+                <p class="text-text-secondary text-sm mt-1">{article.data.description}</p>
+              </div>
+              <span class="text-text-muted group-hover:text-brand-light transition-colors shrink-0">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="max-w-6xl mx-auto px-4 py-16 text-center">
+    <div class="p-8 rounded-2xl bg-gradient-to-br from-brand/10 to-brand-dark/10 border border-brand/20">
+      <h2 class="text-2xl font-bold mb-3">一起學、一起做</h2>
+      <p class="text-text-secondary mb-6 max-w-lg mx-auto">
+        卡關不可恥，分享你的經驗幫助更多人。加入 LaunchDock 的共學社群。
+      </p>
+      <a
+        href="https://github.com/589411/launchdock/discussions"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-8 py-3 bg-brand hover:bg-brand-dark text-white rounded-lg font-medium transition-colors"
+      >
+        💬 加入討論區
+      </a>
+    </div>
+  </section>
+</BaseLayout>

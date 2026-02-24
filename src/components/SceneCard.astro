@@ -1,0 +1,27 @@
+---
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  href: string;
+  articleCount: number;
+}
+
+const { icon, title, description, href, articleCount } = Astro.props;
+---
+
+<a
+  href={href}
+  class="group block p-6 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all duration-200"
+>
+  <div class="text-3xl mb-3">{icon}</div>
+  <h3 class="text-lg font-semibold mb-2 group-hover:text-brand-light transition-colors">
+    {title}
+  </h3>
+  <p class="text-text-secondary text-sm mb-3 leading-relaxed">
+    {description}
+  </p>
+  <span class="text-text-muted text-xs">
+    {articleCount} 篇教學
+  </span>
+</a>

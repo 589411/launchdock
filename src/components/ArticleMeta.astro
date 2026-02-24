@@ -1,0 +1,29 @@
+---
+interface Props {
+  createdAt: string;
+  verifiedAt: string;
+  archived?: boolean;
+  archivedReason?: string;
+}
+
+const { createdAt, verifiedAt, archived } = Astro.props;
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<div class="flex flex-wrap items-center gap-4 text-sm text-text-muted">
+  <span class="flex items-center gap-1">
+    📝 建立：{formatDate(createdAt)}
+  </span>
+  <span class="flex items-center gap-1">
+    ✅ 最後驗證：{formatDate(verifiedAt)}
+  </span>
+  {archived && (
+    <span class="flex items-center gap-1 text-red-400">
+      📦 已封存
+    </span>
+  )}
+</div>
