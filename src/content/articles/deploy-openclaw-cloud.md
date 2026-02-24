@@ -207,8 +207,10 @@ docker-compose ps
 
 部署完成後，你可以開始學習 OpenClaw 的核心功能：
 
+- ⚙️ [設定模型切換與 Fallback](/articles/openclaw-model-config)
 - 🧩 [Skill：讓 AI 學會可重複的工作流](/articles/openclaw-skill)
 - 🤖 [Agent：你的 AI 分身](/articles/openclaw-agent)
 - 🧠 [Soul：讓 Agent 有記憶和個性](/articles/openclaw-soul)
+- 📱 [串接 Telegram 隨時隨地使用](/articles/telegram-integration)
 
 有問題？到 [首頁討論區](/#discussion) 一起討論！

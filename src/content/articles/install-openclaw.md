@@ -95,6 +95,8 @@ stuckOptions:
 裝好了？可以接著學：
 
 - 📖 [為什麼需要 OpenClaw？](/articles/why-openclaw)
+- ⚙️ [設定模型與 API Key](/articles/openclaw-model-config)
+- 💰 [搞懂 Token 計費](/articles/token-economics)
 - 🧩 [打造你的第一個 Skill](/articles/openclaw-skill)
 - 🤖 [建立自動化 Agent](/articles/openclaw-agent)
 - 👻 [設計 AI 的靈魂：Soul](/articles/openclaw-soul)

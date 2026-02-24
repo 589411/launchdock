@@ -320,4 +320,7 @@ OpenClaw 會記錄每次執行的 log。你可以在管理介面看到每個步�
 
 - 🤖 學習 [Agent：你的 AI 分身](/articles/openclaw-agent)，讓 Agent 自動選擇和組合 Skill
 - 🧠 了解 [Soul：讓 Agent 有記憶和個性](/articles/openclaw-soul)
+- 💬 [Prompt 工程：寫出更好的 Skill Prompt](/articles/prompt-engineering)
+- 🔗 [MCP 協定：讓 Skill 串接外部工具](/articles/mcp-protocol)
+- 📚 [用 Skill 建立知識管理系統](/articles/pkm-system)
 - ☁️ 還沒部署？看 [雲端部署指南](/articles/deploy-openclaw-cloud)

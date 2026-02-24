@@ -108,7 +108,11 @@ OpenClaw 的 Skill 是**可重複的自動化流程**。你設定一次，以後
 2. 然後跟著 [Google API Key 設定指南](/articles/google-api-key-guide) 串接 Google 服務
 3. 試著建立你的第一個 Skill
 
-如果你已經安裝了，想到更多場景：
+如果你已經安裝了，想深入學習：
+- 💬 [Prompt 工程：讓 AI 聽懂你的話](/articles/prompt-engineering)
+- 🔗 [MCP 協定：AI 的 USB 接口](/articles/mcp-protocol)
+- 💰 [Token 經濟學：搞懂 AI 怎麼計費](/articles/token-economics)
+- 📚 [建立你的知識管理系統](/articles/pkm-system)
 - 看看 [工作流自動化](/articles?scene=工作流自動化) 的教學
 - 到 [討論區](/#discussion) 分享你的工作流
 

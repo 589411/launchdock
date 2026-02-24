@@ -177,6 +177,17 @@ Google 有很多名字很像的 API。確認你啟用的是：
 
 ---
 
+## 下一步
+
+API Key 設定好了，接下來：
+
+- 💰 [搞懂 Token 計費，不被帳單嚇到](/articles/token-economics)
+- ⚙️ [設定模型切換策略，省錢又穩定](/articles/openclaw-model-config)
+- 🧩 [寫你的第一個 Skill](/articles/openclaw-skill)
+- 💬 [學 Prompt 技巧讓 AI 回答更好](/articles/prompt-engineering)
+
+---
+
 ## 還是卡住了？
 
 點擊下方的「😵 卡關了」按鈕讓我們知道，或直接到 [首頁討論區](/#discussion) 發問，附上錯誤訊息，我們一起解決！

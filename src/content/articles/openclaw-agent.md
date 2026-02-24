@@ -322,4 +322,7 @@ behavior:
 
 - 🧠 深入了解 [Soul：讓 Agent 有記憶和個性](/articles/openclaw-soul)
 - 🧩 回顧 [Skill：可重複的工作流](/articles/openclaw-skill)
+- 🔗 [MCP 協定：讓 Agent 連接外部工具](/articles/mcp-protocol)
+- ⚙️ [模型設定：讓 Agent 用最合適的模型](/articles/openclaw-model-config)
+- 📱 [把 Agent 串接到 Telegram](/articles/telegram-integration)
 - ☁️ 部署你的 Agent：[雲端部署指南](/articles/deploy-openclaw-cloud)
