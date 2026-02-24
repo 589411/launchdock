@@ -1,4 +1,11 @@
 import { useState, useEffect } from 'react';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import {
+  getFingerprint,
+  validateContent,
+  checkRateLimit,
+  formatRetryTime,
+} from '../lib/content-security';
 
 interface Reactions {
   rocket: number;
@@ -24,45 +31,125 @@ export default function EmotionFeedback({ slug }: Props) {
   const [stuckNote, setStuckNote] = useState('');
   const [showStuckInput, setShowStuckInput] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [stuckError, setStuckError] = useState<string | null>(null);
 
-  // Load reactions from localStorage on mount
   useEffect(() => {
-    const stored = localStorage.getItem(`launchdock-reactions-${slug}`);
-    if (stored) {
-      try {
-        const data = JSON.parse(stored);
-        setReactions(data.counts || { rocket: 0, like: 0, stuck: 0, cry: 0 });
-      } catch {}
-    }
-    const userVote = localStorage.getItem(`launchdock-vote-${slug}`);
-    if (userVote) {
-      setUserReaction(userVote);
-    }
+    loadReactions();
   }, [slug]);
 
-  const handleReaction = (key: string) => {
-    if (userReaction) return; // Already voted
+  async function loadReactions() {
+    // Check local vote first
+    const userVote = localStorage.getItem(`launchdock-vote-${slug}`);
+    if (userVote) setUserReaction(userVote);
 
-    const newReactions = { ...reactions, [key]: reactions[key as keyof Reactions] + 1 };
+    if (!isSupabaseConfigured()) {
+      const stored = localStorage.getItem(`launchdock-reactions-${slug}`);
+      if (stored) {
+        try {
+          const data = JSON.parse(stored);
+          setReactions(data.counts || { rocket: 0, like: 0, stuck: 0, cry: 0 });
+        } catch {}
+      }
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from('article_reactions')
+        .select('reaction_type')
+        .eq('slug', slug);
+
+      if (error) throw error;
+
+      const counts: Reactions = { rocket: 0, like: 0, stuck: 0, cry: 0 };
+      for (const row of data || []) {
+        if (row.reaction_type in counts) {
+          counts[row.reaction_type as keyof Reactions]++;
+        }
+      }
+      setReactions(counts);
+    } catch {
+      // Fallback to localStorage
+      const stored = localStorage.getItem(`launchdock-reactions-${slug}`);
+      if (stored) {
+        try {
+          const data = JSON.parse(stored);
+          setReactions(data.counts || { rocket: 0, like: 0, stuck: 0, cry: 0 });
+        } catch {}
+      }
+    }
+  }
+
+  const handleReaction = async (key: string) => {
+    if (userReaction === key) return; // Same vote, do nothing
+
+    const rateCheck = checkRateLimit('reaction');
+    if (!rateCheck.allowed) return;
+
+    // Optimistic update: decrement old, increment new
+    const newReactions = { ...reactions };
+    if (userReaction) {
+      newReactions[userReaction as keyof Reactions] = Math.max(0, newReactions[userReaction as keyof Reactions] - 1);
+    }
+    newReactions[key as keyof Reactions]++;
     setReactions(newReactions);
     setUserReaction(key);
 
-    // Save to localStorage
     localStorage.setItem(`launchdock-reactions-${slug}`, JSON.stringify({ counts: newReactions }));
     localStorage.setItem(`launchdock-vote-${slug}`, key);
 
-    // Show stuck input if clicked stuck or cry
+    if (isSupabaseConfigured()) {
+      try {
+        const fp = getFingerprint();
+        // Upsert: UNIQUE(slug, fingerprint) replaces old reaction
+        await supabase.from('article_reactions').upsert({
+          slug,
+          reaction_type: key as 'rocket' | 'like' | 'stuck' | 'cry',
+          fingerprint: fp,
+        }, { onConflict: 'slug,fingerprint' });
+      } catch (err) {
+        console.error('Failed to save article reaction:', err);
+      }
+    }
+
     if (key === 'stuck' || key === 'cry') {
       setShowStuckInput(true);
+      setStuckError(null);
     }
   };
 
-  const handleStuckSubmit = () => {
+  const handleStuckSubmit = async () => {
     if (stuckNote.trim()) {
-      // Save stuck note to localStorage (will be synced to GitHub Discussion later)
-      const notes = JSON.parse(localStorage.getItem(`launchdock-stuck-notes-${slug}`) || '[]');
-      notes.push({ note: stuckNote, timestamp: new Date().toISOString() });
-      localStorage.setItem(`launchdock-stuck-notes-${slug}`, JSON.stringify(notes));
+      const validation = validateContent(stuckNote, 300);
+      if (!validation.ok) {
+        setStuckError(validation.reason || '內容驗證失敗');
+        return;
+      }
+
+      const rateCheck = checkRateLimit('question');
+      if (!rateCheck.allowed) {
+        setStuckError(`提問太頻繁，請等 ${formatRetryTime(rateCheck.retryAfterMs!)} 後再試`);
+        return;
+      }
+
+      if (isSupabaseConfigured()) {
+        try {
+          const fp = getFingerprint();
+          await supabase.from('qa_questions').insert({
+            slug,
+            section_id: null,
+            section_title: null,
+            question: validation.sanitized,
+            fingerprint: fp,
+          });
+        } catch (err) {
+          console.error('Failed to save stuck note:', err);
+        }
+      } else {
+        const notes = JSON.parse(localStorage.getItem(`launchdock-stuck-notes-${slug}`) || '[]');
+        notes.push({ note: validation.sanitized, timestamp: new Date().toISOString() });
+        localStorage.setItem(`launchdock-stuck-notes-${slug}`, JSON.stringify(notes));
+      }
     }
     setShowStuckInput(false);
     setSubmitted(true);
@@ -79,19 +166,16 @@ export default function EmotionFeedback({ slug }: Props) {
           <button
             key={key}
             onClick={() => handleReaction(key)}
-            disabled={!!userReaction}
             className={`
               flex flex-col items-center gap-1 px-5 py-3 rounded-xl
-              border transition-all duration-200
+              border transition-all duration-200 cursor-pointer
               ${userReaction === key
                 ? 'border-brand bg-brand/20 scale-105'
-                : userReaction
-                  ? 'border-transparent opacity-50 cursor-default'
-                  : `border-transparent ${color} cursor-pointer`
+                : `border-transparent ${color}`
               }
             `}
             style={{
-              backgroundColor: !userReaction ? 'var(--color-surface-light)' : undefined,
+              backgroundColor: userReaction !== key ? 'var(--color-surface-light)' : undefined,
               borderColor: userReaction === key ? 'var(--color-brand)' : undefined,
             }}
           >
@@ -110,6 +194,11 @@ export default function EmotionFeedback({ slug }: Props) {
           <p className="text-sm mb-2" style={{ color: 'var(--color-text-secondary)' }}>
             卡在哪一步？（選填，幫助我們改進文章）
           </p>
+          {stuckError && (
+            <p className="text-xs mb-2" style={{ color: 'var(--color-accent-stuck)' }}>
+              ⚠️ {stuckError}
+            </p>
+          )}
           <div className="flex gap-2">
             <input
               type="text"
@@ -150,7 +239,7 @@ export default function EmotionFeedback({ slug }: Props) {
       )}
       {submitted && (
         <p className="text-sm mt-2" style={{ color: 'var(--color-text-muted)' }}>
-          感謝你的回饋！如果卡關了，歡迎到討論區發問 💬
+          感謝你的回饋！卡關的話可以在下方問答區提問 💬
         </p>
       )}
     </div>

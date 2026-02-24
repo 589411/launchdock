@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SceneCard from '../components/SceneCard.astro';
+import HomeDiscussion from '../components/HomeDiscussion.tsx';
 import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.archived);
@@ -48,9 +49,7 @@ const latestArticles = [...allArticles].sort((a, b) =>
           開始探索場景教學
         </a>
         <a
-          href="https://github.com/589411/launchdock/discussions"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#discussion"
           class="px-8 py-3 border border-surface-lighter hover:border-brand/50 text-text-secondary hover:text-text-primary rounded-lg font-medium transition-all"
         >
           💬 加入討論
@@ -144,21 +143,8 @@ const latestArticles = [...allArticles].sort((a, b) =>
     </section>
   )}
 
-  <!-- CTA -->
-  <section class="max-w-6xl mx-auto px-4 py-16 text-center">
-    <div class="p-8 rounded-2xl bg-gradient-to-br from-brand/10 to-brand-dark/10 border border-brand/20">
-      <h2 class="text-2xl font-bold mb-3">一起學、一起做</h2>
-      <p class="text-text-secondary mb-6 max-w-lg mx-auto">
-        卡關不可恥，分享你的經驗幫助更多人。加入 LaunchDock 的共學社群。
-      </p>
-      <a
-        href="https://github.com/589411/launchdock/discussions"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 px-8 py-3 bg-brand hover:bg-brand-dark text-white rounded-lg font-medium transition-colors"
-      >
-        💬 加入討論區
-      </a>
-    </div>
+  <!-- Discussion Section -->
+  <section id="discussion" class="max-w-6xl mx-auto px-4 py-16">
+    <HomeDiscussion client:load />
   </section>
 </BaseLayout>

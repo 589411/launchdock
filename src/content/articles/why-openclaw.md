@@ -9,6 +9,10 @@ archived: false
 discussionUrl: "https://github.com/589411/launchdock/discussions"
 order: 1
 tags: ["OpenClaw", "資訊孤島", "自動化", "概念"]
+stuckOptions:
+  "資訊是斷裂的": ["我的資訊並沒有很分散啊？", "用 Notion 就可以解決了吧？", "看不懂「資訊孤島」是什麼"]
+  "OpenClaw 解決什麼": ["跟 ChatGPT 有什麼不同？", "OpenClaw 是免費的嗎？", "我需要會寫程式嗎？"]
+  "從哪裡開始": ["我是完全新手，該先看哪篇？", "可以先試用再決定嗎？"]
 ---
 
 ## 你可能已經很會用 AI 工具了
@@ -89,7 +93,7 @@ OpenClaw 的 Skill 是**可重複的自動化流程**。你設定一次，以後
 
 老實說，OpenClaw 也有學習曲線：
 
-- **安裝需要一點點技術基礎**（我們有 [安裝指南](/articles/google-api-key-guide)）
+- **安裝需要一點點技術基礎**（我們有 [安裝指南](/articles/install-openclaw)）
 - **串接 Google 服務需要申請 API Key**（最常卡關的一步，我們也有教）
 - **寫 Skill 需要理解基本的流程邏輯**
 
@@ -100,13 +104,13 @@ OpenClaw 的 Skill 是**可重複的自動化流程**。你設定一次，以後
 ## 該從哪裡開始？
 
 如果你還沒安裝 OpenClaw：
-1. 先看 [安裝指南](#)
+1. 先看 [安裝指南](/articles/install-openclaw)
 2. 然後跟著 [Google API Key 設定指南](/articles/google-api-key-guide) 串接 Google 服務
 3. 試著建立你的第一個 Skill
 
 如果你已經安裝了，想到更多場景：
 - 看看 [工作流自動化](/articles?scene=工作流自動化) 的教學
-- 到 [討論區](https://github.com/589411/launchdock/discussions) 分享你的工作流
+- 到 [討論區](/#discussion) 分享你的工作流
 
 ---
 

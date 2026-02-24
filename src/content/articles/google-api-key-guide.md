@@ -9,6 +9,14 @@ archived: false
 discussionUrl: "https://github.com/589411/launchdock/discussions"
 order: 1
 tags: ["OpenClaw", "Google API", "Google Drive", "Gmail", "設定"]
+stuckOptions:
+  "進入 Google Cloud Console": ["找不到 Google Cloud Console 入口", "登入後畫面跟文章不一樣"]
+  "建立新專案": ["不知道專案名稱該取什麼", "找不到「建立專案」按鈕"]
+  "啟用需要的 API": ["不確定該啟用哪些 API", "搜尋 API 名稱找不到"]
+  "OAuth 同意畫面": ["OAuth 同意畫面設定很複雜", "不知道「測試使用者」該填什麼", "审核要等很久嗎？"]
+  "建立憑證": ["不知道該選 API Key 還是 OAuth Client", "Client ID 和 Client Secret 傻傻分不清", "重導 URI 該填什麼？"]
+  "OpenClaw 中設定": ["找不到 OpenClaw 設定頁面", "貼上 Key 後沒有反應"]
+  "驗證是否成功": ["測試失敗但不知道哪裡出錯", "顯示權限不足的錯誤"]
 ---
 
 ## 為什麼你會看到這篇？
@@ -25,7 +33,7 @@ tags: ["OpenClaw", "Google API", "Google Drive", "Gmail", "設定"]
 
 - 一個 Google 帳號（你平常用的 Gmail 就行）
 - 大約 15-20 分鐘的時間
-- OpenClaw 已安裝完成（如果還沒安裝，先看 [安裝指南](#)）
+- OpenClaw 已安裝完成（如果還沒安裝，先看 [安裝指南](/articles/install-openclaw)）
 
 ---
 
@@ -171,4 +179,4 @@ Google 有很多名字很像的 API。確認你啟用的是：
 
 ## 還是卡住了？
 
-點擊下方的「😵 卡關了」按鈕讓我們知道，或直接到 [GitHub Discussions](https://github.com/589411/launchdock/discussions) 發問，附上錯誤訊息，我們一起解決！
+點擊下方的「😵 卡關了」按鈕讓我們知道，或直接到 [首頁討論區](/#discussion) 發問，附上錯誤訊息，我們一起解決！
