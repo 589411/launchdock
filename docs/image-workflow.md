@@ -14,6 +14,7 @@
 5. [情境操作手冊](#情境操作手冊)
 6. [檔案結構與命名規範](#檔案結構與命名規範)
 7. [截圖品質規範](#截圖品質規範)
+8. [自動截圖工具串接（auto-capture）](#自動截圖工具串接auto-capture)
 
 ---
 
@@ -337,6 +338,86 @@ slug 就是檔名去掉 `.md`，例如：
 | GIF 時長 | 3–10 秒 |
 | 裁剪 | 只截重點區域，不截全螢幕 |
 | 標註 | 用箭頭或框線指出重點（推薦 CleanShot X / Shottr） |
+
+---
+
+## 自動截圖工具串接（auto-capture）
+
+> `auto-capture` 是獨立的 Python CLI 工具，位於另一個 repo。
+> 它負責「一邊操作一邊自動截圖」，產出的圖片再由本 repo 的 `add-image.sh` 串接到文章中。
+
+### 為什麼分開
+
+| 面向 | launchdock | auto-capture |
+|---|---|---|
+| 語言 | Node.js / Astro | Python (pyobjc + Pillow) |
+| 平台 | 跨平台 | macOS 專用 |
+| 用途 | 靜態網站 + 內容管理 | 螢幕截圖擷取工具 |
+| 安裝方式 | npm install | pip install / pipx |
+
+兩者的技術棧和使用對象不同，放同一 repo 會增加不必要的依賴。
+
+### auto-capture 功能簡述
+
+- **Window capture**：擷取指定視窗（非全螢幕），使用 macOS `screencapture -l <windowID>`
+- **Click trigger**：透過 `CGEventTap` 監聽滑鼠點擊，自動觸發截圖
+- **Hotkey trigger**：手動按下快捷鍵（如 `Ctrl+Shift+S`）也能截圖
+- **Click annotation**：在截圖上用可調整的框線 / 圓圈標註「點擊在哪裡」
+  - 可設定框線大小、顏色、線寬
+- **Sequential naming**：產出檔名按序號排列 `001.png`, `002.png`, …
+
+### 串接流程
+
+```
+┌───────────────┐      檔案系統      ┌───────────────────┐
+│  auto-capture │  ──── *.png ────▷  │  add-image.sh     │
+│  (Python CLI) │                    │  (Bash CLI)       │
+└───────────────┘                    └───────────────────┘
+       ▲                                      │
+       │ 操作應用程式                            ▼
+    使用者                              文章 .md 檔更新
+```
+
+**步驟：**
+
+```bash
+# 1. 用 auto-capture 錄製截圖（在 auto-capture repo 中）
+auto-capture --window "OpenClaw" --output ~/Desktop/captures/deploy-openclaw-cloud/
+
+# 2. 操作完成後，回到 launchdock repo
+cd ~/Documents/github/launchdock
+
+# 3. 用 add-image.sh 將截圖配對到文章的 @img 標記
+./scripts/add-image.sh deploy-openclaw-cloud ~/Desktop/captures/deploy-openclaw-cloud/*.png
+```
+
+### 輸出規範（auto-capture 必須遵守）
+
+為了讓 `add-image.sh` 順利配對，auto-capture 的輸出需符合：
+
+| 項目 | 規範 |
+|---|---|
+| 格式 | PNG（預設），GIF（可選） |
+| 檔名 | 序號開頭：`001.png`, `002.png`, …（add-image.sh 按順序對應 @img 標記） |
+| 輸出目錄 | 使用者指定，建議 `~/Desktop/captures/<slug>/` |
+| 單張大小 | 建議 < 2MB（原始截圖；add-image.sh 會負責壓縮到 < 500KB） |
+| 解析度 | macOS Retina 下 `screencapture` 會產生 2x 解析度，add-image.sh 會自動 resize |
+| 標註 | auto-capture 負責加標註框；add-image.sh 不處理標註 |
+
+### 快速指令對照
+
+| 需求 | 指令 |
+|---|---|
+| 開始錄製 | `auto-capture --window "App名稱" --output <dir>` |
+| 僅手動觸發 | `auto-capture --window "App名稱" --output <dir> --manual-only` |
+| 錄完配對 | `./scripts/add-image.sh <slug> <dir>/*.png` |
+| 先看有幾個標記 | `./scripts/add-image.sh <slug> --scan` |
+| 驗證配對結果 | `./scripts/add-image.sh <slug> --validate` |
+
+### Repo 位置
+
+- **本 repo（launchdock）**：`~/Documents/github/launchdock/`
+- **auto-capture repo**：`~/Documents/github/auto-capture/`（獨立安裝，`pip install -e .` 或 `pipx install .`）
 
 ---
 

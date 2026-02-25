@@ -86,6 +86,10 @@ Phase 3: CLI 配對     → 引導使用者執行 add-image.sh
 當你完成 Phase 1（生成/編輯文章）後，**必須提醒使用者**：
 > 文章已包含 X 個 @img 截圖標記。請照文章步驟實際操作並截圖，然後執行：
 > `./scripts/add-image.sh <slug> <圖片路徑...>`
+>
+> 💡 如果安裝了 [auto-capture](https://github.com/589411/auto-capture)，可以用：
+> `auto-capture --window "App名稱" --output ~/Desktop/captures/<slug>/`
+> 操作完成後再執行 `./scripts/add-image.sh <slug> ~/Desktop/captures/<slug>/*.png`
 
 ---
 
@@ -135,6 +139,6 @@ stuckOptions:
 src/content/articles/*.md    ← 教學文章
 public/images/articles/*/    ← 文章圖片（按 slug 分資料夾）
 scripts/add-image.sh         ← 圖片工作流程 CLI
-docs/image-workflow.md       ← 圖片工作流程完整文檔
+docs/image-workflow.md       ← 圖片工作流程完整文檔（含 auto-capture 串接說明）
 docs/llm-article-prompt.md   ← LLM 生成文章時的 @img 規則
 ```
