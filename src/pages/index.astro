@@ -42,11 +42,12 @@ const latestArticles = [...allArticles].sort((a, b) =>
         <img src="/logo.png" alt="LaunchDock" class="w-48 md:w-64 h-auto" />
       </div>
       <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-        起飛前，先把工具裝好
+        弄髒雙手，但不用弄髒全身
       </h1>
       <p class="text-xl text-text-secondary max-w-2xl mx-auto mb-8 leading-relaxed">
-        你看了影片、讀了文件，腦袋懂了——手卻跟不上？<br />
-        LaunchDock 把 AI 學習做成一個「可以停下來練習」的互動空間：照著做、段落旁用 👍/😵/😢 回饋卡點，文章底部直接提問，大家一起把成果做出來。
+        AI 圈的人都說「just do it」——<br />
+        但對非技術背景的你來說，跟著做往往不只是弄髒雙手，而是弄髒全身。<br />
+        LaunchDock 讓你安心動手——每一步都有截圖、每個卡點都能回報、每個問題都有人接。
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
@@ -72,27 +73,36 @@ const latestArticles = [...allArticles].sort((a, b) =>
   <section class="max-w-6xl mx-auto px-4 py-12">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter">
-        <span class="text-2xl mb-3 block">🎬</span>
-        <h3 class="font-semibold mb-2">影片太快，跟不上</h3>
+        <span class="text-2xl mb-3 block">🤯</span>
+        <h3 class="font-semibold mb-2">跟著做，卻不知道哪裡做錯</h3>
         <p class="text-text-secondary text-sm">
-          影片只能一直往前走：漏看一步就要倒帶、快轉、再倒帶。看完覺得懂了，但一動手就卡住。
+          教學說「很簡單」，但你卡了兩小時。不是你笨——是中間少了十個沒人講的步驟。
         </p>
       </div>
       <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter">
-        <span class="text-2xl mb-3 block">🧾</span>
-        <h3 class="font-semibold mb-2">文件太硬，看不懂</h3>
+        <span class="text-2xl mb-3 block">😰</span>
+        <h3 class="font-semibold mb-2">出了錯，不知道問誰</h3>
         <p class="text-text-secondary text-sm">
-          官方文件通常假設你什麼都懂。你只想把東西跑起來，但卡在一個名詞、一道設定、或一個錯誤訊息。
+          Google 到的答案全是英文，而且假設你已經懂。錯誤訊息貼到 ChatGPT，它叫你做更多看不懂的事。
         </p>
       </div>
       <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter">
-        <span class="text-2xl mb-3 block">🧑‍✈️</span>
-        <h3 class="font-semibold mb-2">缺一個能互動的練習場</h3>
+        <span class="text-2xl mb-3 block">🫣</span>
+        <h3 class="font-semibold mb-2">怕弄壞東西，不敢動手</h3>
         <p class="text-text-secondary text-sm">
-          你需要的是「手把手」：每一步都可照做、每段都有回饋、遇到問題有人能接。LaunchDock 就是這個碼頭。
+          不確定這步會不會搞爛電腦、會不會被扣錢、會不會刪到重要東西。所以你選擇繼續觀望。
         </p>
       </div>
     </div>
+  </section>
+
+  <!-- Promise Section -->
+  <section class="max-w-3xl mx-auto px-4 py-8 text-center">
+    <h2 class="text-2xl font-bold mb-4">所以我們這樣做</h2>
+    <p class="text-text-secondary text-lg leading-relaxed">
+      每篇教學都有截圖、每個步驟都能回報卡關、每一個困惑都有人回答。<br />
+      你只要願意動手，我們負責讓你不弄髒全身。
+    </p>
   </section>
 
   <!-- Learning Path (Primary CTA) -->
@@ -102,7 +112,7 @@ const latestArticles = [...allArticles].sort((a, b) =>
 
   <!-- Scene Cards (Secondary: for returning users) -->
   <section class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-2xl font-bold mb-2">依場景探索</h2>
+    <h2 class="text-2xl font-bold mb-2">從你想做的事開始弄髒雙手</h2>
     <p class="text-text-secondary mb-8">已經上手了？從你的問題出發，找到更多進階教學。</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {scenes.map((scene) => (

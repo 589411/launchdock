@@ -10,36 +10,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h1 class="text-3xl font-bold mb-6">關於 LaunchDock</h1>
 
     <div class="prose">
+      <h2>為什麼做 LaunchDock？</h2>
       <p>
-        LaunchDock 是一個以<strong>手把手實作</strong>為核心的互動式 AI 教學空間。
-        你可以把它想像成「起飛前的碼頭」：在這裡把工具裝好、把流程跑順，然後帶著成果出航。
+        AI 界有句名言：「弄髒雙手，學習 AI 就是這麼一回事。」
+      </p>
+      <p>
+        這句話對資工系的人來說是勵志語。<br />
+        但對行銷、設計、老師、自由工作者來說，
+        跟著教學操作，往往不只是弄髒雙手——<strong>而是弄髒全身</strong>。
+      </p>
+      <p>
+        裝 Python，卡在環境變數。<br />
+        跑指令，噴一整頁看不懂的錯誤。<br />
+        Google 到的解法是英文的，而且假設你已經知道什麼是 PATH。
+      </p>
+      <p>
+        <a href="https://github.com/nicepkg/openclaw" target="_blank" rel="noopener noreferrer">OpenClaw</a>
+        是一個很棒的 AI Agent 框架，但它的文件是給開發者寫的。
+      </p>
+      <p>
+        LaunchDock 就是為了那些<strong>「想學、願意動手、但需要有人帶」</strong>的人而生。
       </p>
 
-      <h2>為什麼做這個網站？</h2>
-      <p>
-        每天都有新的 AI 工具和突破消息。你看了 YouTube、收藏了一堆文章，覺得「這個好像很有用」。
-        但當你真的想動手做，才發現真正的敵人不是不會——而是<strong>卡在中間</strong>：
-      </p>
+      <h2>我們怎麼做</h2>
+      <p>每一篇教學：</p>
       <ul>
-        <li>影片太快：漏一個步驟就要重播、快轉、再重播</li>
-        <li>文件太硬：一句話帶過的設定，實作卻卡半小時</li>
-        <li>沒有互動：卡關時不知道「我是不是做錯了」</li>
-        <li>想問人：但不知道該把問題丟去哪裡</li>
+        <li>📸 每一步都有截圖，不用猜現在應該看到什麼</li>
+        <li>😵 每個段落都能回報「卡關」，我們會知道哪裡需要改</li>
+        <li>💬 每篇文章下都能問問題，社群會幫你回答</li>
+        <li>🧪 經過實際驗證（verifiedAt），不是複製貼上的過期教學</li>
       </ul>
-      <p>
-        LaunchDock 就是為了解決這些痛點而生：我們把教學寫成<strong>可跟做</strong>的路線，
-        讓你每一步都有方向、每一段都能回饋、真的把成果做出來。
-      </p>
 
       <h2>為什麼從 OpenClaw 開始？</h2>
       <p>
-        <a href="https://github.com/nicepkg/openclaw" target="_blank" rel="noopener noreferrer">OpenClaw</a>
-        結合了過去所有 AI Agent 技術的精華，特別適合打造個人助理。
-        它最大的優勢不在「單次任務做得多好」——ChatGPT、Gemini 一樣能搜新聞、整理筆記。
-      </p>
-      <p>
-        OpenClaw 的真正價值在於<strong>串接</strong>：把多個工具串成自動化工作流，
-        打破資訊孤島，讓資訊自動流動，不再 copy-paste。
+        OpenClaw 的真正價值在於<strong>串接</strong>：把你的 Gmail、Drive、Notion
+        串成自動化工作流，打破資訊孤島，讓資訊自動流動——這是 ChatGPT、Gemini 做不到的事。
       </p>
       <p>
         但我們不會只做 OpenClaw。未來會擴展到更多 AI 工具的實戰教學。
@@ -47,8 +52,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <h2>共學精神</h2>
       <p>
+        Just do it 沒有錯。但你不需要一個人 do it。
+      </p>
+      <p>
         卡關不可恥。這個網站鼓勵你分享你的經驗——不管是成功還是失敗。
-        我們把「互動」設計進文章裡：
         每個段落旁都可以用 👍/😵/😢 快速回饋你目前的狀態；文章最下方也有問答區，
         你可以直接留言提問，其他讀者和作者都能一起幫忙解答。
         如果你想更開放地討論，也可以去<a href="/#discussion">討論區</a>，
