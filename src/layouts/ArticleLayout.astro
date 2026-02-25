@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import ArticleMeta from '../components/ArticleMeta.astro';
+import GifPlayer from '../components/GifPlayer.astro';
 import EmotionFeedback from '../components/EmotionFeedback.tsx';
 import SectionReactions from '../components/SectionReactions.tsx';
 import ArticleQA from '../components/ArticleQA.tsx';
@@ -78,6 +79,9 @@ const slug = Astro.url.pathname.replace(/^\/articles\//, '').replace(/\/$/, '');
 
     <!-- Section Reactions (injects emoji buttons next to each h2) -->
     <SectionReactions client:load slug={slug} stuckOptions={frontmatter.stuckOptions || {}} />
+
+    <!-- GIF Play-once Controller -->
+    <GifPlayer />
 
     <!-- Article-level Emotion Feedback -->
     <div class="mt-12 pt-8 border-t border-surface-lighter">

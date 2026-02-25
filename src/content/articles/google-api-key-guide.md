@@ -18,7 +18,6 @@ stuckOptions:
   "OpenClaw 中設定": ["找不到 OpenClaw 設定頁面", "貼上 Key 後沒有反應"]
   "驗證是否成功": ["測試失敗但不知道哪裡出錯", "顯示權限不足的錯誤"]
 ---
-
 ## 為什麼你會看到這篇？
 
 你想用 OpenClaw 串接 Google Drive 或 Gmail，但在設定 API Key 的步驟卡住了。
@@ -43,6 +42,8 @@ stuckOptions:
 2. 用你的 Google 帳號登入
 3. 如果是第一次使用，會看到「同意服務條款」的畫面，勾選後按「同意並繼續」
 
+![Google Cloud Console 首頁畫面](/images/articles/google-api-key-guide/001.gif)
+
 > 💡 **小提醒**：如果你有多個 Google 帳號，確認你用的是正確的那個。右上角的頭像可以切換帳號。
 
 ---
@@ -50,14 +51,25 @@ stuckOptions:
 ## 步驟二：建立新專案
 
 1. 點擊頂部的專案選擇器（可能顯示「My First Project」或「選取專案」）
+
+![點擊頂部專案選擇器](/images/articles/google-api-key-guide/002.gif)
+
 2. 點擊「新增專案」
+
+![新增專案按鈕](/images/articles/google-api-key-guide/003.gif)
+
 3. 專案名稱輸入：`openclaw-integration`（或任何你喜歡的名字）
 4. 點擊「建立」
+
+![輸入專案名稱並建立](/images/articles/google-api-key-guide/004.png)
+
 5. 等待幾秒鐘，專案建立完成後會自動切換
 
 ### 🚨 常見錯誤 #1：沒有切換到新專案
 
 建立完專案後，頂部的專案名稱可能**沒有自動切換**。請手動點擊專案選擇器，確認你在 `openclaw-integration` 專案底下。
+
+![確認已切換到正確專案](/images/articles/google-api-key-guide/005.png)
 
 ---
 
@@ -68,19 +80,41 @@ stuckOptions:
 ### 串接 Google Drive
 
 1. 在左側選單找到「API 與服務」→「程式庫」
+
+   ![啟用 Google Drive API](/images/articles/google-api-key-guide/007.png)
+
+   ![啟用 Google Drive API](/images/articles/google-api-key-guide/009.png)
+
+<!-- @img: api-library-menu | 左側選單找到 API 程式庫 -->
+
 2. 搜尋 `Google Drive API`
 3. 點進去後按「啟用」
+
+![啟用 Google Drive API](/images/articles/google-api-key-guide/011.png)
+
+![啟用 Google Drive API](/images/articles/google-api-key-guide/012.png)
+
+![啟用 Google Drive API](/images/articles/google-api-key-guide/013.png)
 
 ### 串接 Gmail
 
 1. 同上，搜尋 `Gmail API`
 2. 點進去後按「啟用」
 
+![啟用 Gmail API](/images/articles/google-api-key-guide/016.png)
+
+![啟用 Gmail API](/images/articles/google-api-key-guide/017.png)
+
+![啟用 Gmail API](/images/articles/google-api-key-guide/018.png)
+
+<!-- @img: enable-gmail-api | 啟用 Gmail API -->
+
 > 💡 **兩個都要用？** 兩個都啟用就好，不衝突。
 
 ### 🚨 常見錯誤 #2：啟用了錯誤的 API
 
 Google 有很多名字很像的 API。確認你啟用的是：
+
 - ✅ `Google Drive API`（不是 Google Drive Activity API）
 - ✅ `Gmail API`（不是 Google Workspace 其他的 API）
 
@@ -93,15 +127,21 @@ Google 有很多名字很像的 API。確認你啟用的是：
 1. 在左側選單找到「API 與服務」→ 「OAuth 同意畫面」
 2. 選擇「外部」（External），點擊「建立」
 3. 填寫以下資訊：
-   - **應用程式名稱**：`OpenClaw`（隨你取）
-   - **使用者支援電子郵件**：選你的 Gmail
-   - **開發人員聯絡資訊**：填你的 Gmail
+
+- **應用程式名稱**：`OpenClaw`（隨你取）
+- **使用者支援電子郵件**：選你的 Gmail
+- **開發人員聯絡資訊**：填你的 Gmail
+
 4. 其他欄位可以不填，點「儲存並繼續」
+
 5. 在「範圍」頁面，直接點「儲存並繼續」
 6. 在「測試使用者」頁面：
    - 點「新增使用者」
    - 輸入**你自己的 Gmail 地址**
    - 點「儲存並繼續」
+
+<!-- @img: add-test-user | 新增測試使用者 -->
+
 7. 回到摘要頁面，確認後完成
 
 ### 🚨 常見錯誤 #3：忘記加測試使用者
@@ -116,12 +156,37 @@ Google 有很多名字很像的 API。確認你啟用的是：
 
 1. 在左側選單「API 與服務」→「憑證」
 2. 點「建立憑證」→「OAuth 用戶端 ID」
+
+<!-- @img: create-credentials-menu | 建立憑證選單 -->
+![選擇外部使用者類型](/images/articles/google-api-key-guide/022.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/023.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/024.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/025.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/026.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/027.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/028.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/029.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/031.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/032.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/034.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/036.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/037.png)
 3. 應用程式類型選「電腦版應用程式」（Desktop app）
+
+<!-- @img: select-desktop-app | 選擇電腦版應用程式類型 -->
+
 4. 名稱隨意，點「建立」
 5. 會出現一個對話框顯示：
    - **用戶端 ID**
    - **用戶端密鑰**
 6. **把這兩個都複製下來！** 點「下載 JSON」更好，會下載一個 `credentials.json` 檔案
+
+<!-- @img: oauth-client-created | OAuth 用戶端建立完成，複製 ID 和密鑰 -->
+![選擇外部使用者類型](/images/articles/google-api-key-guide/039.gif)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/040.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/041.png)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/043.png)
+
 
 ### 🚨 常見錯誤 #4：選錯應用程式類型
 
@@ -149,6 +214,8 @@ Google 有很多名字很像的 API。確認你啟用的是：
 3. 重啟 OpenClaw
 4. 第一次使用時會跳出瀏覽器要你授權——按「允許」就好
 
+<!-- @img: google-auth-allow | Google 授權畫面按允許 -->
+
 ### 🚨 常見錯誤 #5：scope 權限太大或太小
 
 - `drive.readonly` = 只能讀取 Google Drive 檔案（安全）
@@ -164,6 +231,8 @@ Google 有很多名字很像的 API。確認你啟用的是：
 ```
 列出我 Google Drive 中最近 5 個修改的檔案
 ```
+
+<!-- @img: openclaw-drive-success | OpenClaw 成功列出 Google Drive 檔案 -->
 
 如果看到檔案列表，恭喜你 🚀 **發射成功！**
 

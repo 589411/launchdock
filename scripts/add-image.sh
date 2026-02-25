@@ -149,10 +149,11 @@ process_image() {
 # 在文章中替換 @img 標記為正式圖片
 replace_marker() {
   local article_path="$1"
-  local marker_line="$2"     # 完整的 <!-- @img: ... --> 行
+  local marker_line="$2"     # 完整的 <!-- @img: ... --> 行（或行號）
   local img_filename="$3"    # 圖片檔名
   local alt_text="$4"        # alt 文字
   local slug="$5"
+  local line_num="${6:-}"    # 可選：行號（更精確）
   
   local img_path="/images/articles/${slug}/${img_filename}"
   local replacement="![${alt_text}](${img_path})"
@@ -163,14 +164,21 @@ replace_marker() {
     return
   fi
   
-  # Use awk for reliable replacement (handles special chars)
-  local tmp_file=$(mktemp)
-  awk -v old="$marker_line" -v new="$replacement" '{
-    if (index($0, old) > 0) {
-      sub(old, new)
-    }
-    print
-  }' "$article_path" > "$tmp_file" && mv "$tmp_file" "$article_path"
+  # Use sed with line number for precise replacement (avoids regex issues)
+  if [ -n "$line_num" ]; then
+    # Replace the entire line at the given line number
+    sed -i '' "${line_num}s|.*|${replacement}|" "$article_path"
+  else
+    # Fallback: match by literal string using awk index() + full-line replace
+    local tmp_file=$(mktemp)
+    awk -v old="$marker_line" -v new="$replacement" '{
+      if (index($0, old) > 0) {
+        print new
+      } else {
+        print
+      }
+    }' "$article_path" > "$tmp_file" && mv "$tmp_file" "$article_path"
+  fi
   
   echo -e "  ${GREEN}✅ 已替換${NC}"
 }
@@ -822,7 +830,8 @@ ${img_md}
         "${marker_full_lines[$m_idx]}" \
         "$img_file" \
         "${marker_alts[$m_idx]}" \
-        "$slug"
+        "$slug" \
+        "${marker_line_nums[$m_idx]}"
       
       replacements_made=$((replacements_made + 1))
     else

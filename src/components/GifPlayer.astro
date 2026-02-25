@@ -1,0 +1,97 @@
+---
+/**
+ * GifPlayer — 控制文章中 GIF 圖片只播放一次，點擊重播。
+ *
+ * auto-capture GIF 規格：12 幀，前 11 幀 80ms，最後一幀 320ms，總計 1200ms
+ * 凍結時間 = 前 10 幀 (800ms) = 第 11 幀剛出現時截圖
+ */
+---
+
+<script>
+  // auto-capture GIF 固定規格
+  // 12 幀: 80×11 + 320 = 1200ms
+  // 凍結在第 10 幀結束 (800ms)，確保不會 loop 回去
+  const FREEZE_TIME = 800;
+
+  /** 將 img 當前幀截圖為 data URL */
+  function captureFrame(img: HTMLImageElement): string {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d')!;
+    ctx.drawImage(img, 0, 0);
+    return canvas.toDataURL('image/png');
+  }
+
+  /** 為圖片外層容器添加重播覆蓋層 */
+  function addOverlay(wrapper: HTMLElement) {
+    const overlay = document.createElement('div');
+    overlay.className = 'gif-replay-overlay';
+    overlay.innerHTML = '<span class="gif-replay-icon">▶</span><span>點擊重播</span>';
+    wrapper.appendChild(overlay);
+  }
+
+  /** 移除重播覆蓋層 */
+  function removeOverlay(wrapper: HTMLElement) {
+    const overlay = wrapper.querySelector('.gif-replay-overlay');
+    if (overlay) overlay.remove();
+  }
+
+  /** 凍結 GIF 在當前幀 */
+  function freezeGif(img: HTMLImageElement, wrapper: HTMLElement, originalSrc: string) {
+    const frozenSrc = captureFrame(img);
+    img.src = frozenSrc;
+    img.dataset.gifSrc = originalSrc;
+    img.dataset.frozen = 'true';
+    addOverlay(wrapper);
+  }
+
+  /** 播放 GIF 一次然後凍結 */
+  function playOnce(img: HTMLImageElement, wrapper: HTMLElement, originalSrc: string) {
+    const freshSrc = originalSrc + '?' + Date.now();
+    const tempImg = new Image();
+
+    tempImg.onload = () => {
+      img.src = freshSrc;
+      setTimeout(() => freezeGif(img, wrapper, originalSrc), FREEZE_TIME);
+    };
+
+    tempImg.src = freshSrc;
+  }
+
+  /** 初始化單一 GIF 圖片 */
+  function initGif(img: HTMLImageElement) {
+    const originalSrc = img.src;
+
+    // 建立外層容器
+    const wrapper = document.createElement('div');
+    wrapper.className = 'gif-player-wrapper';
+    img.parentNode!.insertBefore(wrapper, img);
+    wrapper.appendChild(img);
+
+    // 第一次：讓原始 GIF 播一輪後凍結
+    // 直接用 img.onload 在確認圖片顯示後開始計時
+    if (img.complete) {
+      setTimeout(() => freezeGif(img, wrapper, originalSrc), FREEZE_TIME);
+    } else {
+      img.addEventListener('load', () => {
+        setTimeout(() => freezeGif(img, wrapper, originalSrc), FREEZE_TIME);
+      }, { once: true });
+    }
+
+    // 點擊重播
+    wrapper.addEventListener('click', () => {
+      if (img.dataset.frozen !== 'true') return;
+
+      img.dataset.frozen = 'false';
+      removeOverlay(wrapper);
+
+      playOnce(img, wrapper, originalSrc);
+    });
+  }
+
+  // 頁面載入後初始化所有 GIF
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll<HTMLImageElement>('.prose img[src$=".gif"]').forEach(initGif);
+  });
+</script>

@@ -1,0 +1,5 @@
+{
+  "markdown.editor.pasteUrlAsFormattedLink": "never",
+  "editor.pasteAs.enabled": false,
+  "markdown.editor.filePaste.copyIntoWorkspace": "never"
+}
