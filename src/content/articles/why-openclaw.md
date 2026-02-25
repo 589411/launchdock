@@ -8,6 +8,7 @@ verifiedAt: "2026-02-24"
 archived: false
 discussionUrl: "https://github.com/589411/launchdock/discussions"
 order: 1
+pathStep: 1
 tags: ["OpenClaw", "資訊孤島", "自動化", "概念"]
 stuckOptions:
   "資訊是斷裂的": ["我的資訊並沒有很分散啊？", "用 Notion 就可以解決了吧？", "看不懂「資訊孤島」是什麼"]
@@ -103,18 +104,23 @@ OpenClaw 的 Skill 是**可重複的自動化流程**。你設定一次，以後
 
 ## 該從哪裡開始？
 
-如果你還沒安裝 OpenClaw：
-1. 先看 [安裝指南](/articles/install-openclaw)
-2. 然後跟著 [Google API Key 設定指南](/articles/google-api-key-guide) 串接 Google 服務
-3. 試著建立你的第一個 Skill
+跟著入門路線的順序走就對了：
 
-如果你已經安裝了，想深入學習：
+1. 🧠 [選擇你的 AI 大腦](/articles/llm-guide)——搞懂 LLM 方案、選出最適合你的
+2. 🔑 [申請 API Key](/articles/ai-api-key-guide)——拿到讓 AI 運作的鑰匙
+3. 💻 [安裝 OpenClaw](/articles/install-openclaw)——選擇平台、開始安裝
+4. 🚀 [第一次啟動](/articles/openclaw-first-run)——設定好 Key，聽到 AI 的第一句話
+5. ⚡ [第一個 Skill](/articles/openclaw-first-skill)——完成你的第一個自動化任務
+
+**下一步** 👉 [選擇你的 AI 大腦](/articles/llm-guide)
+
+---
+
+已經上手了？探索更多：
 - 💬 [Prompt 工程：讓 AI 聽懂你的話](/articles/prompt-engineering)
 - 🔗 [MCP 協定：AI 的 USB 接口](/articles/mcp-protocol)
 - 💰 [Token 經濟學：搞懂 AI 怎麼計費](/articles/token-economics)
 - 📚 [建立你的知識管理系統](/articles/pkm-system)
-- 看看 [工作流自動化](/articles?scene=工作流自動化) 的教學
-- 到 [討論區](/#discussion) 分享你的工作流
 
 ---
 

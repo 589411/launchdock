@@ -874,3 +874,275 @@ code {
   border-color: var(--color-brand);
   color: var(--color-brand-light);
 }
+
+/* ==========================================
+   Learning Path (Homepage)
+   ========================================== */
+.learning-path-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.learning-path-step {
+  position: relative;
+}
+
+/* Vertical connector line */
+.learning-path-line {
+  position: absolute;
+  left: 1.75rem;
+  top: 4.5rem;
+  bottom: -0.5rem;
+  width: 2px;
+  background: var(--color-surface-lighter);
+}
+.learning-path-line.active {
+  background: linear-gradient(to bottom, var(--color-brand), var(--color-brand-light));
+}
+
+.learning-path-node {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+  position: relative;
+}
+.learning-path-node.available {
+  border-color: var(--color-surface-lighter);
+  background: var(--color-surface-light);
+}
+.learning-path-node.available:hover {
+  border-color: var(--color-brand);
+  background: var(--color-surface-lighter);
+  transform: translateX(4px);
+}
+.learning-path-node.upcoming {
+  opacity: 0.5;
+}
+
+.learning-path-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  width: 2rem;
+  text-align: center;
+}
+.learning-path-icon.dimmed {
+  filter: grayscale(0.8);
+}
+
+.learning-path-number {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--color-brand);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.learning-path-node.upcoming .learning-path-number {
+  background: var(--color-surface-lighter);
+  color: var(--color-text-muted);
+}
+
+.learning-path-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.learning-path-arrow {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  font-size: 1.25rem;
+}
+
+/* ==========================================
+   Article Progress Bar (in-article nav)
+   ========================================== */
+.article-progress-bar {
+  margin-bottom: 2rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-surface-lighter);
+}
+
+.progress-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+/* Horizontal track */
+.progress-steps::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  right: 1rem;
+  height: 2px;
+  background: var(--color-surface-lighter);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  z-index: 1;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s;
+}
+a.progress-step:hover {
+  transform: scale(1.1);
+}
+
+.progress-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--color-surface-lighter);
+  border: 2px solid var(--color-surface-lighter);
+  transition: all 0.15s;
+}
+.progress-step.past .progress-dot {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+}
+.progress-step.current .progress-dot {
+  background: var(--color-brand-light);
+  border-color: var(--color-brand-light);
+  box-shadow: 0 0 0 3px var(--color-brand)/30;
+  width: 1rem;
+  height: 1rem;
+}
+.progress-step.future .progress-dot {
+  background: transparent;
+  border-color: var(--color-surface-lighter);
+}
+a.progress-step:hover .progress-dot {
+  border-color: var(--color-brand-light);
+}
+
+.progress-label {
+  font-size: 0.6rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+.progress-step.current .progress-label {
+  color: var(--color-brand-light);
+  font-weight: 600;
+}
+
+.progress-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progress-nav-link {
+  font-size: 0.85rem;
+  color: var(--color-brand-light);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.progress-nav-link:hover {
+  color: var(--color-brand);
+}
+
+.progress-current-label {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================
+   Article Tabs (articles listing page)
+   ========================================== */
+.article-tabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 2px solid var(--color-surface-lighter);
+  padding-bottom: 0;
+}
+
+.article-tab {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.article-tab:hover {
+  color: var(--color-text-secondary);
+}
+.article-tab.active {
+  color: var(--color-brand-light);
+  border-bottom-color: var(--color-brand);
+}
+
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+
+/* Step badge in article list */
+.learning-path-step-badge {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-surface-lighter);
+  flex-shrink: 0;
+}
+.learning-path-step-badge.available {
+  border-color: var(--color-brand)/30;
+}
+.learning-path-step-badge .step-num {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.35rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: var(--color-brand);
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.learning-path-step-badge.upcoming .step-num {
+  background: var(--color-surface-lighter);
+  color: var(--color-text-muted);
+}

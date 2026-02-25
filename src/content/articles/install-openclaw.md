@@ -7,6 +7,7 @@ createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 order: 1
+pathStep: 4
 tags: ["OpenClaw", "安裝", "入門"]
 stuckOptions:
   "選擇安裝方式": ["我不知道該選哪個", "可以裝在平板或手機上嗎？", "我的電腦很舊，跑得動嗎？"]

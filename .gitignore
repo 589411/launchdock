@@ -20,5 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# auto-capture temp screenshots (do not commit)
+captures/
+
 # jetbrains setting folder
 .idea/

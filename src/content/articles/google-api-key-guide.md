@@ -182,7 +182,7 @@ Google 有很多名字很像的 API。確認你啟用的是：
 6. **把這兩個都複製下來！** 點「下載 JSON」更好，會下載一個 `credentials.json` 檔案
 
 <!-- @img: oauth-client-created | OAuth 用戶端建立完成，複製 ID 和密鑰 -->
-![選擇外部使用者類型](/images/articles/google-api-key-guide/039.gif)
+![選擇外部使用者類型](/images/articles/google-api-key-guide/039.png)
 ![選擇外部使用者類型](/images/articles/google-api-key-guide/040.png)
 ![選擇外部使用者類型](/images/articles/google-api-key-guide/041.png)
 ![選擇外部使用者類型](/images/articles/google-api-key-guide/043.png)

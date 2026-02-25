@@ -1,0 +1,84 @@
+---
+/**
+ * ArticleProgressBar — 文章頂部的主線學習進度條
+ * 只在 pathStep 存在的文章中顯示
+ */
+import { getCollection } from 'astro:content';
+
+interface Props {
+  currentStep: number;
+}
+
+const { currentStep } = Astro.props;
+
+const allArticles = await getCollection('articles', ({ data }) => !data.archived && !!data.pathStep);
+
+// Build step map
+const stepArticleMap = new Map<number, typeof allArticles[0]>();
+for (const article of allArticles) {
+  if (article.data.pathStep) {
+    stepArticleMap.set(article.data.pathStep, article);
+  }
+}
+
+const steps = [
+  { step: 1, label: '認識' },
+  { step: 2, label: 'LLM' },
+  { step: 3, label: 'API Key' },
+  { step: 4, label: '安裝' },
+  { step: 5, label: '啟動' },
+  { step: 6, label: 'Skill' },
+];
+
+// Find prev/next articles in path
+const prevArticle = stepArticleMap.get(currentStep - 1);
+const nextArticle = stepArticleMap.get(currentStep + 1);
+---
+
+<nav class="article-progress-bar" aria-label="入門路線進度">
+  <div class="progress-steps">
+    {steps.map((s) => {
+      const article = stepArticleMap.get(s.step);
+      const isCurrent = s.step === currentStep;
+      const isPast = s.step < currentStep;
+      const available = !!article && !isCurrent;
+
+      return available ? (
+        <a
+          href={`/articles/${article.id}`}
+          class={`progress-step ${isPast ? 'past' : ''}`}
+          title={s.label}
+        >
+          <span class="progress-dot" />
+          <span class="progress-label">{s.label}</span>
+        </a>
+      ) : (
+        <div
+          class={`progress-step ${isCurrent ? 'current' : ''} ${!article && !isCurrent ? 'future' : ''}`}
+          title={s.label}
+        >
+          <span class="progress-dot" />
+          <span class="progress-label">{s.label}</span>
+        </div>
+      );
+    })}
+  </div>
+
+  <div class="progress-nav">
+    {prevArticle ? (
+      <a href={`/articles/${prevArticle.id}`} class="progress-nav-link">
+        ← 上一步
+      </a>
+    ) : <span />}
+    <span class="progress-current-label">第 {currentStep}/6 步</span>
+    {nextArticle ? (
+      <a href={`/articles/${nextArticle.id}`} class="progress-nav-link">
+        下一步 →
+      </a>
+    ) : currentStep < 6 ? (
+      <span class="text-text-muted text-sm">即將推出</span>
+    ) : (
+      <span class="text-text-muted text-sm">🎉 完成！</span>
+    )}
+  </div>
+</nav>

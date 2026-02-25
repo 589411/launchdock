@@ -56,7 +56,9 @@ GOOGLE_API_KEY=AIzaSyxxxxxxxxxxxxxxxxxx
 ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxx
 ```
 
-> 💡 還沒有 API Key？先看 [Google API Key 申請指南](/articles/google-api-key-guide)——Google 有免費額度，最適合新手。
+> 💡 還沒有 API Key？先看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide)——Google AI Studio 有免費額度，最適合新手。
+>
+> 注意：這裡要填的是 **AI 模型的 Key**（用來呼叫 LLM），不是 [Google Drive/Gmail 的 OAuth Key](/articles/google-api-key-guide)，兩者不同。
 
 ### 測試連線
 

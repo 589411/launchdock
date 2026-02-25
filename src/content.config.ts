@@ -15,6 +15,7 @@ const articles = defineCollection({
     discussionUrl: z.string().url().optional(),
     order: z.number().optional().default(0),
     tags: z.array(z.string()).optional().default([]),
+    pathStep: z.number().optional(),
     stuckOptions: z.record(z.string(), z.array(z.string())).optional().default({}),
   }),
 });

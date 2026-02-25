@@ -4,7 +4,12 @@ import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.archived);
 
-// Group by scene
+// Learning path articles (sorted by pathStep)
+const pathArticles = allArticles
+  .filter(a => a.data.pathStep)
+  .sort((a, b) => (a.data.pathStep || 0) - (b.data.pathStep || 0));
+
+// Group by scene (for scene view)
 const sceneMap = new Map<string, typeof allArticles>();
 for (const article of allArticles) {
   const scene = article.data.scene;
@@ -25,33 +30,107 @@ const sceneIcons: Record<string, string> = {
   '工作流自動化': '⚡',
   '知識管理': '📚',
 };
+
+const steps = [
+  { step: 1, icon: '🧭', title: '認識 OpenClaw' },
+  { step: 2, icon: '🧠', title: '選擇你的 AI 大腦' },
+  { step: 3, icon: '🔑', title: '申請 API Key' },
+  { step: 4, icon: '💻', title: '安裝 OpenClaw' },
+  { step: 5, icon: '🚀', title: '第一次啟動' },
+  { step: 6, icon: '⚡', title: '第一個 Skill' },
+];
+
+// Build step map for step metadata
+const stepMap = new Map(steps.map(s => [s.step, s]));
 ---
 
-<BaseLayout title="場景教學">
+<BaseLayout title="教學文章">
   <div class="max-w-4xl mx-auto px-4 py-12">
-    <h1 class="text-3xl font-bold mb-4">場景教學</h1>
-    <p class="text-text-secondary mb-12">
+    <h1 class="text-3xl font-bold mb-4">教學文章</h1>
+    <p class="text-text-secondary mb-8">
       從你的問題出發，找到解決方案。每篇文章都是可操作的實戰筆記。
     </p>
 
-    {sceneOrder.map((sceneName) => {
-      const articles = sceneMap.get(sceneName);
-      if (!articles || articles.length === 0) return null;
-      return (
-        <section class="mb-12">
-          <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
-            <span>{sceneIcons[sceneName] || '📄'}</span>
-            {sceneName}
-          </h2>
-          <div class="space-y-3">
-            {articles.map((article) => (
+    <!-- Tab switcher -->
+    <div class="article-tabs mb-10" id="article-tabs">
+      <button class="article-tab active" data-tab="path" onclick="switchTab('path')">
+        🚀 入門路線
+      </button>
+      <button class="article-tab" data-tab="scene" onclick="switchTab('scene')">
+        🗂️ 場景瀏覽
+      </button>
+    </div>
+
+    <!-- Tab: 入門路線 -->
+    <div class="tab-content active" id="tab-path">
+      <div class="space-y-3">
+        {steps.map((s) => {
+          const article = pathArticles.find(a => a.data.pathStep === s.step);
+          const available = !!article;
+
+          return available ? (
+            <a
+              href={`/articles/${article.id}`}
+              class="block p-5 rounded-lg bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+            >
+              <div class="flex items-center gap-4">
+                <div class="learning-path-step-badge available">
+                  <span class="text-lg">{s.icon}</span>
+                  <span class="step-num">{s.step}</span>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class={`text-xs px-2 py-0.5 rounded-full ${
+                      article.data.difficulty === '入門' ? 'bg-green-500/20 text-green-400' :
+                      article.data.difficulty === '中級' ? 'bg-yellow-500/20 text-yellow-400' :
+                      'bg-red-500/20 text-red-400'
+                    }`}>
+                      {article.data.difficulty}
+                    </span>
+                  </div>
+                  <h3 class="font-medium group-hover:text-brand-light transition-colors">
+                    {article.data.title}
+                  </h3>
+                  <p class="text-text-muted text-sm mt-1">{article.data.description}</p>
+                </div>
+                <span class="text-text-muted group-hover:text-brand-light transition-colors shrink-0">→</span>
+              </div>
+            </a>
+          ) : (
+            <div class="block p-5 rounded-lg bg-surface-light/50 border border-surface-lighter/50 opacity-60">
+              <div class="flex items-center gap-4">
+                <div class="learning-path-step-badge upcoming">
+                  <span class="text-lg">{s.icon}</span>
+                  <span class="step-num">{s.step}</span>
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-medium text-text-muted">{s.title}</h3>
+                  <p class="text-text-muted text-sm mt-1">📝 即將推出</p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Supplementary articles (not in main path) */}
+      <div class="mt-12">
+        <h2 class="text-lg font-semibold mb-4 text-text-secondary">📖 延伸閱讀</h2>
+        <div class="space-y-3">
+          {allArticles
+            .filter(a => !a.data.pathStep)
+            .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+            .map((article) => (
               <a
                 href={`/articles/${article.id}`}
-                class="block p-5 rounded-lg bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+                class="block p-4 rounded-lg bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
               >
                 <div class="flex items-center justify-between gap-4">
                   <div>
                     <div class="flex items-center gap-2 mb-1">
+                      <span class="text-xs px-2 py-0.5 rounded-full bg-brand/20 text-brand-light">
+                        {article.data.scene}
+                      </span>
                       <span class={`text-xs px-2 py-0.5 rounded-full ${
                         article.data.difficulty === '入門' ? 'bg-green-500/20 text-green-400' :
                         article.data.difficulty === '中級' ? 'bg-yellow-500/20 text-yellow-400' :
@@ -69,10 +148,57 @@ const sceneIcons: Record<string, string> = {
                 </div>
               </a>
             ))}
-          </div>
-        </section>
-      );
-    })}
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: 場景瀏覽 -->
+    <div class="tab-content" id="tab-scene">
+      {sceneOrder.map((sceneName) => {
+        const articles = sceneMap.get(sceneName);
+        if (!articles || articles.length === 0) return null;
+        return (
+          <section class="mb-12">
+            <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+              <span>{sceneIcons[sceneName] || '📄'}</span>
+              {sceneName}
+            </h2>
+            <div class="space-y-3">
+              {articles.map((article) => (
+                <a
+                  href={`/articles/${article.id}`}
+                  class="block p-5 rounded-lg bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+                >
+                  <div class="flex items-center justify-between gap-4">
+                    <div>
+                      <div class="flex items-center gap-2 mb-1">
+                        <span class={`text-xs px-2 py-0.5 rounded-full ${
+                          article.data.difficulty === '入門' ? 'bg-green-500/20 text-green-400' :
+                          article.data.difficulty === '中級' ? 'bg-yellow-500/20 text-yellow-400' :
+                          'bg-red-500/20 text-red-400'
+                        }`}>
+                          {article.data.difficulty}
+                        </span>
+                        {article.data.pathStep && (
+                          <span class="text-xs px-2 py-0.5 rounded-full bg-brand/20 text-brand-light">
+                            入門第 {article.data.pathStep} 步
+                          </span>
+                        )}
+                      </div>
+                      <h3 class="font-medium group-hover:text-brand-light transition-colors">
+                        {article.data.title}
+                      </h3>
+                      <p class="text-text-muted text-sm mt-1">{article.data.description}</p>
+                    </div>
+                    <span class="text-text-muted group-hover:text-brand-light transition-colors shrink-0">→</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        );
+      })}
+    </div>
 
     {allArticles.length === 0 && (
       <div class="text-center py-20">
@@ -88,3 +214,24 @@ const sceneIcons: Record<string, string> = {
     )}
   </div>
 </BaseLayout>
+
+<script is:inline>
+function switchTab(tab) {
+  // Update tab buttons
+  document.querySelectorAll('.article-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
+  });
+  // Update tab content
+  document.querySelectorAll('.tab-content').forEach(el => {
+    el.classList.toggle('active', el.id === 'tab-' + tab);
+  });
+  // Save preference
+  localStorage.setItem('launchdock-article-tab', tab);
+}
+
+// Restore tab preference
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('launchdock-article-tab');
+  if (saved) switchTab(saved);
+});
+</script>

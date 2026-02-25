@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import ArticleMeta from '../components/ArticleMeta.astro';
+import ArticleProgressBar from '../components/ArticleProgressBar.astro';
 import GifPlayer from '../components/GifPlayer.astro';
 import EmotionFeedback from '../components/EmotionFeedback.tsx';
 import SectionReactions from '../components/SectionReactions.tsx';
@@ -17,6 +18,7 @@ interface Props {
     archived?: boolean;
     archivedReason?: string;
     discussionUrl?: string;
+    pathStep?: number;
     stuckOptions?: Record<string, string[]>;
   };
 }
@@ -27,6 +29,11 @@ const slug = Astro.url.pathname.replace(/^\/articles\//, '').replace(/\/$/, '');
 
 <BaseLayout title={frontmatter.title} description={frontmatter.description}>
   <article class="max-w-3xl mx-auto px-4 py-8">
+    <!-- Learning Path Progress Bar (only for path articles) -->
+    {frontmatter.pathStep && (
+      <ArticleProgressBar currentStep={frontmatter.pathStep} />
+    )}
+
     <!-- Article Header -->
     <header class="mb-8">
       <div class="flex items-center gap-2 mb-4">
@@ -68,7 +75,11 @@ const slug = Astro.url.pathname.replace(/^\/articles\//, '').replace(/\/$/, '');
       <!-- Section reactions hint -->
       <div class="mt-4 px-3 py-2 rounded-lg bg-surface-light/50 text-xs text-text-muted flex items-center gap-2">
         <span>💡</span>
-        <span>每個段落旁的 <strong class="text-text-secondary">+</strong> 按鈕可以反應「看懂 / 卡關」，幫助我們改進文章</span>
+        <span>
+          每個段落旁的 <strong class="text-text-secondary">+</strong> 可以選
+          <strong class="text-text-secondary">👍 看懂</strong> / <strong class="text-text-secondary">😵 卡關</strong> / <strong class="text-text-secondary">😢 看不懂</strong>。
+          文章最下方也能在問答區提問，一起把卡點補起來。
+        </span>
       </div>
     </header>
 
