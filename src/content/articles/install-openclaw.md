@@ -74,6 +74,8 @@ stuckOptions:
 | 有 Linux 開發經驗 | 🪟 **Windows WSL 2** 或直接參考 macOS 教學 |
 | 電腦跑不太動 | ☁️ **雲端部署** |
 
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：雲端部署就像叫外賣——不用自己開火，馬上就能吃。本地安裝就是自己學做菜——花時間，但以後想吃什麼都能自己來。兩種都對，看你現在餓不餓。
+
 ---
 
 ## 系統需求
@@ -87,7 +89,7 @@ stuckOptions:
 - **網路** 穩定連線（需要呼叫 AI API）
 - **API Key** 至少一個：OpenAI / Google / Anthropic
 
-> 💡 還沒有 API Key？先看 [Google API Key 申請指南](/articles/google-api-key-guide)，免費額度就能開始！
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 還沒有 API Key？先看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide)——Google AI Studio 有免費額度，最適合新手。
 
 ---
 

@@ -78,7 +78,7 @@ openclaw onboard --install-daemon
 
 複製你保存的 API Key，貼到終端機裡。
 
-> 💡 **貼上去可能看不到任何字元，這是正常的！** 終端機出於安全考量不會顯示密碼類的輸入。直接按 Enter 就好。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **貼上去可能看不到任何字元，這是正常的！** 終端機出於安全考量不會顯示密碼類的輸入。直接按 Enter 就好。
 
 <!-- @img: onboard-api-key | 輸入 API Key -->
 
@@ -93,7 +93,7 @@ openclaw onboard --install-daemon
 | OpenAI | `gpt-4o-mini` | 便宜、速度快 |
 | Anthropic | `claude-sonnet-4-5` | 平衡品質和速度 |
 
-> 💡 不用糾結太久，之後隨時可以在設定檔裡換。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 不用糾結太久，之後隨時可以在設定檔裡換。
 
 <!-- @img: onboard-model | 選擇模型 -->
 
@@ -117,7 +117,7 @@ openclaw onboard --install-daemon
 
 **新手推薦 Telegram**——最簡單、免費、手機電腦都能用。
 
-> 💡 如果你還不想設定平台，可以跳過這步，直接用 Web 介面（`http://localhost:18789`）跟 OpenClaw 對話。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 如果你還不想設定平台，可以跳過這步，直接用 Web 介面（`http://localhost:18789`）跟 OpenClaw 對話。
 
 ### 3.1 建立 Telegram 機器人
 
@@ -225,7 +225,7 @@ openclaw gateway start --daemon
 > 你的 OpenClaw 已經可以運作了。下一步來試試更厲害的東西——
 >
 > 👉 [第一個 Skill：完成你的第一個自動化任務](/articles/openclaw-first-skill)
-
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：第一次聽到 AI 回話的感覚怎麼樣？就像你組了一台電腦，按下電源鍵的那一刻——螢幕亮了，一切值得了。接下來要教你讓它幹活，而不只是聊天。
 ---
 
 ## 🚨 常見問題排查
@@ -293,6 +293,6 @@ openclaw doctor
 └── logs/            ← 錯誤日誌
 ```
 
-> 💡 進階設定（模型路由、Fallback 機制）可以看 [模型設定與切換](/articles/openclaw-model-config)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 進階設定（模型路由、Fallback 機制）可以看 [模型設定與切換](/articles/openclaw-model-config)。
 
 ---

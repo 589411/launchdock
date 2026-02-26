@@ -29,6 +29,8 @@ stuckOptions:
 
 每個工具都很強大。但你有沒有發現一個問題？
 
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：想像一下，你有五個超強的廚師，一個會炒菜、一個會煮湯、一個會烤肉⋯⋯但他們各自在不同的廚房，彼此不講話。你每做一道菜，就得自己端著食材跑來跑去。累不累？這就是你現在用 AI 工具的狀態。
+
 ---
 
 ## 問題：你的資訊是斷裂的
@@ -66,6 +68,8 @@ ChatGPT、Gemini 每次都是獨立的對話。你上週教它的事，這週它
 
 OpenClaw 的 Skill 是**可重複的自動化流程**。你設定一次，以後一鍵執行。
 
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **換句話說**：ChatGPT 像是每天來的臨時工，你得重新交代一次任務。OpenClaw 的 Skill 像是你寫好的 SOP 手冊——新人來了翻開手冊就能做，不用你盯。
+
 ---
 
 ## 一個具體的例子
@@ -99,6 +103,8 @@ OpenClaw 的 Skill 是**可重複的自動化流程**。你設定一次，以後
 - **寫 Skill 需要理解基本的流程邏輯**
 
 但這些前期投資是值得的，因為你只需要做一次。
+
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：學 OpenClaw 有點像學開車。一開始覺得油門、方向盤、後照鏡要同時顧好幾個東西，很崩潰。但一旦學會了，你就再也回不去走路的日子了。而且我們這條路上有路標（教學文章），還有交通警察（社群）幫你指路，不用怕迷路。
 
 ---
 

@@ -91,6 +91,8 @@ USB-C 統一了一切。
 
 你只需要跟翻譯說中文（MCP 協定），翻譯會用對方的語言（各種 API）溝通。
 
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：再講白一點——MCP 就像辦公室裡的內線電話系統。不管你要找財務部（Google Drive）還是行銷部（Slack），撥分機號碼就好，不用跑去對方的辦公室學他們的術語。
+
 ---
 
 ## MCP 怎麼運作？
@@ -206,7 +208,7 @@ mcp_servers:
 
 啟動後，你的 Agent 就能同時操作 Google Drive、Slack 和 Notion。
 
-> 💡 **不知道怎麼設定 Google API Key？** 看 [Google API Key 申請指南](/articles/google-api-key-guide)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **不知道怎麼設定 Google API Key？** 看 [Google API Key 申請指南](/articles/google-api-key-guide)。
 
 ### 確認連接成功
 
@@ -252,7 +254,7 @@ openclaw mcp test google-drive
 | Web Scraper | 爬取網頁 | ⭐⭐ 中等 |
 | RSS | RSS 訂閱 | ⭐ 簡單 |
 
-> 💡 完整清單可以在 [ClawHub](https://clawhub.dev) 上查看。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 完整清單可以在 [ClawHub](https://clawhub.dev) 上查看。
 
 ---
 
@@ -273,6 +275,8 @@ openclaw mcp test google-drive
 ### 3. 換工具不用改流程
 
 今天用 Notion，明天想換 Obsidian？只需要換一個 MCP Server，你的 [Skill](/articles/openclaw-skill) 和 Agent 邏輯完全不用改。
+
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **換句話說**：以前從 Notion 換到 Obsidian 等於搬家——要打包、拆裝、重新整理。有了 MCP，換工具就像換插座面板——線路不用動，只換一個零件就好。
 
 ### 4. 安全性內建
 
@@ -337,7 +341,7 @@ const transport = new StdioServerTransport();
 await server.connect(transport);
 ```
 
-> 💡 MCP SDK 目前有 **Node.js** 和 **Python** 版本。如果你會寫程式，可以輕鬆擴充。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> MCP SDK 目前有 **Node.js** 和 **Python** 版本。如果你會寫程式，可以輕鬆擴充。
 
 ---
 

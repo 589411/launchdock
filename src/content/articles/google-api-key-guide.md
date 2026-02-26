@@ -44,7 +44,7 @@ stuckOptions:
 
 ![Google Cloud Console 首頁畫面](/images/articles/google-api-key-guide/001.gif)
 
-> 💡 **小提醒**：如果你有多個 Google 帳號，確認你用的是正確的那個。右上角的頭像可以切換帳號。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **小提醒**：如果你有多個 Google 帳號，確認你用的是正確的那個。右上角的頭像可以切換帳號。
 
 ---
 
@@ -109,7 +109,7 @@ stuckOptions:
 
 <!-- @img: enable-gmail-api | 啟用 Gmail API -->
 
-> 💡 **兩個都要用？** 兩個都啟用就好，不衝突。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **兩個都要用？** 兩個都啟用就好，不衝突。
 
 ### 🚨 常見錯誤 #2：啟用了錯誤的 API
 

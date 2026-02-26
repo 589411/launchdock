@@ -32,7 +32,7 @@ stuckOptions:
 - 穩定的網路連線
 - 一個 OpenAI / Google / Anthropic 的 API Key（至少一個）
 
-> 💡 **確認 Windows 版本**：按 `Win + R`，輸入 `winver`，按 Enter。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **確認 Windows 版本**：按 `Win + R`，輸入 `winver`，按 Enter。
 
 ---
 
@@ -162,7 +162,7 @@ GOOGLE_API_KEY=your-google-api-key
 ANTHROPIC_API_KEY=sk-ant-xxxxxxxx
 ```
 
-> 💡 **不知道怎麼申請 Google API Key？** 看 [Google API Key 申請指南](/articles/google-api-key-guide)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **還沒有 API Key？** 看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide)——Google AI Studio 有免費額度，最適合新手。
 
 ### Step 8：啟動 OpenClaw
 
@@ -179,7 +179,7 @@ python -m openclaw start
 
 打開瀏覽器前往 `http://localhost:3000`。
 
-> 💡 如果 Windows Defender 跳出防火牆警告，點「允許存取」即可。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 如果 Windows Defender 跳出防火牆警告，點「允許存取」即可。
 
 ---
 

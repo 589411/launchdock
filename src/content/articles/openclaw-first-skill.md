@@ -39,6 +39,8 @@ stuckOptions:
 
 **打個比方**：直接聊天 = 每次口頭交代新員工。Skill = 寫一份 SOP，新員工照著做就好。
 
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：你不會每次去早餐店都從頭解釋「我要一個蛋餅、不要辣、加起司、中杯冰奶茶半糖」——你會直接說「老樣子」。Skill 就是你的「老樣子」。
+
 ---
 
 ## 我們要做什麼？
@@ -119,7 +121,7 @@ output:
   result: "{{steps.summarize.output}}"
 ```
 
-> 💡 **不用怕打錯**。YAML 最常見的錯誤是**縮排不對**。確保用空格（不是 Tab），每層縮排 2 個空格。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **不用怕打錯**。YAML 最常見的錯誤是**縮排不對**。確保用空格（不是 Tab），每層縮排 2 個空格。
 
 <!-- @img: skill-yaml-content | Skill 檔案的完整內容 -->
 
@@ -136,6 +138,8 @@ output:
 | `output` | 最終輸出什麼 |
 
 步驟之間用 `{{steps.search.output}}` 把上一步的結果傳給下一步。像接力賽一樣。
+
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **換句話說**：整個 Skill 就像一條工廠流水線——第一站搜集原料（搜尋新聞），第二站加工包裝（AI 整理），最後成品出貨（顯示摘要）。你只要按下開關，流水線就自己跑。
 
 ---
 

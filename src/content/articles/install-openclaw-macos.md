@@ -31,7 +31,7 @@ stuckOptions:
 - 穩定的網路連線
 - 一個 OpenAI / Google / Anthropic 的 API Key（至少一個）
 
-> 💡 不確定 Mac 型號？點左上角蘋果圖示 →「關於這台 Mac」查看。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 不確定 Mac 型號？點左上角蘋果圖示 →「關於這台 Mac」查看。
 
 ---
 
@@ -89,7 +89,7 @@ python --version
 # 應該顯示 Python 3.11.x
 ```
 
-> 💡 **已經有 Python？** 執行 `python3 --version` 確認。如果是 3.11 以上可以跳過這步。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **已經有 Python？** 執行 `python3 --version` 確認。如果是 3.11 以上可以跳過這步。
 
 ---
 
@@ -185,7 +185,7 @@ GOOGLE_API_KEY=your-google-api-key
 ANTHROPIC_API_KEY=sk-ant-xxxxxxxx
 ```
 
-> 💡 **不知道怎麼申請 Google API Key？** 看 [Google API Key 申請指南](/articles/google-api-key-guide)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **還沒有 API Key？** 看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide)——Google AI Studio 有免費額度，最適合新手。
 
 ---
 

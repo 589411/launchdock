@@ -78,7 +78,7 @@ workspace/
 └── config.yaml       # MCP 連接設定
 ```
 
-> 💡 Workspace 設定的詳細說明可以參考 [Soul 設定指南](/articles/openclaw-soul)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> Workspace 設定的詳細說明可以參考 [Soul 設定指南](/articles/openclaw-soul)。
 
 ### 知識分類法
 
@@ -180,7 +180,7 @@ steps:
       message: "📚 今日知識新訊\n\n{{digest}}"
 ```
 
-> 💡 Telegram 的設定請看 [Telegram 整合教學](/articles/telegram-integration)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> Telegram 的設定請看 [Telegram 整合教學](/articles/telegram-integration)。
 
 ---
 

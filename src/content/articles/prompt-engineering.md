@@ -60,6 +60,8 @@ stuckOptions:
 └─────────────────────────────────────┘
 ```
 
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **換句話說**：寫 Prompt 就像寫點餐單。你跟服務生說「給我好吃的」，他不知道要上什麼菜。但你說「不辣的、一飯一肉一湯、台幣 200 以內」——菜馬上就對了。
+
 ### 1. 角色設定
 
 告訴 AI「你是誰」，可以顯著提升回答品質。
@@ -70,7 +72,7 @@ stuckOptions:
 你是一位嚴格的程式碼審查者。
 ```
 
-> 💡 角色設定跟 OpenClaw 的 [Soul 人設](/articles/openclaw-soul) 概念完全相同。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 角色設定跟 OpenClaw 的 [Soul 人設](/articles/openclaw-soul) 概念完全相同。
 
 ### 2. 明確的任務描述
 
@@ -148,6 +150,8 @@ AI 會學到格式，回答：`分類：技術問題，緊急度：高`
 
 思維鏈對複雜推理任務特別有效，準確率可以提升 20-40%。
 
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：CoT 就像考數學時老師要求你「寫出計算過程」。直接寫答案容易粗心，但一步步寫出來反而不會算錯。AI 也是一樣——你叫它慢慢想，它反而比較聰明。
+
 ### 技巧 4：Role Play（角色扮演）
 
 讓 AI 從特定視角回答。
@@ -205,7 +209,7 @@ steps:
       max_tokens: 800
 ```
 
-> 💡 **省錢提醒**：精簡 Prompt 可以顯著降低 [Token 成本](/articles/token-economics)。每少 100 token，每天 100 次就省 10,000 tokens。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **省錢提醒**：精簡 Prompt 可以顯著降低 [Token 成本](/articles/token-economics)。每少 100 token，每天 100 次就省 10,000 tokens。
 
 ### Agent Prompt = 決策的「指南針」
 

@@ -112,7 +112,7 @@ TELEGRAM_BOT_TOKEN=7123456789:AAHxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 TELEGRAM_ALLOWED_USERS=123456789
 ```
 
-> 💡 **怎麼找到自己的 User ID？** 跟 `@userinfobot` 對話，它會告訴你。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **怎麼找到自己的 User ID？** 跟 `@userinfobot` 對話，它會告訴你。
 
 ### 2.3 設定 config.yaml
 

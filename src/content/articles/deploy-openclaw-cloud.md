@@ -83,7 +83,7 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx
 GOOGLE_API_KEY=your-google-api-key
 ```
 
-> 💡 **小提醒**：不知道怎麼申請 Google API Key？看 [Google API Key 申請指南](/articles/google-api-key-guide)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **小提醒**：不知道怎麼申請 API Key？看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide)——Google AI Studio 有免費額度，最適合新手。
 
 #### Step 5：取得你的存取網址
 
@@ -187,7 +187,7 @@ docker-compose up -d
 docker-compose ps
 ```
 
-> 💡 **安全提醒**：正式部署請記得設定 HTTPS（可以用 Nginx + Let's Encrypt）和防火牆規則。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **安全提醒**：正式部署請記得設定 HTTPS（可以用 Nginx + Let's Encrypt）和防火牆規則。
 
 ---
 

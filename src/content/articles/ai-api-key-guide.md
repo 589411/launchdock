@@ -24,7 +24,7 @@ stuckOptions:
 
 整個過程大約 3-10 分鐘，取決於你選的方案。
 
-> 💡 **只需要選一個就好。** 之後隨時可以加其他家。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **只需要選一個就好。** 之後隨時可以加其他家。
 
 ---
 
@@ -36,6 +36,8 @@ API Key 就像你家的鑰匙。拿著它就能用你的帳號呼叫 AI——**�
 1. **不要截圖分享** Key
 2. **不要貼到公開的地方**（GitHub、論壇、聊天室）
 3. **不小心外洩就立即撤銷**，然後重新申請一把
+
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **換句話說**：API Key 就是你家大門鑰匙。你不會把鑰匙拍照放 IG 吧？同樣的道理，Key 外洩就等於把家門打開，任何人都可以進去刷你的信用卡。
 
 ---
 

@@ -56,6 +56,19 @@ code {
 .prose img[alt*="screenshot"], .prose img[alt*="截圖"] { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); }
 .prose strong { color: var(--color-text-primary); }
 
+/* 鴨編 inline icon — override .prose img defaults */
+.prose blockquote img[alt="鴨編"] {
+  display: inline;
+  width: 24px;
+  height: 24px;
+  margin: 0 0.3rem 0 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  vertical-align: middle;
+  image-rendering: -webkit-optimize-contrast;
+}
+
 /* Figure / caption styling */
 .prose figure { margin: 1.5rem 0; }
 .prose figure img { margin: 0; }

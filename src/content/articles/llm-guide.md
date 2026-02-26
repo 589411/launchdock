@@ -41,6 +41,8 @@ LLM 就是 ChatGPT、Claude、Gemini 背後的核心技術。它讀過海量的�
 
 OpenClaw 可以接上**任何一家**的 LLM。而且之後隨時可以換。
 
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **換句話說**：ChatGPT、Claude、Gemini 就像不同品牌的引擎——Toyota、BMW、Tesla。OpenClaw 是車架，引擎可以隨你換，換了不用重新學開車。
+
 ---
 
 ## 4 種方案完整比較
@@ -54,7 +56,7 @@ OpenClaw 可以接上**任何一家**的 LLM。而且之後隨時可以換。
 | **C. OpenAI API**       | 按用量   | 按用量   | ⭐⭐ 中等 | 主要用 GPT 的人      |
 | **D. Anthropic API**    | 按用量   | 按用量   | ⭐⭐ 中等 | 想要最好品質的人     |
 
-> 💡 **不確定？選 A（Google AI Studio）。** 免費額度最高、不需要綁信用卡，最適合先體驗。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **不確定？選 A（Google AI Studio）。** 免費額度最高、不需要綁信用卡，最適合先體驗。
 
 ---
 
@@ -145,7 +147,7 @@ OpenClaw 可以接上**任何一家**的 LLM。而且之後隨時可以換。
 | 一天正常使用   | ~20,000       | ~$0.003           | ~$0.80           |
 | 一個月正常使用 | ~600,000      | ~$0.10            | ~$24.00          |
 
-> 💡 **結論**：用便宜模型（Gemini Flash），一個月不到 $1 美元。用頂級模型（Claude Opus），一個月大約一杯咖啡到一頓午餐的價格。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **結論**：用便宜模型（Gemini Flash），一個月不到 $1 美元。用頂級模型（Claude Opus），一個月大約一杯咖啡到一頓午餐的價格。
 >
 > 想深入了解可以看 [Token 經濟學](/articles/token-economics)。
 
@@ -158,6 +160,8 @@ OpenClaw 可以接上**任何一家**的 LLM。而且之後隨時可以換。
 - **Google AI Studio**：免費額度本身就有限制，不會自動扣錢
 
 設定完上限後，到達上限會自動停止，不會繼續扣款。
+
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：帳單爆炸就像吃到飽忘記設定人數上限——先設好安全門檻，超過自動鎖住，你就安心了。
 
 ---
 
@@ -172,7 +176,7 @@ OpenClaw 可以接上**任何一家**的 LLM。而且之後隨時可以換。
 | 寫報告、分析、寫程式 | Claude Sonnet / GPT-4o     | 品質最好            |
 | 處理超長文件         | Gemini 1.5 Pro             | 100 萬 Token 上下文 |
 
-> 💡 **以後可以換嗎？** 當然可以。OpenClaw 支援同時設定多個 Provider，隨時切換。進階設定可以看 [模型設定與切換](/articles/openclaw-model-config)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **以後可以換嗎？** 當然可以。OpenClaw 支援同時設定多個 Provider，隨時切換。進階設定可以看 [模型設定與切換](/articles/openclaw-model-config)。
 
 ---
 

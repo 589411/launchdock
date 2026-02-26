@@ -56,7 +56,7 @@ GOOGLE_API_KEY=AIzaSyxxxxxxxxxxxxxxxxxx
 ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxx
 ```
 
-> 💡 還沒有 API Key？先看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide)——Google AI Studio 有免費額度，最適合新手。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 還沒有 API Key？先看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide)——Google AI Studio 有免費額度，最適合新手。
 >
 > 注意：這裡要填的是 **AI 模型的 Key**（用來呼叫 LLM），不是 [Google Drive/Gmail 的 OAuth Key](/articles/google-api-key-guide)，兩者不同。
 
@@ -184,7 +184,7 @@ models:
 繼續工作，使用者無感
 ```
 
-> 💡 Fallback 是多 Provider 的最大好處。只設一個 Provider 就沒有這個安全網。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> Fallback 是多 Provider 的最大好處。只設一個 Provider 就沒有這個安全網。
 
 ---
 
@@ -235,7 +235,7 @@ routing:
 fallback: gpt-4o-mini
 ```
 
-> 💡 不知道怎麼估算費用？看 [Token 經濟學](/articles/token-economics) 精算成本。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 不知道怎麼估算費用？看 [Token 經濟學](/articles/token-economics) 精算成本。
 
 ---
 
