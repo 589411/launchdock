@@ -2,7 +2,7 @@
 title: "AI 技術狂飆中：一個壞消息、一個好消息"
 description: "AI 發展速度令人焦慮？別慌，技術終將變成人人可用的產品。關鍵是你現在怎麼卡位。"
 contentType: "guide"
-scene: "認識 OpenClaw"
+scene: "鴨編觀點"
 difficulty: "入門"
 createdAt: "2026-02-27"
 verifiedAt: "2026-02-27"
