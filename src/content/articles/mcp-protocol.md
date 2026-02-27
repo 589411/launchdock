@@ -1,13 +1,16 @@
 ---
 title: "MCP 協定：AI 的 USB 接口，讓工具即插即用"
 description: "Model Context Protocol 讓 AI 能連接任何工具。了解 MCP 如何運作，以及它為什麼是 OpenClaw 的核心骨架。"
-scene: "打破資訊孤島"
+contentType: "guide"
+scene: "核心功能"
 difficulty: "中級"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
-order: 3
-tags: ["MCP", "協定", "API", "標準化", "OpenClaw"]
+order: 4
+prerequisites: ["why-openclaw"]
+estimatedMinutes: 10
+tags: ["MCP", "API", "OpenClaw"]
 stuckOptions:
   "為什麼需要 MCP": ["現在的 API 方式有什麼問題？", "MCP 是誰制定的？"]
   "MCP 怎麼運作": ["Client 跟 Server 的關係看不懂", "JSON-RPC 是什麼？", "跟 REST API 差在哪？"]

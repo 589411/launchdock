@@ -17,11 +17,13 @@ for (const article of allArticles) {
 
 // Scene metadata
 const scenes = [
-  { key: '打破資訊孤島', icon: '🔗', description: '告別 copy-paste，讓 AI 工具之間的資訊自動流動' },
-  { key: '安裝與設定', icon: '🔧', description: '從零開始安裝 OpenClaw，常見卡關問題全解析' },
-  { key: '核心功能', icon: '🧩', description: 'Skill、Agent、Soul——OpenClaw 的三大支柱' },
-  { key: '工作流自動化', icon: '⚡', description: '把重複性工作變成一鍵完成的自動化流程' },
-  { key: '知識管理', icon: '📚', description: '用 OpenClaw 打造你的個人知識庫' },
+  { key: '認識 OpenClaw', icon: '🧭', description: '了解 OpenClaw 的核心價值與基本概念' },
+  { key: '環境準備', icon: '🔑', description: '選擇 LLM、申請 API Key、前置準備' },
+  { key: '安裝與部署', icon: '💻', description: '本機安裝或雲端部署 OpenClaw' },
+  { key: '基礎使用', icon: '🚀', description: '首次啟動、模型設定、基本操作' },
+  { key: '核心功能', icon: '🧩', description: 'Agent、Skill、Soul、MCP 深入理解' },
+  { key: '整合與自動化', icon: '⚡', description: '連接外部服務、建立自動化工作流' },
+  { key: '知識與進階', icon: '📚', description: '知識管理系統、進階設定與最佳實踐' },
 ];
 
 // Get latest articles
@@ -54,7 +56,7 @@ const latestArticles = [...allArticles].sort((a, b) =>
           href="#learning-path"
           class="px-8 py-3 bg-brand hover:bg-brand-dark text-white rounded-lg font-medium transition-colors"
         >
-          🚀 開始入門路線
+          🚀 新手養蝦路線
         </a>
         <a
           href="/articles"

@@ -1,12 +1,15 @@
 ---
 title: "macOS 安裝 OpenClaw：從零開始的完整教學"
 description: "在 Mac 上安裝 OpenClaw 的逐步指南，涵蓋 Homebrew、Python 環境、相依套件到第一次啟動。"
-scene: "安裝與設定"
+contentType: "tutorial"
+scene: "安裝與部署"
 difficulty: "入門"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 order: 2
+prerequisites: ["install-openclaw"]
+estimatedMinutes: 15
 tags: ["OpenClaw", "macOS", "安裝", "Python", "Homebrew"]
 stuckOptions:
   "Homebrew": ["Homebrew 安裝指令跑很久", "終端機顯示 permission denied", "不知道 Homebrew 是什麼"]

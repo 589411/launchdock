@@ -1,14 +1,17 @@
 ---
 title: "OpenClaw Agent 完全指南：打造你的 AI 分身"
 description: "Agent 是 OpenClaw 的靈魂角色，它能理解你的意圖、自動選擇 Skill、甚至自己決定下一步該做什麼。"
+contentType: "guide"
 scene: "核心功能"
 difficulty: "中級"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 discussionUrl: "https://github.com/589411/launchdock/discussions"
-order: 4
-tags: ["OpenClaw", "Agent", "AI 代理", "核心功能", "LLM"]
+order: 2
+prerequisites: ["openclaw-first-run"]
+estimatedMinutes: 8
+tags: ["OpenClaw", "Agent", "AI 代理", "LLM"]
 stuckOptions:
   "Agent 是什麼": ["Agent 和 Skill 差在哪裡？", "需要自己的 API Key 嗎？"]
   "運作原理": ["ReAct 框架看不懂", "什麼是 Tool Calling？"]

@@ -1,13 +1,16 @@
 ---
 title: "Telegram 整合完整教學：讓 OpenClaw 變成你的私人 AI 助理"
 description: "從 BotFather 建立機器人到串接 OpenClaw，把 Telegram 變成你隨時隨地使用 AI 的入口。"
-scene: "工作流自動化"
+contentType: "tutorial"
+scene: "整合與自動化"
 difficulty: "中級"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
-order: 2
-tags: ["Telegram", "Bot", "整合", "聊天", "MCP"]
+order: 1
+prerequisites: ["openclaw-first-run"]
+estimatedMinutes: 15
+tags: ["Telegram", "Bot", "MCP", "整合"]
 stuckOptions:
   "為什麼用 Telegram": ["LINE 不行嗎？", "為什麼不用 Discord？", "Telegram 在台灣不流行吧？"]
   "建立 Bot": ["BotFather 找不到", "Token 長什麼樣？", "Bot 和一般帳號有什麼不同？"]

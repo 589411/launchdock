@@ -1,12 +1,15 @@
 ---
 title: "模型設定與切換：讓 OpenClaw 自動選最適合的 AI 模型"
 description: "不同任務用不同模型。學會設定 Provider、模型路由和 Fallback 機制，又省錢又高效。"
-scene: "安裝與設定"
+contentType: "tutorial"
+scene: "基礎使用"
 difficulty: "中級"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 order: 3
+prerequisites: ["openclaw-first-run"]
+estimatedMinutes: 10
 tags: ["OpenClaw", "模型", "GPT", "Gemini", "Claude", "設定"]
 stuckOptions:
   "為什麼要切換模型": ["一個模型用到底不行嗎？", "模型之間真的差很多嗎？"]

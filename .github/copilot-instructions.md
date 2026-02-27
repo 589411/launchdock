@@ -101,18 +101,48 @@ Phase 3: CLI 配對     → 引導使用者執行 add-image.sh
 ---
 title: "標題"
 description: "描述"
-scene: "安裝與設定"  # 分類
-difficulty: "入門"     # 入門 | 進階
+contentType: "tutorial"  # tutorial | guide | reference | troubleshoot
+scene: "安裝與部署"      # 見下方場景列表
+difficulty: "入門"        # 入門 | 中級 | 進階
 createdAt: "YYYY-MM-DD"
 verifiedAt: "YYYY-MM-DD"
 archived: false
-discussionUrl: "https://github.com/589411/launchdock/discussions"
 order: 1
-tags: ["tag1", "tag2"]
+prerequisites: ["slug-of-previous-article"]
+estimatedMinutes: 10
+tags: ["OpenClaw", "安裝"]  # 1-8 個，優先從受控詞彙選
 stuckOptions:
   "步驟名稱": ["常見問題1", "常見問題2"]
 ---
 ```
+
+### contentType 說明
+- `tutorial`：手把手教學（安裝、設定、API 申請），步驟多、截圖多
+- `guide`：概念指南（LLM 科普、Token 經濟學），解釋 why
+- `reference`：參考速查（設定表、指令大全），表格為主
+- `troubleshoot`：疑難排解（錯誤排查），問題→原因→解法
+
+### scene 可用值
+- `認識 OpenClaw`：入門概念、價值主張
+- `環境準備`：LLM 選擇、API Key 申請
+- `安裝與部署`：本機安裝、雲端部署
+- `基礎使用`：首次啟動、模型設定
+- `核心功能`：Agent、Skill、Soul、MCP
+- `整合與自動化`：Telegram、外部服務
+- `知識與進階`：PKM、進階設定
+
+### 受控標籤（tags 優先從此選擇）
+- **平台**：OpenClaw, KimiClaw, Zeabur, Docker, Telegram, Notion, Obsidian
+- **AI 供應商**：OpenAI, Anthropic, Google, OpenRouter, Ollama, DeepSeek
+- **作業系統**：macOS, Windows, Linux, WSL
+- **核心概念**：LLM, API, Agent, Skill, Soul, MCP, Token, Prompt, RAG
+- **操作類型**：安裝, 設定, 申請, 部署, 除錯, 整合
+
+### 可選欄位
+- `pathStep`：主線學習步驟編號（1-6）
+- `series`：系列歸屬（name + part）
+- `compatibleVersion`：適用 OpenClaw 版本
+- `discussionUrl`：討論連結
 
 ### 文章風格
 - 繁體中文

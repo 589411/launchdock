@@ -1,13 +1,19 @@
 ---
 title: "AI 模型 API Key 申請指南：OpenAI、Anthropic、Google、OpenRouter 一次搞定"
 description: "一步步教你申請 AI 模型的 API Key。不管你選哪家，照著做就能拿到讓 OpenClaw 運作的鑰匙。"
-scene: "安裝與設定"
+contentType: "tutorial"
+scene: "環境準備"
 difficulty: "入門"
 createdAt: "2026-02-25"
 verifiedAt: "2026-02-25"
 archived: false
 order: 3
 pathStep: 3
+series:
+  name: "新手入門"
+  part: 3
+prerequisites: ["llm-guide"]
+estimatedMinutes: 10
 tags: ["API Key", "OpenAI", "Anthropic", "Google AI Studio", "OpenRouter", "Gemini", "Claude", "GPT"]
 stuckOptions:
   "選哪家": ["我還沒決定要用哪家", "可以之後再加其他家嗎？"]

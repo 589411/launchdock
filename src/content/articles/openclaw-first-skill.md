@@ -1,14 +1,20 @@
 ---
 title: "第一個 Skill：5 分鐘完成你的第一個自動化任務"
 description: "你的 OpenClaw 已經能回話了，但它真正的威力在 Skill。跟著做，把一個手動任務變成一鍵完成。"
-scene: "核心功能"
+contentType: "tutorial"
+scene: "基礎使用"
 difficulty: "入門"
 createdAt: "2026-02-25"
 verifiedAt: "2026-02-25"
 archived: false
-order: 1
+order: 2
 pathStep: 6
-tags: ["OpenClaw", "Skill", "自動化", "入門", "第一個"]
+series:
+  name: "新手入門"
+  part: 6
+prerequisites: ["openclaw-first-run"]
+estimatedMinutes: 10
+tags: ["OpenClaw", "Skill", "自動化", "入門"]
 stuckOptions:
   "Skill 概念": ["跟直接跟 AI 聊天有什麼不同？", "Skill 可以做什麼？"]
   "建立 Skill 檔案": ["不知道檔案要放在哪裡", "YAML 格式看不懂", "縮排一直出錯"]

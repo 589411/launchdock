@@ -1,13 +1,19 @@
 ---
 title: "選擇你的 AI 大腦：4 種 LLM 方案完整比較"
 description: "OpenClaw 需要接上 LLM 才能運作。搞懂 ChatGPT 訂閱、OpenRouter、各家 API 的差別，選出最適合你的方案。"
-scene: "安裝與設定"
+contentType: "guide"
+scene: "環境準備"
 difficulty: "入門"
 createdAt: "2026-02-25"
 verifiedAt: "2026-02-25"
 archived: false
 order: 2
 pathStep: 2
+series:
+  name: "新手入門"
+  part: 2
+prerequisites: ["why-openclaw"]
+estimatedMinutes: 8
 tags: ["LLM", "ChatGPT", "Claude", "Gemini", "OpenRouter", "API", "OpenClaw"]
 stuckOptions:
   "LLM 是什麼": ["LLM 跟 ChatGPT 有什麼不同？", "為什麼 OpenClaw 要另外接 LLM？", "OpenClaw 本身不能回答問題嗎？"]

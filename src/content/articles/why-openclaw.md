@@ -1,7 +1,8 @@
 ---
 title: "為什麼你需要 OpenClaw？當 ChatGPT 和 Gemini 不夠用的時候"
 description: "你已經在用 5 個 AI 工具了，但資訊還是散落各處。看看 OpenClaw 如何幫你把它們串起來。"
-scene: "打破資訊孤島"
+contentType: "guide"
+scene: "認識 OpenClaw"
 difficulty: "入門"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
@@ -9,6 +10,11 @@ archived: false
 discussionUrl: "https://github.com/589411/launchdock/discussions"
 order: 1
 pathStep: 1
+series:
+  name: "新手入門"
+  part: 1
+prerequisites: []
+estimatedMinutes: 5
 tags: ["OpenClaw", "資訊孤島", "自動化", "概念"]
 stuckOptions:
   "資訊是斷裂的": ["我的資訊並沒有很分散啊？", "用 Notion 就可以解決了吧？", "看不懂「資訊孤島」是什麼"]

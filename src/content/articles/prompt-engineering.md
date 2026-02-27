@@ -1,13 +1,16 @@
 ---
 title: "Prompt 工程：讓 AI 聽懂你的話，給出你要的答案"
 description: "掌握 Prompt 的核心技巧，從角色設定到思維鏈，讓同一個模型的回答品質提升 10 倍。"
-scene: "工作流自動化"
+contentType: "guide"
+scene: "知識與進階"
 difficulty: "入門"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 order: 1
-tags: ["Prompt", "提示工程", "LLM", "技巧", "工作流"]
+prerequisites: ["openclaw-first-run"]
+estimatedMinutes: 10
+tags: ["Prompt", "LLM"]
 stuckOptions:
   "為什麼 Prompt 重要": ["隨便問不行嗎？", "AI 不是應該很聰明嗎？"]
   "Prompt 的基本結構": ["角色、任務、格式怎麼分？", "每次都要寫一大串嗎？"]

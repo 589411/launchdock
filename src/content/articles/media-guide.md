@@ -1,7 +1,8 @@
 ---
 title: "文章媒體使用指南：圖片、GIF、影片的插入方法"
 description: "如何在 LaunchDock 文章中高效插入截圖、動態 GIF 和 YouTube 影片，讓教學生動易懂。"
-scene: "編輯指南"
+contentType: "reference"
+scene: "知識與進階"
 difficulty: "入門"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
@@ -9,7 +10,8 @@ archived: true
 archivedReason: "內部編輯指南，不對讀者公開"
 discussionUrl: "https://github.com/589411/launchdock/discussions"
 order: 99
-tags: ["LaunchDock", "編輯指南", "圖片", "GIF", "影片"]
+estimatedMinutes: 5
+tags: ["LaunchDock", "圖片", "GIF"]
 stuckOptions:
   "圖床方案": ["圖片該放 GitHub 還是 CDN？", "免費圖床有流量限制嗎？"]
   "圖片": ["圖片太大怎麼壓縮？", "Markdown 圖片路徑寫錯了"]

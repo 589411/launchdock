@@ -1,14 +1,17 @@
 ---
 title: "Google API Key 申請完整指南：OpenClaw 串接 Google Drive / Gmail 必讀"
 description: "一步步教你申請 Google Cloud API Key，解決 OpenClaw 串接 Google 服務時最常卡關的那一步。"
-scene: "安裝與設定"
+contentType: "tutorial"
+scene: "環境準備"
 difficulty: "入門"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 discussionUrl: "https://github.com/589411/launchdock/discussions"
 order: 1
-tags: ["OpenClaw", "Google API", "Google Drive", "Gmail", "設定"]
+prerequisites: ["ai-api-key-guide"]
+estimatedMinutes: 10
+tags: ["OpenClaw", "Google API", "Google Drive", "Gmail", "申請"]
 stuckOptions:
   "進入 Google Cloud Console": ["找不到 Google Cloud Console 入口", "登入後畫面跟文章不一樣"]
   "建立新專案": ["不知道專案名稱該取什麼", "找不到「建立專案」按鈕"]

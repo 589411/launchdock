@@ -1,12 +1,15 @@
 ---
 title: "Windows 安裝 OpenClaw：從零開始的完整教學"
 description: "在 Windows 10/11 上安裝 OpenClaw 的逐步指南，涵蓋 Python、WSL、相依套件到第一次啟動。"
-scene: "安裝與設定"
+contentType: "tutorial"
+scene: "安裝與部署"
 difficulty: "入門"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 order: 2
+prerequisites: ["install-openclaw"]
+estimatedMinutes: 15
 tags: ["OpenClaw", "Windows", "安裝", "Python", "WSL"]
 stuckOptions:
   "選擇安裝方式": ["我該用 WSL 還是原生 Windows？", "WSL 是什麼？"]

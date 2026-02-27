@@ -1,13 +1,16 @@
 ---
 title: "用 OpenClaw 打造個人知識管理（PKM）系統"
 description: "告別資訊焦慮。用 OpenClaw 自動收集、整理、回顧知識，讓你的第二大腦真正運作起來。"
-scene: "知識管理"
+contentType: "guide"
+scene: "知識與進階"
 difficulty: "中級"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
-order: 1
-tags: ["PKM", "知識管理", "Notion", "Obsidian", "自動化", "工作流"]
+order: 2
+prerequisites: ["openclaw-skill"]
+estimatedMinutes: 10
+tags: ["PKM", "Notion", "Obsidian", "自動化"]
 stuckOptions:
   "為什麼你需要 PKM": ["我用書籤和筆記就夠了", "PKM 不就是 Notion 嗎？"]
   "架構設計": ["資料夾結構怎麼設計？", "標籤太多反而亂了", "Workspace 是什麼？"]

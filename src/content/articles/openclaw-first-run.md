@@ -1,13 +1,19 @@
 ---
 title: "第一次啟動 OpenClaw：設定 API Key、聽到 AI 的第一句話"
 description: "安裝好了，現在讓 OpenClaw 真正動起來。跟著設定精靈完成初始化，3 分鐘內讓 AI 回應你的第一句話。"
-scene: "安裝與設定"
+contentType: "tutorial"
+scene: "基礎使用"
 difficulty: "入門"
 createdAt: "2026-02-25"
 verifiedAt: "2026-02-25"
 archived: false
-order: 4
+order: 1
 pathStep: 5
+series:
+  name: "新手入門"
+  part: 5
+prerequisites: ["install-openclaw"]
+estimatedMinutes: 10
 tags: ["OpenClaw", "設定", "啟動", "Gateway", "API Key", "入門"]
 stuckOptions:
   "啟動設定精靈": ["找不到 openclaw 指令", "出現 command not found", "精靈卡住了"]

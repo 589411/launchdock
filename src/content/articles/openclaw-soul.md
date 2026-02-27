@@ -1,14 +1,17 @@
 ---
 title: "OpenClaw Soul 完全指南：讓 Agent 擁有記憶、個性與成長能力"
 description: "Soul 是 OpenClaw 最強大也最獨特的功能。它讓你的 Agent 不只是工具，而是一個真正『懂你』的 AI 夥伴。"
+contentType: "guide"
 scene: "核心功能"
 difficulty: "中級"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 discussionUrl: "https://github.com/589411/launchdock/discussions"
-order: 5
-tags: ["OpenClaw", "Soul", "記憶系統", "個性化", "核心功能"]
+order: 3
+prerequisites: ["openclaw-agent"]
+estimatedMinutes: 8
+tags: ["OpenClaw", "Soul", "記憶系統", "個性化"]
 stuckOptions:
   "Soul 是什麼": ["Soul 和 Agent 差在哪？", "沒有 Soul 的 Agent 也能用吧？"]
   "四大組成": ["Memory / Persona / Preference / Growth 太多了看不懂", "該從哪個開始設定？"]

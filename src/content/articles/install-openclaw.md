@@ -1,13 +1,19 @@
 ---
 title: "安裝指南：選擇你的平台"
 description: "OpenClaw 安裝入口頁面，根據你的作業系統選擇對應的安裝教學。"
-scene: "安裝與設定"
+contentType: "guide"
+scene: "安裝與部署"
 difficulty: "入門"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 order: 1
 pathStep: 4
+series:
+  name: "新手入門"
+  part: 4
+prerequisites: ["ai-api-key-guide"]
+estimatedMinutes: 3
 tags: ["OpenClaw", "安裝", "入門"]
 stuckOptions:
   "選擇安裝方式": ["我不知道該選哪個", "可以裝在平板或手機上嗎？", "我的電腦很舊，跑得動嗎？"]

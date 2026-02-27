@@ -1,14 +1,17 @@
 ---
 title: "雲端部署 OpenClaw：Zeabur 一鍵部署 + KimiClaw 快速上手"
 description: "不想折騰本地環境？用 Zeabur 一鍵部署 OpenClaw，或試試 KimiClaw 直接在雲端體驗 AI Agent 的威力。"
-scene: "安裝與設定"
+contentType: "tutorial"
+scene: "安裝與部署"
 difficulty: "入門"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 discussionUrl: "https://github.com/589411/launchdock/discussions"
-order: 2
-tags: ["OpenClaw", "Zeabur", "KimiClaw", "雲端部署", "Docker"]
+order: 3
+prerequisites: ["ai-api-key-guide"]
+estimatedMinutes: 12
+tags: ["OpenClaw", "Zeabur", "KimiClaw", "部署", "Docker"]
 stuckOptions:
   "Zeabur 一鍵部署": ["注冊 Zeabur 後不知道怎麼開始", "部署失敗但沒有錯誤訊息", "免費額度夠用嗎？"]
   "KimiClaw": ["注冊後找不到 OpenClaw 入口", "跟本地版功能有什麼差別？"]

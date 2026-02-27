@@ -1,13 +1,16 @@
 ---
 title: "Token 經濟學：搞懂 AI 怎麼計費，不再帳單爆炸"
 description: "什麼是 Token？各模型怎麼收費？教你精準控制 AI 使用成本，用最少的錢做最多的事。"
-scene: "打破資訊孤島"
+contentType: "guide"
+scene: "認識 OpenClaw"
 difficulty: "入門"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 order: 2
-tags: ["Token", "計費", "LLM", "成本控制", "AI 基礎"]
+prerequisites: ["llm-guide"]
+estimatedMinutes: 8
+tags: ["Token", "LLM", "成本控制"]
 stuckOptions:
   "什麼是 Token": ["Token 和字元有什麼不同？", "中文的 Token 特別多嗎？", "為什麼不直接用字數計費？"]
   "各模型計費方式": ["OpenAI 和 Google 哪個比較便宜？", "免費額度用完怎麼辦？", "怎麼看帳單明細？"]

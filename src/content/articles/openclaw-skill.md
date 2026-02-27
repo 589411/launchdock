@@ -1,14 +1,17 @@
 ---
 title: "OpenClaw Skill 完全指南：讓 AI 學會可重複的工作流"
 description: "Skill 是 OpenClaw 的核心功能。學會寫 Skill，你的 AI 就能一鍵完成原本需要 30 分鐘的工作。"
+contentType: "guide"
 scene: "核心功能"
 difficulty: "入門"
 createdAt: "2026-02-24"
 verifiedAt: "2026-02-24"
 archived: false
 discussionUrl: "https://github.com/589411/launchdock/discussions"
-order: 3
-tags: ["OpenClaw", "Skill", "自動化", "工作流", "核心功能"]
+order: 1
+prerequisites: ["openclaw-first-skill"]
+estimatedMinutes: 8
+tags: ["OpenClaw", "Skill", "自動化", "工作流"]
 stuckOptions:
   "Skill 是什麼": ["跟其他自動化工具有什麼不同？", "需要會寫程式嗎？"]
   "基本結構": ["YAML 格式看不懂", "縮排一直出錯", "action 和 input 的關係搞不清"]
