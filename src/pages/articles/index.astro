@@ -1,8 +1,19 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PopularArticles from '../../components/PopularArticles.tsx';
 import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.archived);
+
+// Prepare lightweight article metadata for the client-side PopularArticles component
+const articlesMeta = allArticles.map(a => ({
+  slug: a.id,
+  title: a.data.title,
+  description: a.data.description,
+  scene: a.data.scene,
+  difficulty: a.data.difficulty,
+  tags: a.data.tags,
+}));
 
 // Learning path articles (sorted by pathStep)
 const pathArticles = allArticles
@@ -58,6 +69,9 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
     <div class="article-tabs mb-10" id="article-tabs">
       <button class="article-tab active" data-tab="path" onclick="switchTab('path')">
         🚀 入門路線
+      </button>
+      <button class="article-tab" data-tab="popular" onclick="switchTab('popular')">
+        🔥 熱門文章
       </button>
       <button class="article-tab" data-tab="scene" onclick="switchTab('scene')">
         🗂️ 場景瀏覽
@@ -153,6 +167,11 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
             ))}
         </div>
       </div>
+    </div>
+
+    <!-- Tab: 熱門文章 -->
+    <div class="tab-content" id="tab-popular">
+      <PopularArticles client:load articles={articlesMeta} />
     </div>
 
     <!-- Tab: 場景瀏覽 -->

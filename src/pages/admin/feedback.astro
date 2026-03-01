@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeedbackDashboard from '../../components/FeedbackDashboard.tsx';
+---
+
+<BaseLayout title="回饋監控" description="監控文章的卡關和哭哭回饋，找出需要改進的內容。">
+  <div class="max-w-5xl mx-auto px-4 py-12">
+    <FeedbackDashboard client:load />
+  </div>
+</BaseLayout>

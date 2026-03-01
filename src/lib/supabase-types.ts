@@ -86,6 +86,41 @@ export interface Database {
         Args: { answer_id_input: string; fingerprint_input: string };
         Returns: number;
       };
+      get_popular_articles: {
+        Args: { limit_count?: number };
+        Returns: {
+          slug: string;
+          rocket_count: number;
+          like_count: number;
+          stuck_count: number;
+          cry_count: number;
+          total_reactions: number;
+          popularity_score: number;
+        }[];
+      };
+      get_distress_alerts: {
+        Args: { min_distress_count?: number; min_distress_pct?: number };
+        Returns: {
+          slug: string;
+          total_reactions: number;
+          stuck_count: number;
+          cry_count: number;
+          distress_count: number;
+          distress_pct: number;
+        }[];
+      };
+      get_section_distress: {
+        Args: { target_slug?: string };
+        Returns: {
+          slug: string;
+          section_id: string;
+          total_reactions: number;
+          stuck_count: number;
+          cry_count: number;
+          distress_count: number;
+          distress_pct: number;
+        }[];
+      };
     };
   };
 }
