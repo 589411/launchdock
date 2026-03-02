@@ -243,9 +243,9 @@ wsl --install
 
 > ⚠️ 如果 `wsl --install` 沒反應，回頭確認 Step 1 的 BIOS 虛擬化是否已開啟。
 
-### Step 4：安裝 Node.js 24+（使用 nvm）
+### Step 4：安裝 Node.js 22+（使用 nvm）
 
-開啟 Ubuntu（從開始選單啟動）：
+OpenClaw 需要 **Node.js 22 以上**。開啟 Ubuntu（從開始選單啟動）：
 
 ```bash
 # 確認現有 Node 版本（如果已安裝）
@@ -257,7 +257,7 @@ sudo apt autoremove -y
 sudo apt update
 
 # 安裝 nvm（Node 版本管理器）
-curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 
 # 重新載入設定（或退出再重新登入）
 exit
@@ -273,16 +273,16 @@ wsl -d ubuntu
 # 確認 nvm
 nvm --version
 
-# 安裝 Node.js 24
-nvm install 24
-nvm use 24
+# 安裝 Node.js 22（OpenClaw 最低需求）
+nvm install 22
+nvm use 22
 
 # 設為預設
-nvm alias default 24
+nvm alias default 22
 
 # 確認
-node -v   # 應顯示 v24.x.x
-which node  # 應在 ~/.nvm/versions/node/v24.x.x/bin/node
+node -v   # 應顯示 v22.x.x
+which node  # 應在 ~/.nvm/versions/node/v22.x.x/bin/node
 ```
 
 ### Step 5：安裝與啟動 OpenClaw
@@ -336,7 +336,7 @@ ollama --version
 
 # 一鍵啟動 OpenClaw + 選雲端模型
 ollama launch openclaw
-# 選 minimax-m2.5:cloud → 不需下載模型、Ollama 送免費 Token
+# 選雲端模型（如 kimi-k2.5、minimax-m2.5）→ 不需下載模型、Ollama 有免費額度
 ```
 
 詳細說明見 [Ollama + OpenClaw 完整教學](/articles/ollama-openclaw)。
