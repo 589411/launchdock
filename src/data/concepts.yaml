@@ -123,7 +123,21 @@ RAG:
   aliases: ["RAG", "Retrieval-Augmented Generation", "檢索增強生成"]
   shortDesc: "讓 AI 先查資料再回答，大幅減少幻覺的技術"
   canonicalArticle: "rag-explained"
-  relatedArticles: ["openclaw-soul", "pkm-system"]
+  relatedArticles: ["openclaw-soul", "pkm-system", "ai-agent-memory-guide"]
+
+Agent Memory:
+  displayName: "Agent 記憶系統"
+  aliases: ["Agent Memory", "agent memory", "代理記憶", "Agent 記憶"]
+  shortDesc: "讓 AI Agent 跨 session 持久累積、管理與演進知識的機制"
+  canonicalArticle: "ai-agent-memory-guide"
+  relatedArticles: ["rag-explained", "openclaw-soul", "openclaw-agent", "multi-agent-swarm"]
+
+Context Engineering:
+  displayName: "Context Engineering（上下文工程）"
+  aliases: ["Context Engineering", "context engineering", "上下文工程"]
+  shortDesc: "管理 AI 模型 context window 使用效率的技術，包含壓縮、排程與優先化"
+  canonicalArticle: "ai-agent-memory-guide"
+  relatedArticles: ["rag-explained", "token-economics", "ai-tech-evolution"]
 
 CoT:
   displayName: "Chain-of-Thought（思維鏈）"

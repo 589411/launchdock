@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-03-02T05:17:23.628Z",
+  "_generated": "2026-03-02T07:45:09.719Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -91,6 +91,18 @@
       "shortDesc": "讓 AI 先查資料再回答，大幅減少幻覺的技術",
       "canonicalArticle": "rag-explained",
       "link": "/articles/rag-explained"
+    },
+    "Agent Memory": {
+      "displayName": "Agent 記憶系統",
+      "shortDesc": "讓 AI Agent 跨 session 持久累積、管理與演進知識的機制",
+      "canonicalArticle": "ai-agent-memory-guide",
+      "link": "/articles/ai-agent-memory-guide"
+    },
+    "Context Engineering": {
+      "displayName": "Context Engineering（上下文工程）",
+      "shortDesc": "管理 AI 模型 context window 使用效率的技術，包含壓縮、排程與優先化",
+      "canonicalArticle": "ai-agent-memory-guide",
+      "link": "/articles/ai-agent-memory-guide"
     },
     "CoT": {
       "displayName": "Chain-of-Thought（思維鏈）",
@@ -454,9 +466,37 @@
       ],
       "concepts_referenced": [
         "Agent",
+        "Agent Memory",
         "ReAct"
       ],
       "link": "/articles/multi-agent-swarm"
+    },
+    {
+      "slug": "ai-agent-memory-guide",
+      "title": "AI 的記憶腦洞大開：為什麼你的 Agent 用完就忘？",
+      "description": "RAG 是記憶？長上下文是記憶？模型微調是記憶？當大家都在說「AI 記憶」，我們其實在說完全不同的四件事——一篇用鴨編視角把這些搞清楚的文章。",
+      "scene": "知識與進階",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "Agent",
+        "RAG",
+        "LLM",
+        "Prompt Engineering",
+        "MCP"
+      ],
+      "prerequisites": [
+        "openclaw-agent",
+        "rag-explained"
+      ],
+      "concepts_defined": [
+        "Agent Memory",
+        "Context Engineering"
+      ],
+      "concepts_referenced": [
+        "RAG"
+      ],
+      "link": "/articles/ai-agent-memory-guide"
     },
     {
       "slug": "cot-and-reasoning",
@@ -553,6 +593,7 @@
       "concepts_referenced": [
         "Soul",
         "MCP",
+        "Agent Memory",
         "CoT",
         "ReAct",
         "Multi-Agent",
@@ -608,6 +649,7 @@
         "Agent",
         "Prompt Engineering",
         "RAG",
+        "Agent Memory",
         "Embedding",
         "QMD"
       ],
@@ -636,6 +678,8 @@
       ],
       "concepts_referenced": [
         "Soul",
+        "Agent Memory",
+        "Context Engineering",
         "Context Window",
         "PKM"
       ],
@@ -765,6 +809,7 @@
       ],
       "concepts_referenced": [
         "LLM",
+        "Context Engineering",
         "Multi-Agent",
         "Swarm"
       ],
@@ -790,6 +835,7 @@
       ],
       "concepts_referenced": [
         "LLM",
+        "Context Engineering",
         "Context Window"
       ],
       "link": "/articles/token-economics"
