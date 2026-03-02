@@ -93,6 +93,32 @@ Phase 3: CLI 配對     → 引導使用者執行 add-image.sh
 
 ---
 
+## 🟡 概念自動連結系統
+
+本站有一套概念自動連結機制：build 時 Remark 插件會自動將已知概念名詞轉為超連結，文章底部也會自動產生「延伸閱讀」卡片。
+
+### ⚡ 生成/編輯文章前必做
+
+**在生成或編輯任何教學文章之前，必須先讀取 `docs/article-registry.json`**，了解：
+- 目前有哪些概念已被定義（避免重複解釋）
+- 每個概念的 canonical 文章是哪一篇（該概念已有主文章的，不需重新解釋，讀者會自動看到連結）
+- 各文章之間的概念關聯（確保新文章正確定位）
+
+### 寫作守則
+
+1. **用語一致**：使用 `src/data/concepts.yaml` 中的 `displayName` 或 `aliases` 寫法
+2. **首次提到用全名**：如「大型語言模型（LLM）」，之後可只用「LLM」
+3. **不需手動加連結**：Remark 插件會自動處理概念連結，你只需正常寫文字
+4. **引入新概念時**：完成文章後提醒使用者更新 `src/data/concepts.yaml` 並執行 `npm run registry`
+
+### 完成文章後的提醒模板
+
+生成文章後，除了原有的 @img 提醒，還需額外提醒：
+> 📘 本文引用了 N 個已知概念（會自動連結），並新增了 M 個新概念。
+> 若有新概念，請更新 `src/data/concepts.yaml` 後執行 `npm run registry`。
+
+---
+
 ## 文章結構規範
 
 ### frontmatter 必要欄位
@@ -167,8 +193,12 @@ stuckOptions:
 
 ```
 src/content/articles/*.md    ← 教學文章
+src/data/concepts.yaml       ← 受控概念定義（displayName、aliases、canonical article）
 public/images/articles/*/    ← 文章圖片（按 slug 分資料夾）
-scripts/add-image.sh         ← 圖片工作流程 CLI
+docs/article-registry.json   ← ⭐ 概念×文章交叉索引（生成文章前必讀）
 docs/image-workflow.md       ← 圖片工作流程完整文檔（含 auto-capture 串接說明）
-docs/llm-article-prompt.md   ← LLM 生成文章時的 @img 規則
+docs/llm-article-prompt.md   ← LLM 生成文章時的 @img 與概念連結規則
+scripts/add-image.sh         ← 圖片工作流程 CLI
+scripts/generate-article-registry.mjs ← 重新產生 article-registry.json
+plugins/remark-concept-links.mjs      ← 概念自動連結 Remark 插件
 ```
