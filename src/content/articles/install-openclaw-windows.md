@@ -22,6 +22,8 @@ stuckOptions:
 
 ## 開始之前
 
+> 這篇藍鴨教學會帶你在 Windows 上透過 WSL 安裝 OpenClaw，每一步都有截圖。
+
 這篇教學適合在 **Windows 10（版本 2004+）或 Windows 11** 上安裝 OpenClaw。
 
 > 💡 **先讀這篇**：[為什麼不建議在 Windows 原生環境安裝 OpenClaw？](/articles/why-not-windows-openclaw)——了解為什麼 WSL 是 Windows 用戶的最佳選擇。

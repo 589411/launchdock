@@ -26,6 +26,8 @@ stuckOptions:
 
 ## 這篇要幹嘛？
 
+> 這篇藍鴨教學帶你用最快速度取得 API Key，讓 OpenClaw 正式連上 AI。
+
 上一步你已經 [選好了 LLM 方案](/articles/llm-guide)。現在要去**拿到那把鑰匙（API Key）**，讓 OpenClaw 能呼叫 AI 模型。
 
 整個過程大約 3-10 分鐘，取決於你選的方案。

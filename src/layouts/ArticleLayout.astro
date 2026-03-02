@@ -32,6 +32,15 @@ const slug = Astro.url.pathname.replace(/^\/articles\//, '').replace(/\/$/, '');
 
 <BaseLayout title={frontmatter.title} description={frontmatter.description}>
   <article class="max-w-3xl mx-auto px-4 py-8">
+    <!-- Branded Breadcrumb for SEO -->
+    <nav class="text-xs text-text-muted mb-4" aria-label="麿包屑">
+      <a href="/" class="hover:text-text-secondary transition-colors">藍鴨 LaunchDock</a>
+      <span class="mx-1">/</span>
+      <a href={`/articles?scene=${encodeURIComponent(frontmatter.scene)}`} class="hover:text-text-secondary transition-colors">{frontmatter.scene}</a>
+      <span class="mx-1">/</span>
+      <span class="text-text-secondary">{frontmatter.title}</span>
+    </nav>
+
     <!-- Learning Path Progress Bar (only for path articles) -->
     {frontmatter.pathStep && (
       <ArticleProgressBar currentStep={frontmatter.pathStep} />

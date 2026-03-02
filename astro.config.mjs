@@ -2,13 +2,16 @@
 import { defineConfig } from 'astro/config';
 
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import remarkConceptLinks from './plugins/remark-concept-links.mjs';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://launchdock.app',
-  integrations: [react()],
+  integrations: [react(), sitemap({
+    filter: (page) => !page.includes('/admin/'),
+  })],
 
   markdown: {
     remarkPlugins: [remarkConceptLinks],

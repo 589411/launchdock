@@ -25,6 +25,8 @@ stuckOptions:
 
 ## 你目前的進度
 
+> 恭喜走到這一步！這篇藍鴨教學帶你完成 OpenClaw 的首次啟動——填入 API Key、聽到 AI 的第一句話。
+
 到這裡，你應該已經完成了：
 
 - ✅ [了解 OpenClaw 是什麼](/articles/why-openclaw)

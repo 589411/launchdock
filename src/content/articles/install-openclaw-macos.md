@@ -21,6 +21,8 @@ stuckOptions:
 
 ## 開始之前
 
+> 這篇藍鴨教學會帶你在 macOS 上從零安裝 OpenClaw，每一步都有截圖。
+
 這篇教學適合在 **macOS**（Intel 或 Apple Silicon M1/M2/M3）上安裝 OpenClaw。
 
 如果你用的是 Windows，請看 [Windows 安裝指南](/articles/install-openclaw-windows)。

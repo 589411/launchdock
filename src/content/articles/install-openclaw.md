@@ -21,6 +21,8 @@ stuckOptions:
 
 ## 選擇安裝方式
 
+> 藍鴨（LaunchDock）為三種平台都準備了圖文教學，選一個你的環境開始吧。
+
 根據你的環境，選一個最適合的方式開始：
 
 <div class="install-platform-cards">

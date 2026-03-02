@@ -35,22 +35,23 @@ const latestArticles = [...allArticles].sort((a, b) =>
 
 <BaseLayout
   title="首頁"
-  description="LaunchDock 是手把手的互動式 AI 教學空間。針對影片太快、文件看不懂、實作卡關等痛點，用可跟做的路線帶你把 OpenClaw 跑起來。"
+  description="藍鴨 LaunchDock 是手把手的互動式 AI 教學空間。針對影片太快、文件看不懂、實作卡關等痛點，用可跟做的路線帶你把 OpenClaw 跑起來。全台首創 OpenClaw 繁體中文視覺化教學站。"
 >
   <!-- Hero Section -->
   <section class="relative overflow-hidden">
     <div class="max-w-6xl mx-auto px-4 py-20 text-center">
       <!-- Logo -->
       <div class="flex justify-center mb-8">
-        <img src="/logo.png" alt="LaunchDock" class="w-48 md:w-64 h-auto" />
+        <img src="/logo.png" alt="藍鴨 LaunchDock" class="w-48 md:w-64 h-auto" />
       </div>
       <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-        弄髒雙手，但不用弄髒全身
+        藍鴨 LaunchDock｜OpenClaw 繁體中文自動化教學
       </h1>
+      <p class="text-lg text-text-muted mb-4">弄髒雙手，但不用弄髒全身</p>
       <p class="text-xl text-text-secondary max-w-2xl mx-auto mb-8 leading-relaxed">
         AI 圈的人都說「just do it」——<br />
         但對非技術背景的你來說，跟著做往往不只是弄髒雙手，而是弄髒全身。<br />
-        LaunchDock 讓你安心動手——每一步都有截圖、每個卡點都能回報、每個問題都有人接。
+        藍鴨 LaunchDock 讓你安心動手——每一步都有截圖、每個卡點都能回報、每個問題都有人接。
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
@@ -133,7 +134,10 @@ const latestArticles = [...allArticles].sort((a, b) =>
   <!-- Latest Articles -->
   {latestArticles.length > 0 && (
     <section class="max-w-6xl mx-auto px-4 py-12">
-      <h2 class="text-2xl font-bold mb-2">最新教學</h2>
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="text-2xl font-bold">最新教學</h2>
+        <span class="text-xs text-text-muted">內容最後更新：{latestArticles[0].data.verifiedAt || latestArticles[0].data.createdAt}</span>
+      </div>
       <p class="text-text-secondary mb-8">剛出爐的實戰筆記。</p>
       <div class="space-y-4">
         {latestArticles.map((article) => (
