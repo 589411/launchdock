@@ -1,4 +1,6 @@
 ---
+import SearchTrigger from './SearchTrigger.tsx';
+
 const navItems = [
   { label: '首頁', href: '/' },
   { label: '場景教學', href: '/articles' },
@@ -32,6 +34,7 @@ const navItems = [
       >
         💬 討論區
       </a>
+      <SearchTrigger client:load />
     </div>
 
     <!-- Mobile Menu Button -->
@@ -63,6 +66,9 @@ const navItems = [
       >
         💬 討論區
       </a>
+      <div class="py-2">
+        <SearchTrigger client:load />
+      </div>
     </div>
   </div>
 </header>
