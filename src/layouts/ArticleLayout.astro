@@ -6,6 +6,7 @@ import GifPlayer from '../components/GifPlayer.astro';
 import EmotionFeedback from '../components/EmotionFeedback.tsx';
 import SectionReactions from '../components/SectionReactions.tsx';
 import ArticleQA from '../components/ArticleQA.tsx';
+import RelatedArticles from '../components/RelatedArticles.astro';
 
 interface Props {
   frontmatter: {
@@ -20,6 +21,8 @@ interface Props {
     discussionUrl?: string;
     pathStep?: number;
     stuckOptions?: Record<string, string[]>;
+    tags?: string[];
+    prerequisites?: string[];
   };
 }
 
@@ -96,6 +99,16 @@ const slug = Astro.url.pathname.replace(/^\/articles\//, '').replace(/\/$/, '');
     <!-- Article-level Emotion Feedback -->
     <div class="mt-12 pt-8 border-t border-surface-lighter">
       <EmotionFeedback client:load slug={slug} />
+    </div>
+
+    <!-- Related Articles (auto-generated from concepts.yaml) -->
+    <div class="mt-10">
+      <RelatedArticles
+        slug={slug}
+        tags={frontmatter.tags || []}
+        prerequisites={frontmatter.prerequisites || []}
+        scene={frontmatter.scene}
+      />
     </div>
 
     <!-- Q&A Section (replaces GitHub Discussions) -->

@@ -1,0 +1,864 @@
+{
+  "_generated": "2026-03-02T04:45:36.030Z",
+  "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
+  "concepts": {
+    "OpenClaw": {
+      "displayName": "OpenClaw",
+      "shortDesc": "開源 AI Agent 框架，串接 LLM、工具與自動化工作流的中控台",
+      "canonicalArticle": "why-openclaw",
+      "link": "/articles/why-openclaw"
+    },
+    "KimiClaw": {
+      "displayName": "KimiClaw",
+      "shortDesc": "基於 OpenClaw 架構的雲端版本，零安裝即用",
+      "canonicalArticle": "deploy-openclaw-cloud",
+      "link": "/articles/deploy-openclaw-cloud"
+    },
+    "LLM": {
+      "displayName": "大型語言模型 (LLM)",
+      "shortDesc": "ChatGPT、Claude、Gemini 背後的 AI 模型技術",
+      "canonicalArticle": "llm-guide",
+      "link": "/articles/llm-guide"
+    },
+    "Token": {
+      "displayName": "Token",
+      "shortDesc": "AI 模型處理文字的基本計量單位，也是計費依據",
+      "canonicalArticle": "token-economics",
+      "link": "/articles/token-economics"
+    },
+    "Provider": {
+      "displayName": "Provider（模型供應商）",
+      "shortDesc": "AI 模型的供應商，如 OpenAI、Google、Anthropic",
+      "canonicalArticle": "llm-guide",
+      "link": "/articles/llm-guide"
+    },
+    "API Key": {
+      "displayName": "API Key",
+      "shortDesc": "存取 AI 模型服務的身份憑證",
+      "canonicalArticle": "ai-api-key-guide",
+      "link": "/articles/ai-api-key-guide"
+    },
+    "Ollama": {
+      "displayName": "Ollama",
+      "shortDesc": "在本機輕鬆運行開源 LLM 的工具，完全免費",
+      "canonicalArticle": "ollama-openclaw",
+      "link": "/articles/ollama-openclaw"
+    },
+    "OpenRouter": {
+      "displayName": "OpenRouter",
+      "shortDesc": "一把 API Key 存取多家模型的中繼平台",
+      "canonicalArticle": "llm-guide",
+      "link": "/articles/llm-guide"
+    },
+    "Agent": {
+      "displayName": "Agent（AI 代理）",
+      "shortDesc": "能自主決策、使用工具完成任務的 AI 實體",
+      "canonicalArticle": "openclaw-agent",
+      "link": "/articles/openclaw-agent"
+    },
+    "Skill": {
+      "displayName": "Skill（技能）",
+      "shortDesc": "OpenClaw 中可重複執行的自動化工作流模板",
+      "canonicalArticle": "openclaw-skill",
+      "link": "/articles/openclaw-skill"
+    },
+    "Soul": {
+      "displayName": "Soul（人設）",
+      "shortDesc": "定義 Agent 的記憶、個性與成長能力的設定系統",
+      "canonicalArticle": "openclaw-soul",
+      "link": "/articles/openclaw-soul"
+    },
+    "MCP": {
+      "displayName": "MCP 協定",
+      "shortDesc": "讓 AI 自動學會使用外部工具的標準協定，AI 的 USB 接口",
+      "canonicalArticle": "mcp-protocol",
+      "link": "/articles/mcp-protocol"
+    },
+    "Gateway": {
+      "displayName": "Gateway",
+      "shortDesc": "OpenClaw 的核心服務，監聽 port 18789",
+      "canonicalArticle": "openclaw-first-run",
+      "link": "/articles/openclaw-first-run"
+    },
+    "Prompt Engineering": {
+      "displayName": "Prompt 工程",
+      "shortDesc": "設計有效的 AI 指令，讓模型給出精準回答的技術",
+      "canonicalArticle": "prompt-engineering",
+      "link": "/articles/prompt-engineering"
+    },
+    "RAG": {
+      "displayName": "RAG（檢索增強生成）",
+      "shortDesc": "讓 AI 先查資料再回答，大幅減少幻覺的技術",
+      "canonicalArticle": "rag-explained",
+      "link": "/articles/rag-explained"
+    },
+    "CoT": {
+      "displayName": "Chain-of-Thought（思維鏈）",
+      "shortDesc": "讓 AI 一步步推理、展示思考過程的 Prompt 技巧",
+      "canonicalArticle": "cot-and-reasoning",
+      "link": "/articles/cot-and-reasoning"
+    },
+    "ReAct": {
+      "displayName": "ReAct",
+      "shortDesc": "結合推理與行動的 Agent 架構：思考→行動→觀察→決策",
+      "canonicalArticle": "cot-and-reasoning",
+      "link": "/articles/cot-and-reasoning"
+    },
+    "Embedding": {
+      "displayName": "Embedding（向量嵌入）",
+      "shortDesc": "將文字轉為數值向量，用於語義搜尋和記憶系統",
+      "canonicalArticle": "rag-explained",
+      "link": "/articles/rag-explained"
+    },
+    "Transformer": {
+      "displayName": "Transformer",
+      "shortDesc": "現代 AI 大語言模型的核心架構，使用自注意力機制",
+      "canonicalArticle": "ai-tech-evolution",
+      "link": "/articles/ai-tech-evolution"
+    },
+    "Context Window": {
+      "displayName": "Context Window（上下文窗口）",
+      "shortDesc": "AI 模型一次能處理的最大文字長度",
+      "canonicalArticle": "ai-tech-evolution",
+      "link": "/articles/ai-tech-evolution"
+    },
+    "Multi-Agent": {
+      "displayName": "Multi-Agent（多代理系統）",
+      "shortDesc": "多個 AI Agent 分工合作完成複雜任務",
+      "canonicalArticle": "multi-agent-swarm",
+      "link": "/articles/multi-agent-swarm"
+    },
+    "Swarm": {
+      "displayName": "蜂群智能 (Swarm)",
+      "shortDesc": "去中心化的多 Agent 協作模式，模仿蜂群的集體智能",
+      "canonicalArticle": "multi-agent-swarm",
+      "link": "/articles/multi-agent-swarm"
+    },
+    "Fallback": {
+      "displayName": "Fallback（備援機制）",
+      "shortDesc": "主要模型失敗時自動切換到備用模型的機制",
+      "canonicalArticle": "openclaw-model-config",
+      "link": "/articles/openclaw-model-config"
+    },
+    "Telegram Bot": {
+      "displayName": "Telegram Bot",
+      "shortDesc": "透過 Telegram 隨時隨地與你的 OpenClaw Agent 對話",
+      "canonicalArticle": "telegram-integration",
+      "link": "/articles/telegram-integration"
+    },
+    "PKM": {
+      "displayName": "個人知識管理 (PKM)",
+      "shortDesc": "系統化收集、整理、連結知識，讓資訊變成洞見",
+      "canonicalArticle": "pkm-system",
+      "link": "/articles/pkm-system"
+    },
+    "Zeabur": {
+      "displayName": "Zeabur",
+      "shortDesc": "台灣團隊打造的雲端部署平台，一鍵部署 OpenClaw",
+      "canonicalArticle": "deploy-openclaw-cloud",
+      "link": "/articles/deploy-openclaw-cloud"
+    },
+    "Docker": {
+      "displayName": "Docker",
+      "shortDesc": "容器化部署工具，用於自建伺服器部署 OpenClaw",
+      "canonicalArticle": "deploy-openclaw-cloud",
+      "link": "/articles/deploy-openclaw-cloud"
+    },
+    "WSL": {
+      "displayName": "WSL（Windows Subsystem for Linux）",
+      "shortDesc": "在 Windows 上運行 Linux 環境的子系統",
+      "canonicalArticle": "install-openclaw-windows",
+      "link": "/articles/install-openclaw-windows"
+    },
+    "Homebrew": {
+      "displayName": "Homebrew",
+      "shortDesc": "macOS 上最常用的套件管理工具",
+      "canonicalArticle": "install-openclaw-macos",
+      "link": "/articles/install-openclaw-macos"
+    },
+    "QMD": {
+      "displayName": "QMD",
+      "shortDesc": "OpenClaw 的結構化記憶格式，YAML-based",
+      "canonicalArticle": "rag-explained",
+      "link": "/articles/rag-explained"
+    },
+    "Google Cloud Console": {
+      "displayName": "Google Cloud Console",
+      "shortDesc": "Google 雲端服務的管理介面，用於啟用 API",
+      "canonicalArticle": "google-api-key-guide",
+      "link": "/articles/google-api-key-guide"
+    },
+    "OAuth": {
+      "displayName": "OAuth",
+      "shortDesc": "安全的第三方授權協定，用於 Google API 存取",
+      "canonicalArticle": "google-api-key-guide",
+      "link": "/articles/google-api-key-guide"
+    }
+  },
+  "articles": [
+    {
+      "slug": "install-openclaw",
+      "title": "安裝指南：選擇你的平台",
+      "description": "OpenClaw 安裝入口頁面，根據你的作業系統選擇對應的安裝教學。",
+      "scene": "安裝與部署",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "OpenClaw",
+        "安裝",
+        "入門"
+      ],
+      "prerequisites": [
+        "ai-api-key-guide"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [
+        "OpenClaw",
+        "Gateway",
+        "Zeabur",
+        "WSL",
+        "Homebrew"
+      ],
+      "link": "/articles/install-openclaw"
+    },
+    {
+      "slug": "deploy-openclaw-cloud",
+      "title": "雲端部署 OpenClaw：Zeabur 一鍵部署 + KimiClaw 快速上手",
+      "description": "不想折騰本地環境？用 Zeabur 一鍵部署 OpenClaw，或試試 KimiClaw 直接在雲端體驗 AI Agent 的威力。",
+      "scene": "安裝與部署",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "OpenClaw",
+        "Zeabur",
+        "KimiClaw",
+        "部署",
+        "Docker"
+      ],
+      "prerequisites": [
+        "ai-api-key-guide"
+      ],
+      "concepts_defined": [
+        "KimiClaw",
+        "Zeabur",
+        "Docker"
+      ],
+      "concepts_referenced": [
+        "OpenClaw"
+      ],
+      "link": "/articles/deploy-openclaw-cloud"
+    },
+    {
+      "slug": "install-openclaw-macos",
+      "title": "macOS 安裝 OpenClaw：從零開始的完整教學",
+      "description": "在 Mac 上安裝 OpenClaw 的逐步指南，涵蓋 Homebrew、Python 環境、相依套件到第一次啟動。",
+      "scene": "安裝與部署",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "OpenClaw",
+        "macOS",
+        "安裝",
+        "Python",
+        "Homebrew"
+      ],
+      "prerequisites": [
+        "install-openclaw"
+      ],
+      "concepts_defined": [
+        "Homebrew"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/install-openclaw-macos"
+    },
+    {
+      "slug": "ollama-openclaw",
+      "title": "Ollama + OpenClaw：本機跑 AI 模型，完全免費零 API 費",
+      "description": "用 Ollama 在自己的電腦上跑開源 LLM，搭配 OpenClaw 打造完全離線、零費用的 AI Agent。從安裝到串接，手把手帶你走完全程。",
+      "scene": "安裝與部署",
+      "difficulty": "中級",
+      "contentType": "tutorial",
+      "tags": [
+        "OpenClaw",
+        "Ollama",
+        "安裝",
+        "LLM",
+        "部署",
+        "macOS",
+        "Windows",
+        "Linux"
+      ],
+      "prerequisites": [
+        "llm-guide",
+        "install-openclaw"
+      ],
+      "concepts_defined": [
+        "Ollama"
+      ],
+      "concepts_referenced": [
+        "Fallback",
+        "Docker"
+      ],
+      "link": "/articles/ollama-openclaw"
+    },
+    {
+      "slug": "install-openclaw-windows",
+      "title": "Windows 安裝 OpenClaw：從零開始的完整教學",
+      "description": "在 Windows 10/11 上安裝 OpenClaw 的逐步指南，涵蓋 Python、WSL、相依套件到第一次啟動。",
+      "scene": "安裝與部署",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "OpenClaw",
+        "Windows",
+        "安裝",
+        "Python",
+        "WSL"
+      ],
+      "prerequisites": [
+        "install-openclaw"
+      ],
+      "concepts_defined": [
+        "WSL"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/install-openclaw-windows"
+    },
+    {
+      "slug": "media-guide",
+      "title": "文章媒體使用指南：圖片、GIF、影片的插入方法",
+      "description": "如何在 LaunchDock 文章中高效插入截圖、動態 GIF 和 YouTube 影片，讓教學生動易懂。",
+      "scene": "知識與進階",
+      "difficulty": "入門",
+      "contentType": "reference",
+      "tags": [
+        "LaunchDock",
+        "圖片",
+        "GIF"
+      ],
+      "prerequisites": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/media-guide"
+    },
+    {
+      "slug": "pkm-system",
+      "title": "用 OpenClaw 打造個人知識管理（PKM）系統",
+      "description": "告別資訊焦慮。用 OpenClaw 自動收集、整理、回顧知識，讓你的第二大腦真正運作起來。",
+      "scene": "知識與進階",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "PKM",
+        "Notion",
+        "Obsidian",
+        "自動化"
+      ],
+      "prerequisites": [
+        "openclaw-skill"
+      ],
+      "concepts_defined": [
+        "PKM"
+      ],
+      "concepts_referenced": [
+        "Skill",
+        "RAG",
+        "Embedding"
+      ],
+      "link": "/articles/pkm-system"
+    },
+    {
+      "slug": "multi-agent-swarm",
+      "title": "多 Agent 協作與蜂群智能：當 AI 學會團隊合作",
+      "description": "一個 Agent 能力有限，但一群 Agent 分工合作就能解決複雜問題。了解 Multi-Agent 系統的協作模式、蜂群智能概念，以及 OpenClaw 如何實現多角色協同。",
+      "scene": "知識與進階",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "Agent",
+        "OpenClaw",
+        "LLM"
+      ],
+      "prerequisites": [
+        "openclaw-agent"
+      ],
+      "concepts_defined": [
+        "Multi-Agent",
+        "Swarm"
+      ],
+      "concepts_referenced": [
+        "Agent",
+        "ReAct"
+      ],
+      "link": "/articles/multi-agent-swarm"
+    },
+    {
+      "slug": "cot-and-reasoning",
+      "title": "AI 推理技術解密：Chain-of-Thought、ReAct 與思維樹",
+      "description": "AI 怎麼學會「想事情」？從 Chain-of-Thought 到思維樹，了解讓 AI 推理能力提升 5 倍的技術，以及 OpenClaw 如何運用它們。",
+      "scene": "知識與進階",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "LLM",
+        "Prompt",
+        "Agent",
+        "OpenClaw"
+      ],
+      "prerequisites": [
+        "prompt-engineering"
+      ],
+      "concepts_defined": [
+        "CoT",
+        "ReAct"
+      ],
+      "concepts_referenced": [
+        "Agent",
+        "Prompt Engineering"
+      ],
+      "link": "/articles/cot-and-reasoning"
+    },
+    {
+      "slug": "prompt-engineering",
+      "title": "Prompt 工程：讓 AI 聽懂你的話，給出你要的答案",
+      "description": "掌握 Prompt 的核心技巧，從角色設定到思維鏈，讓同一個模型的回答品質提升 10 倍。",
+      "scene": "知識與進階",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "Prompt",
+        "LLM"
+      ],
+      "prerequisites": [
+        "openclaw-first-run"
+      ],
+      "concepts_defined": [
+        "Prompt Engineering"
+      ],
+      "concepts_referenced": [
+        "Skill",
+        "Soul",
+        "CoT"
+      ],
+      "link": "/articles/prompt-engineering"
+    },
+    {
+      "slug": "mcp-protocol",
+      "title": "MCP 協定：AI 的 USB 接口，讓工具即插即用",
+      "description": "Model Context Protocol 讓 AI 能連接任何工具。了解 MCP 如何運作，以及它為什麼是 OpenClaw 的核心骨架。",
+      "scene": "核心功能",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "MCP",
+        "API",
+        "OpenClaw"
+      ],
+      "prerequisites": [
+        "why-openclaw"
+      ],
+      "concepts_defined": [
+        "MCP"
+      ],
+      "concepts_referenced": [
+        "Telegram Bot"
+      ],
+      "link": "/articles/mcp-protocol"
+    },
+    {
+      "slug": "openclaw-agent",
+      "title": "OpenClaw Agent 完全指南：打造你的 AI 分身",
+      "description": "Agent 是 OpenClaw 的靈魂角色，它能理解你的意圖、自動選擇 Skill、甚至自己決定下一步該做什麼。",
+      "scene": "核心功能",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "OpenClaw",
+        "Agent",
+        "AI 代理",
+        "LLM"
+      ],
+      "prerequisites": [
+        "openclaw-first-run"
+      ],
+      "concepts_defined": [
+        "Agent"
+      ],
+      "concepts_referenced": [
+        "Soul",
+        "MCP",
+        "CoT",
+        "ReAct",
+        "Multi-Agent",
+        "Swarm"
+      ],
+      "link": "/articles/openclaw-agent"
+    },
+    {
+      "slug": "openclaw-skill",
+      "title": "OpenClaw Skill 完全指南：讓 AI 學會可重複的工作流",
+      "description": "Skill 是 OpenClaw 的核心功能。學會寫 Skill，你的 AI 就能一鍵完成原本需要 30 分鐘的工作。",
+      "scene": "核心功能",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "OpenClaw",
+        "Skill",
+        "自動化",
+        "工作流"
+      ],
+      "prerequisites": [
+        "openclaw-first-skill"
+      ],
+      "concepts_defined": [
+        "Skill"
+      ],
+      "concepts_referenced": [
+        "Prompt Engineering",
+        "PKM"
+      ],
+      "link": "/articles/openclaw-skill"
+    },
+    {
+      "slug": "openclaw-soul",
+      "title": "OpenClaw Soul 完全指南：讓 Agent 擁有記憶、個性與成長能力",
+      "description": "Soul 是 OpenClaw 最強大也最獨特的功能。它讓你的 Agent 不只是工具，而是一個真正『懂你』的 AI 夥伴。",
+      "scene": "核心功能",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "OpenClaw",
+        "Soul",
+        "記憶系統",
+        "個性化"
+      ],
+      "prerequisites": [
+        "openclaw-agent"
+      ],
+      "concepts_defined": [
+        "Soul"
+      ],
+      "concepts_referenced": [
+        "Agent",
+        "Prompt Engineering",
+        "RAG",
+        "Embedding",
+        "QMD"
+      ],
+      "link": "/articles/openclaw-soul"
+    },
+    {
+      "slug": "rag-explained",
+      "title": "RAG 技術入門：讓 AI 不再胡說八道的記憶術",
+      "description": "AI 會幻覺、知識會過期。RAG 技術讓 AI 先查資料再回答，從「憑感覺說」變成「有根據地說」。了解 OpenClaw 的 Memory 系統如何運用 RAG。",
+      "scene": "核心功能",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "RAG",
+        "LLM",
+        "OpenClaw",
+        "Agent"
+      ],
+      "prerequisites": [
+        "openclaw-first-run"
+      ],
+      "concepts_defined": [
+        "RAG",
+        "Embedding",
+        "QMD"
+      ],
+      "concepts_referenced": [
+        "Soul",
+        "Context Window",
+        "PKM"
+      ],
+      "link": "/articles/rag-explained"
+    },
+    {
+      "slug": "openclaw-first-run",
+      "title": "第一次啟動 OpenClaw：設定 API Key、聽到 AI 的第一句話",
+      "description": "安裝好了，現在讓 OpenClaw 真正動起來。跟著設定精靈完成初始化，3 分鐘內讓 AI 回應你的第一句話。",
+      "scene": "基礎使用",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "OpenClaw",
+        "設定",
+        "啟動",
+        "Gateway",
+        "API Key",
+        "入門"
+      ],
+      "prerequisites": [
+        "install-openclaw"
+      ],
+      "concepts_defined": [
+        "Gateway"
+      ],
+      "concepts_referenced": [
+        "OpenClaw",
+        "API Key",
+        "Telegram Bot"
+      ],
+      "link": "/articles/openclaw-first-run"
+    },
+    {
+      "slug": "openclaw-first-skill",
+      "title": "第一個 Skill：5 分鐘完成你的第一個自動化任務",
+      "description": "你的 OpenClaw 已經能回話了，但它真正的威力在 Skill。跟著做，把一個手動任務變成一鍵完成。",
+      "scene": "基礎使用",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "OpenClaw",
+        "Skill",
+        "自動化",
+        "入門"
+      ],
+      "prerequisites": [
+        "openclaw-first-run"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [
+        "Skill"
+      ],
+      "link": "/articles/openclaw-first-skill"
+    },
+    {
+      "slug": "openclaw-model-config",
+      "title": "模型設定與切換：讓 OpenClaw 自動選最適合的 AI 模型",
+      "description": "不同任務用不同模型。學會設定 Provider、模型路由和 Fallback 機制，又省錢又高效。",
+      "scene": "基礎使用",
+      "difficulty": "中級",
+      "contentType": "tutorial",
+      "tags": [
+        "OpenClaw",
+        "模型",
+        "GPT",
+        "Gemini",
+        "Claude",
+        "設定"
+      ],
+      "prerequisites": [
+        "openclaw-first-run"
+      ],
+      "concepts_defined": [
+        "Fallback"
+      ],
+      "concepts_referenced": [
+        "LLM",
+        "Token",
+        "Provider",
+        "Ollama",
+        "Context Window"
+      ],
+      "link": "/articles/openclaw-model-config"
+    },
+    {
+      "slug": "why-openclaw",
+      "title": "為什麼你需要 OpenClaw？當 ChatGPT 和 Gemini 不夠用的時候",
+      "description": "你已經在用 5 個 AI 工具了，但資訊還是散落各處。看看 OpenClaw 如何幫你把它們串起來。",
+      "scene": "認識 OpenClaw",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "OpenClaw",
+        "資訊孤島",
+        "自動化",
+        "概念"
+      ],
+      "prerequisites": [],
+      "concepts_defined": [
+        "OpenClaw"
+      ],
+      "concepts_referenced": [
+        "KimiClaw"
+      ],
+      "link": "/articles/why-openclaw"
+    },
+    {
+      "slug": "ai-tech-evolution",
+      "title": "AI 技術演進全景圖：從 Transformer 到蜂群智能，一次看懂",
+      "description": "2017 年一篇論文改變了世界。用 10 分鐘了解 AI/LLM 的技術發展脈絡，搞懂 OpenClaw 背後的所有技術為什麼存在。",
+      "scene": "認識 OpenClaw",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "LLM",
+        "OpenClaw",
+        "Agent",
+        "MCP"
+      ],
+      "prerequisites": [
+        "why-openclaw"
+      ],
+      "concepts_defined": [
+        "Transformer",
+        "Context Window"
+      ],
+      "concepts_referenced": [
+        "LLM",
+        "Multi-Agent",
+        "Swarm"
+      ],
+      "link": "/articles/ai-tech-evolution"
+    },
+    {
+      "slug": "token-economics",
+      "title": "Token 經濟學：搞懂 AI 怎麼計費，不再帳單爆炸",
+      "description": "什麼是 Token？各模型怎麼收費？教你精準控制 AI 使用成本，用最少的錢做最多的事。",
+      "scene": "認識 OpenClaw",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "Token",
+        "LLM",
+        "成本控制"
+      ],
+      "prerequisites": [
+        "llm-guide"
+      ],
+      "concepts_defined": [
+        "Token"
+      ],
+      "concepts_referenced": [
+        "LLM",
+        "Context Window"
+      ],
+      "link": "/articles/token-economics"
+    },
+    {
+      "slug": "telegram-integration",
+      "title": "Telegram 整合完整教學：讓 OpenClaw 變成你的私人 AI 助理",
+      "description": "從 BotFather 建立機器人到串接 OpenClaw，把 Telegram 變成你隨時隨地使用 AI 的入口。",
+      "scene": "整合與自動化",
+      "difficulty": "中級",
+      "contentType": "tutorial",
+      "tags": [
+        "Telegram",
+        "Bot",
+        "MCP",
+        "整合"
+      ],
+      "prerequisites": [
+        "openclaw-first-run"
+      ],
+      "concepts_defined": [
+        "Telegram Bot"
+      ],
+      "concepts_referenced": [
+        "MCP"
+      ],
+      "link": "/articles/telegram-integration"
+    },
+    {
+      "slug": "ai-speed-and-opportunity",
+      "title": "AI 技術狂飆中：一個壞消息、一個好消息",
+      "description": "AI 發展速度令人焦慮？別慌，技術終將變成人人可用的產品。關鍵是你現在怎麼卡位。",
+      "scene": "鴨編觀點",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "OpenClaw",
+        "LLM",
+        "Agent",
+        "Token"
+      ],
+      "prerequisites": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/ai-speed-and-opportunity"
+    },
+    {
+      "slug": "llm-guide",
+      "title": "選擇你的 AI 大腦：4 種 LLM 方案完整比較",
+      "description": "OpenClaw 需要接上 LLM 才能運作。搞懂 ChatGPT 訂閱、OpenRouter、各家 API 的差別，選出最適合你的方案。",
+      "scene": "環境準備",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "LLM",
+        "ChatGPT",
+        "Claude",
+        "Gemini",
+        "OpenRouter",
+        "API",
+        "OpenClaw"
+      ],
+      "prerequisites": [
+        "why-openclaw"
+      ],
+      "concepts_defined": [
+        "LLM",
+        "Provider",
+        "OpenRouter"
+      ],
+      "concepts_referenced": [
+        "Token",
+        "API Key",
+        "Ollama",
+        "Transformer",
+        "Fallback"
+      ],
+      "link": "/articles/llm-guide"
+    },
+    {
+      "slug": "ai-api-key-guide",
+      "title": "AI 模型 API Key 申請指南：OpenAI、Anthropic、Google、OpenRouter 一次搞定",
+      "description": "一步步教你申請 AI 模型的 API Key。不管你選哪家，照著做就能拿到讓 OpenClaw 運作的鑰匙。",
+      "scene": "環境準備",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "API Key",
+        "OpenAI",
+        "Anthropic",
+        "Google AI Studio",
+        "OpenRouter",
+        "Gemini",
+        "Claude",
+        "GPT"
+      ],
+      "prerequisites": [
+        "llm-guide"
+      ],
+      "concepts_defined": [
+        "API Key"
+      ],
+      "concepts_referenced": [
+        "Provider",
+        "OpenRouter",
+        "Google Cloud Console",
+        "OAuth"
+      ],
+      "link": "/articles/ai-api-key-guide"
+    },
+    {
+      "slug": "google-api-key-guide",
+      "title": "Google API Key 申請完整指南：OpenClaw 串接 Google Drive / Gmail 必讀",
+      "description": "一步步教你申請 Google Cloud API Key，解決 OpenClaw 串接 Google 服務時最常卡關的那一步。",
+      "scene": "環境準備",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "OpenClaw",
+        "Google API",
+        "Google Drive",
+        "Gmail",
+        "申請"
+      ],
+      "prerequisites": [
+        "ai-api-key-guide"
+      ],
+      "concepts_defined": [
+        "Google Cloud Console",
+        "OAuth"
+      ],
+      "concepts_referenced": [
+        "API Key"
+      ],
+      "link": "/articles/google-api-key-guide"
+    }
+  ]
+}

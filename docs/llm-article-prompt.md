@@ -71,3 +71,51 @@
 ```
 
 檔名加上 `.gif` 後綴，作者在 Phase 2 就知道這裡需要錄 GIF 而非截圖。
+
+---
+
+## 專有名詞與概念連結
+
+本站有一套概念自動連結系統。寫文章時請遵守以下規則，確保概念之間的正確串接。
+
+### 概念來源
+
+所有已定義的概念存放在 `src/data/concepts.yaml`，每筆概念包含：
+- `displayName`：正式中文名稱
+- `aliases`：同義詞／英文縮寫（用於自動連結比對）
+- `shortDesc`：一句話說明
+- `canonicalArticle`：主要解釋該概念的文章 slug
+- `relatedArticles`：有提到該概念的其他文章
+
+自動產生的概念索引：`docs/article-registry.json`（執行 `npm run registry` 取得最新版）。
+
+### 寫作守則
+
+1. **用語一致**：使用 `concepts.yaml` 中的 `displayName` 或 `aliases` 寫法。例如「大型語言模型（LLM）」不要寫成「大語言模型」。
+2. **首次出現時帶全名**：在文章中第一次提到概念時，寫全名加縮寫，如「大型語言模型（LLM）」；之後可只用縮寫 `LLM`。
+3. **不需手動加連結**：Remark 插件會自動將已知概念的首次出現轉為超連結指向 `canonicalArticle`。你只需正常寫文字即可。
+4. **自身概念不會連結**：如果你在寫 `llm-guide.md`，文中的「LLM」不會被連結（避免自連）。
+5. **新概念要登錄**：如果文章引入了 `concepts.yaml` 中不存在的新名詞，請在文章完成後提醒更新 `concepts.yaml` 並重跑 `npm run registry`。
+
+### 概念快速查表
+
+撰寫新文章前，先參考 `docs/article-registry.json` 了解：
+- 哪些概念已有 canonical 文章（不需重複解釋，讀者可點連結）
+- 哪些概念尚無 canonical 文章（可以在新文章中全面說明並登錄為 canonical）
+- 各文章定義了哪些概念、引用了哪些概念（避免遺漏關聯）
+
+### 新增概念範例
+
+如果你在新文章中定義了一個新概念「Fine-tuning（微調）」，完成文章後需要：
+
+```yaml
+# 加入 src/data/concepts.yaml
+fine-tuning:
+  displayName: "微調（Fine-tuning）"
+  aliases: ["Fine-tuning", "微調", "fine-tune"]
+  shortDesc: "用特定資料進一步訓練已有的模型，使其更適合特定任務"
+  canonicalArticle: "your-new-article-slug"
+  relatedArticles: ["llm-guide", "token-economics"]
+```
+
+然後執行 `npm run registry` 更新索引。

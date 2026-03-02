@@ -1,0 +1,177 @@
+---
+/**
+ * RelatedArticles.astro
+ *
+ * 根據 concepts.yaml 自動產生「延伸閱讀」區塊。
+ * 邏輯：收集當前文章定義和被引用的概念 → 聚合相關文章 → 去重排序。
+ */
+import { getCollection } from 'astro:content';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+interface Props {
+  slug: string;
+  tags: string[];
+  prerequisites?: string[];
+  scene?: string;
+}
+
+interface ConceptEntry {
+  displayName: string;
+  aliases: string[];
+  shortDesc: string;
+  canonicalArticle: string;
+  relatedArticles: string[];
+}
+
+// ── Load concepts.yaml (cached in module scope for SSG) ─────────────
+
+function parseSimpleYaml(text: string): Record<string, ConceptEntry> {
+  const result: Record<string, any> = {};
+  let currentTopKey: string | null = null;
+  let currentObj: any = null;
+  let currentArrayKey: string | null = null;
+
+  for (const line of text.split('\n')) {
+    if (/^\s*#/.test(line) || /^\s*$/.test(line)) continue;
+
+    const topMatch = line.match(/^([A-Za-z][^:]*?):\s*$/);
+    if (topMatch) {
+      if (currentTopKey && currentObj) result[currentTopKey] = currentObj;
+      currentTopKey = topMatch[1].trim();
+      currentObj = {};
+      currentArrayKey = null;
+      continue;
+    }
+
+    if (!currentObj) continue;
+
+    const inlineArrayMatch = line.match(/^\s+([\w]+):\s*\[(.*)]\s*$/);
+    if (inlineArrayMatch) {
+      const [, key, items] = inlineArrayMatch;
+      currentObj[key] = items
+        .split(',')
+        .map((s: string) => s.trim().replace(/^["']|["']$/g, ''))
+        .filter(Boolean);
+      currentArrayKey = null;
+      continue;
+    }
+
+    const scalarMatch = line.match(/^\s+([\w]+):\s*"?(.+?)"?\s*$/);
+    if (scalarMatch) {
+      const [, key, val] = scalarMatch;
+      currentObj[key] = val;
+      currentArrayKey = null;
+      continue;
+    }
+
+    const arrayItemMatch = line.match(/^\s+-\s*"?(.+?)"?\s*$/);
+    if (arrayItemMatch && currentArrayKey) {
+      currentObj[currentArrayKey].push(arrayItemMatch[1]);
+      continue;
+    }
+
+    const blockArrayMatch = line.match(/^\s+([\w]+):\s*$/);
+    if (blockArrayMatch) {
+      currentArrayKey = blockArrayMatch[1];
+      currentObj[currentArrayKey] = [];
+      continue;
+    }
+  }
+  if (currentTopKey && currentObj) result[currentTopKey] = currentObj;
+  return result;
+}
+
+const conceptsRaw = readFileSync(join(process.cwd(), 'src', 'data', 'concepts.yaml'), 'utf-8');
+const concepts = parseSimpleYaml(conceptsRaw);
+
+// ── Compute related articles for this slug ──────────────
+
+const { slug, tags, prerequisites = [], scene } = Astro.props;
+
+const relatedSlugs = new Map<string, number>(); // slug → relevance score
+
+// 1. From concepts where this article is canonical → its relatedArticles
+for (const [, c] of Object.entries(concepts)) {
+  if (c.canonicalArticle === slug) {
+    for (const rel of (c.relatedArticles || [])) {
+      relatedSlugs.set(rel, (relatedSlugs.get(rel) || 0) + 3);
+    }
+  }
+}
+
+// 2. From concepts where this article appears in relatedArticles → its canonical
+for (const [, c] of Object.entries(concepts)) {
+  if ((c.relatedArticles || []).includes(slug)) {
+    const canon = c.canonicalArticle;
+    if (canon && canon !== slug) {
+      relatedSlugs.set(canon, (relatedSlugs.get(canon) || 0) + 2);
+    }
+  }
+}
+
+// 3. Prerequisites (weaker signal)
+for (const pre of prerequisites) {
+  if (pre !== slug) {
+    relatedSlugs.set(pre, (relatedSlugs.get(pre) || 0) + 1);
+  }
+}
+
+// Remove self
+relatedSlugs.delete(slug);
+
+// Get top related slugs sorted by score
+const topSlugs = [...relatedSlugs.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 5)
+  .map(([s]) => s);
+
+// Fetch article data for these slugs
+const allArticles = await getCollection('articles', ({ data }) => !data.archived);
+const articleMap = new Map(allArticles.map((a) => [a.id, a]));
+
+const relatedArticles = topSlugs
+  .map((s) => articleMap.get(s))
+  .filter(Boolean);
+
+const SCENE_ICONS: Record<string, string> = {
+  '認識 OpenClaw': '🧭',
+  '環境準備': '🔑',
+  '安裝與部署': '💻',
+  '基礎使用': '🚀',
+  '核心功能': '🧩',
+  '整合與自動化': '⚡',
+  '知識與進階': '📚',
+  '鴨編觀點': '🦆',
+};
+---
+
+{relatedArticles.length > 0 && (
+  <section class="related-articles">
+    <h2 class="related-articles-title">📖 延伸閱讀</h2>
+    <div class="related-articles-grid">
+      {relatedArticles.map((article) => (
+        <a
+          href={`/articles/${article!.id}`}
+          class="related-article-card"
+        >
+          <div class="related-article-scene">
+            <span>{SCENE_ICONS[article!.data.scene] || '📄'}</span>
+            <span>{article!.data.scene}</span>
+          </div>
+          <h3 class="related-article-name">{article!.data.title}</h3>
+          <p class="related-article-desc">{article!.data.description}</p>
+          <div class="related-article-meta">
+            <span class={`related-article-difficulty ${
+              article!.data.difficulty === '入門' ? 'beginner' :
+              article!.data.difficulty === '中級' ? 'intermediate' : 'advanced'
+            }`}>
+              {article!.data.difficulty}
+            </span>
+            <span class="related-article-time">⏱ {article!.data.estimatedMinutes} 分鐘</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

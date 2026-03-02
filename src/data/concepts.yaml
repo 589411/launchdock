@@ -1,0 +1,251 @@
+# LaunchDock 概念登錄表（Concept Registry）
+# ============================================================
+# 這是所有文章間交叉連結的 Single Source of Truth。
+#
+# 每個概念包含：
+#   displayName   — 顯示名稱（含中英文）
+#   aliases       — 別名清單（文章中可能出現的其他寫法）
+#   shortDesc     — 一句話解釋（用於 tooltip）
+#   canonicalArticle — 最權威的定義文章 slug
+#   relatedArticles  — 相關延伸文章 slug 清單
+#
+# 新增文章時請同步更新此檔案。
+# ============================================================
+
+# ── 核心框架 ──────────────────────────────────────────────
+
+OpenClaw:
+  displayName: "OpenClaw"
+  aliases: ["openclaw"]
+  shortDesc: "開源 AI Agent 框架，串接 LLM、工具與自動化工作流的中控台"
+  canonicalArticle: "why-openclaw"
+  relatedArticles: ["install-openclaw", "openclaw-first-run", "deploy-openclaw-cloud"]
+
+KimiClaw:
+  displayName: "KimiClaw"
+  aliases: ["kimiclaw"]
+  shortDesc: "基於 OpenClaw 架構的雲端版本，零安裝即用"
+  canonicalArticle: "deploy-openclaw-cloud"
+  relatedArticles: ["why-openclaw"]
+
+# ── AI 模型相關 ──────────────────────────────────────────
+
+LLM:
+  displayName: "大型語言模型 (LLM)"
+  aliases: ["LLM", "大型語言模型", "大語言模型"]
+  shortDesc: "ChatGPT、Claude、Gemini 背後的 AI 模型技術"
+  canonicalArticle: "llm-guide"
+  relatedArticles: ["token-economics", "openclaw-model-config", "ai-tech-evolution"]
+
+Token:
+  displayName: "Token"
+  aliases: ["token", "tokens"]
+  shortDesc: "AI 模型處理文字的基本計量單位，也是計費依據"
+  canonicalArticle: "token-economics"
+  relatedArticles: ["llm-guide", "openclaw-model-config"]
+
+Provider:
+  displayName: "Provider（模型供應商）"
+  aliases: ["Provider", "provider", "供應商"]
+  shortDesc: "AI 模型的供應商，如 OpenAI、Google、Anthropic"
+  canonicalArticle: "llm-guide"
+  relatedArticles: ["openclaw-model-config", "ai-api-key-guide"]
+
+API Key:
+  displayName: "API Key"
+  aliases: ["API Key", "API key", "api key", "金鑰"]
+  shortDesc: "存取 AI 模型服務的身份憑證"
+  canonicalArticle: "ai-api-key-guide"
+  relatedArticles: ["llm-guide", "google-api-key-guide", "openclaw-first-run"]
+
+Ollama:
+  displayName: "Ollama"
+  aliases: ["ollama"]
+  shortDesc: "在本機輕鬆運行開源 LLM 的工具，完全免費"
+  canonicalArticle: "ollama-openclaw"
+  relatedArticles: ["llm-guide", "openclaw-model-config"]
+
+OpenRouter:
+  displayName: "OpenRouter"
+  aliases: ["openrouter"]
+  shortDesc: "一把 API Key 存取多家模型的中繼平台"
+  canonicalArticle: "llm-guide"
+  relatedArticles: ["ai-api-key-guide"]
+
+# ── OpenClaw 核心功能 ────────────────────────────────────
+
+Agent:
+  displayName: "Agent（AI 代理）"
+  aliases: ["Agent", "agent", "AI 代理", "代理"]
+  shortDesc: "能自主決策、使用工具完成任務的 AI 實體"
+  canonicalArticle: "openclaw-agent"
+  relatedArticles: ["multi-agent-swarm", "openclaw-soul", "cot-and-reasoning"]
+
+Skill:
+  displayName: "Skill（技能）"
+  aliases: ["Skill", "skill", "技能"]
+  shortDesc: "OpenClaw 中可重複執行的自動化工作流模板"
+  canonicalArticle: "openclaw-skill"
+  relatedArticles: ["openclaw-first-skill", "prompt-engineering", "pkm-system"]
+
+Soul:
+  displayName: "Soul（人設）"
+  aliases: ["Soul", "soul", "SOUL.md", "人設"]
+  shortDesc: "定義 Agent 的記憶、個性與成長能力的設定系統"
+  canonicalArticle: "openclaw-soul"
+  relatedArticles: ["openclaw-agent", "prompt-engineering", "rag-explained"]
+
+MCP:
+  displayName: "MCP 協定"
+  aliases: ["MCP", "Model Context Protocol"]
+  shortDesc: "讓 AI 自動學會使用外部工具的標準協定，AI 的 USB 接口"
+  canonicalArticle: "mcp-protocol"
+  relatedArticles: ["openclaw-agent", "telegram-integration"]
+
+Gateway:
+  displayName: "Gateway"
+  aliases: ["Gateway", "gateway"]
+  shortDesc: "OpenClaw 的核心服務，監聽 port 18789"
+  canonicalArticle: "openclaw-first-run"
+  relatedArticles: ["install-openclaw"]
+
+# ── AI 技術概念 ──────────────────────────────────────────
+
+Prompt Engineering:
+  displayName: "Prompt 工程"
+  aliases: ["Prompt Engineering", "Prompt 工程", "prompt engineering"]
+  shortDesc: "設計有效的 AI 指令，讓模型給出精準回答的技術"
+  canonicalArticle: "prompt-engineering"
+  relatedArticles: ["cot-and-reasoning", "openclaw-skill", "openclaw-soul"]
+
+RAG:
+  displayName: "RAG（檢索增強生成）"
+  aliases: ["RAG", "Retrieval-Augmented Generation", "檢索增強生成"]
+  shortDesc: "讓 AI 先查資料再回答，大幅減少幻覺的技術"
+  canonicalArticle: "rag-explained"
+  relatedArticles: ["openclaw-soul", "pkm-system"]
+
+CoT:
+  displayName: "Chain-of-Thought（思維鏈）"
+  aliases: ["CoT", "Chain-of-Thought", "思維鏈"]
+  shortDesc: "讓 AI 一步步推理、展示思考過程的 Prompt 技巧"
+  canonicalArticle: "cot-and-reasoning"
+  relatedArticles: ["prompt-engineering", "openclaw-agent"]
+
+ReAct:
+  displayName: "ReAct"
+  aliases: ["ReAct"]
+  shortDesc: "結合推理與行動的 Agent 架構：思考→行動→觀察→決策"
+  canonicalArticle: "cot-and-reasoning"
+  relatedArticles: ["openclaw-agent", "multi-agent-swarm"]
+
+Embedding:
+  displayName: "Embedding（向量嵌入）"
+  aliases: ["Embedding", "embedding", "向量嵌入", "向量"]
+  shortDesc: "將文字轉為數值向量，用於語義搜尋和記憶系統"
+  canonicalArticle: "rag-explained"
+  relatedArticles: ["openclaw-soul", "pkm-system"]
+
+Transformer:
+  displayName: "Transformer"
+  aliases: ["Transformer", "transformer"]
+  shortDesc: "現代 AI 大語言模型的核心架構，使用自注意力機制"
+  canonicalArticle: "ai-tech-evolution"
+  relatedArticles: ["llm-guide"]
+
+Context Window:
+  displayName: "Context Window（上下文窗口）"
+  aliases: ["Context Window", "context window", "上下文窗口"]
+  shortDesc: "AI 模型一次能處理的最大文字長度"
+  canonicalArticle: "ai-tech-evolution"
+  relatedArticles: ["token-economics", "rag-explained", "openclaw-model-config"]
+
+Multi-Agent:
+  displayName: "Multi-Agent（多代理系統）"
+  aliases: ["Multi-Agent", "multi-agent", "多代理", "多 Agent"]
+  shortDesc: "多個 AI Agent 分工合作完成複雜任務"
+  canonicalArticle: "multi-agent-swarm"
+  relatedArticles: ["openclaw-agent", "ai-tech-evolution"]
+
+Swarm:
+  displayName: "蜂群智能 (Swarm)"
+  aliases: ["Swarm", "swarm", "蜂群智能", "蜂群"]
+  shortDesc: "去中心化的多 Agent 協作模式，模仿蜂群的集體智能"
+  canonicalArticle: "multi-agent-swarm"
+  relatedArticles: ["openclaw-agent", "ai-tech-evolution"]
+
+Fallback:
+  displayName: "Fallback（備援機制）"
+  aliases: ["Fallback", "fallback", "備援"]
+  shortDesc: "主要模型失敗時自動切換到備用模型的機制"
+  canonicalArticle: "openclaw-model-config"
+  relatedArticles: ["ollama-openclaw", "llm-guide"]
+
+# ── 整合與工具 ──────────────────────────────────────────
+
+Telegram Bot:
+  displayName: "Telegram Bot"
+  aliases: ["Telegram Bot", "Telegram bot", "Telegram 機器人"]
+  shortDesc: "透過 Telegram 隨時隨地與你的 OpenClaw Agent 對話"
+  canonicalArticle: "telegram-integration"
+  relatedArticles: ["openclaw-first-run", "mcp-protocol"]
+
+PKM:
+  displayName: "個人知識管理 (PKM)"
+  aliases: ["PKM", "個人知識管理"]
+  shortDesc: "系統化收集、整理、連結知識，讓資訊變成洞見"
+  canonicalArticle: "pkm-system"
+  relatedArticles: ["rag-explained", "openclaw-skill"]
+
+# ── 部署與安裝 ──────────────────────────────────────────
+
+Zeabur:
+  displayName: "Zeabur"
+  aliases: ["zeabur"]
+  shortDesc: "台灣團隊打造的雲端部署平台，一鍵部署 OpenClaw"
+  canonicalArticle: "deploy-openclaw-cloud"
+  relatedArticles: ["install-openclaw"]
+
+Docker:
+  displayName: "Docker"
+  aliases: ["Docker", "docker", "docker-compose"]
+  shortDesc: "容器化部署工具，用於自建伺服器部署 OpenClaw"
+  canonicalArticle: "deploy-openclaw-cloud"
+  relatedArticles: ["ollama-openclaw"]
+
+WSL:
+  displayName: "WSL（Windows Subsystem for Linux）"
+  aliases: ["WSL", "WSL2", "WSL 2"]
+  shortDesc: "在 Windows 上運行 Linux 環境的子系統"
+  canonicalArticle: "install-openclaw-windows"
+  relatedArticles: ["install-openclaw"]
+
+Homebrew:
+  displayName: "Homebrew"
+  aliases: ["Homebrew", "homebrew", "brew"]
+  shortDesc: "macOS 上最常用的套件管理工具"
+  canonicalArticle: "install-openclaw-macos"
+  relatedArticles: ["install-openclaw"]
+
+# ── 設定格式 ──────────────────────────────────────────
+
+QMD:
+  displayName: "QMD"
+  aliases: ["QMD", "qmd"]
+  shortDesc: "OpenClaw 的結構化記憶格式，YAML-based"
+  canonicalArticle: "rag-explained"
+  relatedArticles: ["openclaw-soul"]
+
+Google Cloud Console:
+  displayName: "Google Cloud Console"
+  aliases: ["Google Cloud Console", "GCP 控制台"]
+  shortDesc: "Google 雲端服務的管理介面，用於啟用 API"
+  canonicalArticle: "google-api-key-guide"
+  relatedArticles: ["ai-api-key-guide"]
+
+OAuth:
+  displayName: "OAuth"
+  aliases: ["OAuth", "OAuth 2.0"]
+  shortDesc: "安全的第三方授權協定，用於 Google API 存取"
+  canonicalArticle: "google-api-key-guide"
+  relatedArticles: ["ai-api-key-guide"]
