@@ -217,15 +217,29 @@ WSL:
   displayName: "WSL（Windows Subsystem for Linux）"
   aliases: ["WSL", "WSL2", "WSL 2"]
   shortDesc: "在 Windows 上運行 Linux 環境的子系統"
-  canonicalArticle: "install-openclaw-windows"
-  relatedArticles: ["install-openclaw"]
+  canonicalArticle: "windows-wsl-guide"
+  relatedArticles: ["install-openclaw-windows", "install-openclaw", "why-not-windows-openclaw", "cli-guide"]
+
+CLI:
+  displayName: "CLI（命令列介面）"
+  aliases: ["CLI", "cli", "命令列", "命令行", "Command-Line", "command line", "Terminal", "terminal", "終端機"]
+  shortDesc: "用文字指令操作電腦的介面，AI Agent 執行工具的主要方式"
+  canonicalArticle: "cli-guide"
+  relatedArticles: ["why-not-windows-openclaw", "windows-wsl-guide", "install-openclaw-macos"]
 
 Homebrew:
   displayName: "Homebrew"
   aliases: ["Homebrew", "homebrew", "brew"]
   shortDesc: "macOS 上最常用的套件管理工具"
   canonicalArticle: "install-openclaw-macos"
-  relatedArticles: ["install-openclaw"]
+  relatedArticles: ["install-openclaw", "cli-guide"]
+
+Shell:
+  displayName: "Shell（殼層）"
+  aliases: ["Shell", "shell", "Bash", "bash", "Zsh", "zsh", "殼層"]
+  shortDesc: "等待你輸入指令的程式，你跟作業系統之間的翻譯官"
+  canonicalArticle: "cli-guide"
+  relatedArticles: ["windows-wsl-guide", "install-openclaw-macos"]
 
 # ── 設定格式 ──────────────────────────────────────────
 

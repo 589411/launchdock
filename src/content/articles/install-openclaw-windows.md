@@ -24,6 +24,8 @@ stuckOptions:
 
 這篇教學適合在 **Windows 10（版本 2004+）或 Windows 11** 上安裝 OpenClaw。
 
+> 💡 **先讀這篇**：[為什麼不建議在 Windows 原生環境安裝 OpenClaw？](/articles/why-not-windows-openclaw)——了解為什麼 WSL 是 Windows 用戶的最佳選擇。
+
 如果你用的是 Mac，請看 [macOS 安裝指南](/articles/install-openclaw-macos)。
 如果你不想在本地安裝，可以考慮 [雲端部署方案](/articles/deploy-openclaw-cloud)。
 
@@ -189,6 +191,8 @@ python -m openclaw start
 ## 方式 B：WSL 2 安裝（進階）
 
 WSL（Windows Subsystem for Linux）讓你在 Windows 裡跑 Linux。好處是很多 Python 套件在 Linux 上更穩定。
+
+> 📘 **完整版教學**：如果你想深入了解 WSL 的原理和更多使用技巧，請看 [WSL 完整教學](/articles/windows-wsl-guide)。以下是快速安裝版。
 
 ### Step 1：安裝 WSL 2
 

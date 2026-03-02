@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-03-02T04:45:36.030Z",
+  "_generated": "2026-03-02T05:17:23.628Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -167,14 +167,26 @@
     "WSL": {
       "displayName": "WSL（Windows Subsystem for Linux）",
       "shortDesc": "在 Windows 上運行 Linux 環境的子系統",
-      "canonicalArticle": "install-openclaw-windows",
-      "link": "/articles/install-openclaw-windows"
+      "canonicalArticle": "windows-wsl-guide",
+      "link": "/articles/windows-wsl-guide"
+    },
+    "CLI": {
+      "displayName": "CLI（命令列介面）",
+      "shortDesc": "用文字指令操作電腦的介面，AI Agent 執行工具的主要方式",
+      "canonicalArticle": "cli-guide",
+      "link": "/articles/cli-guide"
     },
     "Homebrew": {
       "displayName": "Homebrew",
       "shortDesc": "macOS 上最常用的套件管理工具",
       "canonicalArticle": "install-openclaw-macos",
       "link": "/articles/install-openclaw-macos"
+    },
+    "Shell": {
+      "displayName": "Shell（殼層）",
+      "shortDesc": "等待你輸入指令的程式，你跟作業系統之間的翻譯官",
+      "canonicalArticle": "cli-guide",
+      "link": "/articles/cli-guide"
     },
     "QMD": {
       "displayName": "QMD",
@@ -220,6 +232,31 @@
         "Homebrew"
       ],
       "link": "/articles/install-openclaw"
+    },
+    {
+      "slug": "why-not-windows-openclaw",
+      "title": "為什麼不建議在 Windows 原生環境安裝 OpenClaw？",
+      "description": "OpenClaw 的運作核心是 CLI 工具與 Markdown 檔案。了解為什麼 macOS、Linux 是龍蝦最好的飼養環境，以及 Windows 用戶該怎麼辦。",
+      "scene": "安裝與部署",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "OpenClaw",
+        "Windows",
+        "macOS",
+        "Linux",
+        "WSL",
+        "安裝"
+      ],
+      "prerequisites": [
+        "why-openclaw"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [
+        "WSL",
+        "CLI"
+      ],
+      "link": "/articles/why-not-windows-openclaw"
     },
     {
       "slug": "deploy-openclaw-cloud",
@@ -268,7 +305,10 @@
       "concepts_defined": [
         "Homebrew"
       ],
-      "concepts_referenced": [],
+      "concepts_referenced": [
+        "CLI",
+        "Shell"
+      ],
       "link": "/articles/install-openclaw-macos"
     },
     {
@@ -318,11 +358,37 @@
       "prerequisites": [
         "install-openclaw"
       ],
+      "concepts_defined": [],
+      "concepts_referenced": [
+        "WSL"
+      ],
+      "link": "/articles/install-openclaw-windows"
+    },
+    {
+      "slug": "windows-wsl-guide",
+      "title": "WSL 完整教學：讓你的 Windows 擁有 Linux 超能力",
+      "description": "WSL（Windows Subsystem for Linux）是 Windows 用戶安裝 OpenClaw 的最佳方案。從安裝、設定到日常使用，一次搞定。",
+      "scene": "安裝與部署",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "WSL",
+        "Windows",
+        "Linux",
+        "安裝",
+        "OpenClaw"
+      ],
+      "prerequisites": [
+        "cli-guide"
+      ],
       "concepts_defined": [
         "WSL"
       ],
-      "concepts_referenced": [],
-      "link": "/articles/install-openclaw-windows"
+      "concepts_referenced": [
+        "CLI",
+        "Shell"
+      ],
+      "link": "/articles/windows-wsl-guide"
     },
     {
       "slug": "media-guide",
@@ -833,6 +899,33 @@
         "OAuth"
       ],
       "link": "/articles/ai-api-key-guide"
+    },
+    {
+      "slug": "cli-guide",
+      "title": "CLI 入門指南：命令列到底是什麼？為什麼 AI 離不開它？",
+      "description": "命令列介面（CLI）是 OpenClaw 的手和腳。了解 CLI 的原理、常見工具、以及它為什麼是 AI 時代最強大的操作方式。",
+      "scene": "環境準備",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "OpenClaw",
+        "安裝",
+        "macOS",
+        "Linux",
+        "WSL"
+      ],
+      "prerequisites": [
+        "why-openclaw"
+      ],
+      "concepts_defined": [
+        "CLI",
+        "Shell"
+      ],
+      "concepts_referenced": [
+        "WSL",
+        "Homebrew"
+      ],
+      "link": "/articles/cli-guide"
     },
     {
       "slug": "google-api-key-guide",

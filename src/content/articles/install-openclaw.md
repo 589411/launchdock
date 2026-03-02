@@ -76,9 +76,11 @@ stuckOptions:
 | 情境 | 建議 |
 |---|---|
 | 第一次接觸，只想試試 | ☁️ **雲端部署**（最快） |
-| 想長期使用、深入學習 | 🍎 **macOS** 或 🪟 **Windows** 本地安裝 |
+| 想長期使用、深入學習 | 🍎 **macOS** 或 🪟 **Windows + WSL** 本地安裝 |
 | 有 Linux 開發經驗 | 🪟 **Windows WSL 2** 或直接參考 macOS 教學 |
 | 電腦跑不太動 | ☁️ **雲端部署** |
+
+> 💡 **Windows 用戶注意**：OpenClaw 大量依賴 CLI 工具，而 CLI 在 Linux 環境最完整。強烈建議 Windows 用戶使用 [WSL（Windows Subsystem for Linux）](/articles/windows-wsl-guide) 來安裝。詳情請看 [為什麼不建議在 Windows 原生環境安裝？](/articles/why-not-windows-openclaw)
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：雲端部署就像叫外賣——不用自己開火，馬上就能吃。本地安裝就是自己學做菜——花時間，但以後想吃什麼都能自己來。兩種都對，看你現在餓不餓。
 
