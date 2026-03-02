@@ -76,6 +76,7 @@ stuckOptions:
 | 情境 | 建議 |
 |---|---|
 | 第一次接觸，只想試試 | ☁️ **雲端部署**（最快） |
+| 想免費體驗，不想申請 API Key | 🦙 **[Ollama 快速體驗](/articles/ollama-openclaw)**（`ollama launch openclaw` 一鍵啟動）|
 | 想長期使用、深入學習 | 🍎 **macOS** 或 🪟 **Windows + WSL** 本地安裝 |
 | 有 Linux 開發經驗 | 🪟 **Windows WSL 2** 或直接參考 macOS 教學 |
 | 電腦跑不太動 | ☁️ **雲端部署** |
