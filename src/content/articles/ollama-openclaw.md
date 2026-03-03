@@ -3,7 +3,7 @@ title: "Ollama + OpenClaw：免 API Key，幾分鐘內開始和 AI 對話"
 description: "不用設定 API Key，直接用 Ollama 帳號的免費雲端額度，幾分鐘內就能讓 OpenClaw 開口說話。想在本機跑開源模型？文末附完整補充說明。"
 contentType: "tutorial"
 scene: "安裝與部署"
-difficulty: "初級"
+difficulty: "入門"
 createdAt: "2026-03-02"
 verifiedAt: "2026-03-02"
 archived: false
