@@ -19,6 +19,8 @@ stuckOptions:
   "本機模型": ["下載速度很慢怎麼辦？", "硬碟空間不夠怎麼辦？", "GPU 有被用到嗎？"]
 ---
 
+![Ollama + OpenClaw 讓你和 AI 一起快樂工作](/images/articles/ollama-openclaw/happy-bros.webp)
+
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **你在哪個階段？**
 >
 > | 我的狀況 | 建議路線 |
@@ -70,6 +72,10 @@ OpenClaw = AI Agent 框架（技能、自動化、對話）
 4. 打開 Ollama
 
 ![Ollama 官網下載頁面（macOS）](/images/articles/ollama-openclaw/ollama-download-mac.png)
+
+![Ollama 安裝包拖入應用程式資料夾](/images/articles/ollama-openclaw/ollama-downloaded.png)
+
+![Ollama 首次啟動 macOS 設定畫面](/images/articles/ollama-openclaw/ollama-setup-mac.png)
 
 > 🚨 **macOS 安全性提示**：如果看到「無法打開 Ollama，因為來自未識別的開發者」，到「系統設定 → 隱私與安全性」拉到底點「仍然開啟」。
 
@@ -152,6 +158,9 @@ Ollama 的雲端模型有免費額度可用（[官方說明](https://ollama.com/
 
 1. 前往 [ollama.com/settings](https://ollama.com/settings)
 2. 用 Google 帳號登入
+
+![Ollama 登入頁面](/images/articles/ollama-openclaw/ollama-login.png)
+
 3. 即可查看剩餘免費額度與用量
 
 ![Ollama 帳號設定頁面查看免費額度](/images/articles/ollama-openclaw/ollama-settings-tokens.png)
