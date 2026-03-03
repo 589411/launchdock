@@ -79,7 +79,7 @@ OpenClaw = AI Agent 框架（技能、自動化、對話）
 
 > 🚨 **macOS 安全性提示**：如果看到「無法打開 Ollama，因為來自未識別的開發者」，到「系統設定 → 隱私與安全性」拉到底點「仍然開啟」。
 
-<!-- @img: macos-security-allow | macOS 安全性設定允許 Ollama --><!-- ⚠️ 未配對 -->
+![macOS 安全性設定允許 Ollama](/images/articles/ollama-openclaw/macos-security-allow.png)
 
 ### Windows
 
@@ -108,7 +108,7 @@ ollama --version
 ollama version 0.6.x
 ```
 
-<!-- @img: ollama-version-check | 終端機確認 Ollama 版本 --><!-- ⚠️ 未配對 -->
+![終端機確認 Ollama 版本](/images/articles/ollama-openclaw/ollama-version-check.png)
 
 ---
 
@@ -120,6 +120,10 @@ ollama version 0.6.x
 # macOS / Linux
 curl -fsSL https://openclaw.ai/install.sh | bash
 ```
+
+![終端機執行 OpenClaw 安裝指令過程](/images/articles/ollama-openclaw/install-openclaw-terminal.png)
+
+![OpenClaw 安裝成功完成訊息](/images/articles/ollama-openclaw/openclaw-install-success.png)
 
 ```powershell
 # Windows（PowerShell）
@@ -133,6 +137,8 @@ iwr -useb https://openclaw.ai/install.ps1 | iex
 ```bash
 ollama launch openclaw
 ```
+
+![終端機執行 ollama launch openclaw 輸出](/images/articles/ollama-openclaw/ollama-launch-terminal.png)
 
 Ollama 會開啟一個設定頁面，讓你選擇模型和配置 OpenClaw。
 
@@ -207,6 +213,8 @@ Ollama 安裝後會常駐在背景。確認它有在跑：
 # 測試 Ollama API 是否可用
 curl http://localhost:11434/api/tags
 ```
+
+<!-- @img: ollama-api-check-terminal | 終端機 curl localhost:11434/api/tags 回傳 JSON --><!-- ⚠️ 未配對 -->
 
 如果回傳一串 JSON（包含你下載的模型清單），代表 Ollama 運行正常。
 
@@ -289,6 +297,8 @@ openclaw chat "用繁體中文跟我打招呼"
 # 查看模型運行資訊
 ollama ps
 ```
+
+<!-- @img: ollama-ps-terminal | 終端機 ollama ps 顯示執行中模型與 GPU 資訊 --><!-- ⚠️ 未配對 -->
 
 如果看到 `gpu` 相關資訊，代表 GPU 加速已啟用。
 
