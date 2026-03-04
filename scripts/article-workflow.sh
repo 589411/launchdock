@@ -326,10 +326,10 @@ PYTHON_EOF
   
   echo -e "${GREEN}✅ 已複製 $COPIED_COUNT 個檔案到 $PUBLIC_DIR${NC}"
   
-  # Step 8: 上架前最終機敏檢查
-  print_step 8 "上架前最終機敏檢查"
+  # Step 8: 上架前最終機敏檢查（強制，發現即自動遮蔽）
+  print_step 8 "上架前最終機敏檢查（強制）"
   
-  echo -e "${CYAN}正在檢查 public/images 中的圖片...${NC}"
+  echo -e "${CYAN}正在掃描 public/images 中的截圖...${NC}"
   
   python3 << PYTHON_EOF
 import sys
@@ -350,25 +350,52 @@ for img_path in images:
     import tempfile
     with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp:
         tmp_path = Path(tmp.name)
-    
     _, regions = redact_image(img_path, config, tmp_path)
     tmp_path.unlink()
-    
     if regions:
         sensitive_count += 1
         sensitive_files.append((img_path.name, len(regions)))
 
 if sensitive_count > 0:
-    print(f"⚠️  警告：發現 {sensitive_count} 張圖片仍包含敏感資訊！")
-    for name, count in sensitive_files:
-        print(f"   - {name} ({count} 個區域)")
-    sys.exit(1)
+    print(f"🔍 發現 {sensitive_count} 張圖片含敏感資訊，立即自動遮蔽...")
+    for img_path in images:
+        _, regions = redact_image(img_path, config, output_path=img_path)
+        if regions:
+            print(f"   🔒 已遮蔽：{img_path.name} ({len(regions)} 個區域)")
+    # 遮蔽後再掃一次確認
+    still_sensitive = []
+    for img_path in images:
+        import tempfile
+        with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp:
+            tmp_path = Path(tmp.name)
+        _, regions = redact_image(img_path, config, tmp_path)
+        tmp_path.unlink()
+        if regions:
+            still_sensitive.append(img_path.name)
+    if still_sensitive:
+        print(f"\n❌ 遮蔽後仍有問題，請人工檢查：")
+        for name in still_sensitive:
+            print(f"   - {name}")
+        sys.exit(2)  # 硬封鎖
+    else:
+        print(f"✅ 遮蔽完成，所有 {len(images)} 張圖片已安全")
+        sys.exit(0)
 else:
-    print(f"✅ 所有 {len(images)} 張圖片都已安全")
+    print(f"✅ 所有 {len(images)} 張圖片都安全")
     sys.exit(0)
 PYTHON_EOF
   
   FINAL_CHECK_STATUS=$?
+  
+  if [ $FINAL_CHECK_STATUS -eq 2 ]; then
+    echo ""
+    echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${RED}❌ 硬封鎖：機敏資訊遮蔽後仍有殘留，禁止上架！${NC}"
+    echo -e "${RED}   請人工檢查上方列出的圖片，確認後再重新執行${NC}"
+    echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    exit 1
+  fi
   
   # Step 9: 完成提示
   print_step 9 "完成！"
@@ -383,9 +410,7 @@ PYTHON_EOF
   echo ""
   
   if [ $FINAL_CHECK_STATUS -eq 0 ]; then
-    echo -e "${GREEN}✅ 所有檢查通過，可以上架！${NC}"
-  else
-    echo -e "${RED}⚠️  最終檢查發現敏感資訊，請先處理再上架${NC}"
+    echo -e "${GREEN}✅ 所有安全檢查通過，可以上架！${NC}"
   fi
   
   echo ""

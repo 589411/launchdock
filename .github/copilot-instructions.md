@@ -36,10 +36,50 @@ LaunchDock 是一個 Astro 靜態網站，為中文使用者提供 OpenClaw AI A
 5. ✅ Vision AI 辨識圖片內容（Claude/Gemini/OpenAI）
 6. ✅ 自動配對並寫入文章
 7. ✅ 複製到 `public/images/articles/<slug>/`
-8. ✅ 🔐 上架前最終安全檢查
+8. ✅ 🔐 上架前最終安全檢查（**自動遮蔽，硬封鎖**）
 9. ✅ 提示預覽與提交
 
 **詳細文檔：** `docs/article-workflow-guide.md`
+
+---
+
+## 🔴 機敏資訊安全規則（AI Agent 強制遵守）
+
+> **這是不可跳過的安全規則，任何圖片插入操作後都必須執行。**
+
+### 強制檢查時機
+
+每當發生以下任一操作，**必須立即**對 `public/images/articles/<slug>/` 執行機敏資訊掃描：
+
+- 呼叫 `publish_manual_screenshots` MCP 工具後
+- 手動複製圖片到 `public/images/` 後
+- 任何新增或更新截圖後
+
+### AI Agent 必須執行的步驟
+
+```
+1. 插入圖片（任何方式）
+   ↓
+2. 【強制】呼叫 check_image_sensitive_info 掃描 public/images/<slug>/ 全部圖片
+   ↓
+3. 若有敏感資訊 → 立即呼叫 redact_images 遮蔽 → 再次掃描確認
+   ↓
+4. 確認全部 clean 後，才能 commit/push
+```
+
+### 敏感資訊類型（自動偵測）
+
+| 類型 | 範例 |
+|------|------|
+| `system_real_name` | 終端機標題列、shell prompt 中的用戶名 |
+| `email` | npm 安裝輸出中的 maintainer email |
+| `hostname` | 主機名稱（如 `username@MacBook-Pro`） |
+| `api_key` | 任何 API Key 格式字串 |
+
+### ⚠️ 違反後果
+
+若未執行此檢查直接 commit/push，個人資料（姓名、email）將公開於 GitHub。
+上次事故：`openclaw-version-check.png` 含 3 處 email，已推送至 remote 才發現。
 
 ### @img 標記系統
 
