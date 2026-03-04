@@ -144,9 +144,11 @@ ollama launch openclaw
 >
 > | 模型 | 特色 |
 > |------|------|
-> | `kimi-k2.5` | 1T 參數，Agent 任務能力最強 |
-> | `minimax-m2.5` | 最新版，編程與生產力任務 |
+> | `minimax-m2.5` | 🥇 **實測推薦**：工具呼叫能力最佳，Agent 任務表現優異 |
+> | `kimi-k2.5` | 1T 參數，對話品質強 |
 > | `glm-4.7` | 通用型，穩定可靠 |
+>
+> **不過要說明的是**：以上模型用來「試玩龍蝦、感受功能」都沒問題，但如果你希望**真正導入日常工作流程、交辦重要任務**，還是建議換用 Claude、GPT-4o 等主流商業模型——穩定性、指令遵循能力和工具使用的可靠度，目前仍有明顯差距。Ollama 免費額度很適合入門體驗，正式工作再升級。
 
 
 ![macOS 安全性設定允許 Node](/images/articles/ollama-openclaw/macos-security-allow.png)

@@ -1,5 +1,11 @@
 {
   "markdown.editor.pasteUrlAsFormattedLink": "never",
   "editor.pasteAs.enabled": false,
-  "markdown.editor.filePaste.copyIntoWorkspace": "never"
+  "markdown.editor.filePaste.copyIntoWorkspace": "never",
+  "chat.tools.terminal.autoApprove": {
+    "/^cd /Users/yen-tangchang/Documents/github/launchdock-redesign && git stash pop$/": {
+      "approve": true,
+      "matchCommandLine": true
+    }
+  }
 }
