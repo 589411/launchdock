@@ -16,6 +16,31 @@ LaunchDock 是一個 Astro 靜態網站，為中文使用者提供 OpenClaw AI A
 
 本站教學文章的核心價值在於「讀者能跟著操作」，因此**螢幕截圖是最重要的功能**。
 
+### 🚀 自動化工作流程（推薦）
+
+**使用一鍵式腳本完成所有截圖處理步驟：**
+
+```bash
+# 互動式完整流程
+./scripts/article-workflow.sh
+
+# 直接指定文章
+./scripts/article-workflow.sh <article-slug>
+```
+
+**自動執行以下所有步驟：**
+1. ✅ 選定文章並檢查 @img 標記
+2. ✅ 創建截圖資料夾（`~/Desktop/captures/<slug>/`）
+3. ✅ 自動截圖（監聽滑鼠點擊）+ 標註 + GIF 動畫
+4. ✅ 🔒 檢查並遮蔽敏感資訊（Email、主機名、路徑等）
+5. ✅ Vision AI 辨識圖片內容（Claude/Gemini/OpenAI）
+6. ✅ 自動配對並寫入文章
+7. ✅ 複製到 `public/images/articles/<slug>/`
+8. ✅ 🔐 上架前最終安全檢查
+9. ✅ 提示預覽與提交
+
+**詳細文檔：** `docs/article-workflow-guide.md`
+
 ### @img 標記系統
 
 任何時候生成或編輯教學文章，都必須在需要截圖的位置放置佔位標記：
@@ -53,6 +78,17 @@ LaunchDock 是一個 Astro 靜態網站，為中文使用者提供 OpenClaw AI A
 
 ### CLI 工具
 
+#### 🚀 主工具：完整工作流程
+
+```bash
+# 一鍵式自動化流程（推薦）
+./scripts/article-workflow.sh <slug>
+```
+
+自動執行：選定文章 → 截圖 → 遮蔽敏感資訊 → AI 配對 → 寫入文章 → 複製圖片 → 安全檢查
+
+#### 🔧 輔助工具：單獨步驟
+
 圖片處理用 `scripts/add-image.sh`：
 
 ```bash
@@ -84,12 +120,16 @@ Phase 3: CLI 配對     → 引導使用者執行 add-image.sh
 ```
 
 當你完成 Phase 1（生成/編輯文章）後，**必須提醒使用者**：
-> 文章已包含 X 個 @img 截圖標記。請照文章步驟實際操作並截圖，然後執行：
-> `./scripts/add-image.sh <slug> <圖片路徑...>`
->
-> 💡 如果安裝了 [auto-capture](https://github.com/589411/auto-capture)，可以用：
-> `auto-capture --window "App名稱" --output ~/Desktop/captures/<slug>/`
-> 操作完成後再執行 `./scripts/add-image.sh <slug> ~/Desktop/captures/<slug>/*.png`
+> 文章已包含 X 個 @img 截圖標記。
+> 
+> **推薦使用自動化工作流程：**
+> `./scripts/article-workflow.sh <slug>`
+> 
+> 或手動執行：
+> 1. 截圖：`auto-capture --article <slug>.md --window "App名稱"`
+> 2. 配對：`./scripts/add-image.sh <slug> ~/Desktop/captures/<slug>/*.png`
+
+**快速參考：** `QUICK_REFERENCE.md`
 
 ---
 

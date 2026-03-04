@@ -96,6 +96,110 @@ scan_headings() {
   grep -n '^##' "$article_path" 2>/dev/null || true
 }
 
+# 檢測並遮蔽敏感資訊（呼叫 auto-capture 的 redact 功能）
+check_and_redact_image() {
+  local image_path="$1"
+  local force_check="${2:-true}"  # 預設強制檢查
+  
+  # 檢查 auto-capture 是否可用
+  if ! command -v auto-capture &> /dev/null; then
+    echo -e "  ${YELLOW}⚠️  未安裝 auto-capture，跳過敏感資訊檢測${NC}" >&2
+    echo -e "  ${DIM}   安裝方式: pip install auto-capture${NC}" >&2
+    return 0
+  fi
+  
+  # 使用 Python 直接調用 auto-capture 的 redact 功能進行檢測
+  local python_script=$(cat <<'PYTHON_EOF'
+import sys
+from pathlib import Path
+from auto_capture.redact import redact_image
+from auto_capture.config import RedactConfig
+
+image_path = Path(sys.argv[1])
+
+# 啟用 redact，但先只檢測不修改
+config = RedactConfig(enabled=True)
+
+# 檢測敏感資訊
+try:
+    # 先用臨時輸出檢測
+    import tempfile
+    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp:
+        tmp_path = Path(tmp.name)
+    
+    output_path, regions = redact_image(image_path, config, tmp_path)
+    
+    # 刪除臨時檔案
+    tmp_path.unlink()
+    
+    if regions:
+        print("FOUND_SENSITIVE")
+        for region in regions:
+            print(f"  - {region.pattern_name}: {region.matched_text}")
+        sys.exit(1)
+    else:
+        print("CLEAN")
+        sys.exit(0)
+except Exception as e:
+    print(f"ERROR: {e}", file=sys.stderr)
+    sys.exit(2)
+PYTHON_EOF
+)
+  
+  local check_result
+  check_result=$(python3 -c "$python_script" "$image_path" 2>&1)
+  local exit_code=$?
+  
+  # 處理檢測結果
+  if [ $exit_code -eq 0 ]; then
+    echo -e "  ${GREEN}🔒 未偵測到敏感資訊${NC}" >&2
+    return 0
+  elif [ $exit_code -eq 2 ]; then
+    echo -e "  ${YELLOW}⚠️  檢測失敗: ${check_result}${NC}" >&2
+    return 0
+  fi
+  
+  # 發現敏感資訊
+  echo -e "  ${RED}⚠️  偵測到敏感資訊！${NC}" >&2
+  echo "$check_result" | grep "  -" >&2
+  echo "" >&2
+  
+  # 詢問是否遮蔽
+  local response="y"
+  if [ "$force_check" = "true" ]; then
+    echo -e "  ${BOLD}是否要自動遮蔽？(Y/n)${NC} " >&2
+    read -r response
+  fi
+  
+  if [[ ! "$response" =~ ^[nN] ]]; then
+    # 執行遮蔽
+    local redact_script=$(cat <<'PYTHON_EOF'
+import sys
+from pathlib import Path
+from auto_capture.redact import redact_image
+from auto_capture.config import RedactConfig
+
+image_path = Path(sys.argv[1])
+config = RedactConfig(enabled=True)
+
+try:
+    output_path, regions = redact_image(image_path, config)
+    print(f"REDACTED: {len(regions)} regions")
+except Exception as e:
+    print(f"ERROR: {e}", file=sys.stderr)
+    sys.exit(1)
+PYTHON_EOF
+)
+    
+    python3 -c "$redact_script" "$image_path" >&2
+    echo -e "  ${GREEN}✅ 已自動遮蔽敏感資訊${NC}" >&2
+  else
+    echo -e "  ${YELLOW}⚠️  已跳過遮蔽，請手動處理敏感資訊再上架${NC}" >&2
+  fi
+  
+  return 0
+}
+
 # 處理一張圖片（複製、壓縮、回傳路徑）
 process_image() {
   local src="$1"
@@ -139,6 +243,9 @@ process_image() {
   if [ "$final_size" -gt "$WARN_SIZE" ]; then
     echo -e "  ${YELLOW}⚠️  檔案較大 (${size_kb}KB)${NC}" >&2
   fi
+  
+  # ⚡ 強制檢查敏感資訊
+  check_and_redact_image "$dest"
   
   echo -e "  ${GREEN}✅ ${safe_name}${NC} (${size_kb}KB)" >&2
   

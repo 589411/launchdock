@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "auto-capture": {
+      "command": "python3",
+      "args": [
+        "/Users/yen-tangchang/Documents/github/auto-capture/mcp_server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/Users/yen-tangchang/Documents/github/auto-capture"
+      }
+    }
+  }
+}
