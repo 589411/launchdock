@@ -1,19 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #6366f1;
-  --color-brand-light: #818cf8;
-  --color-brand-dark: #4f46e5;
-  --color-surface: #0f172a;
-  --color-surface-light: #1e293b;
-  --color-surface-lighter: #334155;
+  /* Brand: Red accent from demo */
+  --color-brand: #e94560;
+  --color-brand-light: #ff6b81;
+  --color-brand-dark: #c83a52;
+  --color-accent2: #0f3460;
+  --color-accent2-light: #1a4a8a;
+
+  /* Dark theme surfaces */
+  --color-surface: #1a1a2e;
+  --color-surface-light: #16213e;
+  --color-surface-lighter: #30363d;
+
+  /* Dark theme text */
   --color-text-primary: #f8fafc;
   --color-text-secondary: #94a3b8;
   --color-text-muted: #64748b;
+
+  /* Semantic accents */
   --color-accent-rocket: #f59e0b;
-  --color-accent-like: #3b82f6;
+  --color-accent-like: #58a6ff;
   --color-accent-stuck: #ef4444;
   --color-accent-cry: #8b5cf6;
+  --color-success: #3fb950;
+  --color-warn: #d29922;
+  --color-info: #58a6ff;
+
   --font-sans: 'Inter', 'Noto Sans TC', system-ui, -apple-system, sans-serif;
 }
 
@@ -34,6 +47,8 @@ html[data-theme="light"] {
   --color-brand: #e94560;
   --color-brand-light: #ff6b81;
   --color-brand-dark: #c83a52;
+  --color-accent2: #0f3460;
+  --color-accent2-light: #1a4a8a;
   --color-surface: #f6f8fa;
   --color-surface-light: #ffffff;
   --color-surface-lighter: #d0d7de;
@@ -41,20 +56,25 @@ html[data-theme="light"] {
   --color-text-secondary: #57606a;
   --color-text-muted: #8b949e;
   --color-accent-rocket: #d97706;
-  --color-accent-like: #2563eb;
+  --color-accent-like: #1976d2;
   --color-accent-stuck: #dc2626;
   --color-accent-cry: #7c3aed;
+  --color-success: #2e7d32;
+  --color-warn: #e65100;
+  --color-info: #1976d2;
 }
 
-/* Light mode: keep code blocks dark (GitHub-style) */
-html[data-theme="light"] pre {
+/* Code blocks stay dark in both themes (GitHub-style) */
+pre {
   background-color: #0d1117 !important;
-  color: #c9d1d9;
+  color: #c9d1d9 !important;
   border: 1px solid #30363d;
 }
-html[data-theme="light"] pre code {
-  color: #c9d1d9;
+pre code {
+  color: #c9d1d9 !important;
 }
+
+/* Light mode: inline code */
 html[data-theme="light"] .prose :not(pre) > code {
   background: #eff1f3;
   color: #cf222e;
@@ -62,17 +82,22 @@ html[data-theme="light"] .prose :not(pre) > code {
   border-radius: 0.25rem;
 }
 
-/* Light mode: hero section keeps dark gradient */
-html[data-theme="light"] .hero-section {
+/* Hero section: dark gradient in BOTH themes */
+.hero-section {
   background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 60%, #16213e 100%);
+  color: white;
+}
+.hero-section,
+.hero-section * {
   --color-text-primary: #f8fafc;
   --color-text-secondary: #cbd5e1;
   --color-text-muted: #94a3b8;
-  --color-surface-lighter: rgba(255, 255, 255, 0.25);
-  --color-brand: #e94560;
+}
+.hero-section .border-surface-lighter {
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* Light mode: softer shadows */
+/* Light mode: softer shadows & overlays */
 html[data-theme="light"] .section-reactions-bar {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
@@ -105,6 +130,19 @@ html[data-theme="light"] .home-discussion__error {
   color: #b91c1c;
   background: rgba(239, 68, 68, 0.06);
   border-color: rgba(239, 68, 68, 0.2);
+}
+
+/* Light mode: card hover uses subtle brand tint */
+html[data-theme="light"] .qa-item:hover,
+html[data-theme="light"] .home-discussion__topic:hover {
+  border-color: rgba(233, 69, 96, 0.3);
+}
+
+/* Light mode: table header */
+html[data-theme="light"] .prose th {
+  background-color: #0f3460;
+  color: white;
+  border-color: #0f3460;
 }
 
 /* ============================================================
@@ -143,7 +181,6 @@ pre {
   border-radius: 0.5rem;
   padding: 1rem;
   overflow-x: auto;
-  background-color: var(--color-surface-light) !important;
 }
 
 code {
@@ -879,7 +916,7 @@ code {
   transition: border-color 0.15s;
 }
 .home-discussion__topic:hover {
-  border-color: var(--color-brand, #6366f1) / 0.4;
+  border-color: var(--color-brand) / 0.4;
 }
 .home-discussion__topic-header {
   display: flex;
@@ -909,7 +946,7 @@ code {
 .home-discussion__mine {
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
-  background: var(--color-brand, #6366f1) / 0.15;
+  background: var(--color-brand) / 0.15;
   color: var(--color-brand-light);
   font-size: 0.7rem;
 }
@@ -1597,7 +1634,7 @@ a.progress-step:hover .progress-dot {
   transition: all 0.15s ease;
 }
 .related-article-card:hover {
-  border-color: rgba(99, 102, 241, 0.4);
+  border-color: rgba(233, 69, 96, 0.4);
   background: var(--color-surface-lighter);
 }
 .related-article-scene {
