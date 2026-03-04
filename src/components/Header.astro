@@ -1,5 +1,6 @@
 ---
 import SearchTrigger from './SearchTrigger.tsx';
+import ThemeToggle from './ThemeToggle.astro';
 
 const navItems = [
   { label: '首頁', href: '/' },
@@ -35,6 +36,7 @@ const navItems = [
         💬 討論區
       </a>
       <SearchTrigger client:load />
+      <ThemeToggle />
     </div>
 
     <!-- Mobile Menu Button -->
@@ -66,8 +68,9 @@ const navItems = [
       >
         💬 討論區
       </a>
-      <div class="py-2">
+      <div class="py-2 flex items-center gap-3">
         <SearchTrigger client:load />
+        <ThemeToggle />
       </div>
     </div>
   </div>

@@ -1,5 +1,11 @@
 {
   "markdown.editor.pasteUrlAsFormattedLink": "never",
   "editor.pasteAs.enabled": false,
-  "markdown.editor.filePaste.copyIntoWorkspace": "never"
+  "markdown.editor.filePaste.copyIntoWorkspace": "never",
+  "chat.tools.terminal.autoApprove": {
+    "/^git stash --include-untracked -m \"WIP: uncommitted changes before redesign branch\"$/": {
+      "approve": true,
+      "matchCommandLine": true
+    }
+  }
 }
