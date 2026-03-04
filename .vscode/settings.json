@@ -6,6 +6,10 @@
     "/^cd /Users/yen-tangchang/Documents/github/launchdock-redesign && git stash pop$/": {
       "approve": true,
       "matchCommandLine": true
+    },
+    "/^npm install$/": {
+      "approve": true,
+      "matchCommandLine": true
     }
   }
 }
