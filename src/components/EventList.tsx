@@ -34,26 +34,30 @@ export default function EventList({ compact = false }: Props) {
       return;
     }
 
-    const { data, error } = await supabase
-      .from('events')
-      .select('*')
-      .in('status', ['published', 'completed'])
-      .order('event_date', { ascending: true });
+    try {
+      const { data, error } = await supabase
+        .from('events')
+        .select('*')
+        .in('status', ['published', 'completed'])
+        .order('event_date', { ascending: true });
 
-    if (data) {
-      // Fetch registration counts
-      const eventsWithCounts = await Promise.all(
-        data.map(async (event) => {
-          const { count } = await supabase
-            .from('event_registrations')
-            .select('*', { count: 'exact', head: true })
-            .eq('event_id', event.id)
-            .in('status', ['registered', 'attended']);
+      if (data) {
+        // Fetch registration counts
+        const eventsWithCounts = await Promise.all(
+          data.map(async (event) => {
+            const { count } = await supabase
+              .from('event_registrations')
+              .select('*', { count: 'exact', head: true })
+              .eq('event_id', event.id)
+              .in('status', ['registered', 'attended']);
 
-          return { ...event, registration_count: count ?? 0 } as Event;
-        })
-      );
-      setEvents(eventsWithCounts);
+            return { ...event, registration_count: count ?? 0 } as Event;
+          })
+        );
+        setEvents(eventsWithCounts);
+      }
+    } catch {
+      // Query timed out or failed — show empty state
     }
     setLoading(false);
   }

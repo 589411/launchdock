@@ -37,7 +37,6 @@ export default function PopularArticlesHome({ articles }: Props) {
 
     if (isSupabaseConfigured()) {
       try {
-        // Query aggregated page views
         const { data, error } = await supabase
           .from('article_page_views')
           .select('slug');

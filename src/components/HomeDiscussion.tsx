@@ -49,7 +49,7 @@ export default function HomeDiscussion() {
 
   useEffect(() => {
     if (isSupabaseConfigured()) {
-      supabase.auth.getSession().then(({ data: { session } }) => {
+      supabase.auth.onAuthStateChange((event, session) => {
         setCurrentUserId(session?.user?.id ?? null);
       });
     }
