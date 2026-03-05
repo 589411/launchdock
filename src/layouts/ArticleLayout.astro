@@ -31,13 +31,13 @@ const slug = Astro.url.pathname.replace(/^\/articles\//, '').replace(/\/$/, '');
 ---
 
 <BaseLayout title={frontmatter.title} description={frontmatter.description}>
-  <article class="max-w-3xl mx-auto px-4 py-8">
+  <article class="max-w-[900px] mx-auto px-6 py-10">
     <!-- Branded Breadcrumb for SEO -->
-    <nav class="text-xs text-text-muted mb-4" aria-label="麿包屑">
-      <a href="/" class="hover:text-text-secondary transition-colors">藍鴨 LaunchDock</a>
-      <span class="mx-1">/</span>
-      <a href={`/articles?scene=${encodeURIComponent(frontmatter.scene)}`} class="hover:text-text-secondary transition-colors">{frontmatter.scene}</a>
-      <span class="mx-1">/</span>
+    <nav class="text-xs text-text-muted mb-6" aria-label="麿包屑">
+      <a href="/" class="hover:text-accent2 transition-colors">藍鴨 LaunchDock</a>
+      <span class="mx-1.5 opacity-50">/</span>
+      <a href={`/articles?scene=${encodeURIComponent(frontmatter.scene)}`} class="hover:text-accent2 transition-colors">{frontmatter.scene}</a>
+      <span class="mx-1.5 opacity-50">/</span>
       <span class="text-text-secondary">{frontmatter.title}</span>
     </nav>
 
@@ -46,51 +46,54 @@ const slug = Astro.url.pathname.replace(/^\/articles\//, '').replace(/\/$/, '');
       <ArticleProgressBar currentStep={frontmatter.pathStep} />
     )}
 
-    <!-- Article Header -->
-    <header class="mb-8">
-      <div class="flex items-center gap-2 mb-4">
-        <span class="text-sm px-3 py-1 rounded-full bg-brand/20 text-brand-light">
-          {frontmatter.scene}
-        </span>
-        <span class={`text-sm px-3 py-1 rounded-full ${
-          frontmatter.difficulty === '入門' ? 'bg-green-500/20 text-green-400' :
-          frontmatter.difficulty === '中級' ? 'bg-yellow-500/20 text-yellow-400' :
-          'bg-red-500/20 text-red-400'
-        }`}>
-          {frontmatter.difficulty}
-        </span>
-      </div>
-
-      <h1 class="text-3xl font-bold mb-4 leading-tight">
-        {frontmatter.title}
-      </h1>
-
-      <p class="text-text-secondary text-lg mb-4">
-        {frontmatter.description}
-      </p>
-
-      <ArticleMeta
-        createdAt={frontmatter.createdAt}
-        verifiedAt={frontmatter.verifiedAt}
-        archived={frontmatter.archived}
-        archivedReason={frontmatter.archivedReason}
-      />
-
-      {frontmatter.archived && (
-        <div class="mt-4 p-4 rounded-lg bg-red-500/10 border border-red-500/30">
-          <p class="text-red-400 text-sm">
-            ⚠️ 此文章已封存：{frontmatter.archivedReason || '內容可能已過時'}
-          </p>
+    <!-- Article Header (phase-card style) -->
+    <header class="mb-10 rounded-xl bg-surface-light border border-surface-lighter overflow-hidden">
+      <!-- Gradient header bar -->
+      <div class="bg-gradient-to-r from-accent2 to-accent2-light px-6 py-4">
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+          <span class="badge text-xs">
+            {frontmatter.scene}
+          </span>
+          <span class={`badge text-xs ${
+            frontmatter.difficulty === '入門' ? '' :
+            frontmatter.difficulty === '中級' ? '' : ''
+          }`}>
+            {frontmatter.difficulty === '入門' ? '✅' : frontmatter.difficulty === '中級' ? '⚡' : '🔥'} {frontmatter.difficulty}
+          </span>
         </div>
-      )}
+        <h1 class="text-2xl md:text-[1.8rem] font-extrabold text-white leading-tight tracking-tight">
+          {frontmatter.title}
+        </h1>
+      </div>
+      <!-- Body -->
+      <div class="px-6 py-5">
+        <p class="text-text-secondary text-base mb-4 leading-relaxed">
+          {frontmatter.description}
+        </p>
 
-      <!-- Section reactions hint -->
-      <div class="mt-4 px-3 py-2 rounded-lg bg-surface-light/50 text-xs text-text-muted flex items-center gap-2">
-        <img src="/images/dock_head_s.png" alt="鴨編" width="20" height="20" style="vertical-align: middle;" />
-        <span>
-          卡住很正常——點段落旁的 <strong class="text-text-secondary">😵 卡關</strong> 讓我們知道，或直接往下滾到問答區發問。
-          也可以用 <strong class="text-text-secondary">👍 看懂</strong> / <strong class="text-text-secondary">😢 看不懂</strong> 告訴我們哪裡寫得好、哪裡要改。
-        </span>
+        <ArticleMeta
+          createdAt={frontmatter.createdAt}
+          verifiedAt={frontmatter.verifiedAt}
+          archived={frontmatter.archived}
+          archivedReason={frontmatter.archivedReason}
+        />
+
+        {frontmatter.archived && (
+          <div class="mt-4 p-4 rounded-lg bg-red-500/10 border border-red-500/30">
+            <p class="text-red-400 text-sm">
+              ⚠️ 此文章已封存：{frontmatter.archivedReason || '內容可能已過時'}
+            </p>
+          </div>
+        )}
+
+        <!-- Section reactions hint -->
+        <div class="mt-4 px-4 py-3 rounded-lg bg-surface/50 border border-surface-lighter text-xs text-text-muted flex items-center gap-2">
+          <img src="/images/dock_head_s.png" alt="鴨編" width="20" height="20" style="vertical-align: middle;" />
+          <span>
+            卡住很正常——點段落旁的 <strong class="text-text-secondary">😵 卡關</strong> 讓我們知道，或直接往下滾到問答區發問。
+            也可以用 <strong class="text-text-secondary">👍 看懂</strong> / <strong class="text-text-secondary">😢 看不懂</strong> 告訴我們哪裡寫得好、哪裡要改。
+          </span>
+        </div>
       </div>
     </header>
 

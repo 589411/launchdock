@@ -39,20 +39,26 @@ const latestArticles = [...allArticles].sort((a, b) =>
 >
   <!-- Hero Section -->
   <section class="hero-section relative overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 py-20 text-center">
+    <div class="max-w-[900px] mx-auto px-6 text-center">
       <!-- Logo -->
-      <div class="flex justify-center mb-8">
-        <img src="/logo.png" alt="藍鴨 LaunchDock" class="w-48 md:w-64 h-auto" />
+      <div class="flex justify-center mb-6">
+        <img src="/logo.png" alt="藍鴨 LaunchDock" class="w-40 md:w-56 h-auto" />
       </div>
-      <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-        藍鴨 LaunchDock｜OpenClaw 繁體中文自動化教學
+      <h1 class="text-3xl md:text-[2.4rem] font-extrabold mb-4 leading-tight tracking-tight">
+        藍鴨 LaunchDock｜<span class="highlight">OpenClaw</span> 繁體中文自動化教學
       </h1>
-      <p class="text-lg text-text-muted mb-4">弄髒雙手，但不用弄髒全身</p>
-      <p class="text-xl text-text-secondary max-w-2xl mx-auto mb-8 leading-relaxed">
+      <p class="text-base text-[#94a3b8] mb-3">弄髒雙手，但不用弄髒全身</p>
+      <p class="text-lg text-[#cbd5e1] max-w-2xl mx-auto mb-8 leading-relaxed">
         AI 圈的人都說「just do it」——<br />
         但對非技術背景的你來說，跟著做往往不只是弄髒雙手，而是弄髒全身。<br />
         藍鴨 LaunchDock 讓你安心動手——每一步都有截圖、每個卡點都能回報、每個問題都有人接。
       </p>
+      <div class="flex flex-wrap gap-2.5 justify-center mb-8">
+        <span class="badge">✅ 繁體中文</span>
+        <span class="badge">📸 每步截圖</span>
+        <span class="badge">💬 即時問答</span>
+        <span class="badge">🦆 藍鴨陪你</span>
+      </div>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
           href="#learning-path"
@@ -74,26 +80,26 @@ const latestArticles = [...allArticles].sort((a, b) =>
   </section>
 
   <!-- Pain Point Section -->
-  <section class="max-w-6xl mx-auto px-4 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter">
+  <section class="max-w-[900px] mx-auto px-6 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter hover:border-brand/30 transition-all">
         <span class="text-2xl mb-3 block">🤯</span>
         <h3 class="font-semibold mb-2">跟著做，卻不知道哪裡做錯</h3>
-        <p class="text-text-secondary text-sm">
+        <p class="text-text-secondary text-sm leading-relaxed">
           教學說「很簡單」，但你卡了兩小時。不是你笨——是中間少了十個沒人講的步驟。
         </p>
       </div>
-      <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter">
+      <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter hover:border-brand/30 transition-all">
         <span class="text-2xl mb-3 block">😰</span>
         <h3 class="font-semibold mb-2">出了錯，不知道問誰</h3>
-        <p class="text-text-secondary text-sm">
+        <p class="text-text-secondary text-sm leading-relaxed">
           Google 到的答案全是英文，而且假設你已經懂。錯誤訊息貼到 ChatGPT，它叫你做更多看不懂的事。
         </p>
       </div>
-      <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter">
+      <div class="p-6 rounded-xl bg-surface-light border border-surface-lighter hover:border-brand/30 transition-all">
         <span class="text-2xl mb-3 block">🫣</span>
         <h3 class="font-semibold mb-2">怕弄壞東西，不敢動手</h3>
-        <p class="text-text-secondary text-sm">
+        <p class="text-text-secondary text-sm leading-relaxed">
           不確定這步會不會搞爛電腦、會不會被扣錢、會不會刪到重要東西。所以你選擇繼續觀望。
         </p>
       </div>
@@ -101,7 +107,7 @@ const latestArticles = [...allArticles].sort((a, b) =>
   </section>
 
   <!-- Promise Section -->
-  <section class="max-w-3xl mx-auto px-4 py-8 text-center">
+  <section class="max-w-[700px] mx-auto px-6 py-8 text-center">
     <h2 class="text-2xl font-bold mb-4">所以我們這樣做</h2>
     <p class="text-text-secondary text-lg leading-relaxed">
       每篇教學都有截圖、每個步驟都能回報卡關、每一個困惑都有人回答。<br />
@@ -115,7 +121,7 @@ const latestArticles = [...allArticles].sort((a, b) =>
   </div>
 
   <!-- Scene Cards (Secondary: for returning users) -->
-  <section class="max-w-6xl mx-auto px-4 py-12">
+  <section class="max-w-[900px] mx-auto px-6 py-14">
     <h2 class="text-2xl font-bold mb-2">從你想做的事開始弄髒雙手</h2>
     <p class="text-text-secondary mb-8">已經上手了？從你的問題出發，找到更多進階教學。</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -133,17 +139,17 @@ const latestArticles = [...allArticles].sort((a, b) =>
 
   <!-- Latest Articles -->
   {latestArticles.length > 0 && (
-    <section class="max-w-6xl mx-auto px-4 py-12">
+    <section class="max-w-[900px] mx-auto px-6 py-14">
       <div class="flex items-center justify-between mb-2">
         <h2 class="text-2xl font-bold">最新教學</h2>
         <span class="text-xs text-text-muted">內容最後更新：{latestArticles[0].data.verifiedAt || latestArticles[0].data.createdAt}</span>
       </div>
       <p class="text-text-secondary mb-8">剛出爐的實戰筆記。</p>
-      <div class="space-y-4">
+      <div class="space-y-3">
         {latestArticles.map((article) => (
           <a
             href={`/articles/${article.id}`}
-            class="block p-6 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+            class="block p-5 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
           >
             <div class="flex items-start justify-between gap-4">
               <div>
@@ -173,7 +179,7 @@ const latestArticles = [...allArticles].sort((a, b) =>
   )}
 
   <!-- Discussion Section -->
-  <section id="discussion" class="max-w-6xl mx-auto px-4 py-16">
+  <section id="discussion" class="max-w-[900px] mx-auto px-6 py-16">
     <HomeDiscussion client:load />
   </section>
 </BaseLayout>

@@ -59,8 +59,8 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
 ---
 
 <BaseLayout title="教學文章">
-  <div class="max-w-4xl mx-auto px-4 py-12">
-    <h1 class="text-3xl font-bold mb-4">教學文章</h1>
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <h1 class="text-3xl font-extrabold mb-3 tracking-tight">教學文章</h1>
     <p class="text-text-secondary mb-8">
       從你的問題出發，找到解決方案。每篇文章都是可操作的實戰筆記。
     </p>
@@ -88,7 +88,7 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
           return available ? (
             <a
               href={`/articles/${article.id}`}
-              class="block p-5 rounded-lg bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+              class="block p-5 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
             >
               <div class="flex items-center gap-4">
                 <div class="learning-path-step-badge available">
@@ -114,7 +114,7 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
               </div>
             </a>
           ) : (
-            <div class="block p-5 rounded-lg bg-surface-light/50 border border-surface-lighter/50 opacity-60">
+            <div class="block p-5 rounded-xl bg-surface-light/50 border border-surface-lighter/50 opacity-60">
               <div class="flex items-center gap-4">
                 <div class="learning-path-step-badge upcoming">
                   <span class="text-lg">{s.icon}</span>
@@ -140,7 +140,7 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
             .map((article) => (
               <a
                 href={`/articles/${article.id}`}
-                class="block p-4 rounded-lg bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+                class="block p-4 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
               >
                 <div class="flex items-center justify-between gap-4">
                   <div>
@@ -189,7 +189,7 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
               {articles.map((article) => (
                 <a
                   href={`/articles/${article.id}`}
-                  class="block p-5 rounded-lg bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+                  class="block p-5 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
                 >
                   <div class="flex items-center justify-between gap-4">
                     <div>
