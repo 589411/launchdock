@@ -102,6 +102,31 @@ EXCEPTION
 END;
 $$;
 
+-- 6. Page Views (for popular articles ranking)
+CREATE TABLE IF NOT EXISTS article_page_views (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  slug TEXT NOT NULL,
+  fingerprint TEXT,
+  referrer TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE INDEX idx_article_page_views_slug ON article_page_views(slug);
+CREATE INDEX idx_article_page_views_created_at ON article_page_views(created_at);
+
+-- 7. Meetup Signups (藍鴨小聚報名)
+CREATE TABLE IF NOT EXISTS meetup_signups (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL CHECK (char_length(name) <= 100),
+  email TEXT NOT NULL CHECK (char_length(email) <= 320),
+  interest TEXT,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  -- Prevent duplicate signups from same email
+  UNIQUE (email)
+);
+
+CREATE INDEX idx_meetup_signups_email ON meetup_signups(email);
+
 -- ============================================================
 -- Row Level Security (RLS)
 -- ============================================================
@@ -111,6 +136,8 @@ ALTER TABLE section_reactions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE qa_questions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE qa_answers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE qa_helpful_votes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE article_page_views ENABLE ROW LEVEL SECURITY;
+ALTER TABLE meetup_signups ENABLE ROW LEVEL SECURITY;
 
 -- article_reactions: anyone can read, anyone can insert (one per fp+slug)
 CREATE POLICY "article_reactions_select" ON article_reactions
@@ -144,6 +171,16 @@ CREATE POLICY "qa_answers_insert" ON qa_answers
 CREATE POLICY "qa_helpful_votes_select" ON qa_helpful_votes
   FOR SELECT USING (true);
 CREATE POLICY "qa_helpful_votes_insert" ON qa_helpful_votes
+  FOR INSERT WITH CHECK (true);
+
+-- article_page_views: anyone can read aggregates, anyone can insert
+CREATE POLICY "article_page_views_select" ON article_page_views
+  FOR SELECT USING (true);
+CREATE POLICY "article_page_views_insert" ON article_page_views
+  FOR INSERT WITH CHECK (true);
+
+-- meetup_signups: insert only (no public read)
+CREATE POLICY "meetup_signups_insert" ON meetup_signups
   FOR INSERT WITH CHECK (true);
 
 -- ============================================================

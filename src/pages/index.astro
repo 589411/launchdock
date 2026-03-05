@@ -2,7 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LearningPath from '../components/LearningPath.astro';
 import SceneCard from '../components/SceneCard.astro';
+import PopularArticlesHome from '../components/PopularArticlesHome.tsx';
 import HomeDiscussion from '../components/HomeDiscussion.tsx';
+import EventList from '../components/EventList.tsx';
 import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.archived);
@@ -15,22 +17,36 @@ for (const article of allArticles) {
   sceneMap.get(scene)!.push(article);
 }
 
-// Scene metadata
-const scenes = [
-  { key: '認識 OpenClaw', icon: '🧭', description: '了解 OpenClaw 的核心價值與基本概念' },
-  { key: '環境準備', icon: '🔑', description: '選擇 LLM、申請 API Key、前置準備' },
-  { key: '安裝與部署', icon: '💻', description: '本機安裝或雲端部署 OpenClaw' },
-  { key: '基礎使用', icon: '🚀', description: '首次啟動、模型設定、基本操作' },
-  { key: '核心功能', icon: '🧩', description: 'Agent、Skill、Soul、MCP 深入理解' },
-  { key: '整合與自動化', icon: '⚡', description: '連接外部服務、建立自動化工作流' },
-  { key: '知識與進階', icon: '📚', description: '知識管理系統、進階設定與最佳實踐' },
-  { key: '鴨編觀點', icon: '🦆', description: 'AI 趨勢觀察、產業洞察與鴨編的真心話' },
+// New top-level sections (replaces old 8-scene flat grid)
+const sections = [
+  { key: '新手養蝦', icon: '🦐', description: '從零開始安裝 OpenClaw 並跑起來', anchor: '#learning-path' },
+  { key: '基礎知識', icon: '📘', description: 'LLM、API Key、Token、CLI 等核心概念', scenes: ['認識 OpenClaw', '環境準備'] },
+  { key: '應用實戰', icon: '⚡', description: 'Skill、整合外部服務、自動化工作流', scenes: ['基礎使用', '整合與自動化'] },
+  { key: '龍蝦架構', icon: '🏗️', description: 'Agent、Skill、Soul、MCP、Tools 深度拆解', scenes: ['核心功能'] },
+  { key: '知識進階', icon: '📚', description: 'PKM、Prompt 工程、RAG、推理技術', scenes: ['知識與進階'] },
+  { key: '鴨編的碎碎念', icon: '/images/dock_head_s.png', description: 'AI 趨勢觀察、產業洞察與鴨編的真心話', scenes: ['鴨編的碎碎念'] },
 ];
+
+// Count articles for each section
+function countArticles(sectionScenes?: string[]) {
+  if (!sectionScenes) return 0;
+  return sectionScenes.reduce((sum, s) => sum + (sceneMap.get(s)?.length || 0), 0);
+}
 
 // Get latest articles
 const latestArticles = [...allArticles].sort((a, b) =>
   new Date(b.data.createdAt).getTime() - new Date(a.data.createdAt).getTime()
 ).slice(0, 5);
+
+// Prepare lightweight article metadata for PopularArticlesHome
+const articlesMeta = allArticles.map(a => ({
+  slug: a.id,
+  title: a.data.title,
+  description: a.data.description,
+  scene: a.data.scene,
+  difficulty: a.data.difficulty,
+  tags: a.data.tags,
+}));
 ---
 
 <BaseLayout
@@ -40,12 +56,11 @@ const latestArticles = [...allArticles].sort((a, b) =>
   <!-- Hero Section -->
   <section class="hero-section relative overflow-hidden">
     <div class="max-w-[900px] mx-auto px-6 text-center">
-      <!-- Logo -->
       <div class="flex justify-center mb-6">
         <img src="/logo.png" alt="藍鴨 LaunchDock" class="w-40 md:w-56 h-auto" />
       </div>
       <h1 class="text-3xl md:text-[2.4rem] font-extrabold mb-4 leading-tight tracking-tight">
-        藍鴨 LaunchDock｜<span class="highlight">OpenClaw</span> 繁體中文自動化教學
+        藍鴨 LaunchDock｜龍蝦<span class="highlight">OpenClaw</span> 繁體中文自動化教學
       </h1>
       <p class="text-base text-[#94a3b8] mb-3">弄髒雙手，但不用弄髒全身</p>
       <p class="text-lg text-[#cbd5e1] max-w-2xl mx-auto mb-8 leading-relaxed">
@@ -74,8 +89,6 @@ const latestArticles = [...allArticles].sort((a, b) =>
         </a>
       </div>
     </div>
-
-    <!-- Decorative gradient -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#e94560]/10 rounded-full blur-3xl -z-10"></div>
   </section>
 
@@ -115,25 +128,96 @@ const latestArticles = [...allArticles].sort((a, b) =>
     </p>
   </section>
 
-  <!-- Learning Path (Primary CTA) -->
+  <!-- 🔥 Popular Articles (prominent position) -->
+  <section class="max-w-[900px] mx-auto px-6 py-14">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="text-2xl">🔥</span>
+      <h2 class="text-2xl font-bold">大家都在看</h2>
+    </div>
+    <p class="text-text-secondary mb-8">最多人閱讀的教學文章，跟著讀準沒錯。</p>
+    <PopularArticlesHome client:load articles={articlesMeta} />
+  </section>
+
+  <!-- 🦐 Learning Path (Primary CTA) -->
   <div id="learning-path">
     <LearningPath />
   </div>
 
-  <!-- Scene Cards (Secondary: for returning users) -->
+  <!-- Topic Sections (new structure) -->
   <section class="max-w-[900px] mx-auto px-6 py-14">
     <h2 class="text-2xl font-bold mb-2">從你想做的事開始弄髒雙手</h2>
     <p class="text-text-secondary mb-8">已經上手了？從你的問題出發，找到更多進階教學。</p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {scenes.map((scene) => (
-        <SceneCard
-          icon={scene.icon}
-          title={scene.key}
-          description={scene.description}
-          href={`/articles?scene=${encodeURIComponent(scene.key)}`}
-          articleCount={sceneMap.get(scene.key)?.length || 0}
-        />
-      ))}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {sections.map((section) => {
+        const isAnchor = !!section.anchor;
+        const articleCount = isAnchor ? 0 : countArticles(section.scenes);
+        const href = isAnchor
+          ? section.anchor!
+          : `/articles?scene=${encodeURIComponent(section.scenes![0])}`;
+
+        return (
+          <SceneCard
+            icon={section.icon}
+            title={section.key}
+            description={section.description}
+            href={href}
+            articleCount={articleCount}
+          />
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- 🦆 藍鴨小聚 CTA -->
+  <section class="max-w-[900px] mx-auto px-6 py-14">
+    <div class="rounded-2xl overflow-hidden border border-surface-lighter bg-gradient-to-br from-surface-light to-[#16213e]">
+      <div class="p-8 md:p-12 text-center">
+        <img src="/images/dock_head_s.png" alt="藍鴨" class="w-16 h-16 mx-auto mb-4 object-contain" />
+        <h2 class="text-2xl md:text-3xl font-extrabold mb-3 tracking-tight">藍鴨小聚</h2>
+        <p class="text-text-secondary text-lg max-w-xl mx-auto mb-2">
+          一個人養蝦太孤單？和其他養蝦人一起學習、交流、解決問題。
+        </p>
+        <p class="text-text-muted text-sm mb-8">
+          線上聚會 → 主題工作坊 → 實體活動，一步一步來。
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-10">
+          <div class="p-4 rounded-xl bg-surface-light/50 border border-surface-lighter">
+            <span class="text-xl block mb-2">💻</span>
+            <h4 class="font-semibold text-sm mb-1">線上小聚</h4>
+            <p class="text-text-muted text-xs">每月一次，免費參加</p>
+          </div>
+          <div class="p-4 rounded-xl bg-surface-light/50 border border-surface-lighter">
+            <span class="text-xl block mb-2">🎓</span>
+            <h4 class="font-semibold text-sm mb-1">主題課程</h4>
+            <p class="text-text-muted text-xs">深入特定主題的付費課程</p>
+          </div>
+          <div class="p-4 rounded-xl bg-surface-light/50 border border-surface-lighter">
+            <span class="text-xl block mb-2">🤝</span>
+            <h4 class="font-semibold text-sm mb-1">實體工作坊</h4>
+            <p class="text-text-muted text-xs">面對面手把手帶你做</p>
+          </div>
+        </div>
+
+        <!-- Dynamic upcoming event -->
+        <div class="max-w-md mx-auto mb-8">
+          <EventList client:load compact={true} />
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="/events"
+            class="px-8 py-3 bg-brand hover:bg-brand-dark text-white rounded-lg font-medium transition-colors"
+          >
+            🎟️ 查看所有活動
+          </a>
+          <a
+            href="#discussion"
+            class="px-8 py-3 border border-white/25 hover:border-white/50 text-white/85 hover:text-white rounded-lg font-medium transition-all"
+          >
+            先看看大家在聊什麼
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -183,3 +267,5 @@ const latestArticles = [...allArticles].sort((a, b) =>
     <HomeDiscussion client:load />
   </section>
 </BaseLayout>
+
+

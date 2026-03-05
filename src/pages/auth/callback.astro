@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="登入中..." description="正在完成 Google 登入">
+  <div class="max-w-md mx-auto px-6 py-24 text-center">
+    <div id="callback-loading">
+      <span class="text-4xl block mb-4">🔑</span>
+      <p class="text-lg text-text-secondary">正在完成登入...</p>
+    </div>
+    <div id="callback-error" class="hidden">
+      <span class="text-4xl block mb-4">❌</span>
+      <p class="text-lg text-text-primary font-semibold mb-2">登入失敗</p>
+      <p id="error-message" class="text-text-secondary text-sm mb-6"></p>
+      <a
+        href="/"
+        class="px-6 py-2.5 bg-brand hover:bg-brand-dark text-white rounded-lg font-medium transition-colors inline-block"
+      >
+        回到首頁
+      </a>
+    </div>
+    <div id="callback-success" class="hidden">
+      <span class="text-4xl block mb-4">✅</span>
+      <p class="text-lg text-text-primary font-semibold mb-2">登入成功！</p>
+      <p class="text-text-secondary text-sm">正在跳轉...</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { supabase, isSupabaseConfigured } from '../../lib/supabase';
+
+  async function handleCallback() {
+    const loadingEl = document.getElementById('callback-loading');
+    const errorEl = document.getElementById('callback-error');
+    const successEl = document.getElementById('callback-success');
+    const errorMsg = document.getElementById('error-message');
+
+    if (!isSupabaseConfigured()) {
+      loadingEl?.classList.add('hidden');
+      errorEl?.classList.remove('hidden');
+      if (errorMsg) errorMsg.textContent = 'Supabase 尚未設定';
+      return;
+    }
+
+    try {
+      // Use onAuthStateChange to detect session (getSession() may hang)
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(
+        (_event, session) => {
+          subscription.unsubscribe();
+
+          if (session) {
+            loadingEl?.classList.add('hidden');
+            successEl?.classList.remove('hidden');
+
+            const returnTo = sessionStorage.getItem('auth-return-to') || '/';
+            sessionStorage.removeItem('auth-return-to');
+            setTimeout(() => {
+              window.location.href = returnTo;
+            }, 1000);
+          }
+        }
+      );
+
+      // Timeout fallback: if no auth event fires within 8s, show error
+      setTimeout(() => {
+        subscription.unsubscribe();
+        if (!successEl?.classList.contains('hidden')) return; // already succeeded
+        loadingEl?.classList.add('hidden');
+        errorEl?.classList.remove('hidden');
+        if (errorMsg) errorMsg.textContent = '無法取得登入資訊，請重試。';
+      }, 8000);
+    } catch (err) {
+      loadingEl?.classList.add('hidden');
+      errorEl?.classList.remove('hidden');
+      if (errorMsg) errorMsg.textContent = '發生未預期的錯誤，請重試。';
+    }
+  }
+
+  handleCallback();
+</script>

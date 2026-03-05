@@ -78,6 +78,30 @@ WHERE created_at >= NOW() - INTERVAL '7 days'
 GROUP BY slug, DATE(created_at)
 ORDER BY day DESC, distress_count DESC;
 
+-- 5. 熱門文章排行（依瀏覽量排序，結合 reaction 加分）
+-- ============================================================
+CREATE OR REPLACE VIEW v_popular_by_views AS
+SELECT
+  pv.slug,
+  pv.total_views,
+  pv.unique_views,
+  pv.views_7d,
+  COALESCE(ar.total_reactions, 0) AS total_reactions,
+  COALESCE(ar.popularity_score, 0) AS reaction_score,
+  -- Combined score: views + reaction bonus
+  (pv.total_views + COALESCE(ar.popularity_score, 0) * 5) AS combined_score
+FROM (
+  SELECT
+    slug,
+    COUNT(*) AS total_views,
+    COUNT(DISTINCT fingerprint) AS unique_views,
+    COUNT(*) FILTER (WHERE created_at >= NOW() - INTERVAL '7 days') AS views_7d
+  FROM article_page_views
+  GROUP BY slug
+) pv
+LEFT JOIN v_popular_articles ar ON ar.slug = pv.slug
+ORDER BY combined_score DESC;
+
 -- 5. RPC: 取得熱門文章排行（供前端呼叫）
 -- ============================================================
 CREATE OR REPLACE FUNCTION get_popular_articles(limit_count INT DEFAULT 20)

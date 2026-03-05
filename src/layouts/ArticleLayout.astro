@@ -7,6 +7,7 @@ import EmotionFeedback from '../components/EmotionFeedback.tsx';
 import SectionReactions from '../components/SectionReactions.tsx';
 import ArticleQA from '../components/ArticleQA.tsx';
 import RelatedArticles from '../components/RelatedArticles.astro';
+import PageViewTracker from '../components/PageViewTracker.tsx';
 
 interface Props {
   frontmatter: {
@@ -31,6 +32,7 @@ const slug = Astro.url.pathname.replace(/^\/articles\//, '').replace(/\/$/, '');
 ---
 
 <BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <PageViewTracker slug={slug} client:only="react" />
   <article class="max-w-[900px] mx-auto px-6 py-10">
     <!-- Branded Breadcrumb for SEO -->
     <nav class="text-xs text-text-muted mb-6" aria-label="麿包屑">

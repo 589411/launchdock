@@ -997,6 +997,16 @@ html[data-theme="dark"] .prose tr:nth-child(even) td { background: rgba(255,255,
   color: var(--color-brand-light);
   background: var(--color-brand)/15;
 }
+/* Member badge */
+.qa-member-badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #f0c040;
+  background: rgba(240, 192, 64, 0.12);
+}
 
 /* Character count */
 .qa-char-count {
@@ -1171,6 +1181,14 @@ html[data-theme="dark"] .prose tr:nth-child(even) td { background: rgba(255,255,
   background: var(--color-brand) / 0.15;
   color: var(--color-brand-light);
   font-size: 0.7rem;
+}
+.home-discussion__member-badge {
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(240, 192, 64, 0.12);
+  color: #f0c040;
+  font-size: 0.7rem;
+  font-weight: 600;
 }
 .home-discussion__reply-count {
   color: var(--color-text-secondary);

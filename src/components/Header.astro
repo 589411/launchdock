@@ -1,10 +1,12 @@
 ---
 import SearchTrigger from './SearchTrigger.tsx';
 import ThemeToggle from './ThemeToggle.astro';
+import AuthButton from './AuthButton.tsx';
 
 const navItems = [
   { label: '首頁', href: '/' },
   { label: '場景教學', href: '/articles' },
+  { label: '活動', href: '/events' },
   { label: '關於', href: '/about' },
 ];
 ---
@@ -37,6 +39,7 @@ const navItems = [
       </a>
       <SearchTrigger client:load />
       <ThemeToggle />
+      <AuthButton client:load />
     </div>
 
     <!-- Mobile Menu Button -->
@@ -71,6 +74,7 @@ const navItems = [
       <div class="py-2 flex items-center gap-3">
         <SearchTrigger client:load />
         <ThemeToggle />
+        <AuthButton client:load />
       </div>
     </div>
   </div>

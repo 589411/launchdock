@@ -14,6 +14,10 @@
     "/^sleep 5 && lsof -i -P \\| grep -i node \\| grep LISTEN$/": {
       "approve": true,
       "matchCommandLine": true
+    },
+    "/^grep -h \"\\^title:\\\\\\|\\^scene:\\\\\\|\\^difficulty:\\\\\\|\\^pathStep:\" src/content/articles/\\*\\.md \\| paste - - - - 2>/dev/null \\|\\| grep -h \"\\^title:\\\\\\|\\^scene:\\\\\\|\\^difficulty:\" src/content/articles/\\*\\.md$/": {
+      "approve": true,
+      "matchCommandLine": true
     }
   }
 }

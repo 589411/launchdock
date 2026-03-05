@@ -33,7 +33,7 @@ for (const [, articles] of sceneMap) {
   articles.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
 }
 
-const sceneOrder = ['認識 OpenClaw', '環境準備', '安裝與部署', '基礎使用', '核心功能', '整合與自動化', '知識與進階', '鴨編觀點'];
+const sceneOrder = ['認識 OpenClaw', '環境準備', '安裝與部署', '基礎使用', '核心功能', '整合與自動化', '知識與進階', '鴨編的碎碎念'];
 const sceneIcons: Record<string, string> = {
   '認識 OpenClaw': '🧭',
   '環境準備': '🔑',
@@ -42,7 +42,7 @@ const sceneIcons: Record<string, string> = {
   '核心功能': '🧩',
   '整合與自動化': '⚡',
   '知識與進階': '📚',
-  '鴨編觀點': '🦆',
+  '鴨編的碎碎念': '🦆',
 };
 
 const steps = [
@@ -251,9 +251,25 @@ function switchTab(tab) {
   localStorage.setItem('launchdock-article-tab', tab);
 }
 
-// Restore tab preference
+// Check URL params first, then restore tab preference
 document.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('launchdock-article-tab');
-  if (saved) switchTab(saved);
+  const params = new URLSearchParams(window.location.search);
+  const scene = params.get('scene');
+  if (scene) {
+    switchTab('scene');
+    // Scroll to the matching scene section
+    setTimeout(() => {
+      const headings = document.querySelectorAll('#tab-scene h2');
+      for (const h of headings) {
+        if (h.textContent && h.textContent.includes(scene)) {
+          h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          break;
+        }
+      }
+    }, 100);
+  } else {
+    const saved = localStorage.getItem('launchdock-article-tab');
+    if (saved) switchTab(saved);
+  }
 });
 </script>

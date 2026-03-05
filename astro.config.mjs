@@ -10,7 +10,7 @@ import remarkConceptLinks from './plugins/remark-concept-links.mjs';
 export default defineConfig({
   site: 'https://launchdock.app',
   integrations: [react(), sitemap({
-    filter: (page) => !page.includes('/admin/'),
+    filter: (page) => !page.includes('/admin/') && !page.includes('/auth/'),
   })],
 
   markdown: {

@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdminEvents from '../../components/AdminEvents.tsx';
+---
+
+<BaseLayout title="活動管理" description="管理藍鴨活動、報名名單、出席追蹤。">
+  <div class="max-w-5xl mx-auto px-4 py-12">
+    <div class="flex items-center gap-3 mb-8">
+      <a href="/admin/feedback" class="text-text-muted hover:text-text-primary text-sm">← 回饋監控</a>
+      <span class="text-text-muted">|</span>
+      <span class="text-sm font-medium text-brand-light">活動管理</span>
+      <span class="text-text-muted">|</span>
+      <a href="/admin/members" class="text-text-muted hover:text-text-primary text-sm">會員管理</a>
+      <span class="text-text-muted">|</span>
+      <a href="/admin/notifications" class="text-text-muted hover:text-text-primary text-sm">通知管理</a>
+    </div>
+    <AdminEvents client:load />
+  </div>
+</BaseLayout>

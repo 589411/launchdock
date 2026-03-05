@@ -196,6 +196,7 @@ stuckOptions:
 - `核心功能`：Agent、Skill、Soul、MCP
 - `整合與自動化`：Telegram、外部服務
 - `知識與進階`：PKM、進階設定
+- `鴨編的碎碎念`：AI 趨勢觀察、產業洞察
 
 ### 受控標籤（tags 優先從此選擇）
 - **平台**：OpenClaw, KimiClaw, Zeabur, Docker, Telegram, Notion, Obsidian

@@ -18,7 +18,7 @@ const articles = defineCollection({
       '核心功能',
       '整合與自動化',
       '知識與進階',
-      '鴨編觀點',
+      '鴨編的碎碎念',
     ]),
     difficulty: z.enum(['入門', '中級', '進階']),
     tags: z.array(z.string()).min(1).max(8),
