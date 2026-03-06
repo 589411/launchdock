@@ -33,7 +33,9 @@ export default function PageViewTracker({ slug }: Props) {
     supabase
       .from('article_page_views')
       .insert({ slug, fingerprint: fp, referrer: document.referrer || null })
-      .then(() => {});
+      .then(({ error }) => {
+        if (error) console.warn('[PageViewTracker] insert failed:', error.message);
+      });
   }, [slug]);
 
   return null;

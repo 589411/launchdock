@@ -47,7 +47,9 @@ function getClient(): SupabaseClient<Database> {
       },
       // This is the key fix: providing accessToken means _getAccessToken()
       // calls our function directly instead of auth.getSession() → deadlock.
-      accessToken: async () => readStoredAccessToken(),
+      // Fall back to anon key for anonymous visitors — an empty string causes
+      // PostgREST to reject the request instead of granting the anon role.
+      accessToken: async () => readStoredAccessToken() || supabaseAnonKey,
       global: {
         fetch: (url, options = {}) => {
           const controller = new AbortController();
