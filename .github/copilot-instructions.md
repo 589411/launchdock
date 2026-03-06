@@ -220,6 +220,30 @@ stuckOptions:
 
 ---
 
+## 🌐 多語系（i18n）
+
+本站支援繁體中文（預設）和英文。
+
+### 生成新文章時必須同時產出英文版
+
+| 語言 | 路徑 | scene 值 | difficulty 值 |
+|------|------|----------|---------------|
+| 繁中 | `src/content/articles/<slug>.md` | 中文（`認識 OpenClaw`） | 中文（`入門`） |
+| 英文 | `src/content/articles/en/<slug>.md` | 英文 key（`intro`） | 英文 key（`beginner`） |
+
+**Scene 對照**：認識 OpenClaw→`intro` / 環境準備→`env-setup` / 安裝與部署→`install` / 基礎使用→`basics` / 核心功能→`core` / 整合與自動化→`integration` / 知識與進階→`advanced` / 鴨編的碎碎念→`blog`
+
+**Difficulty 對照**：入門→`beginner` / 中級→`intermediate` / 進階→`advanced`
+
+**規則**：
+- slug 相同（中英共用 `why-openclaw.md`）
+- `@img` 標記保留，alt 文字改英文
+- 圖片共用 `public/images/articles/<slug>/`
+- 英文風格：professional but approachable, use "you", numbered steps
+- 完成後提醒：`🌐 已同時生成英文版：src/content/articles/en/<slug>.md`
+
+---
+
 ## 技術棧
 
 - **框架**：Astro (SSG)
@@ -233,7 +257,10 @@ stuckOptions:
 ## 檔案結構速查
 
 ```
-src/content/articles/*.md    ← 教學文章
+src/content/articles/*.md    ← 教學文章（繁中）
+src/content/articles/en/*.md ← 教學文章（英文）
+src/i18n/ui.ts               ← UI 翻譯字典（zh-tw / en）
+src/i18n/utils.ts            ← i18n helpers
 src/data/concepts.yaml       ← 受控概念定義（displayName、aliases、canonical article）
 public/images/articles/*/    ← 文章圖片（按 slug 分資料夾）
 docs/article-registry.json   ← ⭐ 概念×文章交叉索引（生成文章前必讀）

@@ -119,3 +119,51 @@ fine-tuning:
 ```
 
 然後執行 `npm run registry` 更新索引。
+
+---
+
+## 🌐 多語系文章生成（i18n）
+
+### 同時生成中英文版本
+
+**生成新文章時，必須同時產出中文和英文版本。**
+
+#### 檔案對應
+| 語言 | 路徑 | scene 值 | difficulty 值 |
+|------|------|----------|---------------|
+| 繁中 | `src/content/articles/<slug>.md` | 中文（`認識 OpenClaw`） | 中文（`入門`） |
+| 英文 | `src/content/articles/en/<slug>.md` | 英文 key（`intro`） | 英文 key（`beginner`） |
+
+#### Scene 對照表
+| 中文 scene | 英文 key |
+|-----------|----------|
+| 認識 OpenClaw | `intro` |
+| 環境準備 | `env-setup` |
+| 安裝與部署 | `install` |
+| 基礎使用 | `basics` |
+| 核心功能 | `core` |
+| 整合與自動化 | `integration` |
+| 知識與進階 | `advanced` |
+| 鴨編的碎碎念 | `blog` |
+
+#### Difficulty 對照表
+| 中文 | 英文 key |
+|------|----------|
+| 入門 | `beginner` |
+| 中級 | `intermediate` |
+| 進階 | `advanced` |
+
+#### 英文版規則
+1. **slug 必須相同**：中英文版共用同一個 slug（如 `llm-guide.md`）
+2. **@img 標記保留**：英文版保留所有 `<!-- @img: ... -->` 標記，alt 文字改成英文
+3. **圖片共用**：中英文共用 `public/images/articles/<slug>/` 下的圖片
+4. **title / description 翻譯**：frontmatter 的這兩個欄位翻成英文
+5. **tags 不變**：標籤保持英文（如 `LLM`, `API`, `OpenClaw`）
+6. **stuckOptions 翻譯**：key 和 value 都翻成英文
+7. **風格**：專業但平易近人，使用 "you" 稱呼讀者，步驟清楚編號
+
+#### 提醒模板補充
+
+生成文章後，在原有提醒之外，加入：
+> 🌐 已同時生成英文版本：`src/content/articles/en/<slug>.md`
+> 英文版路由：`/en/articles/<slug>`
