@@ -28,7 +28,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <script>
-  import { supabase, isSupabaseConfigured } from '../../lib/supabase';
+  import { createClient } from '@supabase/supabase-js';
+  import { isSupabaseConfigured } from '../../lib/supabase';
 
   async function handleCallback() {
     const loadingEl = document.getElementById('callback-loading');
@@ -36,44 +37,74 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     const successEl = document.getElementById('callback-success');
     const errorMsg = document.getElementById('error-message');
 
-    if (!isSupabaseConfigured()) {
+    function showError(msg: string) {
       loadingEl?.classList.add('hidden');
       errorEl?.classList.remove('hidden');
-      if (errorMsg) errorMsg.textContent = 'Supabase 尚未設定';
+      if (errorMsg) errorMsg.textContent = msg;
+    }
+
+    function showSuccess() {
+      loadingEl?.classList.add('hidden');
+      successEl?.classList.remove('hidden');
+      const returnTo = sessionStorage.getItem('auth-return-to') || '/';
+      sessionStorage.removeItem('auth-return-to');
+      setTimeout(() => { window.location.href = returnTo; }, 800);
+    }
+
+    if (!isSupabaseConfigured()) {
+      showError('Supabase 尚未設定');
       return;
     }
 
+    const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+    const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
+
+    // Create a dedicated client WITH detectSessionInUrl enabled.
+    // The main app client has it disabled to prevent double-parsing,
+    // but on this callback page we NEED Supabase to auto-detect tokens.
+    const callbackClient = createClient(supabaseUrl, supabaseKey, {
+      auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true,
+      },
+    });
+
     try {
-      // Use onAuthStateChange to detect session (getSession() may hang)
-      const { data: { subscription } } = supabase.auth.onAuthStateChange(
-        (_event, session) => {
+      // Wait for Supabase to auto-detect and set the session from URL
+      // This handles both implicit (#access_token) and PKCE (?code=) flows
+      const { data: { session }, error } = await callbackClient.auth.getSession();
+
+      if (error) {
+        showError(`登入錯誤：${error.message}`);
+        return;
+      }
+
+      if (session) {
+        showSuccess();
+        return;
+      }
+
+      // Session not yet available — listen for auth state change
+      let done = false;
+      const { data: { subscription } } = callbackClient.auth.onAuthStateChange(
+        (_event, s) => {
+          if (done || !s) return;
+          done = true;
           subscription.unsubscribe();
-
-          if (session) {
-            loadingEl?.classList.add('hidden');
-            successEl?.classList.remove('hidden');
-
-            const returnTo = sessionStorage.getItem('auth-return-to') || '/';
-            sessionStorage.removeItem('auth-return-to');
-            setTimeout(() => {
-              window.location.href = returnTo;
-            }, 1000);
-          }
+          showSuccess();
         }
       );
 
-      // Timeout fallback: if no auth event fires within 8s, show error
+      // Timeout fallback
       setTimeout(() => {
+        if (done) return;
+        done = true;
         subscription.unsubscribe();
-        if (!successEl?.classList.contains('hidden')) return; // already succeeded
-        loadingEl?.classList.add('hidden');
-        errorEl?.classList.remove('hidden');
-        if (errorMsg) errorMsg.textContent = '無法取得登入資訊，請重試。';
-      }, 8000);
-    } catch (err) {
-      loadingEl?.classList.add('hidden');
-      errorEl?.classList.remove('hidden');
-      if (errorMsg) errorMsg.textContent = '發生未預期的錯誤，請重試。';
+        showError('登入逾時，請重試。');
+      }, 10000);
+    } catch {
+      showError('發生未預期的錯誤，請重試。');
     }
   }
 

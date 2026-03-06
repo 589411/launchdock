@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { supabase, isSupabaseConfigured, getStoredSession } from '../lib/supabase';
 import AdminGuard from './AdminGuard';
-import type { EventStatus } from '../lib/supabase-types';
+import type { EventStatus, EventType } from '../lib/supabase-types';
 
 interface Event {
   id: string;
@@ -12,6 +12,9 @@ interface Event {
   max_capacity: number | null;
   status: EventStatus;
   priority_hours: number;
+  event_type: EventType;
+  price: number;
+  meet_link: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -44,36 +47,53 @@ function AdminEventsContent() {
   useEffect(() => { loadEvents(); }, []);
 
   async function loadEvents() {
-    const { data } = await supabase
-      .from('events')
-      .select('*')
-      .order('event_date', { ascending: false });
-    setEvents((data as Event[]) || []);
+    try {
+      const { data, error } = await supabase
+        .from('events')
+        .select('*')
+        .order('event_date', { ascending: false });
+      if (error) console.error('loadEvents error:', error);
+      setEvents((data as Event[]) || []);
+    } catch (err) {
+      console.error('loadEvents failed:', err);
+      setEvents([]);
+    }
     setLoading(false);
   }
 
   async function loadRegistrations(eventId: string) {
     setRegLoading(true);
     setSelectedEvent(eventId);
-    const { data } = await supabase
-      .from('event_registrations')
-      .select('*')
-      .eq('event_id', eventId)
-      .order('registered_at', { ascending: true });
+    try {
+      const { data } = await supabase
+        .from('event_registrations')
+        .select('*')
+        .eq('event_id', eventId)
+        .order('registered_at', { ascending: true });
 
-    if (data) {
-      // Fetch profiles for each registration
-      const withProfiles = await Promise.all(
-        data.map(async (reg) => {
-          const { data: profile } = await supabase
-            .from('member_profiles')
-            .select('display_name, email, avatar_url')
-            .eq('user_id', reg.user_id)
-            .single();
-          return { ...reg, profile: profile || undefined } as Registration;
-        })
-      );
-      setRegistrations(withProfiles);
+      if (data && data.length > 0) {
+        // Batch fetch all profiles in one query instead of N+1
+        const userIds = data.map(r => r.user_id);
+        const { data: profiles } = await supabase
+          .from('member_profiles')
+          .select('user_id, display_name, email, avatar_url')
+          .in('user_id', userIds);
+
+        const profileMap = new Map(
+          (profiles || []).map(p => [p.user_id, p])
+        );
+
+        const withProfiles = data.map(reg => ({
+          ...reg,
+          profile: profileMap.get(reg.user_id) || undefined,
+        })) as Registration[];
+        setRegistrations(withProfiles);
+      } else {
+        setRegistrations([]);
+      }
+    } catch (err) {
+      console.error('loadRegistrations failed:', err);
+      setRegistrations([]);
     }
     setRegLoading(false);
   }
@@ -101,7 +121,21 @@ function AdminEventsContent() {
     completed: 'bg-blue-500/20 text-blue-400',
   };
 
-  if (loading) return <p className="text-text-muted text-center py-8">載入中...</p>;
+  if (loading) return <p className="text-text-muted text-center py-8">載入活動資料中...</p>;
+
+  if (events.length === 0 && !showForm) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-text-muted mb-4">目前還沒有活動，建立第一個活動吧！</p>
+        <button
+          onClick={() => { setEditingEvent(null); setShowForm(true); }}
+          className="px-4 py-2 bg-brand hover:bg-brand-dark text-white rounded-lg text-sm font-medium transition-colors"
+        >
+          ＋ 新增活動
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -268,6 +302,9 @@ function EventForm({
   const [location, setLocation] = useState(event?.location || '');
   const [maxCapacity, setMaxCapacity] = useState(event?.max_capacity?.toString() || '');
   const [priorityHours, setPriorityHours] = useState(event?.priority_hours?.toString() || '0');
+  const [eventType, setEventType] = useState<EventType>(event?.event_type || 'meetup');
+  const [price, setPrice] = useState(event?.price?.toString() || '0');
+  const [meetLink, setMeetLink] = useState(event?.meet_link || '');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
@@ -288,16 +325,20 @@ function EventForm({
       location: location.trim() || null,
       max_capacity: maxCapacity ? parseInt(maxCapacity) : null,
       priority_hours: parseInt(priorityHours) || 0,
+      event_type: eventType,
+      price: parseInt(price) || 0,
+      meet_link: meetLink.trim() || null,
     };
 
     if (event) {
       const { error: err } = await supabase.from('events').update(payload).eq('id', event.id);
       if (err) { setError(err.message); setSaving(false); return; }
     } else {
-      const { data: { session } } = await supabase.auth.getSession();
+      // Use stored session to avoid getSession() deadlock
+      const stored = getStoredSession();
       const { error: err } = await supabase.from('events').insert({
         ...payload,
-        created_by: session?.user?.id,
+        created_by: stored?.userId || null,
       });
       if (err) { setError(err.message); setSaving(false); return; }
     }
@@ -328,6 +369,42 @@ function EventForm({
             className="w-full px-4 py-2 rounded-lg bg-surface border border-surface-lighter text-text-primary focus:border-brand focus:outline-none resize-y"
             placeholder="活動內容說明..."
           />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">活動類型 *</label>
+            <select
+              value={eventType}
+              onChange={e => setEventType(e.target.value as EventType)}
+              className="w-full px-4 py-2 rounded-lg bg-surface border border-surface-lighter text-text-primary focus:border-brand focus:outline-none"
+            >
+              <option value="meetup">💻 線上小聚（免費）</option>
+              <option value="course">🎓 主題課程（付費）</option>
+              <option value="workshop">🤝 實體工作坊</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">費用（NT$）</label>
+            <input
+              type="number"
+              min="0"
+              value={price}
+              onChange={e => setPrice(e.target.value)}
+              className="w-full px-4 py-2 rounded-lg bg-surface border border-surface-lighter text-text-primary focus:border-brand focus:outline-none"
+              placeholder="0 = 免費"
+            />
+          </div>
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">Google Meet 連結</label>
+          <input
+            type="text"
+            value={meetLink}
+            onChange={e => setMeetLink(e.target.value)}
+            className="w-full px-4 py-2 rounded-lg bg-surface border border-surface-lighter text-text-primary focus:border-brand focus:outline-none"
+            placeholder="https://meet.google.com/xxx-xxxx-xxx"
+          />
+          <p className="text-text-muted text-xs mt-1">報名成功後才會顯示給已報名者</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>

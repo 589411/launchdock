@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
-import type { EventStatus } from '../lib/supabase-types';
+import type { EventStatus, EventType } from '../lib/supabase-types';
 
 interface Event {
   id: string;
@@ -11,6 +11,9 @@ interface Event {
   max_capacity: number | null;
   status: EventStatus;
   priority_hours: number;
+  event_type: EventType;
+  price: number;
+  meet_link: string | null;
   registration_count?: number;
 }
 
@@ -56,6 +59,16 @@ export default function EventCard({ eventData, compact = false }: Props) {
 
   const badge = statusBadge();
 
+  const typeBadge = () => {
+    switch (event.event_type) {
+      case 'course': return { text: '🎓 主題課程', cls: 'bg-purple-500/20 text-purple-400' };
+      case 'workshop': return { text: '🤝 實體工作坊', cls: 'bg-orange-500/20 text-orange-400' };
+      default: return { text: '💻 線上小聚', cls: 'bg-blue-500/20 text-blue-400' };
+    }
+  };
+
+  const tBadge = typeBadge();
+
   if (compact) {
     return (
       <a
@@ -86,10 +99,22 @@ export default function EventCard({ eventData, compact = false }: Props) {
       className="p-6 rounded-2xl bg-surface-light border border-surface-lighter hover:border-brand/30 transition-all"
     >
       <div className="flex items-start justify-between gap-4 mb-4">
-        <div>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className={`text-xs px-2.5 py-1 rounded-full ${tBadge.cls}`}>
+            {tBadge.text}
+          </span>
           <span className={`text-xs px-2.5 py-1 rounded-full ${badge.cls}`}>
             {badge.text}
           </span>
+          {event.price > 0 ? (
+            <span className="text-xs px-2.5 py-1 rounded-full bg-yellow-500/20 text-yellow-400">
+              NT${event.price}
+            </span>
+          ) : (
+            <span className="text-xs px-2.5 py-1 rounded-full bg-green-500/10 text-green-400">
+              免費
+            </span>
+          )}
         </div>
         {spotsLeft !== null && !isPast && event.status === 'published' && (
           <span className="text-xs text-text-muted">
@@ -124,14 +149,14 @@ export default function EventCard({ eventData, compact = false }: Props) {
       </div>
 
       {!isPast && event.status === 'published' && (
-        <EventRegButton eventId={event.id} isFull={isFull} onRegister={() => setRegCount(c => c + 1)} />
+        <EventRegButton eventId={event.id} isFull={isFull} onRegister={() => setRegCount(c => c + 1)} meetLink={event.meet_link} price={event.price} />
       )}
     </div>
   );
 }
 
 // Inline registration button (uses auth)
-function EventRegButton({ eventId, isFull, onRegister }: { eventId: string; isFull: boolean; onRegister: () => void }) {
+function EventRegButton({ eventId, isFull, onRegister, meetLink, price }: { eventId: string; isFull: boolean; onRegister: () => void; meetLink: string | null; price: number }) {
   const [state, setState] = useState<'idle' | 'loading' | 'registered' | 'error'>('idle');
   const [userId, setUserId] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState('');
@@ -139,28 +164,33 @@ function EventRegButton({ eventId, isFull, onRegister }: { eventId: string; isFu
   useEffect(() => {
     if (!isSupabaseConfigured()) return;
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user) {
-        setUserId(session.user.id);
-        // Check if already registered
-        supabase
-          .from('event_registrations')
-          .select('id, status')
-          .eq('event_id', eventId)
-          .eq('user_id', session.user.id)
-          .single()
-          .then(({ data }) => {
-            if (data && data.status !== 'cancelled') {
-              setState('registered');
-            }
-          });
-      }
-    });
+    let cancelled = false;
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUserId(session?.user?.id ?? null);
-    });
-    return () => subscription.unsubscribe();
+    // Use onAuthStateChange instead of getSession() to avoid navigator.locks deadlock
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (_event, session) => {
+        if (cancelled) return;
+        const uid = session?.user?.id ?? null;
+        setUserId(uid);
+        if (uid) {
+          // Check if already registered
+          const { data } = await supabase
+            .from('event_registrations')
+            .select('id, status')
+            .eq('event_id', eventId)
+            .eq('user_id', uid)
+            .single();
+          if (!cancelled && data && data.status !== 'cancelled') {
+            setState('registered');
+          }
+        }
+      }
+    );
+
+    return () => {
+      cancelled = true;
+      subscription.unsubscribe();
+    };
   }, [eventId]);
 
   const handleRegister = async () => {
@@ -209,16 +239,37 @@ function EventRegButton({ eventId, isFull, onRegister }: { eventId: string; isFu
 
   if (state === 'registered') {
     return (
-      <div className="flex items-center gap-3">
-        <span className="flex items-center gap-1.5 text-sm text-green-400 font-medium">
-          ✅ 已報名
-        </span>
-        <button
-          onClick={handleCancel}
-          className="text-xs text-text-muted hover:text-red-400 transition-colors underline"
-        >
-          取消報名
-        </button>
+      <div className="space-y-3">
+        <div className="flex items-center gap-3">
+          <span className="flex items-center gap-1.5 text-sm text-green-400 font-medium">
+            ✅ 已報名
+          </span>
+          <button
+            onClick={handleCancel}
+            className="text-xs text-text-muted hover:text-red-400 transition-colors underline"
+          >
+            取消報名
+          </button>
+        </div>
+        {meetLink && (
+          <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20">
+            <p className="text-xs text-text-muted mb-1">📹 會議連結（報名者專屬）</p>
+            <a
+              href={meetLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-brand-light hover:underline break-all"
+            >
+              {meetLink}
+            </a>
+          </div>
+        )}
+        {price > 0 && (
+          <div className="p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
+            <p className="text-xs text-text-muted mb-1">💳 付款資訊</p>
+            <p className="text-sm text-text-secondary">請轉帳 NT${price} 至指定帳戶，並於下方備註轉帳末五碼。</p>
+          </div>
+        )}
       </div>
     );
   }

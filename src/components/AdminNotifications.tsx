@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { supabase, isSupabaseConfigured, getStoredSession } from '../lib/supabase';
 import AdminGuard from './AdminGuard';
 import type { EmailType } from '../lib/supabase-types';
 
@@ -63,8 +63,8 @@ function AdminNotificationsContent() {
     setSendResult(null);
 
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) throw new Error('未登入');
+      const stored = getStoredSession();
+      if (!stored) throw new Error('未登入');
 
       // Call Edge Function to send notification
       const payload: Record<string, string> = {
@@ -85,7 +85,7 @@ function AdminNotificationsContent() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`,
+          'Authorization': `Bearer ${stored.accessToken}`,
         },
         body: JSON.stringify(payload),
       });

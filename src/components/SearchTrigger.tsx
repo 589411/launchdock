@@ -35,7 +35,11 @@ export default function SearchTrigger() {
     };
   }, [open]);
 
-  const isMac = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.userAgent);
+  // Detect macOS after hydration to avoid SSR mismatch
+  const [isMac, setIsMac] = useState(false);
+  useEffect(() => {
+    setIsMac(/Mac|iPod|iPhone|iPad/.test(navigator.userAgent));
+  }, []);
 
   return (
     <>

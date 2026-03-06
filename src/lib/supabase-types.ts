@@ -9,6 +9,8 @@ export type MemberRole = 'member' | 'admin';
 export type EventStatus = 'draft' | 'published' | 'cancelled' | 'completed';
 export type RegistrationStatus = 'registered' | 'waitlist' | 'cancelled' | 'attended';
 export type EmailType = 'registration_confirmation' | 'event_reminder' | 'event_update' | 'new_article';
+export type EventType = 'meetup' | 'course' | 'workshop';
+export type PaymentStatus = 'not_required' | 'pending' | 'paid' | 'refunded';
 
 export interface Database {
   public: {
@@ -144,6 +146,7 @@ export interface Database {
         Update: {
           display_name?: string;
           avatar_url?: string | null;
+          role?: MemberRole;
           notification_preferences?: NotificationPreferences;
         };
       };
@@ -157,6 +160,9 @@ export interface Database {
           max_capacity: number | null;
           status: EventStatus;
           priority_hours: number;
+          event_type: EventType;
+          price: number;
+          meet_link: string | null;
           created_by: string | null;
           created_at: string;
           updated_at: string;
@@ -169,6 +175,9 @@ export interface Database {
           max_capacity?: number | null;
           status?: EventStatus;
           priority_hours?: number;
+          event_type?: EventType;
+          price?: number;
+          meet_link?: string | null;
           created_by?: string | null;
         };
         Update: {
@@ -179,6 +188,9 @@ export interface Database {
           max_capacity?: number | null;
           status?: EventStatus;
           priority_hours?: number;
+          event_type?: EventType;
+          price?: number;
+          meet_link?: string | null;
         };
       };
       event_registrations: {
@@ -189,15 +201,21 @@ export interface Database {
           status: RegistrationStatus;
           registered_at: string;
           cancelled_at: string | null;
+          payment_status: PaymentStatus;
+          payment_note: string | null;
         };
         Insert: {
           event_id: string;
           user_id: string;
           status?: RegistrationStatus;
+          payment_status?: PaymentStatus;
+          payment_note?: string | null;
         };
         Update: {
           status?: RegistrationStatus;
           cancelled_at?: string | null;
+          payment_status?: PaymentStatus;
+          payment_note?: string | null;
         };
       };
       email_logs: {

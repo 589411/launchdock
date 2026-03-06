@@ -61,18 +61,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session: s } }) => {
-      setSession(s);
-      setUser(s?.user ?? null);
-      if (s?.user) {
-        fetchProfile(s.user.id).finally(() => setLoading(false));
-      } else {
-        setLoading(false);
-      }
-    });
+    let initialResolved = false;
 
-    // Listen for auth changes
+    // Use onAuthStateChange exclusively — avoids getSession() deadlock
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, s) => {
         setSession(s);
@@ -82,10 +73,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else {
           setProfile(null);
         }
+        if (!initialResolved) {
+          initialResolved = true;
+          setLoading(false);
+        }
       }
     );
 
-    return () => subscription.unsubscribe();
+    // Fallback timeout if INITIAL_SESSION event never fires
+    const timeout = setTimeout(() => {
+      if (!initialResolved) {
+        initialResolved = true;
+        setLoading(false);
+      }
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeout);
+      subscription.unsubscribe();
+    };
   }, []);
 
   const handleSignIn = async () => {

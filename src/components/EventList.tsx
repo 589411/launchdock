@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import EventCard from './EventCard';
-import type { EventStatus } from '../lib/supabase-types';
+import type { EventStatus, EventType } from '../lib/supabase-types';
 
 interface Event {
   id: string;
@@ -12,6 +12,9 @@ interface Event {
   max_capacity: number | null;
   status: EventStatus;
   priority_hours: number;
+  event_type: EventType;
+  price: number;
+  meet_link: string | null;
   registration_count?: number;
 }
 
@@ -42,14 +45,11 @@ export default function EventList({ compact = false }: Props) {
         .order('event_date', { ascending: true });
 
       if (data) {
-        // Fetch registration counts
+        // Use SECURITY DEFINER RPC to get accurate counts (bypasses RLS)
         const eventsWithCounts = await Promise.all(
           data.map(async (event) => {
-            const { count } = await supabase
-              .from('event_registrations')
-              .select('*', { count: 'exact', head: true })
-              .eq('event_id', event.id)
-              .in('status', ['registered', 'attended']);
+            const { data: count } = await supabase
+              .rpc('get_event_registration_count', { event_id_input: event.id });
 
             return { ...event, registration_count: count ?? 0 } as Event;
           })

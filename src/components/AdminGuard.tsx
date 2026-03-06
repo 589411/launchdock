@@ -1,6 +1,5 @@
 import { useState, useEffect, type ReactNode } from 'react';
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
-import type { MemberRole } from '../lib/supabase-types';
+import { supabase, isSupabaseConfigured, getStoredSession } from '../lib/supabase';
 
 interface Props {
   children: ReactNode;
@@ -15,28 +14,33 @@ export default function AdminGuard({ children }: Props) {
       return;
     }
 
-    checkAuth();
-  }, []);
-
-  async function checkAuth() {
-    const { data: { session } } = await supabase.auth.getSession();
+    const session = getStoredSession();
     if (!session) {
       setState('unauthenticated');
       return;
     }
 
-    const { data: profile } = await supabase
-      .from('member_profiles')
-      .select('role')
-      .eq('user_id', session.user.id)
-      .single();
+    // Direct fetch to Supabase REST API — bypasses JS client entirely
+    const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
+    const anonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
-    if (profile?.role === 'admin') {
-      setState('authorized');
-    } else {
-      setState('unauthorized');
-    }
-  }
+    fetch(
+      `${supabaseUrl}/rest/v1/member_profiles?select=role&user_id=eq.${session.userId}`,
+      {
+        headers: {
+          'apikey': anonKey,
+          'Authorization': `Bearer ${session.accessToken}`,
+        },
+      }
+    )
+      .then(res => res.json())
+      .then((rows: any[]) => {
+        setState(rows?.[0]?.role === 'admin' ? 'authorized' : 'unauthorized');
+      })
+      .catch(() => {
+        setState('unauthorized');
+      });
+  }, []);
 
   if (state === 'loading') {
     return (
