@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import EventList from '../../../components/EventList.tsx';
+---
+
+<BaseLayout title="Events" lang="en" description="Blue Duck Meetups — Learn, share, and solve problems with fellow AI enthusiasts.">
+  <section class="max-w-[900px] mx-auto px-6 py-12">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="text-2xl">🎟️</span>
+      <h1 class="text-3xl font-extrabold">Events</h1>
+    </div>
+    <p class="text-text-secondary mb-10">
+      Learning AI alone can be tough. Join our meetups to learn, share, and solve problems together.
+    </p>
+
+    <EventList client:load />
+
+    <!-- CTA -->
+    <div class="mt-16 p-8 rounded-2xl bg-surface-light border border-surface-lighter text-center">
+      <img src="/icons/duck-laptop.png" alt="Blue Duck" class="w-12 h-12 mx-auto mb-4 object-contain" />
+      <h2 class="text-xl font-bold mb-2">Want to be notified about new events?</h2>
+      <p class="text-text-secondary text-sm mb-4">
+        Sign in with your Google account to become a member and get notified when new events are posted.
+      </p>
+      <div id="event-cta-auth"></div>
+    </div>
+  </section>
+</BaseLayout>
