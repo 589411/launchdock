@@ -120,7 +120,7 @@ export default function EventList({ compact = false }: Props) {
       {displayed.length === 0 ? (
         <div className="text-center py-12 bg-surface-light rounded-2xl border border-surface-lighter">
           <span className="text-3xl block mb-3">
-            {tab === 'upcoming' ? '🦆' : '📭'}
+            {tab === 'upcoming' ? <img src="/icons/duck-happy.png" alt="" className="duck-icon" style={{width:'48px',height:'48px',objectFit:'contain',display:'inline-block'}} /> : '📭'}
           </span>
           <p className="text-text-secondary">
             {tab === 'upcoming'
