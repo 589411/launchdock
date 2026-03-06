@@ -1,6 +1,6 @@
 ---
 title: "安裝指南：選擇你的平台"
-description: "OpenClaw 安裝入口頁面，根據你的作業系統選擇對應的安裝教學。"
+description: "OpenClaw（龍蝦 AI Agent）安裝入口，根據你的作業系統選擇 macOS 或 Windows 安裝教學。"
 contentType: "guide"
 scene: "安裝與部署"
 difficulty: "入門"

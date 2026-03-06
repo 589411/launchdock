@@ -17,7 +17,7 @@ const {
   lang = 'zh-tw',
   description = lang === 'en'
     ? 'LaunchDock — Step-by-step interactive AI tutorials. Learn how to run OpenClaw from scratch.'
-    : '藍鴨 LaunchDock — 手把手實作的互動式 AI 教學空間，帶你把 OpenClaw 真正跑起來',
+    : '藍鴨 LaunchDock — 手把手實作的互動式 AI 教學空間，帶你把 OpenClaw 龍蝦 AI Agent 真正跑起來',
   canonicalUrl,
 } = Astro.props;
 
@@ -43,7 +43,7 @@ const enPath = currentPath.startsWith('/en') ? currentPath : `/en${currentPath =
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     {lang === 'zh-tw'
-      ? <meta name="keywords" content="藍鴨, LaunchDock, OpenClaw, AI 教學, 繁體中文, AI Agent, 自動化" />
+      ? <meta name="keywords" content="藍鴨, LaunchDock, OpenClaw, 龍蝦, 龍蝦AI, AI 教學, 繁體中文, AI Agent, 自動化" />
       : <meta name="keywords" content="LaunchDock, OpenClaw, AI tutorial, AI Agent, automation" />
     }
     <link rel="preconnect" href="https://fonts.googleapis.com" />

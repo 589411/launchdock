@@ -1,6 +1,6 @@
 ---
 title: "macOS 安裝 OpenClaw：從零開始的完整教學"
-description: "在 Mac 上安裝 OpenClaw 的逐步指南，涵蓋 Homebrew、Python 環境、相依套件到第一次啟動。"
+description: "在 Mac 上安裝 OpenClaw（龍蝦）的逐步指南，涵蓋 Homebrew、Python 環境、相依套件到第一次啟動。"
 contentType: "tutorial"
 scene: "安裝與部署"
 difficulty: "入門"

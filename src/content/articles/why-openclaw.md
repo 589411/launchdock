@@ -1,6 +1,6 @@
 ---
 title: "為什麼你需要 OpenClaw？當 ChatGPT 和 Gemini 不夠用的時候"
-description: "你已經在用 5 個 AI 工具了，但資訊還是散落各處。看看 OpenClaw 如何幫你把它們串起來。"
+description: "你已經在用 5 個 AI 工具了，但資訊還是散落各處。看看 OpenClaw 龍蝦 AI Agent 如何幫你把它們串起來。"
 contentType: "guide"
 scene: "認識 OpenClaw"
 difficulty: "入門"
