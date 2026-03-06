@@ -1,5 +1,13 @@
 ---
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'zh-tw' } = Astro.props;
 const year = new Date().getFullYear();
+const isEn = lang === 'en';
 ---
 
 <footer class="border-t border-surface-lighter">
@@ -8,7 +16,7 @@ const year = new Date().getFullYear();
       <div class="flex items-center gap-2">
         <img src="/icons/duck-happy.png" alt="藍鴨" class="duck-icon" style="width:24px;height:24px;object-fit:contain" />
         <span class="text-sm text-text-secondary">
-          藍鴨 LaunchDock — 弄髒雙手，但不孤單
+          {isEn ? 'LaunchDock — Get your hands dirty, but not alone' : '藍鴨 LaunchDock — 弄髒雙手，但不孤單'}
         </span>
       </div>
       <div class="flex items-center gap-4">
@@ -21,10 +29,10 @@ const year = new Date().getFullYear();
           GitHub
         </a>
         <a
-          href="/#discussion"
+          href={isEn ? '/en/#discussion' : '/#discussion'}
           class="text-text-muted hover:text-accent2 transition-colors text-sm"
         >
-          討論區
+          {isEn ? 'Discuss' : '討論區'}
         </a>
       </div>
     </div>
@@ -32,7 +40,9 @@ const year = new Date().getFullYear();
       &copy; {year} 藍鴨 LaunchDock. Built with Astro.
     </p>
     <p class="text-center text-text-muted text-xs mt-2 opacity-70">
-      本站為 OpenClaw 開源專案教學社群，與其他同名軟體無關。
+      {isEn
+        ? 'An independent OpenClaw open-source community tutorial site.'
+        : '本站為 OpenClaw 開源專案教學社群，與其他同名軟體無關。'}
     </p>
   </div>
 </footer>

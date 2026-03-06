@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { sceneKeyToLabel, difficultyKeyToLabel } from '../../../i18n/ui';
+
+const allArticles = await getCollection('articlesEn', ({ data }) => !data.archived);
+
+const SCENE_ORDER = ['intro', 'env-setup', 'install', 'basics', 'core', 'integration', 'advanced', 'blog'];
+const SCENE_ICONS: Record<string, string> = {
+  intro: '/icons/duck-compass.png',
+  'env-setup': '/icons/duck-key.png',
+  install: '/icons/duck-laptop.png',
+  basics: '/icons/duck-rocket.png',
+  core: '/icons/duck-puzzle.png',
+  integration: '/icons/automation.png',
+  advanced: '/icons/duck-books.png',
+  blog: '/icons/duck-happy.png',
+};
+
+// Group by scene
+const sceneMap = new Map<string, typeof allArticles>();
+for (const article of allArticles) {
+  const scene = article.data.scene;
+  if (!sceneMap.has(scene)) sceneMap.set(scene, []);
+  sceneMap.get(scene)!.push(article);
+}
+for (const [, arts] of sceneMap) {
+  arts.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+}
+
+const labels = sceneKeyToLabel['en'];
+const diffLabels = difficultyKeyToLabel['en'];
+---
+
+<BaseLayout title="Tutorials" lang="en" description="All OpenClaw tutorials in English. Step-by-step guides to get you up and running.">
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <h1 class="text-3xl font-extrabold mb-3 tracking-tight">Tutorials</h1>
+    <p class="text-text-secondary mb-8">
+      Hands-on guides for running OpenClaw AI Agent. Start from scratch and level up step by step.
+    </p>
+
+    {allArticles.length === 0 ? (
+      <!-- Coming soon state -->
+      <div class="text-center py-24 bg-surface-light rounded-2xl border border-surface-lighter">
+        <img src="/icons/duck-rocket.png" alt="" class="duck-icon w-16 h-16 mx-auto mb-4 opacity-60" />
+        <h2 class="text-xl font-semibold mb-2">English articles are on the way!</h2>
+        <p class="text-text-secondary text-sm mb-6">
+          We're translating our Chinese tutorials into English. Check back soon.
+        </p>
+        <a href="/" class="text-brand-light hover:underline text-sm">
+          ← Browse Chinese articles
+        </a>
+      </div>
+    ) : (
+      <div class="space-y-12">
+        {SCENE_ORDER.map((sceneKey) => {
+          const articles = sceneMap.get(sceneKey);
+          if (!articles || articles.length === 0) return null;
+          const sceneLabel = labels[sceneKey] ?? sceneKey;
+          const icon = SCENE_ICONS[sceneKey];
+          return (
+            <section>
+              <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                <img src={icon} alt="" class="duck-icon" style="width:24px;height:24px;object-fit:contain" />
+                {sceneLabel}
+              </h2>
+              <div class="space-y-3">
+                {articles.map((article) => {
+                  const diffLabel = diffLabels[article.data.difficulty] ?? article.data.difficulty;
+                  const diffColor =
+                    article.data.difficulty === 'beginner' ? 'bg-green-500/20 text-green-400' :
+                    article.data.difficulty === 'intermediate' ? 'bg-yellow-500/20 text-yellow-400' :
+                    'bg-red-500/20 text-red-400';
+                  return (
+                    <a
+                      href={`/en/articles/${article.id}`}
+                      class="block p-5 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
+                    >
+                      <div class="flex items-center justify-between gap-4">
+                        <div>
+                          <div class="flex items-center gap-2 mb-1">
+                            <span class={`text-xs px-2 py-0.5 rounded-full ${diffColor}`}>
+                              {diffLabel}
+                            </span>
+                            <span class="text-xs text-text-muted">{article.data.estimatedMinutes} min</span>
+                          </div>
+                          <h3 class="font-medium group-hover:text-brand-light transition-colors">
+                            {article.data.title}
+                          </h3>
+                          <p class="text-text-muted text-sm mt-1">{article.data.description}</p>
+                        </div>
+                        <span class="text-text-muted group-hover:text-brand-light transition-colors shrink-0">→</span>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+    )}
+  </div>
+</BaseLayout>
