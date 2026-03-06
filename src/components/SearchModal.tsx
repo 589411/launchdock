@@ -28,7 +28,7 @@ const SCENE_ICONS: Record<string, string> = {
   '核心功能': '🧩',
   '整合與自動化': '⚡',
   '知識與進階': '📚',
-  '鴨編觀點': '🦆',
+  '鴨編的碎碎念': '🦆',
 };
 
 const CONTENT_TYPE_LABELS: Record<string, string> = {

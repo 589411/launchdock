@@ -16,19 +16,19 @@ for (const article of allArticles) {
 }
 
 const steps = [
-  { step: 1, icon: '🧭', title: '認識 OpenClaw', desc: '了解它能幫你做什麼', time: '5 分鐘' },
-  { step: 2, icon: '🧠', title: '選擇你的 AI 大腦', desc: 'LLM 方案比較與推薦', time: '8 分鐘' },
-  { step: 3, icon: '🔑', title: '申請 API Key', desc: '拿到讓 AI 運作的鑰匙', time: '10 分鐘' },
-  { step: 4, icon: '💻', title: '安裝 OpenClaw', desc: '選擇你的平台，開始安裝', time: '15 分鐘' },
-  { step: 5, icon: '🚀', title: '第一次啟動', desc: '設定 Key、聽到 AI 的第一句話', time: '10 分鐘' },
-  { step: 6, icon: '⚡', title: '第一個 Skill', desc: '完成你的第一個自動化任務', time: '10 分鐘' },
+  { step: 1, icon: '/icons/duck-compass.png', title: '認識 OpenClaw', desc: '了解它能幫你做什麼', time: '5 分鐘' },
+  { step: 2, icon: '/icons/al-models.png', title: '選擇你的 AI 大腦', desc: 'LLM 方案比較與推薦', time: '8 分鐘' },
+  { step: 3, icon: '/icons/duck-key.png', title: '申請 API Key', desc: '拿到讓 AI 運作的鑰匙', time: '10 分鐘' },
+  { step: 4, icon: '/icons/duck-laptop.png', title: '安裝 OpenClaw', desc: '選擇你的平台，開始安裝', time: '15 分鐘' },
+  { step: 5, icon: '/icons/duck-rocket.png', title: '第一次啟動', desc: '設定 Key、聽到 AI 的第一句話', time: '10 分鐘' },
+  { step: 6, icon: '/icons/duck-bolt.png', title: '第一個 Skill', desc: '完成你的第一個自動化任務', time: '10 分鐘' },
 ];
 ---
 
-<section class="max-w-6xl mx-auto px-4 py-16">
+<section class="max-w-[900px] mx-auto px-6 py-16">
   <div class="text-center mb-10">
-    <span class="text-sm font-medium text-brand-light tracking-wide uppercase">新手入門路線</span>
-    <h2 class="text-2xl md:text-3xl font-bold mt-2">從零開始，6 步上手</h2>
+    <span class="text-sm font-semibold text-brand-light tracking-wide uppercase">新手入門路線</span>
+    <h2 class="text-2xl md:text-3xl font-extrabold mt-2 tracking-tight">從零開始，6 步上手</h2>
     <p class="text-text-secondary mt-2 max-w-lg mx-auto">
       每一步都有可操作的產出，跟著走就對了。
     </p>
@@ -52,7 +52,7 @@ const steps = [
           {/* Step node */}
           {available ? (
             <a href={href} class="learning-path-node available group">
-              <div class="learning-path-icon">{s.icon}</div>
+              <div class="learning-path-icon">{s.icon.startsWith('/') ? <img src={s.icon} alt="" class="duck-icon" style="width:28px;height:28px;object-fit:contain" /> : s.icon}</div>
               <div class="learning-path-number">{s.step}</div>
               <div class="learning-path-content">
                 <h3 class="font-semibold group-hover:text-brand-light transition-colors">{s.title}</h3>
@@ -63,7 +63,7 @@ const steps = [
             </a>
           ) : (
             <div class="learning-path-node upcoming">
-              <div class="learning-path-icon dimmed">{s.icon}</div>
+              <div class="learning-path-icon dimmed">{s.icon.startsWith('/') ? <img src={s.icon} alt="" class="duck-icon" style="width:28px;height:28px;object-fit:contain;filter:grayscale(0.8)" /> : s.icon}</div>
               <div class="learning-path-number">{s.step}</div>
               <div class="learning-path-content">
                 <h3 class="font-semibold text-text-muted">{s.title}</h3>

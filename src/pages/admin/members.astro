@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdminMembers from '../../components/AdminMembers.tsx';
+---
+
+<BaseLayout title="會員管理" description="管理會員、角色、通知偏好。">
+  <div class="max-w-5xl mx-auto px-4 py-12">
+    <div class="flex items-center gap-3 mb-8">
+      <a href="/admin/feedback" class="text-text-muted hover:text-text-primary text-sm">← 回饋監控</a>
+      <span class="text-text-muted">|</span>
+      <a href="/admin/events" class="text-text-muted hover:text-text-primary text-sm">活動管理</a>
+      <span class="text-text-muted">|</span>
+      <span class="text-sm font-medium text-brand-light">會員管理</span>
+      <span class="text-text-muted">|</span>
+      <a href="/admin/notifications" class="text-text-muted hover:text-text-primary text-sm">通知管理</a>
+    </div>
+    <AdminMembers client:load />
+  </div>
+</BaseLayout>

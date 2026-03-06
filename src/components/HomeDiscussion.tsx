@@ -9,12 +9,20 @@ import {
 
 const SLUG = '_homepage';
 
+interface MemberBadge {
+  display_name: string;
+  avatar_url: string | null;
+  role: string;
+}
+
 interface Reply {
   id: string;
   text: string;
   timestamp: string;
   helpful: number;
   isMine?: boolean;
+  user_id?: string | null;
+  member?: MemberBadge | null;
 }
 
 interface Topic {
@@ -23,6 +31,8 @@ interface Topic {
   timestamp: string;
   replies: Reply[];
   isMine?: boolean;
+  user_id?: string | null;
+  member?: MemberBadge | null;
 }
 
 export default function HomeDiscussion() {
@@ -35,8 +45,14 @@ export default function HomeDiscussion() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
   useEffect(() => {
+    if (isSupabaseConfigured()) {
+      supabase.auth.onAuthStateChange((event, session) => {
+        setCurrentUserId(session?.user?.id ?? null);
+      });
+    }
     loadTopics();
   }, []);
 
@@ -87,7 +103,39 @@ export default function HomeDiscussion() {
             timestamp: a.created_at,
             helpful: a.helpful_count,
             isMine: a.fingerprint === fp,
+            user_id: a.user_id ?? null,
           });
+        }
+      }
+
+      // Collect all user_ids from questions and replies for badge lookup
+      const allUserIds = new Set<string>();
+      for (const q of qData || []) {
+        if (q.user_id) allUserIds.add(q.user_id);
+      }
+      for (const replies of Object.values(repliesMap)) {
+        for (const r of replies) {
+          if (r.user_id) allUserIds.add(r.user_id);
+        }
+      }
+
+      let memberMap: Record<string, MemberBadge> = {};
+      if (allUserIds.size > 0) {
+        const { data: profiles } = await supabase
+          .from('member_profiles')
+          .select('user_id, display_name, avatar_url, role')
+          .in('user_id', [...allUserIds]);
+        for (const p of profiles || []) {
+          memberMap[p.user_id] = { display_name: p.display_name, avatar_url: p.avatar_url, role: p.role };
+        }
+      }
+
+      // Attach member badges to replies
+      for (const replies of Object.values(repliesMap)) {
+        for (const r of replies) {
+          if (r.user_id && memberMap[r.user_id]) {
+            r.member = memberMap[r.user_id];
+          }
         }
       }
 
@@ -98,6 +146,8 @@ export default function HomeDiscussion() {
           timestamp: q.created_at,
           replies: repliesMap[q.id] || [],
           isMine: q.fingerprint === fp,
+          user_id: q.user_id ?? null,
+          member: q.user_id && memberMap[q.user_id] ? memberMap[q.user_id] : null,
         }))
       );
     } catch (err: any) {
@@ -149,15 +199,18 @@ export default function HomeDiscussion() {
 
     try {
       const fp = getFingerprint();
+      const insertData: Record<string, unknown> = {
+        slug: SLUG,
+        section_id: '',
+        section_title: '首頁討論',
+        question: validation.sanitized,
+        fingerprint: fp,
+      };
+      if (currentUserId) insertData.user_id = currentUserId;
+
       const { data, error: err } = await supabase
         .from('qa_questions')
-        .insert({
-          slug: SLUG,
-          section_id: '',
-          section_title: '首頁討論',
-          question: validation.sanitized,
-          fingerprint: fp,
-        })
+        .insert(insertData)
         .select()
         .single();
 
@@ -170,6 +223,7 @@ export default function HomeDiscussion() {
           timestamp: data.created_at,
           replies: [],
           isMine: true,
+          user_id: data.user_id ?? null,
         },
         ...prev,
       ]);
@@ -222,13 +276,16 @@ export default function HomeDiscussion() {
 
     try {
       const fp = getFingerprint();
+      const insertData: Record<string, unknown> = {
+        question_id: topicId,
+        answer: validation.sanitized,
+        fingerprint: fp,
+      };
+      if (currentUserId) insertData.user_id = currentUserId;
+
       const { data, error: err } = await supabase
         .from('qa_answers')
-        .insert({
-          question_id: topicId,
-          answer: validation.sanitized,
-          fingerprint: fp,
-        })
+        .insert(insertData)
         .select()
         .single();
 
@@ -247,6 +304,7 @@ export default function HomeDiscussion() {
                     timestamp: data.created_at,
                     helpful: 0,
                     isMine: true,
+                    user_id: data.user_id ?? null,
                   },
                 ],
               }
@@ -363,6 +421,11 @@ export default function HomeDiscussion() {
                 <div className="home-discussion__topic-main">
                   <p className="home-discussion__topic-text">{topic.title}</p>
                   <div className="home-discussion__topic-meta">
+                    {topic.member && (
+                      <span className="home-discussion__member-badge" title="已登入會員">
+                        🎟️ {topic.member.display_name}
+                      </span>
+                    )}
                     <span>{timeAgo(topic.timestamp)}</span>
                     {topic.isMine && <span className="home-discussion__mine">我的</span>}
                     {topic.replies.length > 0 && (
@@ -386,6 +449,11 @@ export default function HomeDiscussion() {
                     <div key={reply.id} className="home-discussion__reply">
                       <p>{reply.text}</p>
                       <div className="home-discussion__reply-meta">
+                        {reply.member && (
+                          <span className="home-discussion__member-badge" title="已登入會員">
+                            🎟️ {reply.member.display_name}
+                          </span>
+                        )}
                         <span>{timeAgo(reply.timestamp)}</span>
                         {reply.isMine && <span className="home-discussion__mine">我的</span>}
                         <button

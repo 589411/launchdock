@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
-interface ArticlePopularity {
+interface ArticleStats {
   slug: string;
-  rocket_count: number;
-  like_count: number;
-  stuck_count: number;
-  cry_count: number;
-  total_reactions: number;
-  popularity_score: number;
+  views: number;
+  reactions: number;
 }
 
 interface ArticleMeta {
@@ -25,141 +21,92 @@ interface Props {
   articles: ArticleMeta[];
 }
 
-type SortMode = 'popular' | 'most-reactions' | 'most-rocket' | 'most-stuck';
+type SortMode = 'views' | 'reactions' | 'recent';
 
 const SORT_OPTIONS: { key: SortMode; label: string; icon: string }[] = [
-  { key: 'popular', label: '綜合熱門', icon: '🔥' },
-  { key: 'most-reactions', label: '最多互動', icon: '💬' },
-  { key: 'most-rocket', label: '最多發射', icon: '🚀' },
-  { key: 'most-stuck', label: '最多卡關', icon: '😵' },
+  { key: 'views', label: '最多閱讀', icon: '👀' },
+  { key: 'reactions', label: '最多互動', icon: '💬' },
+  { key: 'recent', label: '最近發布', icon: '🆕' },
 ];
 
 export default function PopularArticles({ articles }: Props) {
-  const [popularData, setPopularData] = useState<ArticlePopularity[]>([]);
-  const [sortMode, setSortMode] = useState<SortMode>('popular');
+  const [statsMap, setStatsMap] = useState<Map<string, ArticleStats>>(new Map());
+  const [sortMode, setSortMode] = useState<SortMode>('views');
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadPopularData();
+    loadStats();
   }, []);
 
-  async function loadPopularData() {
+  async function loadStats() {
     setLoading(true);
-    setError(null);
+    const map = new Map<string, ArticleStats>();
 
-    if (!isSupabaseConfigured()) {
-      // Fallback: gather from localStorage
-      const localData: ArticlePopularity[] = [];
-      for (const article of articles) {
-        const stored = localStorage.getItem(`launchdock-reactions-${article.slug}`);
-        if (stored) {
-          try {
-            const { counts } = JSON.parse(stored);
-            if (counts) {
-              const r = counts.rocket || 0;
-              const l = counts.like || 0;
-              const s = counts.stuck || 0;
-              const c = counts.cry || 0;
-              localData.push({
-                slug: article.slug,
-                rocket_count: r,
-                like_count: l,
-                stuck_count: s,
-                cry_count: c,
-                total_reactions: r + l + s + c,
-                popularity_score: r * 3 + l * 2 + s + c,
-              });
-            }
-          } catch {}
-        }
-      }
-      setPopularData(localData);
-      setLoading(false);
-      return;
+    // Initialize all articles with zero stats
+    for (const a of articles) {
+      map.set(a.slug, { slug: a.slug, views: 0, reactions: 0 });
     }
 
-    try {
-      const { data, error: rpcError } = await (supabase.rpc as any)('get_popular_articles', {
-        limit_count: 50,
-      });
-
-      if (rpcError) throw rpcError;
-      setPopularData((data as ArticlePopularity[]) || []);
-    } catch (err) {
-      console.error('Failed to load popular articles:', err);
-      // Fallback: direct query
+    if (isSupabaseConfigured()) {
       try {
-        const { data, error: queryError } = await supabase
+        // Load page views
+        const { data: viewData } = await supabase
+          .from('article_page_views')
+          .select('slug');
+
+        if (viewData) {
+          for (const row of viewData as { slug: string }[]) {
+            const entry = map.get(row.slug);
+            if (entry) entry.views++;
+          }
+        }
+
+        // Load reaction counts
+        const { data: reactionData } = await supabase
           .from('article_reactions')
-          .select('slug, reaction_type');
+          .select('slug');
 
-        if (queryError) throw queryError;
-
-        const map = new Map<string, ArticlePopularity>();
-        for (const row of (data || []) as { slug: string; reaction_type: string }[]) {
-          if (!map.has(row.slug)) {
-            map.set(row.slug, {
-              slug: row.slug,
-              rocket_count: 0,
-              like_count: 0,
-              stuck_count: 0,
-              cry_count: 0,
-              total_reactions: 0,
-              popularity_score: 0,
-            });
-          }
-          const entry = map.get(row.slug)!;
-          entry.total_reactions++;
-          switch (row.reaction_type) {
-            case 'rocket': entry.rocket_count++; break;
-            case 'like': entry.like_count++; break;
-            case 'stuck': entry.stuck_count++; break;
-            case 'cry': entry.cry_count++; break;
+        if (reactionData) {
+          for (const row of reactionData as { slug: string }[]) {
+            const entry = map.get(row.slug);
+            if (entry) entry.reactions++;
           }
         }
-        // Calculate scores
-        for (const entry of map.values()) {
-          entry.popularity_score =
-            entry.rocket_count * 3 +
-            entry.like_count * 2 +
-            entry.stuck_count +
-            entry.cry_count;
-        }
-        setPopularData(Array.from(map.values()));
       } catch {
-        setError('無法載入熱門資料');
+        // Fall through to localStorage
       }
-    } finally {
-      setLoading(false);
     }
+
+    // Merge localStorage view data
+    for (const a of articles) {
+      const localViews = Number(localStorage.getItem(`launchdock-views-${a.slug}`) || 0);
+      const entry = map.get(a.slug)!;
+      if (localViews > entry.views) {
+        entry.views = localViews;
+      }
+    }
+
+    setStatsMap(map);
+    setLoading(false);
   }
 
-  // Sort the combined data
+  // Sort articles
   const sortedArticles = (() => {
-    const popMap = new Map(popularData.map(p => [p.slug, p]));
-
-    // Only show articles that have at least 1 reaction
-    const articlesWithData = articles
-      .filter(a => popMap.has(a.slug))
-      .map(a => ({
-        ...a,
-        pop: popMap.get(a.slug)!,
-      }));
+    const list = articles.map(a => ({
+      ...a,
+      stats: statsMap.get(a.slug) || { slug: a.slug, views: 0, reactions: 0 },
+    }));
 
     switch (sortMode) {
-      case 'popular':
-        return articlesWithData.sort((a, b) => b.pop.popularity_score - a.pop.popularity_score);
-      case 'most-reactions':
-        return articlesWithData.sort((a, b) => b.pop.total_reactions - a.pop.total_reactions);
-      case 'most-rocket':
-        return articlesWithData.sort((a, b) => b.pop.rocket_count - a.pop.rocket_count);
-      case 'most-stuck':
-        return articlesWithData.sort((a, b) =>
-          (b.pop.stuck_count + b.pop.cry_count) - (a.pop.stuck_count + a.pop.cry_count)
-        );
+      case 'views':
+        return list.sort((a, b) => b.stats.views - a.stats.views);
+      case 'reactions':
+        return list.sort((a, b) => b.stats.reactions - a.stats.reactions);
+      case 'recent':
+        // articles are already in collection order; just return as-is
+        return list;
       default:
-        return articlesWithData;
+        return list;
     }
   })();
 
@@ -169,33 +116,9 @@ export default function PopularArticles({ articles }: Props) {
         <div className="inline-block animate-pulse">
           <span className="text-2xl">🔥</span>
           <p className="text-sm mt-2" style={{ color: 'var(--color-text-muted)' }}>
-            載入熱門排行中...
+            載入排行中...
           </p>
         </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-center py-8">
-        <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-          {error}
-        </p>
-      </div>
-    );
-  }
-
-  if (sortedArticles.length === 0) {
-    return (
-      <div className="text-center py-12">
-        <span className="text-4xl block mb-4">🦗</span>
-        <p style={{ color: 'var(--color-text-secondary)' }}>
-          還沒有足夠的互動數據。
-        </p>
-        <p className="text-sm mt-1" style={{ color: 'var(--color-text-muted)' }}>
-          閱讀文章後按下表情符號，就能幫文章累積人氣！
-        </p>
       </div>
     );
   }
@@ -222,7 +145,7 @@ export default function PopularArticles({ articles }: Props) {
 
       {/* Article list */}
       <div className="space-y-3">
-        {sortedArticles.map(({ slug, title, description, scene, difficulty, pop }, index) => (
+        {sortedArticles.map(({ slug, title, description, scene, difficulty, stats }, index) => (
           <a
             key={slug}
             href={`/articles/${slug}`}
@@ -295,34 +218,14 @@ export default function PopularArticles({ articles }: Props) {
                 </p>
               </div>
 
-              {/* Reaction stats */}
-              <div className="flex-shrink-0 flex items-center gap-3 text-sm">
-                {pop.rocket_count > 0 && (
-                  <span title="發射成功">🚀 {pop.rocket_count}</span>
+              {/* View & reaction stats */}
+              <div className="flex-shrink-0 flex items-center gap-3 text-sm" style={{ color: 'var(--color-text-muted)' }}>
+                {stats.views > 0 && (
+                  <span title="閱讀次數">👀 {stats.views}</span>
                 )}
-                {pop.like_count > 0 && (
-                  <span title="有用">👍 {pop.like_count}</span>
+                {stats.reactions > 0 && (
+                  <span title="互動次數">💬 {stats.reactions}</span>
                 )}
-                {pop.stuck_count > 0 && (
-                  <span title="卡關了" style={{ color: 'var(--color-accent-stuck)' }}>
-                    😵 {pop.stuck_count}
-                  </span>
-                )}
-                {pop.cry_count > 0 && (
-                  <span title="救命" style={{ color: 'var(--color-accent-cry)' }}>
-                    😢 {pop.cry_count}
-                  </span>
-                )}
-                <span
-                  className="text-xs px-2 py-1 rounded-full"
-                  style={{
-                    backgroundColor: 'var(--color-surface-lighter)',
-                    color: 'var(--color-text-muted)',
-                  }}
-                  title="熱門分數"
-                >
-                  🔥 {pop.popularity_score}
-                </span>
               </div>
 
               <span

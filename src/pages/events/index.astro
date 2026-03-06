@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EventList from '../../components/EventList.tsx';
+---
+
+<BaseLayout title="活動" description="藍鴨小聚 — 和其他養蝦人一起學習、交流、解決問題。">
+  <section class="max-w-[900px] mx-auto px-6 py-12">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="text-2xl">🎟️</span>
+      <h1 class="text-3xl font-extrabold">藍鴨活動</h1>
+    </div>
+    <p class="text-text-secondary mb-10">
+      一個人養蝦太孤單？來參加藍鴨小聚，和其他養蝦人一起學習、交流、解決問題。
+    </p>
+
+    <EventList client:load />
+
+    <!-- CTA -->
+    <div class="mt-16 p-8 rounded-2xl bg-surface-light border border-surface-lighter text-center">
+      <img src="/icons/duck-laptop.png" alt="藍鴨" class="w-12 h-12 mx-auto mb-4 object-contain" />
+      <h2 class="text-xl font-bold mb-2">想被通知新活動？</h2>
+      <p class="text-text-secondary text-sm mb-4">
+        用 Google 帳號登入即可成為會員，新活動上架時會自動通知你。
+      </p>
+      <div id="event-cta-auth"></div>
+    </div>
+  </section>
+</BaseLayout>

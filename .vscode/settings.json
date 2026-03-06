@@ -3,7 +3,15 @@
   "editor.pasteAs.enabled": false,
   "markdown.editor.filePaste.copyIntoWorkspace": "never",
   "chat.tools.terminal.autoApprove": {
-    "/^cd /Users/yen-tangchang/Documents/github/launchdock-redesign && git stash pop$/": {
+    "/^git stash --include-untracked -m \"WIP: uncommitted changes before redesign branch\"$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^lsof -i :4321 2>/dev/null \\| grep LISTEN$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^sleep 5 && lsof -i -P \\| grep -i node \\| grep LISTEN$/": {
       "approve": true,
       "matchCommandLine": true
     },

@@ -2,17 +2,39 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import type { Locale } from '../i18n/ui';
 
 interface Props {
   title: string;
   description?: string;
+  lang?: Locale;
+  /** Canonical URL for SEO (optional) */
+  canonicalUrl?: string;
 }
 
-const { title, description = '藍鴨 LaunchDock — 手把手實作的互動式 AI 教學空間，帶你把 OpenClaw 真正跑起來' } = Astro.props;
+const {
+  title,
+  lang = 'zh-tw',
+  description = lang === 'en'
+    ? 'LaunchDock — Step-by-step interactive AI tutorials. Learn how to run OpenClaw from scratch.'
+    : '藍鴨 LaunchDock — 手把手實作的互動式 AI 教學空間，帶你把 OpenClaw 真正跑起來',
+  canonicalUrl,
+} = Astro.props;
+
+const htmlLang = lang === 'zh-tw' ? 'zh-TW' : 'en';
+const titleTemplate = lang === 'en'
+  ? `${title} | LaunchDock — OpenClaw Tutorials`
+  : `${title} | 藍鴨 LaunchDock｜龍蝦OpenClaw 繁體中文自動化教學`;
+
+// hreflang alternate URLs
+const site = 'https://launchdock.app';
+const currentPath = Astro.url.pathname;
+const zhPath = currentPath.replace(/^\/en/, '') || '/';
+const enPath = currentPath.startsWith('/en') ? currentPath : `/en${currentPath === '/' ? '' : currentPath}`;
 ---
 
 <!doctype html>
-<html lang="zh-TW">
+<html lang={htmlLang}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -20,17 +42,33 @@ const { title, description = '藍鴨 LaunchDock — 手把手實作的互動式 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="keywords" content="藍鴨, LaunchDock, OpenClaw, AI 教學, 繁體中文, AI Agent, 自動化" />
+    {lang === 'zh-tw'
+      ? <meta name="keywords" content="藍鴨, LaunchDock, OpenClaw, AI 教學, 繁體中文, AI Agent, 自動化" />
+      : <meta name="keywords" content="LaunchDock, OpenClaw, AI tutorial, AI Agent, automation" />
+    }
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
-    <title>{title} | 藍鴨 LaunchDock｜OpenClaw 繁體中文 AI 自動化教學</title>
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <!-- hreflang for SEO -->
+    <link rel="alternate" hreflang="zh-TW" href={`${site}${zhPath}`} />
+    <link rel="alternate" hreflang="en" href={`${site}${enPath}`} />
+    <link rel="alternate" hreflang="x-default" href={`${site}${zhPath}`} />
+    <title>{titleTemplate}</title>
+    <script is:inline>
+      (function() {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </head>
   <body class="min-h-screen flex flex-col">
-    <Header />
+    <Header lang={lang} />
     <main class="flex-1">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

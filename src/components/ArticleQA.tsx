@@ -7,12 +7,20 @@ import {
   formatRetryTime,
 } from '../lib/content-security';
 
+interface MemberBadge {
+  display_name: string;
+  avatar_url: string | null;
+  role: string;
+}
+
 interface Answer {
   id: string;
   text: string;
   timestamp: string;
   helpful: number;
   isMine?: boolean;
+  user_id?: string | null;
+  member?: MemberBadge | null;
 }
 
 interface Question {
@@ -23,6 +31,8 @@ interface Question {
   timestamp: string;
   answers: Answer[];
   isMine?: boolean;
+  user_id?: string | null;
+  member?: MemberBadge | null;
 }
 
 interface Props {
@@ -39,9 +49,15 @@ export default function ArticleQA({ slug }: Props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
   // ---- Data fetching ----
   useEffect(() => {
+    if (isSupabaseConfigured()) {
+      supabase.auth.onAuthStateChange((event, session) => {
+        setCurrentUserId(session?.user?.id ?? null);
+      });
+    }
     loadQuestions();
   }, [slug]);
 
@@ -91,8 +107,46 @@ export default function ArticleQA({ slug }: Props) {
             timestamp: a.created_at,
             helpful: a.helpful_count,
             isMine: a.fingerprint === fp,
+            user_id: a.user_id ?? null,
           });
         }
+      }
+
+      // Collect all user_ids for badge lookup
+      const allUserIds = new Set<string>();
+      for (const q of qData || []) {
+        if (q.user_id) allUserIds.add(q.user_id);
+      }
+      for (const answers of Object.values(answersMap)) {
+        for (const a of answers) {
+          if (a.user_id) allUserIds.add(a.user_id);
+        }
+      }
+
+      let memberMap: Record<string, MemberBadge> = {};
+      if (allUserIds.size > 0) {
+        const { data: profiles } = await supabase
+          .from('member_profiles')
+          .select('user_id, display_name, avatar_url, role')
+          .in('user_id', [...allUserIds]);
+        for (const p of profiles || []) {
+          memberMap[p.user_id] = { display_name: p.display_name, avatar_url: p.avatar_url, role: p.role };
+        }
+      }
+
+      // Attach member badges and sort: member answers first, then by time
+      for (const answers of Object.values(answersMap)) {
+        for (const a of answers) {
+          if (a.user_id && memberMap[a.user_id]) {
+            a.member = memberMap[a.user_id];
+          }
+        }
+        answers.sort((x, y) => {
+          const xMember = x.member ? 1 : 0;
+          const yMember = y.member ? 1 : 0;
+          if (xMember !== yMember) return yMember - xMember; // members first
+          return new Date(x.timestamp).getTime() - new Date(y.timestamp).getTime();
+        });
       }
 
       setQuestions(
@@ -104,6 +158,8 @@ export default function ArticleQA({ slug }: Props) {
           timestamp: q.created_at,
           answers: answersMap[q.id] || [],
           isMine: q.fingerprint === fp,
+          user_id: q.user_id ?? null,
+          member: q.user_id && memberMap[q.user_id] ? memberMap[q.user_id] : null,
         }))
       );
     } catch (err: any) {
@@ -158,15 +214,18 @@ export default function ArticleQA({ slug }: Props) {
 
     try {
       const fp = getFingerprint();
+      const insertData: Record<string, unknown> = {
+        slug,
+        section_id: '',
+        section_title: '一般問題',
+        question: validation.sanitized,
+        fingerprint: fp,
+      };
+      if (currentUserId) insertData.user_id = currentUserId;
+
       const { data, error: err } = await supabase
         .from('qa_questions')
-        .insert({
-          slug,
-          section_id: '',
-          section_title: '一般問題',
-          question: validation.sanitized,
-          fingerprint: fp,
-        })
+        .insert(insertData)
         .select()
         .single();
 
@@ -182,6 +241,7 @@ export default function ArticleQA({ slug }: Props) {
           timestamp: data.created_at,
           answers: [],
           isMine: true,
+          user_id: data.user_id ?? null,
         },
       ]);
       setNewQuestion('');
@@ -239,13 +299,16 @@ export default function ArticleQA({ slug }: Props) {
 
     try {
       const fp = getFingerprint();
+      const insertData: Record<string, unknown> = {
+        question_id: questionId,
+        answer: validation.sanitized,
+        fingerprint: fp,
+      };
+      if (currentUserId) insertData.user_id = currentUserId;
+
       const { data, error: err } = await supabase
         .from('qa_answers')
-        .insert({
-          question_id: questionId,
-          answer: validation.sanitized,
-          fingerprint: fp,
-        })
+        .insert(insertData)
         .select()
         .single();
 
@@ -262,6 +325,7 @@ export default function ArticleQA({ slug }: Props) {
                 timestamp: data.created_at,
                 helpful: 0,
                 isMine: true,
+                user_id: data.user_id ?? null,
               }],
             };
           }
@@ -388,6 +452,11 @@ export default function ArticleQA({ slug }: Props) {
                   {q.sectionTitle && q.sectionTitle !== '一般問題' && (
                     <span className="qa-section-tag">📌 {q.sectionTitle}</span>
                   )}
+                  {q.member && (
+                    <span className="qa-member-badge" title="已登入會員">
+                      🎟️ {q.member.display_name}
+                    </span>
+                  )}
                   {q.isMine && <span className="qa-mine-tag">我的提問</span>}
                   <span className="qa-time">{formatTime(q.timestamp)}</span>
                 </div>
@@ -400,6 +469,11 @@ export default function ArticleQA({ slug }: Props) {
                       <div key={a.id} className="qa-answer">
                         <p>{a.text}</p>
                         <div className="qa-answer-footer">
+                          {a.member && (
+                            <span className="qa-member-badge" title="已登入會員">
+                              🎟️ {a.member.display_name}
+                            </span>
+                          )}
                           <span className="qa-time">{formatTime(a.timestamp)}</span>
                           {a.isMine && <span className="qa-mine-tag">我的回答</span>}
                           <button

@@ -1,25 +1,39 @@
 ---
 import SearchTrigger from './SearchTrigger.tsx';
+import ThemeToggle from './ThemeToggle.astro';
+import AuthButton from './AuthButton.tsx';
+import { useTranslations, getAlternatePath } from '../i18n/utils';
+import { languages, type Locale } from '../i18n/ui';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'zh-tw' } = Astro.props;
+const t = useTranslations(lang);
+const otherLang = lang === 'zh-tw' ? 'en' : 'zh-tw';
+const alternatePath = getAlternatePath(Astro.url, otherLang);
 
 const navItems = [
-  { label: '首頁', href: '/' },
-  { label: '場景教學', href: '/articles' },
-  { label: '關於', href: '/about' },
+  { label: t('nav.home'), href: lang === 'en' ? '/en/' : '/' },
+  { label: t('nav.articles'), href: lang === 'en' ? '/en/articles' : '/articles' },
+  { label: t('nav.events'), href: lang === 'en' ? '/en/events' : '/events' },
+  { label: t('nav.about'), href: lang === 'en' ? '/en/about' : '/about' },
 ];
 ---
 
-<header class="sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-surface-lighter">
-  <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+<header class="sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-surface-lighter shadow-sm">
+  <nav class="max-w-[900px] mx-auto px-6 h-14 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="flex items-center gap-2 group">
-      <span class="text-2xl">🚀</span>
-      <span class="text-xl font-bold text-text-primary group-hover:text-brand-light transition-colors">
+      <img src="/icons/duck-rocket.png" alt="" class="duck-icon" style="width:24px;height:24px;object-fit:contain" />
+      <span class="text-lg font-bold text-text-primary group-hover:text-brand-light transition-colors tracking-tight">
         藍鴨 LaunchDock
       </span>
     </a>
 
     <!-- Desktop Nav -->
-    <div class="hidden md:flex items-center gap-6">
+    <div class="hidden md:flex items-center gap-5">
       {navItems.map((item) => (
         <a
           href={item.href}
@@ -29,12 +43,22 @@ const navItems = [
         </a>
       ))}
       <a
-        href="/#discussion"
+        href={lang === 'en' ? '/en/#discussion' : '/#discussion'}
         class="text-text-secondary hover:text-text-primary transition-colors text-sm font-medium flex items-center gap-1"
       >
-        💬 討論區
+        💬 {t('nav.discussion')}
       </a>
       <SearchTrigger client:load />
+      <!-- Language switcher -->
+      <a
+        href={alternatePath}
+        class="text-xs font-semibold px-2 py-1 rounded-md border border-surface-lighter text-text-muted hover:text-text-primary hover:border-accent2 transition-colors"
+        title={languages[otherLang]}
+      >
+        {languages[otherLang]}
+      </a>
+      <ThemeToggle />
+      <AuthButton client:load />
     </div>
 
     <!-- Mobile Menu Button -->
@@ -61,13 +85,22 @@ const navItems = [
         </a>
       ))}
       <a
-        href="/#discussion"
+        href={lang === 'en' ? '/en/#discussion' : '/#discussion'}
         class="block text-text-secondary hover:text-text-primary transition-colors text-sm font-medium py-2"
       >
-        💬 討論區
+        💬 {t('nav.discussion')}
       </a>
-      <div class="py-2">
+      <div class="py-2 flex items-center gap-3">
         <SearchTrigger client:load />
+        <!-- Language switcher (mobile) -->
+        <a
+          href={alternatePath}
+          class="text-xs font-semibold px-2 py-1 rounded-md border border-surface-lighter text-text-muted hover:text-text-primary transition-colors"
+        >
+          {languages[otherLang]}
+        </a>
+        <ThemeToggle />
+        <AuthButton client:load />
       </div>
     </div>
   </div>

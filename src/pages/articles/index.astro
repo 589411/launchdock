@@ -33,25 +33,25 @@ for (const [, articles] of sceneMap) {
   articles.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
 }
 
-const sceneOrder = ['認識 OpenClaw', '環境準備', '安裝與部署', '基礎使用', '核心功能', '整合與自動化', '知識與進階', '鴨編觀點'];
+const sceneOrder = ['認識 OpenClaw', '環境準備', '安裝與部署', '基礎使用', '核心功能', '整合與自動化', '知識與進階', '鴨編的碎碎念'];
 const sceneIcons: Record<string, string> = {
-  '認識 OpenClaw': '🧭',
-  '環境準備': '🔑',
-  '安裝與部署': '💻',
-  '基礎使用': '🚀',
-  '核心功能': '🧩',
-  '整合與自動化': '⚡',
-  '知識與進階': '📚',
-  '鴨編觀點': '🦆',
+  '認識 OpenClaw': '/icons/duck-compass.png',
+  '環境準備': '/icons/duck-key.png',
+  '安裝與部署': '/icons/duck-laptop.png',
+  '基礎使用': '/icons/duck-rocket.png',
+  '核心功能': '/icons/duck-puzzle.png',
+  '整合與自動化': '/icons/automation.png',
+  '知識與進階': '/icons/duck-books.png',
+  '鴨編的碎碎念': '/icons/duck-happy.png',
 };
 
 const steps = [
-  { step: 1, icon: '🧭', title: '認識 OpenClaw' },
-  { step: 2, icon: '🧠', title: '選擇你的 AI 大腦' },
-  { step: 3, icon: '🔑', title: '申請 API Key' },
-  { step: 4, icon: '💻', title: '安裝 OpenClaw' },
-  { step: 5, icon: '🚀', title: '第一次啟動' },
-  { step: 6, icon: '⚡', title: '第一個 Skill' },
+  { step: 1, icon: '/icons/duck-compass.png', title: '認識 OpenClaw' },
+  { step: 2, icon: '/icons/al-models.png', title: '選擇你的 AI 大腦' },
+  { step: 3, icon: '/icons/duck-key.png', title: '申請 API Key' },
+  { step: 4, icon: '/icons/duck-laptop.png', title: '安裝 OpenClaw' },
+  { step: 5, icon: '/icons/duck-rocket.png', title: '第一次啟動' },
+  { step: 6, icon: '/icons/duck-bolt.png', title: '第一個 Skill' },
 ];
 
 // Build step map for step metadata
@@ -59,8 +59,8 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
 ---
 
 <BaseLayout title="教學文章">
-  <div class="max-w-4xl mx-auto px-4 py-12">
-    <h1 class="text-3xl font-bold mb-4">教學文章</h1>
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <h1 class="text-3xl font-extrabold mb-3 tracking-tight">教學文章</h1>
     <p class="text-text-secondary mb-8">
       從你的問題出發，找到解決方案。每篇文章都是可操作的實戰筆記。
     </p>
@@ -88,11 +88,11 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
           return available ? (
             <a
               href={`/articles/${article.id}`}
-              class="block p-5 rounded-lg bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+              class="block p-5 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
             >
               <div class="flex items-center gap-4">
                 <div class="learning-path-step-badge available">
-                  <span class="text-lg">{s.icon}</span>
+                  <span class="text-lg">{s.icon.startsWith('/') ? <img src={s.icon} alt="" class="duck-icon" style="width:24px;height:24px;object-fit:contain" /> : s.icon}</span>
                   <span class="step-num">{s.step}</span>
                 </div>
                 <div class="flex-1">
@@ -114,10 +114,10 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
               </div>
             </a>
           ) : (
-            <div class="block p-5 rounded-lg bg-surface-light/50 border border-surface-lighter/50 opacity-60">
+            <div class="block p-5 rounded-xl bg-surface-light/50 border border-surface-lighter/50 opacity-60">
               <div class="flex items-center gap-4">
                 <div class="learning-path-step-badge upcoming">
-                  <span class="text-lg">{s.icon}</span>
+                  <span class="text-lg">{s.icon.startsWith('/') ? <img src={s.icon} alt="" class="duck-icon" style="width:24px;height:24px;object-fit:contain;filter:grayscale(0.8)" /> : s.icon}</span>
                   <span class="step-num">{s.step}</span>
                 </div>
                 <div class="flex-1">
@@ -140,7 +140,7 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
             .map((article) => (
               <a
                 href={`/articles/${article.id}`}
-                class="block p-4 rounded-lg bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+                class="block p-4 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
               >
                 <div class="flex items-center justify-between gap-4">
                   <div>
@@ -182,14 +182,14 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
         return (
           <section class="mb-12">
             <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
-              <span>{sceneIcons[sceneName] || '📄'}</span>
+              <span>{sceneIcons[sceneName]?.startsWith('/') ? <img src={sceneIcons[sceneName]} alt="" class="duck-icon" style="width:24px;height:24px;object-fit:contain;display:inline-block;vertical-align:middle" /> : (sceneIcons[sceneName] || '📄')}</span>
               {sceneName}
             </h2>
             <div class="space-y-3">
               {articles.map((article) => (
                 <a
                   href={`/articles/${article.id}`}
-                  class="block p-5 rounded-lg bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/50 transition-all group"
+                  class="block p-5 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
                 >
                   <div class="flex items-center justify-between gap-4">
                     <div>
@@ -251,9 +251,25 @@ function switchTab(tab) {
   localStorage.setItem('launchdock-article-tab', tab);
 }
 
-// Restore tab preference
+// Check URL params first, then restore tab preference
 document.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('launchdock-article-tab');
-  if (saved) switchTab(saved);
+  const params = new URLSearchParams(window.location.search);
+  const scene = params.get('scene');
+  if (scene) {
+    switchTab('scene');
+    // Scroll to the matching scene section
+    setTimeout(() => {
+      const headings = document.querySelectorAll('#tab-scene h2');
+      for (const h of headings) {
+        if (h.textContent && h.textContent.includes(scene)) {
+          h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          break;
+        }
+      }
+    }, 100);
+  } else {
+    const saved = localStorage.getItem('launchdock-article-tab');
+    if (saved) switchTab(saved);
+  }
 });
 </script>

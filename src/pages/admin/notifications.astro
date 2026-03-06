@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdminNotifications from '../../components/AdminNotifications.tsx';
+---
+
+<BaseLayout title="通知管理" description="發送活動通知、新文章通知、查看郵件發送記錄。">
+  <div class="max-w-5xl mx-auto px-4 py-12">
+    <div class="flex items-center gap-3 mb-8">
+      <a href="/admin/feedback" class="text-text-muted hover:text-text-primary text-sm">← 回饋監控</a>
+      <span class="text-text-muted">|</span>
+      <a href="/admin/events" class="text-text-muted hover:text-text-primary text-sm">活動管理</a>
+      <span class="text-text-muted">|</span>
+      <a href="/admin/members" class="text-text-muted hover:text-text-primary text-sm">會員管理</a>
+      <span class="text-text-muted">|</span>
+      <span class="text-sm font-medium text-brand-light">通知管理</span>
+    </div>
+    <AdminNotifications client:load />
+  </div>
+</BaseLayout>
