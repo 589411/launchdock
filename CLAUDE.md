@@ -12,7 +12,22 @@ LaunchDock 是一個 Astro 靜態網站，為中文使用者提供 OpenClaw AI A
 
 ---
 
-## 🔴 最重要的規則：圖片工作流程
+## � 部署與 SEO：Sitemap 更新提醒
+
+本站使用 `@astrojs/sitemap` 在每次 `astro build` 時**自動生成** sitemap，部署流程如下：
+
+```
+git push → Cloudflare Pages 自動 build → sitemap-index.xml 自動更新
+```
+
+每次新增文章、頁面，或大改版後，**push 即自動更新 sitemap**，無需手動操作。
+
+- Sitemap 提交網址：`https://launchdock.app/sitemap-index.xml`（Google Search Console 只需提交一次）
+- `public/robots.txt` 已設定指向 sitemap
+
+---
+
+## �🔴 最重要的規則：圖片工作流程
 
 本站教學文章的核心價值在於「讀者能跟著操作」，因此**螢幕截圖是最重要的功能**。
 
