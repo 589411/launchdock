@@ -2,7 +2,7 @@
 title: "工具調用才是真本事：LLM 的戰場從紙上談兵變成真槍實彈"
 description: "OpenClaw 的出現，讓 LLM 的比較標準徹底改變。不再看誰文章寫得好，而是看誰敢動工具、會動工具。鴨編的第一線觀察。"
 contentType: "guide"
-scene: "鴨編觀點"
+scene: "鴨編的碎碎念"
 difficulty: "入門"
 createdAt: "2026-03-04"
 verifiedAt: "2026-03-04"
