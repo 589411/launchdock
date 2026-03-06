@@ -8,6 +8,7 @@ interface Event {
   title: string;
   description: string | null;
   event_date: string;
+  duration_hours: number | null;
   location: string | null;
   max_capacity: number | null;
   status: EventStatus;
@@ -44,6 +45,10 @@ export default function EventList({ compact = false }: Props) {
         .in('status', ['published', 'completed'])
         .order('event_date', { ascending: true });
 
+      if (error) {
+        console.error('EventList query error:', error);
+      }
+
       if (data) {
         // Use SECURITY DEFINER RPC to get accurate counts (bypasses RLS)
         const eventsWithCounts = await Promise.all(
@@ -56,8 +61,8 @@ export default function EventList({ compact = false }: Props) {
         );
         setEvents(eventsWithCounts);
       }
-    } catch {
-      // Query timed out or failed — show empty state
+    } catch (err) {
+      console.error('EventList loadEvents failed:', err);
     }
     setLoading(false);
   }

@@ -7,6 +7,7 @@ interface Event {
   title: string;
   description: string | null;
   event_date: string;
+  duration_hours: number | null;
   location: string | null;
   max_capacity: number | null;
   status: EventStatus;
@@ -49,6 +50,14 @@ export default function EventCard({ eventData, compact = false }: Props) {
     });
   };
 
+  const formatTimeRange = () => {
+    const start = formatTime(event.event_date);
+    if (!event.duration_hours) return start;
+    const endDate = new Date(new Date(event.event_date).getTime() + event.duration_hours * 3600000);
+    const end = endDate.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+    return `${start}–${end}`;
+  };
+
   const statusBadge = () => {
     if (event.status === 'cancelled') return { text: '已取消', cls: 'bg-red-500/20 text-red-400' };
     if (event.status === 'completed') return { text: '已結束', cls: 'bg-gray-500/20 text-gray-400' };
@@ -82,7 +91,7 @@ export default function EventCard({ eventData, compact = false }: Props) {
               {event.title}
             </h3>
             <p className="text-text-muted text-xs mt-0.5">
-              {formatDate(event.event_date)} {formatTime(event.event_date)}
+              {formatDate(event.event_date)} {formatTimeRange()}
             </p>
           </div>
           <span className={`text-xs px-2 py-1 rounded-full whitespace-nowrap ${badge.cls}`}>
@@ -134,7 +143,7 @@ export default function EventCard({ eventData, compact = false }: Props) {
       <div className="space-y-2 mb-5">
         <div className="flex items-center gap-2 text-sm text-text-muted">
           <span>📅</span>
-          <span>{formatDate(event.event_date)} {formatTime(event.event_date)}</span>
+          <span>{formatDate(event.event_date)} {formatTimeRange()}</span>
         </div>
         {event.location && (
           <div className="flex items-center gap-2 text-sm text-text-muted">

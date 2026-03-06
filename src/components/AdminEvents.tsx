@@ -8,6 +8,7 @@ interface Event {
   title: string;
   description: string | null;
   event_date: string;
+  duration_hours: number | null;
   location: string | null;
   max_capacity: number | null;
   status: EventStatus;
@@ -17,6 +18,12 @@ interface Event {
   meet_link: string | null;
   created_at: string;
   updated_at: string;
+}
+
+// Format a Date to local 'YYYY-MM-DDTHH:mm' for <input type="datetime-local">
+function toLocalDatetimeString(d: Date): string {
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
 interface Registration {
@@ -103,6 +110,18 @@ function AdminEventsContent() {
     await loadEvents();
   }
 
+  async function deleteEvent(eventId: string, title: string) {
+    if (!confirm(`確定要刪除「${title}」嗎？此操作無法復原。`)) return;
+    // Delete registrations first (FK constraint)
+    await supabase.from('event_registrations').delete().eq('event_id', eventId);
+    const { error } = await supabase.from('events').delete().eq('id', eventId);
+    if (error) {
+      alert('刪除失敗：' + error.message);
+      return;
+    }
+    await loadEvents();
+  }
+
   async function markAttended(regId: string) {
     await supabase
       .from('event_registrations')
@@ -113,6 +132,16 @@ function AdminEventsContent() {
 
   const formatDate = (d: string) =>
     new Date(d).toLocaleDateString('zh-TW', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+  const formatTimeOnly = (d: string) =>
+    new Date(d).toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+
+  const formatDateRange = (start: string, durationH: number | null) => {
+    const base = formatDate(start);
+    if (!durationH) return base;
+    const endDate = new Date(new Date(start).getTime() + durationH * 3600000);
+    return `${base}–${formatTimeOnly(endDate.toISOString())}`;
+  };
 
   const statusColors: Record<string, string> = {
     draft: 'bg-gray-500/20 text-gray-400',
@@ -169,7 +198,7 @@ function AdminEventsContent() {
                   <h3 className="font-semibold">{event.title}</h3>
                 </div>
                 <p className="text-text-muted text-xs">
-                  📅 {formatDate(event.event_date)}
+                  📅 {formatDateRange(event.event_date, event.duration_hours)}
                   {event.location && ` · 📍 ${event.location}`}
                   {event.max_capacity && ` · 👥 上限 ${event.max_capacity}`}
                 </p>
@@ -186,6 +215,12 @@ function AdminEventsContent() {
                   className="text-xs px-3 py-1.5 border border-surface-lighter hover:border-brand/40 rounded-lg text-text-secondary hover:text-text-primary transition-all"
                 >
                   ✏️ 編輯
+                </button>
+                <button
+                  onClick={() => deleteEvent(event.id, event.title)}
+                  className="text-xs px-3 py-1.5 border border-red-500/30 hover:border-red-500/60 hover:bg-red-500/10 rounded-lg text-red-400 transition-all"
+                >
+                  🗑️ 刪除
                 </button>
                 <select
                   value={event.status}
@@ -297,8 +332,9 @@ function EventForm({
   const [title, setTitle] = useState(event?.title || '');
   const [description, setDescription] = useState(event?.description || '');
   const [eventDate, setEventDate] = useState(
-    event?.event_date ? new Date(event.event_date).toISOString().slice(0, 16) : ''
+    event?.event_date ? toLocalDatetimeString(new Date(event.event_date)) : ''
   );
+  const [durationHours, setDurationHours] = useState(event?.duration_hours?.toString() || '1');
   const [location, setLocation] = useState(event?.location || '');
   const [maxCapacity, setMaxCapacity] = useState(event?.max_capacity?.toString() || '');
   const [priorityHours, setPriorityHours] = useState(event?.priority_hours?.toString() || '0');
@@ -322,6 +358,7 @@ function EventForm({
       title: title.trim(),
       description: description.trim() || null,
       event_date: new Date(eventDate).toISOString(),
+      duration_hours: durationHours ? parseFloat(durationHours) : null,
       location: location.trim() || null,
       max_capacity: maxCapacity ? parseInt(maxCapacity) : null,
       priority_hours: parseInt(priorityHours) || 0,
@@ -406,15 +443,29 @@ function EventForm({
           />
           <p className="text-text-muted text-xs mt-1">報名成功後才會顯示給已報名者</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">日期時間 *</label>
+            <label className="block text-sm font-medium mb-1">活動時間 *</label>
             <input
               type="datetime-local"
               value={eventDate}
               onChange={e => setEventDate(e.target.value)}
               className="w-full px-4 py-2 rounded-lg bg-surface border border-surface-lighter text-text-primary focus:border-brand focus:outline-none"
             />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">活動長度（小時）</label>
+            <input
+              type="number"
+              min="0.5"
+              max="24"
+              step="0.5"
+              value={durationHours}
+              onChange={e => setDurationHours(e.target.value)}
+              className="w-full px-4 py-2 rounded-lg bg-surface border border-surface-lighter text-text-primary focus:border-brand focus:outline-none"
+              placeholder="1"
+            />
+            <p className="text-text-muted text-xs mt-1">例如填 1 = 1 小時，1.5 = 1.5 小時</p>
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">地點</label>

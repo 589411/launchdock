@@ -156,6 +156,7 @@ export interface Database {
           title: string;
           description: string | null;
           event_date: string;
+          duration_hours: number | null;
           location: string | null;
           max_capacity: number | null;
           status: EventStatus;
@@ -171,6 +172,7 @@ export interface Database {
           title: string;
           description?: string | null;
           event_date: string;
+          duration_hours?: number | null;
           location?: string | null;
           max_capacity?: number | null;
           status?: EventStatus;
@@ -184,6 +186,7 @@ export interface Database {
           title?: string;
           description?: string | null;
           event_date?: string;
+          duration_hours?: number | null;
           location?: string | null;
           max_capacity?: number | null;
           status?: EventStatus;
