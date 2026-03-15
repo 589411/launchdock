@@ -5,7 +5,7 @@ contentType: "tutorial"
 scene: "env-setup"
 difficulty: "beginner"
 createdAt: "2026-02-25"
-verifiedAt: "2026-02-25"
+verifiedAt: "2026-03-15"
 archived: false
 order: 3
 pathStep: 3
@@ -94,6 +94,16 @@ On the Google AI Studio page, you can test it directly:
 
 > ✅ **Done!** You've got your Gemini API Key. Jump to [Next step: Install OpenClaw](/articles/install-openclaw).
 
+### (Optional) Set a Spending Limit — Finally Safe to Add a Card
+
+Before, many users hesitated to link a credit card to Gemini because there was no way to cap spending. Google AI Studio now supports **spending limits**, so you can safely upgrade to a paid plan!
+
+1. Go to the [AI Studio Spend Management page](https://aistudio.google.com/spend)
+2. The page shows all your projects (Free tier, Tier 1, etc.)
+3. Select a project and set your monthly spending cap
+
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> With a cap set, even if OpenClaw goes wild calling the API, you'll never spend more than the limit you defined. No more bill shock!
+
 ### 🚨 Common Issues
 
 **Q: It says "Google AI Studio is not available in your region"?**
@@ -110,7 +120,7 @@ Some regions may have restrictions. Solutions:
 |---|---|---|
 | **Purpose** | Call Gemini AI models | Connect Google Drive / Gmail |
 | **Key format** | `AIzaSy...` | OAuth Client ID + Secret |
-| **Cost** | Generous free tier | Requires a billing account |
+| **Cost** | Generous free tier, with spending limit support | Requires a billing account |
 | **Tutorial** | This article | [Google API Key Guide](/articles/google-api-key-guide) |
 
 ---

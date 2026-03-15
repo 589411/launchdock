@@ -5,7 +5,7 @@ contentType: "tutorial"
 scene: "環境準備"
 difficulty: "入門"
 createdAt: "2026-02-25"
-verifiedAt: "2026-02-25"
+verifiedAt: "2026-03-15"
 archived: false
 order: 3
 pathStep: 3
@@ -94,6 +94,16 @@ AIzaSyxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 > ✅ **完成！** 你已經拿到 Gemini 的 API Key 了。跳到 [下一步：安裝 OpenClaw](/articles/install-openclaw)。
 
+### （選做）設定花費上限：終於可以放心綁卡了
+
+以前很多龍蝦主不敢幫 Gemini 帳號綁信用卡，因為沒辦法限制費用。現在 Google AI Studio 已經支援**花費上限設定**，可以安心升級到付費方案了！
+
+1. 前往 [AI Studio 花費管理頁](https://aistudio.google.com/spend)
+2. 頁面會列出帳戶的各個專案（Free tier、Tier 1 等）
+3. 選擇專案後，設定每月花費上限金額
+
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 設了上限，就算 OpenClaw 瘋狂呼叫 API，最多也只花到你設定的金額，完全不怕爆表。這功能對龍蝦主而言是一大福音！
+
 ### 🚨 常見問題
 
 **Q：顯示「Google AI Studio is not available in your region」？**
@@ -110,7 +120,7 @@ AIzaSyxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |---|---|---|
 | **用途** | 呼叫 Gemini AI 模型 | 串接 Google Drive / Gmail |
 | **Key 格式** | `AIzaSy...` | OAuth Client ID + Secret |
-| **費用** | 免費額度很大 | 要設定計費帳號 |
+| **費用** | 免費額度很大，可設定花費上限 | 要設定計費帳號 |
 | **教學** | 就是這篇 | [Google API Key 指南](/articles/google-api-key-guide) |
 
 ---
