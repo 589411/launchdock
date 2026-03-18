@@ -5,7 +5,7 @@ contentType: "tutorial"
 scene: "安裝與部署"
 difficulty: "入門"
 createdAt: "2026-02-24"
-verifiedAt: "2026-02-24"
+verifiedAt: "2026-03-18"
 archived: false
 order: 2
 prerequisites: ["install-openclaw"]
@@ -106,11 +106,11 @@ OpenClaw 需要幾個系統工具：
 # Git（版本控制，通常 macOS 已內建）
 git --version
 
-# Node.js（部分功能需要）
-brew install node
+# Node.js（部分功能需要，官方建議 Node 24，最低 22.16）
+brew install node@24
 
 # 確認
-node --version  # 應該 v18 以上
+node --version  # 應該 v24.x.x（或最低 v22.16+）
 npm --version
 ```
 

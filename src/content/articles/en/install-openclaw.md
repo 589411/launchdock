@@ -5,7 +5,7 @@ contentType: "guide"
 scene: "install"
 difficulty: "beginner"
 createdAt: "2026-02-24"
-verifiedAt: "2026-02-24"
+verifiedAt: "2026-03-18"
 archived: false
 order: 1
 pathStep: 4
@@ -94,13 +94,13 @@ Based on your environment, choose the best option to begin:
 Regardless of platform, the minimum requirements are:
 
 - **Python** 3.11 or above
-- **Node.js** 18 or above
+- **Node.js** 22.16 or above (official recommendation: **Node 24**)
 - **RAM** 8GB (16GB recommended)
 - **Disk space** 5GB or more
 - **Network** Stable internet connection (needed to call the AI API)
-- **API Key** At least one: OpenAI / Google / Anthropic
+- **API Key** At least one: OpenAI / Google / Anthropic / Ollama Cloud
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Don't have an API Key yet? Check out [AI Model API Key Guide](/articles/ai-api-key-guide) first — Google AI Studio has a free tier and is the best option for beginners.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Don't have an API Key yet? Two free options: (1) [Ollama Cloud](https://ollama.com) — sign up at ollama.com then run `ollama signin` to use cloud models like qwen3-coder and deepseek for free; (2) [Google AI Studio](https://aistudio.google.com/) — Google API Key includes a free tier.
 
 ---
 

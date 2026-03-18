@@ -5,7 +5,7 @@ contentType: "tutorial"
 scene: "install"
 difficulty: "beginner"
 createdAt: "2026-02-24"
-verifiedAt: "2026-02-24"
+verifiedAt: "2026-03-18"
 archived: false
 order: 2
 prerequisites: ["install-openclaw"]
@@ -106,11 +106,11 @@ OpenClaw needs a few system tools:
 # Git (version control, usually pre-installed on macOS)
 git --version
 
-# Node.js (needed for some features)
-brew install node
+# Node.js (needed for some features, official recommendation: Node 24, minimum 22.16)
+brew install node@24
 
 # Verify
-node --version  # Should be v18 or above
+node --version  # Should be v24.x.x (minimum v22.16+)
 npm --version
 ```
 

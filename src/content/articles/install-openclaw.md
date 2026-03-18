@@ -5,7 +5,7 @@ contentType: "guide"
 scene: "安裝與部署"
 difficulty: "入門"
 createdAt: "2026-02-24"
-verifiedAt: "2026-02-24"
+verifiedAt: "2026-03-18"
 archived: false
 order: 1
 pathStep: 4
@@ -94,13 +94,13 @@ stuckOptions:
 不管哪個平台，最低需求：
 
 - **Python** 3.11 以上
-- **Node.js** 18 以上
+- **Node.js** 22.16 以上（官方建議安裝 **Node 24**）
 - **RAM** 8GB（建議 16GB）
 - **磁碟空間** 5GB 以上
 - **網路** 穩定連線（需要呼叫 AI API）
-- **API Key** 至少一個：OpenAI / Google / Anthropic
+- **API Key** 至少一個：OpenAI / Google / Anthropic / Ollama Cloud
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 還沒有 API Key？先看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide)——Google AI Studio 有免費額度，最適合新手。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 還沒有 API Key？有兩個免費選項：(1) [Ollama Cloud](https://ollama.com)——先到 ollama.com 建立帳號再執行 `ollama signin`，即可免費使用 qwen3-coder、deepseek 等雲端模型；(2) [Google AI Studio](https://aistudio.google.com/)——Google API Key 有免費額度。
 
 ---
 
