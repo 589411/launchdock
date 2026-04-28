@@ -65,6 +65,13 @@ Ollama:
   canonicalArticle: "ollama-openclaw"
   relatedArticles: ["llm-guide", "openclaw-model-config"]
 
+Hermes:
+  displayName: "Hermes Agent"
+  aliases: ["Hermes", "hermes", "hermes agent", "hermes-agent"]
+  shortDesc: "Nous Research 開發的開源 AI Agent，具備跨 session 記憶、自動技能建立與 70+ 內建技能"
+  canonicalArticle: "hermes-agent"
+  relatedArticles: ["hermes-agent-windows", "ollama-openclaw-mac", "openclaw-agent"]
+
 OpenRouter:
   displayName: "OpenRouter"
   aliases: ["openrouter"]
