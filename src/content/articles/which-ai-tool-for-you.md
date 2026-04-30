@@ -106,7 +106,7 @@ Layer 1 不是落後，是選擇。
 
 **為什麼是 Gemini 而不是 Claude 做這件事：**
 
-Gemini 的模型能力不是頂尖，但它的護城河是 Google Workspace 全家桶整合。這是 Anthropic 和 OpenAI 沒有的優勢。另外，Gemini 的中文圖片生成（Imagen 3）也有一定優勢，但需要額外付費。
+Gemini 的模型能力不是頂尖，但它的護城河是 Google Workspace 全家桶整合。這是 Anthropic 和 OpenAI 沒有的優勢。另外，Gemini 的中文圖片生成（Nano Banana 2 🍌）也有一定優勢，但需要額外付費。
 
 **隱性的選工具原則：**
 

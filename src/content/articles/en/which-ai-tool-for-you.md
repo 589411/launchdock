@@ -106,7 +106,7 @@ Your Calendar, Drive, Gmail, and Docs all live in the Google ecosystem. Gemini c
 
 **Why Gemini and not Claude for this:**
 
-Gemini's model capability isn't top-tier, but its moat is deep Google Workspace integration — something Anthropic and OpenAI simply don't have. Gemini's Chinese image generation (Imagen 3) also has advantages for relevant use cases, though it requires additional fees.
+Gemini's model capability isn't top-tier, but its moat is deep Google Workspace integration — something Anthropic and OpenAI simply don't have. Gemini's Chinese image generation (Nano Banana 2 🍌) also has advantages for relevant use cases, though it requires additional fees.
 
 **The hidden rule for choosing tools:**
 
