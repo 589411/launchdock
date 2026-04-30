@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-04-28T03:19:21.466Z",
+  "_generated": "2026-04-30T14:11:18.927Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -85,6 +85,12 @@
       "shortDesc": "OpenClaw 的核心服務，監聽 port 18789",
       "canonicalArticle": "openclaw-first-run",
       "link": "/articles/openclaw-first-run"
+    },
+    "AI 控制邊界": {
+      "displayName": "AI 控制邊界",
+      "shortDesc": "AI 工具能力範圍的分類框架：從對話框內到外部操控、內部整合、全托管，理解每層工具的本質差異",
+      "canonicalArticle": "which-ai-tool-for-you",
+      "link": "/articles/which-ai-tool-for-you"
     },
     "Prompt Engineering": {
       "displayName": "Prompt 工程",
@@ -510,7 +516,9 @@
         "ai-tool-landscape"
       ],
       "concepts_defined": [],
-      "concepts_referenced": [],
+      "concepts_referenced": [
+        "AI 控制邊界"
+      ],
       "link": "/articles/ai-tool-decision-framework"
     },
     {
@@ -824,9 +832,33 @@
         "OpenClaw"
       ],
       "concepts_referenced": [
-        "KimiClaw"
+        "KimiClaw",
+        "AI 控制邊界"
       ],
       "link": "/articles/why-openclaw"
+    },
+    {
+      "slug": "which-ai-tool-for-you",
+      "title": "龍蝦適合你嗎？先走完這五層再說",
+      "description": "很多人問：我適合用 OpenClaw 嗎？這個問題沒有標準答案——但有一張地圖。五層工具地圖帶你看清楚自己現在在哪、下一步是什麼、每一層的真實代價。",
+      "scene": "認識 OpenClaw",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "LLM",
+        "Agent",
+        "OpenClaw",
+        "Hermes"
+      ],
+      "prerequisites": [
+        "why-openclaw",
+        "ai-tool-landscape"
+      ],
+      "concepts_defined": [
+        "AI 控制邊界"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/which-ai-tool-for-you"
     },
     {
       "slug": "ai-tool-landscape",
@@ -848,7 +880,9 @@
         "ai-tech-evolution"
       ],
       "concepts_defined": [],
-      "concepts_referenced": [],
+      "concepts_referenced": [
+        "AI 控制邊界"
+      ],
       "link": "/articles/ai-tool-landscape"
     },
     {

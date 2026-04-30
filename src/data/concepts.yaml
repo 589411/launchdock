@@ -116,6 +116,15 @@ Gateway:
   canonicalArticle: "openclaw-first-run"
   relatedArticles: ["install-openclaw"]
 
+# ── AI 工具選擇框架 ──────────────────────────────────────
+
+AI 控制邊界:
+  displayName: "AI 控制邊界"
+  aliases: ["AI 控制邊界", "控制邊界", "AI control boundary"]
+  shortDesc: "AI 工具能力範圍的分類框架：從對話框內到外部操控、內部整合、全托管，理解每層工具的本質差異"
+  canonicalArticle: "which-ai-tool-for-you"
+  relatedArticles: ["ai-tool-landscape", "ai-tool-decision-framework", "why-openclaw"]
+
 # ── AI 技術概念 ──────────────────────────────────────────
 
 Prompt Engineering:
