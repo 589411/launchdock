@@ -62,8 +62,8 @@ Ollama:
   displayName: "Ollama"
   aliases: ["ollama"]
   shortDesc: "在本機輕鬆運行開源 LLM 的工具，完全免費"
-  canonicalArticle: "ollama-openclaw"
-  relatedArticles: ["llm-guide", "openclaw-model-config"]
+  canonicalArticle: "ollama-openclaw-mac"
+  relatedArticles: ["ollama-openclaw-windows", "llm-guide", "openclaw-model-config"]
 
 Hermes:
   displayName: "Hermes Agent"
@@ -93,7 +93,14 @@ Skill:
   aliases: ["Skill", "skill", "技能"]
   shortDesc: "OpenClaw 中可重複執行的自動化工作流模板"
   canonicalArticle: "openclaw-skill"
-  relatedArticles: ["openclaw-first-skill", "prompt-engineering", "pkm-system"]
+  relatedArticles: ["openclaw-first-skill", "prompt-engineering", "pkm-system", "from-prompt-to-skill"]
+
+Harness:
+  displayName: "Harness"
+  aliases: ["Harness", "harness", "代理骨架"]
+  shortDesc: "包在模型外的控制與治理層，負責設邊界、驗證成果、錯誤回復與調度，決定 Agent 的可靠度"
+  canonicalArticle: "ai-agent-anatomy"
+  relatedArticles: ["from-prompt-to-skill", "mcp-protocol", "llm-tool-calling-era"]
 
 Soul:
   displayName: "Soul（人設）"
@@ -209,7 +216,7 @@ Fallback:
   aliases: ["Fallback", "fallback", "備援"]
   shortDesc: "主要模型失敗時自動切換到備用模型的機制"
   canonicalArticle: "openclaw-model-config"
-  relatedArticles: ["ollama-openclaw", "llm-guide"]
+  relatedArticles: ["ollama-openclaw-mac", "llm-guide"]
 
 # ── 整合與工具 ──────────────────────────────────────────
 
@@ -241,7 +248,14 @@ Docker:
   aliases: ["Docker", "docker", "docker-compose"]
   shortDesc: "容器化部署工具，用於自建伺服器部署 OpenClaw"
   canonicalArticle: "deploy-openclaw-cloud"
-  relatedArticles: ["ollama-openclaw"]
+  relatedArticles: ["ollama-openclaw-mac", "docker-n8n-mac", "docker-n8n-windows"]
+
+n8n:
+  displayName: "n8n"
+  aliases: ["n8n"]
+  shortDesc: "開源、可自架的工作流程自動化工具，用視覺化節點串接不同系統，也能接上 LLM"
+  canonicalArticle: "what-is-n8n"
+  relatedArticles: ["docker-n8n-mac", "docker-n8n-windows"]
 
 WSL:
   displayName: "WSL（Windows Subsystem for Linux）"
@@ -286,6 +300,20 @@ Google Cloud Console:
   shortDesc: "Google 雲端服務的管理介面，用於啟用 API"
   canonicalArticle: "google-api-key-guide"
   relatedArticles: ["ai-api-key-guide"]
+
+Google Apps Script:
+  displayName: "Google Apps Script (GAS)"
+  aliases: ["Google Apps Script", "GAS", "Apps Script"]
+  shortDesc: "Google 內建免費的雲端程式環境，能讓試算表、表單、文件自動化運作"
+  canonicalArticle: "gemini-gas-ordering-system"
+  relatedArticles: ["google-api-key-guide"]
+
+Gemini:
+  displayName: "Gemini"
+  aliases: ["Gemini", "Google Gemini"]
+  shortDesc: "Google 的大型語言模型，可透過網頁版或 API 使用，擅長多模態與程式生成"
+  canonicalArticle: "google-api-key-guide"
+  relatedArticles: ["gemini-gas-ordering-system", "llm-guide", "ai-tool-landscape"]
 
 OAuth:
   displayName: "OAuth"

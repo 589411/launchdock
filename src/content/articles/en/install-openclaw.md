@@ -78,7 +78,7 @@ Based on your environment, choose the best option to begin:
 | Scenario | Recommendation |
 |---|---|
 | First time, just want to try it out | ☁️ **Cloud Deployment** (fastest) |
-| Want a free experience without applying for an API Key | 🦙 **[Ollama Quick Start](/articles/ollama-openclaw)** (`ollama launch openclaw` — one command to launch) |
+| Want a free experience without applying for an API Key | 🦙 **[Ollama Quick Start (macOS)](/en/articles/ollama-openclaw-mac)** (`ollama launch openclaw` — one command to launch) ｜🪟 **[Windows](/en/articles/ollama-openclaw-windows)** |
 | Want long-term use and deeper learning | 🍎 **macOS** or 🪟 **Windows + WSL** local installation |
 | Have Linux development experience | 🪟 **Windows WSL 2** or follow the macOS tutorial |
 | Computer is struggling | ☁️ **Cloud Deployment** |

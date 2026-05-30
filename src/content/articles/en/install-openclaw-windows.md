@@ -201,7 +201,7 @@ codex "explain this error and how to fix it: [paste error message here]"
 
 > 💡 Codex CLI requires an OpenAI API Key. If you have Ollama installed, it can also be configured to use local models. See [Codex CLI docs](https://github.com/openai/codex).
 
-For more on Ollama, see [Ollama + OpenClaw Complete Guide](/en/articles/ollama-openclaw).
+For more on Ollama, see [Ollama + OpenClaw Quick Start (Windows)](/en/articles/ollama-openclaw-windows).
 
 ---
 

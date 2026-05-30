@@ -203,7 +203,7 @@ codex "explain this error and how to fix it: [把錯誤訊息貼在這裡]"
 
 > 💡 Codex CLI 需要 OpenAI API Key。如果你已經安裝 Ollama，也可以設定它使用本機模型來回答喔。詳見 [Codex CLI 文件](https://github.com/openai/codex)。
 
-詳細說明見 [Ollama + OpenClaw 完整教學](/articles/ollama-openclaw)。
+詳細說明見 [Ollama + OpenClaw 快速上手（Windows 篇）](/articles/ollama-openclaw-windows)。
 
 ---
 
