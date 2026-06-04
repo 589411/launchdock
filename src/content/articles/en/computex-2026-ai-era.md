@@ -59,31 +59,48 @@ Also announced: **DGX Station**, powered by the GB300 Grace Blackwell Ultra chip
 
 ## Bottleneck #1 — Immature Tech? Solved.
 
-The first February concern was "the technology isn't mature enough."
+When I said "the technology isn't mature enough," I wasn't just talking about AI model quality — I meant the entire ecosystem around agent frameworks like OpenClaw.
 
-At the time, local models required massive RAM to run, were slow, and lagged far behind cloud APIs in quality. Now?
+At the time, OpenClaw itself was iterating rapidly: unstable features, incomplete documentation, a small community. More seriously, **malicious Skills started appearing** — people packaging harmful tools as useful Skills and releasing them for unsuspecting users to install. This shook confidence in the whole ecosystem and made people cautious about installing anything from the community.
 
-- **128GB unified memory** lets full 70B-parameter models load entirely in memory — no disk swapping
-- **Blackwell architecture's** 1 Petaflop AI compute brings inference speed on par with cloud APIs
+Now, four months later, the ecosystem has visibly matured:
+
+- OpenClaw has continued to evolve, and similar products have emerged — competition raises the bar
+- Skill safety practices have improved; the community is better at identifying bad actors
+- **128GB unified memory** on RTX Spark finally lets large local models run at cloud API speeds — no disk swapping
 - Open-source models like **Gemma 4, Llama 4, and Qwen 3** keep improving — one `ollama pull` command away
 
-The tech maturity bottleneck **is officially cleared with the RTX Spark generation**.
+The ecosystem maturity bottleneck **is officially cleared with this hardware generation and this open-source model wave**.
 
 ---
 
 ## Bottleneck #2 — Token Fees? Local Models Eliminate Them.
 
-The second concern was token costs.
+There's important context most people miss on this one.
 
-Running an AI agent on cloud APIs means every single conversation costs money. An automated workflow running 24/7 can generate a surprisingly painful bill — and that's exactly what makes people hesitate to give AI a permanent role in their lives.
+Back in February, there were still a few **subscription-based services** that let you use an agent framework for a flat monthly fee — no per-conversation billing. That made some people feel the cost problem was manageable.
 
-Local models flip the economics completely:
+But those subscription services **shut down one by one**.
+
+The reason is simple: they were absorbing the backend token costs themselves. Once usage exceeded projections, they bled money. So now the reality is: if you want to run a personal AI agent, you're on API billing — you pay per conversation, every time.
+
+For **professional, productivity-driven use**, this is fine. If AI is helping you produce real output — drafting content, automating workflows, analyzing data — the token cost is justified by the value you get back.
+
+But for **personal, casual, or exploratory use**, it's a different story:
+
+- Maybe you just want to try a feature
+- Or use AI as a daily conversational companion
+- Or learn through trial and error, running the same thing ten times
+
+In those situations, "every message costs money" creates a **psychological friction far greater than the actual dollar amount**. It's one of the main reasons so many people installed OpenClaw but never really made it a daily habit.
+
+Local models change the equation entirely:
 
 **You pay for hardware once. Every conversation after that costs nothing.**
 
-Whether an RTX Spark laptop or a Mac running Ollama — running ten thousand conversations costs the same as running one: a bit of electricity.
+Whether an RTX Spark laptop or a Mac running Ollama — running ten thousand conversations costs the same as running one: a bit of electricity. Want to experiment? Experiment. Want to chat? Chat. No mental tax on every message.
 
-This is the inflection point that transforms OpenClaw from "interesting tech experiment" into "AI assistant I use every single day."
+That's what transforms OpenClaw from "productivity tool for power users" into "personal AI assistant for everyone."
 
 ---
 
