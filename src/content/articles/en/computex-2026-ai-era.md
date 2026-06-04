@@ -1,6 +1,6 @@
 ---
 title: "Computex 2026: Nvidia Breaks the OpenClaw Bottlenecks — Personal AI Assistant Era Begins"
-description: "Four months ago we identified two bottlenecks for personal AI agents: immature tech and per-token costs. Nvidia's RTX Spark at Computex 2026 just removed both. Here's what it means."
+description: "Four months ago I predicted in a course: once the tech matures and good local models arrive, personal AI agents go mainstream — and that will change the history of personal computing. Computex 2026 just proved it."
 contentType: "guide"
 scene: "blog"
 difficulty: "beginner"
@@ -17,14 +17,14 @@ stuckOptions:
   "What You Can Do Now": ["How do I start using a personal AI assistant today?", "Can I do this without buying new hardware?", "Is the cloud option good enough?"]
 ---
 
-## A Conversation Four Months Ago
+## Four Months Ago, I Said This in a Course
 
-Back in February, our group was discussing OpenClaw — the open-source AI agent framework — and someone laid out two core bottlenecks standing in the way of mass adoption:
+Back in February, during one of my sessions, we were discussing why OpenClaw hadn't gone mainstream yet. I laid out two core bottlenecks:
 
 > **Bottleneck #1: The technology is still developing too fast to be reliable**
 > **Bottleneck #2: Every conversation costs token fees, forever**
 
-The conclusion at the time: "Eventually, there'll be a more mature agent product combined with good local models — and that's when the personal AI assistant era truly begins."
+My prediction: "There will come a day when a more mature agent product meets good local models — and that's when the personal AI assistant era begins. And when it does, it will change the history of personal computing."
 
 It's now June 2026.
 
