@@ -5,6 +5,16 @@
 
 ---
 
+## 🔁 內容 Loop 鐵律（最先讀）
+
+本站內容更新採 loop 制（設計見 `~/github/dev-harness/LAUNCHDOCK-CONTENT-LOOP.md`）：
+
+- **開場**：先讀 `STATUS.md` 與 `BACKLOG.md`，回報現況並從 BACKLOG 挑一件最高價值的事再動工。
+- **收尾**：把這次的進展與新發現的待辦寫回 `BACKLOG.md`，並更新 `STATUS.md` 的「下一個具體動作」。
+- 監控結果（壞連結、未配對 @img、讀者回饋）一律附加到 `BACKLOG.md` 的「來自監控」區。
+
+---
+
 ## 專案概述
 
 LaunchDock 是一個 Astro 靜態網站，為中文使用者提供 OpenClaw AI Agent 的教學文章。
