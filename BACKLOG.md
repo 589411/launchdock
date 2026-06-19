@@ -11,7 +11,7 @@
 <尚無。每週排程會把壞連結、未配對 @img、讀者回饋寫進這裡。>
 
 ## 💡 來自規劃（你或 AI 提議的新內容）
-- [ ] 寫一篇關於loop 的短文，現在最紅的loop 其實是定時觸發，hook,等綜合體，可以調用現有的agent, skill ,mcp 等自動完成任務 — 來自 LINE 2026-06-19 21:11 🆕
+- [ ] 寫一篇關於loop 的短文，現在最紅的loop 其實是定時觸發，hook,等綜合體，可以調用現有的agent, skill ,mcp 等自動完成任務 — 來自 LINE 2026-06-19 21:11 ✍️ → src/content/articles/_drafts/idea-20260619-7cfa7c.md
 - [ ] （範例）為 lab demo `gas-line-push` 寫一篇對應教學文
 - [ ] （範例）盤點 46 篇文章中截圖過舊、需重拍的
 
