@@ -234,7 +234,35 @@ PKM:
   canonicalArticle: "pkm-system"
   relatedArticles: ["rag-explained", "openclaw-skill"]
 
+Webhook:
+  displayName: "Webhook"
+  aliases: ["Webhook", "webhook", "Webhook URL"]
+  shortDesc: "事件發生時由服務端主動把資料 POST 到你指定網址的回呼機制，Bot 即時收訊的基礎"
+  canonicalArticle: "deploy-line-bot-cloudflare-workers"
+  relatedArticles: ["telegram-integration", "mcp-protocol"]
+
+LINE Bot:
+  displayName: "LINE Bot"
+  aliases: ["LINE Bot", "LINE bot", "LINE 機器人", "LINE 官方帳號", "Messaging API"]
+  shortDesc: "透過 LINE 官方帳號的 Messaging API 接上後端，讓 LINE 帳號變成可自動回應的 AI 機器人"
+  canonicalArticle: "deploy-line-bot-cloudflare-workers"
+  relatedArticles: ["telegram-integration", "mcp-protocol"]
+
 # ── 部署與安裝 ──────────────────────────────────────────
+
+Cloudflare Workers:
+  displayName: "Cloudflare Workers"
+  aliases: ["Cloudflare Workers", "Cloudflare Worker", "Workers", "Cloudflare"]
+  shortDesc: "Cloudflare 的邊緣運算平台，部署即得 HTTPS 網址，免維護伺服器，適合當 Bot 後端"
+  canonicalArticle: "deploy-line-bot-cloudflare-workers"
+  relatedArticles: ["deploy-openclaw-cloud", "telegram-integration"]
+
+wrangler:
+  displayName: "wrangler"
+  aliases: ["wrangler", "Wrangler"]
+  shortDesc: "Cloudflare Workers 的命令列工具，負責登入、設定機密與一行指令部署"
+  canonicalArticle: "deploy-line-bot-cloudflare-workers"
+  relatedArticles: ["cli-guide", "deploy-openclaw-cloud"]
 
 Zeabur:
   displayName: "Zeabur"

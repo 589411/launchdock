@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-06-04T15:46:06.237Z",
+  "_generated": "2026-06-18T15:48:23.845Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -182,6 +182,30 @@
       "canonicalArticle": "pkm-system",
       "link": "/articles/pkm-system"
     },
+    "Webhook": {
+      "displayName": "Webhook",
+      "shortDesc": "事件發生時由服務端主動把資料 POST 到你指定網址的回呼機制，Bot 即時收訊的基礎",
+      "canonicalArticle": "deploy-line-bot-cloudflare-workers",
+      "link": "/articles/deploy-line-bot-cloudflare-workers"
+    },
+    "LINE Bot": {
+      "displayName": "LINE Bot",
+      "shortDesc": "透過 LINE 官方帳號的 Messaging API 接上後端，讓 LINE 帳號變成可自動回應的 AI 機器人",
+      "canonicalArticle": "deploy-line-bot-cloudflare-workers",
+      "link": "/articles/deploy-line-bot-cloudflare-workers"
+    },
+    "Cloudflare Workers": {
+      "displayName": "Cloudflare Workers",
+      "shortDesc": "Cloudflare 的邊緣運算平台，部署即得 HTTPS 網址，免維護伺服器，適合當 Bot 後端",
+      "canonicalArticle": "deploy-line-bot-cloudflare-workers",
+      "link": "/articles/deploy-line-bot-cloudflare-workers"
+    },
+    "wrangler": {
+      "displayName": "wrangler",
+      "shortDesc": "Cloudflare Workers 的命令列工具，負責登入、設定機密與一行指令部署",
+      "canonicalArticle": "deploy-line-bot-cloudflare-workers",
+      "link": "/articles/deploy-line-bot-cloudflare-workers"
+    },
     "Zeabur": {
       "displayName": "Zeabur",
       "shortDesc": "台灣團隊打造的雲端部署平台，一鍵部署 OpenClaw",
@@ -329,7 +353,9 @@
         "Docker"
       ],
       "concepts_referenced": [
-        "OpenClaw"
+        "OpenClaw",
+        "Cloudflare Workers",
+        "wrangler"
       ],
       "link": "/articles/deploy-openclaw-cloud"
     },
@@ -690,7 +716,9 @@
       ],
       "concepts_referenced": [
         "Harness",
-        "Telegram Bot"
+        "Telegram Bot",
+        "Webhook",
+        "LINE Bot"
       ],
       "link": "/articles/mcp-protocol"
     },
@@ -1015,6 +1043,32 @@
       "link": "/articles/token-economics"
     },
     {
+      "slug": "deploy-line-bot-cloudflare-workers",
+      "title": "用 Cloudflare Workers 當 LINE Bot 後端：部署 Worker + 設定官方帳號 Webhook",
+      "description": "用 Claude Code 一行指令把 Cloudflare Worker 部署上線，再到 LINE 官方帳號後台開啟 Messaging API 與 Webhook，讓你的 LINE 帳號變成 24 小時在線的 AI 機器人。",
+      "scene": "整合與自動化",
+      "difficulty": "中級",
+      "contentType": "tutorial",
+      "tags": [
+        "LINE",
+        "Cloudflare",
+        "Webhook",
+        "部署",
+        "整合"
+      ],
+      "prerequisites": [
+        "telegram-integration"
+      ],
+      "concepts_defined": [
+        "Webhook",
+        "LINE Bot",
+        "Cloudflare Workers",
+        "wrangler"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/deploy-line-bot-cloudflare-workers"
+    },
+    {
       "slug": "gemini-gas-ordering-system",
       "title": "用 Gemini 打造 AI 雲端訂餐系統：從菜單到廚房螢幕的 4 步驟實戰",
       "description": "不寫一行程式碼，靠四個提示詞讓 Gemini 幫你寫出 Google Apps Script 後端、自動化表單、即時廚房跳單系統。重點不只是程式，而是學會面對欄位對不齊、權限沒開、版本沒更新這些真實開發問題。",
@@ -1125,7 +1179,10 @@
         "Telegram Bot"
       ],
       "concepts_referenced": [
-        "MCP"
+        "MCP",
+        "Webhook",
+        "LINE Bot",
+        "Cloudflare Workers"
       ],
       "link": "/articles/telegram-integration"
     },
@@ -1194,7 +1251,7 @@
     {
       "slug": "computex-2026-ai-era",
       "title": "Computex 2026：Nvidia 打破龍蝦瓶頸，個人 AI 助理元年正式開始",
-      "description": "四個月前我們在 LINE 群組預測：等技術成熟加上好用的地端模型，就是龍蝦普及的時刻。Computex 2026 的 Nvidia RTX Spark，讓這個預測提前兌現。",
+      "description": "四個月前我在課程中預測：等技術成熟加上好用的地端模型，就是龍蝦普及的時刻。Computex 2026 的 Nvidia RTX Spark，讓這個預測提前兌現，也將改變個人電腦的歷史。",
       "scene": "鴨編的碎碎念",
       "difficulty": "入門",
       "contentType": "guide",
@@ -1340,6 +1397,7 @@
         "Shell"
       ],
       "concepts_referenced": [
+        "wrangler",
         "WSL",
         "Homebrew"
       ],
