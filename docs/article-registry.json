@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-06-04T15:46:06.237Z",
+  "_generated": "2026-06-27T08:55:35.362Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -61,6 +61,12 @@
       "shortDesc": "能自主決策、使用工具完成任務的 AI 實體",
       "canonicalArticle": "openclaw-agent",
       "link": "/articles/openclaw-agent"
+    },
+    "Computer Use": {
+      "displayName": "Computer Use（電腦操作）",
+      "shortDesc": "讓 AI 直接操作電腦或瀏覽器（點按鈕、填表單、跨頁把任務做完）的能力",
+      "canonicalArticle": "ai-agent-browsers",
+      "link": "/articles/ai-agent-browsers"
     },
     "Skill": {
       "displayName": "Skill（技能）",
@@ -353,6 +359,27 @@
         "n8n"
       ],
       "link": "/articles/docker-n8n-mac"
+    },
+    {
+      "slug": "dev-cli-tools-mac",
+      "title": "Mac 開發者必備 CLI 工具安裝：Homebrew、GitHub CLI、Firebase CLI、Antigravity CLI",
+      "description": "在 Mac 上一次裝好開發常用的命令列工具。先用 Homebrew 打底，再安裝 GitHub CLI、Firebase CLI 與 Google Antigravity CLI，附登入與常見排錯。",
+      "scene": "安裝與部署",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "macOS",
+        "安裝",
+        "Homebrew",
+        "GitHub",
+        "Firebase"
+      ],
+      "prerequisites": [
+        "cli-guide"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/dev-cli-tools-mac"
     },
     {
       "slug": "install-openclaw-macos",
@@ -956,6 +983,7 @@
       ],
       "concepts_defined": [],
       "concepts_referenced": [
+        "Computer Use",
         "AI 控制邊界",
         "Gemini"
       ],
@@ -1057,7 +1085,9 @@
       "concepts_defined": [
         "Hermes"
       ],
-      "concepts_referenced": [],
+      "concepts_referenced": [
+        "Computer Use"
+      ],
       "link": "/articles/hermes-agent"
     },
     {
@@ -1192,9 +1222,32 @@
       "link": "/articles/ai-speed-and-opportunity"
     },
     {
+      "slug": "ai-agent-browsers",
+      "title": "AI 會自己操作網頁了：Comet、Atlas 到完整 Computer Use 瀏覽器選擇清單",
+      "description": "瀏覽器不再只是『顯示網頁』，而是會自己點按鈕、填表單、把任務做完。Perplexity Comet、ChatGPT Atlas 到底差在哪？這篇幫你一次選對。",
+      "scene": "鴨編的碎碎念",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "Agent",
+        "LLM",
+        "OpenAI",
+        "Google",
+        "MCP"
+      ],
+      "prerequisites": [
+        "ai-tool-landscape"
+      ],
+      "concepts_defined": [
+        "Computer Use"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/ai-agent-browsers"
+    },
+    {
       "slug": "computex-2026-ai-era",
       "title": "Computex 2026：Nvidia 打破龍蝦瓶頸，個人 AI 助理元年正式開始",
-      "description": "四個月前我們在 LINE 群組預測：等技術成熟加上好用的地端模型，就是龍蝦普及的時刻。Computex 2026 的 Nvidia RTX Spark，讓這個預測提前兌現。",
+      "description": "四個月前我在課程中預測：等技術成熟加上好用的地端模型，就是龍蝦普及的時刻。Computex 2026 的 Nvidia RTX Spark，讓這個預測提前兌現，也將改變個人電腦的歷史。",
       "scene": "鴨編的碎碎念",
       "difficulty": "入門",
       "contentType": "guide",
@@ -1281,6 +1334,7 @@
         "Token",
         "API Key",
         "Ollama",
+        "Computer Use",
         "Transformer",
         "Fallback",
         "Gemini"

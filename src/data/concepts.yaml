@@ -88,6 +88,13 @@ Agent:
   canonicalArticle: "openclaw-agent"
   relatedArticles: ["multi-agent-swarm", "openclaw-soul", "cot-and-reasoning"]
 
+Computer Use:
+  displayName: "Computer Use（電腦操作）"
+  aliases: ["Computer Use", "computer use", "電腦操作", "Agent 瀏覽器", "代理瀏覽器", "AI 瀏覽器"]
+  shortDesc: "讓 AI 直接操作電腦或瀏覽器（點按鈕、填表單、跨頁把任務做完）的能力"
+  canonicalArticle: "ai-agent-browsers"
+  relatedArticles: ["ai-tool-landscape", "hermes-agent", "llm-guide"]
+
 Skill:
   displayName: "Skill（技能）"
   aliases: ["Skill", "skill", "技能"]
