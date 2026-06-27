@@ -17,6 +17,7 @@ export const ui = {
     // Navigation
     'nav.home': '首頁',
     'nav.articles': '場景教學',
+    'nav.quiz': '能力測驗',
     'nav.events': '活動',
     'nav.about': '關於',
     'nav.discussion': '討論區',
@@ -71,6 +72,7 @@ export const ui = {
     // Navigation
     'nav.home': 'Home',
     'nav.articles': 'Tutorials',
+    'nav.quiz': 'Capability Check',
     'nav.events': 'Events',
     'nav.about': 'About',
     'nav.discussion': 'Discuss',

@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CapabilityQuiz from '../components/CapabilityQuiz.tsx';
+import { getCollection } from 'astro:content';
+import { levels, topLevelInfo } from '../data/quiz';
+
+// 收集所有推薦會用到的 slug，只傳這些文章的精簡 metadata 給 island
+const recommendedSlugs = new Set<string>([
+  ...Object.values(levels).flatMap((l) => l.recommended),
+  ...topLevelInfo.recommended,
+]);
+
+const allArticles = await getCollection('articles', ({ data }) => !data.archived);
+const articles: Record<string, { title: string; description: string; url: string }> = {};
+for (const a of allArticles) {
+  if (recommendedSlugs.has(a.id)) {
+    articles[a.id] = {
+      title: a.data.title,
+      description: a.data.description,
+      url: `/articles/${a.id}`,
+    };
+  }
+}
+---
+
+<BaseLayout title="AI 能力測驗" description="2 分鐘 AI 能力自評：找出你缺哪塊能力、下一步該學什麼、看哪幾篇文章。">
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <CapabilityQuiz client:load locale="zh-tw" articles={articles} />
+  </div>
+</BaseLayout>

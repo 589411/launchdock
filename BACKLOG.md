@@ -11,12 +11,15 @@
 <尚無。每週排程會把壞連結、未配對 @img、讀者回饋寫進這裡。>
 
 ## 💡 來自規劃（你或 AI 提議的新內容）
+- [ ] [功能] AI 能力測驗後續：用途定位＝講座/課程暖場 + 體驗課評估。可考慮 → 結果分享圖卡(OG)、
+      存 Supabase 做分析、講師後台看學員分佈、依結果 email 推薦清單
 - [ ] [缺圖] `ai-agent-browsers` 待補 2 張截圖：comet-browser、chatgpt-atlas（中英共用）
 - [ ] 寫一篇關於loop 的短文，現在最紅的loop 其實是定時觸發，hook,等綜合體，可以調用現有的agent, skill ,mcp 等自動完成任務 — 來自 LINE 2026-06-19 21:11 ✍️ → src/content/articles/_drafts/idea-20260619-7cfa7c.md
 - [ ] （範例）為 lab demo `gas-line-push` 寫一篇對應教學文
 - [ ] （範例）盤點 46 篇文章中截圖過舊、需重拍的
 
 ## ✅ 最近完成（保留最近 5 筆，舊的刪）
+- 2026-06-27 「AI 能力測驗」功能：行為自評 12 題 → 缺口導向結果 + 雷達圖 + 推薦文章（中英），已驗證（待 commit）
 - 2026-06-27 「AI Computer Use 瀏覽器選擇清單（Comet/Atlas…）」鴨編碎碎念文（中英）+ 登錄 Computer Use 概念 — 待補 2 張截圖
 - 2026-06-19 「Cloudflare Workers 當 LINE Bot 後端」教學文（中英）
 - 2026-06-05 更新瓶頸段落內容

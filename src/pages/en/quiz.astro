@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CapabilityQuiz from '../../components/CapabilityQuiz.tsx';
+import { getCollection } from 'astro:content';
+import { levels, topLevelInfo } from '../../data/quiz';
+
+const recommendedSlugs = new Set<string>([
+  ...Object.values(levels).flatMap((l) => l.recommended),
+  ...topLevelInfo.recommended,
+]);
+
+const allArticles = await getCollection('articlesEn', ({ data }) => !data.archived);
+const articles: Record<string, { title: string; description: string; url: string }> = {};
+for (const a of allArticles) {
+  if (recommendedSlugs.has(a.id)) {
+    articles[a.id] = {
+      title: a.data.title,
+      description: a.data.description,
+      url: `/en/articles/${a.id}`,
+    };
+  }
+}
+---
+
+<BaseLayout title="AI Capability Check" lang="en" description="A 2-minute AI capability self-check: find your gap, what to learn next, and which articles to read.">
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <CapabilityQuiz client:load locale="en" articles={articles} />
+  </div>
+</BaseLayout>

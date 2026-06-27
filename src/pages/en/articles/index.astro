@@ -39,6 +39,21 @@ const diffLabels = difficultyKeyToLabel['en'];
       Hands-on guides for running OpenClaw AI Agent. Start from scratch and level up step by step.
     </p>
 
+    <!-- Quiz CTA -->
+    <a
+      href="/en/quiz"
+      class="flex items-center justify-between gap-4 p-5 mb-10 rounded-2xl bg-brand/10 border border-brand/40 hover:border-brand transition-all group"
+    >
+      <div class="flex items-center gap-3">
+        <img src="/icons/duck-compass.png" alt="" class="duck-icon" style="width:36px;height:36px;object-fit:contain" />
+        <div>
+          <h2 class="font-semibold group-hover:text-brand-light transition-colors">Not sure where to start?</h2>
+          <p class="text-text-muted text-sm mt-0.5">Take the 2-minute AI capability check — find your gap and what to learn next.</p>
+        </div>
+      </div>
+      <span class="text-brand-light shrink-0 font-medium">Start →</span>
+    </a>
+
     {allArticles.length === 0 ? (
       <!-- Coming soon state -->
       <div class="text-center py-24 bg-surface-light rounded-2xl border border-surface-lighter">

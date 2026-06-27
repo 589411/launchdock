@@ -65,6 +65,21 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
       從你的問題出發，找到解決方案。每篇文章都是可操作的實戰筆記。
     </p>
 
+    <!-- Quiz CTA -->
+    <a
+      href="/quiz"
+      class="flex items-center justify-between gap-4 p-5 mb-10 rounded-2xl bg-brand/10 border border-brand/40 hover:border-brand transition-all group"
+    >
+      <div class="flex items-center gap-3">
+        <img src="/icons/duck-compass.png" alt="" class="duck-icon" style="width:36px;height:36px;object-fit:contain" />
+        <div>
+          <h2 class="font-semibold group-hover:text-brand-light transition-colors">不知道從哪篇開始？</h2>
+          <p class="text-text-muted text-sm mt-0.5">做 2 分鐘 AI 能力測驗，找出你缺哪塊、下一步學什麼。</p>
+        </div>
+      </div>
+      <span class="text-brand-light shrink-0 font-medium">開始測驗 →</span>
+    </a>
+
     <!-- Tab switcher -->
     <div class="article-tabs mb-10" id="article-tabs">
       <button class="article-tab active" data-tab="path" onclick="switchTab('path')">
