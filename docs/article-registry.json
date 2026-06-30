@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-06-27T08:55:35.362Z",
+  "_generated": "2026-06-30T03:32:05.026Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -182,6 +182,36 @@
       "canonicalArticle": "telegram-integration",
       "link": "/articles/telegram-integration"
     },
+    "LIFF": {
+      "displayName": "LIFF",
+      "shortDesc": "LINE 的前端框架，把你的網頁包成可在 LINE App 內直接開啟、並取得使用者身分的小程式",
+      "canonicalArticle": "create-line-login-liff-app",
+      "link": "/articles/create-line-login-liff-app"
+    },
+    "LINE Login": {
+      "displayName": "LINE Login",
+      "shortDesc": "LINE 的 OAuth 登入機制，讓使用者用 LINE 身分一鍵登入你的網頁；LIFF App 必須掛在 LINE Login channel 底下",
+      "canonicalArticle": "create-line-login-liff-app",
+      "link": "/articles/create-line-login-liff-app"
+    },
+    "Firebase": {
+      "displayName": "Firebase",
+      "shortDesc": "Google 的後端即服務平台，替純前端網站外包登入、資料庫與託管，免自架伺服器",
+      "canonicalArticle": "firebase-create-project",
+      "link": "/articles/firebase-create-project"
+    },
+    "Firebase Authentication": {
+      "displayName": "Firebase Authentication",
+      "shortDesc": "Firebase 的登入服務，一鍵接上 Google、email、匿名等多種登入方式",
+      "canonicalArticle": "firebase-enable-google-login",
+      "link": "/articles/firebase-enable-google-login"
+    },
+    "Firestore": {
+      "displayName": "Firestore",
+      "shortDesc": "Firebase 的雲端 NoSQL 資料庫，前端可直接讀寫並即時同步，靠安全規則保護",
+      "canonicalArticle": "firebase-firestore-rules-deploy",
+      "link": "/articles/firebase-firestore-rules-deploy"
+    },
     "PKM": {
       "displayName": "個人知識管理 (PKM)",
       "shortDesc": "系統化收集、整理、連結知識，讓資訊變成洞見",
@@ -263,81 +293,84 @@
   },
   "articles": [
     {
-      "slug": "install-openclaw",
-      "title": "安裝指南：選擇你的平台",
-      "description": "OpenClaw（龍蝦 AI Agent）安裝入口，根據你的作業系統選擇 macOS 或 Windows 安裝教學。",
-      "scene": "安裝與部署",
-      "difficulty": "入門",
-      "contentType": "guide",
+      "slug": "openclaw-model-config",
+      "title": "模型設定與切換：讓 OpenClaw 自動選最適合的 AI 模型",
+      "description": "不同任務用不同模型。學會設定 Provider、模型路由和 Fallback 機制，又省錢又高效。",
+      "scene": "基礎使用",
+      "difficulty": "中級",
+      "contentType": "tutorial",
       "tags": [
         "OpenClaw",
-        "安裝",
-        "入門"
+        "模型",
+        "GPT",
+        "Gemini",
+        "Claude",
+        "設定"
       ],
       "prerequisites": [
-        "ai-api-key-guide"
+        "openclaw-first-run"
       ],
-      "concepts_defined": [],
+      "concepts_defined": [
+        "Fallback"
+      ],
       "concepts_referenced": [
-        "OpenClaw",
-        "Gateway",
-        "Zeabur",
-        "WSL",
-        "Homebrew"
+        "LLM",
+        "Token",
+        "Provider",
+        "Ollama",
+        "Context Window"
       ],
-      "link": "/articles/install-openclaw"
+      "link": "/articles/openclaw-model-config"
     },
     {
-      "slug": "why-not-windows-openclaw",
-      "title": "為什麼不建議在 Windows 原生環境安裝 OpenClaw？",
-      "description": "OpenClaw 的運作核心是 CLI 工具與 Markdown 檔案。了解為什麼 macOS、Linux 是龍蝦最好的飼養環境，以及 Windows 用戶該怎麼辦。",
-      "scene": "安裝與部署",
-      "difficulty": "入門",
-      "contentType": "guide",
-      "tags": [
-        "OpenClaw",
-        "Windows",
-        "macOS",
-        "Linux",
-        "WSL",
-        "安裝"
-      ],
-      "prerequisites": [
-        "why-openclaw"
-      ],
-      "concepts_defined": [],
-      "concepts_referenced": [
-        "WSL",
-        "CLI"
-      ],
-      "link": "/articles/why-not-windows-openclaw"
-    },
-    {
-      "slug": "deploy-openclaw-cloud",
-      "title": "雲端部署 OpenClaw：Zeabur 一鍵部署 + KimiClaw 快速上手",
-      "description": "不想折騰本地環境？用 Zeabur 一鍵部署 OpenClaw，或試試 KimiClaw 直接在雲端體驗 AI Agent 的威力。",
-      "scene": "安裝與部署",
+      "slug": "openclaw-first-skill",
+      "title": "第一個 Skill：5 分鐘完成你的第一個自動化任務",
+      "description": "你的 OpenClaw 已經能回話了，但它真正的威力在 Skill。跟著做，把一個手動任務變成一鍵完成。",
+      "scene": "基礎使用",
       "difficulty": "入門",
       "contentType": "tutorial",
       "tags": [
         "OpenClaw",
-        "Zeabur",
-        "KimiClaw",
-        "部署",
-        "Docker"
+        "Skill",
+        "自動化",
+        "入門"
       ],
       "prerequisites": [
-        "ai-api-key-guide"
+        "openclaw-first-run"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [
+        "Skill"
+      ],
+      "link": "/articles/openclaw-first-skill"
+    },
+    {
+      "slug": "openclaw-first-run",
+      "title": "第一次啟動 OpenClaw：設定 API Key、聽到 AI 的第一句話",
+      "description": "安裝好了，現在讓 OpenClaw 真正動起來。跟著設定精靈完成初始化，3 分鐘內讓 AI 回應你的第一句話。",
+      "scene": "基礎使用",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "OpenClaw",
+        "設定",
+        "啟動",
+        "Gateway",
+        "API Key",
+        "入門"
+      ],
+      "prerequisites": [
+        "install-openclaw"
       ],
       "concepts_defined": [
-        "KimiClaw",
-        "Zeabur",
-        "Docker"
+        "Gateway"
       ],
       "concepts_referenced": [
-        "OpenClaw"
+        "OpenClaw",
+        "API Key",
+        "Telegram Bot"
       ],
-      "link": "/articles/deploy-openclaw-cloud"
+      "link": "/articles/openclaw-first-run"
     },
     {
       "slug": "docker-n8n-mac",
@@ -531,171 +564,332 @@
       "link": "/articles/windows-wsl-guide"
     },
     {
-      "slug": "media-guide",
-      "title": "文章媒體使用指南：圖片、GIF、影片的插入方法",
-      "description": "如何在 LaunchDock 文章中高效插入截圖、動態 GIF 和 YouTube 影片，讓教學生動易懂。",
-      "scene": "知識與進階",
+      "slug": "install-openclaw",
+      "title": "安裝指南：選擇你的平台",
+      "description": "OpenClaw（龍蝦 AI Agent）安裝入口，根據你的作業系統選擇 macOS 或 Windows 安裝教學。",
+      "scene": "安裝與部署",
       "difficulty": "入門",
-      "contentType": "reference",
+      "contentType": "guide",
       "tags": [
-        "LaunchDock",
-        "圖片",
-        "GIF"
+        "OpenClaw",
+        "安裝",
+        "入門"
+      ],
+      "prerequisites": [
+        "ai-api-key-guide"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [
+        "OpenClaw",
+        "Gateway",
+        "Zeabur",
+        "WSL",
+        "Homebrew"
+      ],
+      "link": "/articles/install-openclaw"
+    },
+    {
+      "slug": "deploy-to-github-pages",
+      "title": "把靜態網站／PWA 部署到 GitHub Pages：從建 repo 到自動上線",
+      "description": "把你的純前端網站（HTML/JS、PWA）免費部署到 GitHub Pages：建立 repo、推上程式、在 Settings 開啟 Pages，讓 GitHub Actions 自動 build 並上線。附完整截圖與 build 失敗、網域排錯。",
+      "scene": "安裝與部署",
+      "difficulty": "中級",
+      "contentType": "tutorial",
+      "tags": [
+        "GitHub",
+        "部署",
+        "整合",
+        "設定"
       ],
       "prerequisites": [],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/media-guide"
+      "link": "/articles/deploy-to-github-pages"
     },
     {
-      "slug": "pkm-system",
-      "title": "用 OpenClaw 打造個人知識管理（PKM）系統",
-      "description": "告別資訊焦慮。用 OpenClaw 自動收集、整理、回顧知識，讓你的第二大腦真正運作起來。",
-      "scene": "知識與進階",
-      "difficulty": "中級",
-      "contentType": "guide",
-      "tags": [
-        "PKM",
-        "Notion",
-        "Obsidian",
-        "自動化"
-      ],
-      "prerequisites": [
-        "openclaw-skill"
-      ],
-      "concepts_defined": [
-        "PKM"
-      ],
-      "concepts_referenced": [
-        "Skill",
-        "RAG",
-        "Embedding"
-      ],
-      "link": "/articles/pkm-system"
-    },
-    {
-      "slug": "multi-agent-swarm",
-      "title": "多 Agent 協作與蜂群智能：當 AI 學會團隊合作",
-      "description": "一個 Agent 能力有限，但一群 Agent 分工合作就能解決複雜問題。了解 Multi-Agent 系統的協作模式、蜂群智能概念，以及 OpenClaw 如何實現多角色協同。",
-      "scene": "知識與進階",
-      "difficulty": "中級",
-      "contentType": "guide",
-      "tags": [
-        "Agent",
-        "OpenClaw",
-        "LLM"
-      ],
-      "prerequisites": [
-        "openclaw-agent"
-      ],
-      "concepts_defined": [
-        "Multi-Agent",
-        "Swarm"
-      ],
-      "concepts_referenced": [
-        "Agent",
-        "Agent Memory",
-        "ReAct"
-      ],
-      "link": "/articles/multi-agent-swarm"
-    },
-    {
-      "slug": "ai-tool-decision-framework",
-      "title": "我該用哪個 AI 工具？5 個問題讓你不再猜",
-      "description": "工具選錯，事倍功半。用這個決策框架，5 個問題內找到最適合你任務的 AI 工具——再也不用靠感覺或 Google 亂找。",
-      "scene": "知識與進階",
+      "slug": "why-not-windows-openclaw",
+      "title": "為什麼不建議在 Windows 原生環境安裝 OpenClaw？",
+      "description": "OpenClaw 的運作核心是 CLI 工具與 Markdown 檔案。了解為什麼 macOS、Linux 是龍蝦最好的飼養環境，以及 Windows 用戶該怎麼辦。",
+      "scene": "安裝與部署",
       "difficulty": "入門",
       "contentType": "guide",
       "tags": [
-        "Agent",
-        "LLM",
-        "MCP",
         "OpenClaw",
-        "Prompt"
+        "Windows",
+        "macOS",
+        "Linux",
+        "WSL",
+        "安裝"
       ],
       "prerequisites": [
-        "ai-tool-landscape"
+        "why-openclaw"
       ],
       "concepts_defined": [],
       "concepts_referenced": [
-        "AI 控制邊界"
+        "WSL",
+        "CLI"
       ],
-      "link": "/articles/ai-tool-decision-framework"
+      "link": "/articles/why-not-windows-openclaw"
     },
     {
-      "slug": "ai-agent-memory-guide",
-      "title": "AI 記憶的基礎建設缺失：為什麼大模型越強，Agent 越容易「原地踏步」？",
-      "description": "記憶不是 AI 的附加功能，而是讓 Agent 從「工具」變成「夥伴」的核心基礎建設。這篇文章不跟你解釋論文，而是帶你想清楚：如果你在設計 AI Agent，記憶這一層你到底在解決什麼問題？",
-      "scene": "知識與進階",
-      "difficulty": "中級",
-      "contentType": "guide",
+      "slug": "deploy-openclaw-cloud",
+      "title": "雲端部署 OpenClaw：Zeabur 一鍵部署 + KimiClaw 快速上手",
+      "description": "不想折騰本地環境？用 Zeabur 一鍵部署 OpenClaw，或試試 KimiClaw 直接在雲端體驗 AI Agent 的威力。",
+      "scene": "安裝與部署",
+      "difficulty": "入門",
+      "contentType": "tutorial",
       "tags": [
-        "Agent",
-        "RAG",
-        "LLM",
-        "MCP"
+        "OpenClaw",
+        "Zeabur",
+        "KimiClaw",
+        "部署",
+        "Docker"
       ],
       "prerequisites": [
-        "openclaw-agent"
+        "ai-api-key-guide"
       ],
       "concepts_defined": [
-        "Agent Memory",
-        "Context Engineering"
+        "KimiClaw",
+        "Zeabur",
+        "Docker"
       ],
       "concepts_referenced": [
-        "RAG"
-      ],
-      "link": "/articles/ai-agent-memory-guide"
-    },
-    {
-      "slug": "cot-and-reasoning",
-      "title": "AI 推理技術解密：Chain-of-Thought、ReAct 與思維樹",
-      "description": "AI 怎麼學會「想事情」？從 Chain-of-Thought 到思維樹，了解讓 AI 推理能力提升 5 倍的技術，以及 OpenClaw 如何運用它們。",
-      "scene": "知識與進階",
-      "difficulty": "中級",
-      "contentType": "guide",
-      "tags": [
-        "LLM",
-        "Prompt",
-        "Agent",
         "OpenClaw"
       ],
-      "prerequisites": [
-        "prompt-engineering"
-      ],
-      "concepts_defined": [
-        "CoT",
-        "ReAct"
-      ],
-      "concepts_referenced": [
-        "Agent",
-        "Prompt Engineering"
-      ],
-      "link": "/articles/cot-and-reasoning"
+      "link": "/articles/deploy-openclaw-cloud"
     },
     {
-      "slug": "prompt-engineering",
-      "title": "Prompt 工程：讓 AI 聽懂你的話，給出你要的答案",
-      "description": "掌握 Prompt 的核心技巧，從角色設定到思維鏈，讓同一個模型的回答品質提升 10 倍。",
-      "scene": "知識與進階",
+      "slug": "hermes-agent",
+      "title": "Hermes Agent 快速上手｜ollama launch hermes 一鍵啟動",
+      "description": "用一行指令啟動 Hermes AI Agent：自動安裝、選雲端模型、設定完成，幾分鐘內體驗具備跨 session 記憶與 70+ 內建技能的自主 Agent。",
+      "scene": "整合與自動化",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "Ollama",
+        "Hermes",
+        "Agent",
+        "安裝",
+        "LLM"
+      ],
+      "prerequisites": [
+        "ollama-openclaw-mac"
+      ],
+      "concepts_defined": [
+        "Hermes"
+      ],
+      "concepts_referenced": [
+        "Computer Use"
+      ],
+      "link": "/articles/hermes-agent"
+    },
+    {
+      "slug": "hermes-agent-windows",
+      "title": "Hermes Agent 快速上手｜Windows + WSL2 篇",
+      "description": "Windows 專用教學：用 WSL2 + Ollama 一鍵啟動 Hermes AI Agent，體驗跨 session 記憶與雲端模型運行，完全不需要設定 API Key。",
+      "scene": "整合與自動化",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "Ollama",
+        "Hermes",
+        "Agent",
+        "安裝",
+        "Windows",
+        "WSL"
+      ],
+      "prerequisites": [
+        "ollama-openclaw-windows",
+        "windows-wsl-guide"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [
+        "Hermes"
+      ],
+      "link": "/articles/hermes-agent-windows"
+    },
+    {
+      "slug": "what-is-n8n",
+      "title": "n8n 是什麼？企業自動化的痛點與解方",
+      "description": "員工每天在系統間複製貼上、報表手動拉、SaaS 工具按次計費爆預算——n8n 用一條條視覺化流程把這些雜事接起來。鴨編帶你看懂為什麼企業在瘋這個工具。",
+      "scene": "整合與自動化",
       "difficulty": "入門",
       "contentType": "guide",
       "tags": [
-        "Prompt",
-        "LLM"
+        "n8n",
+        "整合",
+        "Agent",
+        "OpenClaw"
+      ],
+      "prerequisites": [],
+      "concepts_defined": [
+        "n8n"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/what-is-n8n"
+    },
+    {
+      "slug": "telegram-integration",
+      "title": "Telegram 整合完整教學：讓 OpenClaw 變成你的私人 AI 助理",
+      "description": "從 BotFather 建立機器人到串接 OpenClaw，把 Telegram 變成你隨時隨地使用 AI 的入口。",
+      "scene": "整合與自動化",
+      "difficulty": "中級",
+      "contentType": "tutorial",
+      "tags": [
+        "Telegram",
+        "Bot",
+        "MCP",
+        "整合"
       ],
       "prerequisites": [
         "openclaw-first-run"
       ],
       "concepts_defined": [
-        "Prompt Engineering"
+        "Telegram Bot"
       ],
       "concepts_referenced": [
-        "Skill",
-        "Soul",
-        "CoT"
+        "MCP"
       ],
-      "link": "/articles/prompt-engineering"
+      "link": "/articles/telegram-integration"
+    },
+    {
+      "slug": "firebase-firestore-rules-deploy",
+      "title": "修好「Missing or insufficient permissions」：用 Firebase CLI 部署 Firestore 安全規則",
+      "description": "純前端網站接上 Firestore 後，雲端連線測試卻跳「Missing or insufficient permissions」？這是 Firestore 預設規則鎖死所致。本文用 Firebase CLI 一步步部署你的 firestore.rules、在 Console 驗證，並排查授權網域，附完整截圖。",
+      "scene": "整合與自動化",
+      "difficulty": "中級",
+      "contentType": "troubleshoot",
+      "tags": [
+        "Firebase",
+        "Firestore",
+        "部署",
+        "除錯",
+        "整合"
+      ],
+      "prerequisites": [
+        "firebase-register-web-app"
+      ],
+      "concepts_defined": [
+        "Firestore"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/firebase-firestore-rules-deploy"
+    },
+    {
+      "slug": "firebase-enable-google-login",
+      "title": "在 Firebase 啟用 Google 登入",
+      "description": "用 Firebase Authentication 替你的網站加上「用 Google 登入」：開啟 Authentication、選 Google 登入方式、設定專案支援 email。附截圖與最常見的支援 email 警告排解。",
+      "scene": "整合與自動化",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "Firebase",
+        "Google",
+        "OAuth",
+        "申請",
+        "整合"
+      ],
+      "prerequisites": [
+        "firebase-create-project"
+      ],
+      "concepts_defined": [
+        "Firebase Authentication"
+      ],
+      "concepts_referenced": [
+        "Firebase"
+      ],
+      "link": "/articles/firebase-enable-google-login"
+    },
+    {
+      "slug": "firebase-register-web-app",
+      "title": "在 Firebase 註冊 Web App 取得 SDK 設定",
+      "description": "把你的網站註冊成 Firebase 專案下的 Web 應用程式，拿到 firebaseConfig SDK 設定，前端就能連上 Firebase。附截圖，並說明 apiKey 到底算不算機密、之後在哪再看到這段設定。",
+      "scene": "整合與自動化",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "Firebase",
+        "OAuth",
+        "設定",
+        "整合"
+      ],
+      "prerequisites": [
+        "firebase-enable-google-login"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [
+        "Firebase",
+        "Firebase Authentication",
+        "Firestore"
+      ],
+      "link": "/articles/firebase-register-web-app"
+    },
+    {
+      "slug": "create-line-login-liff-app",
+      "title": "建立 LINE Login Channel 並新增 LIFF App：把你的網頁變成 LINE 內開的小程式",
+      "description": "在 LINE Developers 主控台建立一個 LINE Login channel，再到 LIFF 分頁新增 LIFF App，取得 LIFF ID 與 LIFF URL。手把手 6 步驟附截圖，並解釋 LIFF 能做什麼、適合哪些情境，以及最容易卡關的地方。",
+      "scene": "整合與自動化",
+      "difficulty": "中級",
+      "contentType": "tutorial",
+      "tags": [
+        "LINE",
+        "LIFF",
+        "OAuth",
+        "申請",
+        "整合"
+      ],
+      "prerequisites": [],
+      "concepts_defined": [
+        "LIFF",
+        "LINE Login"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/create-line-login-liff-app"
+    },
+    {
+      "slug": "firebase-create-project",
+      "title": "建立你的第一個 Firebase 專案",
+      "description": "純前端網站想加雲端登入或資料同步？第一步是在 Firebase Console 建立一個專案。本文從歡迎頁到專案總覽帶你走完，並解釋 Firebase 能替沒有後端的你做什麼。",
+      "scene": "整合與自動化",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "Firebase",
+        "Google",
+        "申請",
+        "整合"
+      ],
+      "prerequisites": [],
+      "concepts_defined": [
+        "Firebase"
+      ],
+      "concepts_referenced": [
+        "Firebase Authentication"
+      ],
+      "link": "/articles/firebase-create-project"
+    },
+    {
+      "slug": "gemini-gas-ordering-system",
+      "title": "用 Gemini 打造 AI 雲端訂餐系統：從菜單到廚房螢幕的 4 步驟實戰",
+      "description": "不寫一行程式碼，靠四個提示詞讓 Gemini 幫你寫出 Google Apps Script 後端、自動化表單、即時廚房跳單系統。重點不只是程式，而是學會面對欄位對不齊、權限沒開、版本沒更新這些真實開發問題。",
+      "scene": "整合與自動化",
+      "difficulty": "中級",
+      "contentType": "tutorial",
+      "tags": [
+        "Gemini",
+        "Google Apps Script",
+        "整合",
+        "自動化",
+        "Prompt"
+      ],
+      "prerequisites": [],
+      "concepts_defined": [
+        "Google Apps Script"
+      ],
+      "concepts_referenced": [
+        "Gemini"
+      ],
+      "link": "/articles/gemini-gas-ordering-system"
     },
     {
       "slug": "mcp-protocol",
@@ -837,130 +1031,328 @@
       "link": "/articles/rag-explained"
     },
     {
-      "slug": "openclaw-first-run",
-      "title": "第一次啟動 OpenClaw：設定 API Key、聽到 AI 的第一句話",
-      "description": "安裝好了，現在讓 OpenClaw 真正動起來。跟著設定精靈完成初始化，3 分鐘內讓 AI 回應你的第一句話。",
-      "scene": "基礎使用",
+      "slug": "ai-api-key-guide",
+      "title": "AI 模型 API Key 申請指南：OpenAI、Anthropic、Google、OpenRouter 一次搞定",
+      "description": "一步步教你申請 AI 模型的 API Key。不管你選哪家，照著做就能拿到讓 OpenClaw 運作的鑰匙。",
+      "scene": "環境準備",
       "difficulty": "入門",
       "contentType": "tutorial",
       "tags": [
-        "OpenClaw",
-        "設定",
-        "啟動",
-        "Gateway",
         "API Key",
-        "入門"
+        "OpenAI",
+        "Anthropic",
+        "Google AI Studio",
+        "OpenRouter",
+        "Gemini",
+        "Claude",
+        "GPT"
       ],
       "prerequisites": [
-        "install-openclaw"
+        "llm-guide"
       ],
       "concepts_defined": [
-        "Gateway"
+        "API Key"
       ],
       "concepts_referenced": [
-        "OpenClaw",
-        "API Key",
-        "Telegram Bot"
+        "Provider",
+        "OpenRouter",
+        "Google Cloud Console",
+        "OAuth"
       ],
-      "link": "/articles/openclaw-first-run"
+      "link": "/articles/ai-api-key-guide"
     },
     {
-      "slug": "openclaw-first-skill",
-      "title": "第一個 Skill：5 分鐘完成你的第一個自動化任務",
-      "description": "你的 OpenClaw 已經能回話了，但它真正的威力在 Skill。跟著做，把一個手動任務變成一鍵完成。",
-      "scene": "基礎使用",
+      "slug": "cli-guide",
+      "title": "CLI 入門指南：命令列到底是什麼？為什麼 AI 離不開它？",
+      "description": "命令列介面（CLI）是 OpenClaw 的手和腳。了解 CLI 的原理、常見工具、以及它為什麼是 AI 時代最強大的操作方式。",
+      "scene": "環境準備",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "OpenClaw",
+        "安裝",
+        "macOS",
+        "Linux",
+        "WSL"
+      ],
+      "prerequisites": [
+        "why-openclaw"
+      ],
+      "concepts_defined": [
+        "CLI",
+        "Shell"
+      ],
+      "concepts_referenced": [
+        "WSL",
+        "Homebrew"
+      ],
+      "link": "/articles/cli-guide"
+    },
+    {
+      "slug": "github-developer-settings-tokens",
+      "title": "GitHub 開發者設定導覽：Fine-grained Token、SSH/GPG 金鑰在哪管理",
+      "description": "搞不清楚 GitHub 的 Personal Access Token、SSH/GPG 金鑰、GitHub Apps 在哪設定？這篇帶你認識 Settings → Developer settings 底下各個頁面，重點講解較安全的 Fine-grained Token，以及操作敏感設定時的 passkey 二次驗證。",
+      "scene": "環境準備",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "GitHub",
+        "API",
+        "設定",
+        "整合"
+      ],
+      "prerequisites": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/github-developer-settings-tokens"
+    },
+    {
+      "slug": "google-api-key-guide",
+      "title": "Google API Key 申請完整指南：OpenClaw 串接 Google Drive / Gmail 必讀",
+      "description": "一步步教你申請 Google Cloud API Key，解決 OpenClaw 串接 Google 服務時最常卡關的那一步。",
+      "scene": "環境準備",
       "difficulty": "入門",
       "contentType": "tutorial",
       "tags": [
         "OpenClaw",
-        "Skill",
-        "自動化",
-        "入門"
+        "Google API",
+        "Google Drive",
+        "Gmail",
+        "申請"
+      ],
+      "prerequisites": [
+        "ai-api-key-guide"
+      ],
+      "concepts_defined": [
+        "Google Cloud Console",
+        "Gemini",
+        "OAuth"
+      ],
+      "concepts_referenced": [
+        "API Key",
+        "Firebase",
+        "Google Apps Script"
+      ],
+      "link": "/articles/google-api-key-guide"
+    },
+    {
+      "slug": "github-account-signup",
+      "title": "註冊 GitHub 帳號：從首頁到登入後台（含裝置 email 驗證）",
+      "description": "手把手註冊一個 GitHub 帳號：填寫註冊表單、完成 email 裝置驗證、進入 Dashboard，並找到右上角的帳號選單。很多教學的第一步都需要 GitHub 帳號，這篇幫你先把這關過了。",
+      "scene": "環境準備",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "GitHub",
+        "申請",
+        "整合"
+      ],
+      "prerequisites": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/github-account-signup"
+    },
+    {
+      "slug": "llm-guide",
+      "title": "選擇你的 AI 大腦：4 種 LLM 方案完整比較",
+      "description": "OpenClaw 需要接上 LLM 才能運作。搞懂 ChatGPT 訂閱、OpenRouter、各家 API 的差別，選出最適合你的方案。",
+      "scene": "環境準備",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "LLM",
+        "ChatGPT",
+        "Claude",
+        "Gemini",
+        "OpenRouter",
+        "API",
+        "OpenClaw"
+      ],
+      "prerequisites": [
+        "why-openclaw"
+      ],
+      "concepts_defined": [
+        "LLM",
+        "Provider",
+        "OpenRouter"
+      ],
+      "concepts_referenced": [
+        "Token",
+        "API Key",
+        "Ollama",
+        "Computer Use",
+        "Transformer",
+        "Fallback",
+        "Gemini"
+      ],
+      "link": "/articles/llm-guide"
+    },
+    {
+      "slug": "cot-and-reasoning",
+      "title": "AI 推理技術解密：Chain-of-Thought、ReAct 與思維樹",
+      "description": "AI 怎麼學會「想事情」？從 Chain-of-Thought 到思維樹，了解讓 AI 推理能力提升 5 倍的技術，以及 OpenClaw 如何運用它們。",
+      "scene": "知識與進階",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "LLM",
+        "Prompt",
+        "Agent",
+        "OpenClaw"
+      ],
+      "prerequisites": [
+        "prompt-engineering"
+      ],
+      "concepts_defined": [
+        "CoT",
+        "ReAct"
+      ],
+      "concepts_referenced": [
+        "Agent",
+        "Prompt Engineering"
+      ],
+      "link": "/articles/cot-and-reasoning"
+    },
+    {
+      "slug": "ai-agent-memory-guide",
+      "title": "AI 記憶的基礎建設缺失：為什麼大模型越強，Agent 越容易「原地踏步」？",
+      "description": "記憶不是 AI 的附加功能，而是讓 Agent 從「工具」變成「夥伴」的核心基礎建設。這篇文章不跟你解釋論文，而是帶你想清楚：如果你在設計 AI Agent，記憶這一層你到底在解決什麼問題？",
+      "scene": "知識與進階",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "Agent",
+        "RAG",
+        "LLM",
+        "MCP"
+      ],
+      "prerequisites": [
+        "openclaw-agent"
+      ],
+      "concepts_defined": [
+        "Agent Memory",
+        "Context Engineering"
+      ],
+      "concepts_referenced": [
+        "RAG"
+      ],
+      "link": "/articles/ai-agent-memory-guide"
+    },
+    {
+      "slug": "prompt-engineering",
+      "title": "Prompt 工程：讓 AI 聽懂你的話，給出你要的答案",
+      "description": "掌握 Prompt 的核心技巧，從角色設定到思維鏈，讓同一個模型的回答品質提升 10 倍。",
+      "scene": "知識與進階",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "Prompt",
+        "LLM"
       ],
       "prerequisites": [
         "openclaw-first-run"
+      ],
+      "concepts_defined": [
+        "Prompt Engineering"
+      ],
+      "concepts_referenced": [
+        "Skill",
+        "Soul",
+        "CoT"
+      ],
+      "link": "/articles/prompt-engineering"
+    },
+    {
+      "slug": "multi-agent-swarm",
+      "title": "多 Agent 協作與蜂群智能：當 AI 學會團隊合作",
+      "description": "一個 Agent 能力有限，但一群 Agent 分工合作就能解決複雜問題。了解 Multi-Agent 系統的協作模式、蜂群智能概念，以及 OpenClaw 如何實現多角色協同。",
+      "scene": "知識與進階",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "Agent",
+        "OpenClaw",
+        "LLM"
+      ],
+      "prerequisites": [
+        "openclaw-agent"
+      ],
+      "concepts_defined": [
+        "Multi-Agent",
+        "Swarm"
+      ],
+      "concepts_referenced": [
+        "Agent",
+        "Agent Memory",
+        "ReAct"
+      ],
+      "link": "/articles/multi-agent-swarm"
+    },
+    {
+      "slug": "ai-tool-decision-framework",
+      "title": "我該用哪個 AI 工具？5 個問題讓你不再猜",
+      "description": "工具選錯，事倍功半。用這個決策框架，5 個問題內找到最適合你任務的 AI 工具——再也不用靠感覺或 Google 亂找。",
+      "scene": "知識與進階",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "Agent",
+        "LLM",
+        "MCP",
+        "OpenClaw",
+        "Prompt"
+      ],
+      "prerequisites": [
+        "ai-tool-landscape"
       ],
       "concepts_defined": [],
       "concepts_referenced": [
-        "Skill"
+        "AI 控制邊界"
       ],
-      "link": "/articles/openclaw-first-skill"
+      "link": "/articles/ai-tool-decision-framework"
     },
     {
-      "slug": "openclaw-model-config",
-      "title": "模型設定與切換：讓 OpenClaw 自動選最適合的 AI 模型",
-      "description": "不同任務用不同模型。學會設定 Provider、模型路由和 Fallback 機制，又省錢又高效。",
-      "scene": "基礎使用",
-      "difficulty": "中級",
-      "contentType": "tutorial",
-      "tags": [
-        "OpenClaw",
-        "模型",
-        "GPT",
-        "Gemini",
-        "Claude",
-        "設定"
-      ],
-      "prerequisites": [
-        "openclaw-first-run"
-      ],
-      "concepts_defined": [
-        "Fallback"
-      ],
-      "concepts_referenced": [
-        "LLM",
-        "Token",
-        "Provider",
-        "Ollama",
-        "Context Window"
-      ],
-      "link": "/articles/openclaw-model-config"
-    },
-    {
-      "slug": "why-openclaw",
-      "title": "為什麼你需要 OpenClaw？當 ChatGPT 和 Gemini 不夠用的時候",
-      "description": "你已經在用 5 個 AI 工具了，但資訊還是散落各處。看看 OpenClaw 龍蝦 AI Agent 如何幫你把它們串起來。",
-      "scene": "認識 OpenClaw",
+      "slug": "media-guide",
+      "title": "文章媒體使用指南：圖片、GIF、影片的插入方法",
+      "description": "如何在 LaunchDock 文章中高效插入截圖、動態 GIF 和 YouTube 影片，讓教學生動易懂。",
+      "scene": "知識與進階",
       "difficulty": "入門",
-      "contentType": "guide",
+      "contentType": "reference",
       "tags": [
-        "OpenClaw",
-        "資訊孤島",
-        "自動化",
-        "概念"
+        "LaunchDock",
+        "圖片",
+        "GIF"
       ],
       "prerequisites": [],
-      "concepts_defined": [
-        "OpenClaw"
-      ],
-      "concepts_referenced": [
-        "KimiClaw",
-        "AI 控制邊界"
-      ],
-      "link": "/articles/why-openclaw"
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/media-guide"
     },
     {
-      "slug": "which-ai-tool-for-you",
-      "title": "龍蝦適合你嗎？先走完這五層再說",
-      "description": "很多人問：我適合用 OpenClaw 嗎？這個問題沒有標準答案——但有一張地圖。五層工具地圖帶你看清楚自己現在在哪、下一步是什麼、每一層的真實代價。",
-      "scene": "認識 OpenClaw",
-      "difficulty": "入門",
+      "slug": "pkm-system",
+      "title": "用 OpenClaw 打造個人知識管理（PKM）系統",
+      "description": "告別資訊焦慮。用 OpenClaw 自動收集、整理、回顧知識，讓你的第二大腦真正運作起來。",
+      "scene": "知識與進階",
+      "difficulty": "中級",
       "contentType": "guide",
       "tags": [
-        "LLM",
-        "Agent",
-        "OpenClaw",
-        "Hermes"
+        "PKM",
+        "Notion",
+        "Obsidian",
+        "自動化"
       ],
       "prerequisites": [
-        "why-openclaw",
-        "ai-tool-landscape"
+        "openclaw-skill"
       ],
       "concepts_defined": [
-        "AI 控制邊界"
+        "PKM"
       ],
-      "concepts_referenced": [],
-      "link": "/articles/which-ai-tool-for-you"
+      "concepts_referenced": [
+        "Skill",
+        "RAG",
+        "Embedding"
+      ],
+      "link": "/articles/pkm-system"
     },
     {
       "slug": "ai-tool-landscape",
@@ -1043,165 +1435,50 @@
       "link": "/articles/token-economics"
     },
     {
-      "slug": "gemini-gas-ordering-system",
-      "title": "用 Gemini 打造 AI 雲端訂餐系統：從菜單到廚房螢幕的 4 步驟實戰",
-      "description": "不寫一行程式碼，靠四個提示詞讓 Gemini 幫你寫出 Google Apps Script 後端、自動化表單、即時廚房跳單系統。重點不只是程式，而是學會面對欄位對不齊、權限沒開、版本沒更新這些真實開發問題。",
-      "scene": "整合與自動化",
-      "difficulty": "中級",
-      "contentType": "tutorial",
-      "tags": [
-        "Gemini",
-        "Google Apps Script",
-        "整合",
-        "自動化",
-        "Prompt"
-      ],
-      "prerequisites": [],
-      "concepts_defined": [
-        "Google Apps Script"
-      ],
-      "concepts_referenced": [
-        "Gemini"
-      ],
-      "link": "/articles/gemini-gas-ordering-system"
-    },
-    {
-      "slug": "hermes-agent",
-      "title": "Hermes Agent 快速上手｜ollama launch hermes 一鍵啟動",
-      "description": "用一行指令啟動 Hermes AI Agent：自動安裝、選雲端模型、設定完成，幾分鐘內體驗具備跨 session 記憶與 70+ 內建技能的自主 Agent。",
-      "scene": "整合與自動化",
-      "difficulty": "入門",
-      "contentType": "tutorial",
-      "tags": [
-        "Ollama",
-        "Hermes",
-        "Agent",
-        "安裝",
-        "LLM"
-      ],
-      "prerequisites": [
-        "ollama-openclaw-mac"
-      ],
-      "concepts_defined": [
-        "Hermes"
-      ],
-      "concepts_referenced": [
-        "Computer Use"
-      ],
-      "link": "/articles/hermes-agent"
-    },
-    {
-      "slug": "hermes-agent-windows",
-      "title": "Hermes Agent 快速上手｜Windows + WSL2 篇",
-      "description": "Windows 專用教學：用 WSL2 + Ollama 一鍵啟動 Hermes AI Agent，體驗跨 session 記憶與雲端模型運行，完全不需要設定 API Key。",
-      "scene": "整合與自動化",
-      "difficulty": "入門",
-      "contentType": "tutorial",
-      "tags": [
-        "Ollama",
-        "Hermes",
-        "Agent",
-        "安裝",
-        "Windows",
-        "WSL"
-      ],
-      "prerequisites": [
-        "ollama-openclaw-windows",
-        "windows-wsl-guide"
-      ],
-      "concepts_defined": [],
-      "concepts_referenced": [
-        "Hermes"
-      ],
-      "link": "/articles/hermes-agent-windows"
-    },
-    {
-      "slug": "what-is-n8n",
-      "title": "n8n 是什麼？企業自動化的痛點與解方",
-      "description": "員工每天在系統間複製貼上、報表手動拉、SaaS 工具按次計費爆預算——n8n 用一條條視覺化流程把這些雜事接起來。鴨編帶你看懂為什麼企業在瘋這個工具。",
-      "scene": "整合與自動化",
-      "difficulty": "入門",
-      "contentType": "guide",
-      "tags": [
-        "n8n",
-        "整合",
-        "Agent",
-        "OpenClaw"
-      ],
-      "prerequisites": [],
-      "concepts_defined": [
-        "n8n"
-      ],
-      "concepts_referenced": [],
-      "link": "/articles/what-is-n8n"
-    },
-    {
-      "slug": "telegram-integration",
-      "title": "Telegram 整合完整教學：讓 OpenClaw 變成你的私人 AI 助理",
-      "description": "從 BotFather 建立機器人到串接 OpenClaw，把 Telegram 變成你隨時隨地使用 AI 的入口。",
-      "scene": "整合與自動化",
-      "difficulty": "中級",
-      "contentType": "tutorial",
-      "tags": [
-        "Telegram",
-        "Bot",
-        "MCP",
-        "整合"
-      ],
-      "prerequisites": [
-        "openclaw-first-run"
-      ],
-      "concepts_defined": [
-        "Telegram Bot"
-      ],
-      "concepts_referenced": [
-        "MCP"
-      ],
-      "link": "/articles/telegram-integration"
-    },
-    {
-      "slug": "llm-tool-calling-era",
-      "title": "工具調用才是真本事：LLM 的戰場從紙上談兵變成真槍實彈",
-      "description": "OpenClaw 的出現，讓 LLM 的比較標準徹底改變。不再看誰文章寫得好，而是看誰敢動工具、會動工具。鴨編的第一線觀察。",
-      "scene": "鴨編的碎碎念",
+      "slug": "why-openclaw",
+      "title": "為什麼你需要 OpenClaw？當 ChatGPT 和 Gemini 不夠用的時候",
+      "description": "你已經在用 5 個 AI 工具了，但資訊還是散落各處。看看 OpenClaw 龍蝦 AI Agent 如何幫你把它們串起來。",
+      "scene": "認識 OpenClaw",
       "difficulty": "入門",
       "contentType": "guide",
       "tags": [
         "OpenClaw",
-        "LLM",
-        "Agent",
-        "工具調用",
-        "MCP"
-      ],
-      "prerequisites": [
-        "why-openclaw"
-      ],
-      "concepts_defined": [],
-      "concepts_referenced": [
-        "Harness"
-      ],
-      "link": "/articles/llm-tool-calling-era"
-    },
-    {
-      "slug": "ai-agent-anatomy",
-      "title": "拆解 AI Agent：Skill、工具、Harness 三層，為什麼光有好模型不夠",
-      "description": "同樣一顆 Claude 或 GPT，裝在不同的 AI Agent 裡，有的穩得像老師傅，有的動不動就自爆。差別常常不在模型，而在你看不見的那層骨架——Harness。鴨編帶你拆開一個 Agent 的三層結構。",
-      "scene": "鴨編的碎碎念",
-      "difficulty": "中級",
-      "contentType": "guide",
-      "tags": [
-        "Agent",
-        "Skill",
-        "MCP",
-        "Harness",
-        "OpenClaw"
+        "資訊孤島",
+        "自動化",
+        "概念"
       ],
       "prerequisites": [],
       "concepts_defined": [
-        "Harness"
+        "OpenClaw"
+      ],
+      "concepts_referenced": [
+        "KimiClaw",
+        "AI 控制邊界"
+      ],
+      "link": "/articles/why-openclaw"
+    },
+    {
+      "slug": "which-ai-tool-for-you",
+      "title": "龍蝦適合你嗎？先走完這五層再說",
+      "description": "很多人問：我適合用 OpenClaw 嗎？這個問題沒有標準答案——但有一張地圖。五層工具地圖帶你看清楚自己現在在哪、下一步是什麼、每一層的真實代價。",
+      "scene": "認識 OpenClaw",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "LLM",
+        "Agent",
+        "OpenClaw",
+        "Hermes"
+      ],
+      "prerequisites": [
+        "why-openclaw",
+        "ai-tool-landscape"
+      ],
+      "concepts_defined": [
+        "AI 控制邊界"
       ],
       "concepts_referenced": [],
-      "link": "/articles/ai-agent-anatomy"
+      "link": "/articles/which-ai-tool-for-you"
     },
     {
       "slug": "ai-speed-and-opportunity",
@@ -1307,125 +1584,48 @@
       "link": "/articles/from-prompt-to-skill"
     },
     {
-      "slug": "llm-guide",
-      "title": "選擇你的 AI 大腦：4 種 LLM 方案完整比較",
-      "description": "OpenClaw 需要接上 LLM 才能運作。搞懂 ChatGPT 訂閱、OpenRouter、各家 API 的差別，選出最適合你的方案。",
-      "scene": "環境準備",
+      "slug": "llm-tool-calling-era",
+      "title": "工具調用才是真本事：LLM 的戰場從紙上談兵變成真槍實彈",
+      "description": "OpenClaw 的出現，讓 LLM 的比較標準徹底改變。不再看誰文章寫得好，而是看誰敢動工具、會動工具。鴨編的第一線觀察。",
+      "scene": "鴨編的碎碎念",
       "difficulty": "入門",
       "contentType": "guide",
       "tags": [
+        "OpenClaw",
         "LLM",
-        "ChatGPT",
-        "Claude",
-        "Gemini",
-        "OpenRouter",
-        "API",
+        "Agent",
+        "工具調用",
+        "MCP"
+      ],
+      "prerequisites": [
+        "why-openclaw"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [
+        "Harness"
+      ],
+      "link": "/articles/llm-tool-calling-era"
+    },
+    {
+      "slug": "ai-agent-anatomy",
+      "title": "拆解 AI Agent：Skill、工具、Harness 三層，為什麼光有好模型不夠",
+      "description": "同樣一顆 Claude 或 GPT，裝在不同的 AI Agent 裡，有的穩得像老師傅，有的動不動就自爆。差別常常不在模型，而在你看不見的那層骨架——Harness。鴨編帶你拆開一個 Agent 的三層結構。",
+      "scene": "鴨編的碎碎念",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "Agent",
+        "Skill",
+        "MCP",
+        "Harness",
         "OpenClaw"
       ],
-      "prerequisites": [
-        "why-openclaw"
-      ],
+      "prerequisites": [],
       "concepts_defined": [
-        "LLM",
-        "Provider",
-        "OpenRouter"
+        "Harness"
       ],
-      "concepts_referenced": [
-        "Token",
-        "API Key",
-        "Ollama",
-        "Computer Use",
-        "Transformer",
-        "Fallback",
-        "Gemini"
-      ],
-      "link": "/articles/llm-guide"
-    },
-    {
-      "slug": "ai-api-key-guide",
-      "title": "AI 模型 API Key 申請指南：OpenAI、Anthropic、Google、OpenRouter 一次搞定",
-      "description": "一步步教你申請 AI 模型的 API Key。不管你選哪家，照著做就能拿到讓 OpenClaw 運作的鑰匙。",
-      "scene": "環境準備",
-      "difficulty": "入門",
-      "contentType": "tutorial",
-      "tags": [
-        "API Key",
-        "OpenAI",
-        "Anthropic",
-        "Google AI Studio",
-        "OpenRouter",
-        "Gemini",
-        "Claude",
-        "GPT"
-      ],
-      "prerequisites": [
-        "llm-guide"
-      ],
-      "concepts_defined": [
-        "API Key"
-      ],
-      "concepts_referenced": [
-        "Provider",
-        "OpenRouter",
-        "Google Cloud Console",
-        "OAuth"
-      ],
-      "link": "/articles/ai-api-key-guide"
-    },
-    {
-      "slug": "cli-guide",
-      "title": "CLI 入門指南：命令列到底是什麼？為什麼 AI 離不開它？",
-      "description": "命令列介面（CLI）是 OpenClaw 的手和腳。了解 CLI 的原理、常見工具、以及它為什麼是 AI 時代最強大的操作方式。",
-      "scene": "環境準備",
-      "difficulty": "入門",
-      "contentType": "guide",
-      "tags": [
-        "OpenClaw",
-        "安裝",
-        "macOS",
-        "Linux",
-        "WSL"
-      ],
-      "prerequisites": [
-        "why-openclaw"
-      ],
-      "concepts_defined": [
-        "CLI",
-        "Shell"
-      ],
-      "concepts_referenced": [
-        "WSL",
-        "Homebrew"
-      ],
-      "link": "/articles/cli-guide"
-    },
-    {
-      "slug": "google-api-key-guide",
-      "title": "Google API Key 申請完整指南：OpenClaw 串接 Google Drive / Gmail 必讀",
-      "description": "一步步教你申請 Google Cloud API Key，解決 OpenClaw 串接 Google 服務時最常卡關的那一步。",
-      "scene": "環境準備",
-      "difficulty": "入門",
-      "contentType": "tutorial",
-      "tags": [
-        "OpenClaw",
-        "Google API",
-        "Google Drive",
-        "Gmail",
-        "申請"
-      ],
-      "prerequisites": [
-        "ai-api-key-guide"
-      ],
-      "concepts_defined": [
-        "Google Cloud Console",
-        "Gemini",
-        "OAuth"
-      ],
-      "concepts_referenced": [
-        "API Key",
-        "Google Apps Script"
-      ],
-      "link": "/articles/google-api-key-guide"
+      "concepts_referenced": [],
+      "link": "/articles/ai-agent-anatomy"
     }
   ]
 }

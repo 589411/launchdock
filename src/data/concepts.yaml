@@ -234,6 +234,41 @@ Telegram Bot:
   canonicalArticle: "telegram-integration"
   relatedArticles: ["openclaw-first-run", "mcp-protocol"]
 
+LIFF:
+  displayName: "LIFF"
+  aliases: ["LIFF", "LIFF App", "LINE Front-end Framework", "LIFF ID", "LIFF URL"]
+  shortDesc: "LINE 的前端框架，把你的網頁包成可在 LINE App 內直接開啟、並取得使用者身分的小程式"
+  canonicalArticle: "create-line-login-liff-app"
+  relatedArticles: []
+
+LINE Login:
+  displayName: "LINE Login"
+  aliases: ["LINE Login", "LINE 登入"]
+  shortDesc: "LINE 的 OAuth 登入機制，讓使用者用 LINE 身分一鍵登入你的網頁；LIFF App 必須掛在 LINE Login channel 底下"
+  canonicalArticle: "create-line-login-liff-app"
+  relatedArticles: []
+
+Firebase:
+  displayName: "Firebase"
+  aliases: ["Firebase", "firebase", "Firebase Console"]
+  shortDesc: "Google 的後端即服務平台，替純前端網站外包登入、資料庫與託管，免自架伺服器"
+  canonicalArticle: "firebase-create-project"
+  relatedArticles: ["firebase-enable-google-login", "firebase-register-web-app", "google-api-key-guide"]
+
+Firebase Authentication:
+  displayName: "Firebase Authentication"
+  aliases: ["Firebase Authentication", "Firebase Auth"]
+  shortDesc: "Firebase 的登入服務，一鍵接上 Google、email、匿名等多種登入方式"
+  canonicalArticle: "firebase-enable-google-login"
+  relatedArticles: ["firebase-create-project", "firebase-register-web-app"]
+
+Firestore:
+  displayName: "Firestore"
+  aliases: ["Firestore", "Cloud Firestore", "Firestore Database"]
+  shortDesc: "Firebase 的雲端 NoSQL 資料庫，前端可直接讀寫並即時同步，靠安全規則保護"
+  canonicalArticle: "firebase-firestore-rules-deploy"
+  relatedArticles: ["firebase-register-web-app"]
+
 PKM:
   displayName: "個人知識管理 (PKM)"
   aliases: ["PKM", "個人知識管理"]
