@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-05T02:57:38.525Z",
+  "_generated": "2026-07-05T14:49:51.297Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -1641,6 +1641,26 @@
         "Harness"
       ],
       "link": "/articles/from-prompt-to-skill"
+    },
+    {
+      "slug": "openclaw-hermes-or-claude-max",
+      "title": "初學者該用 OpenClaw 還是 Hermes？鴨編的真心話：先把 3000 元花對地方",
+      "description": "很多人問我：新手選哪個 Agent 工具？我的答案可能讓你意外——工具先別急著選。開源拿來學、拿來玩；真要提高生產力，一個月約 3000 元訂 Claude Max，讓 AI 直接幫你操作電腦。",
+      "scene": "鴨編的碎碎念",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "OpenClaw",
+        "Hermes",
+        "Anthropic",
+        "Agent",
+        "LLM"
+      ],
+      "prerequisites": [],
+      "modules": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/openclaw-hermes-or-claude-max"
     },
     {
       "slug": "llm-tool-calling-era",

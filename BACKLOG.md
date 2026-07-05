@@ -10,9 +10,12 @@
 ## 📡 來自監控（系統自動產生，新項目補在最上）
 
 ### 2026-07-05 大整理 session（cowork 全面掃描 + 動工）
-- [ ] [安全] Supabase advisors:4 個 SECURITY DEFINER view(v_popular_articles 等)ERROR 級;
-      `handle_new_user`/`rls_auto_enable` anon 可經 REST 呼叫;5 張表 INSERT `WITH CHECK (true)`(匿名回饋設計使然,防濫用靠 rate limit);
-      8 張 cpc_* 表 RLS 開了沒 policy(deny-all,若只走 service key 屬正常);Auth 洩漏密碼保護未開 — 修 production DB 前等 Joseph 授權 — supabase
+- [x] [安全] Supabase 安全加固 07-05 完成(migration 006 已上 production + commit):4 個 SECURITY DEFINER view
+      → security_invoker、`handle_new_user`/`rls_auto_enable` 收回 anon EXECUTE、7 函式釘 search_path、3 唯讀函式轉
+      SECURITY INVOKER;8 張 cpc_* revoke anon/authenticated(補進 new-cpc repo 001)。ERROR 級 lint 全清 — supabase
+- [ ] [安全] 剩兩項(低優先):① Auth 洩漏密碼保護未開 → **只能 Joseph 手動**(Dashboard→Authentication→Leaked Password Protection);
+      ② cpc_* 暫寄同一 Supabase 共用 anon key,根本解是搬獨立 schema/project — supabase
+- [ ] [內容] 5 張表 INSERT `WITH CHECK (true)`(匿名回饋設計使然,防濫用靠 rate limit)+ `increment_helpful` 保留 DEFINER — 皆 by-design,advisor WARN 可接受 — supabase
 - [ ] [基建] feedback-monitor.sh 缺 .env 仍停擺(同 06-29,唯一卡「真實回饋驅動內容」的點)— feedback-monitor
 - [ ] [效能] 剩 ~37 張 500KB–1.8MB 的 PNG(寬已 ≤1800):可再上 WebP/AVIF 或 Astro Image,屬錦上添花 — images
 - [ ] [內容] 47 篇文章批量掛 `modules` 標籤(已示範 3 篇:M01/M04/M05),掛完講義線才有肉 — handout
