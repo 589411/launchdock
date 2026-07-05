@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-07-05
+**最後更新：** 2026-07-05（晚間：DB 安全加固 006 上線）
 **整體狀態：** 🟢 進行中
 
 ## 一句話現況
@@ -21,8 +21,12 @@
 - 本次改動的 commit 授權（見上）。
 - lab 三筆 REPLACE 條目的實際連結（只有你有），見 launchdock-lab/STATUS.md。
 - feedback-monitor.sh 需要 `.env`（SUPABASE_URL + SERVICE_KEY）——回饋 loop 停擺的唯一原因。
-- Supabase 安全掃描結果（見 BACKLOG「來自監控」07-05 段）：4 個 SECURITY DEFINER view 屬 ERROR 級,
-  `handle_new_user`/`rls_auto_enable` 不該讓 anon 可呼叫——修正涉及 production DB,等你點頭我再出 migration。
+- ✅ Supabase 安全加固（migration 006）已於 07-05 套到 production 並 commit：4 個 SECURITY DEFINER
+  view 轉 security_invoker、`handle_new_user`/`rls_auto_enable` 收回 anon EXECUTE、7 函式釘 search_path、
+  3 唯讀函式轉 SECURITY INVOKER。ERROR 級 lint 全清。**唯一剩手動**：Dashboard → Authentication 開啟
+  Leaked Password Protection（HaveIBeenPwned）。`increment_helpful` 刻意保留 DEFINER（給 anon 加計數器）。
+- ⚠️ cpc_* 是別專案暫寄同一 Supabase：已 revoke anon/authenticated（new-cpc repo 001 補版控）。
+  根本解是搬進獨立 schema / 獨立 project——只要還共用 anon key 風險就掛著（尚未動）。
 
 ## 進度脈絡（新的在上）
 - 2026-07-05 內容制度正本：docs/EDITORIAL.md + templates/（observation-to-article、pitfall-to-article、concept-svg）；
