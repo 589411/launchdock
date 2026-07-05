@@ -1,0 +1,45 @@
+<svg viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#8b949e"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="798" height="558" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="400" y="40" text-anchor="middle" font-size="22" font-weight="bold" fill="#0f3460">AI 工具五層地圖</text>
+  <text x="400" y="64" text-anchor="middle" font-size="13" fill="#24292f">由上而下，AI 的控制邊界越來越大，你的掌控權逐步轉移給工具</text>
+
+  <line x1="62" y1="92" x2="62" y2="500" stroke="#8b949e" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="46" y="300" font-size="13" fill="#8b949e" text-anchor="middle" transform="rotate(-90 46 300)">AI 控制邊界：由小到大</text>
+
+  <!-- Layer 1 -->
+  <rect x="100" y="84" width="640" height="74" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="118" y="110" font-size="16" font-weight="bold" fill="#0f3460">🟢 Layer 1｜問答層</text>
+  <text x="118" y="131" font-size="13" fill="#1976d2">代表工具：Claude 訂閱、ChatGPT 訂閱、Gemini 訂閱</text>
+  <text x="118" y="149" font-size="13" fill="#24292f">邊界在對話框內——你問 AI 答，你自己執行</text>
+
+  <!-- Layer 2 -->
+  <rect x="100" y="172" width="640" height="74" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="118" y="198" font-size="16" font-weight="bold" fill="#0f3460">🟡 Layer 2｜生態整合層</text>
+  <text x="118" y="219" font-size="13" fill="#1976d2">代表工具：Gemini + Google Workspace、Google Agentspace</text>
+  <text x="118" y="237" font-size="13" fill="#24292f">AI 直接跟你的 Google 工具溝通，不需要複製貼上</text>
+
+  <!-- Layer 3 -->
+  <rect x="100" y="260" width="640" height="74" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="118" y="286" font-size="16" font-weight="bold" fill="#0f3460">🟠 Layer 3｜外部操控層</text>
+  <text x="118" y="307" font-size="13" fill="#1976d2">代表工具：ChatGPT Atlas、Perplexity Comet</text>
+  <text x="118" y="325" font-size="13" fill="#24292f">AI 的手伸出去——控制網路、其他軟體、商業資料</text>
+
+  <!-- Layer 4 -->
+  <rect x="100" y="348" width="640" height="74" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="118" y="374" font-size="16" font-weight="bold" fill="#0f3460">🔴 Layer 4｜內部整合層</text>
+  <text x="118" y="395" font-size="13" fill="#1976d2">代表工具：Claude Code、Claude Cowork、OpenClaw、Hermes Agent</text>
+  <text x="118" y="413" font-size="13" fill="#24292f">AI 的手伸進你自己的系統——你的檔案、工作流、排程</text>
+
+  <!-- Layer 5 -->
+  <rect x="100" y="436" width="640" height="74" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="118" y="462" font-size="16" font-weight="bold" fill="#0f3460">⚫ Layer 5｜全托管層</text>
+  <text x="118" y="483" font-size="13" fill="#1976d2">代表工具：Manus</text>
+  <text x="118" y="501" font-size="13" fill="#24292f">邊界消失——控制權完全交出去，只看結果</text>
+
+  <text x="740" y="540" text-anchor="end" font-size="12" fill="#8b949e">launchdock.app</text>
+</svg>

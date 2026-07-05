@@ -29,7 +29,7 @@ Choose a tool that's too advanced and you'll burn hours on setup. Choose one tha
 
 This article gives you a five-layer map — so you can see clearly: where you are now, whether you need to level up, and what leveling up will actually cost you.
 
-<!-- @img: five-layer-map-overview | Overview diagram of the five-layer AI tool map -->
+![Overview diagram of the five-layer AI tool map](/images/articles/which-ai-tool-for-you/five-layer-map-overview.svg)
 
 ---
 
@@ -118,7 +118,7 @@ The real cost of switching tools isn't learning a new interface — it's data mi
 
 You're limited to integration within the Google ecosystem. Want to integrate with Notion, run scheduled tasks, or operate other software on your machine? You've hit the edge.
 
-<!-- @img: gemini-workspace-integration | Gemini integration with Google Workspace interface -->
+![Diagram of Gemini integration with Google Workspace](/images/articles/which-ai-tool-for-you/gemini-workspace-integration.svg)
 
 ---
 
@@ -147,7 +147,7 @@ When you reach this layer, you need to make another choice.
 
 > <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Duck's Note**: This layer is like a plaza with several exits. Different exits lead to different destinations. There's no "correct" exit — it depends entirely on where you're trying to go.
 
-<!-- @img: layer4-tool-choices | Layer 4 tool selection flowchart -->
+![Layer 4 tool selection flowchart](/images/articles/which-ai-tool-for-you/layer4-tool-choices.svg)
 
 **Four representative tools:**
 
@@ -325,7 +325,7 @@ Choosing a tool isn't just about "does it work well right now." It's also "will 
 
 > <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Duck's Note**: Open source tools (OpenClaw, Hermes) are rated "medium-low" rather than "low" not because they're unstable, but because they depend on community maintenance. If core maintainers stop contributing one day, you'll need to pick it up yourself or rely on the community. That's the mental preparation open source requires. On the flip side, there's no "company closes and everything disappears" risk.
 
-<!-- @img: tool-risk-assessment | Tool business risk assessment table screenshot -->
+![Tool business risk assessment table](/images/articles/which-ai-tool-for-you/tool-risk-assessment.svg)
 
 ---
 

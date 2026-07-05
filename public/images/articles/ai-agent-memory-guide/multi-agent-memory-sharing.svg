@@ -1,0 +1,49 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <defs>
+    <marker id="arrGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2e7d32"/>
+    </marker>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1976d2"/>
+    </marker>
+    <marker id="arrRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d32f2f"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="798" height="498" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="40" y="46" font-size="22" font-weight="bold" fill="#0f3460">多智能體共享記憶（Multi-Agent Memory）</text>
+  <text x="40" y="76" font-size="14" fill="#24292f">當系統不是一個 Agent，而是十個 Agent 分工協作，記憶怎麼共享？</text>
+
+  <!-- agents -->
+  <rect x="60" y="110" width="160" height="70" rx="10" fill="#ffffff" stroke="#0f3460" stroke-width="2"/>
+  <text x="140" y="152" font-size="17" font-weight="bold" fill="#0f3460" text-anchor="middle">Agent A</text>
+
+  <rect x="330" y="110" width="140" height="70" rx="10" fill="#ffffff" stroke="#d0d7de" stroke-dasharray="6 5"/>
+  <text x="400" y="152" font-size="14" fill="#8b949e" text-anchor="middle">其他 Agent ⋯</text>
+
+  <rect x="580" y="110" width="160" height="70" rx="10" fill="#ffffff" stroke="#0f3460" stroke-width="2"/>
+  <text x="660" y="152" font-size="17" font-weight="bold" fill="#0f3460" text-anchor="middle">Agent B</text>
+
+  <!-- shared memory -->
+  <rect x="250" y="290" width="300" height="90" rx="10" fill="#0f3460"/>
+  <text x="400" y="330" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">共享記憶層</text>
+  <text x="400" y="358" font-size="13" fill="#ffffff" text-anchor="middle">Shared Memory</text>
+
+  <!-- 1: A writes -->
+  <line x1="150" y1="185" x2="290" y2="288" stroke="#2e7d32" stroke-width="2.5" marker-end="url(#arrGreen)"/>
+  <text x="52" y="222" font-size="13" font-weight="bold" fill="#2e7d32">① Agent A 學到了一個技巧，寫入</text>
+
+  <!-- 2: sync to B? -->
+  <line x1="510" y1="288" x2="648" y2="186" stroke="#1976d2" stroke-width="2.5" marker-end="url(#arrBlue)"/>
+  <text x="592" y="222" font-size="13" font-weight="bold" fill="#1976d2">② Agent B 應不應該</text>
+  <text x="592" y="240" font-size="13" font-weight="bold" fill="#1976d2">自動知道？</text>
+
+  <!-- 3: correction sync back? -->
+  <line x1="700" y1="185" x2="556" y2="322" stroke="#d32f2f" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrRed)"/>
+  <text x="606" y="286" font-size="13" font-weight="bold" fill="#d32f2f">③ B 發現技巧在某場景不管用，</text>
+  <text x="620" y="304" font-size="13" font-weight="bold" fill="#d32f2f">「校正」要不要同步回去？</text>
+
+  <text x="400" y="435" font-size="14" fill="#24292f" text-anchor="middle">這個問題目前沒有很好的答案——正是論文指出的前沿方向之一。</text>
+
+  <text x="760" y="478" font-size="12" fill="#8b949e" text-anchor="end">launchdock.app</text>
+</svg>

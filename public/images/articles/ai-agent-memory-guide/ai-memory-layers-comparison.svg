@@ -1,0 +1,45 @@
+<svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <rect x="1" y="1" width="798" height="518" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="40" y="46" font-size="22" font-weight="bold" fill="#0f3460">「加入記憶功能」的四種不同意思</text>
+
+  <!-- column headers -->
+  <text x="44" y="82" font-size="13" font-weight="bold" fill="#8b949e">你要解決的問題</text>
+  <text x="340" y="82" font-size="13" font-weight="bold" fill="#8b949e">你實際上在做的事</text>
+  <text x="560" y="82" font-size="13" font-weight="bold" fill="#8b949e">技術方向</text>
+
+  <!-- row 1: RAG -->
+  <rect x="32" y="94" width="736" height="66" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="44" y="133" font-size="14" fill="#24292f">「讓 AI 查得到我們的文件」</text>
+  <text x="340" y="133" font-size="14" fill="#24292f">知識檢索</text>
+  <rect x="548" y="107" width="204" height="40" rx="20" fill="#e3f0fb" stroke="#1976d2"/>
+  <text x="650" y="132" font-size="14" font-weight="bold" fill="#1976d2" text-anchor="middle">RAG</text>
+
+  <!-- row 2: Context Engineering -->
+  <rect x="32" y="172" width="736" height="66" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="44" y="204" font-size="14" fill="#24292f">「對話太長，模型開始</text>
+  <text x="44" y="224" font-size="14" fill="#24292f">忘前面的事」</text>
+  <text x="340" y="211" font-size="14" fill="#24292f">脈絡管理</text>
+  <rect x="548" y="185" width="204" height="40" rx="20" fill="#e3f0fb" stroke="#1976d2"/>
+  <text x="650" y="210" font-size="14" font-weight="bold" fill="#1976d2" text-anchor="middle">Context Engineering</text>
+
+  <!-- row 3: fine-tuning -->
+  <rect x="32" y="250" width="736" height="66" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="44" y="289" font-size="14" fill="#24292f">「讓模型本能知道某個領域」</text>
+  <text x="340" y="289" font-size="14" fill="#24292f">能力內化</text>
+  <rect x="548" y="263" width="204" height="40" rx="20" fill="#e3f0fb" stroke="#1976d2"/>
+  <text x="650" y="288" font-size="14" font-weight="bold" fill="#1976d2" text-anchor="middle">模型微調 / 架構改動</text>
+
+  <!-- row 4: Agent Memory (highlight) -->
+  <rect x="32" y="328" width="736" height="74" rx="8" fill="#0f3460"/>
+  <text x="44" y="360" font-size="14" fill="#ffffff">「讓 Agent 跨對話、跨任務</text>
+  <text x="44" y="380" font-size="14" fill="#ffffff">累積成長」</text>
+  <text x="340" y="371" font-size="14" fill="#ffffff">真正的代理記憶</text>
+  <rect x="548" y="346" width="204" height="40" rx="20" fill="#ffffff"/>
+  <text x="650" y="371" font-size="15" font-weight="bold" fill="#0f3460" text-anchor="middle">Agent Memory</text>
+
+  <!-- annotation -->
+  <text x="40" y="438" font-size="14" fill="#24292f">前三種都是靜態的工具：你放進去什麼，它就輸出什麼，系統本身不會因互動而改變。</text>
+  <text x="40" y="462" font-size="14" font-weight="bold" fill="#2e7d32">Agent Memory 是持久、自我演進的系統——每次互動後都在調整自己的記憶庫。</text>
+
+  <text x="760" y="500" font-size="12" fill="#8b949e" text-anchor="end">launchdock.app</text>
+</svg>

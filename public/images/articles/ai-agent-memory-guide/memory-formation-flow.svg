@@ -1,0 +1,47 @@
+<svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1976d2"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="798" height="458" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="40" y="46" font-size="22" font-weight="bold" fill="#0f3460">記憶的形成（Formation）：什麼值得記？</text>
+  <text x="40" y="76" font-size="14" fill="#24292f">記憶不是把對話紀錄全塞進資料庫，而是要主動「萃取」。</text>
+
+  <!-- stage 1: raw conversation -->
+  <rect x="40" y="140" width="170" height="200" rx="10" fill="#ffffff" stroke="#d0d7de" stroke-width="2"/>
+  <text x="125" y="180" font-size="17" font-weight="bold" fill="#0f3460" text-anchor="middle">原始對話</text>
+  <text x="125" y="215" font-size="13" fill="#24292f" text-anchor="middle">線性的對話紀錄</text>
+  <line x1="65" y1="245" x2="185" y2="245" stroke="#d0d7de"/>
+  <line x1="65" y1="270" x2="185" y2="270" stroke="#d0d7de"/>
+  <line x1="65" y1="295" x2="160" y2="295" stroke="#d0d7de"/>
+
+  <!-- arrow 1 -->
+  <line x1="215" y1="240" x2="282" y2="240" stroke="#1976d2" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="250" y="222" font-size="13" fill="#1976d2" text-anchor="middle">萃取</text>
+
+  <!-- stage 2: extraction -->
+  <rect x="290" y="110" width="270" height="260" rx="10" fill="#ffffff" stroke="#1976d2" stroke-width="2"/>
+  <text x="425" y="148" font-size="17" font-weight="bold" fill="#0f3460" text-anchor="middle">主動萃取</text>
+  <rect x="308" y="170" width="234" height="48" rx="8" fill="#e3f0fb"/>
+  <text x="425" y="199" font-size="13" fill="#24292f" text-anchor="middle">把線性對話壓縮成核心語義摘要</text>
+  <rect x="308" y="230" width="234" height="48" rx="8" fill="#e3f0fb"/>
+  <text x="425" y="250" font-size="13" fill="#24292f" text-anchor="middle">把互動解析成知識圖譜中</text>
+  <text x="425" y="268" font-size="13" fill="#24292f" text-anchor="middle">的節點與邊</text>
+  <rect x="308" y="290" width="234" height="62" rx="8" fill="#e3f0fb"/>
+  <text x="425" y="312" font-size="13" fill="#24292f" text-anchor="middle">偵測「關鍵事件」：很重要的偏好、</text>
+  <text x="425" y="332" font-size="13" fill="#24292f" text-anchor="middle">Agent 犯的有意義的錯誤</text>
+
+  <!-- arrow 2 -->
+  <line x1="565" y1="240" x2="622" y2="240" stroke="#1976d2" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="595" y="222" font-size="13" fill="#1976d2" text-anchor="middle">存入</text>
+
+  <!-- stage 3: structured storage -->
+  <rect x="630" y="140" width="140" height="200" rx="10" fill="#0f3460"/>
+  <text x="700" y="180" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle">結構化存儲</text>
+  <text x="700" y="225" font-size="13" fill="#ffffff" text-anchor="middle">語義摘要</text>
+  <text x="700" y="260" font-size="13" fill="#ffffff" text-anchor="middle">節點與邊</text>
+  <text x="700" y="295" font-size="13" fill="#ffffff" text-anchor="middle">關鍵事件</text>
+
+  <text x="760" y="436" font-size="12" fill="#8b949e" text-anchor="end">launchdock.app</text>
+</svg>

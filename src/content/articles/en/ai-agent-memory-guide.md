@@ -52,7 +52,7 @@ The first three are tools — very useful, but they're static. What you put in i
 
 The key word is "evolving" — not just retrieval, but actively adjusting its memory store after every interaction, deciding what's worth keeping, how to update, and what to discard.
 
-<!-- @img: ai-memory-layers-comparison | Comparison diagram of four memory concept layers -->
+![Comparison diagram of four memory concept layers](/images/articles/ai-agent-memory-guide/ai-memory-layers-comparison.svg)
 
 ---
 
@@ -133,7 +133,7 @@ Memory isn't about dumping entire conversation logs into a database — it's abo
 - Parse interactions into nodes and edges in a knowledge graph
 - Detect "key events" (when you state an important preference, or when the Agent makes a meaningful mistake)
 
-<!-- @img: memory-formation-flow | Memory formation flow: raw conversation → distillation → structured storage -->
+![Memory formation flow: raw conversation → distillation → structured storage](/images/articles/ai-agent-memory-guide/memory-formation-flow.svg)
 
 ### Evolution: The Tug-of-War Between Stability and Plasticity
 
@@ -182,7 +182,7 @@ When your system isn't one Agent but ten Agents collaborating, how do you share 
 
 The problem is very concrete: if Agent A learns a trick, should Agent B automatically know about it? If Agent B later discovers that trick doesn't work in certain scenarios, should this "correction" sync back? There's no good answer to this yet.
 
-<!-- @img: multi-agent-memory-sharing | Architecture diagram of multi-agent shared memory -->
+![Architecture diagram of multi-agent shared memory](/images/articles/ai-agent-memory-guide/multi-agent-memory-sharing.svg)
 
 ### 4. From Vector Piles to Knowledge Graphs
 
@@ -228,7 +228,7 @@ MemGPT improved accuracy on cross-session memory retrieval tasks from a baseline
 
 This isn't a small improvement — it's a fundamental difference. It proves that "external structured memory architecture is worth investing in" isn't just theory; there are already concrete results to compare.
 
-<!-- @img: memory-benchmark-comparison | Memory architecture benchmark performance comparison -->
+![Memory architecture benchmark performance comparison](/images/articles/ai-agent-memory-guide/memory-benchmark-comparison.svg)
 
 ---
 

@@ -1,0 +1,50 @@
+<svg viewBox="0 0 800 540" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <rect x="1" y="1" width="798" height="538" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="40" y="46" font-size="22" font-weight="bold" fill="#0f3460">跨 session 記憶檢索正確率：基線 vs MemGPT</text>
+
+  <!-- grid + y axis -->
+  <g stroke="#d0d7de" stroke-dasharray="4 4">
+    <line x1="110" y1="130" x2="560" y2="130"/>
+    <line x1="110" y1="200" x2="560" y2="200"/>
+    <line x1="110" y1="270" x2="560" y2="270"/>
+    <line x1="110" y1="340" x2="560" y2="340"/>
+  </g>
+  <line x1="110" y1="410" x2="560" y2="410" stroke="#24292f" stroke-width="1.5"/>
+  <g font-size="13" fill="#8b949e" text-anchor="end">
+    <text x="100" y="135">100%</text>
+    <text x="100" y="205">75%</text>
+    <text x="100" y="275">50%</text>
+    <text x="100" y="345">25%</text>
+    <text x="100" y="415">0%</text>
+  </g>
+
+  <!-- baseline bar: 32–39% -->
+  <rect x="180" y="320" width="110" height="90" fill="#d32f2f"/>
+  <rect x="180" y="301" width="110" height="19" fill="#d32f2f" opacity="0.35"/>
+  <text x="235" y="285" font-size="16" font-weight="bold" fill="#d32f2f" text-anchor="middle">32–39%</text>
+  <text x="235" y="440" font-size="15" font-weight="bold" fill="#24292f" text-anchor="middle">基線</text>
+
+  <!-- MemGPT bar: 67–93% -->
+  <rect x="390" y="222" width="110" height="188" fill="#2e7d32"/>
+  <rect x="390" y="150" width="110" height="72" fill="#2e7d32" opacity="0.35"/>
+  <text x="445" y="134" font-size="16" font-weight="bold" fill="#2e7d32" text-anchor="middle">67–93%</text>
+  <text x="445" y="440" font-size="15" font-weight="bold" fill="#24292f" text-anchor="middle">MemGPT</text>
+
+  <!-- legend -->
+  <rect x="180" y="458" width="14" height="14" fill="#0f3460"/>
+  <text x="200" y="470" font-size="13" fill="#24292f">深色＝正確率範圍下限　淺色＝至範圍上限</text>
+
+  <!-- side note: MemoryAgentBench -->
+  <rect x="588" y="130" width="182" height="220" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="679" y="160" font-size="15" font-weight="bold" fill="#0f3460" text-anchor="middle">MemoryAgentBench</text>
+  <text x="604" y="192" font-size="13" fill="#24292f">測試 context 從 6K</text>
+  <text x="604" y="212" font-size="13" fill="#24292f">拉到 32K 時，現有</text>
+  <text x="604" y="232" font-size="13" fill="#24292f">系統效能大幅崩落：</text>
+  <text x="604" y="262" font-size="13" fill="#d32f2f">・記憶一致性</text>
+  <text x="604" y="284" font-size="13" fill="#d32f2f">・時間推理</text>
+  <text x="604" y="306" font-size="13" fill="#d32f2f">・衝突更新</text>
+  <text x="604" y="334" font-size="13" fill="#24292f">皆十分不穩定</text>
+
+  <text x="40" y="506" font-size="14" fill="#24292f">外部結構化記憶架構是值得投資的——不只是理論，已經有具體的效果可以對比。</text>
+  <text x="760" y="528" font-size="12" fill="#8b949e" text-anchor="end">launchdock.app</text>
+</svg>
