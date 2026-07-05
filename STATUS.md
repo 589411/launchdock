@@ -1,40 +1,43 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-06-27
+**最後更新：** 2026-07-05
 **整體狀態：** 🟢 進行中
 
 ## 一句話現況
-旗艦教學站（Astro，47 篇文章，71 commits）。「Cloudflare Workers 當 LINE Bot 後端」
-文章已於 06-19 提交完成。內容 loop 已導入（BACKLOG.md + 每週一排程監控）。
+旗艦教學站（Astro，47 篇文章）。07-05 大整理：內容制度正本上線（EDITORIAL + 兩個任務範本 +
+四角色產線）、LLM 接入層（llms.txt + 全站 .md 端點）、8 張概念缺圖以 SVG 補齊、
+圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**AI 能力測驗功能已做完並驗證通過，尚未 commit**（等 Joseph 授權）。
-- 新檔：`src/data/quiz.ts`（題庫+策展推薦+計分）、`src/components/CapabilityQuiz.tsx`（雷達圖結果）、
-  `src/pages/quiz.astro` + `en/quiz.astro`；改：Header 導覽、ui.ts、文章索引 CTA（中英）。
-- 已驗證：production build 109 頁過、`scoreQuiz` 三邊界單元測過、preview 實際作答 → 缺口判定/雷達圖/推薦導流全對。
-- 下一步：① 等授權 commit；② 可選優化見 BACKLOG（用途：講座暖場 / 體驗課評估）。
-
-待補（更早任務，需 Joseph 素材）：`ai-agent-browsers` 補 2 張截圖
-`./scripts/add-image.sh ai-agent-browsers <圖>` → **機敏掃描** → commit。
+**Joseph review 本次改動並決定 commit**（一次涉及多檔，建議分批：①清理+制度 ②LLM 端點 ③概念圖+圖片壓縮）。
+較早待辦不變：AI 能力測驗已驗證待 commit；`ai-agent-browsers` 待補 2 張截圖。
 
 ## 怎麼驗證這一步成功
-選定任務做完後 `npm run build` 成功、本地預覽正常、無機敏資訊、commit。
+`npm install && npm run build` 過（07-05 已在乾淨環境驗證 exit 0）、
+`dist/llms.txt`、`dist/articles/<slug>.md` 存在、文章頁概念圖正常顯示。
 
 ## 卡點 / 待你決定
-- 待你提供 Comet、ChatGPT Atlas 兩張截圖以補完 `ai-agent-browsers` 配圖。
-- 是否要把 loop 化（見 dev-harness/LAUNCHDOCK-CONTENT-LOOP.md，待建 BACKLOG.md）。
+- 本次改動的 commit 授權（見上）。
+- lab 三筆 REPLACE 條目的實際連結（只有你有），見 launchdock-lab/STATUS.md。
+- feedback-monitor.sh 需要 `.env`（SUPABASE_URL + SERVICE_KEY）——回饋 loop 停擺的唯一原因。
+- Supabase 安全掃描結果（見 BACKLOG「來自監控」07-05 段）：4 個 SECURITY DEFINER view 屬 ERROR 級,
+  `handle_new_user`/`rls_auto_enable` 不該讓 anon 可呼叫——修正涉及 production DB,等你點頭我再出 migration。
 
 ## 進度脈絡（新的在上）
-- 2026-06-27 新增「AI 能力測驗」功能（行為自評→缺口導向→雷達圖→推薦文章，中英），已驗證未 commit
-- 2026-06-27 提交「AI 代理瀏覽器：Comet/Atlas/Computer Use」中英文 + 登錄 Computer Use 概念（截圖待補）
-- 2026-06-19 導入內容 loop：建 BACKLOG.md、CLAUDE.md 加開場/收尾鐵律、掛每週一排程
-- 2026-06-19 提交「Cloudflare Workers 當 LINE Bot 後端」教學文
-- 2026-06-05 更新瓶頸段落內容
+- 2026-07-05 內容制度正本：docs/EDITORIAL.md + templates/（observation-to-article、pitfall-to-article、concept-svg）；
+  文章 schema 加 `modules` 欄位；`npm run handout M0x` 抽組講義；CLAUDE.md 掛薄索引
+- 2026-07-05 LLM 接入層：/llms.txt、/llms-full.txt、每篇 /articles/<slug>.md（中英）
+- 2026-07-05 補 8 張概念圖 SVG（ai-agent-memory-guide ×4、which-ai-tool-for-you ×4，皆 AI 生成，無機敏資訊）
+- 2026-07-05 圖庫瘦身：73 張 >500KB 的 4K retina PNG 縮至寬 1800（94MB→70MB，git 可還原）
+- 2026-07-05 清理：docs/ 13 個一次性討論稿歸檔 docs/archive/、修 dev-harness 斷鏈引用、harness prompt 草稿歸檔
+- 2026-06-27 「AI 能力測驗」功能已驗證未 commit
+- 2026-06-27 「AI 代理瀏覽器」文（截圖待補 2 張）
+- 2026-06-19 導入內容 loop（BACKLOG.md + 每週一排程監控）
 
 ## 已知坑
-- 任何圖片插入後**必須**跑機敏掃描（見 CLAUDE.md 安全規則）。
-- sitemap 靠 build 自動產，push 即更新，不要手動改。
-- React island 互動驗證要用 `npm run preview`（服務 dist），**不要用 `npm run dev`**：
-  dev server 會出 `jsxDEV is not a function` 導致全站 hydration 壞掉（React19+Vite dev-only 問題，
-  非程式 bug，連 SearchTrigger/AuthButton 都掛）。preview 用 production React 正常。
+- 任何圖片插入後**必須**跑機敏掃描（見 CLAUDE.md 安全規則）。生成的 SVG 概念圖除外（無真實資料）。
+- sitemap 靠 build 自動產；llms/.md 端點不會進 sitemap（已驗證）。
+- React island 互動驗證要用 `npm run preview`，**不要用 `npm run dev`**（React19+Vite dev-only 的
+  `jsxDEV is not a function` 問題，preview 用 production React 正常）。
+- 概念圖規格（顏色/字體/底卡）正本在 `docs/templates/concept-svg.md`，不要即興發揮。

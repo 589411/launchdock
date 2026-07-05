@@ -7,11 +7,21 @@
 
 ## 🔁 內容 Loop 鐵律（最先讀）
 
-本站內容更新採 loop 制（設計見 `~/github/dev-harness/LAUNCHDOCK-CONTENT-LOOP.md`）：
+本站內容更新採 loop 制（原始設計已歸檔於 `~/github/dev-harness/archive/LAUNCHDOCK-CONTENT-LOOP.md`；日常執行以本節 + `BACKLOG.md` 為準，不需回讀原檔）：
 
 - **開場**：先讀 `STATUS.md` 與 `BACKLOG.md`，回報現況並從 BACKLOG 挑一件最高價值的事再動工。
 - **收尾**：把這次的進展與新發現的待辦寫回 `BACKLOG.md`，並更新 `STATUS.md` 的「下一個具體動作」。
 - 監控結果（壞連結、未配對 @img、讀者回饋）一律附加到 `BACKLOG.md` 的「來自監控」區。
+
+---
+
+## 📜 內容制度（正本引用，不複製）
+
+- **制度正本**：`docs/EDITORIAL.md`——品牌聲音、硬規則、完成定義、角色分工。寫或改任何文章前先讀。
+- **任務範本**：Joseph 給觀察/趨勢 → `docs/templates/observation-to-article.md`；
+  Joseph 給踩過的坑 → `docs/templates/pitfall-to-article.md`（產出同時是課程講義素材）。
+- **講義**：文章 frontmatter 掛 `modules: [M01–M13]`（定義在 `launchdock-lab/data/modules.yaml`）→
+  `npm run handout M0x` 抽組講義到 `docs/handouts/`。
 
 ---
 

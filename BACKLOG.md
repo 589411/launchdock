@@ -1,6 +1,6 @@
 # BACKLOG — launchdock 內容待辦
 
-> 這是內容 loop 的記憶（見 dev-harness/LAUNCHDOCK-CONTENT-LOOP.md）。
+> 這是內容 loop 的記憶（loop 規則見 CLAUDE.md「內容 Loop 鐵律」）。
 > 規則：每次內容工作**開場先讀這裡挑一件**、**收尾把新發現寫回這裡**。
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
@@ -8,7 +8,40 @@
 <尚無。從下方挑一件移上來。>
 
 ## 📡 來自監控（系統自動產生，新項目補在最上）
-<尚無。每週排程會把壞連結、未配對 @img、讀者回饋寫進這裡。>
+
+### 2026-07-05 大整理 session（cowork 全面掃描 + 動工）
+- [ ] [安全] Supabase advisors:4 個 SECURITY DEFINER view(v_popular_articles 等)ERROR 級;
+      `handle_new_user`/`rls_auto_enable` anon 可經 REST 呼叫;5 張表 INSERT `WITH CHECK (true)`(匿名回饋設計使然,防濫用靠 rate limit);
+      8 張 cpc_* 表 RLS 開了沒 policy(deny-all,若只走 service key 屬正常);Auth 洩漏密碼保護未開 — 修 production DB 前等 Joseph 授權 — supabase
+- [ ] [基建] feedback-monitor.sh 缺 .env 仍停擺(同 06-29,唯一卡「真實回饋驅動內容」的點)— feedback-monitor
+- [ ] [效能] 剩 ~37 張 500KB–1.8MB 的 PNG(寬已 ≤1800):可再上 WebP/AVIF 或 Astro Image,屬錦上添花 — images
+- [ ] [內容] 47 篇文章批量掛 `modules` 標籤(已示範 3 篇:M01/M04/M05),掛完講義線才有肉 — handout
+- [x] [缺圖] 8 張概念圖已以 SVG 補齊(ai-agent-memory-guide ×4、which-ai-tool-for-you ×4),缺圖債 91→83,
+      其餘為真實 UI 截圖(其中 ~35 張需 Windows 機)— @img
+
+
+### 2026-06-29 每週掃描（與 06-22 比對：圖庫零變動，環境問題一解一未解）
+- [ ] [基建] feedback-monitor.sh 仍無法執行：.env 不存在、缺 Supabase 設定 — 讀者回饋監控持續停擺，這是唯一阻擋「用真實回饋驅動內容」的卡點 — feedback-monitor
+- [x] [基建] `.git/index.lock` 本週掃描已不存在 → 06-22 那筆鎖檔問題視為解除（保留紀錄）— git status
+- [ ] [收尾] BACKLOG.md 自 06-22 起一直處於未提交狀態（git 顯示 `M BACKLOG.md`，內含整個 06-22 監控段）— 提醒 Joseph 決定是否 commit loop 記憶 — git status
+- [註] [缺圖] 本週 @img 缺口總數 91 張，與 06-22 完全相同（各 slug 數字未變），無新增/減少；無新文章、無未追蹤的內容檔（src/、public/、.md）需收尾 — @img
+
+### 2026-06-22 每週掃描（中英共用圖庫，補齊 zh 91 個缺口會同步解掉 en 90 個）
+- [ ] [基建] `.git/index.lock` 殘留鎖檔，可能擋住 git 操作 — 確認無 git 程序後手動刪除 — git status
+- [ ] [基建] feedback-monitor.sh 無法執行：缺 Supabase 環境變數（SUPABASE_URL/SERVICE_KEY）— 讀者回饋監控目前停擺，待設定 .env — feedback-monitor
+- [ ] [缺圖] ai-agent-memory-guide：缺 4 張概念圖（層次對比/形成流程/多代理共享/benchmark）— 全為可生成圖解，零環境依賴 — @img
+- [ ] [缺圖] which-ai-tool-for-you：缺 4 張（五層地圖、Layer4 路線圖、Gemini×Workspace、風險評估表）— 多為可生成圖解 — @img
+- [ ] [缺圖] docker-n8n-mac：缺 3 張 Mac 截圖（下載頁/選單鯨魚圖示/n8n 初始畫面）— Joseph 本機可拍 — @img
+- [ ] [缺圖] install-openclaw-windows：缺 1 張（systeminfo 確認 Hyper-V）— 需 Windows 機 — @img
+- [ ] [缺圖] openclaw-first-skill：缺 5 張 — @img
+- [ ] [缺圖] gemini-gas-ordering-system：缺 7 張 — @img
+- [ ] [缺圖] google-api-key-guide：缺 8 張（圖庫已有 34 檔，這 8 個 id 尚未拍）— @img
+- [ ] [缺圖] windows-wsl-guide：缺 9 張（需 Windows）— @img
+- [ ] [缺圖] docker-n8n-windows：缺 10 張（需 Windows）— @img
+- [ ] [缺圖] openclaw-first-run：缺 12 張 — @img
+- [ ] [缺圖] hermes-agent：缺 12 張 — @img
+- [ ] [缺圖] hermes-agent-windows：缺 12 張（需 Windows）— @img
+- [ ] [缺圖] ollama-openclaw-windows：缺 4 張（圖庫已有 16 檔，這 4 個 id 尚未拍，需 Windows）— @img
 
 ## 💡 來自規劃（你或 AI 提議的新內容）
 - [ ] [功能] AI 能力測驗後續：用途定位＝講座/課程暖場 + 體驗課評估。可考慮 → 結果分享圖卡(OG)、
