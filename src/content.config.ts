@@ -19,6 +19,9 @@ const articleSchemaBase = {
   discussionUrl: z.string().url().optional(),
   stuckOptions: z.record(z.string(), z.array(z.string())).optional().default({}),
   tags: z.array(z.string()).min(1).max(8),
+  // 課程模組標籤(M01–M13,權威定義在 launchdock-lab/data/modules.yaml)。
+  // 掛了 module 的文章可被抽組成上課講義:node scripts/generate-handout.mjs M0x
+  modules: z.array(z.string().regex(/^M(0[1-9]|1[0-3])$/)).optional().default([]),
 };
 
 // ── Chinese (zh-tw) articles ──────────────────────────────────

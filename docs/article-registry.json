@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-06-30T03:32:05.026Z",
+  "_generated": "2026-07-05T02:57:38.525Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -310,6 +310,7 @@
       "prerequisites": [
         "openclaw-first-run"
       ],
+      "modules": [],
       "concepts_defined": [
         "Fallback"
       ],
@@ -338,6 +339,7 @@
       "prerequisites": [
         "openclaw-first-run"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "Skill"
@@ -362,6 +364,7 @@
       "prerequisites": [
         "install-openclaw"
       ],
+      "modules": [],
       "concepts_defined": [
         "Gateway"
       ],
@@ -386,6 +389,7 @@
         "安裝"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "Docker",
@@ -410,6 +414,7 @@
       "prerequisites": [
         "cli-guide"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/dev-cli-tools-mac"
@@ -431,6 +436,7 @@
       "prerequisites": [
         "install-openclaw"
       ],
+      "modules": [],
       "concepts_defined": [
         "Homebrew"
       ],
@@ -457,6 +463,7 @@
       "prerequisites": [
         "llm-guide"
       ],
+      "modules": [],
       "concepts_defined": [
         "Ollama"
       ],
@@ -485,6 +492,7 @@
       "prerequisites": [
         "llm-guide"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "Ollama"
@@ -507,6 +515,7 @@
         "除錯"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "Docker",
@@ -531,6 +540,7 @@
       "prerequisites": [
         "install-openclaw"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "WSL"
@@ -554,6 +564,7 @@
       "prerequisites": [
         "cli-guide"
       ],
+      "modules": [],
       "concepts_defined": [
         "WSL"
       ],
@@ -578,6 +589,7 @@
       "prerequisites": [
         "ai-api-key-guide"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "OpenClaw",
@@ -602,6 +614,7 @@
         "設定"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/deploy-to-github-pages"
@@ -624,6 +637,7 @@
       "prerequisites": [
         "why-openclaw"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "WSL",
@@ -648,6 +662,7 @@
       "prerequisites": [
         "ai-api-key-guide"
       ],
+      "modules": [],
       "concepts_defined": [
         "KimiClaw",
         "Zeabur",
@@ -675,6 +690,7 @@
       "prerequisites": [
         "ollama-openclaw-mac"
       ],
+      "modules": [],
       "concepts_defined": [
         "Hermes"
       ],
@@ -702,6 +718,7 @@
         "ollama-openclaw-windows",
         "windows-wsl-guide"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "Hermes"
@@ -722,6 +739,9 @@
         "OpenClaw"
       ],
       "prerequisites": [],
+      "modules": [
+        "M05"
+      ],
       "concepts_defined": [
         "n8n"
       ],
@@ -744,6 +764,7 @@
       "prerequisites": [
         "openclaw-first-run"
       ],
+      "modules": [],
       "concepts_defined": [
         "Telegram Bot"
       ],
@@ -769,6 +790,7 @@
       "prerequisites": [
         "firebase-register-web-app"
       ],
+      "modules": [],
       "concepts_defined": [
         "Firestore"
       ],
@@ -792,6 +814,7 @@
       "prerequisites": [
         "firebase-create-project"
       ],
+      "modules": [],
       "concepts_defined": [
         "Firebase Authentication"
       ],
@@ -816,6 +839,7 @@
       "prerequisites": [
         "firebase-enable-google-login"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "Firebase",
@@ -839,6 +863,9 @@
         "整合"
       ],
       "prerequisites": [],
+      "modules": [
+        "M04"
+      ],
       "concepts_defined": [
         "LIFF",
         "LINE Login"
@@ -860,6 +887,7 @@
         "整合"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [
         "Firebase"
       ],
@@ -883,6 +911,7 @@
         "Prompt"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [
         "Google Apps Script"
       ],
@@ -906,6 +935,7 @@
       "prerequisites": [
         "why-openclaw"
       ],
+      "modules": [],
       "concepts_defined": [
         "MCP"
       ],
@@ -931,6 +961,7 @@
       "prerequisites": [
         "openclaw-first-run"
       ],
+      "modules": [],
       "concepts_defined": [
         "Agent"
       ],
@@ -962,6 +993,7 @@
       "prerequisites": [
         "openclaw-first-skill"
       ],
+      "modules": [],
       "concepts_defined": [
         "Skill"
       ],
@@ -987,6 +1019,7 @@
       "prerequisites": [
         "openclaw-agent"
       ],
+      "modules": [],
       "concepts_defined": [
         "Soul"
       ],
@@ -1016,6 +1049,7 @@
       "prerequisites": [
         "openclaw-first-run"
       ],
+      "modules": [],
       "concepts_defined": [
         "RAG",
         "Embedding",
@@ -1050,6 +1084,7 @@
       "prerequisites": [
         "llm-guide"
       ],
+      "modules": [],
       "concepts_defined": [
         "API Key"
       ],
@@ -1078,6 +1113,7 @@
       "prerequisites": [
         "why-openclaw"
       ],
+      "modules": [],
       "concepts_defined": [
         "CLI",
         "Shell"
@@ -1102,6 +1138,7 @@
         "整合"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/github-developer-settings-tokens"
@@ -1123,6 +1160,7 @@
       "prerequisites": [
         "ai-api-key-guide"
       ],
+      "modules": [],
       "concepts_defined": [
         "Google Cloud Console",
         "Gemini",
@@ -1148,6 +1186,7 @@
         "整合"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/github-account-signup"
@@ -1171,6 +1210,7 @@
       "prerequisites": [
         "why-openclaw"
       ],
+      "modules": [],
       "concepts_defined": [
         "LLM",
         "Provider",
@@ -1203,6 +1243,7 @@
       "prerequisites": [
         "prompt-engineering"
       ],
+      "modules": [],
       "concepts_defined": [
         "CoT",
         "ReAct"
@@ -1229,6 +1270,9 @@
       "prerequisites": [
         "openclaw-agent"
       ],
+      "modules": [
+        "M01"
+      ],
       "concepts_defined": [
         "Agent Memory",
         "Context Engineering"
@@ -1252,6 +1296,7 @@
       "prerequisites": [
         "openclaw-first-run"
       ],
+      "modules": [],
       "concepts_defined": [
         "Prompt Engineering"
       ],
@@ -1277,6 +1322,7 @@
       "prerequisites": [
         "openclaw-agent"
       ],
+      "modules": [],
       "concepts_defined": [
         "Multi-Agent",
         "Swarm"
@@ -1305,6 +1351,7 @@
       "prerequisites": [
         "ai-tool-landscape"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "AI 控制邊界"
@@ -1324,6 +1371,7 @@
         "GIF"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/media-guide"
@@ -1344,6 +1392,7 @@
       "prerequisites": [
         "openclaw-skill"
       ],
+      "modules": [],
       "concepts_defined": [
         "PKM"
       ],
@@ -1373,6 +1422,7 @@
         "why-openclaw",
         "ai-tech-evolution"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "Computer Use",
@@ -1397,6 +1447,7 @@
       "prerequisites": [
         "why-openclaw"
       ],
+      "modules": [],
       "concepts_defined": [
         "Transformer",
         "Context Window"
@@ -1424,6 +1475,7 @@
       "prerequisites": [
         "llm-guide"
       ],
+      "modules": [],
       "concepts_defined": [
         "Token"
       ],
@@ -1448,6 +1500,7 @@
         "概念"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [
         "OpenClaw"
       ],
@@ -1474,6 +1527,7 @@
         "why-openclaw",
         "ai-tool-landscape"
       ],
+      "modules": [],
       "concepts_defined": [
         "AI 控制邊界"
       ],
@@ -1494,6 +1548,7 @@
         "Token"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/ai-speed-and-opportunity"
@@ -1515,6 +1570,7 @@
       "prerequisites": [
         "ai-tool-landscape"
       ],
+      "modules": [],
       "concepts_defined": [
         "Computer Use"
       ],
@@ -1536,6 +1592,7 @@
         "Windows"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/computex-2026-ai-era"
@@ -1558,6 +1615,7 @@
         "llm-guide",
         "ollama-openclaw-mac"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/google-gemma4"
@@ -1576,6 +1634,7 @@
         "Gemini"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "Skill",
@@ -1600,6 +1659,7 @@
       "prerequisites": [
         "why-openclaw"
       ],
+      "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [
         "Harness"
@@ -1621,6 +1681,7 @@
         "OpenClaw"
       ],
       "prerequisites": [],
+      "modules": [],
       "concepts_defined": [
         "Harness"
       ],

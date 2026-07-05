@@ -11,6 +11,7 @@ order: 6
 prerequisites: ["openclaw-agent"]
 estimatedMinutes: 15
 tags: ["Agent", "RAG", "LLM", "MCP"]
+modules: [M01]
 stuckOptions:
   "記憶 vs. 其他概念": ["Agent 記憶跟 RAG 有什麼不同？", "Context Engineering 不算記憶嗎？", "為什麼 LLM 內部記憶不夠？"]
   "記憶的三種形式": ["Token-level 要怎麼選資料結構？", "燒進模型的記憶有什麼代價？", "Latent 記憶是什麼？"]
@@ -52,7 +53,7 @@ stuckOptions:
 
 關鍵詞是「演進」——不只是查，而是每次互動後都在調整自己的記憶庫，決定什麼值得留下、怎麼更新、什麼可以刪掉。
 
-<!-- @img: ai-memory-layers-comparison | 四種記憶概念的層次對比圖 -->
+![四種記憶概念的層次對比圖](/images/articles/ai-agent-memory-guide/ai-memory-layers-comparison.svg)
 
 ---
 
@@ -133,7 +134,7 @@ MemGPT、Mem0 這類系統主要倚賴這種形式。
 - 把互動解析成知識圖譜中的節點與邊
 - 偵測「關鍵事件」（你說了一句很重要的偏好，或者 Agent 犯了一個有意義的錯誤）
 
-<!-- @img: memory-formation-flow | 記憶形成流程：原始對話 → 萃取 → 結構化存儲 -->
+![記憶形成流程：原始對話 → 萃取 → 結構化存儲](/images/articles/ai-agent-memory-guide/memory-formation-flow.svg)
 
 ### 演進（Evolution）：穩定性 vs. 可塑性的拉鋸
 
@@ -182,7 +183,7 @@ Agent 記憶的提取要更主動：
 
 問題很具體：Agent A 學到了一個技巧，Agent B 應不應該自動知道？假設 Agent B 後來發現那個技巧在某場景不管用，這個「校正」要不要同步回去？這個問題目前沒有很好的答案。
 
-<!-- @img: multi-agent-memory-sharing | 多智能體共享記憶的架構示意 -->
+![多智能體共享記憶的架構示意](/images/articles/ai-agent-memory-guide/multi-agent-memory-sharing.svg)
 
 ### 4. 從向量堆到知識圖譜
 
@@ -228,7 +229,7 @@ MemGPT 在跨 session 記憶檢索任務上，把正確率從基線的 32–39% 
 
 這不是小改進，這是根本性的差異。說明「外部結構化記憶架構是值得投資的」這件事不只是理論，已經有具體的效果可以對比了。
 
-<!-- @img: memory-benchmark-comparison | 記憶架構 benchmark 效能對比 -->
+![記憶架構 benchmark 效能對比](/images/articles/ai-agent-memory-guide/memory-benchmark-comparison.svg)
 
 ---
 

@@ -11,6 +11,7 @@ order: 3
 prerequisites: []
 estimatedMinutes: 12
 tags: ["LINE", "LIFF", "OAuth", "申請", "整合"]
+modules: [M04]
 stuckOptions:
   "LIFF 是什麼": ["LIFF 跟一般網頁差在哪？", "做 LIFF 一定要會寫程式嗎？", "LIFF 跟 LINE Bot 是同一件事嗎？"]
   "選擇頻道類型": ["為什麼不是選 Messaging API？", "LINE MINI App 跟 LIFF 差在哪？", "同一個 Provider 可以建幾個 channel？"]

@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "registry": "node scripts/generate-article-registry.mjs"
+    "registry": "node scripts/generate-article-registry.mjs",
+    "handout": "node scripts/generate-handout.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",

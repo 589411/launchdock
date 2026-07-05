@@ -173,6 +173,7 @@ for (const file of files) {
     contentType: fm.contentType || '',
     tags: fm.tags || [],
     prerequisites: fm.prerequisites || [],
+    modules: fm.modules || [],
     concepts_defined: slugToConceptsDefined[slug] || [],
     concepts_referenced: [...new Set(slugToConceptsReferenced[slug] || [])],
     link: `/articles/${slug}`,

@@ -11,6 +11,7 @@ order: 3
 prerequisites: []
 estimatedMinutes: 7
 tags: ["n8n", "整合", "Agent", "OpenClaw"]
+modules: [M05]
 stuckOptions:
   "n8n 到底是什麼": ["跟 Zapier、Make 差在哪？", "我不會寫程式也能用嗎？"]
   "企業為什麼需要": ["我們公司規模不大，也用得到嗎？", "和 RPA 有什麼不同？"]
