@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-07-05（晚間：DB 安全加固 006 上線）
+**最後更新：** 2026-07-08（藍鴨小聚 /meetup 報名表單接上、已上線）
 **整體狀態：** 🟢 進行中
 
 ## 一句話現況
@@ -10,7 +10,8 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**Joseph review 本次改動並決定 commit**（一次涉及多檔，建議分批：①清理+制度 ②LLM 端點 ③概念圖+圖片壓縮）。
+**藍鴨小聚 /meetup 已可對外分享**——報名表單（forms.gle/K9BUvxV6svWUgYVN9，launchdockapp 帳號建）已接上 FORM_URL、build 過、已 commit+push。
+下一步由 Joseph 決定：①開始對外宣傳 /meetup（LINE/社群）②開場前當天查證免費層還在（GitHub Models／OpenRouter／Gemini）③8/26 正式場改用站上原生 events + Resend 自動信、主持帳號收回 launchdockapp。
 較早待辦不變：AI 能力測驗已驗證待 commit；`ai-agent-browsers` 待補 2 張截圖。
 
 ## 怎麼驗證這一步成功
@@ -29,6 +30,13 @@
   根本解是搬進獨立 schema / 獨立 project——只要還共用 anon key 風險就掛著（尚未動）。
 
 ## 進度脈絡（新的在上）
+- 2026-07-08 新增活動頁 `src/pages/meetup.astro`（`/meetup`）：藍鴨小聚「鴨聚·Assemble！」7/29 試營運場（系統提示詞主題）。
+  用 BaseLayout+Tailwind token+複用 .hero-section，含四階梯路線圖 + 導流三篇文章（Soul/from-prompt-to-skill/新文）。
+  build 過、瀏覽器實測渲染正常。**✅ 2026-07-08 FORM_URL 已接上**（forms.gle/K9BUvxV6svWUgYVN9），已 build 驗證 + commit + push，/meetup 可對外分享。
+  報名/發信結論：試營運走 Google 表單+固定 Meet link+確認頁回信（省工、免登入）；站上原生 events 有 send-registration-confirmation(Resend) 自動信，留 8 月正式場再接。
+  表單細節：launchdockapp 帳號建、系統提示詞主題、4 題（稱呼/AI程度/最想學/最卡關）、收 email（作答者手動輸入）、提交後確認頁附 Meet link（ays-gqvd-zcx，7/29 20:00–22:00）。
+  帳號分工：Meet 房間用 tranngoclan51873（有 Gemini/Google One，撐 2hr/100人，純幕後）、對外品牌全走 launchdockapp、個人 589411 不碰。當天需登入 tranngoclan 主持。
+  題目定案：單場＝「系統提示詞」；「從小白到指揮官」當整個階梯的 slogan（非單場題目）。
 - 2026-07-05（晚）新碎碎念文：`openclaw-hermes-or-claude-max`（中英）——「初學者選 OpenClaw/Hermes？先分清學 vs 幹活」。
   框架：開源拿來學、付費助理拿來幹活（化解站的 OpenClaw 定位張力）。build 過、registry 已更新、Joseph gate 通過已 commit
 - 2026-07-05（晚）DB 安全加固 006 上 production（見卡點區）

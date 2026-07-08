@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// 報名表單（launchdockapp 帳號）：收名單 + 需求問卷；提交後確認頁附 Meet 連結
+const FORM_URL = 'https://forms.gle/K9BUvxV6svWUgYVN9';
+
+// 導流：先暖身讀這幾篇（連到站內文章）
+const warmups = [
+  {
+    slug: 'openclaw-soul',
+    title: 'Soul 完全指南：讓 Agent 有記憶、個性與成長',
+    note: '系統提示詞的「進階版」——OpenClaw 用 Soul 幫 AI 立人設。',
+  },
+  {
+    slug: 'from-prompt-to-skill',
+    title: 'Skill 其實是 GPTs 的進化版：指令打包三段演化',
+    note: '從一段提示，一路長成可重複使用的技能——就是我們的階梯。',
+  },
+  {
+    slug: 'openclaw-hermes-or-claude-max',
+    title: '初學者該用 OpenClaw 還是 Hermes？',
+    note: '先想清楚你要「學」還是要「幹活」——階梯最上面那一階。',
+  },
+];
+---
+
+<BaseLayout
+  title="藍鴨小聚・鴨聚 Assemble"
+  description="7/29（三）晚上，鴨聚 Assemble！搶先試營運場——別再每次都跟 AI 重講一遍，鴨編帶你設定第一個系統提示詞。免費，零門檻。"
+  canonicalUrl="https://launchdock.app/meetup"
+>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero-section">
+    <div class="max-w-[760px] mx-auto">
+      <div class="flex items-center gap-3 mb-8">
+        <img src="/images/dock_head_s.png" alt="藍鴨" class="w-11 h-11 object-contain rounded-xl bg-white/10 p-1" />
+        <div class="leading-tight">
+          <div class="font-bold">藍鴨小聚</div>
+          <div class="font-mono text-[0.6rem] tracking-[0.2em] text-text-secondary">LAUNCHDOCK · LIVE</div>
+        </div>
+      </div>
+
+      <p class="font-mono text-xs tracking-[0.2em] uppercase mb-4" style="color:#f9a825">
+        鴨聚 · Assemble！　·　搶先試營運場
+      </p>
+      <h1 class="text-balance mb-5">
+        別再每次都跟 AI 重講一遍，<br />
+        <span class="highlight">設定你的第一個系統提示詞。</span>
+      </h1>
+      <p class="text-[1.05rem] text-text-secondary max-w-[34em] mb-8">
+        你是不是每次打開 AI，都要重新交代同樣的事——我是誰、講中文、別給我廢話？這一晚，鴨編帶你設定一次
+        <b style="color:#f9a825">系統提示詞</b>（讓 AI 記住你是誰的那段設定），從此不用再重講。這是從小白通往高手的第一步：零門檻，打開你已經在用的 AI 就能做。
+      </p>
+
+      <!-- ticket -->
+      <div class="flex flex-wrap rounded-2xl border border-white/20 bg-white/5 overflow-hidden mb-8 font-mono">
+        <div class="flex-1 min-w-[120px] px-5 py-3.5 border-r border-dashed border-white/20">
+          <div class="text-[0.6rem] tracking-[0.18em] uppercase text-text-secondary">日期</div>
+          <div class="text-lg font-semibold tabular-nums mt-1">7 / 29 <span class="text-sm text-text-secondary">（三）</span></div>
+        </div>
+        <div class="flex-1 min-w-[120px] px-5 py-3.5 border-r border-dashed border-white/20">
+          <div class="text-[0.6rem] tracking-[0.18em] uppercase text-text-secondary">時間</div>
+          <div class="text-lg font-semibold tabular-nums mt-1">20:00–22:00</div>
+        </div>
+        <div class="flex-1 min-w-[120px] px-5 py-3.5">
+          <div class="text-[0.6rem] tracking-[0.18em] uppercase text-text-secondary">地點</div>
+          <div class="text-lg font-semibold mt-1">線上 <span class="text-sm text-text-secondary">Meet</span></div>
+        </div>
+      </div>
+
+      <a
+        href={FORM_URL}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2.5 rounded-xl px-8 py-4 font-extrabold text-[1.05rem] text-[#2a1b04] transition-transform hover:-translate-y-0.5"
+        style="background:linear-gradient(180deg,#f2a63a,#e4901f); box-shadow:0 10px 26px -8px rgba(242,166,58,.55)"
+      >
+        我要報名 <span aria-hidden="true">→</span>
+      </a>
+      <p class="font-mono text-xs text-text-secondary mt-3.5">免費參加　·　小型互動場　·　名額有限</p>
+    </div>
+  </section>
+
+  <!-- ===================== BODY ===================== -->
+  <div class="max-w-[760px] mx-auto px-6">
+
+    <!-- 帶走什麼 -->
+    <section class="py-14 border-b border-surface-lighter">
+      <h2 class="text-2xl font-extrabold text-balance mb-1.5">這一晚，你會帶走什麼</h2>
+      <p class="text-text-secondary mb-7">不用先準備、也不用先付費。是這三樣真的能帶走的東西。</p>
+      <div class="grid gap-3.5">
+        {[
+          { n: '01', h: '一段屬於你的系統提示詞', p: '現場就把它寫出來。設定一次，之後每次打開 AI，它都懂你是誰、要什麼。' },
+          { n: '02', h: '「原來這麼簡單」的體感', p: '不用寫程式、不用裝任何東西。在你已經在用的 ChatGPT／Claude 裡就能設好。' },
+          { n: '03', h: '一張往上爬的地圖', p: '看清楚從「設一段提示詞」到「養一隻幫你打工的 AI」，整條路怎麼走。' },
+        ].map((c) => (
+          <div class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 items-start bg-surface-light border border-surface-lighter rounded-2xl p-[22px]">
+            <span class="row-span-2 grid place-items-center w-9 h-9 rounded-lg font-mono font-bold text-white" style="background:#58a6ff">{c.n}</span>
+            <h3 class="self-center text-[1.06rem] font-bold m-0">{c.h}</h3>
+            <p class="col-start-2 text-text-secondary text-[0.97rem] m-0">{c.p}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 形式 & 適合誰 -->
+    <section class="py-14 border-b border-surface-lighter">
+      <h2 class="text-2xl font-extrabold text-balance mb-1.5">形式 &amp; 適合誰</h2>
+      <p class="text-text-secondary mb-7">一張票的資訊，先講清楚。</p>
+      <dl class="bg-surface-light border border-surface-lighter rounded-2xl overflow-hidden m-0">
+        {[
+          ['形式', '線上・講解 ＋ 現場示範（輕鬆聽就好，不用先準備）'],
+          ['適合', '完全的新手——會用 ChatGPT／Claude 聊天，但沒設過系統提示詞的你'],
+          ['需要', '一台電腦、一個你常用的 AI 帳號（免費的就行）、兩小時的專心'],
+          ['費用', '免費（這是搶先試營運場，名額有限）'],
+        ].map(([k, v]) => (
+          <div class="grid grid-cols-[76px_1fr] gap-3.5 px-5 py-4 border-b border-dashed border-surface-lighter last:border-b-0 items-baseline">
+            <dt class="font-mono text-[0.68rem] tracking-[0.14em] uppercase text-accent-rocket font-medium">{k}</dt>
+            <dd class="m-0">{v}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <!-- 當晚兩小時 -->
+    <section class="py-14 border-b border-surface-lighter">
+      <h2 class="text-2xl font-extrabold text-balance mb-1.5">當晚的兩小時</h2>
+      <p class="text-text-secondary mb-7">節奏抓好，不讓你放空，也不讓你掉隊。</p>
+      <div class="grid">
+        {[
+          ['20:00', '開場・今晚的痛點', '「你是不是每次都要跟 AI 重講一遍？」'],
+          ['20:10', '系統提示詞是什麼', '用生活比喻秒懂——它就是 AI 的「人設」。'],
+          ['20:35', '現場示範・寫一段給你看', '鴨編公開自己的系統提示詞，一句一句拆給你看。'],
+          ['21:05', '換你寫', '「你每次都要重複交代 AI 的是什麼？」把它變成你的提示詞（跟著寫，不強迫分享）。'],
+          ['21:30', '這只是第一步', '攤開四階梯路線圖：模板 → 自動化 → AI Agent。'],
+          ['21:45', 'Q&A ＋ 免費資源清單', '帶走清單、留個需求：你最想學什麼？下一場為你設計。'],
+        ].map(([t, h, d]) => (
+          <div class="grid grid-cols-[74px_1fr] gap-[18px] py-4 border-t border-surface-lighter first:border-t-0 items-baseline">
+            <div class="font-mono text-[0.9rem] font-semibold tabular-nums" style="color:#58a6ff">{t}</div>
+            <div>
+              <strong class="font-bold">{h}</strong>
+              <span class="block text-text-secondary text-[0.94rem] mt-0.5">{d}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 四階梯 -->
+    <section class="py-14 border-b border-surface-lighter">
+      <h2 class="text-2xl font-extrabold text-balance mb-1.5">這場只是第一步——整條路長這樣</h2>
+      <p class="text-text-secondary mb-7">藍鴨小聚每月一場，帶你一階一階往上爬：從小白，到能自己指揮 AI 幫你打工。</p>
+      <div class="grid gap-2.5">
+        {[
+          { lv: '①', now: true, h: '設定系統提示詞', p: '讓 AI 記住你是誰、要什麼。個人化的第一步。' },
+          { lv: '②', now: false, h: '把常用的存成模板', p: '自訂指令、Projects、GPTs——你的口袋咒語，存一次到處用。' },
+          { lv: '③', now: false, h: '讓 AI 自己動手', p: '踏進自動化：把重複的事交給 AI 自己跑。' },
+          { lv: '④', now: false, h: '養一隻幫你打工的 AI', p: 'AI Agent 登場：OpenClaw／Hermes 上手，成為你的數位員工。' },
+        ].map((r) => (
+          <div class={`grid grid-cols-[34px_1fr] gap-3.5 items-start bg-surface-light border rounded-xl px-[18px] py-3.5 ${r.now ? 'border-l-[3px]' : ''}`} style={r.now ? 'border-color:#f59e0b' : 'border-color:var(--color-surface-lighter)'}>
+            <span class="font-mono font-bold text-[1.05rem]" style={r.now ? 'color:#f59e0b' : 'color:#58a6ff'}>{r.lv}</span>
+            <div>
+              <h3 class="m-0 text-[1.02rem] font-bold">
+                {r.h}
+                {r.now && <span class="inline-block font-mono text-[0.58rem] tracking-[0.12em] uppercase text-[#2a1b04] rounded-md px-1.5 py-0.5 ml-2 align-middle" style="background:#f59e0b">7/29 本場</span>}
+              </h3>
+              <p class="m-0 mt-0.5 text-text-secondary text-[0.92rem]">{r.p}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 導流：先讀這幾篇 -->
+    <section class="py-14 border-b border-surface-lighter">
+      <h2 class="text-2xl font-extrabold text-balance mb-1.5">來之前，先讀這幾篇暖身</h2>
+      <p class="text-text-secondary mb-7">想先有感覺？這幾篇站上文章跟這場最相關，讀了 7/29 更好接。</p>
+      <div class="grid gap-3.5">
+        {warmups.map((a) => (
+          <a href={`/articles/${a.slug}`} class="group block bg-surface-light border border-surface-lighter rounded-2xl p-5 transition-colors hover:border-brand">
+            <h3 class="text-[1.05rem] font-bold m-0 group-hover:text-brand transition-colors">{a.title}</h3>
+            <p class="text-text-secondary text-[0.94rem] m-0 mt-1.5">{a.note}</p>
+            <span class="inline-block mt-3 font-mono text-xs text-brand">閱讀文章 →</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- 關於藍鴨 + 432 -->
+    <section class="py-14 border-b border-surface-lighter">
+      <h2 class="text-2xl font-extrabold text-balance mb-3">關於藍鴨</h2>
+      <p class="text-text-secondary text-[1rem]">
+        藍鴨（LaunchDock）是一個陪台灣人從零學會用 AI 的地方。我們相信：與其一直比較哪個工具最厲害，不如真的動手，用它做出屬於你的東西。
+      </p>
+      <div class="mt-5 rounded-xl bg-surface-light border border-surface-lighter border-l-[3px] p-5" style="border-left-color:#f59e0b">
+        <div class="font-mono font-bold text-2xl tracking-[0.12em]">4 · 3 · 2 …<span style="color:#f59e0b"> 一定要來哦</span></div>
+        <p class="mt-2 text-text-secondary text-[0.95rem] m-0">
+          這場是搶先試營運。從 8 月起，藍鴨小聚固定在<b class="text-text-primary">每月第 4 個星期三</b>晚上——第
+          <b class="text-text-primary">4</b> 週、週 <b class="text-text-primary">3</b>、<b class="text-text-primary">2</b> 小時，倒數 4·3·2 之後那個「1」，就是一定要來。
+        </p>
+      </div>
+    </section>
+
+    <!-- final CTA -->
+    <section class="py-16 text-center">
+      <h2 class="text-2xl font-extrabold text-balance mb-1.5">7/29 晚上，設好你的第一個系統提示詞</h2>
+      <p class="text-text-secondary mb-6">名額有限，先報先卡位。</p>
+      <a
+        href={FORM_URL}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2.5 rounded-xl px-8 py-4 font-extrabold text-[1.05rem] text-[#2a1b04] transition-transform hover:-translate-y-0.5"
+        style="background:linear-gradient(180deg,#f2a63a,#e4901f); box-shadow:0 10px 26px -8px rgba(242,166,58,.55)"
+      >
+        我要報名 <span aria-hidden="true">→</span>
+      </a>
+      <p class="font-mono text-xs text-text-secondary mt-3.5">填一張小表單，順便告訴我們你最想學的那件事</p>
+    </section>
+
+  </div>
+</BaseLayout>
