@@ -16,6 +16,7 @@ interface Event {
   event_type: EventType;
   price: number;
   meet_link: string | null;
+  external_url: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -341,6 +342,7 @@ function EventForm({
   const [eventType, setEventType] = useState<EventType>(event?.event_type || 'meetup');
   const [price, setPrice] = useState(event?.price?.toString() || '0');
   const [meetLink, setMeetLink] = useState(event?.meet_link || '');
+  const [externalUrl, setExternalUrl] = useState(event?.external_url || '');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
@@ -365,6 +367,7 @@ function EventForm({
       event_type: eventType,
       price: parseInt(price) || 0,
       meet_link: meetLink.trim() || null,
+      external_url: externalUrl.trim() || null,
     };
 
     if (event) {
@@ -442,6 +445,17 @@ function EventForm({
             placeholder="https://meet.google.com/xxx-xxxx-xxx"
           />
           <p className="text-text-muted text-xs mt-1">報名成功後才會顯示給已報名者</p>
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">外部報名連結（Google 表單等）</label>
+          <input
+            type="text"
+            value={externalUrl}
+            onChange={e => setExternalUrl(e.target.value)}
+            className="w-full px-4 py-2 rounded-lg bg-surface border border-surface-lighter text-text-primary focus:border-brand focus:outline-none"
+            placeholder="https://forms.gle/xxxx（留空＝走站上原生報名）"
+          />
+          <p className="text-text-muted text-xs mt-1">填了的話，報名按鈕會導去這個外部連結，不走站上 Google 登入報名。試營運場用。</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>

@@ -15,6 +15,7 @@ interface Event {
   event_type: EventType;
   price: number;
   meet_link: string | null;
+  external_url: string | null;
   registration_count?: number;
 }
 
@@ -151,14 +152,27 @@ export default function EventCard({ eventData, compact = false }: Props) {
             <span>{event.location}</span>
           </div>
         )}
-        <div className="flex items-center gap-2 text-sm text-text-muted">
-          <span>👥</span>
-          <span>{regCount} 人已報名{event.max_capacity ? ` / ${event.max_capacity} 名額` : ''}</span>
-        </div>
+        {!event.external_url && (
+          <div className="flex items-center gap-2 text-sm text-text-muted">
+            <span>👥</span>
+            <span>{regCount} 人已報名{event.max_capacity ? ` / ${event.max_capacity} 名額` : ''}</span>
+          </div>
+        )}
       </div>
 
       {!isPast && event.status === 'published' && (
-        <EventRegButton eventId={event.id} isFull={isFull} onRegister={() => setRegCount(c => c + 1)} meetLink={event.meet_link} price={event.price} />
+        event.external_url ? (
+          <a
+            href={event.external_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-6 py-2.5 bg-brand hover:bg-brand-dark text-white rounded-lg font-medium transition-colors text-sm"
+          >
+            🙋 前往報名 →
+          </a>
+        ) : (
+          <EventRegButton eventId={event.id} isFull={isFull} onRegister={() => setRegCount(c => c + 1)} meetLink={event.meet_link} price={event.price} />
+        )
       )}
     </div>
   );

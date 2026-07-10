@@ -164,6 +164,7 @@ export interface Database {
           event_type: EventType;
           price: number;
           meet_link: string | null;
+          external_url: string | null;
           created_by: string | null;
           created_at: string;
           updated_at: string;
@@ -180,6 +181,7 @@ export interface Database {
           event_type?: EventType;
           price?: number;
           meet_link?: string | null;
+          external_url?: string | null;
           created_by?: string | null;
         };
         Update: {
@@ -194,6 +196,7 @@ export interface Database {
           event_type?: EventType;
           price?: number;
           meet_link?: string | null;
+          external_url?: string | null;
         };
       };
       event_registrations: {

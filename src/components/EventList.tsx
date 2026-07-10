@@ -16,6 +16,7 @@ interface Event {
   event_type: EventType;
   price: number;
   meet_link: string | null;
+  external_url: string | null;
   registration_count?: number;
 }
 
