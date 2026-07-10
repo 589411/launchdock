@@ -50,6 +50,8 @@ export const ui = {
     'article.stuck.ok': '👍 看懂',
     'article.stuck.notok': '😢 看不懂',
     'article.stuck.feedback': '告訴我們哪裡寫得好、哪裡要改。',
+    'article.share.line': '分享到 LINE',
+    'article.share.hint': '覺得有用？分享給也在弄髒雙手的朋友',
     'article.breadcrumb.home': '藍鴨 LaunchDock',
 
     // Articles list page
@@ -105,6 +107,8 @@ export const ui = {
     'article.stuck.ok': '👍 Got it',
     'article.stuck.notok': '😢 Confused',
     'article.stuck.feedback': 'to give feedback.',
+    'article.share.line': 'Share on LINE',
+    'article.share.hint': 'Found this useful? Share it with a friend who’s also getting their hands dirty',
     'article.breadcrumb.home': 'LaunchDock',
 
     // Articles list page

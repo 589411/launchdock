@@ -7,6 +7,7 @@ import EmotionFeedback from '../components/EmotionFeedback.tsx';
 import SectionReactions from '../components/SectionReactions.tsx';
 import ArticleQA from '../components/ArticleQA.tsx';
 import RelatedArticles from '../components/RelatedArticles.astro';
+import ShareToLine from '../components/ShareToLine.astro';
 import PageViewTracker from '../components/PageViewTracker.tsx';
 import { sceneKeyToLabel, difficultyKeyToLabel, type Locale } from '../i18n/ui';
 import { articlesPath } from '../i18n/utils';
@@ -45,6 +46,9 @@ const difficultyDisplay = difficultyKeyToLabel[lang][frontmatter.difficulty] ?? 
 const difficultyIcon =
   ['入門', 'beginner'].includes(frontmatter.difficulty) ? '✅' :
   ['中級', 'intermediate'].includes(frontmatter.difficulty) ? '⚡' : '🔥';
+
+// Absolute URL for share links (falls back to path if site is unset)
+const shareUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
 
 const articlesBase = articlesPath(lang);
 const homeHref = lang === 'en' ? '/en/' : '/';
@@ -146,5 +150,8 @@ const homeName = lang === 'en' ? 'LaunchDock' : '藍鴨 LaunchDock';
     <div class="mt-8 pt-8 border-t border-surface-lighter">
       <ArticleQA client:load slug={slug} />
     </div>
+
+    <!-- Share to LINE (static link — no channel / no push quota) -->
+    <ShareToLine url={shareUrl} lang={lang} />
   </article>
 </BaseLayout>

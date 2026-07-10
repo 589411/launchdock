@@ -10,7 +10,9 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**2026-07-10 藍鴨小聚已上站露出＋原生 events 支援外部報名（已上 production）**——原本 `/meetup` 是孤兒頁（站上無入口）。已做：① 首頁 hero banner（中英）→ /meetup；② events 表加 `external_url` 欄位（migration 007，已套 production）+ 改 EventCard（有值→報名按鈕導外部表單、隱藏報名人數；無值→維持原生 Google 登入報名）+ AdminEvents 加欄位（你日後可自行增修活動）；③ production 建 7/29 藍鴨小聚（external_url=forms.gle/K9BUvxV6svWUgYVN9、published），`/events` 即將舉辦(1)、前往報名導表單，已瀏覽器實測。**下一步由你挑**：① 對外宣傳 /meetup（LINE/社群）；② `dont-fomo` 的 LINE 短文（cowork outputs/line-post-dont-fomo.md）部署後點開確認 URL 再貼；③ 8/26 正式場改用**原生報名**（建 event 時 external_url 留空即走 Resend 自動信）；④ BACKLOG 其他（47 篇批量掛 modules、ai-agent-browsers 補 2 圖）。
+**2026-07-10 LINE 會員 Phase 1b：LINE 登入接 channel**——Phase 1a（不需 channel 的部分）已完成並實測：① 文章「分享到 LINE」按鈕（`ShareToLine.astro`，純 LINE it! URL，零 API/零配額，塞 `ArticleLayout` → 47 篇自動有）已上；② migration 008（`member_profiles.email` 改可空 + `handle_new_user` 容忍 LINE 無 email 用戶）**已寫、尚未套 production**（跟 cpc_* 共用庫，套庫待 Joseph gate）。**下一步（需 Joseph）**：① 決定 LINE Login channel 掛哪個帳號（要跟未來 OA 同 provider）→ 建 channel 拿 Channel ID/Secret；② Supabase Dashboard 開 Custom OIDC `custom:line`（issuer access.line.me、email_optional）；③ 套 migration 008；④ 前端 AuthButton/EventCard/AuthProvider/AdminGuard 四處加「用 LINE 登入」（Google 並存）；⑤ 瀏覽器實測登入→建 profile→報名。Phase 2（OA webhook 自動回覆課程，避開 200 push/月 上限）見 BACKLOG。
+
+**（前一段）2026-07-10 藍鴨小聚已上站露出＋原生 events 支援外部報名（已上 production）**——原本 `/meetup` 是孤兒頁（站上無入口）。已做：① 首頁 hero banner（中英）→ /meetup；② events 表加 `external_url` 欄位（migration 007，已套 production）+ 改 EventCard（有值→報名按鈕導外部表單、隱藏報名人數；無值→維持原生 Google 登入報名）+ AdminEvents 加欄位（你日後可自行增修活動）；③ production 建 7/29 藍鴨小聚（external_url=forms.gle/K9BUvxV6svWUgYVN9、published），`/events` 即將舉辦(1)、前往報名導表單，已瀏覽器實測。**下一步由你挑**：① 對外宣傳 /meetup（LINE/社群）；② `dont-fomo` 的 LINE 短文（cowork outputs/line-post-dont-fomo.md）部署後點開確認 URL 再貼；③ 8/26 正式場改用**原生報名**（建 event 時 external_url 留空即走 Resend 自動信）；④ BACKLOG 其他（47 篇批量掛 modules、ai-agent-browsers 補 2 圖）。
 
 **（背景）活動系統雙軌**：原生 events（Supabase `events` 表 + EventList/EventCard，站上報名或 external_url 導外部）｜`/meetup` 獨立硬編頁（完整 landing，報名走 Google 表單）。7/29 這場兩者並存：hero banner→/meetup（詳頁），/events→原生卡（直接導表單）。
 較早待辦不變：AI 能力測驗已驗證待 commit；`ai-agent-browsers` 待補 2 張截圖。
@@ -31,6 +33,8 @@
   根本解是搬進獨立 schema / 獨立 project——只要還共用 anon key 風險就掛著（尚未動）。
 
 ## 進度脈絡（新的在上）
+- 2026-07-10 LINE 會員 Phase 1a（不需 channel 的部分，已 build 綠 + 瀏覽器實測）：① 新增 `src/components/ShareToLine.astro`——文章一鍵分享到 LINE，用官方 LINE it! share endpoint（純靜態 `<a>`，零 API/零配額/零 channel），塞進 `ArticleLayout.astro` → 中英 47 篇（含未來新增）自動全有、未動任何一篇文章；i18n 加 `article.share.line`/`article.share.hint`。② migration 008 `member_profiles.email` 改可空 + 重寫 `handle_new_user()` 容忍 LINE 無 email 用戶（保留 006 加固），對 Google 用戶零影響——**檔案已寫、尚未套 production**。設計討論（三塊：LINE 登入 / 分享 / 詢問→自動回覆避開 200 push 上限）與分階段見 BACKLOG「藍鴨導入 LINE 會員系統」。
+- 2026-07-10 新增商模 roadmap `docs/ROADMAP.md`：「vibe coding 課 × 限時能力包」試營運實驗（月底）。關鍵洞察＝`memory-mcp` 已是 remote read-only MCP，限時能力包架構已存在、只差限時 token；demo 任務源自 `launchdock-lab`、能力包內容源自 `589411/memory`。三個待驗數字：付費轉換/續訂率/任務完成率。細節待辦已進 BACKLOG 規劃區。（純規劃文件，無程式改動）
 - 2026-07-10 藍鴨小聚上站露出 + 原生 events 加外部報名能力（已上 production）：發現 `/meetup` 是孤兒頁（首頁/活動頁都無入口，訪客只有拿到網址才點得到）。
   階段一（靜態，commit bf33019）：首頁 hero banner + /events 手動精選卡（中英）→ /meetup。
   階段二（commit b83f905 + 714cbac）：migration 007 加 `events.external_url`；EventCard 有值→報名導外部表單+隱藏報名人數，無值→維持原生 Google 登入報名；AdminEvents 加欄位；production 建 7/29 場（external_url=表單、published）；驗證 /events 即將舉辦(1)+前往報名導表單後，移除階段一手動卡（原生取代）。hero banner 保留。

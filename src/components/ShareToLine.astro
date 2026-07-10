@@ -1,0 +1,35 @@
+---
+// Share-to-LINE button — a pure static link using the official LINE it! social
+// plugin endpoint. No channel, no Messaging API, no monthly-push quota: it just
+// opens LINE's share dialog with the article URL. Lives in ArticleLayout so all
+// articles (zh + en) get it automatically — never inserted per-article.
+import { useTranslations, type Locale } from '../i18n/utils';
+
+interface Props {
+  url: string; // absolute article URL
+  lang?: Locale;
+}
+
+const { url, lang = 'zh-tw' } = Astro.props;
+const t = useTranslations(lang);
+
+// LINE it! share plugin — opens the LINE share sheet with this URL.
+const shareHref = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`;
+---
+
+<div class="flex flex-col items-center gap-2 mt-12 pt-8 border-t border-surface-lighter">
+  <p class="text-sm text-text-muted">{t('article.share.hint')}</p>
+  <a
+    href={shareHref}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-white transition-transform hover:-translate-y-0.5"
+    style="background-color:#06C755"
+    aria-label={t('article.share.line')}
+  >
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.48 2 2 5.69 2 10.22c0 4.06 3.55 7.46 8.35 8.11.32.07.77.21.88.49.1.25.07.64.03.9l-.14.85c-.04.25-.2.98.86.53s5.71-3.36 7.79-5.76c1.43-1.57 2.23-3.17 2.23-5.12C22 5.69 17.52 2 12 2ZM8.06 12.86H6.07a.53.53 0 0 1-.53-.53V8.36a.53.53 0 0 1 1.06 0v3.44h1.46a.53.53 0 0 1 0 1.06Zm2.08-.53a.53.53 0 0 1-1.06 0V8.36a.53.53 0 0 1 1.06 0v3.97Zm4.79 0a.53.53 0 0 1-.36.5.6.6 0 0 1-.17.03.52.52 0 0 1-.43-.21l-2.04-2.77v2.45a.53.53 0 0 1-1.06 0V8.36a.53.53 0 0 1 .36-.5.5.5 0 0 1 .17-.03c.16 0 .32.08.42.21l2.05 2.78V8.36a.53.53 0 0 1 1.06 0v3.97Zm3.35-2.51a.53.53 0 0 1 0 1.06h-1.46v.92h1.46a.53.53 0 0 1 0 1.06h-1.99a.53.53 0 0 1-.53-.53V8.36a.53.53 0 0 1 .53-.53h1.99a.53.53 0 0 1 0 1.06h-1.46v.93h1.46Z"/>
+    </svg>
+    {t('article.share.line')}
+  </a>
+</div>
