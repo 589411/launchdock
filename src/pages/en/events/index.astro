@@ -13,6 +13,29 @@ import EventList from '../../../components/EventList.tsx';
       Learning AI alone can be tough. Join our meetups to learn, share, and solve problems together.
     </p>
 
+    <!-- Featured: Blue Duck Meetup (preview run uses a standalone page + external form) -->
+    <a
+      href="/meetup"
+      class="block mb-10 p-6 rounded-2xl bg-gradient-to-br from-brand/15 to-surface-light border border-brand/40 hover:border-brand transition-all group"
+    >
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-brand text-white">Preview run</span>
+        <span class="text-xs font-semibold text-brand-light tracking-wider">LIVE</span>
+      </div>
+      <h2 class="text-xl font-bold mb-1 group-hover:text-brand-light transition-colors">
+        Blue Duck Meetup・Assemble! — Set up your first system prompt
+      </h2>
+      <p class="text-text-secondary text-sm mb-4">
+        Stop re-explaining yourself to AI every time. In one evening, set up a system prompt once and never repeat it. Zero barrier — do it with the AI you already use. (Event held in Mandarin.)
+      </p>
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-text-secondary">
+        <span>📅 Jul 29 (Wed)</span>
+        <span>🕗 20:00–22:00</span>
+        <span>📍 Online (Meet)</span>
+        <span class="text-brand-light font-medium group-hover:underline">Details & sign up →</span>
+      </div>
+    </a>
+
     <EventList client:load />
 
     <!-- CTA -->
