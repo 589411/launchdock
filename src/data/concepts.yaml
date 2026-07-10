@@ -327,6 +327,13 @@ Shell:
   canonicalArticle: "cli-guide"
   relatedArticles: ["windows-wsl-guide", "install-openclaw-macos"]
 
+caffeinate:
+  displayName: "caffeinate"
+  aliases: ["caffeinate", "咖啡因指令"]
+  shortDesc: "macOS 內建指令，讓電腦保持清醒不進入休眠，避免長時間跑的 Agent 斷線"
+  canonicalArticle: "caffeinate-keep-mac-awake"
+  relatedArticles: ["cli-guide"]
+
 # ── 設定格式 ──────────────────────────────────────────
 
 QMD:

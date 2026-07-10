@@ -254,7 +254,7 @@ export const levels: Record<number, LevelInfo> = {
   3: {
     title: { zh: 'Level 3 — 工具操作', en: 'Level 3 — Tool Operator' },
     blurb: { zh: '你能用文件了，接下來讓 AI 真的動手用工具、接連接器。', en: 'You work with documents — next, let AI use tools and connectors.' },
-    recommended: ['ai-api-key-guide', 'mcp-protocol', 'llm-tool-calling-era', 'telegram-integration'],
+    recommended: ['dont-fomo-ai-tools', 'ai-api-key-guide', 'mcp-protocol', 'llm-tool-calling-era', 'telegram-integration'],
   },
   4: {
     title: { zh: 'Level 4 — 自動化', en: 'Level 4 — Automation Builder' },

@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-07-08（藍鴨小聚 /meetup 報名表單接上、已上線）
+**最後更新：** 2026-07-10（新增 2 篇中英雙版：caffeinate 教學 + dont-fomo-ai-tools 測驗橋接文；均掛 M01、build 綠、瀏覽器實測過，已 commit+push）
 **整體狀態：** 🟢 進行中
 
 ## 一句話現況
@@ -10,7 +10,9 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**藍鴨小聚 /meetup 已可對外分享**——報名表單（forms.gle/K9BUvxV6svWUgYVN9，launchdockapp 帳號建）已接上 FORM_URL、build 過、已 commit+push。
+**2026-07-10 兩篇新文已收尾（caffeinate + dont-fomo-ai-tools）**——都掛 `modules: [M01]`、`npm run registry`（58 篇/49 概念）、`npm run build` exit 0、瀏覽器實測（測驗結果頁工具力缺口首位命中 dont-fomo、概念自動連結生效），已 commit+push。**下一步由你挑**：① `dont-fomo` 附帶的 LINE 課程群組短文（cowork outputs/line-post-dont-fomo.md）部署後點開確認 URL 再貼群組；② 開始對外宣傳 /meetup；③ 從 BACKLOG「來自監控／規劃」挑下一件（如 47 篇批量掛 modules、ai-agent-browsers 補 2 圖）。
+
+**（前一件，仍有效）藍鴨小聚 /meetup 已可對外分享**——報名表單（forms.gle/K9BUvxV6svWUgYVN9，launchdockapp 帳號建）已接上 FORM_URL、build 過、已 commit+push。
 下一步由 Joseph 決定：①開始對外宣傳 /meetup（LINE/社群）②開場前當天查證免費層還在（GitHub Models／OpenRouter／Gemini）③8/26 正式場改用站上原生 events + Resend 自動信、主持帳號收回 launchdockapp。
 較早待辦不變：AI 能力測驗已驗證待 commit；`ai-agent-browsers` 待補 2 張截圖。
 
@@ -30,6 +32,13 @@
   根本解是搬進獨立 schema / 獨立 project——只要還共用 anon key 風險就掛著（尚未動）。
 
 ## 進度脈絡（新的在上）
+- 2026-07-10 新碎碎念/橋接文 `dont-fomo-ai-tools`（中英）：接測驗「工具力」缺口的推薦文（已進 quiz.ts levels[3] 首位）。
+  論點＝「AI 自動調用工具正變成跨廠牌內建基本盤，所以別 FOMO、該練判斷不是追型號」，綁 Joseph 昨天課堂預言 + 2026-07-09 OpenAI 更新當證據。
+  查證：GPT-5.6 Sol/Terra/Luna 7/9 上線、ChatGPT+Codex 併桌面 App（含 Free）、ChatGPT Work 跨 App agent（多家點名衝 Claude Cowork）皆已多方證實；max/ultra 檔位、500萬/100萬 統計、Claude Code 匯入、Sites 等未能獨立證實 → 刻意未寫進文。
+  附帶產出 LINE 課程群組短文（cowork outputs/line-post-dont-fomo.md，URL 待部署）。**未 build、未 commit、待 gate**。
+- 2026-07-10 新踩坑文 `caffeinate-keep-mac-awake`（中英）：Agent 跑很久／掛著接訊息時 Mac 休眠→斷線，用 caffeinate 解。
+  contentType: troubleshoot、scene 基礎使用、零 @img（全 CLI 走 code block）。查證：caffeinate -dimsu 五 flag（ss64/Apple）、OpenClaw（Steinberger，前身 Warelay/Moltbot）、Hermes（Nous Research，2026-02）。
+  concepts.yaml 新增 caffeinate、registry 已重跑。**未 build（沙箱缺 rollup-linux）、未 commit、待 gate**。
 - 2026-07-08 新增活動頁 `src/pages/meetup.astro`（`/meetup`）：藍鴨小聚「鴨聚·Assemble！」7/29 試營運場（系統提示詞主題）。
   用 BaseLayout+Tailwind token+複用 .hero-section，含四階梯路線圖 + 導流三篇文章（Soul/from-prompt-to-skill/新文）。
   build 過、瀏覽器實測渲染正常。**✅ 2026-07-08 FORM_URL 已接上**（forms.gle/K9BUvxV6svWUgYVN9），已 build 驗證 + commit + push，/meetup 可對外分享。

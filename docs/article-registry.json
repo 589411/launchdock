@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-05T14:49:51.297Z",
+  "_generated": "2026-07-10T01:36:50.327Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -260,6 +260,12 @@
       "canonicalArticle": "cli-guide",
       "link": "/articles/cli-guide"
     },
+    "caffeinate": {
+      "displayName": "caffeinate",
+      "shortDesc": "macOS 內建指令，讓電腦保持清醒不進入休眠，避免長時間跑的 Agent 斷線",
+      "canonicalArticle": "caffeinate-keep-mac-awake",
+      "link": "/articles/caffeinate-keep-mac-awake"
+    },
     "QMD": {
       "displayName": "QMD",
       "shortDesc": "OpenClaw 的結構化記憶格式，YAML-based",
@@ -292,6 +298,30 @@
     }
   },
   "articles": [
+    {
+      "slug": "caffeinate-keep-mac-awake",
+      "title": "Mac 一睡著 AI Agent 就斷線？用 caffeinate 讓 OpenClaw、Hermes 整夜不中斷",
+      "description": "叫 Agent 跑一件要好幾個鐘頭的事，去泡杯咖啡回來卻發現 Mac 睡著、任務斷在一半、Telegram 也叫不動它？macOS 內建的 caffeinate 指令能讓電腦保持清醒、服務不中斷。本文把 -dimsu 五個參數逐一講清楚，附常用寫法與最容易踩的坑。",
+      "scene": "基礎使用",
+      "difficulty": "入門",
+      "contentType": "troubleshoot",
+      "tags": [
+        "OpenClaw",
+        "Hermes",
+        "macOS",
+        "CLI",
+        "設定"
+      ],
+      "prerequisites": [],
+      "modules": [
+        "M01"
+      ],
+      "concepts_defined": [
+        "caffeinate"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/caffeinate-keep-mac-awake"
+    },
     {
       "slug": "openclaw-model-config",
       "title": "模型設定與切換：讓 OpenClaw 自動選最適合的 AI 模型",
@@ -1120,7 +1150,8 @@
       ],
       "concepts_referenced": [
         "WSL",
-        "Homebrew"
+        "Homebrew",
+        "caffeinate"
       ],
       "link": "/articles/cli-guide"
     },
@@ -1554,6 +1585,28 @@
       "link": "/articles/ai-speed-and-opportunity"
     },
     {
+      "slug": "dont-fomo-ai-tools",
+      "title": "AI 會自己動手用工具，正在變成「內建基本盤」——所以你不用 FOMO",
+      "description": "測驗卡在「工具力」這關？先別焦慮。OpenAI 今天（7/9）一口氣上線 GPT-5.6、把 ChatGPT 和 Codex 併成一個桌面 App、推出跨應用的 ChatGPT Work——這正好證明一件事：讓 AI 自己調用工具、取用資料，正在從「你要自己拼」變成產品內建的基本盤。這篇談這對非技術的你實際代表什麼，以及你該把力氣花在哪。",
+      "scene": "鴨編的碎碎念",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "OpenAI",
+        "Agent",
+        "LLM",
+        "Anthropic",
+        "趨勢"
+      ],
+      "prerequisites": [],
+      "modules": [
+        "M01"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/dont-fomo-ai-tools"
+    },
+    {
       "slug": "ai-agent-browsers",
       "title": "AI 會自己操作網頁了：Comet、Atlas 到完整 Computer Use 瀏覽器選擇清單",
       "description": "瀏覽器不再只是『顯示網頁』，而是會自己點按鈕、填表單、把任務做完。Perplexity Comet、ChatGPT Atlas 到底差在哪？這篇幫你一次選對。",
@@ -1644,17 +1697,17 @@
     },
     {
       "slug": "openclaw-hermes-or-claude-max",
-      "title": "初學者該用 OpenClaw 還是 Hermes？鴨編的真心話：先把 3000 元花對地方",
-      "description": "很多人問我：新手選哪個 Agent 工具？我的答案可能讓你意外——工具先別急著選。開源拿來學、拿來玩；真要提高生產力，一個月約 3000 元訂 Claude Max，讓 AI 直接幫你操作電腦。",
+      "title": "初學者該用 OpenClaw 還是 Hermes？先想清楚你要「學」還是要「幹活」",
+      "description": "很多人問我：新手選哪個 Agent 工具？我的答案是——先別急著選工具。先分清楚你是要學習原理，還是要提高生產力。這兩件事，該花力氣的地方完全不同。",
       "scene": "鴨編的碎碎念",
       "difficulty": "入門",
       "contentType": "guide",
       "tags": [
         "OpenClaw",
         "Hermes",
-        "Anthropic",
         "Agent",
-        "LLM"
+        "LLM",
+        "Anthropic"
       ],
       "prerequisites": [],
       "modules": [],
