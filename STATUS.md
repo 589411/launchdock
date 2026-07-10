@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-07-10（新增 2 篇中英雙版：caffeinate 教學 + dont-fomo-ai-tools 測驗橋接文；均掛 M01、build 綠、瀏覽器實測過，已 commit+push）
+**最後更新：** 2026-07-10（① 新增 2 篇中英雙版文章 ② 藍鴨小聚上站露出：首頁 hero banner + 原生 events 系統加 external_url 讓報名可導外部表單，7/29 場已在 production 上線並瀏覽器實測過）
 **整體狀態：** 🟢 進行中
 
 ## 一句話現況
@@ -10,10 +10,9 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**2026-07-10 兩篇新文已收尾（caffeinate + dont-fomo-ai-tools）**——都掛 `modules: [M01]`、`npm run registry`（58 篇/49 概念）、`npm run build` exit 0、瀏覽器實測（測驗結果頁工具力缺口首位命中 dont-fomo、概念自動連結生效），已 commit+push。**下一步由你挑**：① `dont-fomo` 附帶的 LINE 課程群組短文（cowork outputs/line-post-dont-fomo.md）部署後點開確認 URL 再貼群組；② 開始對外宣傳 /meetup；③ 從 BACKLOG「來自監控／規劃」挑下一件（如 47 篇批量掛 modules、ai-agent-browsers 補 2 圖）。
+**2026-07-10 藍鴨小聚已上站露出＋原生 events 支援外部報名（已上 production）**——原本 `/meetup` 是孤兒頁（站上無入口）。已做：① 首頁 hero banner（中英）→ /meetup；② events 表加 `external_url` 欄位（migration 007，已套 production）+ 改 EventCard（有值→報名按鈕導外部表單、隱藏報名人數；無值→維持原生 Google 登入報名）+ AdminEvents 加欄位（你日後可自行增修活動）；③ production 建 7/29 藍鴨小聚（external_url=forms.gle/K9BUvxV6svWUgYVN9、published），`/events` 即將舉辦(1)、前往報名導表單，已瀏覽器實測。**下一步由你挑**：① 對外宣傳 /meetup（LINE/社群）；② `dont-fomo` 的 LINE 短文（cowork outputs/line-post-dont-fomo.md）部署後點開確認 URL 再貼；③ 8/26 正式場改用**原生報名**（建 event 時 external_url 留空即走 Resend 自動信）；④ BACKLOG 其他（47 篇批量掛 modules、ai-agent-browsers 補 2 圖）。
 
-**（前一件，仍有效）藍鴨小聚 /meetup 已可對外分享**——報名表單（forms.gle/K9BUvxV6svWUgYVN9，launchdockapp 帳號建）已接上 FORM_URL、build 過、已 commit+push。
-下一步由 Joseph 決定：①開始對外宣傳 /meetup（LINE/社群）②開場前當天查證免費層還在（GitHub Models／OpenRouter／Gemini）③8/26 正式場改用站上原生 events + Resend 自動信、主持帳號收回 launchdockapp。
+**（背景）活動系統雙軌**：原生 events（Supabase `events` 表 + EventList/EventCard，站上報名或 external_url 導外部）｜`/meetup` 獨立硬編頁（完整 landing，報名走 Google 表單）。7/29 這場兩者並存：hero banner→/meetup（詳頁），/events→原生卡（直接導表單）。
 較早待辦不變：AI 能力測驗已驗證待 commit；`ai-agent-browsers` 待補 2 張截圖。
 
 ## 怎麼驗證這一步成功
@@ -32,6 +31,9 @@
   根本解是搬進獨立 schema / 獨立 project——只要還共用 anon key 風險就掛著（尚未動）。
 
 ## 進度脈絡（新的在上）
+- 2026-07-10 藍鴨小聚上站露出 + 原生 events 加外部報名能力（已上 production）：發現 `/meetup` 是孤兒頁（首頁/活動頁都無入口，訪客只有拿到網址才點得到）。
+  階段一（靜態，commit bf33019）：首頁 hero banner + /events 手動精選卡（中英）→ /meetup。
+  階段二（commit b83f905 + 714cbac）：migration 007 加 `events.external_url`；EventCard 有值→報名導外部表單+隱藏報名人數，無值→維持原生 Google 登入報名；AdminEvents 加欄位；production 建 7/29 場（external_url=表單、published）；驗證 /events 即將舉辦(1)+前往報名導表單後，移除階段一手動卡（原生取代）。hero banner 保留。
 - 2026-07-10 新碎碎念/橋接文 `dont-fomo-ai-tools`（中英）：接測驗「工具力」缺口的推薦文（已進 quiz.ts levels[3] 首位）。
   論點＝「AI 自動調用工具正變成跨廠牌內建基本盤，所以別 FOMO、該練判斷不是追型號」，綁 Joseph 昨天課堂預言 + 2026-07-09 OpenAI 更新當證據。
   查證：GPT-5.6 Sol/Terra/Luna 7/9 上線、ChatGPT+Codex 併桌面 App（含 Free）、ChatGPT Work 跨 App agent（多家點名衝 Claude Cowork）皆已多方證實；max/ultra 檔位、500萬/100萬 統計、Claude Code 匯入、Sites 等未能獨立證實 → 刻意未寫進文。
