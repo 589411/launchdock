@@ -61,9 +61,9 @@ API Key:
 Ollama:
   displayName: "Ollama"
   aliases: ["ollama"]
-  shortDesc: "在本機輕鬆運行開源 LLM 的工具，完全免費"
+  shortDesc: "在本機輕鬆運行開源 LLM 的工具；也提供雲端模型與 API 金鑰"
   canonicalArticle: "ollama-openclaw-mac"
-  relatedArticles: ["ollama-openclaw-windows", "llm-guide", "openclaw-model-config"]
+  relatedArticles: ["ollama-openclaw-windows", "llm-guide", "openclaw-model-config", "ollama-cloud-api-key"]
 
 Hermes:
   displayName: "Hermes Agent"
@@ -75,9 +75,9 @@ Hermes:
 OpenRouter:
   displayName: "OpenRouter"
   aliases: ["openrouter"]
-  shortDesc: "一把 API Key 存取多家模型的中繼平台"
-  canonicalArticle: "llm-guide"
-  relatedArticles: ["ai-api-key-guide"]
+  shortDesc: "一把 API Key 存取多家模型的中繼平台（LLM 閘道）"
+  canonicalArticle: "openrouter-free-llm-api-key"
+  relatedArticles: ["ai-api-key-guide", "llm-guide", "make-llm-email-auto-tagging", "ollama-cloud-api-key"]
 
 # ── OpenClaw 核心功能 ────────────────────────────────────
 
@@ -369,4 +369,34 @@ OAuth:
   aliases: ["OAuth", "OAuth 2.0"]
   shortDesc: "安全的第三方授權協定，用於 Google API 存取"
   canonicalArticle: "google-api-key-guide"
-  relatedArticles: ["ai-api-key-guide"]
+  relatedArticles: ["ai-api-key-guide", "google-cloud-oauth-api-setup"]
+
+# ── 自動化與資料工具（截圖產線新增 2026-07-18）────────────
+
+Make:
+  displayName: "Make（Integromat）"
+  aliases: ["Make", "make.com", "Integromat"]
+  shortDesc: "視覺化的零程式碼自動化平台，用「模組串模組」把不同服務串成自動流程（scenario）"
+  canonicalArticle: "make-gmail-sheets-automation"
+  relatedArticles: ["make-llm-email-auto-tagging", "google-cloud-oauth-api-setup", "what-is-n8n"]
+
+Google Cloud:
+  displayName: "Google Cloud（GCP）"
+  aliases: ["Google Cloud", "GCP", "Google Cloud Console", "Cloud Console"]
+  shortDesc: "Google 的雲端平台，建專案、啟用 API、發 OAuth 憑證都在這裡完成"
+  canonicalArticle: "google-cloud-oauth-api-setup"
+  relatedArticles: ["make-gmail-sheets-automation", "google-api-key-guide"]
+
+Kaggle:
+  displayName: "Kaggle"
+  aliases: ["Kaggle", "kaggle"]
+  shortDesc: "全球最大的資料科學與機器學習社群，可下載資料集、在雲端跑 Notebook、參加競賽"
+  canonicalArticle: "kaggle-account-signup"
+  relatedArticles: ["looker-studio-csv-analysis"]
+
+Looker Studio:
+  displayName: "Looker Studio（數據分析）"
+  aliases: ["Looker Studio", "Data Studio", "數據分析"]
+  shortDesc: "Google 免費的資料視覺化工具，可接 CSV、試算表、BigQuery 做互動式儀表板"
+  canonicalArticle: "looker-studio-csv-analysis"
+  relatedArticles: ["kaggle-account-signup"]

@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-07-10（① 新增 2 篇中英雙版文章 ② 藍鴨小聚上站露出：首頁 hero banner + 原生 events 系統加 external_url 讓報名可導外部表單，7/29 場已在 production 上線並瀏覽器實測過）
+**最後更新：** 2026-07-18（反向截圖產線：桌面 167 張截圖全量 triage → 產出 8 篇中英雙版新文章 + 58 張本機遮罩後乾淨圖，build 綠、已 commit 於分支、**尚未 push 待 Joseph 逐篇 review**）
 **整體狀態：** 🟢 進行中
 
 ## 一句話現況
@@ -10,7 +10,9 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**2026-07-10 LINE 會員 Phase 1b：LINE 登入接 channel（等 Joseph 建 channel，之後再做）**——Phase 1a（不需 channel 的部分）已完成：① 文章「分享到 LINE」按鈕（`ShareToLine.astro`，純 LINE it! URL，零 API/零配額，塞 `ArticleLayout` → 47 篇自動有）**已 commit c858921 + push + CF Pages 部署，production 實測確認上線**；② migration 008（`member_profiles.email` 改可空 + `handle_new_user` 容忍 LINE 無 email 用戶）**已寫、尚未套 production**（跟 cpc_* 共用庫，套庫待 Joseph gate）。**下一步（需 Joseph）**：① 決定 LINE Login channel 掛哪個帳號（要跟未來 OA 同 provider）→ 建 channel 拿 Channel ID/Secret；② Supabase Dashboard 開 Custom OIDC `custom:line`（issuer access.line.me、email_optional）；③ 套 migration 008；④ 前端 AuthButton/EventCard/AuthProvider/AdminGuard 四處加「用 LINE 登入」（Google 並存）；⑤ 瀏覽器實測登入→建 profile→報名。Phase 2（OA webhook 自動回覆課程，避開 200 push/月 上限）見 BACKLOG。
+**2026-07-18 反向截圖 8 篇新文章：等 Joseph 逐篇 review → 決定是否 push 上線**——本次用桌面累積的 167 張截圖，全量 triage 後分主題產出 8 篇中英雙版（共 16 檔）＋58 張本機遮罩後乾淨圖，全部在分支 `article/screenshot-batch-20260718` 上 commit（**未 push**，遵循「反向截圖文章先 review 再上傳」慣例）。8 篇：① `kaggle-account-signup`（註冊 Kaggle）② `looker-studio-csv-analysis`（Looker Studio 上傳 CSV）③ `openrouter-free-llm-api-key`（OpenRouter 拿免費 LLM key）④ `make-gmail-sheets-automation`（Make 起手：Gmail→Sheets）⑤ `google-cloud-oauth-api-setup`（GCP 建專案/啟用 API/OAuth）⑥ `make-llm-email-auto-tagging`（Make 串 LLM 自動分類信件）⑦ `ollama-cloud-api-key`（Ollama 雲端 key 當備援）⑧ `ai-agents-build-line-booking-system`（碎碎念：三個 AI 分工做 LINE 預約系統）。遮罩經 redact 腳本 + 手動黑框 + **兩輪獨立 AI 視覺稽核**（批次1抓到 Kaggle 名字馬賽克太淺 + Make 頭像縮寫，已補實心黑框重驗 clean）。**Joseph 下一步**：逐篇讀過（尤其確認遮罩 OK、藍鴨語氣 OK），滿意就 `git checkout main && git merge` 或直接 push 分支 → CF Pages 自動部署。concepts.yaml 已加 Make/Google Cloud/Kaggle/Looker Studio 4 概念、`npm run registry` 已重生（66 篇/53 概念）。原圖仍在 `~/Desktop`（未刪，gitignore 的 `_staging` 有 raw/clean 備份）。
+
+**（前一段）2026-07-10 LINE 會員 Phase 1b：LINE 登入接 channel（等 Joseph 建 channel，之後再做）**——Phase 1a（不需 channel 的部分）已完成：① 文章「分享到 LINE」按鈕（`ShareToLine.astro`，純 LINE it! URL，零 API/零配額，塞 `ArticleLayout` → 47 篇自動有）**已 commit c858921 + push + CF Pages 部署，production 實測確認上線**；② migration 008（`member_profiles.email` 改可空 + `handle_new_user` 容忍 LINE 無 email 用戶）**已寫、尚未套 production**（跟 cpc_* 共用庫，套庫待 Joseph gate）。**下一步（需 Joseph）**：① 決定 LINE Login channel 掛哪個帳號（要跟未來 OA 同 provider）→ 建 channel 拿 Channel ID/Secret；② Supabase Dashboard 開 Custom OIDC `custom:line`（issuer access.line.me、email_optional）；③ 套 migration 008；④ 前端 AuthButton/EventCard/AuthProvider/AdminGuard 四處加「用 LINE 登入」（Google 並存）；⑤ 瀏覽器實測登入→建 profile→報名。Phase 2（OA webhook 自動回覆課程，避開 200 push/月 上限）見 BACKLOG。
 
 **（前一段）2026-07-10 藍鴨小聚已上站露出＋原生 events 支援外部報名（已上 production）**——原本 `/meetup` 是孤兒頁（站上無入口）。已做：① 首頁 hero banner（中英）→ /meetup；② events 表加 `external_url` 欄位（migration 007，已套 production）+ 改 EventCard（有值→報名按鈕導外部表單、隱藏報名人數；無值→維持原生 Google 登入報名）+ AdminEvents 加欄位（你日後可自行增修活動）；③ production 建 7/29 藍鴨小聚（external_url=forms.gle/K9BUvxV6svWUgYVN9、published），`/events` 即將舉辦(1)、前往報名導表單，已瀏覽器實測。**下一步由你挑**：① 對外宣傳 /meetup（LINE/社群）；② `dont-fomo` 的 LINE 短文（cowork outputs/line-post-dont-fomo.md）部署後點開確認 URL 再貼；③ 8/26 正式場改用**原生報名**（建 event 時 external_url 留空即走 Resend 自動信）；④ BACKLOG 其他（47 篇批量掛 modules、ai-agent-browsers 補 2 圖）。
 
