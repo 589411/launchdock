@@ -64,7 +64,7 @@ stuckOptions:
 
 以鴨編自己每天在用的來說，是 Claude 這一套（Claude in Chrome、Claude Code，加上 Claude app 裡的協作模式），剛好把上面三塊都補齊了——它比較像**一個能直接操作電腦的助理**，而不是只會回話的聊天機器人。你當然可以選別家，重點是這三種「會幫你動手」的能力，值得你認真找齊。
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **換句話說**：一般人日常會用到的 AI 功能，一套好的付費助理幾乎就包了，你不用東拼西湊接一堆 API、也不用自己扛伺服器。（如果你對「AI 自己操作瀏覽器」這件事好奇，可以再讀 [AI 會自己操作網頁了](/articles/ai-agent-browsers)。）
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **換句話說**：一般人日常會用到的 AI 功能，一套好的付費助理幾乎就包了，你不用東拼西湊接一堆 API、也不用自己扛伺服器。（如果你對「AI 自己操作瀏覽器」這件事好奇，可以再讀 [AI 會自己操作網頁了](/articles/ai-agent-browsers/)。）
 
 ---
 

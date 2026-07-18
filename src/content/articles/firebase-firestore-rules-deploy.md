@@ -35,7 +35,7 @@ Missing or insufficient permissions.
 
 ![PWA 頁面的雲端連線測試失敗，顯示 Missing or insufficient permissions](/images/articles/firebase-firestore-rules-deploy/pwa-missing-permissions.png)
 
-> 還沒拿到 SDK 設定的話，先看 [在 Firebase 註冊 Web App 取得 SDK 設定](/articles/firebase-register-web-app)（整個 Firebase 系列從[建立專案](/articles/firebase-create-project)開始）。
+> 還沒拿到 SDK 設定的話，先看 [在 Firebase 註冊 Web App 取得 SDK 設定](/articles/firebase-register-web-app/)（整個 Firebase 系列從[建立專案](/articles/firebase-create-project/)開始）。
 
 ### 為什麼？因為 Firestore 預設「全部拒絕」
 
@@ -130,4 +130,4 @@ npx firebase-tools deploy --only firestore:rules
 
 ---
 
-> **下一步**：雲端後端搞定了，把網站本身免費上線 → [部署靜態網站／PWA 到 GitHub Pages](/articles/deploy-to-github-pages)
+> **下一步**：雲端後端搞定了，把網站本身免費上線 → [部署靜態網站／PWA 到 GitHub Pages](/articles/deploy-to-github-pages/)

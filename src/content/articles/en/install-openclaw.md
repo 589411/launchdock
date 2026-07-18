@@ -27,7 +27,7 @@ Based on your environment, choose the best option to begin:
 
 <div class="install-platform-cards">
 
-<a href="/articles/install-openclaw-macos" class="install-card install-card--macos">
+<a href="/articles/install-openclaw-macos/" class="install-card install-card--macos">
   <div class="install-card__icon">🍎</div>
   <div class="install-card__content">
     <h3>macOS</h3>
@@ -41,7 +41,7 @@ Based on your environment, choose the best option to begin:
   <span class="install-card__arrow">→</span>
 </a>
 
-<a href="/articles/install-openclaw-windows" class="install-card install-card--windows">
+<a href="/articles/install-openclaw-windows/" class="install-card install-card--windows">
   <div class="install-card__icon">🪟</div>
   <div class="install-card__content">
     <h3>Windows</h3>
@@ -55,7 +55,7 @@ Based on your environment, choose the best option to begin:
   <span class="install-card__arrow">→</span>
 </a>
 
-<a href="/articles/deploy-openclaw-cloud" class="install-card install-card--cloud">
+<a href="/articles/deploy-openclaw-cloud/" class="install-card install-card--cloud">
   <div class="install-card__icon">☁️</div>
   <div class="install-card__content">
     <h3>Cloud Deployment</h3>
@@ -78,12 +78,12 @@ Based on your environment, choose the best option to begin:
 | Scenario | Recommendation |
 |---|---|
 | First time, just want to try it out | ☁️ **Cloud Deployment** (fastest) |
-| Want a free experience without applying for an API Key | 🦙 **[Ollama Quick Start (macOS)](/en/articles/ollama-openclaw-mac)** (`ollama launch openclaw` — one command to launch) ｜🪟 **[Windows](/en/articles/ollama-openclaw-windows)** |
+| Want a free experience without applying for an API Key | 🦙 **[Ollama Quick Start (macOS)](/en/articles/ollama-openclaw-mac/)** (`ollama launch openclaw` — one command to launch) ｜🪟 **[Windows](/en/articles/ollama-openclaw-windows/)** |
 | Want long-term use and deeper learning | 🍎 **macOS** or 🪟 **Windows + WSL** local installation |
 | Have Linux development experience | 🪟 **Windows WSL 2** or follow the macOS tutorial |
 | Computer is struggling | ☁️ **Cloud Deployment** |
 
-> 💡 **Windows users, heads up**: OpenClaw relies heavily on CLI tools, and CLI works best in a Linux environment. We strongly recommend Windows users install via [WSL (Windows Subsystem for Linux)](/articles/windows-wsl-guide). For details, see [Why Not Install on Native Windows?](/articles/why-not-windows-openclaw)
+> 💡 **Windows users, heads up**: OpenClaw relies heavily on CLI tools, and CLI works best in a Linux environment. We strongly recommend Windows users install via [WSL (Windows Subsystem for Linux)](/articles/windows-wsl-guide/). For details, see [Why Not Install on Native Windows?](/articles/why-not-windows-openclaw/)
 
 > <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Duck Editor says**: Cloud deployment is like ordering takeout — no cooking required, food arrives fast. Local installation is like learning to cook — takes time, but you can make whatever you want anytime. Both are valid — it depends on how hungry you are right now.
 
@@ -108,9 +108,9 @@ Regardless of platform, the minimum requirements are:
 
 All set? Continue learning:
 
-- 📖 [Why You Need OpenClaw](/articles/why-openclaw)
-- ⚙️ [Configure Models & API Keys](/articles/openclaw-model-config)
-- 💰 [Understanding Token Billing](/articles/token-economics)
-- 🧩 [Build Your First Skill](/articles/openclaw-skill)
-- 🤖 [Create an Automated Agent](/articles/openclaw-agent)
-- 👻 [Design AI's Personality: Soul](/articles/openclaw-soul)
+- 📖 [Why You Need OpenClaw](/articles/why-openclaw/)
+- ⚙️ [Configure Models & API Keys](/articles/openclaw-model-config/)
+- 💰 [Understanding Token Billing](/articles/token-economics/)
+- 🧩 [Build Your First Skill](/articles/openclaw-skill/)
+- 🤖 [Create an Automated Agent](/articles/openclaw-agent/)
+- 👻 [Design AI's Personality: Soul](/articles/openclaw-soul/)

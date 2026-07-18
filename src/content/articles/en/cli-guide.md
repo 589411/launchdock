@@ -254,7 +254,7 @@ Repeats until complete
 
 OpenClaw Skills are essentially CLI command templates written in Markdown files. Many of the external tools connected via MCP protocol also interact through CLI interfaces.
 
-This is why [macOS and Linux are the best environments for running Lobster](/articles/why-not-windows-openclaw) — their CLI ecosystems are the most complete. Windows users don't need to worry — install [WSL](/articles/windows-wsl-guide) and you'll enjoy the same CLI environment.
+This is why [macOS and Linux are the best environments for running Lobster](/articles/why-not-windows-openclaw/) — their CLI ecosystems are the most complete. Windows users don't need to worry — install [WSL](/articles/windows-wsl-guide/) and you'll enjoy the same CLI environment.
 
 ---
 
@@ -316,7 +316,7 @@ Master these three steps and you can handle 80% of everyday needs. The rest? Loo
 
 ## Further Reading
 
-- 🪟 [Why We Don't Recommend Installing OpenClaw on Native Windows](/articles/why-not-windows-openclaw) — Understanding the impact of CLI ecosystem differences
-- 🖥️ [WSL Installation and Complete Usage Guide](/articles/windows-wsl-guide) — Getting a CLI environment on Windows
-- 🤖 [OpenClaw Agent Complete Guide](/articles/openclaw-agent) — See how the Agent uses CLI tools
-- 🔌 [MCP Protocol](/articles/mcp-protocol) — The tool connection standard for AI
+- 🪟 [Why We Don't Recommend Installing OpenClaw on Native Windows](/articles/why-not-windows-openclaw/) — Understanding the impact of CLI ecosystem differences
+- 🖥️ [WSL Installation and Complete Usage Guide](/articles/windows-wsl-guide/) — Getting a CLI environment on Windows
+- 🤖 [OpenClaw Agent Complete Guide](/articles/openclaw-agent/) — See how the Agent uses CLI tools
+- 🔌 [MCP Protocol](/articles/mcp-protocol/) — The tool connection standard for AI

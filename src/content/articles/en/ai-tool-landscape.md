@@ -170,9 +170,9 @@ Answer that, and you won't be confused, won't be intimidated, and won't fall beh
 
 | Topic | Article |
 |-------|---------|
-| Prompt techniques | [Prompt Engineering](/articles/prompt-engineering) |
-| What is RAG | [RAG Explained](/articles/rag-explained) |
-| MCP protocol | [MCP Protocol Guide](/articles/mcp-protocol) |
-| What is an Agent | [OpenClaw Agent](/articles/openclaw-agent) |
-| Multi-Agent systems | [Multi-Agent Swarm](/articles/multi-agent-swarm) |
-| Decision framework | [Which AI Tool Should I Use?](/articles/ai-tool-decision-framework) |
+| Prompt techniques | [Prompt Engineering](/articles/prompt-engineering/) |
+| What is RAG | [RAG Explained](/articles/rag-explained/) |
+| MCP protocol | [MCP Protocol Guide](/articles/mcp-protocol/) |
+| What is an Agent | [OpenClaw Agent](/articles/openclaw-agent/) |
+| Multi-Agent systems | [Multi-Agent Swarm](/articles/multi-agent-swarm/) |
+| Decision framework | [Which AI Tool Should I Use?](/articles/ai-tool-decision-framework/) |

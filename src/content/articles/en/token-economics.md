@@ -19,7 +19,7 @@ stuckOptions:
 ---
 ## Why Do You Need to Understand Tokens?
 
-You've already [applied for an API Key](/en/articles/ai-api-key-guide) and started using OpenClaw. Then one day, you receive a bill—
+You've already [applied for an API Key](/en/articles/ai-api-key-guide/) and started using OpenClaw. Then one day, you receive a bill—
 
 > "This month's API usage fee: $47.82"
 
@@ -109,7 +109,7 @@ Major model prices as of early 2026 (per million tokens):
 | Claude 3 Opus     | $15.00      | $75.00       | Highest quality, complex reasoning |
 
 > <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Beginner recommendation**: Start with **Gemini 2.0 Flash** (free quota). Once you're comfortable, consider paid models.
-> That's also why we first teach you to [apply for a Google API Key](/en/articles/google-api-key-guide).
+> That's also why we first teach you to [apply for a Google API Key](/en/articles/google-api-key-guide/).
 
 ---
 
@@ -178,7 +178,7 @@ Very long documents (>200K tokens)     → Gemini 2.5 Pro / Gemini 3.1 Pro
 Best possible quality                  → Claude Opus 4.6
 ```
 
-In OpenClaw, you can [assign different models to different Skills](/en/articles/openclaw-model-config).
+In OpenClaw, you can [assign different models to different Skills](/en/articles/openclaw-model-config/).
 
 ### 2. Streamline Your System Prompt
 
@@ -189,7 +189,7 @@ The System Prompt is sent with every call — it's a "hidden cost."
 ✅ 100-token System Prompt × 100 calls/day = 10,000 tokens/day
 ```
 
-That's an 80% reduction! Check the [Soul Configuration Guide](/en/articles/openclaw-soul) to learn how to write concise, effective personas.
+That's an 80% reduction! Check the [Soul Configuration Guide](/en/articles/openclaw-soul/) to learn how to write concise, effective personas.
 
 ### 3. Use Caching
 
@@ -227,7 +227,7 @@ Recommended settings:
 
 OpenClaw has several built-in cost-saving mechanisms:
 
-1. **Model routing**: Automatically selects models based on task complexity (configured in [Model Settings](/en/articles/openclaw-model-config))
+1. **Model routing**: Automatically selects models based on task complexity (configured in [Model Settings](/en/articles/openclaw-model-config/))
 2. **Agent memory compression**: Doesn't send the entire history — only retains the important parts
 3. **Skill caching**: Identical inputs won't trigger duplicate calls
 4. **Token budgets**: Each Skill can have its own limit
@@ -256,7 +256,7 @@ Tokens aren't prepaid credits — you pay for what you use. Your API balance doe
 
 Now that you understand tokens, you can:
 
-- 🔑 [Apply for an API Key and start using AI](/en/articles/ai-api-key-guide)
-- ⚙️ [Set up model switching strategies](/en/articles/openclaw-model-config)
-- 🧩 [Set token budgets when writing Skills](/en/articles/openclaw-skill)
-- 💬 [Prompt Engineering: Better results with fewer tokens](/en/articles/prompt-engineering)
+- 🔑 [Apply for an API Key and start using AI](/en/articles/ai-api-key-guide/)
+- ⚙️ [Set up model switching strategies](/en/articles/openclaw-model-config/)
+- 🧩 [Set token budgets when writing Skills](/en/articles/openclaw-skill/)
+- 💬 [Prompt Engineering: Better results with fewer tokens](/en/articles/prompt-engineering/)

@@ -149,7 +149,7 @@ export default function SearchModal({ open, onClose }: Props) {
         setSelectedIdx((prev) => Math.max(prev - 1, 0));
       } else if (e.key === 'Enter' && results[selectedIdx]) {
         e.preventDefault();
-        window.location.href = `/articles/${results[selectedIdx].slug}`;
+        window.location.href = `/articles/${results[selectedIdx].slug}/`;
       } else if (e.key === 'Escape') {
         e.preventDefault();
         onClose();
@@ -228,7 +228,7 @@ export default function SearchModal({ open, onClose }: Props) {
           {results.map((item, i) => (
             <a
               key={item.slug}
-              href={`/articles/${item.slug}`}
+              href={`/articles/${item.slug}/`}
               data-idx={i}
               className={`search-modal-result ${i === selectedIdx ? 'selected' : ''}`}
               onMouseEnter={() => setSelectedIdx(i)}

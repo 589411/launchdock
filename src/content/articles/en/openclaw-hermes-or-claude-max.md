@@ -64,7 +64,7 @@ The point isn't the brand. It's whether it can do these few things for you:
 
 For what it's worth, what Duck Editor uses day to day is Claude (Claude in Chrome, Claude Code, plus the collaborative mode in the Claude app), which happens to cover all three—it feels more like **an assistant that can operate your computer** than a chatbot that only talks back. You could absolutely pick another; the point is those three "actually gets things done" capabilities are worth tracking down.
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **In other words**: nearly everything a regular person uses AI for day to day is covered by one good paid assistant—no cobbling together a pile of APIs, no running your own server. (If you're curious about AI operating a browser on its own, read [AI Can Operate Web Pages by Itself](/en/articles/ai-agent-browsers).)
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **In other words**: nearly everything a regular person uses AI for day to day is covered by one good paid assistant—no cobbling together a pile of APIs, no running your own server. (If you're curious about AI operating a browser on its own, read [AI Can Operate Web Pages by Itself](/en/articles/ai-agent-browsers/).)
 
 ---
 

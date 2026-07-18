@@ -102,7 +102,7 @@ function getConceptEntries() {
         displayName: c.displayName || name,
         shortDesc: c.shortDesc || '',
         canonicalArticle: c.canonicalArticle || '',
-        link: `/articles/${c.canonicalArticle}`,
+        link: `/articles/${c.canonicalArticle}/`,
       });
     }
   }

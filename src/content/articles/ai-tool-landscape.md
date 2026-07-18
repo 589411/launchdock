@@ -170,9 +170,9 @@ AI 新工具每隔幾週就出一個，新詞彙讓人應接不暇。
 
 | 主題 | 文章 |
 |------|------|
-| Prompt 技巧 | [Prompt Engineering](/articles/prompt-engineering) |
-| RAG 是什麼 | [RAG 解釋](/articles/rag-explained) |
-| MCP 協定 | [MCP 協定完整說明](/articles/mcp-protocol) |
-| Agent 是什麼 | [OpenClaw Agent](/articles/openclaw-agent) |
-| Multi-Agent | [Multi-Agent 蜂群](/articles/multi-agent-swarm) |
-| 決策框架 | [我該用哪個 AI 工具？](/articles/ai-tool-decision-framework) |
+| Prompt 技巧 | [Prompt Engineering](/articles/prompt-engineering/) |
+| RAG 是什麼 | [RAG 解釋](/articles/rag-explained/) |
+| MCP 協定 | [MCP 協定完整說明](/articles/mcp-protocol/) |
+| Agent 是什麼 | [OpenClaw Agent](/articles/openclaw-agent/) |
+| Multi-Agent | [Multi-Agent 蜂群](/articles/multi-agent-swarm/) |
+| 決策框架 | [我該用哪個 AI 工具？](/articles/ai-tool-decision-framework/) |

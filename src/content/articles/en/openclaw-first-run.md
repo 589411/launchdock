@@ -29,10 +29,10 @@ stuckOptions:
 
 By this point, you should have completed:
 
-- ✅ [Understanding what OpenClaw is](/articles/why-openclaw)
-- ✅ [Choosing your LLM plan](/articles/llm-guide)
-- ✅ [Getting your API Key](/articles/ai-api-key-guide)
-- ✅ [Installing OpenClaw](/articles/install-openclaw)
+- ✅ [Understanding what OpenClaw is](/articles/why-openclaw/)
+- ✅ [Choosing your LLM plan](/articles/llm-guide/)
+- ✅ [Getting your API Key](/articles/ai-api-key-guide/)
+- ✅ [Installing OpenClaw](/articles/install-openclaw/)
 
 What you need to do now is simple: **Enter your API Key and hear AI's first response.**
 
@@ -232,7 +232,7 @@ Wait 5–10 seconds (it may be slower the first time), and you should receive a 
 >
 > Your OpenClaw is now up and running. Next, let's try something more powerful —
 >
-> 👉 [First Skill: Complete Your First Automation Task](/articles/openclaw-first-skill)
+> 👉 [First Skill: Complete Your First Automation Task](/articles/openclaw-first-skill/)
 > <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Duck Editor says**: How does it feel hearing AI respond for the first time? It's like building a PC from scratch and pressing the power button — the screen lights up, and it was all worth it. Next, we'll teach you to put it to work, not just chat.
 ---
 
@@ -301,6 +301,6 @@ If you need to manually edit settings later:
 └── logs/            ← Error logs
 ```
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> For advanced settings (model routing, fallback mechanisms), see [Model Configuration & Switching](/articles/openclaw-model-config).
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> For advanced settings (model routing, fallback mechanisms), see [Model Configuration & Switching](/articles/openclaw-model-config/).
 
 ---

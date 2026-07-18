@@ -38,7 +38,7 @@ Great for PWAs, portfolios, tutorial pages, and event sign-up pages — anything
 
 ## Step 1: Create a repo and push your code
 
-Create a new repo on GitHub (no account yet? see [Sign Up for GitHub](/articles/github-account-signup)). After creating it you'll see the **Quick setup** page — follow it to push your local code:
+Create a new repo on GitHub (no account yet? see [Sign Up for GitHub](/articles/github-account-signup/)). After creating it you'll see the **Quick setup** page — follow it to push your local code:
 
 ```bash
 git init
@@ -102,7 +102,7 @@ GitHub Pages URLs have an extra `/repo-name/` sub-path. If your HTML loads asset
 
 ### 🚨 Trying to wire up Firebase login but it fails?
 
-If your site uses Firebase login, remember to add `your-account.github.io` to Firebase's **Authorized domains**, or login gets blocked (see [Fix Missing permissions: Deploy Firestore Security Rules](/articles/firebase-firestore-rules-deploy)).
+If your site uses Firebase login, remember to add `your-account.github.io` to Firebase's **Authorized domains**, or login gets blocked (see [Fix Missing permissions: Deploy Firestore Security Rules](/articles/firebase-firestore-rules-deploy/)).
 
 ---
 

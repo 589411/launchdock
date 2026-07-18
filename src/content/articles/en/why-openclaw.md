@@ -106,7 +106,7 @@ OpenClaw's Skills are **reusable automation workflows**. Set it up once, run it 
 
 Let's be honest — OpenClaw has a learning curve:
 
-- **Installation requires a bit of technical know-how** (we have an [installation guide](/articles/install-openclaw))
+- **Installation requires a bit of technical know-how** (we have an [installation guide](/articles/install-openclaw/))
 - **Connecting Google services requires an API Key** (the most common stumbling block — we have a guide for that too)
 - **Writing Skills requires understanding basic workflow logic**
 
@@ -120,21 +120,21 @@ But the upfront investment is worth it, because you only need to do it once.
 
 Just follow the beginner path in order:
 
-1. 🧠 [Choose Your AI Brain](/articles/llm-guide) — Understand LLM options, pick the one that fits you best
-2. 🔑 [Apply for an API Key](/articles/ai-api-key-guide) — Get the key that makes AI work
-3. 💻 [Install OpenClaw](/articles/install-openclaw) — Choose your platform, start installing
-4. 🚀 [First Launch](/articles/openclaw-first-run) — Set up your Key, hear AI's first response
-5. ⚡ [First Skill](/articles/openclaw-first-skill) — Complete your first automation task
+1. 🧠 [Choose Your AI Brain](/articles/llm-guide/) — Understand LLM options, pick the one that fits you best
+2. 🔑 [Apply for an API Key](/articles/ai-api-key-guide/) — Get the key that makes AI work
+3. 💻 [Install OpenClaw](/articles/install-openclaw/) — Choose your platform, start installing
+4. 🚀 [First Launch](/articles/openclaw-first-run/) — Set up your Key, hear AI's first response
+5. ⚡ [First Skill](/articles/openclaw-first-skill/) — Complete your first automation task
 
-**Next step** 👉 [Choose Your AI Brain](/articles/llm-guide)
+**Next step** 👉 [Choose Your AI Brain](/articles/llm-guide/)
 
 ---
 
 Already up and running? Explore more:
-- 💬 [Prompt Engineering: Making AI Understand You](/articles/prompt-engineering)
-- 🔗 [MCP Protocol: AI's USB Port](/articles/mcp-protocol)
-- 💰 [Token Economics: Understanding How AI Billing Works](/articles/token-economics)
-- 📚 [Build Your Knowledge Management System](/articles/pkm-system)
+- 💬 [Prompt Engineering: Making AI Understand You](/articles/prompt-engineering/)
+- 🔗 [MCP Protocol: AI's USB Port](/articles/mcp-protocol/)
+- 💰 [Token Economics: Understanding How AI Billing Works](/articles/token-economics/)
+- 📚 [Build Your Knowledge Management System](/articles/pkm-system/)
 
 ---
 

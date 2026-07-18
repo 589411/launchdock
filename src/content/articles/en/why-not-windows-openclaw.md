@@ -48,7 +48,7 @@ When an OpenClaw Agent is working, it makes heavy use of command-line tools:
 - `pandoc` for converting document formats
 - ...and countless more
 
-These are all **Command Line Interface (CLI)** tools. Not familiar with CLI? Check out the [CLI Beginner's Guide](/articles/cli-guide).
+These are all **Command Line Interface (CLI)** tools. Not familiar with CLI? Check out the [CLI Beginner's Guide](/articles/cli-guide/).
 
 ---
 
@@ -136,7 +136,7 @@ Based on the analysis above, here's the ranking of optimal environments for runn
 - Installation requires just one command
 - **This is the best solution for Windows users**
 
-See the [WSL Complete Installation Guide](/articles/windows-wsl-guide) for a detailed walkthrough.
+See the [WSL Complete Installation Guide](/articles/windows-wsl-guide/) for a detailed walkthrough.
 
 ### 🥉 Native Windows
 
@@ -154,19 +154,19 @@ Don't worry — you don't need to buy a Mac or reinstall your OS with Linux. Her
 
 Installing WSL on Windows is like adding a Linux computer inside your PC. Zero cost, almost no performance loss.
 
-👉 [WSL Installation and Usage Complete Guide](/articles/windows-wsl-guide)
+👉 [WSL Installation and Usage Complete Guide](/articles/windows-wsl-guide/)
 
 ### Option 2: Cloud Deployment
 
 Skip the local environment entirely and deploy OpenClaw directly to the cloud.
 
-👉 [Cloud Deployment Options](/articles/deploy-openclaw-cloud)
+👉 [Cloud Deployment Options](/articles/deploy-openclaw-cloud/)
 
 ### Option 3: Native Windows Installation
 
 If you just want a quick taste, native Windows can run it too. The chance of encountering issues is higher, but it's not impossible.
 
-👉 [Windows Installation Guide](/articles/install-openclaw-windows)
+👉 [Windows Installation Guide](/articles/install-openclaw-windows/)
 
 ---
 
@@ -178,7 +178,7 @@ If you just want a quick taste, native Windows can run it too. The chance of enc
 
 ## Further Reading
 
-- 🐚 [CLI Beginner's Guide: What Is the Command Line, Anyway?](/articles/cli-guide) — Understand the principles and advantages of CLI
-- 🪟 [WSL Complete Guide](/articles/windows-wsl-guide) — The best solution for Windows users
-- 🍎 [Install OpenClaw on macOS](/articles/install-openclaw-macos) — Mac users, start here
-- ☁️ [Deploy OpenClaw to the Cloud](/articles/deploy-openclaw-cloud) — Don't want to install locally? Check this out
+- 🐚 [CLI Beginner's Guide: What Is the Command Line, Anyway?](/articles/cli-guide/) — Understand the principles and advantages of CLI
+- 🪟 [WSL Complete Guide](/articles/windows-wsl-guide/) — The best solution for Windows users
+- 🍎 [Install OpenClaw on macOS](/articles/install-openclaw-macos/) — Mac users, start here
+- ☁️ [Deploy OpenClaw to the Cloud](/articles/deploy-openclaw-cloud/) — Don't want to install locally? Check this out

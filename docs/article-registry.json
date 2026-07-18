@@ -1,324 +1,324 @@
 {
-  "_generated": "2026-07-18T14:15:34.871Z",
+  "_generated": "2026-07-18T14:39:05.671Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
       "displayName": "OpenClaw",
       "shortDesc": "開源 AI Agent 框架，串接 LLM、工具與自動化工作流的中控台",
       "canonicalArticle": "why-openclaw",
-      "link": "/articles/why-openclaw"
+      "link": "/articles/why-openclaw/"
     },
     "KimiClaw": {
       "displayName": "KimiClaw",
       "shortDesc": "基於 OpenClaw 架構的雲端版本，零安裝即用",
       "canonicalArticle": "deploy-openclaw-cloud",
-      "link": "/articles/deploy-openclaw-cloud"
+      "link": "/articles/deploy-openclaw-cloud/"
     },
     "LLM": {
       "displayName": "大型語言模型 (LLM)",
       "shortDesc": "ChatGPT、Claude、Gemini 背後的 AI 模型技術",
       "canonicalArticle": "llm-guide",
-      "link": "/articles/llm-guide"
+      "link": "/articles/llm-guide/"
     },
     "Token": {
       "displayName": "Token",
       "shortDesc": "AI 模型處理文字的基本計量單位，也是計費依據",
       "canonicalArticle": "token-economics",
-      "link": "/articles/token-economics"
+      "link": "/articles/token-economics/"
     },
     "Provider": {
       "displayName": "Provider（模型供應商）",
       "shortDesc": "AI 模型的供應商，如 OpenAI、Google、Anthropic",
       "canonicalArticle": "llm-guide",
-      "link": "/articles/llm-guide"
+      "link": "/articles/llm-guide/"
     },
     "API Key": {
       "displayName": "API Key",
       "shortDesc": "存取 AI 模型服務的身份憑證",
       "canonicalArticle": "ai-api-key-guide",
-      "link": "/articles/ai-api-key-guide"
+      "link": "/articles/ai-api-key-guide/"
     },
     "Ollama": {
       "displayName": "Ollama",
       "shortDesc": "在本機輕鬆運行開源 LLM 的工具；也提供雲端模型與 API 金鑰",
       "canonicalArticle": "ollama-openclaw-mac",
-      "link": "/articles/ollama-openclaw-mac"
+      "link": "/articles/ollama-openclaw-mac/"
     },
     "Hermes": {
       "displayName": "Hermes Agent",
       "shortDesc": "Nous Research 開發的開源 AI Agent，具備跨 session 記憶、自動技能建立與 70+ 內建技能",
       "canonicalArticle": "hermes-agent",
-      "link": "/articles/hermes-agent"
+      "link": "/articles/hermes-agent/"
     },
     "OpenRouter": {
       "displayName": "OpenRouter",
       "shortDesc": "一把 API Key 存取多家模型的中繼平台（LLM 閘道）",
       "canonicalArticle": "openrouter-free-llm-api-key",
-      "link": "/articles/openrouter-free-llm-api-key"
+      "link": "/articles/openrouter-free-llm-api-key/"
     },
     "Agent": {
       "displayName": "Agent（AI 代理）",
       "shortDesc": "能自主決策、使用工具完成任務的 AI 實體",
       "canonicalArticle": "openclaw-agent",
-      "link": "/articles/openclaw-agent"
+      "link": "/articles/openclaw-agent/"
     },
     "Computer Use": {
       "displayName": "Computer Use（電腦操作）",
       "shortDesc": "讓 AI 直接操作電腦或瀏覽器（點按鈕、填表單、跨頁把任務做完）的能力",
       "canonicalArticle": "ai-agent-browsers",
-      "link": "/articles/ai-agent-browsers"
+      "link": "/articles/ai-agent-browsers/"
     },
     "Skill": {
       "displayName": "Skill（技能）",
       "shortDesc": "OpenClaw 中可重複執行的自動化工作流模板",
       "canonicalArticle": "openclaw-skill",
-      "link": "/articles/openclaw-skill"
+      "link": "/articles/openclaw-skill/"
     },
     "Harness": {
       "displayName": "Harness",
       "shortDesc": "包在模型外的控制與治理層，負責設邊界、驗證成果、錯誤回復與調度，決定 Agent 的可靠度",
       "canonicalArticle": "ai-agent-anatomy",
-      "link": "/articles/ai-agent-anatomy"
+      "link": "/articles/ai-agent-anatomy/"
     },
     "Soul": {
       "displayName": "Soul（人設）",
       "shortDesc": "定義 Agent 的記憶、個性與成長能力的設定系統",
       "canonicalArticle": "openclaw-soul",
-      "link": "/articles/openclaw-soul"
+      "link": "/articles/openclaw-soul/"
     },
     "MCP": {
       "displayName": "MCP 協定",
       "shortDesc": "讓 AI 自動學會使用外部工具的標準協定，AI 的 USB 接口",
       "canonicalArticle": "mcp-protocol",
-      "link": "/articles/mcp-protocol"
+      "link": "/articles/mcp-protocol/"
     },
     "Gateway": {
       "displayName": "Gateway",
       "shortDesc": "OpenClaw 的核心服務，監聽 port 18789",
       "canonicalArticle": "openclaw-first-run",
-      "link": "/articles/openclaw-first-run"
+      "link": "/articles/openclaw-first-run/"
     },
     "AI 控制邊界": {
       "displayName": "AI 控制邊界",
       "shortDesc": "AI 工具能力範圍的分類框架：從對話框內到外部操控、內部整合、全托管，理解每層工具的本質差異",
       "canonicalArticle": "which-ai-tool-for-you",
-      "link": "/articles/which-ai-tool-for-you"
+      "link": "/articles/which-ai-tool-for-you/"
     },
     "Prompt Engineering": {
       "displayName": "Prompt 工程",
       "shortDesc": "設計有效的 AI 指令，讓模型給出精準回答的技術",
       "canonicalArticle": "prompt-engineering",
-      "link": "/articles/prompt-engineering"
+      "link": "/articles/prompt-engineering/"
     },
     "RAG": {
       "displayName": "RAG（檢索增強生成）",
       "shortDesc": "讓 AI 先查資料再回答，大幅減少幻覺的技術",
       "canonicalArticle": "rag-explained",
-      "link": "/articles/rag-explained"
+      "link": "/articles/rag-explained/"
     },
     "Agent Memory": {
       "displayName": "Agent 記憶系統",
       "shortDesc": "讓 AI Agent 跨 session 持久累積、管理與演進知識的機制",
       "canonicalArticle": "ai-agent-memory-guide",
-      "link": "/articles/ai-agent-memory-guide"
+      "link": "/articles/ai-agent-memory-guide/"
     },
     "Context Engineering": {
       "displayName": "Context Engineering（上下文工程）",
       "shortDesc": "管理 AI 模型 context window 使用效率的技術，包含壓縮、排程與優先化",
       "canonicalArticle": "ai-agent-memory-guide",
-      "link": "/articles/ai-agent-memory-guide"
+      "link": "/articles/ai-agent-memory-guide/"
     },
     "CoT": {
       "displayName": "Chain-of-Thought（思維鏈）",
       "shortDesc": "讓 AI 一步步推理、展示思考過程的 Prompt 技巧",
       "canonicalArticle": "cot-and-reasoning",
-      "link": "/articles/cot-and-reasoning"
+      "link": "/articles/cot-and-reasoning/"
     },
     "ReAct": {
       "displayName": "ReAct",
       "shortDesc": "結合推理與行動的 Agent 架構：思考→行動→觀察→決策",
       "canonicalArticle": "cot-and-reasoning",
-      "link": "/articles/cot-and-reasoning"
+      "link": "/articles/cot-and-reasoning/"
     },
     "Embedding": {
       "displayName": "Embedding（向量嵌入）",
       "shortDesc": "將文字轉為數值向量，用於語義搜尋和記憶系統",
       "canonicalArticle": "rag-explained",
-      "link": "/articles/rag-explained"
+      "link": "/articles/rag-explained/"
     },
     "Transformer": {
       "displayName": "Transformer",
       "shortDesc": "現代 AI 大語言模型的核心架構，使用自注意力機制",
       "canonicalArticle": "ai-tech-evolution",
-      "link": "/articles/ai-tech-evolution"
+      "link": "/articles/ai-tech-evolution/"
     },
     "Context Window": {
       "displayName": "Context Window（上下文窗口）",
       "shortDesc": "AI 模型一次能處理的最大文字長度",
       "canonicalArticle": "ai-tech-evolution",
-      "link": "/articles/ai-tech-evolution"
+      "link": "/articles/ai-tech-evolution/"
     },
     "Multi-Agent": {
       "displayName": "Multi-Agent（多代理系統）",
       "shortDesc": "多個 AI Agent 分工合作完成複雜任務",
       "canonicalArticle": "multi-agent-swarm",
-      "link": "/articles/multi-agent-swarm"
+      "link": "/articles/multi-agent-swarm/"
     },
     "Swarm": {
       "displayName": "蜂群智能 (Swarm)",
       "shortDesc": "去中心化的多 Agent 協作模式，模仿蜂群的集體智能",
       "canonicalArticle": "multi-agent-swarm",
-      "link": "/articles/multi-agent-swarm"
+      "link": "/articles/multi-agent-swarm/"
     },
     "Fallback": {
       "displayName": "Fallback（備援機制）",
       "shortDesc": "主要模型失敗時自動切換到備用模型的機制",
       "canonicalArticle": "openclaw-model-config",
-      "link": "/articles/openclaw-model-config"
+      "link": "/articles/openclaw-model-config/"
     },
     "Telegram Bot": {
       "displayName": "Telegram Bot",
       "shortDesc": "透過 Telegram 隨時隨地與你的 OpenClaw Agent 對話",
       "canonicalArticle": "telegram-integration",
-      "link": "/articles/telegram-integration"
+      "link": "/articles/telegram-integration/"
     },
     "LIFF": {
       "displayName": "LIFF",
       "shortDesc": "LINE 的前端框架，把你的網頁包成可在 LINE App 內直接開啟、並取得使用者身分的小程式",
       "canonicalArticle": "create-line-login-liff-app",
-      "link": "/articles/create-line-login-liff-app"
+      "link": "/articles/create-line-login-liff-app/"
     },
     "LINE Login": {
       "displayName": "LINE Login",
       "shortDesc": "LINE 的 OAuth 登入機制，讓使用者用 LINE 身分一鍵登入你的網頁；LIFF App 必須掛在 LINE Login channel 底下",
       "canonicalArticle": "create-line-login-liff-app",
-      "link": "/articles/create-line-login-liff-app"
+      "link": "/articles/create-line-login-liff-app/"
     },
     "Firebase": {
       "displayName": "Firebase",
       "shortDesc": "Google 的後端即服務平台，替純前端網站外包登入、資料庫與託管，免自架伺服器",
       "canonicalArticle": "firebase-create-project",
-      "link": "/articles/firebase-create-project"
+      "link": "/articles/firebase-create-project/"
     },
     "Firebase Authentication": {
       "displayName": "Firebase Authentication",
       "shortDesc": "Firebase 的登入服務，一鍵接上 Google、email、匿名等多種登入方式",
       "canonicalArticle": "firebase-enable-google-login",
-      "link": "/articles/firebase-enable-google-login"
+      "link": "/articles/firebase-enable-google-login/"
     },
     "Firestore": {
       "displayName": "Firestore",
       "shortDesc": "Firebase 的雲端 NoSQL 資料庫，前端可直接讀寫並即時同步，靠安全規則保護",
       "canonicalArticle": "firebase-firestore-rules-deploy",
-      "link": "/articles/firebase-firestore-rules-deploy"
+      "link": "/articles/firebase-firestore-rules-deploy/"
     },
     "PKM": {
       "displayName": "個人知識管理 (PKM)",
       "shortDesc": "系統化收集、整理、連結知識，讓資訊變成洞見",
       "canonicalArticle": "pkm-system",
-      "link": "/articles/pkm-system"
+      "link": "/articles/pkm-system/"
     },
     "Zeabur": {
       "displayName": "Zeabur",
       "shortDesc": "台灣團隊打造的雲端部署平台，一鍵部署 OpenClaw",
       "canonicalArticle": "deploy-openclaw-cloud",
-      "link": "/articles/deploy-openclaw-cloud"
+      "link": "/articles/deploy-openclaw-cloud/"
     },
     "Docker": {
       "displayName": "Docker",
       "shortDesc": "容器化部署工具，用於自建伺服器部署 OpenClaw",
       "canonicalArticle": "deploy-openclaw-cloud",
-      "link": "/articles/deploy-openclaw-cloud"
+      "link": "/articles/deploy-openclaw-cloud/"
     },
     "n8n": {
       "displayName": "n8n",
       "shortDesc": "開源、可自架的工作流程自動化工具，用視覺化節點串接不同系統，也能接上 LLM",
       "canonicalArticle": "what-is-n8n",
-      "link": "/articles/what-is-n8n"
+      "link": "/articles/what-is-n8n/"
     },
     "WSL": {
       "displayName": "WSL（Windows Subsystem for Linux）",
       "shortDesc": "在 Windows 上運行 Linux 環境的子系統",
       "canonicalArticle": "windows-wsl-guide",
-      "link": "/articles/windows-wsl-guide"
+      "link": "/articles/windows-wsl-guide/"
     },
     "CLI": {
       "displayName": "CLI（命令列介面）",
       "shortDesc": "用文字指令操作電腦的介面，AI Agent 執行工具的主要方式",
       "canonicalArticle": "cli-guide",
-      "link": "/articles/cli-guide"
+      "link": "/articles/cli-guide/"
     },
     "Homebrew": {
       "displayName": "Homebrew",
       "shortDesc": "macOS 上最常用的套件管理工具",
       "canonicalArticle": "install-openclaw-macos",
-      "link": "/articles/install-openclaw-macos"
+      "link": "/articles/install-openclaw-macos/"
     },
     "Shell": {
       "displayName": "Shell（殼層）",
       "shortDesc": "等待你輸入指令的程式，你跟作業系統之間的翻譯官",
       "canonicalArticle": "cli-guide",
-      "link": "/articles/cli-guide"
+      "link": "/articles/cli-guide/"
     },
     "caffeinate": {
       "displayName": "caffeinate",
       "shortDesc": "macOS 內建指令，讓電腦保持清醒不進入休眠，避免長時間跑的 Agent 斷線",
       "canonicalArticle": "caffeinate-keep-mac-awake",
-      "link": "/articles/caffeinate-keep-mac-awake"
+      "link": "/articles/caffeinate-keep-mac-awake/"
     },
     "QMD": {
       "displayName": "QMD",
       "shortDesc": "OpenClaw 的結構化記憶格式，YAML-based",
       "canonicalArticle": "rag-explained",
-      "link": "/articles/rag-explained"
+      "link": "/articles/rag-explained/"
     },
     "Google Cloud Console": {
       "displayName": "Google Cloud Console",
       "shortDesc": "Google 雲端服務的管理介面，用於啟用 API",
       "canonicalArticle": "google-api-key-guide",
-      "link": "/articles/google-api-key-guide"
+      "link": "/articles/google-api-key-guide/"
     },
     "Google Apps Script": {
       "displayName": "Google Apps Script (GAS)",
       "shortDesc": "Google 內建免費的雲端程式環境，能讓試算表、表單、文件自動化運作",
       "canonicalArticle": "gemini-gas-ordering-system",
-      "link": "/articles/gemini-gas-ordering-system"
+      "link": "/articles/gemini-gas-ordering-system/"
     },
     "Gemini": {
       "displayName": "Gemini",
       "shortDesc": "Google 的大型語言模型，可透過網頁版或 API 使用，擅長多模態與程式生成",
       "canonicalArticle": "google-api-key-guide",
-      "link": "/articles/google-api-key-guide"
+      "link": "/articles/google-api-key-guide/"
     },
     "OAuth": {
       "displayName": "OAuth",
       "shortDesc": "安全的第三方授權協定，用於 Google API 存取",
       "canonicalArticle": "google-api-key-guide",
-      "link": "/articles/google-api-key-guide"
+      "link": "/articles/google-api-key-guide/"
     },
     "Make": {
       "displayName": "Make（Integromat）",
       "shortDesc": "視覺化的零程式碼自動化平台，用「模組串模組」把不同服務串成自動流程（scenario）",
       "canonicalArticle": "make-gmail-sheets-automation",
-      "link": "/articles/make-gmail-sheets-automation"
+      "link": "/articles/make-gmail-sheets-automation/"
     },
     "Google Cloud": {
       "displayName": "Google Cloud（GCP）",
       "shortDesc": "Google 的雲端平台，建專案、啟用 API、發 OAuth 憑證都在這裡完成",
       "canonicalArticle": "google-cloud-oauth-api-setup",
-      "link": "/articles/google-cloud-oauth-api-setup"
+      "link": "/articles/google-cloud-oauth-api-setup/"
     },
     "Kaggle": {
       "displayName": "Kaggle",
       "shortDesc": "全球最大的資料科學與機器學習社群，可下載資料集、在雲端跑 Notebook、參加競賽",
       "canonicalArticle": "kaggle-account-signup",
-      "link": "/articles/kaggle-account-signup"
+      "link": "/articles/kaggle-account-signup/"
     },
     "Looker Studio": {
       "displayName": "Looker Studio（數據分析）",
       "shortDesc": "Google 免費的資料視覺化工具，可接 CSV、試算表、BigQuery 做互動式儀表板",
       "canonicalArticle": "looker-studio-csv-analysis",
-      "link": "/articles/looker-studio-csv-analysis"
+      "link": "/articles/looker-studio-csv-analysis/"
     }
   },
   "articles": [
@@ -346,7 +346,7 @@
         "WSL",
         "Homebrew"
       ],
-      "link": "/articles/install-openclaw"
+      "link": "/articles/install-openclaw/"
     },
     {
       "slug": "deploy-to-github-pages",
@@ -365,7 +365,7 @@
       "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/deploy-to-github-pages"
+      "link": "/articles/deploy-to-github-pages/"
     },
     {
       "slug": "why-not-windows-openclaw",
@@ -391,7 +391,7 @@
         "WSL",
         "CLI"
       ],
-      "link": "/articles/why-not-windows-openclaw"
+      "link": "/articles/why-not-windows-openclaw/"
     },
     {
       "slug": "deploy-openclaw-cloud",
@@ -419,7 +419,7 @@
       "concepts_referenced": [
         "OpenClaw"
       ],
-      "link": "/articles/deploy-openclaw-cloud"
+      "link": "/articles/deploy-openclaw-cloud/"
     },
     {
       "slug": "docker-n8n-mac",
@@ -441,7 +441,7 @@
         "Docker",
         "n8n"
       ],
-      "link": "/articles/docker-n8n-mac"
+      "link": "/articles/docker-n8n-mac/"
     },
     {
       "slug": "dev-cli-tools-mac",
@@ -463,7 +463,7 @@
       "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/dev-cli-tools-mac"
+      "link": "/articles/dev-cli-tools-mac/"
     },
     {
       "slug": "install-openclaw-macos",
@@ -490,7 +490,7 @@
         "CLI",
         "Shell"
       ],
-      "link": "/articles/install-openclaw-macos"
+      "link": "/articles/install-openclaw-macos/"
     },
     {
       "slug": "ollama-openclaw-mac",
@@ -518,7 +518,7 @@
         "Fallback",
         "Docker"
       ],
-      "link": "/articles/ollama-openclaw-mac"
+      "link": "/articles/ollama-openclaw-mac/"
     },
     {
       "slug": "ollama-openclaw-windows",
@@ -543,7 +543,7 @@
       "concepts_referenced": [
         "Ollama"
       ],
-      "link": "/articles/ollama-openclaw-windows"
+      "link": "/articles/ollama-openclaw-windows/"
     },
     {
       "slug": "docker-n8n-windows",
@@ -567,7 +567,7 @@
         "Docker",
         "n8n"
       ],
-      "link": "/articles/docker-n8n-windows"
+      "link": "/articles/docker-n8n-windows/"
     },
     {
       "slug": "install-openclaw-windows",
@@ -591,7 +591,7 @@
       "concepts_referenced": [
         "WSL"
       ],
-      "link": "/articles/install-openclaw-windows"
+      "link": "/articles/install-openclaw-windows/"
     },
     {
       "slug": "windows-wsl-guide",
@@ -618,7 +618,7 @@
         "CLI",
         "Shell"
       ],
-      "link": "/articles/windows-wsl-guide"
+      "link": "/articles/windows-wsl-guide/"
     },
     {
       "slug": "media-guide",
@@ -636,7 +636,7 @@
       "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/media-guide"
+      "link": "/articles/media-guide/"
     },
     {
       "slug": "looker-studio-csv-analysis",
@@ -661,7 +661,7 @@
       "concepts_referenced": [
         "Kaggle"
       ],
-      "link": "/articles/looker-studio-csv-analysis"
+      "link": "/articles/looker-studio-csv-analysis/"
     },
     {
       "slug": "pkm-system",
@@ -688,7 +688,7 @@
         "RAG",
         "Embedding"
       ],
-      "link": "/articles/pkm-system"
+      "link": "/articles/pkm-system/"
     },
     {
       "slug": "multi-agent-swarm",
@@ -715,7 +715,7 @@
         "Agent Memory",
         "ReAct"
       ],
-      "link": "/articles/multi-agent-swarm"
+      "link": "/articles/multi-agent-swarm/"
     },
     {
       "slug": "ai-tool-decision-framework",
@@ -739,7 +739,7 @@
       "concepts_referenced": [
         "AI 控制邊界"
       ],
-      "link": "/articles/ai-tool-decision-framework"
+      "link": "/articles/ai-tool-decision-framework/"
     },
     {
       "slug": "ai-agent-memory-guide",
@@ -767,7 +767,7 @@
       "concepts_referenced": [
         "RAG"
       ],
-      "link": "/articles/ai-agent-memory-guide"
+      "link": "/articles/ai-agent-memory-guide/"
     },
     {
       "slug": "cot-and-reasoning",
@@ -794,7 +794,7 @@
         "Agent",
         "Prompt Engineering"
       ],
-      "link": "/articles/cot-and-reasoning"
+      "link": "/articles/cot-and-reasoning/"
     },
     {
       "slug": "prompt-engineering",
@@ -819,7 +819,7 @@
         "Soul",
         "CoT"
       ],
-      "link": "/articles/prompt-engineering"
+      "link": "/articles/prompt-engineering/"
     },
     {
       "slug": "mcp-protocol",
@@ -844,7 +844,7 @@
         "Harness",
         "Telegram Bot"
       ],
-      "link": "/articles/mcp-protocol"
+      "link": "/articles/mcp-protocol/"
     },
     {
       "slug": "openclaw-agent",
@@ -876,7 +876,7 @@
         "Multi-Agent",
         "Swarm"
       ],
-      "link": "/articles/openclaw-agent"
+      "link": "/articles/openclaw-agent/"
     },
     {
       "slug": "openclaw-skill",
@@ -902,7 +902,7 @@
         "Prompt Engineering",
         "PKM"
       ],
-      "link": "/articles/openclaw-skill"
+      "link": "/articles/openclaw-skill/"
     },
     {
       "slug": "openclaw-soul",
@@ -932,7 +932,7 @@
         "Embedding",
         "QMD"
       ],
-      "link": "/articles/openclaw-soul"
+      "link": "/articles/openclaw-soul/"
     },
     {
       "slug": "rag-explained",
@@ -963,7 +963,7 @@
         "Context Window",
         "PKM"
       ],
-      "link": "/articles/rag-explained"
+      "link": "/articles/rag-explained/"
     },
     {
       "slug": "openclaw-first-run",
@@ -992,7 +992,7 @@
         "API Key",
         "Telegram Bot"
       ],
-      "link": "/articles/openclaw-first-run"
+      "link": "/articles/openclaw-first-run/"
     },
     {
       "slug": "openclaw-first-skill",
@@ -1015,7 +1015,7 @@
       "concepts_referenced": [
         "Skill"
       ],
-      "link": "/articles/openclaw-first-skill"
+      "link": "/articles/openclaw-first-skill/"
     },
     {
       "slug": "openclaw-model-config",
@@ -1046,7 +1046,7 @@
         "Ollama",
         "Context Window"
       ],
-      "link": "/articles/openclaw-model-config"
+      "link": "/articles/openclaw-model-config/"
     },
     {
       "slug": "caffeinate-keep-mac-awake",
@@ -1070,7 +1070,7 @@
         "caffeinate"
       ],
       "concepts_referenced": [],
-      "link": "/articles/caffeinate-keep-mac-awake"
+      "link": "/articles/caffeinate-keep-mac-awake/"
     },
     {
       "slug": "why-openclaw",
@@ -1094,7 +1094,7 @@
         "KimiClaw",
         "AI 控制邊界"
       ],
-      "link": "/articles/why-openclaw"
+      "link": "/articles/why-openclaw/"
     },
     {
       "slug": "which-ai-tool-for-you",
@@ -1118,7 +1118,7 @@
         "AI 控制邊界"
       ],
       "concepts_referenced": [],
-      "link": "/articles/which-ai-tool-for-you"
+      "link": "/articles/which-ai-tool-for-you/"
     },
     {
       "slug": "ai-tool-landscape",
@@ -1146,7 +1146,7 @@
         "AI 控制邊界",
         "Gemini"
       ],
-      "link": "/articles/ai-tool-landscape"
+      "link": "/articles/ai-tool-landscape/"
     },
     {
       "slug": "ai-tech-evolution",
@@ -1175,7 +1175,7 @@
         "Multi-Agent",
         "Swarm"
       ],
-      "link": "/articles/ai-tech-evolution"
+      "link": "/articles/ai-tech-evolution/"
     },
     {
       "slug": "token-economics",
@@ -1201,7 +1201,7 @@
         "Context Engineering",
         "Context Window"
       ],
-      "link": "/articles/token-economics"
+      "link": "/articles/token-economics/"
     },
     {
       "slug": "gemini-gas-ordering-system",
@@ -1225,7 +1225,7 @@
       "concepts_referenced": [
         "Gemini"
       ],
-      "link": "/articles/gemini-gas-ordering-system"
+      "link": "/articles/gemini-gas-ordering-system/"
     },
     {
       "slug": "firebase-enable-google-login",
@@ -1251,7 +1251,7 @@
       "concepts_referenced": [
         "Firebase"
       ],
-      "link": "/articles/firebase-enable-google-login"
+      "link": "/articles/firebase-enable-google-login/"
     },
     {
       "slug": "firebase-register-web-app",
@@ -1276,7 +1276,7 @@
         "Firebase Authentication",
         "Firestore"
       ],
-      "link": "/articles/firebase-register-web-app"
+      "link": "/articles/firebase-register-web-app/"
     },
     {
       "slug": "make-llm-email-auto-tagging",
@@ -1304,7 +1304,7 @@
         "OpenRouter",
         "Make"
       ],
-      "link": "/articles/make-llm-email-auto-tagging"
+      "link": "/articles/make-llm-email-auto-tagging/"
     },
     {
       "slug": "create-line-login-liff-app",
@@ -1329,7 +1329,7 @@
         "LINE Login"
       ],
       "concepts_referenced": [],
-      "link": "/articles/create-line-login-liff-app"
+      "link": "/articles/create-line-login-liff-app/"
     },
     {
       "slug": "firebase-create-project",
@@ -1352,7 +1352,7 @@
       "concepts_referenced": [
         "Firebase Authentication"
       ],
-      "link": "/articles/firebase-create-project"
+      "link": "/articles/firebase-create-project/"
     },
     {
       "slug": "firebase-firestore-rules-deploy",
@@ -1376,7 +1376,7 @@
         "Firestore"
       ],
       "concepts_referenced": [],
-      "link": "/articles/firebase-firestore-rules-deploy"
+      "link": "/articles/firebase-firestore-rules-deploy/"
     },
     {
       "slug": "google-cloud-oauth-api-setup",
@@ -1405,7 +1405,7 @@
         "OAuth",
         "Make"
       ],
-      "link": "/articles/google-cloud-oauth-api-setup"
+      "link": "/articles/google-cloud-oauth-api-setup/"
     },
     {
       "slug": "hermes-agent",
@@ -1431,7 +1431,7 @@
       "concepts_referenced": [
         "Computer Use"
       ],
-      "link": "/articles/hermes-agent"
+      "link": "/articles/hermes-agent/"
     },
     {
       "slug": "hermes-agent-windows",
@@ -1457,7 +1457,7 @@
       "concepts_referenced": [
         "Hermes"
       ],
-      "link": "/articles/hermes-agent-windows"
+      "link": "/articles/hermes-agent-windows/"
     },
     {
       "slug": "make-gmail-sheets-automation",
@@ -1482,7 +1482,7 @@
       "concepts_referenced": [
         "Google Cloud"
       ],
-      "link": "/articles/make-gmail-sheets-automation"
+      "link": "/articles/make-gmail-sheets-automation/"
     },
     {
       "slug": "what-is-n8n",
@@ -1507,7 +1507,7 @@
       "concepts_referenced": [
         "Make"
       ],
-      "link": "/articles/what-is-n8n"
+      "link": "/articles/what-is-n8n/"
     },
     {
       "slug": "telegram-integration",
@@ -1532,7 +1532,7 @@
       "concepts_referenced": [
         "MCP"
       ],
-      "link": "/articles/telegram-integration"
+      "link": "/articles/telegram-integration/"
     },
     {
       "slug": "ai-agents-build-line-booking-system",
@@ -1552,7 +1552,7 @@
       ],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/ai-agents-build-line-booking-system"
+      "link": "/articles/ai-agents-build-line-booking-system/"
     },
     {
       "slug": "llm-tool-calling-era",
@@ -1576,7 +1576,7 @@
       "concepts_referenced": [
         "Harness"
       ],
-      "link": "/articles/llm-tool-calling-era"
+      "link": "/articles/llm-tool-calling-era/"
     },
     {
       "slug": "openclaw-hermes-or-claude-max",
@@ -1596,7 +1596,7 @@
       "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/openclaw-hermes-or-claude-max"
+      "link": "/articles/openclaw-hermes-or-claude-max/"
     },
     {
       "slug": "ai-agent-anatomy",
@@ -1618,7 +1618,7 @@
         "Harness"
       ],
       "concepts_referenced": [],
-      "link": "/articles/ai-agent-anatomy"
+      "link": "/articles/ai-agent-anatomy/"
     },
     {
       "slug": "ai-speed-and-opportunity",
@@ -1637,7 +1637,7 @@
       "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/ai-speed-and-opportunity"
+      "link": "/articles/ai-speed-and-opportunity/"
     },
     {
       "slug": "dont-fomo-ai-tools",
@@ -1659,7 +1659,7 @@
       ],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/dont-fomo-ai-tools"
+      "link": "/articles/dont-fomo-ai-tools/"
     },
     {
       "slug": "ai-agent-browsers",
@@ -1683,7 +1683,7 @@
         "Computer Use"
       ],
       "concepts_referenced": [],
-      "link": "/articles/ai-agent-browsers"
+      "link": "/articles/ai-agent-browsers/"
     },
     {
       "slug": "computex-2026-ai-era",
@@ -1703,7 +1703,7 @@
       "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/computex-2026-ai-era"
+      "link": "/articles/computex-2026-ai-era/"
     },
     {
       "slug": "google-gemma4",
@@ -1726,7 +1726,7 @@
       "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/google-gemma4"
+      "link": "/articles/google-gemma4/"
     },
     {
       "slug": "from-prompt-to-skill",
@@ -1748,7 +1748,7 @@
         "Skill",
         "Harness"
       ],
-      "link": "/articles/from-prompt-to-skill"
+      "link": "/articles/from-prompt-to-skill/"
     },
     {
       "slug": "github-account-signup",
@@ -1766,7 +1766,7 @@
       "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/github-account-signup"
+      "link": "/articles/github-account-signup/"
     },
     {
       "slug": "kaggle-account-signup",
@@ -1790,7 +1790,7 @@
       "concepts_referenced": [
         "Looker Studio"
       ],
-      "link": "/articles/kaggle-account-signup"
+      "link": "/articles/kaggle-account-signup/"
     },
     {
       "slug": "llm-guide",
@@ -1826,7 +1826,7 @@
         "Fallback",
         "Gemini"
       ],
-      "link": "/articles/llm-guide"
+      "link": "/articles/llm-guide/"
     },
     {
       "slug": "ai-api-key-guide",
@@ -1858,7 +1858,7 @@
         "Google Cloud Console",
         "OAuth"
       ],
-      "link": "/articles/ai-api-key-guide"
+      "link": "/articles/ai-api-key-guide/"
     },
     {
       "slug": "cli-guide",
@@ -1887,7 +1887,7 @@
         "Homebrew",
         "caffeinate"
       ],
-      "link": "/articles/cli-guide"
+      "link": "/articles/cli-guide/"
     },
     {
       "slug": "github-developer-settings-tokens",
@@ -1906,7 +1906,7 @@
       "modules": [],
       "concepts_defined": [],
       "concepts_referenced": [],
-      "link": "/articles/github-developer-settings-tokens"
+      "link": "/articles/github-developer-settings-tokens/"
     },
     {
       "slug": "google-api-key-guide",
@@ -1937,7 +1937,7 @@
         "Google Apps Script",
         "Google Cloud"
       ],
-      "link": "/articles/google-api-key-guide"
+      "link": "/articles/google-api-key-guide/"
     },
     {
       "slug": "ollama-cloud-api-key",
@@ -1961,7 +1961,7 @@
         "Ollama",
         "OpenRouter"
       ],
-      "link": "/articles/ollama-cloud-api-key"
+      "link": "/articles/ollama-cloud-api-key/"
     },
     {
       "slug": "openrouter-free-llm-api-key",
@@ -1984,7 +1984,7 @@
         "OpenRouter"
       ],
       "concepts_referenced": [],
-      "link": "/articles/openrouter-free-llm-api-key"
+      "link": "/articles/openrouter-free-llm-api-key/"
     }
   ]
 }

@@ -254,7 +254,7 @@ Agent: Based on the target audience you mentioned before (office workers aged 25
        I've drafted a targeted copy for you...
 ```
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Want to dive deeper into the memory system? See [Soul: Give Your Agent Memory and Personality](/en/articles/openclaw-soul)
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Want to dive deeper into the memory system? See [Soul: Give Your Agent Memory and Personality](/en/articles/openclaw-soul/)
 
 ---
 
@@ -323,9 +323,9 @@ behavior:
 
 ## Next Steps
 
-- 🧠 Dive into [Soul: Give Your Agent Memory and Personality](/en/articles/openclaw-soul)
-- 🧩 Review [Skill: Repeatable Workflows](/en/articles/openclaw-skill)
-- 🔗 [MCP Protocol: Connect Your Agent to External Tools](/en/articles/mcp-protocol)
-- ⚙️ [Model Configuration: Use the Best Model for Your Agent](/en/articles/openclaw-model-config)
-- 📱 [Connect Your Agent to Telegram](/en/articles/telegram-integration)
-- ☁️ Deploy your Agent: [Cloud Deployment Guide](/en/articles/deploy-openclaw-cloud)
+- 🧠 Dive into [Soul: Give Your Agent Memory and Personality](/en/articles/openclaw-soul/)
+- 🧩 Review [Skill: Repeatable Workflows](/en/articles/openclaw-skill/)
+- 🔗 [MCP Protocol: Connect Your Agent to External Tools](/en/articles/mcp-protocol/)
+- ⚙️ [Model Configuration: Use the Best Model for Your Agent](/en/articles/openclaw-model-config/)
+- 📱 [Connect Your Agent to Telegram](/en/articles/telegram-integration/)
+- ☁️ Deploy your Agent: [Cloud Deployment Guide](/en/articles/deploy-openclaw-cloud/)

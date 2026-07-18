@@ -26,10 +26,10 @@ stuckOptions:
 
 This tutorial is for installing OpenClaw on **Windows 10 (version 2004+) or Windows 11**.
 
-> 💡 **Read this first**: [Why is installing OpenClaw natively on Windows not recommended?](/en/articles/why-not-windows-openclaw) — Learn why WSL is the best choice for Windows users.
+> 💡 **Read this first**: [Why is installing OpenClaw natively on Windows not recommended?](/en/articles/why-not-windows-openclaw/) — Learn why WSL is the best choice for Windows users.
 
-If you're on Mac, check out the [macOS Installation Guide](/en/articles/install-openclaw-macos).
-If you'd rather not install locally, consider the [Cloud Deployment Guide](/en/articles/deploy-openclaw-cloud).
+If you're on Mac, check out the [macOS Installation Guide](/en/articles/install-openclaw-macos/).
+If you'd rather not install locally, consider the [Cloud Deployment Guide](/en/articles/deploy-openclaw-cloud/).
 
 ### What You'll Need
 
@@ -60,7 +60,7 @@ There are two ways to install on Windows:
 
 WSL (Windows Subsystem for Linux) lets you run Linux inside Windows. OpenClaw's CLI tools and dependencies are more stable in a Linux environment.
 
-> 📘 **Full tutorial**: For a deeper understanding of WSL, see the [Complete WSL Guide](/en/articles/windows-wsl-guide).
+> 📘 **Full tutorial**: For a deeper understanding of WSL, see the [Complete WSL Guide](/en/articles/windows-wsl-guide/).
 
 ### Step 1: Verify BIOS Virtualization is Enabled
 
@@ -201,7 +201,7 @@ codex "explain this error and how to fix it: [paste error message here]"
 
 > 💡 Codex CLI requires an OpenAI API Key. If you have Ollama installed, it can also be configured to use local models. See [Codex CLI docs](https://github.com/openai/codex).
 
-For more on Ollama, see [Ollama + OpenClaw Quick Start (Windows)](/en/articles/ollama-openclaw-windows).
+For more on Ollama, see [Ollama + OpenClaw Quick Start (Windows)](/en/articles/ollama-openclaw-windows/).
 
 ---
 
@@ -360,7 +360,7 @@ hostname -I
 
 Installation complete! Here's what you can do next:
 
-- 🧩 [Learn about Skills: Teach AI repeatable workflows](/en/articles/openclaw-skill)
-- 🤖 [Build your first Agent](/en/articles/openclaw-agent)
-- 🔑 [Get a Google API Key to connect more services](/en/articles/google-api-key-guide)
-- ☁️ [Don't want to manage servers? Try cloud deployment](/en/articles/deploy-openclaw-cloud)
+- 🧩 [Learn about Skills: Teach AI repeatable workflows](/en/articles/openclaw-skill/)
+- 🤖 [Build your first Agent](/en/articles/openclaw-agent/)
+- 🔑 [Get a Google API Key to connect more services](/en/articles/google-api-key-guide/)
+- ☁️ [Don't want to manage servers? Try cloud deployment](/en/articles/deploy-openclaw-cloud/)

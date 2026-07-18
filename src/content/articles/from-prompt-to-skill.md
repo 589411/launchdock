@@ -17,7 +17,7 @@ stuckOptions:
   "我該學哪個": ["現在還要學寫系統提示詞嗎？", "Skill 會不會又被新東西取代？"]
 ---
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 這是鴨編的觀點，不是教學。在我的 [AI 工具地圖](/articles/ai-tool-landscape) 裡，我把 Skill 放在一個特別的位置——因為我認為，它其實就是 GPTs、Gemini Gems 的進化版。聽起來像三個不同的東西，但你拆開看，本質是同一件事。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 這是鴨編的觀點，不是教學。在我的 [AI 工具地圖](/articles/ai-tool-landscape/) 裡，我把 Skill 放在一個特別的位置——因為我認為，它其實就是 GPTs、Gemini Gems 的進化版。聽起來像三個不同的東西，但你拆開看，本質是同一件事。
 
 ---
 
@@ -60,7 +60,7 @@ stuckOptions:
 
 ## 第三階段：Skill——本質一樣，但 AI 自己會用
 
-> 📌 **先講清楚是哪一種 Skill**：本文講的是 **Anthropic 制訂的正統 Agent Skills**——AI 能自主調用、上下文按需加載的那種。它跟某些框架裡「寫死的 YAML 工作流」剛好同名（例如 [OpenClaw 的 Skill](/articles/openclaw-skill) 就是後者），但不是同一個層次的東西，別搞混。
+> 📌 **先講清楚是哪一種 Skill**：本文講的是 **Anthropic 制訂的正統 Agent Skills**——AI 能自主調用、上下文按需加載的那種。它跟某些框架裡「寫死的 YAML 工作流」剛好同名（例如 [OpenClaw 的 Skill](/articles/openclaw-skill/) 就是後者），但不是同一個層次的東西，別搞混。
 
 正統的 Agent Skill 本質上還是同一件事：**一包打包好的指令與知識**。但它突破了前面那兩個天花板，靠的是兩個關鍵躍進。
 
@@ -102,9 +102,9 @@ Skill 的解法是**按需加載**：平常 AI 只記得「我有哪些 Skill、
 
 ## 🔗 延伸閱讀
 
-- 🔬 **光有 Skill 還不夠？拆解 Agent 三層** → [拆解 AI Agent：Skill、工具、Harness](/articles/ai-agent-anatomy)
-- ✍️ **打好地基：把話講清楚給 AI 聽** → [Prompt Engineering 入門](/articles/prompt-engineering)
-- 🗺️ **看懂各工具的定位** → [AI 工具地圖](/articles/ai-tool-landscape)
-- 🧩 **另一種同名的「Skill」（OpenClaw 的 YAML 工作流）** → [OpenClaw Skill 是什麼](/articles/openclaw-skill)
+- 🔬 **光有 Skill 還不夠？拆解 Agent 三層** → [拆解 AI Agent：Skill、工具、Harness](/articles/ai-agent-anatomy/)
+- ✍️ **打好地基：把話講清楚給 AI 聽** → [Prompt Engineering 入門](/articles/prompt-engineering/)
+- 🗺️ **看懂各工具的定位** → [AI 工具地圖](/articles/ai-tool-landscape/)
+- 🧩 **另一種同名的「Skill」（OpenClaw 的 YAML 工作流）** → [OpenClaw Skill 是什麼](/articles/openclaw-skill/)
 
 有想法想跟鴨編討論？到 [首頁討論區](/#discussion) 聊聊！

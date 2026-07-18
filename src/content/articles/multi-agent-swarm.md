@@ -20,7 +20,7 @@ stuckOptions:
 
 ## 為什麼一個 Agent 不夠？
 
-如果你讀過 [Agent 是什麼](/articles/openclaw-agent)，你已經知道 Agent 可以自主決策、使用工具、完成任務。
+如果你讀過 [Agent 是什麼](/articles/openclaw-agent/)，你已經知道 Agent 可以自主決策、使用工具、完成任務。
 
 但問題來了：**一個 Agent 再厲害，也有極限。**
 
@@ -225,8 +225,8 @@ handoff_to: "寫手"  # 完成後交給寫手
 ```
 
 > 想深入了解 Skill 和 Soul 的設定方式，參考：
-> - 🛠️ [Skill 完全指南](/articles/openclaw-skill)
-> - 👻 [Soul 完全指南](/articles/openclaw-soul)
+> - 🛠️ [Skill 完全指南](/articles/openclaw-skill/)
+> - 👻 [Soul 完全指南](/articles/openclaw-soul/)
 
 ---
 
@@ -263,7 +263,7 @@ Multi-Agent 和蜂群智能是 AI 領域最熱門的研究方向之一：
 | **自適應團隊** | Agent 團隊自動調整成員和角色 |
 | **集體記憶** | 多個 Agent 共享記憶庫，知識不重複學習 |
 
-OpenClaw 的 [MCP 協議](/articles/mcp-protocol) 就是朝這個方向走的——讓不同的 Agent 和工具能透過標準協議互相對話。
+OpenClaw 的 [MCP 協議](/articles/mcp-protocol/) 就是朝這個方向走的——讓不同的 Agent 和工具能透過標準協議互相對話。
 
 ---
 
@@ -290,8 +290,8 @@ OpenClaw 的 [MCP 協議](/articles/mcp-protocol) 就是朝這個方向走的—
 
 ## 延伸閱讀
 
-- 🤖 [Agent 是什麼？](/articles/openclaw-agent)——從單一 Agent 理解起
-- 🛠️ [Skill 完全指南](/articles/openclaw-skill)——Agent 的工具箱
-- 👻 [Soul 完全指南](/articles/openclaw-soul)——Agent 的人格設定
-- 🔗 [MCP 協議](/articles/mcp-protocol)——Agent 之間的溝通標準
-- 🧠 [AI 推理技術解密](/articles/cot-and-reasoning)——Agent 如何「思考」
+- 🤖 [Agent 是什麼？](/articles/openclaw-agent/)——從單一 Agent 理解起
+- 🛠️ [Skill 完全指南](/articles/openclaw-skill/)——Agent 的工具箱
+- 👻 [Soul 完全指南](/articles/openclaw-soul/)——Agent 的人格設定
+- 🔗 [MCP 協議](/articles/mcp-protocol/)——Agent 之間的溝通標準
+- 🧠 [AI 推理技術解密](/articles/cot-and-reasoning/)——Agent 如何「思考」

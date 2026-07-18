@@ -47,7 +47,7 @@ export function getAlternatePath(url: URL, targetLang: Locale): string {
   } else {
     // Adding /en prefix
     if (isCurrentlyEn) return path;
-    return '/en' + (path === '/' ? '' : path);
+    return path === '/' ? '/en/' : '/en' + path;
   }
 }
 

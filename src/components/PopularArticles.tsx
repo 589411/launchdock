@@ -148,7 +148,7 @@ export default function PopularArticles({ articles }: Props) {
         {sortedArticles.map(({ slug, title, description, scene, difficulty, stats }, index) => (
           <a
             key={slug}
-            href={`/articles/${slug}`}
+            href={`/articles/${slug}/`}
             className="block p-5 rounded-lg transition-all group"
             style={{
               backgroundColor: 'var(--color-surface-light)',

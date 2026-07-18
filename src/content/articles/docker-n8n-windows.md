@@ -21,7 +21,7 @@ stuckOptions:
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **這篇文章的由來**：一次 Docker Desktop 更新後，WSL2 權限直接爆炸，花了不少時間才搞定。把這些坑整理成一份 SOP，讓你不用重蹈覆轍。
 
-> 📌 **Mac 使用者請移駕**：這篇是 Windows 專版。Mac 版本簡單很多，請看：[Mac 安裝 Docker + n8n 完整指南](/articles/docker-n8n-mac)
+> 📌 **Mac 使用者請移駕**：這篇是 Windows 專版。Mac 版本簡單很多，請看：[Mac 安裝 Docker + n8n 完整指南](/articles/docker-n8n-mac/)
 
 ---
 
@@ -31,7 +31,7 @@ stuckOptions:
 
 | 工具 | 角色 | 比喻 |
 |------|------|------|
-| **[WSL2](/articles/windows-wsl-guide)**（Windows Subsystem for Linux） | Windows 裡面的 Linux 虛擬環境 | 公寓裡隔出來的小套房 |
+| **[WSL2](/articles/windows-wsl-guide/)**（Windows Subsystem for Linux） | Windows 裡面的 Linux 虛擬環境 | 公寓裡隔出來的小套房 |
 | **Docker Desktop** | 管理容器的圖形介面，但實際引擎跑在 WSL2 裡 | 套房的房東（你住在 Windows 這層） |
 | **n8n** | 跑在 Docker 容器內的自動化工具 | 套房裡的住客 |
 
@@ -121,7 +121,7 @@ wsl -d Ubuntu-24.04 -u root nano /etc/wsl.conf
 
 <!-- @img: powershell-wsl-nano-wslconf | PowerShell 執行 wsl nano 開啟設定檔 -->
 
-> 若你的 Linux 版本不同（例如 Ubuntu-22.04），請改成對應的名稱。輸入 `wsl -l -v` 可查看你安裝了哪些版本。如果還沒有安裝 WSL，請先看：[WSL 完整教學](/articles/windows-wsl-guide)。
+> 若你的 Linux 版本不同（例如 Ubuntu-22.04），請改成對應的名稱。輸入 `wsl -l -v` 可查看你安裝了哪些版本。如果還沒有安裝 WSL，請先看：[WSL 完整教學](/articles/windows-wsl-guide/)。
 
 3. 畫面會進入 nano 文字編輯器。原本的內容應該長這樣：
 
@@ -345,11 +345,11 @@ wsl --shutdown
 
 ## 🔗 延伸閱讀
 
-- **用 Mac 跨階簡單很多？** → [Mac 安裝 Docker + n8n 完整指南](/articles/docker-n8n-mac)
-- **想了解 Windows 為什麼要跟 Linux 連在一起？** → [為什麼不建議在 Windows 原生環境安裝 OpenClaw？](/articles/why-not-windows-openclaw)
-- **想深入了解 WSL2 的管理方式？** → [WSL 完整教學](/articles/windows-wsl-guide)
-- **想在 Windows 上跑 AI Agent？** → [Windows 安裝 OpenClaw 完整教學](/articles/install-openclaw-windows)
-- **想用免費本地 LLM？** → [Ollama + OpenClaw 快速上手｜Windows 篇](/articles/ollama-openclaw-windows)
+- **用 Mac 跨階簡單很多？** → [Mac 安裝 Docker + n8n 完整指南](/articles/docker-n8n-mac/)
+- **想了解 Windows 為什麼要跟 Linux 連在一起？** → [為什麼不建議在 Windows 原生環境安裝 OpenClaw？](/articles/why-not-windows-openclaw/)
+- **想深入了解 WSL2 的管理方式？** → [WSL 完整教學](/articles/windows-wsl-guide/)
+- **想在 Windows 上跑 AI Agent？** → [Windows 安裝 OpenClaw 完整教學](/articles/install-openclaw-windows/)
+- **想用免費本地 LLM？** → [Ollama + OpenClaw 快速上手｜Windows 篇](/articles/ollama-openclaw-windows/)
 
 # 查看所有容器（含停止的）
 docker ps -a

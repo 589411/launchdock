@@ -75,7 +75,7 @@ stuckOptions:
 你是一位嚴格的程式碼審查者。
 ```
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 角色設定跟 OpenClaw 的 [Soul 人設](/articles/openclaw-soul) 概念完全相同。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 角色設定跟 OpenClaw 的 [Soul 人設](/articles/openclaw-soul/) 概念完全相同。
 
 ### 2. 明確的任務描述
 
@@ -138,7 +138,7 @@ stuckOptions:
 
 AI 會學到格式，回答：`分類：技術問題，緊急度：高`
 
-> 🔑 **Few-shot 是 OpenClaw Skill 的核心技巧。** 在 [Skill YAML](/articles/openclaw-skill) 裡用 `examples` 欄位定義範例。
+> 🔑 **Few-shot 是 OpenClaw Skill 的核心技巧。** 在 [Skill YAML](/articles/openclaw-skill/) 裡用 `examples` 欄位定義範例。
 
 ### 技巧 3：Chain of Thought / CoT（思維鏈）
 
@@ -180,7 +180,7 @@ AI 會學到格式，回答：`分類：技術問題，緊急度：高`
 
 ### System Prompt = Agent 的「靈魂」
 
-OpenClaw 的 [Soul 設定](/articles/openclaw-soul) 就是長期的 System Prompt：
+OpenClaw 的 [Soul 設定](/articles/openclaw-soul/) 就是長期的 System Prompt：
 
 ```markdown
 # SOUL.md
@@ -192,7 +192,7 @@ OpenClaw 的 [Soul 設定](/articles/openclaw-soul) 就是長期的 System Promp
 
 ### Skill Prompt = 任務的「SOP」
 
-在 [Skill](/articles/openclaw-skill) 裡，你的 Prompt 就是工作流的指令：
+在 [Skill](/articles/openclaw-skill/) 裡，你的 Prompt 就是工作流的指令：
 
 ```yaml
 name: weekly-news-summary
@@ -212,11 +212,11 @@ steps:
       max_tokens: 800
 ```
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **省錢提醒**：精簡 Prompt 可以顯著降低 [Token 成本](/articles/token-economics)。每少 100 token，每天 100 次就省 10,000 tokens。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **省錢提醒**：精簡 Prompt 可以顯著降低 [Token 成本](/articles/token-economics/)。每少 100 token，每天 100 次就省 10,000 tokens。
 
 ### Agent Prompt = 決策的「指南針」
 
-[Agent](/articles/openclaw-agent) 的 Prompt 決定它如何思考和選擇 Skill：
+[Agent](/articles/openclaw-agent/) 的 Prompt 決定它如何思考和選擇 Skill：
 
 ```markdown
 # AGENTS.md - 行銷分析 Agent
@@ -272,7 +272,7 @@ AI 傾向冗長回答。
 
 **解法：**
 - 重要資訊在 Prompt 開頭（AI 對開頭記憶最好）
-- 用 OpenClaw 的 [Agent 記憶系統](/articles/openclaw-agent) 自動管理上下文
+- 用 OpenClaw 的 [Agent 記憶系統](/articles/openclaw-agent/) 自動管理上下文
 - 關鍵資訊用 `<重要>` 標籤包住突出
 
 ---
@@ -336,11 +336,11 @@ AI 傾向冗長回答。
 
 ### 每次都要寫這麼長的 Prompt 嗎？
 
-不用。把常用的 Prompt 存成 OpenClaw 的 [Skill](/articles/openclaw-skill)，以後一句話啟動就好。這就是 Prompt 工程的終極目標：**寫一次，重複用**。
+不用。把常用的 Prompt 存成 OpenClaw 的 [Skill](/articles/openclaw-skill/)，以後一句話啟動就好。這就是 Prompt 工程的終極目標：**寫一次，重複用**。
 
 ### Prompt 技巧適用所有模型嗎？
 
-基本上是的。角色設定、Few-shot、CoT 在所有主流模型上都有效。但不同模型對格式指令的遵循程度不同，可能需要微調。選模型可以參考 [模型設定指南](/articles/openclaw-model-config)。
+基本上是的。角色設定、Few-shot、CoT 在所有主流模型上都有效。但不同模型對格式指令的遵循程度不同，可能需要微調。選模型可以參考 [模型設定指南](/articles/openclaw-model-config/)。
 
 ### 有推薦的學習資源嗎？
 
@@ -354,8 +354,8 @@ AI 傾向冗長回答。
 
 掌握了 Prompt 技巧，你可以：
 
-- 🧩 [用 Skill 把好的 Prompt 變成自動化流程](/articles/openclaw-skill)
-- 🤖 [寫出好的 Agent 決策 Prompt](/articles/openclaw-agent)
-- 👻 [讓 AI 的人設更精準：Soul 設定](/articles/openclaw-soul)
-- 💰 [用更少 Token 達到同樣效果](/articles/token-economics)
-- 🔗 [了解 MCP 協定：AI 怎麼接上外部工具](/articles/mcp-protocol)
+- 🧩 [用 Skill 把好的 Prompt 變成自動化流程](/articles/openclaw-skill/)
+- 🤖 [寫出好的 Agent 決策 Prompt](/articles/openclaw-agent/)
+- 👻 [讓 AI 的人設更精準：Soul 設定](/articles/openclaw-soul/)
+- 💰 [用更少 Token 達到同樣效果](/articles/token-economics/)
+- 🔗 [了解 MCP 協定：AI 怎麼接上外部工具](/articles/mcp-protocol/)

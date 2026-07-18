@@ -213,8 +213,8 @@ curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scri
 
 ## 下一步
 
-- 🦀 [認識 OpenClaw：另一個 AI Agent 框架](/articles/why-openclaw)
-- 📱 [OpenClaw 串接 Telegram](/articles/telegram-integration)
-- 🧩 [打造你的第一個 Skill（OpenClaw）](/articles/openclaw-first-skill)
+- 🦀 [認識 OpenClaw：另一個 AI Agent 框架](/articles/why-openclaw/)
+- 📱 [OpenClaw 串接 Telegram](/articles/telegram-integration/)
+- 🧩 [打造你的第一個 Skill（OpenClaw）](/articles/openclaw-first-skill/)
 
 有問題？到 [首頁討論區](/#discussion) 一起討論！

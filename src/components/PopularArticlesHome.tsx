@@ -106,7 +106,7 @@ export default function PopularArticlesHome({ articles }: Props) {
       {topArticles.map((article, i) => (
         <a
           key={article.slug}
-          href={`/articles/${article.slug}`}
+          href={`/articles/${article.slug}/`}
           className="block p-5 rounded-xl transition-all group relative overflow-hidden"
           style={{
             backgroundColor: 'var(--color-surface-light)',

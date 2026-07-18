@@ -82,7 +82,7 @@ workspace/
 └── config.yaml       # MCP connection settings
 ```
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> For detailed Workspace setup instructions, see the [Soul Configuration Guide](/articles/openclaw-soul).
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> For detailed Workspace setup instructions, see the [Soul Configuration Guide](/articles/openclaw-soul/).
 
 ### Knowledge Classification
 
@@ -184,7 +184,7 @@ steps:
       message: "📚 Today's Knowledge Updates\n\n{{digest}}"
 ```
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> For Telegram setup, see the [Telegram Integration Guide](/articles/telegram-integration).
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> For Telegram setup, see the [Telegram Integration Guide](/articles/telegram-integration/).
 
 ---
 
@@ -331,7 +331,7 @@ steps:
 
 ## Recommended Tool Pairings
 
-OpenClaw's [MCP protocol](/articles/mcp-protocol) lets you connect various knowledge management tools:
+OpenClaw's [MCP protocol](/articles/mcp-protocol/) lets you connect various knowledge management tools:
 
 | Function | Recommended Tool | MCP Server |
 |---|---|---|
@@ -381,15 +381,15 @@ Friday → Weekly report + next week's suggestions
 
 ### Can I use Notion?
 
-Absolutely. OpenClaw connects to Notion API via [MCP](/articles/mcp-protocol), and can automatically create pages, update databases, and search existing notes.
+Absolutely. OpenClaw connects to Notion API via [MCP](/articles/mcp-protocol/), and can automatically create pages, update databases, and search existing notes.
 
 ### What if I don't trust AI organization quality?
 
-You can set it to "AI organize + human review" mode: AI organizes into the inbox, then you review and move items to their permanent location. Quality can be improved with [Prompt techniques](/articles/prompt-engineering).
+You can set it to "AI organize + human review" mode: AI organizes into the inbox, then you review and move items to their permanent location. Quality can be improved with [Prompt techniques](/articles/prompt-engineering/).
 
 ### How much does it cost per month?
 
-Using GPT-4o mini for collection and organization, typical usage costs $1-3 per month. Details in [Token Economics](/articles/token-economics).
+Using GPT-4o mini for collection and organization, typical usage costs $1-3 per month. Details in [Token Economics](/articles/token-economics/).
 
 ### Is my data safe?
 
@@ -401,8 +401,8 @@ OpenClaw runs on your own computer/server — data doesn't go through third part
 
 Start building your PKM system:
 
-- 📦 [Install OpenClaw first](/articles/install-openclaw)
-- 🧩 [Learn to write Skills for automation workflows](/articles/openclaw-skill)
-- 🔗 [Connect Notion / Google Drive via MCP](/articles/mcp-protocol)
-- 💬 [Connect Telegram for push notifications](/articles/telegram-integration)
-- 👻 [Set up your AI assistant's persona](/articles/openclaw-soul)
+- 📦 [Install OpenClaw first](/articles/install-openclaw/)
+- 🧩 [Learn to write Skills for automation workflows](/articles/openclaw-skill/)
+- 🔗 [Connect Notion / Google Drive via MCP](/articles/mcp-protocol/)
+- 💬 [Connect Telegram for push notifications](/articles/telegram-integration/)
+- 👻 [Set up your AI assistant's persona](/articles/openclaw-soul/)

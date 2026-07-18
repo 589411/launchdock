@@ -46,7 +46,7 @@ Let Duck Editor take it apart layer by layer.
 
 ## Layer 1: Skill — Packaged Instructions and Knowledge
 
-In [A Skill Is Really the Evolution of GPTs](/en/articles/from-prompt-to-skill), I explained: a Skill packages a set of instructions or knowledge so the AI can invoke it itself and load it on demand.
+In [A Skill Is Really the Evolution of GPTs](/en/articles/from-prompt-to-skill/), I explained: a Skill packages a set of instructions or knowledge so the AI can invoke it itself and load it on demand.
 
 > 📌 **To be clear:** the "Skill" here means **Anthropic's official Agent Skills** — the kind the AI invokes on its own and loads into context on demand. It happens to share a name with the "hard-coded YAML workflows" in some frameworks, but it's not the same thing. Don't confuse them.
 
@@ -56,7 +56,7 @@ Skill answers one question: **"How is this task done?"** It's the agent's knowle
 
 ## Layer 2: Tools / MCP — Hands and Feet Reaching Into the World
 
-Knowing the method isn't enough — the agent has to **actually act**: read files, query databases, send messages, call APIs. That's the tool layer, and the [MCP protocol](/en/articles/mcp-protocol) is the standard that lets AI connect to all kinds of tools in one unified way.
+Knowing the method isn't enough — the agent has to **actually act**: read files, query databases, send messages, call APIs. That's the tool layer, and the [MCP protocol](/en/articles/mcp-protocol/) is the standard that lets AI connect to all kinds of tools in one unified way.
 
 The tool layer answers: **"What can I reach?"** It's the agent's hands, feet, and senses.
 
@@ -107,7 +107,7 @@ The head chef doesn't necessarily cook every dish personally. What they do is: d
 
 ## Back to the Lobster That Blew Itself Up
 
-Remember the lobster in [Tool Calling Is the Real Test](/en/articles/llm-tool-calling-era) — the one that "helpfully optimized your config and ended up unplugging its own power cord"?
+Remember the lobster in [Tool Calling Is the Real Test](/en/articles/llm-tool-calling-era/) — the one that "helpfully optimized your config and ended up unplugging its own power cord"?
 
 That wasn't the model being dumb. That was the **Harness failing to set boundaries** — it let the agent have permission to edit its own core config. The model just followed instructions; the guardrail that should have blocked that action was never installed.
 
@@ -133,9 +133,9 @@ All three are questions about the Harness. And the Harness is the real answer to
 
 ## 🔗 Further Reading
 
-- 🧩 **How the instruction layer evolved** → [A Skill Is Really the Evolution of GPTs](/en/articles/from-prompt-to-skill)
-- 🔌 **The standard for the connection layer** → [MCP Protocol: AI's USB Port](/en/articles/mcp-protocol)
-- 🦞 **A live example of Harness failure** → [Tool Calling Is the Real Test](/en/articles/llm-tool-calling-era)
-- 🗺️ **Where each tool fits** → [The AI Tool Landscape](/en/articles/ai-tool-landscape)
+- 🧩 **How the instruction layer evolved** → [A Skill Is Really the Evolution of GPTs](/en/articles/from-prompt-to-skill/)
+- 🔌 **The standard for the connection layer** → [MCP Protocol: AI's USB Port](/en/articles/mcp-protocol/)
+- 🦞 **A live example of Harness failure** → [Tool Calling Is the Real Test](/en/articles/llm-tool-calling-era/)
+- 🗺️ **Where each tool fits** → [The AI Tool Landscape](/en/articles/ai-tool-landscape/)
 
 Have a thought to discuss with Duck Editor? Join the [homepage discussion](/#discussion)!

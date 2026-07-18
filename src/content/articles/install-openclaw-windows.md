@@ -26,10 +26,10 @@ stuckOptions:
 
 這篇教學適合在 **Windows 10（版本 2004+）或 Windows 11** 上安裝 OpenClaw。
 
-> 💡 **先讀這篇**：[為什麼不建議在 Windows 原生環境安裝 OpenClaw？](/articles/why-not-windows-openclaw)——了解為什麼 WSL 是 Windows 用戶的最佳選擇。
+> 💡 **先讀這篇**：[為什麼不建議在 Windows 原生環境安裝 OpenClaw？](/articles/why-not-windows-openclaw/)——了解為什麼 WSL 是 Windows 用戶的最佳選擇。
 
-如果你用的是 Mac，請看 [macOS 安裝指南](/articles/install-openclaw-macos)。
-如果你不想在本地安裝，可以考慮 [雲端部署方案](/articles/deploy-openclaw-cloud)。
+如果你用的是 Mac，請看 [macOS 安裝指南](/articles/install-openclaw-macos/)。
+如果你不想在本地安裝，可以考慮 [雲端部署方案](/articles/deploy-openclaw-cloud/)。
 
 ### 你需要準備
 
@@ -60,7 +60,7 @@ Windows 上有兩種安裝方式：
 
 WSL（Windows Subsystem for Linux）讓你在 Windows 裡跑 Linux。OpenClaw 的 CLI 工具和相依套件在 Linux 環境更穩定，強烈建議用這種方式。
 
-> 📘 **完整版教學**：如果想深入了解 WSL 的原理和使用技巧，請看 [WSL 完整教學](/articles/windows-wsl-guide)。
+> 📘 **完整版教學**：如果想深入了解 WSL 的原理和使用技巧，請看 [WSL 完整教學](/articles/windows-wsl-guide/)。
 
 ### Step 1：確認 BIOS 虛擬化已開啟
 
@@ -203,7 +203,7 @@ codex "explain this error and how to fix it: [把錯誤訊息貼在這裡]"
 
 > 💡 Codex CLI 需要 OpenAI API Key。如果你已經安裝 Ollama，也可以設定它使用本機模型來回答喔。詳見 [Codex CLI 文件](https://github.com/openai/codex)。
 
-詳細說明見 [Ollama + OpenClaw 快速上手（Windows 篇）](/articles/ollama-openclaw-windows)。
+詳細說明見 [Ollama + OpenClaw 快速上手（Windows 篇）](/articles/ollama-openclaw-windows/)。
 
 ---
 
@@ -353,7 +353,7 @@ hostname -I
 
 安裝完成！接下來你可以：
 
-- 🧩 [學習 Skill：讓 AI 學會可重複的工作流](/articles/openclaw-skill)
-- 🤖 [打造你的第一個 Agent](/articles/openclaw-agent)
-- 🔑 [申請 Google API Key 串接更多服務](/articles/google-api-key-guide)
-- ☁️ [不想管伺服器？改用雲端部署](/articles/deploy-openclaw-cloud)
+- 🧩 [學習 Skill：讓 AI 學會可重複的工作流](/articles/openclaw-skill/)
+- 🤖 [打造你的第一個 Agent](/articles/openclaw-agent/)
+- 🔑 [申請 Google API Key 串接更多服務](/articles/google-api-key-guide/)
+- ☁️ [不想管伺服器？改用雲端部署](/articles/deploy-openclaw-cloud/)

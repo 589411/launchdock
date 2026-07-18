@@ -203,7 +203,7 @@ For private data applications, cutting API costs, or building AI Agents that don
 
 | Topic | Article |
 |-------|---------|
-| Running open models locally | [Ollama + OpenClaw (macOS)](/articles/ollama-openclaw-mac) |
-| Local Agent architecture | [AI Tool Landscape](/articles/ai-tool-landscape) |
-| What is RAG | [RAG Explained](/articles/rag-explained) |
-| Choosing the right model | [LLM Guide](/articles/llm-guide) |
+| Running open models locally | [Ollama + OpenClaw (macOS)](/articles/ollama-openclaw-mac/) |
+| Local Agent architecture | [AI Tool Landscape](/articles/ai-tool-landscape/) |
+| What is RAG | [RAG Explained](/articles/rag-explained/) |
+| Choosing the right model | [LLM Guide](/articles/llm-guide/) |

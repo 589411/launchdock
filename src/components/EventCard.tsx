@@ -82,7 +82,7 @@ export default function EventCard({ eventData, compact = false }: Props) {
   if (compact) {
     return (
       <a
-        href={`/events#event-${event.id}`}
+        href={`/events/#event-${event.id}`}
         className="block p-4 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
       >
         <div className="flex items-center gap-3">

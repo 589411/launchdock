@@ -27,7 +27,7 @@ You've already installed OpenClaw and it runs great on your computer. But you ca
 
 | Scenario | What You Do |
 |---|---|
-| See a good article while commuting | Send the link to your Bot → automatically organized into your [knowledge base](/articles/pkm-system) |
+| See a good article while commuting | Send the link to your Bot → automatically organized into your [knowledge base](/articles/pkm-system/) |
 | Need a quick translation | Send text to the Bot → instant translation reply |
 | Need to look up info during a meeting | Secretly message the Bot → quietly receive the answer |
 | Get an idea before bed | Voice message to the Bot → auto-transcribed and saved as a note |
@@ -267,7 +267,7 @@ Supported: Images (OCR + understanding), Voice (transcription), Documents (PDF e
 
 ### Scheduled Pushes
 
-Combined with the [PKM system](/articles/pkm-system), have the Bot send scheduled updates:
+Combined with the [PKM system](/articles/pkm-system/), have the Bot send scheduled updates:
 
 ```yaml
 # Push a news digest every day at 8 AM
@@ -350,7 +350,7 @@ telegram:
 - Webhook mode: Should be within 1 second
 - If over 5 seconds: Check model response speed, the AI inference might be taking longer
 
-Use a [faster model](/articles/openclaw-model-config) (like Gemini Flash) to reduce latency.
+Use a [faster model](/articles/openclaw-model-config/) (like Gemini Flash) to reduce latency.
 
 ### Bot blocked by Telegram
 
@@ -364,8 +364,8 @@ Use a [faster model](/articles/openclaw-model-config) (like Gemini Flash) to red
 
 With your Telegram Bot set up, you can:
 
-- 📚 [Build a PKM system — let the Bot auto-collect and organize for you](/articles/pkm-system)
-- 🧩 [Write Skills to have the Bot execute automated tasks](/articles/openclaw-skill)
-- 🔗 [Connect more tools via MCP](/articles/mcp-protocol)
-- ⚙️ [Choose a fast and affordable model for your Bot](/articles/openclaw-model-config)
+- 📚 [Build a PKM system — let the Bot auto-collect and organize for you](/articles/pkm-system/)
+- 🧩 [Write Skills to have the Bot execute automated tasks](/articles/openclaw-skill/)
+- 🔗 [Connect more tools via MCP](/articles/mcp-protocol/)
+- ⚙️ [Choose a fast and affordable model for your Bot](/articles/openclaw-model-config/)
 - 💬 [Share your Bot setup in the homepage discussion](/#discussion)

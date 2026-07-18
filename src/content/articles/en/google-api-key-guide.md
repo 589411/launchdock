@@ -36,7 +36,7 @@ This article will walk you through it step by step, including the **5 most commo
 
 - A Google account (your regular Gmail works fine)
 - About 15-20 minutes
-- OpenClaw already installed (if not, check out the [Installation Guide](/en/articles/install-openclaw) first)
+- OpenClaw already installed (if not, check out the [Installation Guide](/en/articles/install-openclaw/) first)
 
 ---
 
@@ -254,10 +254,10 @@ If you're still having issues, here are the common debugging steps:
 
 Now that your API Key is set up, here's what's next:
 
-- 💰 [Understand Token pricing so you don't get surprised by bills](/en/articles/token-economics)
-- ⚙️ [Set up model switching strategies to save money and stay stable](/en/articles/openclaw-model-config)
-- 🧩 [Write your first Skill](/en/articles/openclaw-skill)
-- 💬 [Learn Prompt techniques for better AI responses](/en/articles/prompt-engineering)
+- 💰 [Understand Token pricing so you don't get surprised by bills](/en/articles/token-economics/)
+- ⚙️ [Set up model switching strategies to save money and stay stable](/en/articles/openclaw-model-config/)
+- 🧩 [Write your first Skill](/en/articles/openclaw-skill/)
+- 💬 [Learn Prompt techniques for better AI responses](/en/articles/prompt-engineering/)
 
 ---
 

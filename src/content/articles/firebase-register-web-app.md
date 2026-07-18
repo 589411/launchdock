@@ -26,7 +26,7 @@ stuckOptions:
 
 前面建好了專案、開好了登入，但你的網頁還不知道「要連到哪個 Firebase 專案」。**註冊一個 Web App** 就是去拿那段「連線地址」——也就是 `firebaseConfig`。
 
-> 還沒開好登入？先看 [在 Firebase 啟用 Google 登入](/articles/firebase-enable-google-login)。
+> 還沒開好登入？先看 [在 Firebase 啟用 Google 登入](/articles/firebase-enable-google-login/)。
 
 ---
 
@@ -69,4 +69,4 @@ stuckOptions:
 
 ---
 
-> **下一步**：連上之後若讀寫資料跳「Missing or insufficient permissions」，那是規則擋的 → [修 Missing permissions：部署 Firestore 安全規則](/articles/firebase-firestore-rules-deploy)
+> **下一步**：連上之後若讀寫資料跳「Missing or insufficient permissions」，那是規則擋的 → [修 Missing permissions：部署 Firestore 安全規則](/articles/firebase-firestore-rules-deploy/)

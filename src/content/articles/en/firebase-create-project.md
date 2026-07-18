@@ -76,4 +76,4 @@ Once created, you arrive at the **project overview**. The left side lists all Fi
 
 ---
 
-> **Next**: With a project in place, turn on login → [Enable Google Sign-In in Firebase](/articles/firebase-enable-google-login)
+> **Next**: With a project in place, turn on login → [Enable Google Sign-In in Firebase](/articles/firebase-enable-google-login/)

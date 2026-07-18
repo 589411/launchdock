@@ -147,12 +147,12 @@ Not everyone needs to rush out and buy an RTX Spark laptop. But these things are
 ### 1. Install Ollama and Try a Local Model
 No new hardware required. If you have a reasonably recent Mac or a PC with a dedicated GPU, you can download Ollama today and run Gemma, Qwen, or Llama locally — and experience what "AI conversation with no token fees" actually feels like.
 
-→ See the guide: [Using Ollama with OpenClaw on Mac](/articles/ollama-openclaw-mac)
+→ See the guide: [Using Ollama with OpenClaw on Mac](/articles/ollama-openclaw-mac/)
 
 ### 2. Build Your AI Assistant Foundation with OpenClaw
 Even if you're still using cloud APIs, setting up OpenClaw and connecting it to your tools now means switching to local models later is just a one-line config change.
 
-→ See the guide: [Why You Need OpenClaw](/articles/why-openclaw)
+→ See the guide: [Why You Need OpenClaw](/articles/why-openclaw/)
 
 ### 3. Watch the Fall RTX Spark Laptop Launch
 Nvidia's partners plan to ship RTX Spark laptops this fall. If you're thinking about a new computer, this generation is worth waiting for.

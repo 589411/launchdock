@@ -9,6 +9,7 @@ import remarkConceptLinks from './plugins/remark-concept-links.mjs';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://launchdock.app',
+  trailingSlash: 'always',
 
   i18n: {
     defaultLocale: 'zh-tw',

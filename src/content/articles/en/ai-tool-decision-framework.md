@@ -128,8 +128,8 @@ Walk through the framework:
 
 | Topic | Article |
 |-------|---------|
-| Full AI tool landscape | [AI Tool Landscape](/articles/ai-tool-landscape) |
-| Prompt techniques | [Prompt Engineering](/articles/prompt-engineering) |
-| What is MCP | [MCP Protocol Guide](/articles/mcp-protocol) |
-| Setting up an Agent | [OpenClaw Agent](/articles/openclaw-agent) |
-| OpenClaw Skills | [Skill System](/articles/openclaw-skill) |
+| Full AI tool landscape | [AI Tool Landscape](/articles/ai-tool-landscape/) |
+| Prompt techniques | [Prompt Engineering](/articles/prompt-engineering/) |
+| What is MCP | [MCP Protocol Guide](/articles/mcp-protocol/) |
+| Setting up an Agent | [OpenClaw Agent](/articles/openclaw-agent/) |
+| OpenClaw Skills | [Skill System](/articles/openclaw-skill/) |

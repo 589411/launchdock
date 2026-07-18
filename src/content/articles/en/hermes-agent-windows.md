@@ -222,8 +222,8 @@ To connect to Ollama during the setup wizard:
 
 ## What's Next
 
-- 🍎 [Hermes on macOS](/articles/hermes-agent)
-- 🦀 [Meet OpenClaw: another AI Agent framework](/articles/why-openclaw)
-- 📱 [Connect OpenClaw to Telegram](/articles/telegram-integration)
+- 🍎 [Hermes on macOS](/articles/hermes-agent/)
+- 🦀 [Meet OpenClaw: another AI Agent framework](/articles/why-openclaw/)
+- 📱 [Connect OpenClaw to Telegram](/articles/telegram-integration/)
 
 Questions? Join the discussion at the [homepage](/#discussion)!

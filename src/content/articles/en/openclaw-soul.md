@@ -399,9 +399,9 @@ Memory queries add roughly 100-200ms of latency per call. Cost-wise, it's mainly
 
 ## Next Steps
 
-- 🧩 Haven't learned about Skills yet? Start with [Skill: Repeatable Workflows](/en/articles/openclaw-skill)
-- 🤖 Set up your Agent: [Agent Complete Guide](/en/articles/openclaw-agent)
-- 💬 [Prompt Engineering: The Underlying Technique Behind Soul Configuration](/en/articles/prompt-engineering)
-- 💰 [Slim Down Soul to Save Tokens: Token Economics](/en/articles/token-economics)
-- ☁️ Deploy to the cloud: [Cloud Deployment Guide](/en/articles/deploy-openclaw-cloud)
+- 🧩 Haven't learned about Skills yet? Start with [Skill: Repeatable Workflows](/en/articles/openclaw-skill/)
+- 🤖 Set up your Agent: [Agent Complete Guide](/en/articles/openclaw-agent/)
+- 💬 [Prompt Engineering: The Underlying Technique Behind Soul Configuration](/en/articles/prompt-engineering/)
+- 💰 [Slim Down Soul to Save Tokens: Token Economics](/en/articles/token-economics/)
+- ☁️ Deploy to the cloud: [Cloud Deployment Guide](/en/articles/deploy-openclaw-cloud/)
 - 💬 Share your Soul configuration: [Homepage Discussion](/#discussion)

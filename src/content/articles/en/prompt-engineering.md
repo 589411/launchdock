@@ -75,7 +75,7 @@ You are a science writer who writes for elementary school kids.
 You are a strict code reviewer.
 ```
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Role setting shares the exact same concept as OpenClaw's [Soul persona](/en/articles/openclaw-soul).
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Role setting shares the exact same concept as OpenClaw's [Soul persona](/en/articles/openclaw-soul/).
 
 ### 2. Clear Task Description
 
@@ -138,7 +138,7 @@ New complaint: "Website keeps crashing, can't place an order" →
 
 AI will learn the format and respond: `Category: Technical Issue, Urgency: High`
 
-> 🔑 **Few-shot is a core technique for OpenClaw Skills.** In your [Skill YAML](/en/articles/openclaw-skill), use the `examples` field to define examples.
+> 🔑 **Few-shot is a core technique for OpenClaw Skills.** In your [Skill YAML](/en/articles/openclaw-skill/), use the `examples` field to define examples.
 
 ### Technique 3: Chain of Thought / CoT
 
@@ -180,7 +180,7 @@ from all three approaches and pick the answer you're most confident in.
 
 ### System Prompt = The Agent's "Soul"
 
-OpenClaw's [Soul settings](/en/articles/openclaw-soul) are the long-running System Prompt:
+OpenClaw's [Soul settings](/en/articles/openclaw-soul/) are the long-running System Prompt:
 
 ```markdown
 # SOUL.md
@@ -192,7 +192,7 @@ You are an AI assistant focused on marketing analysis.
 
 ### Skill Prompt = The Task's "SOP"
 
-In a [Skill](/en/articles/openclaw-skill), your prompt is the workflow instruction:
+In a [Skill](/en/articles/openclaw-skill/), your prompt is the workflow instruction:
 
 ```yaml
 name: weekly-news-summary
@@ -212,11 +212,11 @@ steps:
       max_tokens: 800
 ```
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Cost reminder**: Streamlining your prompts can significantly reduce [token costs](/en/articles/token-economics). Every 100 tokens saved, with 100 calls per day, saves 10,000 tokens.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Cost reminder**: Streamlining your prompts can significantly reduce [token costs](/en/articles/token-economics/). Every 100 tokens saved, with 100 calls per day, saves 10,000 tokens.
 
 ### Agent Prompt = The Decision-Making "Compass"
 
-An [Agent's](/en/articles/openclaw-agent) prompt determines how it thinks and selects Skills:
+An [Agent's](/en/articles/openclaw-agent/) prompt determines how it thinks and selects Skills:
 
 ```markdown
 # AGENTS.md - Marketing Analysis Agent
@@ -272,7 +272,7 @@ In long conversations, AI forgets what was discussed earlier.
 
 **Solutions:**
 - Place important information at the beginning of the prompt (AI remembers the beginning best)
-- Use OpenClaw's [Agent memory system](/en/articles/openclaw-agent) to automatically manage context
+- Use OpenClaw's [Agent memory system](/en/articles/openclaw-agent/) to automatically manage context
 - Wrap critical information in `<important>` tags to make it stand out
 
 ---
@@ -336,11 +336,11 @@ I've encountered a bug. Please help me analyze it.
 
 ### Do I have to write such long prompts every time?
 
-No. Save your frequently used prompts as OpenClaw [Skills](/en/articles/openclaw-skill), and you can launch them with a single command. That's the ultimate goal of prompt engineering: **write once, reuse forever**.
+No. Save your frequently used prompts as OpenClaw [Skills](/en/articles/openclaw-skill/), and you can launch them with a single command. That's the ultimate goal of prompt engineering: **write once, reuse forever**.
 
 ### Do prompt techniques work with all models?
 
-Basically, yes. Role-setting, few-shot, and CoT are effective across all major models. However, different models vary in how well they follow formatting instructions, so some fine-tuning may be needed. See the [Model Configuration Guide](/en/articles/openclaw-model-config) for model selection tips.
+Basically, yes. Role-setting, few-shot, and CoT are effective across all major models. However, different models vary in how well they follow formatting instructions, so some fine-tuning may be needed. See the [Model Configuration Guide](/en/articles/openclaw-model-config/) for model selection tips.
 
 ### Any recommended learning resources?
 
@@ -354,8 +354,8 @@ Basically, yes. Role-setting, few-shot, and CoT are effective across all major m
 
 Now that you've mastered prompt techniques, you can:
 
-- 🧩 [Turn great prompts into automated workflows with Skills](/en/articles/openclaw-skill)
-- 🤖 [Write effective Agent decision-making prompts](/en/articles/openclaw-agent)
-- 👻 [Make AI personas more precise: Soul settings](/en/articles/openclaw-soul)
-- 💰 [Achieve the same results with fewer tokens](/en/articles/token-economics)
-- 🔗 [Understand MCP Protocol: How AI connects to external tools](/en/articles/mcp-protocol)
+- 🧩 [Turn great prompts into automated workflows with Skills](/en/articles/openclaw-skill/)
+- 🤖 [Write effective Agent decision-making prompts](/en/articles/openclaw-agent/)
+- 👻 [Make AI personas more precise: Soul settings](/en/articles/openclaw-soul/)
+- 💰 [Achieve the same results with fewer tokens](/en/articles/token-economics/)
+- 🔗 [Understand MCP Protocol: How AI connects to external tools](/en/articles/mcp-protocol/)

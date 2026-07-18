@@ -18,9 +18,9 @@ stuckOptions:
   "Updating tools": ["How do I update everything at once?", "How do I remove an old version?"]
 ---
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Install once, hit fewer snags**: On Mac, almost every developer CLI tool installs with a single [Homebrew](/articles/cli-guide) command. This guide lays the foundation first, then walks you through GitHub CLI, Firebase CLI, and Google's Antigravity CLI. About 12 minutes and your terminal will be fully equipped.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Install once, hit fewer snags**: On Mac, almost every developer CLI tool installs with a single [Homebrew](/articles/cli-guide/) command. This guide lays the foundation first, then walks you through GitHub CLI, Firebase CLI, and Google's Antigravity CLI. About 12 minutes and your terminal will be fully equipped.
 
-> 📌 **New to the terminal?** Start with the [CLI Starter Guide](/articles/cli-guide) to understand what "operating your computer by typing" means — it'll make this guide go much smoother.
+> 📌 **New to the terminal?** Start with the [CLI Starter Guide](/articles/cli-guide/) to understand what "operating your computer by typing" means — it'll make this guide go much smoother.
 
 ---
 
@@ -232,6 +232,6 @@ brew uninstall firebase-cli
 
 ## 🔗 Further reading
 
-- **New to the command line?** → [CLI Starter Guide: What Is the Command Line?](/articles/cli-guide)
-- **Want to run an AI agent on Mac?** → [Installing OpenClaw on macOS](/articles/install-openclaw-macos)
-- **Want to run automation tools with Docker?** → [Docker + n8n on Mac: Complete Setup Guide](/articles/docker-n8n-mac)
+- **New to the command line?** → [CLI Starter Guide: What Is the Command Line?](/articles/cli-guide/)
+- **Want to run an AI agent on Mac?** → [Installing OpenClaw on macOS](/articles/install-openclaw-macos/)
+- **Want to run automation tools with Docker?** → [Docker + n8n on Mac: Complete Setup Guide](/articles/docker-n8n-mac/)

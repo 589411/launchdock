@@ -38,7 +38,7 @@ stuckOptions:
 
 ## Step 1：建立 repo 並把程式推上去
 
-在 GitHub 建立一個新的 repo（還沒有 GitHub 帳號的話，先看[註冊 GitHub 帳號](/articles/github-account-signup)）。建立後會看到 **Quick setup** 頁，照著把本機程式推上去：
+在 GitHub 建立一個新的 repo（還沒有 GitHub 帳號的話，先看[註冊 GitHub 帳號](/articles/github-account-signup/)）。建立後會看到 **Quick setup** 頁，照著把本機程式推上去：
 
 ```bash
 git init
@@ -102,7 +102,7 @@ GitHub Pages 的網址多了一層 `/repo名/` 子路徑。如果你的 HTML 用
 
 ### 🚨 想接 Firebase 登入卻失敗？
 
-如果網站要用 Firebase 登入，記得把 `你的帳號.github.io` 加進 Firebase 的 **Authorized domains**，否則登入會被擋（見 [修 Missing permissions：部署 Firestore 規則](/articles/firebase-firestore-rules-deploy)）。
+如果網站要用 Firebase 登入，記得把 `你的帳號.github.io` 加進 Firebase 的 **Authorized domains**，否則登入會被擋（見 [修 Missing permissions：部署 Firestore 規則](/articles/firebase-firestore-rules-deploy/)）。
 
 ---
 

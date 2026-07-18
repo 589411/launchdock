@@ -26,7 +26,7 @@ stuckOptions:
 
 To "know who the user is," rolling your own accounts / passwords / OAuth is fiddly and error-prone. Firebase Authentication lets you **wire up Google sign-in in one click** — users log in with an existing Google account and you get their identity directly, skipping the whole credential system.
 
-> No Firebase project yet? Start with [Create Your First Firebase Project](/articles/firebase-create-project).
+> No Firebase project yet? Start with [Create Your First Firebase Project](/articles/firebase-create-project/).
 
 ---
 
@@ -72,4 +72,4 @@ When enabling Google sign-in, Firebase asks for a **public-facing project name**
 
 ---
 
-> **Next**: With login on, register your site as a Web app and grab the SDK config it needs → [Register a Web App in Firebase to Get the SDK Config](/articles/firebase-register-web-app)
+> **Next**: With login on, register your site as a Web app and grab the SDK config it needs → [Register a Web App in Firebase to Get the SDK Config](/articles/firebase-register-web-app/)

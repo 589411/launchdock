@@ -86,7 +86,7 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx
 GOOGLE_API_KEY=your-google-api-key
 ```
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Quick reminder**: Not sure how to get an API Key? Check out the [AI Model API Key Guide](/en/articles/ai-api-key-guide) — Google AI Studio offers a free tier, perfect for beginners.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Quick reminder**: Not sure how to get an API Key? Check out the [AI Model API Key Guide](/en/articles/ai-api-key-guide/) — Google AI Studio offers a free tier, perfect for beginners.
 
 #### Step 5: Get Your Access URL
 
@@ -210,10 +210,10 @@ Do you want a zero-install experience?
 
 After deployment, you can start learning OpenClaw's core features:
 
-- ⚙️ [Set up model switching and fallback](/en/articles/openclaw-model-config)
-- 🧩 [Skills: Teach AI repeatable workflows](/en/articles/openclaw-skill)
-- 🤖 [Agent: Your AI alter ego](/en/articles/openclaw-agent)
-- 🧠 [Soul: Give your Agent memory and personality](/en/articles/openclaw-soul)
-- 📱 [Connect Telegram for on-the-go access](/en/articles/telegram-integration)
+- ⚙️ [Set up model switching and fallback](/en/articles/openclaw-model-config/)
+- 🧩 [Skills: Teach AI repeatable workflows](/en/articles/openclaw-skill/)
+- 🤖 [Agent: Your AI alter ego](/en/articles/openclaw-agent/)
+- 🧠 [Soul: Give your Agent memory and personality](/en/articles/openclaw-soul/)
+- 📱 [Connect Telegram for on-the-go access](/en/articles/telegram-integration/)
 
 Have questions? Head over to the [Home Discussion section](/#discussion) to chat!

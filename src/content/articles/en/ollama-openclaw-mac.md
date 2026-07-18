@@ -128,7 +128,7 @@ Ollama's cloud models come with a free quota ([official details](https://ollama.
 
 ![Ollama account settings page showing free quota](/images/articles/ollama-openclaw/ollama-settings-tokens.png)
 
-Out of quota? You can switch to the [Gemini Flash cloud API](/en/articles/gemini-api-setup), or download an open-source model locally (see the section below).
+Out of quota? You can switch to the [Gemini Flash cloud API](/en/articles/gemini-api-setup/), or download an open-source model locally (see the section below).
 
 ---
 
@@ -188,8 +188,8 @@ Apple Silicon (M1/M2/M3/M4) enables GPU acceleration automatically — no extra 
 
 ## Next Steps
 
-- ⚙️ [Model Configuration and Switching](/en/articles/openclaw-model-config)
-- 🧩 [Build Your First Skill](/en/articles/openclaw-first-skill)
-- 📱 [Connect Telegram](/en/articles/telegram-integration)
+- ⚙️ [Model Configuration and Switching](/en/articles/openclaw-model-config/)
+- 🧩 [Build Your First Skill](/en/articles/openclaw-first-skill/)
+- 📱 [Connect Telegram](/en/articles/telegram-integration/)
 
 Questions? Join the [homepage discussion](/#discussion) and let's talk!

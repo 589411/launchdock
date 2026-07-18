@@ -67,7 +67,7 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
 
     <!-- Quiz CTA -->
     <a
-      href="/quiz"
+      href="/quiz/"
       class="flex items-center justify-between gap-4 p-5 mb-10 rounded-2xl bg-brand/10 border border-brand/40 hover:border-brand transition-all group"
     >
       <div class="flex items-center gap-3">
@@ -102,7 +102,7 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
 
           return available ? (
             <a
-              href={`/articles/${article.id}`}
+              href={`/articles/${article.id}/`}
               class="block p-5 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
             >
               <div class="flex items-center gap-4">
@@ -154,7 +154,7 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
             .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
             .map((article) => (
               <a
-                href={`/articles/${article.id}`}
+                href={`/articles/${article.id}/`}
                 class="block p-4 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
               >
                 <div class="flex items-center justify-between gap-4">
@@ -203,7 +203,7 @@ const stepMap = new Map(steps.map(s => [s.step, s]));
             <div class="space-y-3">
               {articles.map((article) => (
                 <a
-                  href={`/articles/${article.id}`}
+                  href={`/articles/${article.id}/`}
                   class="block p-5 rounded-xl bg-surface-light hover:bg-surface-lighter border border-surface-lighter hover:border-brand/40 transition-all group"
                 >
                   <div class="flex items-center justify-between gap-4">

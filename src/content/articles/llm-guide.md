@@ -89,7 +89,7 @@ OpenClaw 可以接上**任何一家**的 LLM。而且之後隨時可以換。
 > 🚨 **常見搞混**：Google AI Studio 是拿來用 Gemini 模型的（就像要一顆 AI 大腦）。Google Cloud Console 的 API 是用來串接 Google Drive、Gmail 這類服務的。兩者完全不同，申請方式也不同。
 >
 > - **Gemini AI 大腦** → 在 Google AI Studio 申請 → 這篇會教你
-> - **串接 Google Drive/Gmail** → 在 Google Cloud Console 申請 → 看 [Google API Key 指南](/articles/google-api-key-guide)
+> - **串接 Google Drive/Gmail** → 在 Google Cloud Console 申請 → 看 [Google API Key 指南](/articles/google-api-key-guide/)
 
 ---
 
@@ -157,7 +157,7 @@ OpenClaw 可以接上**任何一家**的 LLM。而且之後隨時可以換。
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **結論**：用便宜模型（Gemini Flash），一個月不到 $1 美元。用頂級模型（Claude Opus），一個月大約一杯咖啡到一頓午餐的價格。
 >
-> 想深入了解可以看 [Token 經濟學](/articles/token-economics)。
+> 想深入了解可以看 [Token 經濟學](/articles/token-economics/)。
 
 ### 怎麼避免帳單爆炸？
 
@@ -184,7 +184,7 @@ OpenClaw 可以接上**任何一家**的 LLM。而且之後隨時可以換。
 | 寫報告、分析、寫程式 | Claude Sonnet / GPT-4o     | 品質最好            |
 | 處理超長文件         | Gemini 1.5 Pro             | 100 萬 Token 上下文 |
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **以後可以換嗎？** 當然可以。OpenClaw 支援同時設定多個 Provider，隨時切換。進階設定可以看 [模型設定與切換](/articles/openclaw-model-config)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **以後可以換嗎？** 當然可以。OpenClaw 支援同時設定多個 Provider，隨時切換。進階設定可以看 [模型設定與切換](/articles/openclaw-model-config/)。
 
 ---
 
@@ -196,6 +196,6 @@ OpenClaw 可以接上**任何一家**的 LLM。而且之後隨時可以換。
 - **想多方嘗試** → 選 **B. OpenRouter**
 - **已經有偏好的模型** → 選 **C 或 D**
 
-決定好了嗎？下一步我們就去申請你的 API Key 👉 [申請 API Key](/articles/ai-api-key-guide)
+決定好了嗎？下一步我們就去申請你的 API Key 👉 [申請 API Key](/articles/ai-api-key-guide/)
 
 ---

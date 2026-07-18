@@ -26,7 +26,7 @@ stuckOptions:
 
 要「知道使用者是誰」，自己做一套帳號／密碼／OAuth 很麻煩又容易出錯。Firebase Authentication 讓你**一鍵接上 Google 登入**——使用者用現成的 Google 帳號登入，你直接拿到身分，省掉整套帳密系統。
 
-> 還沒有 Firebase 專案？先看 [建立你的第一個 Firebase 專案](/articles/firebase-create-project)。
+> 還沒有 Firebase 專案？先看 [建立你的第一個 Firebase 專案](/articles/firebase-create-project/)。
 
 ---
 
@@ -72,4 +72,4 @@ stuckOptions:
 
 ---
 
-> **下一步**：登入開好了，接著把你的網站註冊成 Web App、拿到連線用的 SDK 設定 → [在 Firebase 註冊 Web App 取得 SDK 設定](/articles/firebase-register-web-app)
+> **下一步**：登入開好了，接著把你的網站註冊成 Web App、拿到連線用的 SDK 設定 → [在 Firebase 註冊 Web App 取得 SDK 設定](/articles/firebase-register-web-app/)

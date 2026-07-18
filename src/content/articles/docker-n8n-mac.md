@@ -20,17 +20,17 @@ stuckOptions:
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **Mac 使用者的好消息**：在 Mac 上裝 Docker + n8n，比 Windows 簡單非常多。沒有 WSL2 權限坑、沒有路徑斜線混淆、沒有換行符號的問題。看完這篇，你大概 10 分鐘就能跑起來。
 
-> 📌 **Windows 使用者請移駕**：這篇是 Mac 專版。Windows 版本的踩坑指南請看：[Windows 安裝 Docker + n8n 避坑完全指南](/articles/docker-n8n-windows)
+> 📌 **Windows 使用者請移駕**：這篇是 Mac 專版。Windows 版本的踩坑指南請看：[Windows 安裝 Docker + n8n 避坑完全指南](/articles/docker-n8n-windows/)
 
 ---
 
 ## 🤔 為什麼 Mac 比 Windows 簡單這麼多？
 
-如果你看過 [Windows 安裝 Docker + n8n 避坑完全指南](/articles/docker-n8n-windows)，就知道 Windows 使用者要面對一大堆麻煩。這些問題源自於 Windows 原生環境和 Linux 的根本差異，想深入了解可以看這篇：[為什麼不建議在 Windows 原生環境安裝 OpenClaw？](/articles/why-not-windows-openclaw)
+如果你看過 [Windows 安裝 Docker + n8n 避坑完全指南](/articles/docker-n8n-windows/)，就知道 Windows 使用者要面對一大堆麻煩。這些問題源自於 Windows 原生環境和 Linux 的根本差異，想深入了解可以看這篇：[為什麼不建議在 Windows 原生環境安裝 OpenClaw？](/articles/why-not-windows-openclaw/)
 
 | 問題 | Windows | Mac |
 |------|---------|-----|
-| 需要 [WSL2](/articles/windows-wsl-guide) 虛擬環境 | ✅ 必須裝，且常出問題 | ❌ 不需要 |
+| 需要 [WSL2](/articles/windows-wsl-guide/) 虛擬環境 | ✅ 必須裝，且常出問題 | ❌ 不需要 |
 | 路徑斜線方向 | ⚠️ `\` vs `/` 常搞混 | ✅ 全部用 `/`，Unix 原生 |
 | PowerShell 換行符號 | ⚠️ 多行指令容易斷掉 | ✅ Terminal 無此問題 |
 | Volume 路徑含空格 | ⚠️ 需要特別用 `""` 處理 | ✅ 通常不是問題 |
@@ -60,7 +60,7 @@ Mac 是 Unix-based 系統，Docker 的底層就是 Linux，兩者天生相容。
 
 ### Step 2：建立資料夾
 
-開啟 **Terminal**（在 Spotlight 搜尋 `terminal`），建立一個存放 n8n 資料的資料夾。如果你不熟悉 Terminal 操作，可以先看：[CLI 入門指南](/articles/cli-guide)。
+開啟 **Terminal**（在 Spotlight 搜尋 `terminal`），建立一個存放 n8n 資料的資料夾。如果你不熟悉 Terminal 操作，可以先看：[CLI 入門指南](/articles/cli-guide/)。
 
 ```bash
 mkdir ~/n8n_data
@@ -172,7 +172,7 @@ docker run -d --name n8n -p 5678:5678 -v ~/n8n_data:/home/node/.n8n docker.n8n.i
 
 ## 🔗 延伸閱讀
 
-- **也想在 Mac 上跑 AI Agent？** → [macOS 安裝 OpenClaw 完整教學](/articles/install-openclaw-macos)
-- **想用免費本地 LLM 搭配 OpenClaw？** → [Ollama + OpenClaw 快速上手｜macOS 篇](/articles/ollama-openclaw-mac)
-- **想把 OpenClaw 部署到雲端？** → [雲端部署 OpenClaw：Zeabur 一鍵部署](/articles/deploy-openclaw-cloud)
-- **也有 Windows 電腦？** → [Windows 安裝 Docker + n8n 避坑完全指南](/articles/docker-n8n-windows)
+- **也想在 Mac 上跑 AI Agent？** → [macOS 安裝 OpenClaw 完整教學](/articles/install-openclaw-macos/)
+- **想用免費本地 LLM 搭配 OpenClaw？** → [Ollama + OpenClaw 快速上手｜macOS 篇](/articles/ollama-openclaw-mac/)
+- **想把 OpenClaw 部署到雲端？** → [雲端部署 OpenClaw：Zeabur 一鍵部署](/articles/deploy-openclaw-cloud/)
+- **也有 Windows 電腦？** → [Windows 安裝 Docker + n8n 避坑完全指南](/articles/docker-n8n-windows/)

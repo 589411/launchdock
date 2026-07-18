@@ -254,7 +254,7 @@ LLM 分析結果、決定下一步
 
 OpenClaw 的 Skill 本質也是 Markdown 檔案裡寫好的 CLI 指令模板。MCP 協定連接的外部工具，很多也是透過 CLI 介面互動的。
 
-這就是為什麼 [macOS 和 Linux 是龍蝦最好的飼養環境](/articles/why-not-windows-openclaw)——它們的 CLI 生態最完整。Windows 用戶不用擔心，裝了 [WSL](/articles/windows-wsl-guide) 就能享受同樣的 CLI 環境。
+這就是為什麼 [macOS 和 Linux 是龍蝦最好的飼養環境](/articles/why-not-windows-openclaw/)——它們的 CLI 生態最完整。Windows 用戶不用擔心，裝了 [WSL](/articles/windows-wsl-guide/) 就能享受同樣的 CLI 環境。
 
 ---
 
@@ -316,7 +316,7 @@ ls -lt | head -5
 
 ## 延伸閱讀
 
-- 🪟 [為什麼不建議在 Windows 原生環境安裝 OpenClaw？](/articles/why-not-windows-openclaw) — 了解 CLI 生態差異的影響
-- 🖥️ [WSL 安裝與使用完整教學](/articles/windows-wsl-guide) — Windows 用戶取得 CLI 環境
-- 🤖 [OpenClaw Agent 完全指南](/articles/openclaw-agent) — 看看 Agent 怎麼使用 CLI 工具
-- 🔌 [MCP 協定](/articles/mcp-protocol) — AI 的工具連接標準
+- 🪟 [為什麼不建議在 Windows 原生環境安裝 OpenClaw？](/articles/why-not-windows-openclaw/) — 了解 CLI 生態差異的影響
+- 🖥️ [WSL 安裝與使用完整教學](/articles/windows-wsl-guide/) — Windows 用戶取得 CLI 環境
+- 🤖 [OpenClaw Agent 完全指南](/articles/openclaw-agent/) — 看看 Agent 怎麼使用 CLI 工具
+- 🔌 [MCP 協定](/articles/mcp-protocol/) — AI 的工具連接標準

@@ -254,7 +254,7 @@ Agent：我根據你之前提到的目標客群（25-35 歲上班族），
        幫你寫了一份針對性的文案...
 ```
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 想深入了解記憶系統？看 [Soul：讓 Agent 有記憶和個性](/articles/openclaw-soul)
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 想深入了解記憶系統？看 [Soul：讓 Agent 有記憶和個性](/articles/openclaw-soul/)
 
 ---
 
@@ -323,9 +323,9 @@ behavior:
 
 ## 下一步
 
-- 🧠 深入了解 [Soul：讓 Agent 有記憶和個性](/articles/openclaw-soul)
-- 🧩 回顧 [Skill：可重複的工作流](/articles/openclaw-skill)
-- 🔗 [MCP 協定：讓 Agent 連接外部工具](/articles/mcp-protocol)
-- ⚙️ [模型設定：讓 Agent 用最合適的模型](/articles/openclaw-model-config)
-- 📱 [把 Agent 串接到 Telegram](/articles/telegram-integration)
-- ☁️ 部署你的 Agent：[雲端部署指南](/articles/deploy-openclaw-cloud)
+- 🧠 深入了解 [Soul：讓 Agent 有記憶和個性](/articles/openclaw-soul/)
+- 🧩 回顧 [Skill：可重複的工作流](/articles/openclaw-skill/)
+- 🔗 [MCP 協定：讓 Agent 連接外部工具](/articles/mcp-protocol/)
+- ⚙️ [模型設定：讓 Agent 用最合適的模型](/articles/openclaw-model-config/)
+- 📱 [把 Agent 串接到 Telegram](/articles/telegram-integration/)
+- ☁️ 部署你的 Agent：[雲端部署指南](/articles/deploy-openclaw-cloud/)

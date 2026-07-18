@@ -106,7 +106,7 @@ OpenClaw 的 Skill 是**可重複的自動化流程**。你設定一次，以後
 
 老實說，OpenClaw 也有學習曲線：
 
-- **安裝需要一點點技術基礎**（我們有 [安裝指南](/articles/install-openclaw)）
+- **安裝需要一點點技術基礎**（我們有 [安裝指南](/articles/install-openclaw/)）
 - **串接 Google 服務需要申請 API Key**（最常卡關的一步，我們也有教）
 - **寫 Skill 需要理解基本的流程邏輯**
 
@@ -120,21 +120,21 @@ OpenClaw 的 Skill 是**可重複的自動化流程**。你設定一次，以後
 
 跟著入門路線的順序走就對了：
 
-1. 🧠 [選擇你的 AI 大腦](/articles/llm-guide)——搞懂 LLM 方案、選出最適合你的
-2. 🔑 [申請 API Key](/articles/ai-api-key-guide)——拿到讓 AI 運作的鑰匙
-3. 💻 [安裝 OpenClaw](/articles/install-openclaw)——選擇平台、開始安裝
-4. 🚀 [第一次啟動](/articles/openclaw-first-run)——設定好 Key，聽到 AI 的第一句話
-5. ⚡ [第一個 Skill](/articles/openclaw-first-skill)——完成你的第一個自動化任務
+1. 🧠 [選擇你的 AI 大腦](/articles/llm-guide/)——搞懂 LLM 方案、選出最適合你的
+2. 🔑 [申請 API Key](/articles/ai-api-key-guide/)——拿到讓 AI 運作的鑰匙
+3. 💻 [安裝 OpenClaw](/articles/install-openclaw/)——選擇平台、開始安裝
+4. 🚀 [第一次啟動](/articles/openclaw-first-run/)——設定好 Key，聽到 AI 的第一句話
+5. ⚡ [第一個 Skill](/articles/openclaw-first-skill/)——完成你的第一個自動化任務
 
-**下一步** 👉 [選擇你的 AI 大腦](/articles/llm-guide)
+**下一步** 👉 [選擇你的 AI 大腦](/articles/llm-guide/)
 
 ---
 
 已經上手了？探索更多：
-- 💬 [Prompt 工程：讓 AI 聽懂你的話](/articles/prompt-engineering)
-- 🔗 [MCP 協定：AI 的 USB 接口](/articles/mcp-protocol)
-- 💰 [Token 經濟學：搞懂 AI 怎麼計費](/articles/token-economics)
-- 📚 [建立你的知識管理系統](/articles/pkm-system)
+- 💬 [Prompt 工程：讓 AI 聽懂你的話](/articles/prompt-engineering/)
+- 🔗 [MCP 協定：AI 的 USB 接口](/articles/mcp-protocol/)
+- 💰 [Token 經濟學：搞懂 AI 怎麼計費](/articles/token-economics/)
+- 📚 [建立你的知識管理系統](/articles/pkm-system/)
 
 ---
 

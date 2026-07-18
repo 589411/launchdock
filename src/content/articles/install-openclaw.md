@@ -27,7 +27,7 @@ stuckOptions:
 
 <div class="install-platform-cards">
 
-<a href="/articles/install-openclaw-macos" class="install-card install-card--macos">
+<a href="/articles/install-openclaw-macos/" class="install-card install-card--macos">
   <div class="install-card__icon">🍎</div>
   <div class="install-card__content">
     <h3>macOS</h3>
@@ -41,7 +41,7 @@ stuckOptions:
   <span class="install-card__arrow">→</span>
 </a>
 
-<a href="/articles/install-openclaw-windows" class="install-card install-card--windows">
+<a href="/articles/install-openclaw-windows/" class="install-card install-card--windows">
   <div class="install-card__icon">🪟</div>
   <div class="install-card__content">
     <h3>Windows</h3>
@@ -55,7 +55,7 @@ stuckOptions:
   <span class="install-card__arrow">→</span>
 </a>
 
-<a href="/articles/deploy-openclaw-cloud" class="install-card install-card--cloud">
+<a href="/articles/deploy-openclaw-cloud/" class="install-card install-card--cloud">
   <div class="install-card__icon">☁️</div>
   <div class="install-card__content">
     <h3>雲端部署</h3>
@@ -78,12 +78,12 @@ stuckOptions:
 | 情境 | 建議 |
 |---|---|
 | 第一次接觸，只想試試 | ☁️ **雲端部署**（最快） |
-| 想免費體驗，不想申請 API Key | 🦙 **[Ollama 快速體驗（macOS）](/articles/ollama-openclaw-mac)**（`ollama launch openclaw` 一鍵啟動）｜🪟 **[Windows 篇](/articles/ollama-openclaw-windows)** |
+| 想免費體驗，不想申請 API Key | 🦙 **[Ollama 快速體驗（macOS）](/articles/ollama-openclaw-mac/)**（`ollama launch openclaw` 一鍵啟動）｜🪟 **[Windows 篇](/articles/ollama-openclaw-windows/)** |
 | 想長期使用、深入學習 | 🍎 **macOS** 或 🪟 **Windows + WSL** 本地安裝 |
 | 有 Linux 開發經驗 | 🪟 **Windows WSL 2** 或直接參考 macOS 教學 |
 | 電腦跑不太動 | ☁️ **雲端部署** |
 
-> 💡 **Windows 用戶注意**：OpenClaw 大量依賴 CLI 工具，而 CLI 在 Linux 環境最完整。強烈建議 Windows 用戶使用 [WSL（Windows Subsystem for Linux）](/articles/windows-wsl-guide) 來安裝。詳情請看 [為什麼不建議在 Windows 原生環境安裝？](/articles/why-not-windows-openclaw)
+> 💡 **Windows 用戶注意**：OpenClaw 大量依賴 CLI 工具，而 CLI 在 Linux 環境最完整。強烈建議 Windows 用戶使用 [WSL（Windows Subsystem for Linux）](/articles/windows-wsl-guide/) 來安裝。詳情請看 [為什麼不建議在 Windows 原生環境安裝？](/articles/why-not-windows-openclaw/)
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：雲端部署就像叫外賣——不用自己開火，馬上就能吃。本地安裝就是自己學做菜——花時間，但以後想吃什麼都能自己來。兩種都對，看你現在餓不餓。
 
@@ -108,9 +108,9 @@ stuckOptions:
 
 裝好了？可以接著學：
 
-- 📖 [為什麼需要 OpenClaw？](/articles/why-openclaw)
-- ⚙️ [設定模型與 API Key](/articles/openclaw-model-config)
-- 💰 [搞懂 Token 計費](/articles/token-economics)
-- 🧩 [打造你的第一個 Skill](/articles/openclaw-skill)
-- 🤖 [建立自動化 Agent](/articles/openclaw-agent)
-- 👻 [設計 AI 的靈魂：Soul](/articles/openclaw-soul)
+- 📖 [為什麼需要 OpenClaw？](/articles/why-openclaw/)
+- ⚙️ [設定模型與 API Key](/articles/openclaw-model-config/)
+- 💰 [搞懂 Token 計費](/articles/token-economics/)
+- 🧩 [打造你的第一個 Skill](/articles/openclaw-skill/)
+- 🤖 [建立自動化 Agent](/articles/openclaw-agent/)
+- 👻 [設計 AI 的靈魂：Soul](/articles/openclaw-soul/)

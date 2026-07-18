@@ -242,19 +242,19 @@ trigger:
 ## 接下來可以做什麼？
 
 ### 深入學習 Skill
-- 📖 [Skill 完全指南](/articles/openclaw-skill)——更多 Action 類型、條件判斷、錯誤處理
+- 📖 [Skill 完全指南](/articles/openclaw-skill/)——更多 Action 類型、條件判斷、錯誤處理
 
 ### 了解核心架構
-- 🤖 [Agent 完全指南](/articles/openclaw-agent)——讓 AI 自己決定用哪個 Skill
-- 🧠 [Soul 完全指南](/articles/openclaw-soul)——讓 AI 擁有記憶和個性
+- 🤖 [Agent 完全指南](/articles/openclaw-agent/)——讓 AI 自己決定用哪個 Skill
+- 🧠 [Soul 完全指南](/articles/openclaw-soul/)——讓 AI 擁有記憶和個性
 
 ### 實用工作流
-- 💬 [Telegram 整合](/articles/telegram-integration)——手機隨時使用 AI
-- 📚 [知識管理系統](/articles/pkm-system)——自動整理你的知識
+- 💬 [Telegram 整合](/articles/telegram-integration/)——手機隨時使用 AI
+- 📚 [知識管理系統](/articles/pkm-system/)——自動整理你的知識
 
 ### 延伸閱讀
-- 🔗 [MCP 協定](/articles/mcp-protocol)——理解 AI 串接工具的底層原理
-- 💰 [Token 經濟學](/articles/token-economics)——控制 AI 使用成本
-- 🎯 [Prompt 工程](/articles/prompt-engineering)——讓 AI 的回答更精確
+- 🔗 [MCP 協定](/articles/mcp-protocol/)——理解 AI 串接工具的底層原理
+- 💰 [Token 經濟學](/articles/token-economics/)——控制 AI 使用成本
+- 🎯 [Prompt 工程](/articles/prompt-engineering/)——讓 AI 的回答更精確
 
 ---

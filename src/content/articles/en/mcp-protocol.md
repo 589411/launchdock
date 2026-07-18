@@ -156,7 +156,7 @@ Once the Client knows what tools are available, it can use them:
 
 ### 3. AI Decision-Making
 
-After receiving the results, the Agent decides what to do next. This is the [Agent's ReAct workflow](/articles/openclaw-agent):
+After receiving the results, the Agent decides what to do next. This is the [Agent's ReAct workflow](/articles/openclaw-agent/):
 
 ```
 Observe: Found 3 weekly meeting notes
@@ -211,7 +211,7 @@ mcp_servers:
 
 After starting, your Agent can operate Google Drive, Slack, and Notion all at once.
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Not sure how to set up a Google API Key?** Check the [Google API Key Setup Guide](/articles/google-api-key-guide).
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Not sure how to set up a Google API Key?** Check the [Google API Key Setup Guide](/articles/google-api-key-guide/).
 
 ### Confirming the Connection
 
@@ -273,11 +273,11 @@ Now: Install an MCP Server, and it works out of the box.
 
 You don't need to specify "first search with Google, then save to Notion." The Agent automatically determines which MCP Server's tools to use based on your goal.
 
-This is the [power of an Agent](/articles/openclaw-agent).
+This is the [power of an Agent](/articles/openclaw-agent/).
 
 ### 3. Switch Tools Without Changing Your Workflow
 
-Using Notion today but want to switch to Obsidian tomorrow? Just swap out one MCP Server — your [Skills](/articles/openclaw-skill) and Agent logic remain completely unchanged.
+Using Notion today but want to switch to Obsidian tomorrow? Just swap out one MCP Server — your [Skills](/articles/openclaw-skill/) and Agent logic remain completely unchanged.
 
 > <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **In other words**: Before, switching from Notion to Obsidian was like moving house — packing, dismantling, reorganizing everything. With MCP, switching tools is like swapping a light switch cover plate — the wiring stays the same, you just replace one component.
 
@@ -356,7 +356,7 @@ OpenAPI is a specification for defining REST APIs. MCP is a tool connection prot
 
 ### Are all MCP Servers free?
 
-MCP Servers themselves are mostly open-source and free. However, the services they connect to (like Google API) may require an [API Key and incur costs](/articles/token-economics).
+MCP Servers themselves are mostly open-source and free. However, the services they connect to (like Google API) may require an [API Key and incur costs](/articles/token-economics/).
 
 ### How many MCP Servers can I connect at once?
 
@@ -368,8 +368,8 @@ There's no limit. OpenClaw can manage dozens of MCP Servers simultaneously, and 
 
 Now that you understand MCP, you can:
 
-- 🔑 [Apply for an API Key and connect your first service](/articles/google-api-key-guide)
-- 🤖 [Let the Agent automatically call MCP tools](/articles/openclaw-agent)
-- 🧩 [Call MCP tools in your Skills](/articles/openclaw-skill)
-- ⚙️ [Configure your model to drive MCP calls](/articles/openclaw-model-config)
-- 💬 [Connect Telegram as your AI entry point](/articles/telegram-integration)
+- 🔑 [Apply for an API Key and connect your first service](/articles/google-api-key-guide/)
+- 🤖 [Let the Agent automatically call MCP tools](/articles/openclaw-agent/)
+- 🧩 [Call MCP tools in your Skills](/articles/openclaw-skill/)
+- ⚙️ [Configure your model to drive MCP calls](/articles/openclaw-model-config/)
+- 💬 [Connect Telegram as your AI entry point](/articles/telegram-integration/)

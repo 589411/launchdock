@@ -205,14 +205,14 @@ The setup wizard launches automatically. To connect to Ollama:
 4. Leave the API key blank (not required for local Ollama)
 5. Hermes auto-detects your downloaded models — confirm and press Enter
 
-> **Windows users**: Hermes on Windows requires WSL2. Install it with `wsl --install` and run everything from inside the WSL shell. See the [Windows guide](/articles/hermes-agent-windows).
+> **Windows users**: Hermes on Windows requires WSL2. Install it with `wsl --install` and run everything from inside the WSL shell. See the [Windows guide](/articles/hermes-agent-windows/).
 
 ---
 
 ## What's Next
 
-- 🪟 [Hermes on Windows (WSL2)](/articles/hermes-agent-windows)
-- 🦀 [Meet OpenClaw: another AI Agent framework](/articles/why-openclaw)
-- 📱 [Connect OpenClaw to Telegram](/articles/telegram-integration)
+- 🪟 [Hermes on Windows (WSL2)](/articles/hermes-agent-windows/)
+- 🦀 [Meet OpenClaw: another AI Agent framework](/articles/why-openclaw/)
+- 📱 [Connect OpenClaw to Telegram](/articles/telegram-integration/)
 
 Questions? Join the discussion at the [homepage](/#discussion)!

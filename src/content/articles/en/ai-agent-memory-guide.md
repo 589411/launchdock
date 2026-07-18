@@ -267,4 +267,4 @@ This field is still in its early stages, with many questions still lacking stand
 
 - Original paper: [Memory in the Age of AI Agents (arXiv:2512.13564)](https://arxiv.org/abs/2512.13564)
 - Paper list: [Shichun-Liu/Agent-Memory-Paper-List](https://github.com/Shichun-Liu/Agent-Memory-Paper-List)
-- Want to learn about OpenClaw's memory mechanism design? See [the Soul System](/articles/openclaw-soul)
+- Want to learn about OpenClaw's memory mechanism design? See [the Soul System](/articles/openclaw-soul/)

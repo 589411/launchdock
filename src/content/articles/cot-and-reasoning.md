@@ -194,7 +194,7 @@ Agent 觀察：發送成功
 Agent 回覆：「已經把 5 項待辦事項發到你的 Telegram 了！」
 ```
 
-> 詳見 [Agent 完全指南](/articles/openclaw-agent)
+> 詳見 [Agent 完全指南](/articles/openclaw-agent/)
 
 ---
 
@@ -230,7 +230,7 @@ Tree of Thoughts（樹）：
 | 策略規劃 | | ✅（需要比較多種方案）|
 | 程式 Debug | | ✅（需要假設多個原因）|
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> OpenClaw 的蜂群智能模式就像自動化的思維樹——多個 Agent 各走不同路線，最後投票選最好的結果。詳見 [多 Agent 協作](/articles/multi-agent-swarm)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> OpenClaw 的蜂群智能模式就像自動化的思維樹——多個 Agent 各走不同路線，最後投票選最好的結果。詳見 [多 Agent 協作](/articles/multi-agent-swarm/)。
 
 ---
 
@@ -261,7 +261,7 @@ Tree of Thoughts（樹）：
 
 ## 延伸閱讀
 
-- 📝 [Prompt 工程完整教學](/articles/prompt-engineering)——推理技術的基礎
-- 🤖 [Agent 完全指南](/articles/openclaw-agent)——ReAct 在 OpenClaw 的實現
-- 🧠 [AI 技術演進全景圖](/articles/ai-tech-evolution)——推理技術在 AI 發展中的位置
-- 🐝 [多 Agent 協作與蜂群智能](/articles/multi-agent-swarm)——思維樹的群體版
+- 📝 [Prompt 工程完整教學](/articles/prompt-engineering/)——推理技術的基礎
+- 🤖 [Agent 完全指南](/articles/openclaw-agent/)——ReAct 在 OpenClaw 的實現
+- 🧠 [AI 技術演進全景圖](/articles/ai-tech-evolution/)——推理技術在 AI 發展中的位置
+- 🐝 [多 Agent 協作與蜂群智能](/articles/multi-agent-swarm/)——思維樹的群體版

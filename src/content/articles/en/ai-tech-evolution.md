@@ -158,7 +158,7 @@ This sparked the study of **Prompt Engineering**.
 | 3rd | Structured (role + task + format + constraints) | Stable |
 | 4th | Chain-of-Thought ("Let's think step by step...") | Major reasoning improvement |
 
-> Want to learn Prompt in depth? Check out [the Prompt Engineering Complete Guide](/articles/prompt-engineering).
+> Want to learn Prompt in depth? Check out [the Prompt Engineering Complete Guide](/articles/prompt-engineering/).
 
 **In OpenClaw:** `SOUL.md` is your "Super System Prompt" — defining the Agent's role, personality, and behavioral guidelines. A well-written SOUL is equivalent to having your AI set up with 3rd-generation Prompts.
 
@@ -190,7 +190,7 @@ No matter how big the window, there are limits. And larger windows mean:
 
 **This is why OpenClaw has a Memory system** — instead of cramming everything into the window, it uses a search-like approach to "retrieve" relevant memories and only puts what you need into the context.
 
-> See [RAG Technology Explained](/articles/rag-explained) for details
+> See [RAG Technology Explained](/articles/rag-explained/) for details
 
 ---
 
@@ -228,7 +228,7 @@ AI responds: "Tomorrow in Taipei, there's an 80% chance of rain. Bring an umbrel
 
 **This loop is the core operating mechanism of an OpenClaw Agent.**
 
-> Want to dive deeper into reasoning techniques? See [AI Reasoning Techniques Explained](/articles/cot-and-reasoning)
+> Want to dive deeper into reasoning techniques? See [AI Reasoning Techniques Explained](/articles/cot-and-reasoning/)
 
 ---
 
@@ -251,7 +251,7 @@ User's request → AI analyzes → Decides which tool to call
 
 **In OpenClaw:** Each **Skill** is a set of tools. The AI automatically selects which Skill to use based on your instructions.
 
-> See [the Skill Complete Guide](/articles/openclaw-skill) for details
+> See [the Skill Complete Guide](/articles/openclaw-skill/) for details
 
 ### RAG: Stopping AI from Making Things Up
 
@@ -269,7 +269,7 @@ Your question → Search your files/notes → Find relevant data
 
 **In OpenClaw:** The Memory system's QMD backend is an implementation of RAG — your long-term memories are vectorized and automatically retrieved when needed.
 
-> See [RAG Technology Introduction](/articles/rag-explained) for details
+> See [RAG Technology Introduction](/articles/rag-explained/) for details
 
 ---
 
@@ -298,7 +298,7 @@ Agents need to connect to various tools, but every tool has a different interfac
 AI Agent ←→ MCP Protocol ←→ Slack / Gmail / GitHub / Notion / ...
 ```
 
-> See [the MCP Protocol Complete Introduction](/articles/mcp-protocol) for details
+> See [the MCP Protocol Complete Introduction](/articles/mcp-protocol/) for details
 
 ---
 
@@ -331,7 +331,7 @@ Advantages:
 
 **Application in OpenClaw:** `AGENTS.md` lets you define multiple specialist roles to collaborate.
 
-> Want to learn more? See [Multi-Agent Collaboration & Swarm Intelligence](/articles/multi-agent-swarm)
+> Want to learn more? See [Multi-Agent Collaboration & Swarm Intelligence](/articles/multi-agent-swarm/)
 
 ---
 
@@ -376,16 +376,16 @@ You don't need to memorize the details of every technology. What matters is unde
 
 ### Recommended Learning Order
 
-1. 🟢 **Start with Prompts** — you'll use them every day ([Prompt Engineering](/articles/prompt-engineering))
-2. 🟢 **Then learn Agent and Skill** — OpenClaw's core ([Agent Guide](/articles/openclaw-agent), [Skill Guide](/articles/openclaw-skill))
-3. 🟡 **Level up with MCP** — expand capabilities ([MCP Protocol](/articles/mcp-protocol))
-4. 🟡 **Understand RAG and Reasoning** — unlock advanced features ([RAG Technology](/articles/rag-explained), [Reasoning Techniques](/articles/cot-and-reasoning))
-5. 🔴 **Explore Swarm Intelligence** — future trends ([Multi-Agent Collaboration](/articles/multi-agent-swarm))
+1. 🟢 **Start with Prompts** — you'll use them every day ([Prompt Engineering](/articles/prompt-engineering/))
+2. 🟢 **Then learn Agent and Skill** — OpenClaw's core ([Agent Guide](/articles/openclaw-agent/), [Skill Guide](/articles/openclaw-skill/))
+3. 🟡 **Level up with MCP** — expand capabilities ([MCP Protocol](/articles/mcp-protocol/))
+4. 🟡 **Understand RAG and Reasoning** — unlock advanced features ([RAG Technology](/articles/rag-explained/), [Reasoning Techniques](/articles/cot-and-reasoning/))
+5. 🔴 **Explore Swarm Intelligence** — future trends ([Multi-Agent Collaboration](/articles/multi-agent-swarm/))
 
 ---
 
 ## Further Reading
 
-- 🧭 [Why You Need OpenClaw](/articles/why-openclaw)
-- 💰 [Token Economics: Understanding How AI Billing Works](/articles/token-economics)
-- 🧠 [Choosing Your AI Brain](/articles/llm-guide)
+- 🧭 [Why You Need OpenClaw](/articles/why-openclaw/)
+- 💰 [Token Economics: Understanding How AI Billing Works](/articles/token-economics/)
+- 🧠 [Choosing Your AI Brain](/articles/llm-guide/)

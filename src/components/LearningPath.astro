@@ -39,7 +39,7 @@ const steps = [
     {steps.map((s, i) => {
       const article = stepArticleMap.get(s.step);
       const available = !!article;
-      const href = available ? `/articles/${article.id}` : undefined;
+      const href = available ? `/articles/${article.id}/` : undefined;
       const isLast = i === steps.length - 1;
 
       return (

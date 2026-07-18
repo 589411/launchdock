@@ -28,9 +28,13 @@ const titleTemplate = lang === 'en'
 
 // hreflang alternate URLs
 const site = 'https://launchdock.app';
-const currentPath = Astro.url.pathname;
-const zhPath = currentPath.replace(/^\/en/, '') || '/';
-const enPath = currentPath.startsWith('/en') ? currentPath : `/en${currentPath === '/' ? '' : currentPath}`;
+// normalize to trailing-slash form so canonical/hreflang match the served (308→/) URLs
+const rawPath = Astro.url.pathname;
+const path = rawPath.endsWith('/') ? rawPath : `${rawPath}/`;
+const zhPath = path.replace(/^\/en(?=\/)/, '') || '/';
+const enPath = path === '/' ? '/en/' : (path.startsWith('/en/') ? path : `/en${path}`);
+// self-referencing canonical (drops ?query variants, dedupes zh/en via hreflang)
+const canonical = canonicalUrl || `${site}${path}`;
 ---
 
 <!doctype html>
@@ -49,7 +53,7 @@ const enPath = currentPath.startsWith('/en') ? currentPath : `/en${currentPath =
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
-    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <link rel="canonical" href={canonical} />
     <!-- hreflang for SEO -->
     <link rel="alternate" hreflang="zh-TW" href={`${site}${zhPath}`} />
     <link rel="alternate" hreflang="en" href={`${site}${enPath}`} />

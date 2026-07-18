@@ -108,9 +108,9 @@ n8n（唸作 "n-eight-n"，意思是 nodes）是一套**開源的工作流程自
 
 ## 🔗 延伸閱讀
 
-- 🍎 **Mac 使用者** → [Mac 安裝 Docker + n8n 完整指南](/articles/docker-n8n-mac)
-- 🪟 **Windows 使用者** → [Windows 安裝 Docker + n8n 避坑完全指南](/articles/docker-n8n-windows)
-- 🦞 **想讓自動化長腦袋？** → [為什麼選 OpenClaw](/articles/why-openclaw)
-- 🧠 **先搞懂 AI 大腦** → [選 LLM 方案前必看：4 種方案完整比較](/articles/llm-guide)
+- 🍎 **Mac 使用者** → [Mac 安裝 Docker + n8n 完整指南](/articles/docker-n8n-mac/)
+- 🪟 **Windows 使用者** → [Windows 安裝 Docker + n8n 避坑完全指南](/articles/docker-n8n-windows/)
+- 🦞 **想讓自動化長腦袋？** → [為什麼選 OpenClaw](/articles/why-openclaw/)
+- 🧠 **先搞懂 AI 大腦** → [選 LLM 方案前必看：4 種方案完整比較](/articles/llm-guide/)
 
 有問題？到 [首頁討論區](/#discussion) 一起討論！

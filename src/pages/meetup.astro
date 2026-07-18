@@ -27,7 +27,6 @@ const warmups = [
 <BaseLayout
   title="藍鴨小聚・鴨聚 Assemble"
   description="7/29（三）晚上，鴨聚 Assemble！搶先試營運場——別再每次都跟 AI 重講一遍，鴨編帶你設定第一個系統提示詞。免費，零門檻。"
-  canonicalUrl="https://launchdock.app/meetup"
 >
   <!-- ===================== HERO ===================== -->
   <section class="hero-section">
@@ -177,7 +176,7 @@ const warmups = [
       <p class="text-text-secondary mb-7">想先有感覺？這幾篇站上文章跟這場最相關，讀了 7/29 更好接。</p>
       <div class="grid gap-3.5">
         {warmups.map((a) => (
-          <a href={`/articles/${a.slug}`} class="group block bg-surface-light border border-surface-lighter rounded-2xl p-5 transition-colors hover:border-brand">
+          <a href={`/articles/${a.slug}/`} class="group block bg-surface-light border border-surface-lighter rounded-2xl p-5 transition-colors hover:border-brand">
             <h3 class="text-[1.05rem] font-bold m-0 group-hover:text-brand transition-colors">{a.title}</h3>
             <p class="text-text-secondary text-[0.94rem] m-0 mt-1.5">{a.note}</p>
             <span class="inline-block mt-3 font-mono text-xs text-brand">閱讀文章 →</span>

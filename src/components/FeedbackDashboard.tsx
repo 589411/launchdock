@@ -475,7 +475,7 @@ function SectionsTab({ sections }: { sections: SectionDistress[] }) {
             >
               <td className="p-3">
                 <a
-                  href={`/articles/${s.slug}`}
+                  href={`/articles/${s.slug}/`}
                   style={{ color: 'var(--color-brand-light)' }}
                   className="hover:underline"
                 >
@@ -484,7 +484,7 @@ function SectionsTab({ sections }: { sections: SectionDistress[] }) {
               </td>
               <td className="p-3">
                 <a
-                  href={`/articles/${s.slug}#${s.section_id}`}
+                  href={`/articles/${s.slug}/#${s.section_id}`}
                   style={{ color: 'var(--color-text-secondary)' }}
                   className="hover:underline"
                 >
@@ -534,7 +534,7 @@ function QuestionsTab({ questions }: { questions: RecentQuestion[] }) {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-2 text-xs flex-wrap" style={{ color: 'var(--color-text-muted)' }}>
                 <a
-                  href={`/articles/${q.slug}`}
+                  href={`/articles/${q.slug}/`}
                   style={{ color: 'var(--color-brand-light)' }}
                   className="hover:underline"
                 >

@@ -321,9 +321,9 @@ There's no technical limit, but we recommend keeping it under 10 steps. If the w
 
 ## Next Steps
 
-- 🤖 Learn about [Agent: Your AI Double](/en/articles/openclaw-agent) — let the Agent auto-select and combine Skills
-- 🧠 Understand [Soul: Give Your Agent Memory and Personality](/en/articles/openclaw-soul)
-- 💬 [Prompt Engineering: Write Better Skill Prompts](/en/articles/prompt-engineering)
-- 🔗 [MCP Protocol: Connect Skills to External Tools](/en/articles/mcp-protocol)
-- 📚 [Build a Knowledge Management System with Skills](/en/articles/pkm-system)
-- ☁️ Haven't deployed yet? See the [Cloud Deployment Guide](/en/articles/deploy-openclaw-cloud)
+- 🤖 Learn about [Agent: Your AI Double](/en/articles/openclaw-agent/) — let the Agent auto-select and combine Skills
+- 🧠 Understand [Soul: Give Your Agent Memory and Personality](/en/articles/openclaw-soul/)
+- 💬 [Prompt Engineering: Write Better Skill Prompts](/en/articles/prompt-engineering/)
+- 🔗 [MCP Protocol: Connect Skills to External Tools](/en/articles/mcp-protocol/)
+- 📚 [Build a Knowledge Management System with Skills](/en/articles/pkm-system/)
+- ☁️ Haven't deployed yet? See the [Cloud Deployment Guide](/en/articles/deploy-openclaw-cloud/)

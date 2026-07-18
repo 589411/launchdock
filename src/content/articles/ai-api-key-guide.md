@@ -28,7 +28,7 @@ stuckOptions:
 
 > 這篇藍鴨教學帶你用最快速度取得 API Key，讓 OpenClaw 正式連上 AI。
 
-上一步你已經 [選好了 LLM 方案](/articles/llm-guide)。現在要去**拿到那把鑰匙（API Key）**，讓 OpenClaw 能呼叫 AI 模型。
+上一步你已經 [選好了 LLM 方案](/articles/llm-guide/)。現在要去**拿到那把鑰匙（API Key）**，讓 OpenClaw 能呼叫 AI 模型。
 
 整個過程大約 3-10 分鐘，取決於你選的方案。
 
@@ -92,7 +92,7 @@ AIzaSyxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ![在 Google AI Studio 測試](/images/articles/ai-api-key-guide/008.png)
 
-> ✅ **完成！** 你已經拿到 Gemini 的 API Key 了。跳到 [下一步：安裝 OpenClaw](/articles/install-openclaw)。
+> ✅ **完成！** 你已經拿到 Gemini 的 API Key 了。跳到 [下一步：安裝 OpenClaw](/articles/install-openclaw/)。
 
 ### （選做）設定花費上限：終於可以放心綁卡了
 
@@ -121,7 +121,7 @@ AIzaSyxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 | **用途** | 呼叫 Gemini AI 模型 | 串接 Google Drive / Gmail |
 | **Key 格式** | `AIzaSy...` | OAuth Client ID + Secret |
 | **費用** | 免費額度很大，可設定花費上限 | 要設定計費帳號 |
-| **教學** | 就是這篇 | [Google API Key 指南](/articles/google-api-key-guide) |
+| **教學** | 就是這篇 | [Google API Key 指南](/articles/google-api-key-guide/) |
 
 ---
 
@@ -161,7 +161,7 @@ sk-or-v1-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - 免費額度可以先用來測試
 - 需要更多額度：點「**Credit**」→ 選擇金額 → 付款
 
-> ✅ **完成！** 跳到 [下一步：安裝 OpenClaw](/articles/install-openclaw)。
+> ✅ **完成！** 跳到 [下一步：安裝 OpenClaw](/articles/install-openclaw/)。
 
 ---
 
@@ -207,7 +207,7 @@ sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ![複製 API Key](/images/articles/ai-api-key-guide/033.png)
 
-> ✅ **完成！** 跳到 [下一步：安裝 OpenClaw](/articles/install-openclaw)。
+> ✅ **完成！** 跳到 [下一步：安裝 OpenClaw](/articles/install-openclaw/)。
 
 ### 🚨 常見問題
 
@@ -255,7 +255,7 @@ sk-ant-api03-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ![複製 API Key](/images/articles/ai-api-key-guide/051.png)
 
-> ✅ **完成！** 跳到 [下一步：安裝 OpenClaw](/articles/install-openclaw)。
+> ✅ **完成！** 跳到 [下一步：安裝 OpenClaw](/articles/install-openclaw/)。
 
 ---
 
@@ -265,6 +265,6 @@ sk-ant-api03-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 **下一步：安裝 OpenClaw → 選擇你的作業系統**
 
-👉 [安裝 OpenClaw](/articles/install-openclaw)
+👉 [安裝 OpenClaw](/articles/install-openclaw/)
 
 ---

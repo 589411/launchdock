@@ -20,17 +20,17 @@ stuckOptions:
 
 > <img src="/images/dock_head_s.png" alt="LaunchDock" width="24" style="vertical-align: middle;"> **Good news for Mac users**: Installing Docker + n8n on a Mac is significantly simpler than on Windows. No WSL2 permission traps, no path slash confusion, no line-ending headaches. You can be up and running in about 10 minutes.
 
-> 📌 **Windows user?** This guide is Mac-only. For the Windows pitfall guide, see: [Docker + n8n on Windows: A Complete Pitfall Guide](/articles/docker-n8n-windows)
+> 📌 **Windows user?** This guide is Mac-only. For the Windows pitfall guide, see: [Docker + n8n on Windows: A Complete Pitfall Guide](/articles/docker-n8n-windows/)
 
 ---
 
 ## 🤔 Why Is Mac So Much Easier?
 
-If you've read the [Windows pitfall guide](/articles/docker-n8n-windows), you'll know Windows users face a long list of obstacles. These problems stem from the fundamental difference between Windows and Linux environments. For a deeper explanation, see: [Why We Don't Recommend Running OpenClaw Natively on Windows](/articles/why-not-windows-openclaw)
+If you've read the [Windows pitfall guide](/articles/docker-n8n-windows/), you'll know Windows users face a long list of obstacles. These problems stem from the fundamental difference between Windows and Linux environments. For a deeper explanation, see: [Why We Don't Recommend Running OpenClaw Natively on Windows](/articles/why-not-windows-openclaw/)
 
 | Issue | Windows | Mac |
 |-------|---------|-----|
-| Requires [WSL2](/articles/windows-wsl-guide) virtual environment | ✅ Required, often breaks | ❌ Not needed |
+| Requires [WSL2](/articles/windows-wsl-guide/) virtual environment | ✅ Required, often breaks | ❌ Not needed |
 | Path slash direction | ⚠️ `\` vs `/` constantly conflicts | ✅ All `/`, Unix-native |
 | PowerShell line-ending issues | ⚠️ Multi-line commands often break | ✅ Not a problem in Terminal |
 | Spaces in volume paths | ⚠️ Requires `""` workarounds | ✅ Generally not an issue |
@@ -60,7 +60,7 @@ After installation, open Docker Desktop. When you see the whale icon 🐳 in the
 
 ### Step 2: Create a Data Folder
 
-Open **Terminal** (search `terminal` in Spotlight) and create a folder for n8n's data. If you're new to Terminal, check out: [CLI Beginner's Guide](/articles/cli-guide).
+Open **Terminal** (search `terminal` in Spotlight) and create a folder for n8n's data. If you're new to Terminal, check out: [CLI Beginner's Guide](/articles/cli-guide/).
 
 ```bash
 mkdir ~/n8n_data
@@ -172,7 +172,7 @@ docker run -d --name n8n -p 5678:5678 -v ~/n8n_data:/home/node/.n8n docker.n8n.i
 
 ## 🔗 Further Reading
 
-- **Want to run an AI Agent on Mac?** → [macOS: Install OpenClaw from Scratch](/articles/install-openclaw-macos)
-- **Want a free local LLM with OpenClaw?** → [Ollama + OpenClaw Quick Start | macOS](/articles/ollama-openclaw-mac)
-- **Want to deploy OpenClaw to the cloud?** → [Deploy OpenClaw to the Cloud: Zeabur One-Click](/articles/deploy-openclaw-cloud)
-- **Also have a Windows machine?** → [Docker + n8n on Windows: A Complete Pitfall Guide](/articles/docker-n8n-windows)
+- **Want to run an AI Agent on Mac?** → [macOS: Install OpenClaw from Scratch](/articles/install-openclaw-macos/)
+- **Want a free local LLM with OpenClaw?** → [Ollama + OpenClaw Quick Start | macOS](/articles/ollama-openclaw-mac/)
+- **Want to deploy OpenClaw to the cloud?** → [Deploy OpenClaw to the Cloud: Zeabur One-Click](/articles/deploy-openclaw-cloud/)
+- **Also have a Windows machine?** → [Docker + n8n on Windows: A Complete Pitfall Guide](/articles/docker-n8n-windows/)

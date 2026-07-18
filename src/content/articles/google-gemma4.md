@@ -207,7 +207,7 @@ Gemma 4 讓「本地跑得動的模型」這個門檻，又往前推了一大步
 
 | 主題 | 文章 |
 |------|------|
-| 在本機跑開源模型 | [Ollama + OpenClaw（macOS）](/articles/ollama-openclaw-mac) |
-| 本地 Agent 架構 | [AI 工具全景地圖](/articles/ai-tool-landscape) |
-| RAG 是什麼 | [RAG 解釋](/articles/rag-explained) |
-| 哪個模型適合我 | [LLM 選擇指南](/articles/llm-guide) |
+| 在本機跑開源模型 | [Ollama + OpenClaw（macOS）](/articles/ollama-openclaw-mac/) |
+| 本地 Agent 架構 | [AI 工具全景地圖](/articles/ai-tool-landscape/) |
+| RAG 是什麼 | [RAG 解釋](/articles/rag-explained/) |
+| 哪個模型適合我 | [LLM 選擇指南](/articles/llm-guide/) |

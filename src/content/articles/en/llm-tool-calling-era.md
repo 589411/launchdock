@@ -128,7 +128,7 @@ Tool calling is the first exam of the agent era. A player's real skill shows the
 
 ## Further Reading
 
-- 🧠 [Read Before Choosing an LLM Plan: 4 Options Compared](/en/articles/llm-guide)
-- 🦞 [OpenClaw Quick Start (macOS)](/en/articles/ollama-openclaw-mac)
-- 🪟 [OpenClaw Quick Start (Windows)](/en/articles/ollama-openclaw-windows)
-- 🔧 [Model Configuration and Switching](/en/articles/openclaw-model-config)
+- 🧠 [Read Before Choosing an LLM Plan: 4 Options Compared](/en/articles/llm-guide/)
+- 🦞 [OpenClaw Quick Start (macOS)](/en/articles/ollama-openclaw-mac/)
+- 🪟 [OpenClaw Quick Start (Windows)](/en/articles/ollama-openclaw-windows/)
+- 🔧 [Model Configuration and Switching](/en/articles/openclaw-model-config/)

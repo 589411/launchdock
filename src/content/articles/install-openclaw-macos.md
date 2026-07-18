@@ -25,8 +25,8 @@ stuckOptions:
 
 這篇教學適合在 **macOS**（Intel 或 Apple Silicon M1/M2/M3）上安裝 OpenClaw。
 
-如果你用的是 Windows，請看 [Windows 安裝指南](/articles/install-openclaw-windows)。
-如果你不想在本地安裝，可以考慮 [雲端部署方案](/articles/deploy-openclaw-cloud)。
+如果你用的是 Windows，請看 [Windows 安裝指南](/articles/install-openclaw-windows/)。
+如果你不想在本地安裝，可以考慮 [雲端部署方案](/articles/deploy-openclaw-cloud/)。
 
 ### 你需要準備
 
@@ -190,7 +190,7 @@ GOOGLE_API_KEY=your-google-api-key
 ANTHROPIC_API_KEY=sk-ant-xxxxxxxx
 ```
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **還沒有 API Key？** 看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide)——Google AI Studio 有免費額度，最適合新手。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **還沒有 API Key？** 看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide/)——Google AI Studio 有免費額度，最適合新手。
 
 ---
 
@@ -260,7 +260,7 @@ python -m openclaw start
 
 安裝完成！接下來你可以：
 
-- 🧩 [學習 Skill：讓 AI 學會可重複的工作流](/articles/openclaw-skill)
-- 🤖 [打造你的第一個 Agent](/articles/openclaw-agent)
-- 🔑 [申請 Google API Key 串接更多服務](/articles/google-api-key-guide)
-- ☁️ [不想管伺服器？改用雲端部署](/articles/deploy-openclaw-cloud)
+- 🧩 [學習 Skill：讓 AI 學會可重複的工作流](/articles/openclaw-skill/)
+- 🤖 [打造你的第一個 Agent](/articles/openclaw-agent/)
+- 🔑 [申請 Google API Key 串接更多服務](/articles/google-api-key-guide/)
+- ☁️ [不想管伺服器？改用雲端部署](/articles/deploy-openclaw-cloud/)

@@ -17,7 +17,7 @@ stuckOptions:
   "Which one should I learn": ["Do I still need to learn to write system prompts?", "Will Skills just get replaced by something new?"]
 ---
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> This is Duck Editor's opinion, not a tutorial. In my [AI Tool Landscape](/en/articles/ai-tool-landscape), I put Skills in a special spot — because I think they're really the evolution of GPTs and Gemini Gems. They sound like three different things, but take them apart and they're the same thing at heart.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> This is Duck Editor's opinion, not a tutorial. In my [AI Tool Landscape](/en/articles/ai-tool-landscape/), I put Skills in a special spot — because I think they're really the evolution of GPTs and Gemini Gems. They sound like three different things, but take them apart and they're the same thing at heart.
 
 ---
 
@@ -61,7 +61,7 @@ Second, **each is an island**. One GPT is a fixed set of settings, and they don'
 
 ## Stage 3: Skills — Same Essence, but the AI Uses Them Itself
 
-> 📌 **First, which kind of Skill:** this article means **Anthropic's official Agent Skills** — the kind the AI invokes on its own and loads into context on demand. It happens to share a name with the "hard-coded YAML workflows" in some frameworks (e.g. [OpenClaw's Skill](/en/articles/openclaw-skill) is the latter), but it's not the same level of thing. Don't confuse them.
+> 📌 **First, which kind of Skill:** this article means **Anthropic's official Agent Skills** — the kind the AI invokes on its own and loads into context on demand. It happens to share a name with the "hard-coded YAML workflows" in some frameworks (e.g. [OpenClaw's Skill](/en/articles/openclaw-skill/) is the latter), but it's not the same level of thing. Don't confuse them.
 
 A proper Agent Skill is still essentially the same thing: **a package of instructions and knowledge.** But it breaks through those two ceilings, thanks to two key leaps.
 
@@ -103,9 +103,9 @@ As for whether Skills will get replaced by something newer? Probably. But once y
 
 ## 🔗 Further Reading
 
-- 🔬 **Skills alone aren't enough — dissect the three agent layers** → [Dissecting an AI Agent: Skill, Tools, Harness](/en/articles/ai-agent-anatomy)
-- ✍️ **Lay the foundation: say things clearly for the AI** → [Intro to Prompt Engineering](/en/articles/prompt-engineering)
-- 🗺️ **See where each tool fits** → [The AI Tool Landscape](/en/articles/ai-tool-landscape)
-- 🧩 **A different thing that shares the name "Skill" (OpenClaw's YAML workflow)** → [What Is an OpenClaw Skill](/en/articles/openclaw-skill)
+- 🔬 **Skills alone aren't enough — dissect the three agent layers** → [Dissecting an AI Agent: Skill, Tools, Harness](/en/articles/ai-agent-anatomy/)
+- ✍️ **Lay the foundation: say things clearly for the AI** → [Intro to Prompt Engineering](/en/articles/prompt-engineering/)
+- 🗺️ **See where each tool fits** → [The AI Tool Landscape](/en/articles/ai-tool-landscape/)
+- 🧩 **A different thing that shares the name "Skill" (OpenClaw's YAML workflow)** → [What Is an OpenClaw Skill](/en/articles/openclaw-skill/)
 
 Have a thought to discuss with Duck Editor? Join the [homepage discussion](/#discussion)!

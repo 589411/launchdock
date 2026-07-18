@@ -28,7 +28,7 @@ stuckOptions:
 
 > This LaunchDock tutorial walks you through getting your API Key as quickly as possible so OpenClaw can connect to AI.
 
-In the previous step, you [chose your LLM plan](/articles/llm-guide). Now it's time to **get the key (API Key)** that lets OpenClaw call AI models.
+In the previous step, you [chose your LLM plan](/articles/llm-guide/). Now it's time to **get the key (API Key)** that lets OpenClaw call AI models.
 
 The entire process takes about 3–10 minutes, depending on which plan you chose.
 
@@ -92,7 +92,7 @@ On the Google AI Studio page, you can test it directly:
 
 ![Testing in Google AI Studio](/images/articles/ai-api-key-guide/008.png)
 
-> ✅ **Done!** You've got your Gemini API Key. Jump to [Next step: Install OpenClaw](/articles/install-openclaw).
+> ✅ **Done!** You've got your Gemini API Key. Jump to [Next step: Install OpenClaw](/articles/install-openclaw/).
 
 ### (Optional) Set a Spending Limit — Finally Safe to Add a Card
 
@@ -121,7 +121,7 @@ Some regions may have restrictions. Solutions:
 | **Purpose** | Call Gemini AI models | Connect Google Drive / Gmail |
 | **Key format** | `AIzaSy...` | OAuth Client ID + Secret |
 | **Cost** | Generous free tier, with spending limit support | Requires a billing account |
-| **Tutorial** | This article | [Google API Key Guide](/articles/google-api-key-guide) |
+| **Tutorial** | This article | [Google API Key Guide](/articles/google-api-key-guide/) |
 
 ---
 
@@ -161,7 +161,7 @@ sk-or-v1-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 - The free credit can be used for testing first
 - Need more credit: Click "**Credit**" → Choose an amount → Pay
 
-> ✅ **Done!** Jump to [Next step: Install OpenClaw](/articles/install-openclaw).
+> ✅ **Done!** Jump to [Next step: Install OpenClaw](/articles/install-openclaw/).
 
 ---
 
@@ -207,7 +207,7 @@ sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ![Copy API Key](/images/articles/ai-api-key-guide/033.png)
 
-> ✅ **Done!** Jump to [Next step: Install OpenClaw](/articles/install-openclaw).
+> ✅ **Done!** Jump to [Next step: Install OpenClaw](/articles/install-openclaw/).
 
 ### 🚨 Common Issues
 
@@ -255,7 +255,7 @@ sk-ant-api03-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ![Copy API Key](/images/articles/ai-api-key-guide/051.png)
 
-> ✅ **Done!** Jump to [Next step: Install OpenClaw](/articles/install-openclaw).
+> ✅ **Done!** Jump to [Next step: Install OpenClaw](/articles/install-openclaw/).
 
 ---
 
@@ -265,6 +265,6 @@ You now have an API Key in hand. **Store it securely** — you'll need it during
 
 **Next step: Install OpenClaw → Choose your operating system**
 
-👉 [Install OpenClaw](/articles/install-openclaw)
+👉 [Install OpenClaw](/articles/install-openclaw/)
 
 ---

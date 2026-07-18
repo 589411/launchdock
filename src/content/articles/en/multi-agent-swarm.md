@@ -20,7 +20,7 @@ stuckOptions:
 
 ## Why Isn't One Agent Enough?
 
-If you've read [What Is an Agent](/en/articles/openclaw-agent), you already know that Agents can make autonomous decisions, use tools, and complete tasks.
+If you've read [What Is an Agent](/en/articles/openclaw-agent/), you already know that Agents can make autonomous decisions, use tools, and complete tasks.
 
 But here's the problem: **No matter how capable a single Agent is, it has limits.**
 
@@ -228,8 +228,8 @@ handoff_to: "Writer"  # Hand off to Writer when done
 ```
 
 > Want to dive deeper into Skill and Soul configuration? See:
-> - 🛠️ [Skill Complete Guide](/en/articles/openclaw-skill)
-> - 👻 [Soul Complete Guide](/en/articles/openclaw-soul)
+> - 🛠️ [Skill Complete Guide](/en/articles/openclaw-skill/)
+> - 👻 [Soul Complete Guide](/en/articles/openclaw-soul/)
 
 ---
 
@@ -266,7 +266,7 @@ Multi-Agent and swarm intelligence are among the hottest research directions in 
 | **Adaptive teams** | Agent teams automatically adjust members and roles |
 | **Collective memory** | Multiple Agents share a memory bank, avoiding redundant learning |
 
-OpenClaw's [MCP Protocol](/en/articles/mcp-protocol) is heading in this direction — enabling different Agents and tools to communicate through a standard protocol.
+OpenClaw's [MCP Protocol](/en/articles/mcp-protocol/) is heading in this direction — enabling different Agents and tools to communicate through a standard protocol.
 
 ---
 
@@ -293,8 +293,8 @@ OpenClaw's [MCP Protocol](/en/articles/mcp-protocol) is heading in this directio
 
 ## Further Reading
 
-- 🤖 [What Is an Agent?](/en/articles/openclaw-agent) — Start by understanding a single Agent
-- 🛠️ [Skill Complete Guide](/en/articles/openclaw-skill) — The Agent's toolbox
-- 👻 [Soul Complete Guide](/en/articles/openclaw-soul) — The Agent's personality settings
-- 🔗 [MCP Protocol](/en/articles/mcp-protocol) — The communication standard between Agents
-- 🧠 [AI Reasoning Techniques Explained](/en/articles/cot-and-reasoning) — How Agents "think"
+- 🤖 [What Is an Agent?](/en/articles/openclaw-agent/) — Start by understanding a single Agent
+- 🛠️ [Skill Complete Guide](/en/articles/openclaw-skill/) — The Agent's toolbox
+- 👻 [Soul Complete Guide](/en/articles/openclaw-soul/) — The Agent's personality settings
+- 🔗 [MCP Protocol](/en/articles/mcp-protocol/) — The communication standard between Agents
+- 🧠 [AI Reasoning Techniques Explained](/en/articles/cot-and-reasoning/) — How Agents "think"

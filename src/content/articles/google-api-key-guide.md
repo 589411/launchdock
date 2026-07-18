@@ -35,7 +35,7 @@ stuckOptions:
 
 - 一個 Google 帳號（你平常用的 Gmail 就行）
 - 大約 15-20 分鐘的時間
-- OpenClaw 已安裝完成（如果還沒安裝，先看 [安裝指南](/articles/install-openclaw)）
+- OpenClaw 已安裝完成（如果還沒安裝，先看 [安裝指南](/articles/install-openclaw/)）
 
 ---
 
@@ -253,10 +253,10 @@ Google 有很多名字很像的 API。確認你啟用的是：
 
 API Key 設定好了，接下來：
 
-- 💰 [搞懂 Token 計費，不被帳單嚇到](/articles/token-economics)
-- ⚙️ [設定模型切換策略，省錢又穩定](/articles/openclaw-model-config)
-- 🧩 [寫你的第一個 Skill](/articles/openclaw-skill)
-- 💬 [學 Prompt 技巧讓 AI 回答更好](/articles/prompt-engineering)
+- 💰 [搞懂 Token 計費，不被帳單嚇到](/articles/token-economics/)
+- ⚙️ [設定模型切換策略，省錢又穩定](/articles/openclaw-model-config/)
+- 🧩 [寫你的第一個 Skill](/articles/openclaw-skill/)
+- 💬 [學 Prompt 技巧讓 AI 回答更好](/articles/prompt-engineering/)
 
 ---
 

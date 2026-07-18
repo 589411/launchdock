@@ -59,9 +59,9 @@ GOOGLE_API_KEY=AIzaSyxxxxxxxxxxxxxxxxxx
 ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxx
 ```
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 還沒有 API Key？先看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide)——Google AI Studio 有免費額度，最適合新手。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 還沒有 API Key？先看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide/)——Google AI Studio 有免費額度，最適合新手。
 >
-> 注意：這裡要填的是 **AI 模型的 Key**（用來呼叫 LLM），不是 [Google Drive/Gmail 的 OAuth Key](/articles/google-api-key-guide)，兩者不同。
+> 注意：這裡要填的是 **AI 模型的 Key**（用來呼叫 LLM），不是 [Google Drive/Gmail 的 OAuth Key](/articles/google-api-key-guide/)，兩者不同。
 
 ### 測試連線
 
@@ -122,7 +122,7 @@ models:
 
 ### 在 Skill 中指定模型
 
-你也可以在 [Skill](/articles/openclaw-skill) 裡針對每個步驟指定模型：
+你也可以在 [Skill](/articles/openclaw-skill/) 裡針對每個步驟指定模型：
 
 ```yaml
 name: weekly-report
@@ -238,7 +238,7 @@ routing:
 fallback: gpt-4o-mini
 ```
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 不知道怎麼估算費用？看 [Token 經濟學](/articles/token-economics) 精算成本。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 不知道怎麼估算費用？看 [Token 經濟學](/articles/token-economics/) 精算成本。
 
 ---
 
@@ -293,7 +293,7 @@ openclaw logs --filter model
 
 不會。API Key 存在 `.env` 檔案中，只在本地伺服器端使用。前端（瀏覽器）不會看到 Key。
 
-如果你用 [雲端部署](/articles/deploy-openclaw-cloud)，Key 存在環境變數中，同樣安全。
+如果你用 [雲端部署](/articles/deploy-openclaw-cloud/)，Key 存在環境變數中，同樣安全。
 
 ---
 
@@ -301,8 +301,8 @@ openclaw logs --filter model
 
 模型設好了，接下來：
 
-- 🧩 [在 Skill 中用不同模型處理不同步驟](/articles/openclaw-skill)
-- 🤖 [讓 Agent 自動選模型完成任務](/articles/openclaw-agent)
-- 💬 [學好 Prompt 讓便宜模型也有好效果](/articles/prompt-engineering)
-- 💰 [精算你的 Token 成本](/articles/token-economics)
-- 🔗 [用 MCP 連接更多外部工具](/articles/mcp-protocol)
+- 🧩 [在 Skill 中用不同模型處理不同步驟](/articles/openclaw-skill/)
+- 🤖 [讓 Agent 自動選模型完成任務](/articles/openclaw-agent/)
+- 💬 [學好 Prompt 讓便宜模型也有好效果](/articles/prompt-engineering/)
+- 💰 [精算你的 Token 成本](/articles/token-economics/)
+- 🔗 [用 MCP 連接更多外部工具](/articles/mcp-protocol/)

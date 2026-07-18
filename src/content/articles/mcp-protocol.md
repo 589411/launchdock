@@ -156,7 +156,7 @@ Client 知道有什麼工具後，就可以使用：
 
 ### 3. AI 決策
 
-Agent 收到結果後，自己決定下一步。這就是 [Agent 的 ReAct 流程](/articles/openclaw-agent)：
+Agent 收到結果後，自己決定下一步。這就是 [Agent 的 ReAct 流程](/articles/openclaw-agent/)：
 
 ```
 觀察：找到了 3 個週會筆記
@@ -211,7 +211,7 @@ mcp_servers:
 
 啟動後，你的 Agent 就能同時操作 Google Drive、Slack 和 Notion。
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **不知道怎麼設定 Google API Key？** 看 [Google API Key 申請指南](/articles/google-api-key-guide)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **不知道怎麼設定 Google API Key？** 看 [Google API Key 申請指南](/articles/google-api-key-guide/)。
 
 ### 確認連接成功
 
@@ -273,11 +273,11 @@ openclaw mcp test google-drive
 
 你不需要指定「先用 Google 搜、再用 Notion 存」。Agent 根據你的目標，自動判斷要用哪個 MCP Server 的哪個工具。
 
-這就是 [Agent 的威力](/articles/openclaw-agent)。
+這就是 [Agent 的威力](/articles/openclaw-agent/)。
 
 ### 3. 換工具不用改流程
 
-今天用 Notion，明天想換 Obsidian？只需要換一個 MCP Server，你的 [Skill](/articles/openclaw-skill) 和 Agent 邏輯完全不用改。
+今天用 Notion，明天想換 Obsidian？只需要換一個 MCP Server，你的 [Skill](/articles/openclaw-skill/) 和 Agent 邏輯完全不用改。
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **換句話說**：以前從 Notion 換到 Obsidian 等於搬家——要打包、拆裝、重新整理。有了 MCP，換工具就像換插座面板——線路不用動，只換一個零件就好。
 
@@ -356,7 +356,7 @@ OpenAPI 是定義 REST API 的規範。MCP 是 AI 專用的工具連接協定。
 
 ### 每個 MCP Server 都免費嗎？
 
-MCP Server 本身大多是開源免費的。但它連接的服務（如 Google API）可能需要 [API Key 和費用](/articles/token-economics)。
+MCP Server 本身大多是開源免費的。但它連接的服務（如 Google API）可能需要 [API Key 和費用](/articles/token-economics/)。
 
 ### 可以同時連幾個 MCP Server？
 
@@ -368,8 +368,8 @@ MCP Server 本身大多是開源免費的。但它連接的服務（如 Google A
 
 了解了 MCP，你可以：
 
-- 🔑 [申請 API Key 串接第一個服務](/articles/google-api-key-guide)
-- 🤖 [讓 Agent 自動呼叫 MCP 工具](/articles/openclaw-agent)
-- 🧩 [在 Skill 中調用 MCP 工具](/articles/openclaw-skill)
-- ⚙️ [設定模型來驅動 MCP 呼叫](/articles/openclaw-model-config)
-- 💬 [串接 Telegram 作為 AI 入口](/articles/telegram-integration)
+- 🔑 [申請 API Key 串接第一個服務](/articles/google-api-key-guide/)
+- 🤖 [讓 Agent 自動呼叫 MCP 工具](/articles/openclaw-agent/)
+- 🧩 [在 Skill 中調用 MCP 工具](/articles/openclaw-skill/)
+- ⚙️ [設定模型來驅動 MCP 呼叫](/articles/openclaw-model-config/)
+- 💬 [串接 Telegram 作為 AI 入口](/articles/telegram-integration/)

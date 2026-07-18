@@ -152,8 +152,8 @@ Answer that, and you'll always tell marketing hype from the real deal.
 
 | Topic | Article |
 |-------|---------|
-| The AI tool landscape | [AI Tool Landscape: The Five Walls Framework](/articles/ai-tool-landscape) |
-| What is an Agent | [OpenClaw Agent](/articles/openclaw-agent) |
-| From "talking" to "doing" | [The LLM Tool-Calling Era](/articles/llm-tool-calling-era) |
-| MCP protocol | [MCP Protocol Guide](/articles/mcp-protocol) |
-| Which AI tool to use | [Which AI Tool Should I Use?](/articles/which-ai-tool-for-you) |
+| The AI tool landscape | [AI Tool Landscape: The Five Walls Framework](/articles/ai-tool-landscape/) |
+| What is an Agent | [OpenClaw Agent](/articles/openclaw-agent/) |
+| From "talking" to "doing" | [The LLM Tool-Calling Era](/articles/llm-tool-calling-era/) |
+| MCP protocol | [MCP Protocol Guide](/articles/mcp-protocol/) |
+| Which AI tool to use | [Which AI Tool Should I Use?](/articles/which-ai-tool-for-you/) |

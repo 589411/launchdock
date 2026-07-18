@@ -398,9 +398,9 @@ openclaw soul import --agent "工作助理" --input soul-backup.json
 
 ## 下一步
 
-- 🧩 還沒了解 Skill？先看 [Skill：可重複的工作流](/articles/openclaw-skill)
-- 🤖 設定你的 Agent：[Agent 完全指南](/articles/openclaw-agent)
-- 💬 [Prompt 工程：Soul 設定的底層技巧](/articles/prompt-engineering)
-- 💰 [精簡 Soul 省 Token：Token 經濟學](/articles/token-economics)
-- ☁️ 部署到雲端：[雲端部署指南](/articles/deploy-openclaw-cloud)
+- 🧩 還沒了解 Skill？先看 [Skill：可重複的工作流](/articles/openclaw-skill/)
+- 🤖 設定你的 Agent：[Agent 完全指南](/articles/openclaw-agent/)
+- 💬 [Prompt 工程：Soul 設定的底層技巧](/articles/prompt-engineering/)
+- 💰 [精簡 Soul 省 Token：Token 經濟學](/articles/token-economics/)
+- ☁️ 部署到雲端：[雲端部署指南](/articles/deploy-openclaw-cloud/)
 - 💬 分享你的 Soul 設定：[首頁討論區](/#discussion)

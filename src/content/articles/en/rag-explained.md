@@ -208,7 +208,7 @@ AI may ignore the data you provide, or mix multiple sources together to produce 
 
 If your memory bank contains outdated or contradictory information, RAG might dig it up and use it.
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> OpenClaw's Soul system includes a [Memory decay mechanism](/en/articles/openclaw-soul) designed to solve this problem — automatically fading out old, unimportant memories.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> OpenClaw's Soul system includes a [Memory decay mechanism](/en/articles/openclaw-soul/) designed to solve this problem — automatically fading out old, unimportant memories.
 
 ---
 
@@ -245,7 +245,7 @@ If your memory bank contains outdated or contradictory information, RAG might di
 
 ## Further Reading
 
-- 🧭 [AI Technology Evolution Overview](/en/articles/ai-tech-evolution) — Where RAG fits in the AI landscape
-- 👻 [Soul Complete Guide](/en/articles/openclaw-soul) — Full Memory system configuration
-- 🧠 [AI Reasoning Techniques Explained](/en/articles/cot-and-reasoning) — Another technique for making AI smarter
-- 💰 [Token Economics](/en/articles/token-economics) — How RAG helps you save tokens
+- 🧭 [AI Technology Evolution Overview](/en/articles/ai-tech-evolution/) — Where RAG fits in the AI landscape
+- 👻 [Soul Complete Guide](/en/articles/openclaw-soul/) — Full Memory system configuration
+- 🧠 [AI Reasoning Techniques Explained](/en/articles/cot-and-reasoning/) — Another technique for making AI smarter
+- 💰 [Token Economics](/en/articles/token-economics/) — How RAG helps you save tokens

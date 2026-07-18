@@ -349,6 +349,6 @@ Now you have a map.
 
 > **Further Reading**
 >
-> - Want to dig into the decision logic for tool selection → [Which AI Tool Should I Use? 5 Questions to Stop the Guessing](/articles/ai-tool-decision-framework)
-> - Want to understand the full landscape of AI technology evolution → [AI Tool Landscape: The Five-Wall Framework](/articles/ai-tool-landscape)
-> - Want to understand what OpenClaw is → [Why Do You Need OpenClaw?](/articles/why-openclaw)
+> - Want to dig into the decision logic for tool selection → [Which AI Tool Should I Use? 5 Questions to Stop the Guessing](/articles/ai-tool-decision-framework/)
+> - Want to understand the full landscape of AI technology evolution → [AI Tool Landscape: The Five-Wall Framework](/articles/ai-tool-landscape/)
+> - Want to understand what OpenClaw is → [Why Do You Need OpenClaw?](/articles/why-openclaw/)

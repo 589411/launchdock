@@ -187,9 +187,9 @@ KDS 只抓「狀態 = 待處理」的單。如果廚房螢幕一片空白：
 
 ## 🔗 延伸閱讀
 
-- ✍️ **想把提示詞寫得更好？** → [Prompt Engineering 入門](/articles/prompt-engineering)
-- 🔑 **要用 Gemini API 做更進階的串接？** → [Google API Key 申請指南](/articles/google-api-key-guide)
-- 🧩 **想接更複雜的自動化流程？** → [n8n 是什麼？企業自動化的痛點與解方](/articles/what-is-n8n)
-- 🗺️ **搞懂各種 AI 工具的定位** → [AI 工具地圖](/articles/ai-tool-landscape)
+- ✍️ **想把提示詞寫得更好？** → [Prompt Engineering 入門](/articles/prompt-engineering/)
+- 🔑 **要用 Gemini API 做更進階的串接？** → [Google API Key 申請指南](/articles/google-api-key-guide/)
+- 🧩 **想接更複雜的自動化流程？** → [n8n 是什麼？企業自動化的痛點與解方](/articles/what-is-n8n/)
+- 🗺️ **搞懂各種 AI 工具的定位** → [AI 工具地圖](/articles/ai-tool-landscape/)
 
 有問題？到 [首頁討論區](/#discussion) 一起討論！

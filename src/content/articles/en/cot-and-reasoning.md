@@ -192,7 +192,7 @@ Agent observes: Sent successfully
 Agent replies: "I've sent your 5 to-do items to your Telegram!"
 ```
 
-> See [Agent Complete Guide](/en/articles/openclaw-agent) for details.
+> See [Agent Complete Guide](/en/articles/openclaw-agent/) for details.
 
 ---
 
@@ -228,7 +228,7 @@ Tree of Thoughts (tree):
 | Strategic planning|              | ✅ (need to compare multiple plans) |
 | Debugging code    |              | ✅ (need to hypothesize multiple causes) |
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> OpenClaw's swarm intelligence mode is like an automated Tree of Thoughts — multiple Agents each explore different paths, then vote on the best result. See [Multi-Agent Collaboration](/en/articles/multi-agent-swarm) for details.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> OpenClaw's swarm intelligence mode is like an automated Tree of Thoughts — multiple Agents each explore different paths, then vote on the best result. See [Multi-Agent Collaboration](/en/articles/multi-agent-swarm/) for details.
 
 ---
 
@@ -259,7 +259,7 @@ Design workflows in your Skills that run multiple times and compare results — 
 
 ## Further Reading
 
-- 📝 [Prompt Engineering Complete Guide](/en/articles/prompt-engineering) — The foundation for reasoning techniques
-- 🤖 [Agent Complete Guide](/en/articles/openclaw-agent) — ReAct implemented in OpenClaw
-- 🧠 [AI Technology Evolution Overview](/en/articles/ai-tech-evolution) — Where reasoning techniques fit in AI's development
-- 🐝 [Multi-Agent Collaboration and Swarm Intelligence](/en/articles/multi-agent-swarm) — The group version of Tree of Thoughts
+- 📝 [Prompt Engineering Complete Guide](/en/articles/prompt-engineering/) — The foundation for reasoning techniques
+- 🤖 [Agent Complete Guide](/en/articles/openclaw-agent/) — ReAct implemented in OpenClaw
+- 🧠 [AI Technology Evolution Overview](/en/articles/ai-tech-evolution/) — Where reasoning techniques fit in AI's development
+- 🐝 [Multi-Agent Collaboration and Swarm Intelligence](/en/articles/multi-agent-swarm/) — The group version of Tree of Thoughts

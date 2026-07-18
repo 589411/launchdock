@@ -59,9 +59,9 @@ GOOGLE_API_KEY=AIzaSyxxxxxxxxxxxxxxxxxx
 ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxx
 ```
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Don't have an API Key yet? Check the [AI Model API Key Guide](/en/articles/ai-api-key-guide) first — Google AI Studio has a free tier, perfect for beginners.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Don't have an API Key yet? Check the [AI Model API Key Guide](/en/articles/ai-api-key-guide/) first — Google AI Studio has a free tier, perfect for beginners.
 >
-> Note: The key you enter here is the **AI model Key** (for calling LLMs), not the [Google Drive/Gmail OAuth Key](/en/articles/google-api-key-guide) — those are different.
+> Note: The key you enter here is the **AI model Key** (for calling LLMs), not the [Google Drive/Gmail OAuth Key](/en/articles/google-api-key-guide/) — those are different.
 
 ### Test Connections
 
@@ -122,7 +122,7 @@ models:
 
 ### Specify a Model in a Skill
 
-You can also specify a model for each step within a [Skill](/en/articles/openclaw-skill):
+You can also specify a model for each step within a [Skill](/en/articles/openclaw-skill/):
 
 ```yaml
 name: weekly-report
@@ -238,7 +238,7 @@ routing:
 fallback: gpt-4o-mini
 ```
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Not sure how to estimate costs? See [Token Economics](/en/articles/token-economics) for detailed cost calculations.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Not sure how to estimate costs? See [Token Economics](/en/articles/token-economics/) for detailed cost calculations.
 
 ---
 
@@ -293,7 +293,7 @@ openclaw logs --filter model
 
 No. API Keys are stored in the `.env` file and only used on the local server side. The frontend (browser) never sees the Key.
 
-If you're using [cloud deployment](/en/articles/deploy-openclaw-cloud), Keys are stored in environment variables and are equally secure.
+If you're using [cloud deployment](/en/articles/deploy-openclaw-cloud/), Keys are stored in environment variables and are equally secure.
 
 ---
 
@@ -301,8 +301,8 @@ If you're using [cloud deployment](/en/articles/deploy-openclaw-cloud), Keys are
 
 Now that your models are configured:
 
-- 🧩 [Use different models for different steps in your Skills](/en/articles/openclaw-skill)
-- 🤖 [Let Agents auto-select models to complete tasks](/en/articles/openclaw-agent)
-- 💬 [Master Prompts to get great results from cheap models](/en/articles/prompt-engineering)
-- 💰 [Calculate your Token costs precisely](/en/articles/token-economics)
-- 🔗 [Connect more external tools with MCP](/en/articles/mcp-protocol)
+- 🧩 [Use different models for different steps in your Skills](/en/articles/openclaw-skill/)
+- 🤖 [Let Agents auto-select models to complete tasks](/en/articles/openclaw-agent/)
+- 💬 [Master Prompts to get great results from cheap models](/en/articles/prompt-engineering/)
+- 💰 [Calculate your Token costs precisely](/en/articles/token-economics/)
+- 🔗 [Connect more external tools with MCP](/en/articles/mcp-protocol/)

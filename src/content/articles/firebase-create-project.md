@@ -76,4 +76,4 @@ stuckOptions:
 
 ---
 
-> **下一步**：專案有了，接著開啟登入功能 → [在 Firebase 啟用 Google 登入](/articles/firebase-enable-google-login)
+> **下一步**：專案有了，接著開啟登入功能 → [在 Firebase 啟用 Google 登入](/articles/firebase-enable-google-login/)

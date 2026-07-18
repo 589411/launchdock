@@ -107,9 +107,9 @@ Step 2 is the easiest. Pick the tutorial for your system: Mac users are done in 
 
 ## 🔗 Further Reading
 
-- 🍎 **Mac users** → [Mac Docker + n8n Complete Setup Guide](/en/articles/docker-n8n-mac)
-- 🪟 **Windows users** → [Windows Docker + n8n Pitfall-Avoidance Guide](/en/articles/docker-n8n-windows)
-- 🦞 **Want your automation to have a brain?** → [Why Choose OpenClaw](/en/articles/why-openclaw)
-- 🧠 **Understand the AI brain first** → [Read Before Choosing an LLM Plan: 4 Options Compared](/en/articles/llm-guide)
+- 🍎 **Mac users** → [Mac Docker + n8n Complete Setup Guide](/en/articles/docker-n8n-mac/)
+- 🪟 **Windows users** → [Windows Docker + n8n Pitfall-Avoidance Guide](/en/articles/docker-n8n-windows/)
+- 🦞 **Want your automation to have a brain?** → [Why Choose OpenClaw](/en/articles/why-openclaw/)
+- 🧠 **Understand the AI brain first** → [Read Before Choosing an LLM Plan: 4 Options Compared](/en/articles/llm-guide/)
 
 Questions? Join the [homepage discussion](/#discussion) and let's talk!

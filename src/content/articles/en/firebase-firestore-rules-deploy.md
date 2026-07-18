@@ -35,7 +35,7 @@ Missing or insufficient permissions.
 
 ![The PWA cloud connection test failing with Missing or insufficient permissions](/images/articles/firebase-firestore-rules-deploy/pwa-missing-permissions.png)
 
-> Haven't grabbed the SDK config yet? See [Register a Web App in Firebase to Get the SDK Config](/articles/firebase-register-web-app) (the whole Firebase series starts at [Create Your First Firebase Project](/articles/firebase-create-project)).
+> Haven't grabbed the SDK config yet? See [Register a Web App in Firebase to Get the SDK Config](/articles/firebase-register-web-app/) (the whole Firebase series starts at [Create Your First Firebase Project](/articles/firebase-create-project/)).
 
 ### Why? Because Firestore defaults to "deny all"
 
@@ -130,4 +130,4 @@ If the rules are fine but it still fails (especially for **login**-related featu
 
 ---
 
-> **Next**: With the cloud backend sorted, publish the site itself for free → [Deploy a Static Site / PWA to GitHub Pages](/articles/deploy-to-github-pages)
+> **Next**: With the cloud backend sorted, publish the site itself for free → [Deploy a Static Site / PWA to GitHub Pages](/articles/deploy-to-github-pages/)

@@ -21,7 +21,7 @@ stuckOptions:
 
 > <img src="/images/dock_head_s.png" alt="LaunchDock" width="24" style="vertical-align: middle;"> **Why this guide exists**: A Docker Desktop update once completely broke WSL2 permissions. This SOP is the result of debugging that — so you don't have to.
 
-> 📌 **Mac user?** This guide is Windows-only. For the much simpler Mac version, see: [Docker + n8n on Mac: Complete Setup Guide](/articles/docker-n8n-mac)
+> 📌 **Mac user?** This guide is Windows-only. For the much simpler Mac version, see: [Docker + n8n on Mac: Complete Setup Guide](/articles/docker-n8n-mac/)
 
 ---
 
@@ -31,7 +31,7 @@ Running Docker on Windows involves an unusual chain of tools. Understanding how 
 
 | Tool | Role | Analogy |
 |------|------|---------|
-| **[WSL2](/articles/windows-wsl-guide)** | A Linux virtual environment inside Windows | A studio apartment built inside your house |
+| **[WSL2](/articles/windows-wsl-guide/)** | A Linux virtual environment inside Windows | A studio apartment built inside your house |
 | **Docker Desktop** | GUI for managing containers; the actual engine runs inside WSL2 | The landlord living on the Windows floor |
 | **n8n** | Automation tool running inside a Docker container | The tenant in the studio apartment |
 
@@ -121,7 +121,7 @@ wsl -d Ubuntu-24.04 -u root nano /etc/wsl.conf
 
 <!-- @img: powershell-wsl-nano-wslconf | PowerShell running wsl nano to open config file -->
 
-> If your Linux version is different (e.g., Ubuntu-22.04), replace `Ubuntu-24.04` accordingly. Run `wsl -l -v` to see your installed versions. If you haven't installed WSL yet, start here: [WSL Complete Guide](/articles/windows-wsl-guide).
+> If your Linux version is different (e.g., Ubuntu-22.04), replace `Ubuntu-24.04` accordingly. Run `wsl -l -v` to see your installed versions. If you haven't installed WSL yet, start here: [WSL Complete Guide](/articles/windows-wsl-guide/).
 
 3. The nano editor opens. You'll see something like this:
 
@@ -342,8 +342,8 @@ wsl --shutdown
 
 ## 🔗 Further Reading
 
-- **Mac makes this much easier** → [Docker + n8n on Mac: Complete Setup Guide](/articles/docker-n8n-mac)
-- **Why does Windows need all this Linux plumbing?** → [Why We Don't Recommend Running OpenClaw Natively on Windows](/articles/why-not-windows-openclaw)
-- **Want to go deeper on WSL2 management?** → [WSL Complete Guide](/articles/windows-wsl-guide)
-- **Want to run an AI Agent on Windows?** → [Windows: Install OpenClaw from Scratch](/articles/install-openclaw-windows)
-- **Want a free local LLM?** → [Ollama + OpenClaw Quick Start | Windows](/articles/ollama-openclaw-windows)
+- **Mac makes this much easier** → [Docker + n8n on Mac: Complete Setup Guide](/articles/docker-n8n-mac/)
+- **Why does Windows need all this Linux plumbing?** → [Why We Don't Recommend Running OpenClaw Natively on Windows](/articles/why-not-windows-openclaw/)
+- **Want to go deeper on WSL2 management?** → [WSL Complete Guide](/articles/windows-wsl-guide/)
+- **Want to run an AI Agent on Windows?** → [Windows: Install OpenClaw from Scratch](/articles/install-openclaw-windows/)
+- **Want a free local LLM?** → [Ollama + OpenClaw Quick Start | Windows](/articles/ollama-openclaw-windows/)

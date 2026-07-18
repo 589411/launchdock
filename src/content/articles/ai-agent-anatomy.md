@@ -45,7 +45,7 @@ stuckOptions:
 
 ## 第一層：Skill——打包好的指令與知識
 
-我在 [Skill 其實是 GPTs 的進化版](/articles/from-prompt-to-skill) 那篇講過：Skill 就是把一套指令或知識打包起來，讓 AI 需要時自己調用、按需載入。
+我在 [Skill 其實是 GPTs 的進化版](/articles/from-prompt-to-skill/) 那篇講過：Skill 就是把一套指令或知識打包起來，讓 AI 需要時自己調用、按需載入。
 
 > 📌 **講清楚**：這裡說的 Skill，指的是 **Anthropic 制訂的正統 Agent Skills**——AI 能自主調用、上下文按需加載的那種。它跟某些框架裡「寫死的 YAML 工作流」剛好同名，但不是同一個東西，別搞混。
 
@@ -55,7 +55,7 @@ Skill 回答的是一個問題：**「這件事該怎麼做？」** 它是 Agent
 
 ## 第二層：工具 / MCP——伸向外部世界的手腳
 
-光有方法還不夠，Agent 還得能**真的動手**：讀檔案、查資料庫、發訊息、呼叫 API。這就是工具層，而 [MCP 協定](/articles/mcp-protocol) 正是讓 AI 用統一方式接上各種工具的標準。
+光有方法還不夠，Agent 還得能**真的動手**：讀檔案、查資料庫、發訊息、呼叫 API。這就是工具層，而 [MCP 協定](/articles/mcp-protocol/) 正是讓 AI 用統一方式接上各種工具的標準。
 
 工具層回答的是：**「我能碰到哪些東西？」** 它是 Agent 的手腳與感官。
 
@@ -106,7 +106,7 @@ Skill 回答的是一個問題：**「這件事該怎麼做？」** 它是 Agent
 
 ## 回到那隻自爆的龍蝦
 
-還記得 [工具調用才是真本事](/articles/llm-tool-calling-era) 裡，那隻「好心幫你優化設定，結果把自己電源線拔掉」的龍蝦嗎？
+還記得 [工具調用才是真本事](/articles/llm-tool-calling-era/) 裡，那隻「好心幫你優化設定，結果把自己電源線拔掉」的龍蝦嗎？
 
 那不是模型笨。那是 **Harness 沒把邊界設好**——它讓 Agent 有權限去改自己的核心設定。模型只是照指令做事，真正該擋下這個動作的護欄，沒裝上。
 
@@ -132,9 +132,9 @@ Skill 回答的是一個問題：**「這件事該怎麼做？」** 它是 Agent
 
 ## 🔗 延伸閱讀
 
-- 🧩 **指令層怎麼演化來的** → [Skill 其實是 GPTs 的進化版](/articles/from-prompt-to-skill)
-- 🔌 **連接層的標準** → [MCP 協定：AI 的 USB 接口](/articles/mcp-protocol)
-- 🦞 **Harness 失敗的活例** → [工具調用才是真本事](/articles/llm-tool-calling-era)
-- 🗺️ **各工具的定位** → [AI 工具地圖](/articles/ai-tool-landscape)
+- 🧩 **指令層怎麼演化來的** → [Skill 其實是 GPTs 的進化版](/articles/from-prompt-to-skill/)
+- 🔌 **連接層的標準** → [MCP 協定：AI 的 USB 接口](/articles/mcp-protocol/)
+- 🦞 **Harness 失敗的活例** → [工具調用才是真本事](/articles/llm-tool-calling-era/)
+- 🗺️ **各工具的定位** → [AI 工具地圖](/articles/ai-tool-landscape/)
 
 有想法想跟鴨編討論？到 [首頁討論區](/#discussion) 聊聊！

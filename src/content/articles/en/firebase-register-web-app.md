@@ -26,7 +26,7 @@ stuckOptions:
 
 You've created a project and turned on login, but your page still doesn't know *which* Firebase project to connect to. **Registering a Web app** is how you get that "connection address" — the `firebaseConfig`.
 
-> Haven't enabled login yet? See [Enable Google Sign-In in Firebase](/articles/firebase-enable-google-login).
+> Haven't enabled login yet? See [Enable Google Sign-In in Firebase](/articles/firebase-enable-google-login/).
 
 ---
 
@@ -69,4 +69,4 @@ Yes. Go to **Project settings → General → Your apps** anytime to copy the `f
 
 ---
 
-> **Next**: Once connected, if reading/writing data throws "Missing or insufficient permissions," that's the rules blocking you → [Fix Missing permissions: Deploy Firestore Security Rules](/articles/firebase-firestore-rules-deploy)
+> **Next**: Once connected, if reading/writing data throws "Missing or insufficient permissions," that's the rules blocking you → [Fix Missing permissions: Deploy Firestore Security Rules](/articles/firebase-firestore-rules-deploy/)

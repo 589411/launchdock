@@ -29,10 +29,10 @@ stuckOptions:
 
 到這裡，你應該已經完成了：
 
-- ✅ [了解 OpenClaw 是什麼](/articles/why-openclaw)
-- ✅ [選好 LLM 方案](/articles/llm-guide)
-- ✅ [拿到 API Key](/articles/ai-api-key-guide)
-- ✅ [安裝 OpenClaw](/articles/install-openclaw)
+- ✅ [了解 OpenClaw 是什麼](/articles/why-openclaw/)
+- ✅ [選好 LLM 方案](/articles/llm-guide/)
+- ✅ [拿到 API Key](/articles/ai-api-key-guide/)
+- ✅ [安裝 OpenClaw](/articles/install-openclaw/)
 
 現在要做的事很簡單：**把 API Key 填進去，然後聽到 AI 的第一句話。**
 
@@ -232,7 +232,7 @@ openclaw gateway start --daemon
 >
 > 你的 OpenClaw 已經可以運作了。下一步來試試更厲害的東西——
 >
-> 👉 [第一個 Skill：完成你的第一個自動化任務](/articles/openclaw-first-skill)
+> 👉 [第一個 Skill：完成你的第一個自動化任務](/articles/openclaw-first-skill/)
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：第一次聽到 AI 回話的感覚怎麼樣？就像你組了一台電腦，按下電源鍵的那一刻——螢幕亮了，一切值得了。接下來要教你讓它幹活，而不只是聊天。
 ---
 
@@ -301,6 +301,6 @@ openclaw doctor
 └── logs/            ← 錯誤日誌
 ```
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 進階設定（模型路由、Fallback 機制）可以看 [模型設定與切換](/articles/openclaw-model-config)。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 進階設定（模型路由、Fallback 機制）可以看 [模型設定與切換](/articles/openclaw-model-config/)。
 
 ---

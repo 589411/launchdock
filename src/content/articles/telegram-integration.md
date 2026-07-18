@@ -27,7 +27,7 @@ stuckOptions:
 
 | 場景 | 你做的事 |
 |---|---|
-| 通勤時看到好文章 | 貼連結給 Bot → 自動整理到 [知識庫](/articles/pkm-system) |
+| 通勤時看到好文章 | 貼連結給 Bot → 自動整理到 [知識庫](/articles/pkm-system/) |
 | 臨時需要翻譯 | 傳文字給 Bot → 秒回翻譯結果 |
 | 會議中想查資料 | 偷偷傳訊息給 Bot → 安靜地收到答案 |
 | 睡前想到靈感 | 語音訊息給 Bot → 自動轉文字存筆記 |
@@ -266,7 +266,7 @@ Bot：📷 圖片辨識結果：
 
 ### 排程推送
 
-結合 [PKM 系統](/articles/pkm-system)，讓 Bot 定時推送：
+結合 [PKM 系統](/articles/pkm-system/)，讓 Bot 定時推送：
 
 ```yaml
 # 每天早上 8 點推送新聞摘要
@@ -349,7 +349,7 @@ telegram:
 - Webhook 模式：應該在 1 秒內
 - 如果超過 5 秒：檢查模型回應速度，可能 AI 推理比較久
 
-用 [更快的模型](/articles/openclaw-model-config)（如 Gemini Flash）可以減少延遲。
+用 [更快的模型](/articles/openclaw-model-config/)（如 Gemini Flash）可以減少延遲。
 
 ### Bot 被 Telegram 封鎖
 
@@ -363,8 +363,8 @@ telegram:
 
 Telegram Bot 設好了，你可以：
 
-- 📚 [建立 PKM 系統，Bot 幫你自動收集整理](/articles/pkm-system)
-- 🧩 [寫 Skill 讓 Bot 執行自動化任務](/articles/openclaw-skill)
-- 🔗 [用 MCP 串接更多工具](/articles/mcp-protocol)
-- ⚙️ [選一個快又便宜的模型給 Bot 用](/articles/openclaw-model-config)
+- 📚 [建立 PKM 系統，Bot 幫你自動收集整理](/articles/pkm-system/)
+- 🧩 [寫 Skill 讓 Bot 執行自動化任務](/articles/openclaw-skill/)
+- 🔗 [用 MCP 串接更多工具](/articles/mcp-protocol/)
+- ⚙️ [選一個快又便宜的模型給 Bot 用](/articles/openclaw-model-config/)
 - 💬 [在首頁討論區分享你的 Bot 設定](/#discussion)

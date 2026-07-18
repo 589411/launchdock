@@ -195,9 +195,9 @@ This mindset applies to any AI-coding scenario.
 
 ## 🔗 Further Reading
 
-- ✍️ **Want to write better prompts?** → [Intro to Prompt Engineering](/en/articles/prompt-engineering)
-- 🔑 **Want to use the Gemini API for more advanced integration?** → [Google API Key Setup Guide](/en/articles/google-api-key-guide)
-- 🧩 **Want to connect more complex automation flows?** → [What Is n8n? The Enterprise Automation Pain Points It Solves](/en/articles/what-is-n8n)
-- 🗺️ **Understand where each AI tool fits** → [The AI Tool Landscape](/en/articles/ai-tool-landscape)
+- ✍️ **Want to write better prompts?** → [Intro to Prompt Engineering](/en/articles/prompt-engineering/)
+- 🔑 **Want to use the Gemini API for more advanced integration?** → [Google API Key Setup Guide](/en/articles/google-api-key-guide/)
+- 🧩 **Want to connect more complex automation flows?** → [What Is n8n? The Enterprise Automation Pain Points It Solves](/en/articles/what-is-n8n/)
+- 🗺️ **Understand where each AI tool fits** → [The AI Tool Landscape](/en/articles/ai-tool-landscape/)
 
 Questions? Join the [homepage discussion](/#discussion) and let's talk!

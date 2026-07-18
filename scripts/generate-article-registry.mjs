@@ -176,7 +176,7 @@ for (const file of files) {
     modules: fm.modules || [],
     concepts_defined: slugToConceptsDefined[slug] || [],
     concepts_referenced: [...new Set(slugToConceptsReferenced[slug] || [])],
-    link: `/articles/${slug}`,
+    link: `/articles/${slug}/`,
   });
 }
 
@@ -194,7 +194,7 @@ const output = {
         displayName: c.displayName,
         shortDesc: c.shortDesc,
         canonicalArticle: c.canonicalArticle,
-        link: `/articles/${c.canonicalArticle}`,
+        link: `/articles/${c.canonicalArticle}/`,
       },
     ]),
   ),

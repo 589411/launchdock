@@ -177,7 +177,7 @@ export default function AuthButton() {
           </div>
           <div className="py-1">
             <a
-              href="/events"
+              href="/events/"
               className="block px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-lighter transition-colors"
             >
               🎟️ 我的活動
@@ -185,25 +185,25 @@ export default function AuthButton() {
             {profile?.role === 'admin' && (
               <>
                 <a
-                  href="/admin/events"
+                  href="/admin/events/"
                   className="block px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-lighter transition-colors"
                 >
                   ⚙️ 活動管理
                 </a>
                 <a
-                  href="/admin/members"
+                  href="/admin/members/"
                   className="block px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-lighter transition-colors"
                 >
                   👥 會員管理
                 </a>
                 <a
-                  href="/admin/notifications"
+                  href="/admin/notifications/"
                   className="block px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-lighter transition-colors"
                 >
                   📧 通知管理
                 </a>
                 <a
-                  href="/admin/feedback"
+                  href="/admin/feedback/"
                   className="block px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-lighter transition-colors"
                 >
                   📊 回饋監控

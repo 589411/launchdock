@@ -86,7 +86,7 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxx
 GOOGLE_API_KEY=your-google-api-key
 ```
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **小提醒**：不知道怎麼申請 API Key？看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide)——Google AI Studio 有免費額度，最適合新手。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **小提醒**：不知道怎麼申請 API Key？看 [AI 模型 API Key 申請指南](/articles/ai-api-key-guide/)——Google AI Studio 有免費額度，最適合新手。
 
 #### Step 5：取得你的存取網址
 
@@ -210,10 +210,10 @@ docker-compose ps
 
 部署完成後，你可以開始學習 OpenClaw 的核心功能：
 
-- ⚙️ [設定模型切換與 Fallback](/articles/openclaw-model-config)
-- 🧩 [Skill：讓 AI 學會可重複的工作流](/articles/openclaw-skill)
-- 🤖 [Agent：你的 AI 分身](/articles/openclaw-agent)
-- 🧠 [Soul：讓 Agent 有記憶和個性](/articles/openclaw-soul)
-- 📱 [串接 Telegram 隨時隨地使用](/articles/telegram-integration)
+- ⚙️ [設定模型切換與 Fallback](/articles/openclaw-model-config/)
+- 🧩 [Skill：讓 AI 學會可重複的工作流](/articles/openclaw-skill/)
+- 🤖 [Agent：你的 AI 分身](/articles/openclaw-agent/)
+- 🧠 [Soul：讓 Agent 有記憶和個性](/articles/openclaw-soul/)
+- 📱 [串接 Telegram 隨時隨地使用](/articles/telegram-integration/)
 
 有問題？到 [首頁討論區](/#discussion) 一起討論！

@@ -89,7 +89,7 @@ OpenClaw can connect to **any** of these LLMs. And you can switch anytime.
 > 🚨 **Common confusion**: Google AI Studio is for using Gemini models (i.e., getting an AI brain). Google Cloud Console API is for connecting Google Drive, Gmail, and similar services. They're completely different, with different application processes.
 >
 > - **Gemini AI brain** → Apply at Google AI Studio → This article teaches you how
-> - **Connect Google Drive/Gmail** → Apply at Google Cloud Console → See [Google API Key Guide](/articles/google-api-key-guide)
+> - **Connect Google Drive/Gmail** → Apply at Google Cloud Console → See [Google API Key Guide](/articles/google-api-key-guide/)
 
 ---
 
@@ -157,7 +157,7 @@ All API plans are billed by **Tokens**. A Token is the smallest unit of text tha
 
 > <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Bottom line**: With a cheap model (Gemini Flash), less than $1/month. With a top-tier model (Claude Opus), about the price of a coffee to a lunch per month.
 >
-> For a deep dive, check out [Token Economics](/articles/token-economics).
+> For a deep dive, check out [Token Economics](/articles/token-economics/).
 
 ### How to Avoid Bill Shock?
 
@@ -184,7 +184,7 @@ For beginners, just remember this quick reference:
 | Writing reports, analysis, coding | Claude Sonnet / GPT-4o | Best quality |
 | Processing very long documents | Gemini 1.5 Pro | ~1 million Token context window |
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Can I switch later?** Absolutely. OpenClaw supports configuring multiple Providers at the same time, and you can switch anytime. For advanced settings, see [Model Configuration & Switching](/articles/openclaw-model-config).
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Can I switch later?** Absolutely. OpenClaw supports configuring multiple Providers at the same time, and you can switch anytime. For advanced settings, see [Model Configuration & Switching](/articles/openclaw-model-config/).
 
 ---
 
@@ -196,4 +196,4 @@ By now, you should have a plan in mind. If you're still unsure:
 - **Want to try different things** → Choose **B. OpenRouter**
 - **Already have a preferred model** → Choose **C or D**
 
-Made your decision? Next step — let's go get your API Key 👉 [Apply for an API Key](/articles/ai-api-key-guide)
+Made your decision? Next step — let's go get your API Key 👉 [Apply for an API Key](/articles/ai-api-key-guide/)

@@ -241,19 +241,19 @@ You're no longer just an AI tool user — you've started **automating your workf
 ## What's Next?
 
 ### Dive Deeper into Skills
-- 📖 [Skill Complete Guide](/en/articles/openclaw-skill) — More Action types, conditional logic, error handling
+- 📖 [Skill Complete Guide](/en/articles/openclaw-skill/) — More Action types, conditional logic, error handling
 
 ### Understand the Core Architecture
-- 🤖 [Agent Complete Guide](/en/articles/openclaw-agent) — Let AI decide which Skill to use
-- 🧠 [Soul Complete Guide](/en/articles/openclaw-soul) — Give AI memory and personality
+- 🤖 [Agent Complete Guide](/en/articles/openclaw-agent/) — Let AI decide which Skill to use
+- 🧠 [Soul Complete Guide](/en/articles/openclaw-soul/) — Give AI memory and personality
 
 ### Practical Workflows
-- 💬 [Telegram Integration](/en/articles/telegram-integration) — Use AI from your phone anytime
-- 📚 [Knowledge Management System](/en/articles/pkm-system) — Automatically organize your knowledge
+- 💬 [Telegram Integration](/en/articles/telegram-integration/) — Use AI from your phone anytime
+- 📚 [Knowledge Management System](/en/articles/pkm-system/) — Automatically organize your knowledge
 
 ### Further Reading
-- 🔗 [MCP Protocol](/en/articles/mcp-protocol) — Understand the underlying protocol for AI tool integration
-- 💰 [Token Economics](/en/articles/token-economics) — Control your AI usage costs
-- 🎯 [Prompt Engineering](/en/articles/prompt-engineering) — Get more precise responses from AI
+- 🔗 [MCP Protocol](/en/articles/mcp-protocol/) — Understand the underlying protocol for AI tool integration
+- 💰 [Token Economics](/en/articles/token-economics/) — Control your AI usage costs
+- 🎯 [Prompt Engineering](/en/articles/prompt-engineering/) — Get more precise responses from AI
 
 ---

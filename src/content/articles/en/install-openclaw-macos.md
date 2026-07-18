@@ -25,8 +25,8 @@ stuckOptions:
 
 This tutorial is for installing OpenClaw on **macOS** (Intel or Apple Silicon M1/M2/M3).
 
-If you're on Windows, check out the [Windows Installation Guide](/en/articles/install-openclaw-windows).
-If you'd rather not install locally, consider the [Cloud Deployment Guide](/en/articles/deploy-openclaw-cloud).
+If you're on Windows, check out the [Windows Installation Guide](/en/articles/install-openclaw-windows/).
+If you'd rather not install locally, consider the [Cloud Deployment Guide](/en/articles/deploy-openclaw-cloud/).
 
 ### What You'll Need
 
@@ -190,7 +190,7 @@ GOOGLE_API_KEY=your-google-api-key
 ANTHROPIC_API_KEY=sk-ant-xxxxxxxx
 ```
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Don't have an API Key yet?** Check out the [AI Model API Key Guide](/en/articles/ai-api-key-guide) — Google AI Studio offers a free tier, perfect for beginners.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Don't have an API Key yet?** Check out the [AI Model API Key Guide](/en/articles/ai-api-key-guide/) — Google AI Studio offers a free tier, perfect for beginners.
 
 ---
 
@@ -260,7 +260,7 @@ python -m openclaw start
 
 Installation complete! Here's what you can do next:
 
-- 🧩 [Learn about Skills: Teach AI repeatable workflows](/en/articles/openclaw-skill)
-- 🤖 [Build your first Agent](/en/articles/openclaw-agent)
-- 🔑 [Get a Google API Key to connect more services](/en/articles/google-api-key-guide)
-- ☁️ [Don't want to manage servers? Try cloud deployment](/en/articles/deploy-openclaw-cloud)
+- 🧩 [Learn about Skills: Teach AI repeatable workflows](/en/articles/openclaw-skill/)
+- 🤖 [Build your first Agent](/en/articles/openclaw-agent/)
+- 🔑 [Get a Google API Key to connect more services](/en/articles/google-api-key-guide/)
+- ☁️ [Don't want to manage servers? Try cloud deployment](/en/articles/deploy-openclaw-cloud/)

@@ -32,7 +32,7 @@ Simply put: **It lets you run a real Linux environment inside Windows — no vir
 
 ## Why Use WSL?
 
-If you've read [Why is installing OpenClaw natively on Windows not recommended?](/en/articles/why-not-windows-openclaw), you know that OpenClaw relies heavily on CLI tools, and these tools work best on Linux.
+If you've read [Why is installing OpenClaw natively on Windows not recommended?](/en/articles/why-not-windows-openclaw/), you know that OpenClaw relies heavily on CLI tools, and these tools work best on Linux.
 
 WSL gives you the best of both worlds:
 
@@ -303,7 +303,7 @@ ANTHROPIC_API_KEY=sk-ant-xxxxxxxx
 
 > In nano: `Ctrl + O` to save, `Ctrl + X` to exit.
 
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Don't have an API Key yet?** Check out the [AI Model API Key Guide](/en/articles/ai-api-key-guide) — Google AI Studio offers a free tier, perfect for beginners.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Don't have an API Key yet?** Check out the [AI Model API Key Guide](/en/articles/ai-api-key-guide/) — Google AI Studio offers a free tier, perfect for beginners.
 
 ### Launch OpenClaw
 
@@ -479,7 +479,7 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 WSL is all set! Here's what you can do next:
 
-- 🐾 [First time launching OpenClaw](/en/articles/openclaw-first-run) — Set up your API Key and hear AI's first words
-- 🧩 [Learn about Skills](/en/articles/openclaw-skill) — Teach AI repeatable workflows
-- 🤖 [Build your Agent](/en/articles/openclaw-agent) — Your AI alter ego goes live
-- 🔑 [Apply for an API Key](/en/articles/ai-api-key-guide) — Free Google API Key is perfect for beginners
+- 🐾 [First time launching OpenClaw](/en/articles/openclaw-first-run/) — Set up your API Key and hear AI's first words
+- 🧩 [Learn about Skills](/en/articles/openclaw-skill/) — Teach AI repeatable workflows
+- 🤖 [Build your Agent](/en/articles/openclaw-agent/) — Your AI alter ego goes live
+- 🔑 [Apply for an API Key](/en/articles/ai-api-key-guide/) — Free Google API Key is perfect for beginners

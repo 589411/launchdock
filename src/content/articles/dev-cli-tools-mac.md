@@ -18,9 +18,9 @@ stuckOptions:
   "更新工具": ["怎麼一次更新全部工具？", "舊版本怎麼移除？"]
 ---
 
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **一次裝好，少踩幾個坑**：在 Mac 上，幾乎所有開發者 CLI 工具都能靠 [Homebrew](/articles/cli-guide) 一行指令搞定。這篇帶你先打好地基，再依序裝上 GitHub CLI、Firebase CLI、以及 Google 的 Antigravity CLI。看完大概 12 分鐘，你的終端機就齊全了。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **一次裝好，少踩幾個坑**：在 Mac 上，幾乎所有開發者 CLI 工具都能靠 [Homebrew](/articles/cli-guide/) 一行指令搞定。這篇帶你先打好地基，再依序裝上 GitHub CLI、Firebase CLI、以及 Google 的 Antigravity CLI。看完大概 12 分鐘，你的終端機就齊全了。
 
-> 📌 **不熟悉終端機？** 建議先看 [CLI 入門指南](/articles/cli-guide)，了解「打字操作電腦」是怎麼回事，再回來跟著做會更順。
+> 📌 **不熟悉終端機？** 建議先看 [CLI 入門指南](/articles/cli-guide/)，了解「打字操作電腦」是怎麼回事，再回來跟著做會更順。
 
 ---
 
@@ -232,6 +232,6 @@ brew uninstall firebase-cli
 
 ## 🔗 延伸閱讀
 
-- **還不熟命令列？** → [CLI 入門指南：命令列到底是什麼？](/articles/cli-guide)
-- **想在 Mac 跑 AI Agent？** → [macOS 安裝 OpenClaw 完整教學](/articles/install-openclaw-macos)
-- **想用 Docker 跑自動化工具？** → [Mac 安裝 Docker + n8n 完整指南](/articles/docker-n8n-mac)
+- **還不熟命令列？** → [CLI 入門指南：命令列到底是什麼？](/articles/cli-guide/)
+- **想在 Mac 跑 AI Agent？** → [macOS 安裝 OpenClaw 完整教學](/articles/install-openclaw-macos/)
+- **想用 Docker 跑自動化工具？** → [Mac 安裝 Docker + n8n 完整指南](/articles/docker-n8n-mac/)

@@ -45,7 +45,7 @@ const nextArticle = stepArticleMap.get(currentStep + 1);
 
       return available ? (
         <a
-          href={`/articles/${article.id}`}
+          href={`/articles/${article.id}/`}
           class={`progress-step ${isPast ? 'past' : ''}`}
           title={s.label}
         >
@@ -66,13 +66,13 @@ const nextArticle = stepArticleMap.get(currentStep + 1);
 
   <div class="progress-nav">
     {prevArticle ? (
-      <a href={`/articles/${prevArticle.id}`} class="progress-nav-link">
+      <a href={`/articles/${prevArticle.id}/`} class="progress-nav-link">
         ← 上一步
       </a>
     ) : <span />}
     <span class="progress-current-label">第 {currentStep}/6 步</span>
     {nextArticle ? (
-      <a href={`/articles/${nextArticle.id}`} class="progress-nav-link">
+      <a href={`/articles/${nextArticle.id}/`} class="progress-nav-link">
         下一步 →
       </a>
     ) : currentStep < 6 ? (

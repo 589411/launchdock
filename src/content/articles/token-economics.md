@@ -19,7 +19,7 @@ stuckOptions:
 ---
 ## 為什麼你需要懂 Token？
 
-你已經 [申請了 API Key](/articles/ai-api-key-guide)，開始用 OpenClaw 了。突然有一天，你收到一封帳單——
+你已經 [申請了 API Key](/articles/ai-api-key-guide/)，開始用 OpenClaw 了。突然有一天，你收到一封帳單——
 
 > 「本月 API 使用費：$47.82」
 
@@ -109,7 +109,7 @@ AI 回覆的答案 → Output Token（輸出）
 | Claude 3 Opus     | $15.00     | $75.00      | 最高品質、複雜推理 |
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **新手建議**：先用 **Gemini 2.0 Flash**（免費額度），等熟悉了再考慮付費模型。
-> 這也是為什麼我們先教你 [申請 Google API Key](/articles/google-api-key-guide)。
+> 這也是為什麼我們先教你 [申請 Google API Key](/articles/google-api-key-guide/)。
 
 ---
 
@@ -178,7 +178,7 @@ AI 回覆的答案 → Output Token（輸出）
 追求最好品質             → Claude Opus 4.6
 ```
 
-在 OpenClaw 裡，你可以針對不同 Skill [設定不同的模型](/articles/openclaw-model-config)。
+在 OpenClaw 裡，你可以針對不同 Skill [設定不同的模型](/articles/openclaw-model-config/)。
 
 ### 2. 精簡 System Prompt
 
@@ -189,7 +189,7 @@ System Prompt 每次呼叫都會送出，是「隱形成本」。
 ✅ 100 Token 的 System Prompt × 每天 100 次 = 10,000 tokens/天
 ```
 
-減少 80%！參考 [Soul 設定指南](/articles/openclaw-soul) 學習如何寫精簡有效的人設。
+減少 80%！參考 [Soul 設定指南](/articles/openclaw-soul/) 學習如何寫精簡有效的人設。
 
 ### 3. 善用快取（Caching）
 
@@ -227,7 +227,7 @@ config:
 
 OpenClaw 內建幾個省錢機制：
 
-1. **模型路由**：根據任務複雜度自動選模型（在[模型設定](/articles/openclaw-model-config)中配置）
+1. **模型路由**：根據任務複雜度自動選模型（在[模型設定](/articles/openclaw-model-config/)中配置）
 2. **Agent 記憶壓縮**：不會把全部歷史傳送，只保留重要部分
 3. **Skill 快取**：相同輸入不重複呼叫
 4. **Token 預算**：每個 Skill 可設上限
@@ -256,7 +256,7 @@ Token 不是儲值，是用多少算多少。你的 API 額度不會過期（除
 
 了解 Token 後，你可以：
 
-- 🔑 [申請 API Key 開始使用](/articles/ai-api-key-guide)
-- ⚙️ [設定模型切換策略](/articles/openclaw-model-config)
-- 🧩 [寫 Skill 時設定 Token 預算](/articles/openclaw-skill)
-- 💬 [Prompt 工程：用更少 Token 得到更好結果](/articles/prompt-engineering)
+- 🔑 [申請 API Key 開始使用](/articles/ai-api-key-guide/)
+- ⚙️ [設定模型切換策略](/articles/openclaw-model-config/)
+- 🧩 [寫 Skill 時設定 Token 預算](/articles/openclaw-skill/)
+- 💬 [Prompt 工程：用更少 Token 得到更好結果](/articles/prompt-engineering/)

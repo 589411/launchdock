@@ -56,7 +56,7 @@ After rebooting, WSL automatically continues installing Ubuntu. During this step
 
 ![WSL Ubuntu first-launch setup for username and password](/images/articles/ollama-openclaw-windows/wsl-ubuntu-setup.png)
 
-> 🚨 **If `wsl --install` does nothing,** you may need to enable Virtualization in your BIOS first. For detailed steps, see the [Windows WSL Setup Guide](/en/articles/windows-wsl-guide).
+> 🚨 **If `wsl --install` does nothing,** you may need to enable Virtualization in your BIOS first. For detailed steps, see the [Windows WSL Setup Guide](/en/articles/windows-wsl-guide/).
 
 Confirm WSL installed successfully:
 
@@ -252,14 +252,14 @@ Ollama's cloud models come with a free quota ([official details](https://ollama.
 1. Go to [ollama.com/settings](https://ollama.com/settings) and sign in with your Google account
 2. There you can see your remaining free quota and usage
 
-Out of quota? You can switch to the [Gemini Flash cloud API](/en/articles/gemini-api-setup).
+Out of quota? You can switch to the [Gemini Flash cloud API](/en/articles/gemini-api-setup/).
 
 ---
 
 ## Next Steps
 
-- ⚙️ [Model Configuration and Switching](/en/articles/openclaw-model-config)
-- 🧩 [Build Your First Skill](/en/articles/openclaw-first-skill)
-- 📱 [Connect Telegram](/en/articles/telegram-integration)
+- ⚙️ [Model Configuration and Switching](/en/articles/openclaw-model-config/)
+- 🧩 [Build Your First Skill](/en/articles/openclaw-first-skill/)
+- 📱 [Connect Telegram](/en/articles/telegram-integration/)
 
 Questions? Join the [homepage discussion](/#discussion) and let's talk!
