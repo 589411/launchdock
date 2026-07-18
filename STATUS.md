@@ -2,7 +2,7 @@
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
 **最後更新：** 2026-07-18（反向截圖產線：桌面 167 張截圖全量 triage → 8 篇中英雙版新文章 + 58 張本機遮罩圖，經兩輪獨立視覺稽核，**已合併 main + push、Cloudflare Pages 正式站上線並驗證 HTTP 200**）
-**整體狀態：** 🟢 進行中
+**整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 一句話現況
 旗艦教學站（Astro，47 篇文章）。07-05 大整理：內容制度正本上線（EDITORIAL + 兩個任務範本 +
@@ -35,6 +35,7 @@
   根本解是搬進獨立 schema / 獨立 project——只要還共用 anon key 風險就掛著（尚未動）。
 
 ## 進度脈絡（新的在上）
+- 2026-07-18 SEO 未索引修正（commit 9e3296b，已上 production 實測）：根因＝全站內部連結/hreflang/nav 無斜線→Cloudflare 308→Google 判「重新導向」(85)；文章頁無 canonical→重複(12)。修：astro.config trailingSlash:'always'、BaseLayout 自我 canonical+hreflang 斜線、remark 概念外掛/registry/102 篇內文/Header/各元件連結全補斜線。dist 無斜線連結=0、sitemap 143 全斜線。後續：Joseph 到 SC 按「驗證修正」+要求索引。完整紀錄與 checklist：docs/seo-indexing-fix.md。
 - 2026-07-10 LINE 會員 Phase 1a（不需 channel 的部分，已 build 綠 + 瀏覽器實測）：① 新增 `src/components/ShareToLine.astro`——文章一鍵分享到 LINE，用官方 LINE it! share endpoint（純靜態 `<a>`，零 API/零配額/零 channel），塞進 `ArticleLayout.astro` → 中英 47 篇（含未來新增）自動全有、未動任何一篇文章；i18n 加 `article.share.line`/`article.share.hint`。② migration 008 `member_profiles.email` 改可空 + 重寫 `handle_new_user()` 容忍 LINE 無 email 用戶（保留 006 加固），對 Google 用戶零影響——**檔案已寫、尚未套 production**。設計討論（三塊：LINE 登入 / 分享 / 詢問→自動回覆避開 200 push 上限）與分階段見 BACKLOG「藍鴨導入 LINE 會員系統」。
 - 2026-07-10 新增商模 roadmap `docs/ROADMAP.md`：「vibe coding 課 × 限時能力包」試營運實驗（月底）。關鍵洞察＝`memory-mcp` 已是 remote read-only MCP，限時能力包架構已存在、只差限時 token；demo 任務源自 `launchdock-lab`、能力包內容源自 `589411/memory`。三個待驗數字：付費轉換/續訂率/任務完成率。細節待辦已進 BACKLOG 規劃區。（純規劃文件，無程式改動）
 - 2026-07-10 藍鴨小聚上站露出 + 原生 events 加外部報名能力（已上 production）：發現 `/meetup` 是孤兒頁（首頁/活動頁都無入口，訪客只有拿到網址才點得到）。
