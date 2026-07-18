@@ -11,6 +11,7 @@ order: 2
 prerequisites: ["make-gmail-sheets-automation"]
 estimatedMinutes: 15
 tags: ["Google", "API", "設定", "OAuth"]
+modules: [M08, M05]
 stuckOptions:
   "建立專案": ["專案名稱和專案 ID 差在哪？", "父項資源選什麼？", "已經有一堆專案了，要新建嗎？"]
   "啟用 API": ["搜尋不到 Gmail API", "啟用後還要做什麼？", "為什麼要同時開 Sheets 和 Drive？"]

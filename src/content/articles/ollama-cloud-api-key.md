@@ -11,6 +11,7 @@ order: 2
 prerequisites: []
 estimatedMinutes: 6
 tags: ["Ollama", "API", "申請", "LLM"]
+modules: [M01]
 stuckOptions:
   "註冊與登入": ["一定要用 Google 嗎？", "要手機驗證嗎？", "Ollama 不是本機跑的嗎，為什麼要登入？"]
   "建立 API Key": ["Keys 在哪裡？", "金鑰只顯示一次嗎？", "Device Keys 和 API Keys 差在哪？"]

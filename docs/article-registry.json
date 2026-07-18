@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-18T12:56:51.321Z",
+  "_generated": "2026-07-18T14:15:34.871Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -652,7 +652,9 @@
         "設定"
       ],
       "prerequisites": [],
-      "modules": [],
+      "modules": [
+        "M07"
+      ],
       "concepts_defined": [
         "Looker Studio"
       ],
@@ -1293,7 +1295,10 @@
         "make-gmail-sheets-automation",
         "openrouter-free-llm-api-key"
       ],
-      "modules": [],
+      "modules": [
+        "M05",
+        "M01"
+      ],
       "concepts_defined": [],
       "concepts_referenced": [
         "OpenRouter",
@@ -1389,7 +1394,10 @@
       "prerequisites": [
         "make-gmail-sheets-automation"
       ],
-      "modules": [],
+      "modules": [
+        "M08",
+        "M05"
+      ],
       "concepts_defined": [
         "Google Cloud"
       ],
@@ -1465,7 +1473,9 @@
         "Gmail"
       ],
       "prerequisites": [],
-      "modules": [],
+      "modules": [
+        "M05"
+      ],
       "concepts_defined": [
         "Make"
       ],
@@ -1537,7 +1547,9 @@
         "Google"
       ],
       "prerequisites": [],
-      "modules": [],
+      "modules": [
+        "M01"
+      ],
       "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/ai-agents-build-line-booking-system"
@@ -1769,7 +1781,9 @@
         "資料科學"
       ],
       "prerequisites": [],
-      "modules": [],
+      "modules": [
+        "M07"
+      ],
       "concepts_defined": [
         "Kaggle"
       ],
@@ -1939,7 +1953,9 @@
         "LLM"
       ],
       "prerequisites": [],
-      "modules": [],
+      "modules": [
+        "M01"
+      ],
       "concepts_defined": [],
       "concepts_referenced": [
         "Ollama",
@@ -1961,7 +1977,9 @@
         "LLM"
       ],
       "prerequisites": [],
-      "modules": [],
+      "modules": [
+        "M01"
+      ],
       "concepts_defined": [
         "OpenRouter"
       ],

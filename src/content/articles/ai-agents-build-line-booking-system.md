@@ -11,6 +11,7 @@ order: 1
 prerequisites: []
 estimatedMinutes: 9
 tags: ["Agent", "自動化", "Google"]
+modules: [M01]
 stuckOptions:
   "AI 分工的觀念": ["為什麼不用一個 AI 做到底？", "計劃、執行、審查誰做誰？", "這跟 vibe coding 差在哪？"]
   "工具怎麼配": ["Antigravity CLI 是什麼？", "為什麼還要另一個 AI 審查？", "模型要怎麼選？"]

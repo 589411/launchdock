@@ -11,6 +11,7 @@ order: 3
 prerequisites: ["make-gmail-sheets-automation", "openrouter-free-llm-api-key"]
 estimatedMinutes: 14
 tags: ["Make", "LLM", "自動化", "OpenRouter"]
+modules: [M05, M01]
 stuckOptions:
   "加入 OpenRouter 模組": ["搜尋不到 OpenRouter", "要選哪個 action？", "OAuth 連線怎麼建？"]
   "選模型與寫 prompt": ["哪個模型免費？", "System 和 User 訊息差在哪？", "為什麼 AI 回傳一堆廢話？"]

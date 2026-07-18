@@ -11,6 +11,7 @@ order: 1
 prerequisites: []
 estimatedMinutes: 8
 tags: ["Looker Studio", "Google", "資料分析", "設定"]
+modules: [M07]
 stuckOptions:
   "找不到上傳 CSV 的選項": ["連接器列表太多找不到", "為什麼要授權 Google Cloud Storage？", "CSV 有大小限制嗎？"]
   "上傳後欄位怪怪的": ["數字被當成文字", "日期沒被辨識", "有一欄整個空白"]

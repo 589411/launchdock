@@ -11,6 +11,7 @@ order: 1
 prerequisites: []
 estimatedMinutes: 6
 tags: ["Kaggle", "申請", "資料科學"]
+modules: [M07]
 stuckOptions:
   "選擇登入方式": ["一定要用 Google 嗎？", "可以用 Email 註冊嗎？", "哪個方式最快？"]
   "手機驗證": ["收不到簡訊驗證碼", "為什麼一定要驗證手機？", "換一個號碼可以嗎？"]

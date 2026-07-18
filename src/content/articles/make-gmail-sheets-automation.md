@@ -11,6 +11,7 @@ order: 1
 prerequisites: []
 estimatedMinutes: 12
 tags: ["Make", "自動化", "整合", "Gmail"]
+modules: [M05]
 stuckOptions:
   "挑選範本": ["找不到 Gmail to Sheets 範本", "範本要付費嗎？", "eu1／eu2 網址不一樣正常嗎？"]
   "授權 Google 連線": ["Sign in with Google 卡住", "它要很多 Gmail 權限，安全嗎？", "連線一直 Creating a connection"]

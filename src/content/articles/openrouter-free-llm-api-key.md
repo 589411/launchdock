@@ -11,6 +11,7 @@ order: 1
 prerequisites: []
 estimatedMinutes: 7
 tags: ["OpenRouter", "API", "申請", "LLM"]
+modules: [M01]
 stuckOptions:
   "註冊與登入": ["一定要用 Google 嗎？", "Individual 和 Organization 選哪個？", "要先綁信用卡嗎？"]
   "拿 API Key": ["金鑰只顯示一次是什麼意思？", "金鑰不小心關掉了怎麼辦？", "金鑰要放哪裡才安全？"]
