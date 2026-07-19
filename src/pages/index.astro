@@ -217,6 +217,65 @@ const articlesMeta = allArticles.map(a => ({
     </div>
   </section>
 
+  <!-- 🧰 藍鴨生態系工具（Lab / Masters 入口） -->
+  <section class="max-w-[900px] mx-auto px-6 py-14">
+    <h2 class="text-2xl font-bold mb-2">學完，拿去用</h2>
+    <p class="text-text-secondary mb-8">
+      藍鴨還有兩個隨開即用的 AI 工具站——課堂實例可以直接動手玩，管理行銷大師打包成隨選專家團。
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+      <!-- Launchdock Lab -->
+      <a
+        href="https://lab.launchdock.app"
+        target="_blank"
+        rel="noopener"
+        class="group relative block rounded-2xl bg-surface-light border border-surface-lighter hover:border-[#f59e0b]/50 transition-all duration-200 overflow-hidden"
+      >
+        <div class="absolute top-0 left-0 w-full h-1 bg-[#f59e0b]"></div>
+        <div class="p-7">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-3xl">🧪</span>
+            <span class="text-xs text-text-muted group-hover:text-[#f59e0b] transition-colors">lab.launchdock.app ↗</span>
+          </div>
+          <h3 class="text-xl font-bold mb-1 group-hover:text-[#f59e0b] transition-colors">藍鴨實驗室</h3>
+          <p class="text-xs font-semibold tracking-wide text-[#f59e0b] mb-3">Launchdock Lab · AI 實例庫</p>
+          <p class="text-text-secondary text-sm leading-relaxed mb-5">
+            課堂上看到的每個 demo 都在這裡：從一句提示詞，到可複製的範本，到全自動工作流。每張卡片都附「明天就能做的一件事」。
+          </p>
+          <span class="inline-flex items-center gap-1.5 text-sm font-medium text-text-primary group-hover:text-[#f59e0b] transition-colors">
+            開啟實例庫 <span class="inline-block group-hover:translate-x-0.5 transition-transform">→</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Masters Hub -->
+      <a
+        href="https://masters.launchdock.app"
+        target="_blank"
+        rel="noopener"
+        class="group relative block rounded-2xl bg-surface-light border border-surface-lighter hover:border-[#2f8f9d]/50 transition-all duration-200 overflow-hidden"
+      >
+        <div class="absolute top-0 left-0 w-full h-1 bg-[#2f8f9d]"></div>
+        <div class="p-7">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-3xl">🎓</span>
+            <span class="text-xs text-text-muted group-hover:text-[#2f8f9d] transition-colors">masters.launchdock.app ↗</span>
+          </div>
+          <h3 class="text-xl font-bold mb-1 group-hover:text-[#2f8f9d] transition-colors">大師專家團</h3>
+          <p class="text-xs font-semibold tracking-wide text-[#2f8f9d] mb-3">Masters Hub · 隨選 AI 專家團</p>
+          <p class="text-text-secondary text-sm leading-relaxed mb-5">
+            把百年來的管理、行銷、創新理論，打包成一個個「點一下就能用」的 AI 專家。挑一個任務，整組大師連同工作流一次交到你手上。
+          </p>
+          <span class="inline-flex items-center gap-1.5 text-sm font-medium text-text-primary group-hover:text-[#2f8f9d] transition-colors">
+            召喚大師團 <span class="inline-block group-hover:translate-x-0.5 transition-transform">→</span>
+          </span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
   <!-- Discussion Section -->
   <section id="discussion" class="max-w-[900px] mx-auto px-6 py-16">
     <HomeDiscussion client:load />
