@@ -21,6 +21,10 @@ export const ui = {
     'nav.events': '活動',
     'nav.about': '關於',
     'nav.discussion': '討論區',
+    'nav.tools': '工具',
+    'nav.tools.lab': '藍鴨實驗室 · AI 實例庫',
+    'nav.tools.masters': '大師專家團 · 隨選 AI 專家',
+    'footer.tools': '工具站',
 
     // Site identity
     'site.name': '藍鴨 LaunchDock',
@@ -78,6 +82,10 @@ export const ui = {
     'nav.events': 'Events',
     'nav.about': 'About',
     'nav.discussion': 'Discuss',
+    'nav.tools': 'Tools',
+    'nav.tools.lab': 'Launchdock Lab · AI demo library',
+    'nav.tools.masters': 'Masters Hub · on-demand AI experts',
+    'footer.tools': 'Tool apps',
 
     // Site identity
     'site.name': 'LaunchDock',
