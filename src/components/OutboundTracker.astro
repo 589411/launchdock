@@ -1,0 +1,44 @@
+---
+// Global outbound-click tracker.
+// Logs a click on any <a data-track-outbound="lab|masters" data-placement="..."> to
+// Supabase (outbound_clicks table) so we can measure how much traffic each on-site
+// entry point funnels to the ecosystem tool apps. Renders nothing.
+---
+<script>
+  import { supabase, isSupabaseConfigured } from '../lib/supabase';
+
+  // Reuse the same anonymous fingerprint as PageViewTracker.
+  function getFingerprint() {
+    let fp = localStorage.getItem('launchdock-fp') || '';
+    if (!fp) {
+      fp = Math.random().toString(36).slice(2) + Date.now().toString(36);
+      localStorage.setItem('launchdock-fp', fp);
+    }
+    return fp;
+  }
+
+  document.addEventListener('click', (e) => {
+    const el = e.target;
+    const link = el instanceof Element ? el.closest('a[data-track-outbound]') : null;
+    if (!link) return;
+    if (!isSupabaseConfigured()) return;
+
+    const payload = {
+      target: link.getAttribute('data-track-outbound'),
+      placement: link.getAttribute('data-placement') || 'unknown',
+      fingerprint: getFingerprint(),
+      referrer: document.referrer || null,
+      path: location.pathname,
+    };
+
+    // Fire-and-forget. All outbound entry links open in a new tab (target="_blank"),
+    // so this page stays alive and the insert completes before it would be aborted.
+    try {
+      supabase.from('outbound_clicks').insert(payload).then(({ error }) => {
+        if (error) console.warn('[OutboundTracker] insert failed:', error.message);
+      });
+    } catch (err) {
+      console.warn('[OutboundTracker] error:', err);
+    }
+  }, { capture: true });
+</script>
