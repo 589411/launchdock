@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TrafficDashboard from '../../components/TrafficDashboard.tsx';
+---
+
+<BaseLayout title="導流監控" description="監控主站導向 Lab / Masters 工具站的外連點擊，找出最有效的入口位置。">
+  <div class="max-w-5xl mx-auto px-4 py-12">
+    <TrafficDashboard client:load />
+  </div>
+</BaseLayout>
