@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-07-21（反向截圖產線：Grok／ChatGPT 連 GitHub 兩篇中英雙版 + 13 張遮罩圖，分支 `article/connect-github-20260721` 本地 commit、**未 push**，等 Joseph 過目）
+**最後更新：** 2026-07-21（反向截圖產線：Grok／ChatGPT 連 GitHub 兩篇中英雙版 + 13 張遮罩圖【handle 已依決定露出】，分支 `article/connect-github-20260721` 本地 commit、**未 push**，等 Joseph 說一聲即上線）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 一句話現況
@@ -10,7 +10,7 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**2026-07-21 AI 連 GitHub 兩篇：本地 commit 完成、等 Joseph 過目遮罩圖後 push**——分支 `article/connect-github-20260721`（commit 7615b9f，**未 push**）。兩篇中英雙版：① `grok-connect-github`（Grok 免費版**實測可用**：一句話「寫一個介紹cli工具的網站，上傳到github repo」→ 2m14s → GitHub 上真的多出 repo `cli-tool-website` 含 README+index.html，重點教 GitHub App 授權範圍 All vs Only select、sudo mode、怎麼收回；9 張圖）② `chatgpt-connect-github`（外掛程式→GitHub→安裝→「與 GitHub 連線」授權；**誠實寫出免費版模型無法完成實際 GitHub 任務、需訂閱**，並指出該 connector 定位是 PR/issue/CI triage，四個 Skills 裡沒有 Create Repository；4 張圖）。兩篇互相導流＋接 `deploy-to-github-pages`／`mcp-protocol`／`github-account-signup`。圖 13 張全部本機遮罩（腳本 OCR 漏抓多處，靠手動實心黑框補：Grok 左下 email、ChatGPT 側欄私人對話標題、Grok 回覆內的 GitHub Pages 網址），兩輪視覺覆核＋最終 scan 13/13 clean。concepts.yaml 加 Grok／連接器，registry 68 篇/55 概念，build 綠。查證：xAI 官方文件「連接器對所有 Grok 使用者開放」；OpenAI help 頁 403 取不到 → 方案限制一律寫成「實測」不寫成官方政策。→ **待 Joseph 決定：GitHub handle 目前一併遮掉了，若認為公開帳號可露出，說一聲我重跑不含該 token 的版本（圖會清爽很多）。**
+**2026-07-21 AI 連 GitHub 兩篇：本地 commit 完成、等 Joseph 過目遮罩圖後 push**——分支 `article/connect-github-20260721`（commit 7615b9f，**未 push**）。兩篇中英雙版：① `grok-connect-github`（Grok 免費版**實測可用**：一句話「寫一個介紹cli工具的網站，上傳到github repo」→ 2m14s → GitHub 上真的多出 repo `cli-tool-website` 含 README+index.html，重點教 GitHub App 授權範圍 All vs Only select、sudo mode、怎麼收回；9 張圖）② `chatgpt-connect-github`（外掛程式→GitHub→安裝→「與 GitHub 連線」授權；**誠實寫出免費版模型無法完成實際 GitHub 任務、需訂閱**，並指出該 connector 定位是 PR/issue/CI triage，四個 Skills 裡沒有 Create Repository；4 張圖）。兩篇互相導流＋接 `deploy-to-github-pages`／`mcp-protocol`／`github-account-signup`。圖 13 張全部本機遮罩（腳本 OCR 漏抓多處，靠手動實心黑框補：Grok 左下 email、ChatGPT 側欄私人對話標題、Grok 回覆內的 GitHub Pages 網址），兩輪視覺覆核＋最終 scan 13/13 clean。concepts.yaml 加 Grok／連接器，registry 68 篇/55 概念，build 綠。查證：xAI 官方文件「連接器對所有 Grok 使用者開放」；OpenAI help 頁 403 取不到 → 方案限制一律寫成「實測」不寫成官方政策。**2026-07-21 收工前已依 Joseph 決定重跑一版：GitHub handle `josephchang7-dev` 與 repo／Pages 網址改為露出（公開帳號＋public repo），遮罩 token 收斂成 `Joseph Chang`／`josephyhchang7`／`gmail.com`；5 張圖重轉、重掃 13/13 clean、build 綠。→ Joseph 過目後說一聲即 merge main + push。**
 
 **（前一段）2026-07-20 github-account-signup 併入「用 Google 一鍵註冊」：本地 commit 完成、等 Joseph 點頭 push**——把新桌面截圖的「Continue with Google」OAuth 路徑併入既有 github-account-signup（中英雙版），重構成「共用起點 → 方式 A Google 一鍵（推薦）→ 方式 B 填表 → 共用裝置驗證/Dashboard/選單」；並補上往 deploy-to-github-pages 的正向連結（deploy 早已反向連回來，雙向連結完成）。新增 4 張圖（google-search / continue-with-google / account-chooser / oauth-consent，轉 JPEG 220-308K）；其中 account-chooser、oauth-consent 含真實 email＋人名，已用 `redact-screenshots.py --mask-text` 遮罩（OCR 預設漏抓、靠人工 token 補）＋**瀏覽器逐圖視覺覆核**＋最終 scan 9/9 clean。build 綠。**尚未 push**（遵循 PII 圖片先 review 再上傳的慣例，避免重演 email 外流事故）。→ Joseph 過目遮罩圖後說一聲即 push。
 
