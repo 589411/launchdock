@@ -21,6 +21,16 @@
 
 ➡️ 所以一定要做 **AI 視覺第二輪**：人眼掃過每張圖，把上述個資用 `--mask-text` 指定 token，由 OCR 定位後整行馬賽克。
 
+### 連 `--mask-text` 都救不了的一種漏抓：OCR 根本讀不到
+
+`--mask-text` 靠 OCR 先讀出文字才能比對。**畫面一暗化（跳出彈窗時側欄整片變灰），OCR 就讀不到那些字，token 給得再準也沒用。**
+
+2026-07-21 實例：Grok 左下角的「姓名 + email」在彈窗截圖上兩輪都沒被抓到，肉眼卻看得一清二楚。
+
+➡️ 因此 `redact-screenshots.py` **預設會直接蓋掉左下角帳號區的實心黑框**（不依賴 OCR，位置固定就直接蓋）。ChatGPT / Grok / Gemini 這類側欄底部固定顯示登入者資訊，這一塊蓋掉零損失。
+
+**唯一要記得關掉的情況**：左下角本來就是文章要呈現的內容（例如 GitHub repo 頁面的 README 左半部），這時加 `--no-corner-mask`，但**改由人眼負責那一塊**。
+
 ---
 
 ## 完整流程
@@ -56,6 +66,9 @@ python3 scripts/redact-screenshots.py ~/Desktop/captures/_staging/<slug> \
 ```
 
 `--mask-text` 可重複，大小寫不拘；任何 OCR 文字行含該 token 就整行馬賽克。
+左下角帳號區的實心黑框會自動一起蓋（要保留該區內容時加 `--no-corner-mask`）。
+
+> **token 挑得太寬會誤傷**：`--mask-text joseph` 會連 `josephchang7-dev`（公開的 GitHub 帳號）一起遮掉，圖上多好幾塊馬賽克。要遮真名就給 `--mask-text "Joseph Chang"`（含空格），精準得多。
 
 ### Step 4：上架前最終掃描（必須 0 命中）
 
@@ -109,4 +122,4 @@ npm run registry
 **首次實作產物**：`deploy-line-bot-cloudflare-workers`（中英文版）。
 **相關**：`article-workflow-guide.md`、`llm-article-prompt.md`、`image-workflow.md`、`CLAUDE.md`。
 
-**Last updated:** 2026-06-18
+**Last updated:** 2026-07-21（新增左下角帳號區保底黑框、token 挑選建議）
