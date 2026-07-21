@@ -400,3 +400,19 @@ Looker Studio:
   shortDesc: "Google 免費的資料視覺化工具，可接 CSV、試算表、BigQuery 做互動式儀表板"
   canonicalArticle: "looker-studio-csv-analysis"
   relatedArticles: ["kaggle-account-signup"]
+
+# ── AI 連接器與 GitHub（截圖產線新增 2026-07-21）────────────
+
+Grok:
+  displayName: "Grok"
+  aliases: ["Grok", "grok", "xAI"]
+  shortDesc: "xAI 推出的 AI 助理，可透過連接器操作 GitHub、Gmail 等外部服務"
+  canonicalArticle: "grok-connect-github"
+  relatedArticles: ["chatgpt-connect-github", "ai-tool-landscape", "llm-tool-calling-era"]
+
+Connector:
+  displayName: "連接器（Connector）"
+  aliases: ["連接器", "Connector", "connectors"]
+  shortDesc: "把 AI 接上外部服務的授權通道，讓 AI 不只是回答、而是能實際去操作你的帳號"
+  canonicalArticle: "grok-connect-github"
+  relatedArticles: ["chatgpt-connect-github", "mcp-protocol", "llm-tool-calling-era"]
