@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-07-22（兩批一起上線：① 對帳自動化工作流互動頁＋中英雙版文章＋接測驗 L4；② 2026-07-21 Grok／ChatGPT 連 GitHub 兩篇中英雙版 + 13 張遮罩圖。兩支分支**已 merge main + push**）
+**最後更新：** 2026-07-22（**自動化工作流四條全上線**：對帳／報表／收件匣／文件差異，各一個互動 island + 中英雙版文章，全接測驗 L4；同日一併把 2026-07-21 Grok／ChatGPT 連 GitHub 兩篇 + 13 張遮罩圖推上 production）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 一句話現況
@@ -10,7 +10,13 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**2026-07-22 對帳自動化工作流：已上線**——分支 `feat/workflow-reconcile`（commit 9ac2f17，已 merge main + push，Cloudflare Pages 自動部署）。來源＝ `~/github/workflow-claude/` 的交接包（HANDOFF-workflow-reconcile.md，架構已定案）。內容：① `ReconcileWizard.tsx` 四步互動 island（選情境→一鍵比對→結果+白話解讀→換自己 CSV；**純前端零 API**，CSV 只在瀏覽器內解析不上傳；末段附可複製提示詞 + 開啟 Claude）；② `/workflows/reconcile/` 路由頁（BaseLayout + `client:load`）；③ 文章 `workflow-reconcile` **中英雙版**（tag `自動化工作流`、difficulty 進階、scene 整合與自動化／integration，醒目 CTA 連互動頁）；④ `quiz.ts` levels[4].recommended 加 `workflow-reconcile`（自動化＝能力階梯最頂 L4）；⑤ registry 重生 67 篇/53 概念。驗證：`npm run build` 綠（152 頁）、`npm run preview` 開瀏覽器實跑四步（結果 4 相符／1 金額不符／1 只在內部帳／1 只在銀行，日期差自動視為同一筆）、深/淺色都正常、中英文章頁與 quiz 資料掛載都確認。**2026-07-22 已 merge main + push**（先 connect-github 那支、再本支，STATUS 衝突手動合併）。待辦：文章 `modules: []` 尚未接講義線（已寫進 BACKLOG）。
+**2026-07-22 自動化工作流四條已全數上線（production 200 驗證）**——來源＝ `~/github/workflow-claude/HANDOFF.md`（Cowork 整併版交接包，取代舊的 `HANDOFF-workflow-reconcile.md`；四條的 wizard/astro/文章都在該資料夾按 launchdock 路徑排好，直接複製即可）。四條：`/workflows/reconcile/`（對帳・進階）、`/workflows/report/`（報表・中級）、`/workflows/inbox/`（收件匣・入門）、`/workflows/docdiff/`（文件差異・進階），各配一篇 `workflow-*` 文章**中英雙版**、tag `自動化工作流`、scene 整合與自動化／integration，並全部進 `quiz.ts` levels[4].recommended（自動化＝能力階梯最頂 L4）。全部 wizard **純前端零 API**，CSV／文件只在瀏覽器內解析、不上傳；末段附可複製提示詞 + 開啟 Claude。registry 72 篇/55 概念。
+**驗證**：`npm run build` 綠（165 頁）＋ `npm run preview` 瀏覽器逐條實跑——對帳（4 相符／1 金額不符／1 只在內部帳／1 只在銀行，日期差自動視為同一筆）、報表（總計 $2,813k、7月環比 +41%、6月 −22% 標紅，數字覆算正確）、收件匣（4 訊息抽 4 待辦／3 個明確截止，有截止日的排前面）、文件差異（4 處實質變更全標「對你不利」：付款 30→45 天、交期 14→21 天、逾期罰則被刪、新增 7 天視同驗收）；深/淺色都正常。
+**下一步（可挑）**：① 四篇 `modules: []` 接講義線（BACKLOG 已記）；② 「自動化工作流」目前是 tag，若這條線再長考慮升級成 `scene` enum；③ 英文互動頁（現在英文文章連的是中文 wizard，文中已註明）。
+
+**（同日）2026-07-21 AI 連 GitHub 兩篇：已上線**——push 前重跑 `redact-screenshots.py --scan` 再確認 13/13 clean；`grok-connect-github`、`chatgpt-connect-github` 中英雙版 production 皆 200。分支 `article/connect-github-20260721`、`feat/workflow-reconcile` 都已合併並刪除。
+
+**（前一段，已被上面整併取代）2026-07-22 對帳自動化工作流：已上線**——分支 `feat/workflow-reconcile`（commit 9ac2f17，已 merge main + push，Cloudflare Pages 自動部署）。來源＝ `~/github/workflow-claude/` 的交接包（HANDOFF-workflow-reconcile.md，架構已定案）。內容：① `ReconcileWizard.tsx` 四步互動 island（選情境→一鍵比對→結果+白話解讀→換自己 CSV；**純前端零 API**，CSV 只在瀏覽器內解析不上傳；末段附可複製提示詞 + 開啟 Claude）；② `/workflows/reconcile/` 路由頁（BaseLayout + `client:load`）；③ 文章 `workflow-reconcile` **中英雙版**（tag `自動化工作流`、difficulty 進階、scene 整合與自動化／integration，醒目 CTA 連互動頁）；④ `quiz.ts` levels[4].recommended 加 `workflow-reconcile`（自動化＝能力階梯最頂 L4）；⑤ registry 重生 67 篇/53 概念。驗證：`npm run build` 綠（152 頁）、`npm run preview` 開瀏覽器實跑四步（結果 4 相符／1 金額不符／1 只在內部帳／1 只在銀行，日期差自動視為同一筆）、深/淺色都正常、中英文章頁與 quiz 資料掛載都確認。**2026-07-22 已 merge main + push**（先 connect-github 那支、再本支，STATUS 衝突手動合併）。待辦：文章 `modules: []` 尚未接講義線（已寫進 BACKLOG）。
 
 **（同日一起上線）2026-07-21 AI 連 GitHub 兩篇：已上線**——分支 `article/connect-github-20260721`（commit 7615b9f，已 merge main + push）。兩篇中英雙版：① `grok-connect-github`（Grok 免費版**實測可用**：一句話「寫一個介紹cli工具的網站，上傳到github repo」→ 2m14s → GitHub 上真的多出 repo `cli-tool-website` 含 README+index.html，重點教 GitHub App 授權範圍 All vs Only select、sudo mode、怎麼收回；9 張圖）② `chatgpt-connect-github`（外掛程式→GitHub→安裝→「與 GitHub 連線」授權；**誠實寫出免費版模型無法完成實際 GitHub 任務、需訂閱**，並指出該 connector 定位是 PR/issue/CI triage，四個 Skills 裡沒有 Create Repository；4 張圖）。兩篇互相導流＋接 `deploy-to-github-pages`／`mcp-protocol`／`github-account-signup`。圖 13 張全部本機遮罩（腳本 OCR 漏抓多處，靠手動實心黑框補：Grok 左下 email、ChatGPT 側欄私人對話標題、Grok 回覆內的 GitHub Pages 網址），兩輪視覺覆核＋最終 scan 13/13 clean。concepts.yaml 加 Grok／連接器，registry 68 篇/55 概念，build 綠。查證：xAI 官方文件「連接器對所有 Grok 使用者開放」；OpenAI help 頁 403 取不到 → 方案限制一律寫成「實測」不寫成官方政策。**2026-07-21 收工前已依 Joseph 決定重跑一版：GitHub handle `josephchang7-dev` 與 repo／Pages 網址改為露出（公開帳號＋public repo），遮罩 token 收斂成 `Joseph Chang`／`josephyhchang7`／`gmail.com`；5 張圖重轉、重掃 13/13 clean、build 綠。→ **2026-07-22 Joseph 授權，已 merge main + push；push 前重跑 --scan 再確認 13/13 clean。分支可刪。**
 
