@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-07-18（反向截圖產線：桌面 167 張截圖全量 triage → 8 篇中英雙版新文章 + 58 張本機遮罩圖，經兩輪獨立視覺稽核，**已合併 main + push、Cloudflare Pages 正式站上線並驗證 HTTP 200**）
+**最後更新：** 2026-07-22（對帳自動化工作流：互動 island + 中英雙版文章 + 接測驗 L4，分支 `feat/workflow-reconcile` 本地 commit 9ac2f17、**未 push**，等 Joseph 點頭）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 一句話現況
@@ -10,7 +10,9 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**2026-07-20 github-account-signup 併入「用 Google 一鍵註冊」：本地 commit 完成、等 Joseph 點頭 push**——把新桌面截圖的「Continue with Google」OAuth 路徑併入既有 github-account-signup（中英雙版），重構成「共用起點 → 方式 A Google 一鍵（推薦）→ 方式 B 填表 → 共用裝置驗證/Dashboard/選單」；並補上往 deploy-to-github-pages 的正向連結（deploy 早已反向連回來，雙向連結完成）。新增 4 張圖（google-search / continue-with-google / account-chooser / oauth-consent，轉 JPEG 220-308K）；其中 account-chooser、oauth-consent 含真實 email＋人名，已用 `redact-screenshots.py --mask-text` 遮罩（OCR 預設漏抓、靠人工 token 補）＋**瀏覽器逐圖視覺覆核**＋最終 scan 9/9 clean。build 綠。**尚未 push**（遵循 PII 圖片先 review 再上傳的慣例，避免重演 email 外流事故）。→ Joseph 過目遮罩圖後說一聲即 push。
+**2026-07-22 對帳自動化工作流：本地 commit 完成、等 Joseph 點頭 push**——分支 `feat/workflow-reconcile`（從 origin/main 開，commit 9ac2f17，**未 push**）。來源＝ `~/github/workflow-claude/` 的交接包（HANDOFF-workflow-reconcile.md，架構已定案）。內容：① `ReconcileWizard.tsx` 四步互動 island（選情境→一鍵比對→結果+白話解讀→換自己 CSV；**純前端零 API**，CSV 只在瀏覽器內解析不上傳；末段附可複製提示詞 + 開啟 Claude）；② `/workflows/reconcile/` 路由頁（BaseLayout + `client:load`）；③ 文章 `workflow-reconcile` **中英雙版**（tag `自動化工作流`、difficulty 進階、scene 整合與自動化／integration，醒目 CTA 連互動頁）；④ `quiz.ts` levels[4].recommended 加 `workflow-reconcile`（自動化＝能力階梯最頂 L4）；⑤ registry 重生 67 篇/53 概念。驗證：`npm run build` 綠（152 頁）、`npm run preview` 開瀏覽器實跑四步（結果 4 相符／1 金額不符／1 只在內部帳／1 只在銀行，日期差自動視為同一筆）、深/淺色都正常、中英文章頁與 quiz 資料掛載都確認。**下一步**：Joseph 說一聲 → merge main + push（Cloudflare Pages 自動部署）。⚠️ 這支與 `article/connect-github-20260721` 都改了 STATUS.md，**建議先 merge connect-github 那支再 merge 本支**，衝突只會落在 STATUS 標頭。待辦：文章 `modules: []` 尚未接講義線（已寫進 BACKLOG）。
+
+**（前一段）2026-07-20 github-account-signup 併入「用 Google 一鍵註冊」：本地 commit 完成、等 Joseph 點頭 push**——把新桌面截圖的「Continue with Google」OAuth 路徑併入既有 github-account-signup（中英雙版），重構成「共用起點 → 方式 A Google 一鍵（推薦）→ 方式 B 填表 → 共用裝置驗證/Dashboard/選單」；並補上往 deploy-to-github-pages 的正向連結（deploy 早已反向連回來，雙向連結完成）。新增 4 張圖（google-search / continue-with-google / account-chooser / oauth-consent，轉 JPEG 220-308K）；其中 account-chooser、oauth-consent 含真實 email＋人名，已用 `redact-screenshots.py --mask-text` 遮罩（OCR 預設漏抓、靠人工 token 補）＋**瀏覽器逐圖視覺覆核**＋最終 scan 9/9 clean。build 綠。**尚未 push**（遵循 PII 圖片先 review 再上傳的慣例，避免重演 email 外流事故）。→ Joseph 過目遮罩圖後說一聲即 push。
 
 **（前一段）2026-07-18 反向截圖 8 篇新文章：等 Joseph 逐篇 review → 決定是否 push 上線**——本次用桌面累積的 167 張截圖，全量 triage 後分主題產出 8 篇中英雙版（共 16 檔）＋58 張本機遮罩後乾淨圖，全部在分支 `article/screenshot-batch-20260718` 上 commit（**未 push**，遵循「反向截圖文章先 review 再上傳」慣例）。8 篇：① `kaggle-account-signup`（註冊 Kaggle）② `looker-studio-csv-analysis`（Looker Studio 上傳 CSV）③ `openrouter-free-llm-api-key`（OpenRouter 拿免費 LLM key）④ `make-gmail-sheets-automation`（Make 起手：Gmail→Sheets）⑤ `google-cloud-oauth-api-setup`（GCP 建專案/啟用 API/OAuth）⑥ `make-llm-email-auto-tagging`（Make 串 LLM 自動分類信件）⑦ `ollama-cloud-api-key`（Ollama 雲端 key 當備援）⑧ `ai-agents-build-line-booking-system`（碎碎念：三個 AI 分工做 LINE 預約系統）。遮罩經 redact 腳本 + 手動黑框 + **兩輪獨立 AI 視覺稽核**（批次1抓到 Kaggle 名字馬賽克太淺 + Make 頭像縮寫，已補實心黑框重驗 clean）。**已於 2026-07-18 合併 main（merge ad5ea92）+ push，launchdock.app 8 篇正式上線並驗證 HTTP 200；分支 `article/screenshot-batch-20260718` 可刪。** 若日後回頭優化：可考慮補每篇 modules 掛講義線、或把 Make 系列做成 series。concepts.yaml 已加 Make/Google Cloud/Kaggle/Looker Studio 4 概念、`npm run registry` 已重生（66 篇/53 概念）。原圖仍在 `~/Desktop`（未刪，gitignore 的 `_staging` 有 raw/clean 備份）。
 

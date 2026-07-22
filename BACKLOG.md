@@ -5,6 +5,12 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+
+### 2026-07-22 對帳自動化工作流（分支 feat/workflow-reconcile，未 push）
+- [ ] [內容] `workflow-reconcile` 中英雙版 `modules: []` 未接講義線 → 從 `launchdock-lab/data/modules.yaml` 挑對的 M0x 填入 — handout
+- [ ] [內容] 「自動化工作流」目前只是 tag（自由字串，零 schema 變更）。若這條線長到 3+ 篇，考慮升級成 `scene` enum（改 content.config.ts + i18n + articles/index scene 表）— 內容架構
+- [ ] [i18n] 英文版文章連的是中文介面的 `/workflows/reconcile/`（文中已註明）。要做英文互動頁需把 wizard 340 行文案 i18n 化 + 開 `/en/workflows/reconcile/` — i18n
+- [ ] [內容] 這條若成系列，下一條工作流題目待定（候選：表單→CRM 自動貼、發票/收據擷取）— 內容規劃
 _（空——2026-07-10 兩篇新文已收尾 commit+push，見下方最近完成。開場可從「來自監控／規劃」挑一件。）_
 
 ## 📡 來自監控（系統自動產生，新項目補在最上）
