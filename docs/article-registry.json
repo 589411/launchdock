@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-22T15:49:47.665Z",
+  "_generated": "2026-07-22T15:52:30.000Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -1117,6 +1117,63 @@
       ],
       "concepts_referenced": [],
       "link": "/articles/grok-connect-github/"
+    },
+    {
+      "slug": "workflow-inbox",
+      "title": "收件匣結構化工作流：散亂訊息變追蹤表",
+      "description": "一封封讀郵件、把要做的事手動抄進待辦表？這條自動化工作流一鍵從郵件與訊息抽出對象、待辦、截止日、金額，整理成結構化追蹤表並依急迫度排序。點開互動示範看它怎麼運作。",
+      "scene": "整合與自動化",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "自動化工作流",
+        "收件匣",
+        "重複輸入",
+        "Claude"
+      ],
+      "prerequisites": [],
+      "modules": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/workflow-inbox/"
+    },
+    {
+      "slug": "workflow-report",
+      "title": "數據報表工作流：一鍵把數字變儀表板",
+      "description": "每週每月手動拉數據、貼進 Excel、算環比、做圖、盯著找哪裡怪怪的——這條自動化工作流一鍵幫你算指標、抓趨勢、標異常、畫儀表板。點開互動示範看它怎麼運作。",
+      "scene": "整合與自動化",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "自動化工作流",
+        "報表",
+        "數據分析",
+        "Claude"
+      ],
+      "prerequisites": [],
+      "modules": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/workflow-report/"
+    },
+    {
+      "slug": "workflow-docdiff",
+      "title": "文件差異工作流：兩版比對，抓出改了什麼",
+      "description": "合約回稿、報價改版、SOP 更新——逐條唸比哪裡被改、哪裡對你不利，累又容易漏。這條自動化工作流一鍵逐條比對，標出新增刪除修改並點出風險。點開互動示範看它怎麼運作。",
+      "scene": "整合與自動化",
+      "difficulty": "進階",
+      "contentType": "guide",
+      "tags": [
+        "自動化工作流",
+        "文件比對",
+        "合約",
+        "Claude"
+      ],
+      "prerequisites": [],
+      "modules": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/workflow-docdiff/"
     },
     {
       "slug": "gemini-gas-ordering-system",

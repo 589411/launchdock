@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DocDiffWizard from '../../components/DocDiffWizard.tsx';
+---
+
+<BaseLayout
+  title="文件差異工作流 — 兩版比對，抓出改了什麼"
+  description="合約回稿、報價改版、SOP 更新——逐條唸比哪裡被改、哪裡對你不利，累又容易漏。這條工作流一鍵逐條比對，標出新增刪除修改，並點出對你不利的地方。教學層走雲端，真實文件可用地端模式不外流。"
+>
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <div class="mb-8">
+      <span class="text-sm font-semibold text-brand-light tracking-wide uppercase">自動化工作流 · 文件比對</span>
+      <h1 class="text-3xl md:text-4xl font-extrabold mt-2 tracking-tight">兩版文件，一鍵抓出改了什麼</h1>
+      <p class="text-text-secondary mt-3 max-w-2xl">
+        對方合約回稿改了哪幾條？報價新版哪裡動了手腳？逐條唸比又累又漏。
+        這條工作流幫你逐條標出增刪修改，還點出對你不利、簽前要談的地方。先用範例點一遍。
+      </p>
+    </div>
+    <DocDiffWizard client:load />
+  </div>
+</BaseLayout>

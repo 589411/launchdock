@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReportWizard from '../../components/ReportWizard.tsx';
+---
+
+<BaseLayout
+  title="數據報表工作流 — 一鍵把數字變儀表板"
+  description="每週每月手動拉數據、貼進 Excel、算環比、做圖、找哪裡怪怪的？這條工作流一鍵幫你算指標、抓趨勢、標異常、畫儀表板。教學層走雲端，真實營運數據可用地端模式不外流。"
+>
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <div class="mb-8">
+      <span class="text-sm font-semibold text-brand-light tracking-wide uppercase">自動化工作流 · 報表數據</span>
+      <h1 class="text-3xl md:text-4xl font-extrabold mt-2 tracking-tight">一鍵把數字變儀表板</h1>
+      <p class="text-text-secondary mt-3 max-w-2xl">
+        手動拉數據、貼 Excel、算環比、做圖、盯著找哪個月怪怪的——這些沒有一步需要判斷。
+        這條工作流一鍵幫你算完、畫完、還把異常標出來。先用範例點一遍。
+      </p>
+    </div>
+    <ReportWizard client:load />
+  </div>
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import InboxWizard from '../../components/InboxWizard.tsx';
+---
+
+<BaseLayout
+  title="收件匣結構化工作流 — 散亂訊息變追蹤表"
+  description="一封封讀郵件、把要做的事手動抄進待辦表？這條工作流一鍵幫你從郵件與訊息抽出對象、待辦、截止日、金額，整理成結構化追蹤表並依急迫度排序。教學層走雲端，真實往來訊息可用地端模式不外流。"
+>
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <div class="mb-8">
+      <span class="text-sm font-semibold text-brand-light tracking-wide uppercase">自動化工作流 · 收件匣</span>
+      <h1 class="text-3xl md:text-4xl font-extrabold mt-2 tracking-tight">散亂訊息，變成一張追蹤表</h1>
+      <p class="text-text-secondary mt-3 max-w-2xl">
+        一封封讀信、把待辦手動抄進表格、還怕漏掉截止日——這些純搬運的活該交給工作流。
+        它幫你把每封訊息抽成對象、待辦、截止、金額，排好順序。先用範例點一遍。
+      </p>
+    </div>
+    <InboxWizard client:load />
+  </div>
+</BaseLayout>
