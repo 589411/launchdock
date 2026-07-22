@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-21T15:29:15.942Z",
+  "_generated": "2026-07-22T15:49:47.665Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -997,6 +997,25 @@
         "Make"
       ],
       "link": "/articles/make-llm-email-auto-tagging/"
+    },
+    {
+      "slug": "workflow-reconcile",
+      "title": "對帳工作流：兩份帳，一鍵對完",
+      "description": "銀行對帳單對內部帳、平台撥款對訂單、應收對收款——本來要逐筆用眼睛比、還會漏。這條自動化工作流讓 AI 幫你比對、把對不上的直接標出來。點開互動示範，看它怎麼運作。",
+      "scene": "整合與自動化",
+      "difficulty": "進階",
+      "contentType": "guide",
+      "tags": [
+        "自動化工作流",
+        "對帳",
+        "財務",
+        "Claude"
+      ],
+      "prerequisites": [],
+      "modules": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/workflow-reconcile/"
     },
     {
       "slug": "create-line-login-liff-app",
