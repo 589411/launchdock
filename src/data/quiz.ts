@@ -259,7 +259,7 @@ export const levels: Record<number, LevelInfo> = {
   4: {
     title: { zh: 'Level 4 — 自動化', en: 'Level 4 — Automation Builder' },
     blurb: { zh: '你會用工具了，接下來把任務自動化、定時自己跑。', en: 'You use tools — next, automate tasks to run on their own.' },
-    recommended: ['openclaw-agent', 'openclaw-skill', 'from-prompt-to-skill', 'multi-agent-swarm', 'what-is-n8n'],
+    recommended: ['openclaw-agent', 'openclaw-skill', 'from-prompt-to-skill', 'multi-agent-swarm', 'what-is-n8n', 'workflow-reconcile'],
   },
 };
 

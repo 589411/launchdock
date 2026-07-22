@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReconcileWizard from '../../components/ReconcileWizard.tsx';
+---
+
+<BaseLayout
+  title="對帳工作流 — 兩份帳，一鍵對完"
+  description="銀行對帳單對內部帳、平台撥款對訂單、應收對收款。用範例點一遍，看懂 AI 怎麼幫你逐筆比對、標出對不上的那幾筆。教學層走雲端，真實企業應用轉地端版不外流。"
+>
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <div class="mb-8">
+      <span class="text-sm font-semibold text-brand-light tracking-wide uppercase">自動化工作流 · 財務會計</span>
+      <h1 class="text-3xl md:text-4xl font-extrabold mt-2 tracking-tight">兩份帳，一鍵對完</h1>
+      <p class="text-text-secondary mt-3 max-w-2xl">
+        每到月底，會計把兩份 Excel 並排開，一列一列核對金額——漏一筆手續費、看錯一個數字，帳就兜不平。
+        這條工作流讓 AI 幫你比對、把對不上的直接標出來。先用範例點一遍。
+      </p>
+    </div>
+
+    <ReconcileWizard client:load />
+  </div>
+</BaseLayout>
