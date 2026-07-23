@@ -20,7 +20,7 @@ stuckOptions:
   "第一次對話": ["Hermes 回應是英文怎麼辦？", "怎麼確認 Hermes 有在記憶對話？"]
 ---
 
-> `<img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;">` **鴨編快說重點**：Hermes 是 Nous Research 打造的自主 AI Agent，內建 70+ 技能、跨對話記憶、還能自動學新技能。用 Ollama 啟動超簡單——整個流程是這樣的：
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編快說重點**：Hermes 是 Nous Research 打造的自主 AI Agent，內建 70+ 技能、跨對話記憶、還能自動學新技能。用 Ollama 啟動超簡單——整個流程是這樣的：
 >
 > ```
 > brew upgrade ollama → ollama launch hermes → 選雲端模型 → 開始對話
@@ -100,7 +100,7 @@ Ollama 接著自動執行四個步驟：
 
 <!-- @img: hermes-model-selector | Hermes 模型選擇器 -->
 
-> `<img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;">` **推薦的雲端模型**（用 Ollama 免費額度，免下載）：
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **推薦的雲端模型**（用 Ollama 免費額度，免下載）：
 >
 > | 模型 | 特色 |
 > | --- | --- |

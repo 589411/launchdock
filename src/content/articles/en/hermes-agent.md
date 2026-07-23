@@ -20,7 +20,7 @@ stuckOptions:
   "First conversation": ["Hermes responds in English — how do I switch?", "How do I know Hermes is actually remembering my conversations?"]
 ---
 
-> `<img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;">` **Quick summary**: Hermes is an autonomous AI Agent by Nous Research — 70+ built-in skills, cross-session memory, and automatic skill creation. Launching it with Ollama is just one command:
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **Quick summary**: Hermes is an autonomous AI Agent by Nous Research — 70+ built-in skills, cross-session memory, and automatic skill creation. Launching it with Ollama is just one command:
 >
 > ```
 > brew upgrade ollama → ollama launch hermes → pick a cloud model → start chatting
@@ -100,7 +100,7 @@ After installation, Hermes shows you a model selector.
 
 <!-- @img: hermes-model-selector | Hermes model selector screen -->
 
-> `<img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;">` **Recommended cloud models** (uses Ollama's free quota — no local download needed):
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **Recommended cloud models** (uses Ollama's free quota — no local download needed):
 >
 > | Model | Strengths |
 > | --- | --- |

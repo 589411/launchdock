@@ -18,7 +18,7 @@ stuckOptions:
 ---
 ![Ollama + OpenClaw — happily working alongside AI](/images/articles/ollama-openclaw/happy-bros.webp)
 
-> `<img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;">` **Duck Editor, straight to the point:** Ollama + OpenClaw needs no API key setup at all. Use the free cloud quota from your Ollama account, pick a model, and start chatting. The whole flow looks like this:
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Duck Editor, straight to the point:** Ollama + OpenClaw needs no API key setup at all. Use the free cloud quota from your Ollama account, pick a model, and start chatting. The whole flow looks like this:
 >
 > ```
 > Install Ollama → ollama launch openclaw → Pick a cloud model → Start chatting
@@ -75,7 +75,7 @@ The first run installs automatically. When it asks whether to install via npm, p
 
 After installation, pick a model. Just choose "**Cloud**" — there's no need to download a model to your machine.
 
-> `<img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;">` **Recommended cloud models** (use Ollama's free quota, no download):
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **Recommended cloud models** (use Ollama's free quota, no download):
 >
 > | Model            | Strengths                                                   |
 > | ---------------- | ----------------------------------------------------------- |
@@ -114,7 +114,7 @@ Also, pick a distinctive name for yourself!
 
 Congratulations 🎉 Your lobster is officially up and running!
 
-> `<img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;">` If the model replies in a language you don't want, just tell it: "Please reply in English," and it'll switch.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> If the model replies in a language you don't want, just tell it: "Please reply in English," and it'll switch.
 
 ---
 

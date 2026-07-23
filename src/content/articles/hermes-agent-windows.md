@@ -20,7 +20,7 @@ stuckOptions:
   "模型選擇": ["要選雲端還是本機模型？", "本機模型在 Windows 能跑嗎？"]
 ---
 
-> `<img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;">` **鴨編快說重點**：Hermes 在 Windows 上需要 WSL2，但流程其實很直覺——整個步驟是這樣的：
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編快說重點**：Hermes 在 Windows 上需要 WSL2，但流程其實很直覺——整個步驟是這樣的：
 >
 > ```
 > 安裝 WSL2 → 在 WSL 裡安裝 Ollama → ollama launch hermes → 選雲端模型 → 開始對話
@@ -115,7 +115,7 @@ ollama launch hermes
 
 <!-- @img: hermes-model-selector-wsl | Hermes 模型選擇器（WSL）-->
 
-> `<img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;">` **推薦的雲端模型**（用 Ollama 免費額度，免下載，Windows 顯卡不夠也沒問題）：
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **推薦的雲端模型**（用 Ollama 免費額度，免下載，Windows 顯卡不夠也沒問題）：
 >
 > | 模型 | 特色 |
 > | --- | --- |

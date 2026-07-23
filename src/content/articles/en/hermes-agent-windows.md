@@ -20,7 +20,7 @@ stuckOptions:
   "Model selection": ["Should I pick a cloud or local model?", "Can local models run on a Windows laptop GPU?"]
 ---
 
-> `<img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;">` **Quick summary**: Hermes requires WSL2 on Windows, but the process is straightforward:
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **Quick summary**: Hermes requires WSL2 on Windows, but the process is straightforward:
 >
 > ```
 > Install WSL2 → Install Ollama inside WSL → ollama launch hermes → pick a cloud model → start chatting
@@ -109,7 +109,7 @@ After installation, Hermes shows a model selector.
 
 <!-- @img: hermes-model-selector-wsl | Hermes model selector in WSL -->
 
-> `<img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;">` **Recommended cloud models** (uses Ollama's free quota — no download, no GPU needed):
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **Recommended cloud models** (uses Ollama's free quota — no download, no GPU needed):
 >
 > | Model | Strengths |
 > | --- | --- |
