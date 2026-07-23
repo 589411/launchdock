@@ -42,6 +42,7 @@ export const ui = {
     'scene.basics': '基礎使用',
     'scene.core': '核心功能',
     'scene.integration': '整合與自動化',
+    'scene.automation': '自動化工作流',
     'scene.advanced': '知識與進階',
     'scene.blog': '鴨編的碎碎念',
 
@@ -103,6 +104,7 @@ export const ui = {
     'scene.basics': 'Basic Usage',
     'scene.core': 'Core Features',
     'scene.integration': 'Integration & Automation',
+    'scene.automation': 'Automation Workflows',
     'scene.advanced': 'Knowledge & Advanced',
     'scene.blog': "Duck Editor's Notes",
 
@@ -147,6 +149,7 @@ export const sceneKeyToLabel: Record<Locale, Record<string, string>> = {
     basics: '基礎使用',
     core: '核心功能',
     integration: '整合與自動化',
+    automation: '自動化工作流',
     advanced: '知識與進階',
     blog: '鴨編的碎碎念',
   },
@@ -157,6 +160,7 @@ export const sceneKeyToLabel: Record<Locale, Record<string, string>> = {
     basics: 'Basic Usage',
     core: 'Core Features',
     integration: 'Integration & Automation',
+    automation: 'Automation Workflows',
     advanced: 'Knowledge & Advanced',
     blog: "Duck Editor's Notes",
   },

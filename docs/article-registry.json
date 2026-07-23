@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-22T15:52:30.000Z",
+  "_generated": "2026-07-22T23:19:40.978Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -999,25 +999,6 @@
       "link": "/articles/make-llm-email-auto-tagging/"
     },
     {
-      "slug": "workflow-reconcile",
-      "title": "對帳工作流：兩份帳，一鍵對完",
-      "description": "銀行對帳單對內部帳、平台撥款對訂單、應收對收款——本來要逐筆用眼睛比、還會漏。這條自動化工作流讓 AI 幫你比對、把對不上的直接標出來。點開互動示範，看它怎麼運作。",
-      "scene": "整合與自動化",
-      "difficulty": "進階",
-      "contentType": "guide",
-      "tags": [
-        "自動化工作流",
-        "對帳",
-        "財務",
-        "Claude"
-      ],
-      "prerequisites": [],
-      "modules": [],
-      "concepts_defined": [],
-      "concepts_referenced": [],
-      "link": "/articles/workflow-reconcile/"
-    },
-    {
       "slug": "create-line-login-liff-app",
       "title": "建立 LINE Login Channel 並新增 LIFF App：把你的網頁變成 LINE 內開的小程式",
       "description": "在 LINE Developers 主控台建立一個 LINE Login channel，再到 LIFF 分頁新增 LIFF App，取得 LIFF ID 與 LIFF URL。手把手 6 步驟附截圖，並解釋 LIFF 能做什麼、適合哪些情境，以及最容易卡關的地方。",
@@ -1117,63 +1098,6 @@
       ],
       "concepts_referenced": [],
       "link": "/articles/grok-connect-github/"
-    },
-    {
-      "slug": "workflow-inbox",
-      "title": "收件匣結構化工作流：散亂訊息變追蹤表",
-      "description": "一封封讀郵件、把要做的事手動抄進待辦表？這條自動化工作流一鍵從郵件與訊息抽出對象、待辦、截止日、金額，整理成結構化追蹤表並依急迫度排序。點開互動示範看它怎麼運作。",
-      "scene": "整合與自動化",
-      "difficulty": "入門",
-      "contentType": "guide",
-      "tags": [
-        "自動化工作流",
-        "收件匣",
-        "重複輸入",
-        "Claude"
-      ],
-      "prerequisites": [],
-      "modules": [],
-      "concepts_defined": [],
-      "concepts_referenced": [],
-      "link": "/articles/workflow-inbox/"
-    },
-    {
-      "slug": "workflow-report",
-      "title": "數據報表工作流：一鍵把數字變儀表板",
-      "description": "每週每月手動拉數據、貼進 Excel、算環比、做圖、盯著找哪裡怪怪的——這條自動化工作流一鍵幫你算指標、抓趨勢、標異常、畫儀表板。點開互動示範看它怎麼運作。",
-      "scene": "整合與自動化",
-      "difficulty": "中級",
-      "contentType": "guide",
-      "tags": [
-        "自動化工作流",
-        "報表",
-        "數據分析",
-        "Claude"
-      ],
-      "prerequisites": [],
-      "modules": [],
-      "concepts_defined": [],
-      "concepts_referenced": [],
-      "link": "/articles/workflow-report/"
-    },
-    {
-      "slug": "workflow-docdiff",
-      "title": "文件差異工作流：兩版比對，抓出改了什麼",
-      "description": "合約回稿、報價改版、SOP 更新——逐條唸比哪裡被改、哪裡對你不利，累又容易漏。這條自動化工作流一鍵逐條比對，標出新增刪除修改並點出風險。點開互動示範看它怎麼運作。",
-      "scene": "整合與自動化",
-      "difficulty": "進階",
-      "contentType": "guide",
-      "tags": [
-        "自動化工作流",
-        "文件比對",
-        "合約",
-        "Claude"
-      ],
-      "prerequisites": [],
-      "modules": [],
-      "concepts_defined": [],
-      "concepts_referenced": [],
-      "link": "/articles/workflow-docdiff/"
     },
     {
       "slug": "gemini-gas-ordering-system",
@@ -1781,6 +1705,91 @@
         "Embedding"
       ],
       "link": "/articles/pkm-system/"
+    },
+    {
+      "slug": "workflow-reconcile",
+      "title": "對帳工作流：兩份帳，一鍵對完",
+      "description": "銀行對帳單對內部帳、平台撥款對訂單、應收對收款——本來要逐筆用眼睛比、還會漏。這條自動化工作流讓 AI 幫你比對、把對不上的直接標出來。點開互動示範，看它怎麼運作。",
+      "scene": "自動化工作流",
+      "difficulty": "進階",
+      "contentType": "guide",
+      "tags": [
+        "自動化工作流",
+        "對帳",
+        "財務",
+        "Claude"
+      ],
+      "prerequisites": [],
+      "modules": [
+        "M05"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/workflow-reconcile/"
+    },
+    {
+      "slug": "workflow-inbox",
+      "title": "收件匣結構化工作流：散亂訊息變追蹤表",
+      "description": "一封封讀郵件、把要做的事手動抄進待辦表？這條自動化工作流一鍵從郵件與訊息抽出對象、待辦、截止日、金額，整理成結構化追蹤表並依急迫度排序。點開互動示範看它怎麼運作。",
+      "scene": "自動化工作流",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "自動化工作流",
+        "收件匣",
+        "重複輸入",
+        "Claude"
+      ],
+      "prerequisites": [],
+      "modules": [
+        "M05"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/workflow-inbox/"
+    },
+    {
+      "slug": "workflow-report",
+      "title": "數據報表工作流：一鍵把數字變儀表板",
+      "description": "每週每月手動拉數據、貼進 Excel、算環比、做圖、盯著找哪裡怪怪的——這條自動化工作流一鍵幫你算指標、抓趨勢、標異常、畫儀表板。點開互動示範看它怎麼運作。",
+      "scene": "自動化工作流",
+      "difficulty": "中級",
+      "contentType": "guide",
+      "tags": [
+        "自動化工作流",
+        "報表",
+        "數據分析",
+        "Claude"
+      ],
+      "prerequisites": [],
+      "modules": [
+        "M05",
+        "M07"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/workflow-report/"
+    },
+    {
+      "slug": "workflow-docdiff",
+      "title": "文件差異工作流：兩版比對，抓出改了什麼",
+      "description": "合約回稿、報價改版、SOP 更新——逐條唸比哪裡被改、哪裡對你不利，累又容易漏。這條自動化工作流一鍵逐條比對，標出新增刪除修改並點出風險。點開互動示範看它怎麼運作。",
+      "scene": "自動化工作流",
+      "difficulty": "進階",
+      "contentType": "guide",
+      "tags": [
+        "自動化工作流",
+        "文件比對",
+        "合約",
+        "Claude"
+      ],
+      "prerequisites": [],
+      "modules": [
+        "M05"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/workflow-docdiff/"
     },
     {
       "slug": "ai-tool-landscape",

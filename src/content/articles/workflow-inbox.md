@@ -2,7 +2,7 @@
 title: "收件匣結構化工作流：散亂訊息變追蹤表"
 description: "一封封讀郵件、把要做的事手動抄進待辦表？這條自動化工作流一鍵從郵件與訊息抽出對象、待辦、截止日、金額，整理成結構化追蹤表並依急迫度排序。點開互動示範看它怎麼運作。"
 contentType: "guide"
-scene: "整合與自動化"
+scene: "自動化工作流"
 difficulty: "入門"
 createdAt: "2026-07-22"
 verifiedAt: "2026-07-22"
@@ -11,7 +11,7 @@ order: 3
 prerequisites: []
 estimatedMinutes: 4
 tags: ["自動化工作流", "收件匣", "重複輸入", "Claude"]
-modules: []
+modules: ["M05"]
 ---
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 「自動化工作流」系列第三條，打的是「重複輸入／複製貼上」這個 24 家企業共同的痛。先用範例點一遍看它怎麼運作。

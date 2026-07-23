@@ -33,14 +33,15 @@ for (const [, articles] of sceneMap) {
   articles.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
 }
 
-const sceneOrder = ['認識 OpenClaw', '環境準備', '安裝與部署', '基礎使用', '核心功能', '整合與自動化', '知識與進階', '鴨編的碎碎念'];
+const sceneOrder = ['認識 OpenClaw', '環境準備', '安裝與部署', '基礎使用', '核心功能', '整合與自動化', '自動化工作流', '知識與進階', '鴨編的碎碎念'];
 const sceneIcons: Record<string, string> = {
   '認識 OpenClaw': '/icons/duck-compass.png',
   '環境準備': '/icons/duck-key.png',
   '安裝與部署': '/icons/duck-laptop.png',
   '基礎使用': '/icons/duck-rocket.png',
   '核心功能': '/icons/duck-puzzle.png',
-  '整合與自動化': '/icons/automation.png',
+  '整合與自動化': '/icons/api-integrations.png',
+  '自動化工作流': '/icons/automation.png',
   '知識與進階': '/icons/duck-books.png',
   '鴨編的碎碎念': '/icons/duck-happy.png',
 };

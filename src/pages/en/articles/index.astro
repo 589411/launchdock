@@ -5,14 +5,15 @@ import { sceneKeyToLabel, difficultyKeyToLabel } from '../../../i18n/ui';
 
 const allArticles = await getCollection('articlesEn', ({ data }) => !data.archived);
 
-const SCENE_ORDER = ['intro', 'env-setup', 'install', 'basics', 'core', 'integration', 'advanced', 'blog'];
+const SCENE_ORDER = ['intro', 'env-setup', 'install', 'basics', 'core', 'integration', 'automation', 'advanced', 'blog'];
 const SCENE_ICONS: Record<string, string> = {
   intro: '/icons/duck-compass.png',
   'env-setup': '/icons/duck-key.png',
   install: '/icons/duck-laptop.png',
   basics: '/icons/duck-rocket.png',
   core: '/icons/duck-puzzle.png',
-  integration: '/icons/automation.png',
+  integration: '/icons/api-integrations.png',
+  automation: '/icons/automation.png',
   advanced: '/icons/duck-books.png',
   blog: '/icons/duck-happy.png',
 };

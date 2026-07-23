@@ -2,7 +2,7 @@
 title: "The Reconciliation Workflow: Two Ledgers, Matched in One Click"
 description: "Bank statement against internal books, platform payouts against orders, receivables against payments — normally you compare them line by line, and you still miss things. This automation workflow lets AI do the matching and flags whatever doesn't line up. Open the interactive demo and see how it works."
 contentType: "guide"
-scene: "integration"
+scene: "automation"
 difficulty: "advanced"
 createdAt: "2026-07-22"
 verifiedAt: "2026-07-22"
@@ -11,7 +11,7 @@ order: 1
 prerequisites: []
 estimatedMinutes: 5
 tags: ["自動化工作流", "對帳", "財務", "Claude"]
-modules: []
+modules: ["M05"]
 ---
 
 > <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> This is the first piece in the "automation workflow" series. Click through the sample data first to see how it runs, then try it with your own ledgers — and if you need it running on real company data every day, there's a local-only mode described at the end.

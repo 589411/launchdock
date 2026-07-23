@@ -2,7 +2,7 @@
 title: "文件差異工作流：兩版比對，抓出改了什麼"
 description: "合約回稿、報價改版、SOP 更新——逐條唸比哪裡被改、哪裡對你不利，累又容易漏。這條自動化工作流一鍵逐條比對，標出新增刪除修改並點出風險。點開互動示範看它怎麼運作。"
 contentType: "guide"
-scene: "整合與自動化"
+scene: "自動化工作流"
 difficulty: "進階"
 createdAt: "2026-07-22"
 verifiedAt: "2026-07-22"
@@ -11,7 +11,7 @@ order: 4
 prerequisites: []
 estimatedMinutes: 5
 tags: ["自動化工作流", "文件比對", "合約", "Claude"]
-modules: []
+modules: ["M05"]
 ---
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 「自動化工作流」系列第四條，打的是「文件處理／比對」這個 25 家企業共同的痛。先用範例點一遍看它怎麼運作。

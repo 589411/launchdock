@@ -2,7 +2,7 @@
 title: "The Inbox Structuring Workflow: Scattered Messages into a Tracking Table"
 description: "Reading emails one by one and copying the to-dos into a list by hand? This automation workflow pulls out the counterparty, the action, the due date and the amount from your emails and messages, then builds a structured tracking table sorted by urgency. Open the interactive demo and see how it works."
 contentType: "guide"
-scene: "integration"
+scene: "automation"
 difficulty: "beginner"
 createdAt: "2026-07-22"
 verifiedAt: "2026-07-22"
@@ -11,7 +11,7 @@ order: 3
 prerequisites: []
 estimatedMinutes: 4
 tags: ["自動化工作流", "收件匣", "重複輸入", "Claude"]
-modules: []
+modules: ["M05"]
 ---
 
 > <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Third piece in the "automation workflow" series, aimed at "repetitive data entry / copy-paste" — a pain 24 companies named. Click through the sample data first to see how it runs.

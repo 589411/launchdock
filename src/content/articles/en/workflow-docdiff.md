@@ -2,7 +2,7 @@
 title: "The Document Diff Workflow: Two Versions, and Exactly What Changed"
 description: "A contract comes back marked up, a quote gets revised, an SOP is updated — reading clause by clause to find what moved, and what now works against you, is exhausting and easy to miss. This automation workflow compares the two versions clause by clause, marks additions, deletions and edits, and points out the risky ones. Open the interactive demo and see how it works."
 contentType: "guide"
-scene: "integration"
+scene: "automation"
 difficulty: "advanced"
 createdAt: "2026-07-22"
 verifiedAt: "2026-07-22"
@@ -11,7 +11,7 @@ order: 4
 prerequisites: []
 estimatedMinutes: 5
 tags: ["自動化工作流", "文件比對", "合約", "Claude"]
-modules: []
+modules: ["M05"]
 ---
 
 > <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Fourth piece in the "automation workflow" series, aimed at "document handling / comparison" — a pain 25 companies named. Click through the sample data first to see how it runs.

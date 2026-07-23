@@ -37,6 +37,7 @@ const articles = defineCollection({
       '基礎使用',
       '核心功能',
       '整合與自動化',
+      '自動化工作流',
       '知識與進階',
       '鴨編的碎碎念',
     ]),
@@ -52,7 +53,7 @@ const articlesEn = defineCollection({
     ...articleSchemaBase,
     scene: z.enum([
       'intro', 'env-setup', 'install', 'basics',
-      'core', 'integration', 'advanced', 'blog',
+      'core', 'integration', 'automation', 'advanced', 'blog',
     ]),
     difficulty: z.enum(['beginner', 'intermediate', 'advanced']),
   }),

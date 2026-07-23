@@ -2,7 +2,7 @@
 title: "對帳工作流：兩份帳，一鍵對完"
 description: "銀行對帳單對內部帳、平台撥款對訂單、應收對收款——本來要逐筆用眼睛比、還會漏。這條自動化工作流讓 AI 幫你比對、把對不上的直接標出來。點開互動示範，看它怎麼運作。"
 contentType: "guide"
-scene: "整合與自動化"
+scene: "自動化工作流"
 difficulty: "進階"
 createdAt: "2026-07-22"
 verifiedAt: "2026-07-22"
@@ -11,7 +11,7 @@ order: 1
 prerequisites: []
 estimatedMinutes: 5
 tags: ["自動化工作流", "對帳", "財務", "Claude"]
-modules: []
+modules: ["M05"]
 ---
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 這是「自動化工作流」系列的第一條。先用範例點一遍看它怎麼運作，再換你自己的帳試——真正要天天跑在公司資料上，文末有地端版。

@@ -2,7 +2,7 @@
 title: "The Reporting Workflow: Turn Numbers into a Dashboard in One Click"
 description: "Every week and every month you pull the data by hand, paste it into Excel, work out the period-over-period change, build a chart, then squint at it looking for what went wrong. This automation workflow computes the metrics, finds the trend, flags the outliers and draws the dashboard for you. Open the interactive demo and see how it works."
 contentType: "guide"
-scene: "integration"
+scene: "automation"
 difficulty: "intermediate"
 createdAt: "2026-07-22"
 verifiedAt: "2026-07-22"
@@ -11,7 +11,7 @@ order: 2
 prerequisites: []
 estimatedMinutes: 5
 tags: ["自動化工作流", "報表", "數據分析", "Claude"]
-modules: []
+modules: ["M05", "M07"]
 ---
 
 > <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> Second piece in the "automation workflow" series. This is the pain companies name most often — 32 out of 90 are stuck on reporting and data analysis. Click through the sample data first to see how it runs.

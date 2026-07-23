@@ -2,7 +2,7 @@
 title: "數據報表工作流：一鍵把數字變儀表板"
 description: "每週每月手動拉數據、貼進 Excel、算環比、做圖、盯著找哪裡怪怪的——這條自動化工作流一鍵幫你算指標、抓趨勢、標異常、畫儀表板。點開互動示範看它怎麼運作。"
 contentType: "guide"
-scene: "整合與自動化"
+scene: "自動化工作流"
 difficulty: "中級"
 createdAt: "2026-07-22"
 verifiedAt: "2026-07-22"
@@ -11,7 +11,7 @@ order: 2
 prerequisites: []
 estimatedMinutes: 5
 tags: ["自動化工作流", "報表", "數據分析", "Claude"]
-modules: []
+modules: ["M05", "M07"]
 ---
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 「自動化工作流」系列第二條。這是最多企業喊痛的一題——90 家裡有 32 家卡在報表與數據分析。先用範例點一遍看它怎麼運作。
