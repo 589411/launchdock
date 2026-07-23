@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "registry": "node scripts/generate-article-registry.mjs",
-    "handout": "node scripts/generate-handout.mjs"
+    "handout": "node scripts/generate-handout.mjs",
+    "orphans": "node scripts/find-orphan-images.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",

@@ -89,6 +89,7 @@
 
 ## 已知坑
 - 任何圖片插入後**必須**跑機敏掃描（見 CLAUDE.md 安全規則）。生成的 SVG 概念圖除外（無真實資料）。
+- ⚠️ **批次上圖會留「孤兒圖」＝沒被任何文章引用卻已 push public**（2026-07-23 稽核揪出 50 張/21.9MB，含未審的 API key 生 dump）。孤兒＝資安曝險（沒經遮罩審查）＋肥肉。**定期跑 `npm run orphans`**（= `scripts/find-orphan-images.mjs`，掃 src+docs 的 `/images/articles/...` 引用 vs 磁碟差集）；`npm run orphans -- --rm` 印出可複製的 `git rm` 指令（**刻意不自動刪**，孤兒可能是待用素材如錯誤碼 SEO 截圖，人看過再決定）。
 - ⚠️ **`redact-screenshots.py --scan` 的綠燈不可信任**（2026-07-23 事故）：它靠 OCR 抓 token 再遮，對 **base64／長亂數 key 系統性漏抓**。`ollama-openclaw-windows/` 兩張圖的 `ollama.com/connect?...key=` 真憑證，scan 回報「0 敏感區、全 clean」卻實際外洩並已 push public。**鐵律**：凡是「登入／connect／API key／PAT／OAuth secret」類截圖，**一律人眼逐張覆核**，別信 scan 綠燈；遮這種 key 用座標黑框（`PIL ImageDraw.rectangle`）不要靠 OCR。文字檔的 key 才能靠 grep（`AIza`/`GOCSPX-`/`sk-ant-`/`sk-or-v1-`/`ghp_`/`github_pat_`/`ollama.com/connect?...key=`）；截圖裡的要用看的。高風險資料夾清單見本次對話。
 - sitemap 靠 build 自動產；llms/.md 端點不會進 sitemap（已驗證）。
 - React island 互動驗證要用 `npm run preview`，**不要用 `npm run dev`**（React19+Vite dev-only 的
