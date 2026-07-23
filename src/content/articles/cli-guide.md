@@ -1,6 +1,6 @@
 ---
-title: "CLI 入門指南：命令列到底是什麼？為什麼 AI 離不開它？"
-description: "命令列介面（CLI）是 OpenClaw 的手和腳。了解 CLI 的原理、常見工具、以及它為什麼是 AI 時代最強大的操作方式。"
+title: "CLI 是什麼？命令列介面（Command-Line Interface）白話完整介紹"
+description: "CLI（Command-Line Interface，命令列介面）就是用打字指令、而不是滑鼠來操作電腦。這篇用白話解釋 CLI 是什麼、和 GUI／終端機／Shell 差在哪、常見指令有哪些，完全沒基礎也看得懂。"
 contentType: "guide"
 scene: "環境準備"
 difficulty: "入門"
@@ -311,6 +311,26 @@ ls -lt | head -5
 ## 一句話總結
 
 > **CLI 是用文字操作電腦的方式。它快速、可自動化、可組合——這正是 AI Agent 需要的。OpenClaw 的威力，建立在 CLI 生態之上。**
+
+---
+
+## CLI 常見問題
+
+### CLI 的全名（縮寫）是什麼？
+
+CLI 是 **Command-Line Interface** 的縮寫，中文叫「命令列介面」。意思就是：用打字下指令來操作電腦，而不是用滑鼠點圖示。
+
+### CLI 和 Terminal（終端機）、Shell 有什麼不同？
+
+三個很常被混用，但其實是不同層次：**終端機（Terminal）** 是那個黑底白字的視窗（裝指令的容器）；**Shell**（例如 Bash、Zsh）是視窗裡真正負責讀懂並執行你指令的程式；**CLI** 則是「用文字下指令」這整種操作方式的統稱。你在終端機裡、透過 Shell、以 CLI 的方式操作電腦。
+
+### CLI 和 GUI 差在哪？
+
+GUI（圖形介面）用滑鼠點按鈕和圖示，直覺但只能做畫面上有的功能；CLI 用鍵盤打指令，學習曲線高一點，但能自由組合、可自動化、可遠端操作。這也是 AI Agent 偏好 CLI 的原因——它輸出的是文字，剛好能直接變成指令。
+
+### CLI 和 IDE 差在哪？
+
+IDE（整合開發環境，例如 VS Code）是給你寫程式的圖形化工具；CLI 是下指令操作的介面。兩者常一起用——很多 IDE 內就內建一個 CLI 終端機。
 
 ---
 

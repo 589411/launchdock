@@ -72,6 +72,8 @@ WSL 2 需要硬體虛擬化支援。先確認你的電腦有沒有開：
 systeminfo
 ```
 
+> ⚠️ `systeminfo` 是 **Windows 命令提示字元（cmd）** 的指令。如果你在 WSL / Ubuntu 的終端機裡打，會跳 `systeminfo: command not found`——那是正常的，換回 Windows 的 cmd 執行即可。
+
 找到最後幾行，確認「Hyper-V 需求」區塊：
 
 ```
@@ -97,6 +99,14 @@ wsl --install
 安裝完成後**重新啟動電腦**。
 
 重啟後會自動開啟 Ubuntu，設定使用者名稱和密碼。
+
+> ⚠️ **使用者名稱一定要用小寫開頭**：在「Create a default Unix user account」這步，如果打了大寫開頭的名字（例如 `Joseph`），會被擋下來：
+>
+> ```
+> Invalid username. A valid username must start with a lowercase letter or underscore, and can contain lowercase letters, digits, underscores, and dashes.
+> ```
+>
+> 改成全小寫（例如 `joseph`）就會通過。這不是密碼錯誤，只是 Linux 使用者名稱的規則。
 
 > ⚠️ 如果 `wsl --install` 沒反應，回頭確認 Step 1 的 BIOS 虛擬化是否已開啟。
 
@@ -316,6 +326,10 @@ python -m openclaw start
 ---
 
 ## 常見問題
+
+### WSL 建立使用者時出現 `Invalid username`
+
+設定 WSL 使用者名稱時打了大寫或特殊字元，就會看到 `Invalid username. A valid username must start with a lowercase letter or underscore...`。Linux 使用者名稱只能用小寫字母開頭，改成全小寫（例如把 `Joseph` 改成 `joseph`）即可。
 
 ### `python` 指令找不到
 

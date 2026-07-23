@@ -21,6 +21,13 @@ stuckOptions:
   "OpenClaw 中設定": ["找不到 OpenClaw 設定頁面", "貼上 Key 後沒有反應"]
   "驗證是否成功": ["測試失敗但不知道哪裡出錯", "顯示權限不足的錯誤"]
 ---
+
+> **先搞清楚你要哪一種 Google 金鑰**：要讓 OpenClaw 存取你的 **Google Drive / Gmail**，需要的是一組 **OAuth 用戶端 ID + 用戶端密鑰**（`GOCSPX-...` 開頭），**不是** `AIzaSy...` 那種 API 金鑰。這篇就是帶你建 OAuth 用戶端。
+>
+> 👉 如果你其實是要呼叫 **Gemini AI 模型** 的 `AIzaSy...` 金鑰，那在 [AI 模型 API Key 申請](/articles/ai-api-key-guide/) 那篇，3 分鐘就能拿到，不必走這篇的 Cloud Console 流程。
+
+---
+
 ## 為什麼你會看到這篇？
 
 你想用 OpenClaw 串接 Google Drive 或 Gmail，但在設定 API Key 的步驟卡住了。

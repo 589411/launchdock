@@ -1,6 +1,6 @@
 ---
-title: "WSL 完整教學：讓你的 Windows 擁有 Linux 超能力"
-description: "WSL（Windows Subsystem for Linux）是 Windows 用戶安裝 OpenClaw 的最佳方案。從安裝、設定到日常使用，一次搞定。"
+title: "WSL 是什麼？Windows 安裝 WSL 2、啟動與常見錯誤完整教學"
+description: "WSL（Windows Subsystem for Linux）讓你在 Windows 裡跑真正的 Linux，不用虛擬機。這篇白話解釋 WSL 是什麼、怎麼用 wsl --install 安裝 WSL 2、如何啟動與確認，以及最常見的錯誤（wsl --install 沒反應、虛擬化沒開）怎麼解。"
 contentType: "tutorial"
 scene: "安裝與部署"
 difficulty: "入門"
@@ -352,6 +352,10 @@ code .
 ---
 
 ## 常見問題
+
+### 怎麼啟動 WSL？怎麼確認裝好了？
+
+在 **PowerShell 或 CMD** 打 `wsl` 就能進入；指定發行版用 `wsl -d Ubuntu`。想確認裝好沒、裝了哪些發行版、是 WSL 1 還是 2，用 `wsl -l -v`（等同 `wsl --list --verbose`）。要一次關掉全部用 `wsl --shutdown`。
 
 ### 🚨 `wsl --install` 沒反應
 

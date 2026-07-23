@@ -1,5 +1,5 @@
 ---
-title: "GitHub 開發者設定導覽：Fine-grained Token、SSH/GPG 金鑰在哪管理"
+title: "GitHub Developer settings 在哪？開發者設定與 Personal Access Token 完整導覽"
 description: "搞不清楚 GitHub 的 Personal Access Token、SSH/GPG 金鑰、GitHub Apps 在哪設定？這篇帶你認識 Settings → Developer settings 底下各個頁面，重點講解較安全的 Fine-grained Token，以及操作敏感設定時的 passkey 二次驗證。"
 contentType: "guide"
 scene: "環境準備"
@@ -20,6 +20,20 @@ stuckOptions:
 > **一句話**：GitHub 的金鑰與權杖都收在 **Settings → Developer settings** 底下。要拿給程式／CLI 用的存取權杖，優先用權限更細、可設到期日的 **Fine-grained personal access token**。
 
 **關鍵字**：GitHub、Developer settings、Personal Access Token、PAT、Fine-grained token、Tokens classic、SSH keys、GPG keys、Vigilant mode、GitHub Apps、Confirm access、passkey、二次驗證
+
+---
+
+## Developer settings 在哪？怎麼進去
+
+很多人卡在「找不到 Developer settings」——因為它藏在設定頁的**最底部**。點擊路徑是：
+
+1. 右上角**你的頭像** → **Settings（設定）**
+2. 左側選單一路**往下拉到最底**
+3. 最後一個就是 **Developer settings**，點進去
+
+懶得點？直接開這個網址也行：**[github.com/settings/apps](https://github.com/settings/apps)**。進去後左側就是 **GitHub Apps / OAuth Apps / Personal access tokens** 這幾個區塊；要產權杖就選 **Personal access tokens → Fine-grained tokens**。
+
+> 🔍 **真的找不到？** 它一定在左側選單的**最後一個項目**。如果你用**手機版網頁**看不到，切到電腦版網頁（或桌機瀏覽器）就會出現。
 
 ---
 

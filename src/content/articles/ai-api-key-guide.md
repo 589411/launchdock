@@ -1,6 +1,6 @@
 ---
-title: "AI 模型 API Key 申請指南：OpenAI、Anthropic、Google、OpenRouter 一次搞定"
-description: "一步步教你申請 AI 模型的 API Key。不管你選哪家，照著做就能拿到讓 OpenClaw 運作的鑰匙。"
+title: "AI 模型 API Key 怎麼申請（含免費方案）：OpenAI、Anthropic、Google、OpenRouter 一次搞定"
+description: "API Key 是讓程式用你的帳號呼叫 AI 的密碼。這篇一步步教你申請 AI 模型 API Key，含 Google、Anthropic、OpenRouter 的免費方案，照著做就能拿到讓 OpenClaw 運作的鑰匙。"
 contentType: "tutorial"
 scene: "環境準備"
 difficulty: "入門"
@@ -22,6 +22,12 @@ stuckOptions:
   "OpenAI": ["API 跟 ChatGPT Plus 是分開的嗎？", "信用卡被拒絕", "Key 建立後看不到完整內容"]
   "Anthropic": ["$5 免費額度要怎麼啟用？", "Key 格式長什麼樣？"]
   "Key 安全": ["Key 不小心公開了怎麼辦？", "可以把 Key 存在哪裡？"]
+---
+
+> **一句話**：**API Key 是一串像密碼的字串，讓程式（例如 OpenClaw）能用你的帳號去呼叫 AI 模型。** 它也能花你的錢，所以要當密碼保管。下面教你從 Google、OpenAI、Anthropic、OpenRouter 任一家拿到一把——**其中 Google、Anthropic、OpenRouter 都有免費方案，不必綁卡就能開始**。
+
+**關鍵字**：API Key、AI API key、API Key 是什麼、如何取得 API Key、免費 API Key、Google AI Studio、Gemini API key、OpenAI API key、Anthropic API key、OpenRouter、`AIzaSy...`、`sk-...`、`sk-ant-api03`、`sk-or-v1-`
+
 ---
 
 ## 這篇要幹嘛？
