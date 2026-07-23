@@ -194,6 +194,16 @@ Phase 3: CLI 配對     → 引導使用者執行 add-image.sh
 
 ---
 
+## 新增文章時的 FAQ 同步規則
+
+- 首頁 FAQ 的唯一來源是 `src/data/home-faq.ts`；畫面上的 FAQ 與 FAQ schema 都由它生成，改這一個檔即可，不要在 index.astro 裡手寫 FAQ 或 schema。
+- 新增文章後，判斷它是否回答一個「高搜尋需求的新手問題」（可對照 GSC 進站關鍵字）：
+  - 是 → 在 `home-faq.ts` 加一則 `{ q, a, href 指向該文章, linkText }`。全表維持 ~10 則以內，超過就汰換最弱的一則。
+  - 否 → 不要加進首頁 FAQ；該文章的關鍵字/問答放它自己的 frontmatter `stuckOptions` 就好（無上限）。
+- 每篇 troubleshoot 文章的錯誤字串，仍以「內文 code block 逐字寫出」為準（Google 讀不到截圖裡的字）。
+
+---
+
 ## 文章結構規範
 
 ### frontmatter 必要欄位

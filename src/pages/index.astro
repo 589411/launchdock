@@ -4,6 +4,7 @@ import LearningPath from '../components/LearningPath.astro';
 import SceneCard from '../components/SceneCard.astro';
 import PopularArticlesHome from '../components/PopularArticlesHome.tsx';
 import EventList from '../components/EventList.tsx';
+import homeFaq from '../data/home-faq.ts';
 import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.archived);
@@ -286,47 +287,22 @@ const articlesMeta = allArticles.map(a => ({
     <p class="text-text-secondary mb-8">新手最常卡住的地方，先幫你答好。還是卡關？下面有真人接。</p>
 
     <div class="space-y-3">
-
-      <details class="group rounded-xl bg-surface-light border border-surface-lighter p-5">
-        <summary class="cursor-pointer font-semibold list-none flex justify-between items-center gap-4">完全不會寫程式，也能動手做 AI 嗎？<span class="text-text-muted group-open:rotate-180 transition-transform">▾</span></summary>
-        <p class="text-text-secondary mt-3 leading-relaxed">可以。藍鴨所有教學都假設你零基礎——每步有截圖、每個卡點能回報、每個問題有人接。先從 <a href="/articles/cli-guide/" class="text-brand-light hover:underline">CLI 是什麼</a> 和 <a href="/articles/install-openclaw/" class="text-brand-light hover:underline">安裝指南</a> 開始。</p>
-      </details>
-
-      <details class="group rounded-xl bg-surface-light border border-surface-lighter p-5">
-        <summary class="cursor-pointer font-semibold list-none flex justify-between items-center gap-4">我是 Windows，能用嗎？<span class="text-text-muted group-open:rotate-180 transition-transform">▾</span></summary>
-        <p class="text-text-secondary mt-3 leading-relaxed">能。裝了 WSL（Windows Subsystem for Linux）就有完整的 Linux 環境，體驗跟 Mac 幾乎一樣。看 <a href="/articles/windows-wsl-guide/" class="text-brand-light hover:underline">WSL 是什麼與安裝教學</a>。</p>
-      </details>
-
-      <details class="group rounded-xl bg-surface-light border border-surface-lighter p-5">
-        <summary class="cursor-pointer font-semibold list-none flex justify-between items-center gap-4">API Key 是什麼？哪裡拿免費的？<span class="text-text-muted group-open:rotate-180 transition-transform">▾</span></summary>
-        <p class="text-text-secondary mt-3 leading-relaxed">API Key 是一串像密碼的字串，讓程式用你的帳號呼叫 AI 模型。Google、Anthropic、OpenRouter 都有免費方案、不必綁卡。看 <a href="/articles/ai-api-key-guide/" class="text-brand-light hover:underline">API Key 怎麼申請（含免費方案）</a>。</p>
-      </details>
-
-      <details class="group rounded-xl bg-surface-light border border-surface-lighter p-5">
-        <summary class="cursor-pointer font-semibold list-none flex justify-between items-center gap-4">執行 <code>ollama launch hermes</code> 跳出 <code>Error: unknown integration: hermes</code>？<span class="text-text-muted group-open:rotate-180 transition-transform">▾</span></summary>
-        <p class="text-text-secondary mt-3 leading-relaxed">你的 Ollama 版本太舊——<code>hermes</code> 這個整合要 Ollama 夠新才有。更新 Ollama、完全重開、再跑一次即可。看 <a href="/articles/hermes-agent/" class="text-brand-light hover:underline">Hermes Agent 快速上手</a>。</p>
-      </details>
-
-      <details class="group rounded-xl bg-surface-light border border-surface-lighter p-5">
-        <summary class="cursor-pointer font-semibold list-none flex justify-between items-center gap-4">系統提示詞是什麼？<span class="text-text-muted group-open:rotate-180 transition-transform">▾</span></summary>
-        <p class="text-text-secondary mt-3 leading-relaxed">系統提示詞是 AI 的「人設／設定檔」，決定它怎麼回應你——同一個 AI，換一段系統提示詞就像換了個人。7/29 <a href="/meetup/" class="text-brand-light hover:underline">免費線上工作坊</a> 會手把手帶你寫一段自己的、當場帶走。</p>
-      </details>
-
-      <details class="group rounded-xl bg-surface-light border border-surface-lighter p-5">
-        <summary class="cursor-pointer font-semibold list-none flex justify-between items-center gap-4">Mac 跑長任務跑到一半睡著、任務斷掉？<span class="text-text-muted group-open:rotate-180 transition-transform">▾</span></summary>
-        <p class="text-text-secondary mt-3 leading-relaxed">用 macOS 內建的 <code>caffeinate</code> 讓電腦別睡，服務就不會中斷。看 <a href="/articles/caffeinate-keep-mac-awake/" class="text-brand-light hover:underline">caffeinate 是什麼</a>。</p>
-      </details>
-
-      <details class="group rounded-xl bg-surface-light border border-surface-lighter p-5">
-        <summary class="cursor-pointer font-semibold list-none flex justify-between items-center gap-4">要花錢嗎？會不會很貴？<span class="text-text-muted group-open:rotate-180 transition-transform">▾</span></summary>
-        <p class="text-text-secondary mt-3 leading-relaxed">入門幾乎零成本：OpenClaw 本身免費，模型可用 Google／OpenRouter 的免費額度先玩。之後真的要衝量再看 <a href="/articles/token-economics/" class="text-brand-light hover:underline">Token 計費怎麼算</a>，並記得設花費上限。</p>
-      </details>
-
-      <details class="group rounded-xl bg-surface-light border border-surface-lighter p-5">
-        <summary class="cursor-pointer font-semibold list-none flex justify-between items-center gap-4">我卡住了、出現看不懂的錯誤怎麼辦？<span class="text-text-muted group-open:rotate-180 transition-transform">▾</span></summary>
-        <p class="text-text-secondary mt-3 leading-relaxed">把「完整的錯誤訊息」原封不動複製下來，到下面的鴨聚或討論區貼給我們——別自己硬扛，貼上紅字最快解。</p>
-      </details>
-
+      {homeFaq.map((item) => (
+        <details class="group rounded-xl bg-surface-light border border-surface-lighter p-5">
+          <summary class="cursor-pointer font-semibold list-none flex justify-between items-center gap-4">
+            {item.q}
+            <span class="text-text-muted group-open:rotate-180 transition-transform">▾</span>
+          </summary>
+          <p class="text-text-secondary mt-3 leading-relaxed">
+            {item.a}
+            {item.href && (
+              <>
+                {' '}<a href={item.href} class="text-brand-light hover:underline">{item.linkText}→</a>
+              </>
+            )}
+          </p>
+        </details>
+      ))}
     </div>
 
     <!-- 還是卡住？真人接 -->
@@ -343,19 +319,14 @@ const articlesMeta = allArticles.map(a => ({
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": [
-      {"@type":"Question","name":"完全不會寫程式，也能動手做 AI 嗎？","acceptedAnswer":{"@type":"Answer","text":"可以。藍鴨所有教學都假設你零基礎，每步有截圖、每個卡點能回報、每個問題有人接。"}},
-      {"@type":"Question","name":"我是 Windows，能用 OpenClaw 嗎？","acceptedAnswer":{"@type":"Answer","text":"能。裝了 WSL（Windows Subsystem for Linux）就有完整的 Linux 環境，體驗跟 Mac 幾乎一樣。"}},
-      {"@type":"Question","name":"API Key 是什麼？哪裡拿免費的？","acceptedAnswer":{"@type":"Answer","text":"API Key 是一串像密碼的字串，讓程式用你的帳號呼叫 AI 模型。Google、Anthropic、OpenRouter 都有免費方案。"}},
-      {"@type":"Question","name":"ollama launch hermes 跳出 Error: unknown integration: hermes 怎麼辦？","acceptedAnswer":{"@type":"Answer","text":"你的 Ollama 版本太舊。更新 Ollama、完全重開、再跑一次即可。"}},
-      {"@type":"Question","name":"系統提示詞是什麼？","acceptedAnswer":{"@type":"Answer","text":"系統提示詞是 AI 的人設／設定檔，決定它怎麼回應你。"}},
-      {"@type":"Question","name":"Mac 跑長任務跑到一半睡著、任務斷掉？","acceptedAnswer":{"@type":"Answer","text":"用 macOS 內建的 caffeinate 讓電腦別睡，服務就不會中斷。"}},
-      {"@type":"Question","name":"要花錢嗎？會不會很貴？","acceptedAnswer":{"@type":"Answer","text":"入門幾乎零成本：OpenClaw 免費，模型可用免費額度先玩，衝量前記得設花費上限。"}},
-      {"@type":"Question","name":"出現看不懂的錯誤怎麼辦？","acceptedAnswer":{"@type":"Answer","text":"把完整錯誤訊息複製下來，到鴨聚或討論區貼給我們最快解。"}}
-    ]
+    mainEntity: homeFaq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   })} />
 
-  <!-- Discussion Section 已下架：舊 <HomeDiscussion> 停在 100+ 天前像荒廢，改為上方永不過期的 FAQ；HomeDiscussion.tsx 元件檔保留未刪 -->
+  <!-- FAQ 單一資料源＝ src/data/home-faq.ts（畫面 <details> 與上方 FAQPage schema 都由它生成，不會 drift）。舊 <HomeDiscussion> 已下架，元件檔保留未刪 -->
 
   <!-- 🦆 藍鴨小聚 CTA -->
   <section class="max-w-[900px] mx-auto px-6 py-14">
