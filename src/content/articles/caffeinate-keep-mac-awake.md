@@ -1,6 +1,6 @@
 ---
-title: "Mac 一睡著 AI Agent 就斷線？用 caffeinate 讓 OpenClaw、Hermes 整夜不中斷"
-description: "叫 Agent 跑一件要好幾個鐘頭的事，去泡杯咖啡回來卻發現 Mac 睡著、任務斷在一半、Telegram 也叫不動它？macOS 內建的 caffeinate 指令能讓電腦保持清醒、服務不中斷。本文把 -dimsu 五個參數逐一講清楚，附常用寫法與最容易踩的坑。"
+title: "caffeinate 是什麼？讓 Mac 不睡、AI Agent 整夜不斷線（含怎麼停止）"
+description: "caffeinate 是 macOS 內建指令，作用是防止 Mac 進入睡眠，讓 OpenClaw、Hermes 這類長時間跑的 AI Agent 不因電腦休眠而斷線。這篇白話講 caffeinate 是什麼、-dimsu 五個參數各做什麼、常用寫法，以及怎麼用 killall caffeinate 停止，附最容易踩的坑。"
 contentType: "troubleshoot"
 scene: "基礎使用"
 difficulty: "入門"
@@ -16,6 +16,12 @@ stuckOptions:
   "指令怎麼用": ["caffeinate 後面到底要接什麼？", "我按了 Ctrl+C，它就停了正常嗎？", "-dimsu 五個字母一定要全打嗎？"]
   "還是會睡": ["指令有跑，闔上筆電蓋還是睡著了？", "插著電源用 -s 為什麼沒效？", "終端機關掉之後 caffeinate 是不是就沒了？"]
   "要不要一直開": ["我需要讓 Mac 24 小時不睡嗎？", "有沒有比 caffeinate 更適合長期掛機的做法？"]
+---
+
+> **一句話**：**`caffeinate` 是 macOS 內建的指令，作用是「防止 Mac 進入睡眠」、讓電腦保持清醒。** 把它套在 Agent 啟動指令前面（`caffeinate -dimsu 你的指令`），電腦就不會因為閒置而休眠、連線不會斷、長任務不會停在一半。想停止：`killall caffeinate`（詳見下方）。
+
+**關鍵字**：caffeinate、caffeinate 是什麼、caffeinate 用法、Mac 不睡覺、防止 Mac 休眠、讓 Mac 保持喚醒、killall caffeinate、`caffeinate -dimsu`、`-i` `-t` `-w`、Mac 掛機不斷線
+
 ---
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 這篇來自一個很實際的痛：你叫 Agent 幫你跑一件要好幾個鐘頭的事，結果去泡個咖啡回來，Mac 睡著了、任務斷在一半、Telegram 也叫不動它。今天教你一個 macOS 內建、一行就搞定的解法——caffeinate。
@@ -100,7 +106,7 @@ caffeinate -i -w $(pgrep -f openclaw)
 
 ### 🚨 常見錯誤
 
-**關掉終端機視窗＝停止咖啡因。** caffeinate 是跟著那個終端機視窗活的，視窗一關、電腦一重開它就沒了。想長期在背景撐著，可以在指令最後加 `&` 丟到背景，或用 `nohup`、`tmux` 之類的方式，讓它不隨視窗關閉而中斷。
+**關掉終端機視窗＝停止咖啡因。** caffeinate 是跟著那個終端機視窗活的，視窗一關、電腦一重開它就沒了。想長期在背景撐著，可以在指令最後加 `&` 丟到背景，或用 `nohup`、`tmux` 之類的方式，讓它不隨視窗關閉而中斷。**但丟到背景後就不能用 `Ctrl + C` 停了**——要收掉它，執行 `killall caffeinate`，一次結束所有還在跑的 caffeinate。
 
 **闔上筆電蓋，多半還是會睡。** 這是最多人誤會的地方。caffeinate 擋的是「閒置休眠」，但闔上上蓋觸發的睡眠是另一回事——一般情況下即使 caffeinate 在跑，蓋子一闔電腦還是會睡（除非接電源＋外接螢幕等特定條件）。要長時間掛著跑，就讓螢幕開著，別闔蓋。
 
@@ -115,5 +121,23 @@ caffeinate -i -w $(pgrep -f openclaw)
 1. **偶爾跑長任務**——用「寫法一」讓它跑完自動放行，剛剛好，別讓它一直開著。
 2. **天天都要掛著接訊息／跑排程**——這時該往前想一層：是不是該把 Agent 放到一台本來就 24 小時開著的機器上？一台便宜的 VPS、一台舊電腦、甚至一台樹莓派，都比讓主力筆電硬撐更合理。
 3. **記住 caffeinate 的定位**——它是「臨時讓它別睡」的工具，不是「架一個穩定常駐服務」的正解。真的要長期常駐，`pmset`、`launchd`，或直接跑在伺服器上，會比一行 caffeinate 更穩。
+
+## 常見問題
+
+### caffeinate 是什麼？
+
+`caffeinate` 是 macOS 內建的一個指令，作用是**防止 Mac 進入睡眠**、讓電腦保持清醒。名字來自「咖啡因（caffeine）」——就像人喝了咖啡會睡不著。它最常拿來讓長時間跑的程式（例如 AI Agent、長分析、整夜排程）不因電腦休眠而中斷。
+
+### caffeinate 怎麼停止／關掉？
+
+看你怎麼開的：在終端機前景跑的，按 `Ctrl + C` 就停；如果是加 `&` 丟到背景、或用 `nohup`／`tmux` 跑的，執行 **`killall caffeinate`** 一次結束所有還在跑的 caffeinate。另外，用「寫法一」`caffeinate 你的指令` 的話，接的指令一跑完它就自動退場，不用你手動停。
+
+### caffeinate 和 pmset 差在哪？
+
+`caffeinate` 是「臨時、跟著某個工作或視窗」讓 Mac 別睡，工作一結束就恢復正常；`pmset` 則是改「系統電源管理設定」的工具，適合長期、全域地調整休眠行為。臨時掛個長任務用 caffeinate；要一台機器長期常駐，用 `pmset`／`launchd` 或乾脆跑在伺服器上更穩。
+
+### 用電池時 caffeinate 有效嗎？
+
+部分有效。`-i`（防閒置休眠）用電池時仍然有效，但 `-s`（防系統休眠）**只在接電源時才作用**——這是 Apple 的設計。要靠 caffeinate 撐整晚，建議插著電源。
 
 > <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **鴨編的話**：工具選對場合最重要。caffeinate 是你今晚就能用、解「跑一段長任務別讓它斷」的最快解法——這件事它做得漂亮。但如果你的需求慢慢變成「我要一個永遠在線的 Agent」，那就不是喝咖啡撐夜的問題，而是該幫它找張真正的床（一台常開的機器）了。下次丟長任務給 OpenClaw 或 Hermes，就用 `caffeinate -dimsu 你的啟動指令` 把它包起來，然後安心去泡咖啡。
