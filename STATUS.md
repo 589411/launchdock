@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-07-22（**自動化工作流四條全上線**：對帳／報表／收件匣／文件差異，各一個互動 island + 中英雙版文章，全接測驗 L4；同日一併把 2026-07-21 Grok／ChatGPT 連 GitHub 兩篇 + 13 張遮罩圖推上 production）
+**最後更新：** 2026-07-23（**自動化工作流升級為獨立 scene**：從 tag 升成中英 scene enum「自動化工作流／automation」，四篇文章掛 modules（M05／report 加 M07），icon 對調，已上 production 實測；前一日四條工作流 + AI 連 GitHub 兩篇已上線）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 一句話現況
@@ -10,7 +10,10 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**2026-07-22 自動化工作流四條已全數上線（production 200 驗證）**——來源＝ `~/github/workflow-claude/HANDOFF.md`（Cowork 整併版交接包，取代舊的 `HANDOFF-workflow-reconcile.md`；四條的 wizard/astro/文章都在該資料夾按 launchdock 路徑排好，直接複製即可）。四條：`/workflows/reconcile/`（對帳・進階）、`/workflows/report/`（報表・中級）、`/workflows/inbox/`（收件匣・入門）、`/workflows/docdiff/`（文件差異・進階），各配一篇 `workflow-*` 文章**中英雙版**、tag `自動化工作流`、scene 整合與自動化／integration，並全部進 `quiz.ts` levels[4].recommended（自動化＝能力階梯最頂 L4）。全部 wizard **純前端零 API**，CSV／文件只在瀏覽器內解析、不上傳；末段附可複製提示詞 + 開啟 Claude。registry 72 篇/55 概念。
+**2026-07-23 自動化工作流升級為獨立 scene + 四篇掛 modules（已上 production 實測）**——commit `f6b734a`。① **scene 升級（保留彈性、後續可持續加工作流）**：`content.config.ts` zh enum 加「自動化工作流」、en enum 加 `automation`；`i18n/ui.ts` 補 `scene.automation` 與 `sceneKeyToLabel` 中英各一筆；`pages/articles/index.astro` 與 `pages/en/articles/index.astro` 的 sceneOrder/SCENE_ICONS 補新 scene（排在「整合與自動化」之後）；四篇 `workflow-*` 中英 scene 從 integration 改 automation。**icon 對調**（語意更準）：整合與自動化→`api-integrations.png`、自動化工作流→`automation.png`。② **modules 接講義線**：reconcile／inbox／docdiff→`M05`（自動化工作流與 RPA）、report→`M05`+`M07`（資料分析與視覺化）。tag「自動化工作流」保留（scene 導覽軸 + tag 自由聚合並存，不衝突）。registry 重生 72 篇/55 概念。**驗證**：build 綠（165 頁）＋ preview 開瀏覽器看中英「場景瀏覽」都出現獨立「自動化工作流／Automation Workflows」區塊、四篇齊備；push 後 production `/articles/`、`/en/articles/`、文章頁 scene 都確認上線。
+**下一步（可挑）**：① 講義抽組實測 `npm run handout M05`（四篇已掛，可產出 M05 講義）；② 英文互動頁（現在英文文章連的是中文 wizard，文中已註明，需把四個 wizard 文案 i18n 化 + 開 `/en/workflows/*`）；③ ⚠️ **另有一份 `HANDOFF_hero_reface.md`（2026-07-23 建，別處產生）待處理**——首頁 Hero 中英「換臉」（工具導向→使用者情緒導向，SEO/description/養蝦宇宙全保留），**未動、未納入本次 commit**，Joseph 要做時再開。
+
+**（前一段）2026-07-22 自動化工作流四條已全數上線（production 200 驗證）**——來源＝ `~/github/workflow-claude/HANDOFF.md`（Cowork 整併版交接包，取代舊的 `HANDOFF-workflow-reconcile.md`；四條的 wizard/astro/文章都在該資料夾按 launchdock 路徑排好，直接複製即可）。四條：`/workflows/reconcile/`（對帳・進階）、`/workflows/report/`（報表・中級）、`/workflows/inbox/`（收件匣・入門）、`/workflows/docdiff/`（文件差異・進階），各配一篇 `workflow-*` 文章**中英雙版**、tag `自動化工作流`、scene 整合與自動化／integration，並全部進 `quiz.ts` levels[4].recommended（自動化＝能力階梯最頂 L4）。全部 wizard **純前端零 API**，CSV／文件只在瀏覽器內解析、不上傳；末段附可複製提示詞 + 開啟 Claude。registry 72 篇/55 概念。
 **驗證**：`npm run build` 綠（165 頁）＋ `npm run preview` 瀏覽器逐條實跑——對帳（4 相符／1 金額不符／1 只在內部帳／1 只在銀行，日期差自動視為同一筆）、報表（總計 $2,813k、7月環比 +41%、6月 −22% 標紅，數字覆算正確）、收件匣（4 訊息抽 4 待辦／3 個明確截止，有截止日的排前面）、文件差異（4 處實質變更全標「對你不利」：付款 30→45 天、交期 14→21 天、逾期罰則被刪、新增 7 天視同驗收）；深/淺色都正常。
 **下一步（可挑）**：① 四篇 `modules: []` 接講義線（BACKLOG 已記）；② 「自動化工作流」目前是 tag，若這條線再長考慮升級成 `scene` enum；③ 英文互動頁（現在英文文章連的是中文 wizard，文中已註明）。
 
