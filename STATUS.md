@@ -16,6 +16,14 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
+**2026-07-27（插隊）新聞回應文：`ai-share-link-not-private`（AI 分享連結≠私密連結）中英雙版——本地 build 綠、瀏覽器實看過、等 Joseph review 語氣＋事實後決定 push** ⬅️ 最新
+- **緣起**：回應 2026-07 Claude 分享對話被 Google/Bing 索引外流事件（電腦王阿達等報導）。定位＝碎碎念/觀點文，教一個第一性原則心智模型「分享連結 ≠ 私密連結」，適合當 SME/新手教材。
+- **查證（站上硬規則）**：事件在我知識截止後，實查多來源交叉確認：Cybernews／IBTimes(Reuters)／Yahoo Tech／Hackread／Neowin＝Claude 2026/7 分享頁缺 `noindex` 被索引，外流 API 金鑰/履歷/加密錢包/律師筆記/疑似 SSN；前三次同類事件也查實＝ChatGPT 2025/7（~4,500 篇/~10 萬被爬，OpenAI 下架功能）、Grok 2025/8（37 萬+，含密碼）、Claude 2025。**Perplexity/Notion「預設私密」的確切行為沒查實 → 刻意不寫，改用已證實的「修復只差一行 noindex」論點**。
+- **產物**：`ai-share-link-not-private.md`＋`en/`（guide／scene 鴨編的碎碎念·blog／入門／order 99）；3 張圖 `public/images/articles/ai-share-link-not-private/`（Claude 分享按鈕→分享對話框「Keep private/Create public link·Anyone with the link can view」→已建立公開連結）。concepts.yaml 加概念「分享連結 ≠ 私密連結」（canonical＝本篇）；registry 重生 **74 篇/55 概念**。含「誠實角度」段（我是 Anthropic 模型、客觀陳述不護航）。
+- **遮罩**：n3 那張是 Joseph 剛建立的**真‧公開 share 連結**，原樣登站等於自建反向連結、可能被 Google 索引（正踩文章警告的坑）→ 已用座標黑框遮掉 URL 的 UUID，保留 `claude.ai/share/` 前綴示意。三張都是他自己「誰最強」測試對話、無第三方 PII。
+- **驗證**：build 綠（169 頁）＋無孤兒＋3 圖引用＋無斜線連結＋`npm run preview` 開瀏覽器看過三張圖與遮罩 URL 都正確渲染。
+- **下一步（需 Joseph）**：① 過目語氣（尤其「誠實角度」批 Anthropic 那段）與事實框架 → 點頭；② 授權後 `git add` 三新檔＋concepts＋registry＋STATUS，commit＋push。**尚未 commit／push**。可選：加進 `home-faq.ts`（「claude 對話被 google 搜到」時事題）、meetup warmups、或做成一頁式 SME 教材。
+
 **2026-07-27 反向截圖新文章：`set-system-prompt`（系統提示詞四平台教學）中英雙版——本地 build 綠、等 Joseph review 遮罩圖後 push** ⬅️ 最新
 - **緣起**：配合 7/29 工作坊「親手寫第一段 AI 系統提示詞」＝四階梯第①階，把當晚的帶得走講義先寫成站上文章。桌面 33 張 07-27 截圖（Gemini/ChatGPT/Claude/Grok 四平台設定「給 AI 的指令」全流程）反推成文。
 - **產物**：`src/content/articles/set-system-prompt.md`＋`en/set-system-prompt.md`（tutorial／scene 基礎使用·basics／入門）；9 張遮罩後 JPEG 進 `public/images/articles/set-system-prompt/`（1800px、~180–230KB）；`concepts.yaml` 加概念「系統提示詞」（canonical＝本篇，別名含 System Prompt/自訂指令/給 AI 的指令）；registry 重生 **73 篇/55 概念**。內文連 `/meetup/`＋自動連結 prompt-engineering／openclaw-soul／from-prompt-to-skill。附一段可複製新手模板（關於我／回答方式／語氣）。

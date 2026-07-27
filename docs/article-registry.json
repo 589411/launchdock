@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-27T13:07:27.721Z",
+  "_generated": "2026-07-27T14:49:59.818Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -105,10 +105,10 @@
       "link": "/articles/which-ai-tool-for-you/"
     },
     "Prompt Engineering": {
-      "displayName": "系統提示詞",
-      "shortDesc": "在 AI 設定裡寫一次、之後每次對話都自動生效的常駐指令，讓 AI 記住你是誰、要什麼",
-      "canonicalArticle": "set-system-prompt",
-      "link": "/articles/set-system-prompt/"
+      "displayName": "分享連結 ≠ 私密連結",
+      "shortDesc": "AI 的「分享」按鈕預設是產生公開網頁，可能被搜尋引擎索引——不等於只傳給特定人",
+      "canonicalArticle": "ai-share-link-not-private",
+      "link": "/articles/ai-share-link-not-private/"
     },
     "RAG": {
       "displayName": "RAG（檢索增強生成）",
@@ -457,10 +457,10 @@
       ],
       "prerequisites": [],
       "modules": [],
-      "concepts_defined": [
+      "concepts_defined": [],
+      "concepts_referenced": [
         "Prompt Engineering"
       ],
-      "concepts_referenced": [],
       "link": "/articles/set-system-prompt/"
     },
     {
@@ -1250,7 +1250,6 @@
       ],
       "concepts_referenced": [
         "Agent",
-        "Prompt Engineering",
         "RAG",
         "Agent Memory",
         "Embedding",
@@ -2008,6 +2007,28 @@
       "link": "/articles/ai-agent-browsers/"
     },
     {
+      "slug": "ai-share-link-not-private",
+      "title": "Claude 對話被 Google 搜到了：AI「分享連結」第 4 次外流，與你最該學會的一課",
+      "description": "2026 年 7 月，大量 Claude 分享對話被 Google、Bing 索引，外流 API 金鑰、履歷、加密錢包資訊。這不是第一次——ChatGPT、Grok 都發生過。真正的問題不是某家出包，而是一個心智模型錯誤：分享連結 ≠ 私密連結。這篇帶你看懂，並學會自保。",
+      "scene": "鴨編的碎碎念",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "Anthropic",
+        "隱私",
+        "資安",
+        "Claude",
+        "ChatGPT"
+      ],
+      "prerequisites": [],
+      "modules": [],
+      "concepts_defined": [
+        "Prompt Engineering"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/ai-share-link-not-private/"
+    },
+    {
       "slug": "computex-2026-ai-era",
       "title": "Computex 2026：Nvidia 打破龍蝦瓶頸，個人 AI 助理元年正式開始",
       "description": "四個月前我在課程中預測：等技術成熟加上好用的地端模型，就是龍蝦普及的時刻。Computex 2026 的 Nvidia RTX Spark，讓這個預測提前兌現，也將改變個人電腦的歷史。",
@@ -2068,8 +2089,7 @@
       "concepts_defined": [],
       "concepts_referenced": [
         "Skill",
-        "Harness",
-        "Prompt Engineering"
+        "Harness"
       ],
       "link": "/articles/from-prompt-to-skill/"
     },

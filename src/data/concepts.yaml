@@ -155,6 +155,13 @@ Prompt Engineering:
   canonicalArticle: "set-system-prompt"
   relatedArticles: ["prompt-engineering", "from-prompt-to-skill", "openclaw-soul"]
 
+分享連結不等於私密連結:
+  displayName: "分享連結 ≠ 私密連結"
+  aliases: ["分享連結 ≠ 私密連結", "分享連結不等於私密連結", "公開分享連結"]
+  shortDesc: "AI 的「分享」按鈕預設是產生公開網頁，可能被搜尋引擎索引——不等於只傳給特定人"
+  canonicalArticle: "ai-share-link-not-private"
+  relatedArticles: ["set-system-prompt", "prompt-engineering"]
+
 RAG:
   displayName: "RAG（檢索增強生成）"
   aliases: ["RAG", "Retrieval-Augmented Generation", "檢索增強生成"]
