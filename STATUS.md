@@ -4,6 +4,12 @@
 **最後更新：** 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
+## 📈 SEO 成效量測（進行中，等 08-10 驗收）
+2026-07-23~25 上線一批 SEO 改動（Hero 換臉、8 篇文章標題/description/FAQ、首頁資料驅動 FAQ+schema、meetup 招牌），**現在太早看不出成效**（GSC 資料延遲+需重爬）。已建立閉環：
+- **改版前基準**：`docs/seo-baseline-2026-07-27.md`——GSC 近3月總覽（點擊656/曝光40.1K/CTR1.6%/排名14.1）+ 成效計分卡（cli 1345曝光、github developer settings 444、api key 154、google api key 146 這些高曝光低點擊頁的 before CTR）+ **判讀框架（after 落哪格→有效複製/文案再改/催爬/換槓桿）** + 變更清單供歸因。
+- **回撈排程**：cloud agent `trig_01S94FvRh8HvBgV7wRfgAeSQ`，2026-08-10 09:00 台北觸發，會自動產 `docs/seo-after-2026-08-10.md` 對照草稿（before 帶好、after 留白）。**它撈不到 GSC**（雲端登不進），到時需人開瀏覽器撈「最近28天」數字填進去。
+- **下一步（08-10）**：撈 GSC after → 逐列比計分卡 CTR → 依判讀框架決定「複製成功公式 or 再修文案 or 催爬」。這就是「是否進步／再修正」的依據。
+
 ## 一句話現況
 旗艦教學站（Astro，47 篇文章）。07-05 大整理：內容制度正本上線（EDITORIAL + 兩個任務範本 +
 四角色產線）、LLM 接入層（llms.txt + 全站 .md 端點）、8 張概念缺圖以 SVG 補齊、
