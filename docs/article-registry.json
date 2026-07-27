@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-27T14:49:59.818Z",
+  "_generated": "2026-07-27T15:35:22.309Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -105,10 +105,10 @@
       "link": "/articles/which-ai-tool-for-you/"
     },
     "Prompt Engineering": {
-      "displayName": "分享連結 ≠ 私密連結",
-      "shortDesc": "AI 的「分享」按鈕預設是產生公開網頁，可能被搜尋引擎索引——不等於只傳給特定人",
-      "canonicalArticle": "ai-share-link-not-private",
-      "link": "/articles/ai-share-link-not-private/"
+      "displayName": "語音輸入補上下文",
+      "shortDesc": "用語音把大量背景快速倒給 AI，讓 LLM 幫你把非結構化的思緒重組成結構——補足上下文最省力的方式",
+      "canonicalArticle": "voice-input-ai-context",
+      "link": "/articles/voice-input-ai-context/"
     },
     "RAG": {
       "displayName": "RAG（檢索增強生成）",
@@ -2022,9 +2022,7 @@
       ],
       "prerequisites": [],
       "modules": [],
-      "concepts_defined": [
-        "Prompt Engineering"
-      ],
+      "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/ai-share-link-not-private/"
     },
@@ -2132,6 +2130,26 @@
       "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/openclaw-hermes-or-claude-max/"
+    },
+    {
+      "slug": "voice-input-ai-context",
+      "title": "別急著刻 prompt：對 AI 語音「亂聊」10 分鐘，是補上下文最省力的方法",
+      "description": "遇到複雜問題，先別煩惱 prompt 怎麼寫。前 Tesla AI 總監、OpenAI 創始成員 Karpathy 的祕訣是：切到語音、亂聊十分鐘，讓 AI 幫你把雜亂思緒重組成結構。這招的第一性原理，跟鴨編一直在課堂上教的一樣——語音是補足 AI 上下文最省力的管道。",
+      "scene": "鴨編的碎碎念",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "Prompt",
+        "LLM",
+        "語音輸入"
+      ],
+      "prerequisites": [],
+      "modules": [],
+      "concepts_defined": [
+        "Prompt Engineering"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/voice-input-ai-context/"
     },
     {
       "slug": "llm-tool-calling-era",

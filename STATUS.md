@@ -16,6 +16,12 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
+**2026-07-27 碎碎念文：`voice-input-ai-context`（語音亂聊補上下文）中英雙版——已 push 上線** ⬅️ 最新
+- **緣起**：綁三條線＝① Joseph 7/9 台中課早就教「語音輸入快速補 LLM 上下文」② AI 大師 Karpathy 公開同款「long ramble / switch to voice / 亂聊 10 分鐘 / Mind Meld」（查證：推文 x.com/karpathy/status/2079610838143623371 屬實，多家二手佐證）③ 補上先前查到的站上內容缺口（無此概念文）。定位純觀點碎碎念（guide/scene 鴨編的碎碎念·blog/order 99），**不配圖**（EDITORIAL 允許純觀點零截圖），個人故事概略帶過不編細節（Joseph 指定）。
+- **產物**：`voice-input-ai-context.md`＋`en/`；concepts.yaml 加概念「語音輸入補上下文」（canonical＝本篇）；registry 重生 **75 篇/55 概念**。內文手動連 `set-system-prompt`／`ai-share-link-not-private`（HTML 驗證無巢狀 `<a>`、無雙連結）。
+- **驗證＋上線**：build 綠（171 頁）、無 @img 欠債、無斜線連結、概念連結生效；push 後 production 200。
+- **坑筆記**：手動連「系統提示詞」時它已是概念名詞（Remark 會自動連），本次剛好沒打架（我的手動連結是首次出現、plugin 跳過），但下次連概念詞應直接寫純文字讓 plugin 處理，別手動連。
+
 **2026-07-27（插隊）新聞回應文：`ai-share-link-not-private`（AI 分享連結≠私密連結）中英雙版——本地 build 綠、瀏覽器實看過、等 Joseph review 語氣＋事實後決定 push** ⬅️ 最新
 - **緣起**：回應 2026-07 Claude 分享對話被 Google/Bing 索引外流事件（電腦王阿達等報導）。定位＝碎碎念/觀點文，教一個第一性原則心智模型「分享連結 ≠ 私密連結」，適合當 SME/新手教材。
 - **查證（站上硬規則）**：事件在我知識截止後，實查多來源交叉確認：Cybernews／IBTimes(Reuters)／Yahoo Tech／Hackread／Neowin＝Claude 2026/7 分享頁缺 `noindex` 被索引，外流 API 金鑰/履歷/加密錢包/律師筆記/疑似 SSN；前三次同類事件也查實＝ChatGPT 2025/7（~4,500 篇/~10 萬被爬，OpenAI 下架功能）、Grok 2025/8（37 萬+，含密碼）、Claude 2025。**Perplexity/Notion「預設私密」的確切行為沒查實 → 刻意不寫，改用已證實的「修復只差一行 noindex」論點**。

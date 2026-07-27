@@ -162,6 +162,13 @@ Prompt Engineering:
   canonicalArticle: "ai-share-link-not-private"
   relatedArticles: ["set-system-prompt", "prompt-engineering"]
 
+語音輸入補上下文:
+  displayName: "語音輸入補上下文"
+  aliases: ["語音輸入補上下文", "語音亂聊", "語音輸入"]
+  shortDesc: "用語音把大量背景快速倒給 AI，讓 LLM 幫你把非結構化的思緒重組成結構——補足上下文最省力的方式"
+  canonicalArticle: "voice-input-ai-context"
+  relatedArticles: ["set-system-prompt", "prompt-engineering"]
+
 RAG:
   displayName: "RAG（檢索增強生成）"
   aliases: ["RAG", "Retrieval-Augmented Generation", "檢索增強生成"]
