@@ -148,6 +148,13 @@ Prompt Engineering:
   canonicalArticle: "prompt-engineering"
   relatedArticles: ["cot-and-reasoning", "openclaw-skill", "openclaw-soul"]
 
+系統提示詞:
+  displayName: "系統提示詞"
+  aliases: ["系統提示詞", "System Prompt", "system prompt", "自訂指令", "給 AI 的指令", "客製指令"]
+  shortDesc: "在 AI 設定裡寫一次、之後每次對話都自動生效的常駐指令，讓 AI 記住你是誰、要什麼"
+  canonicalArticle: "set-system-prompt"
+  relatedArticles: ["prompt-engineering", "from-prompt-to-skill", "openclaw-soul"]
+
 RAG:
   displayName: "RAG（檢索增強生成）"
   aliases: ["RAG", "Retrieval-Augmented Generation", "檢索增強生成"]

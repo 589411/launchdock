@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-22T23:19:40.978Z",
+  "_generated": "2026-07-27T13:07:27.721Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -105,10 +105,10 @@
       "link": "/articles/which-ai-tool-for-you/"
     },
     "Prompt Engineering": {
-      "displayName": "Prompt 工程",
-      "shortDesc": "設計有效的 AI 指令，讓模型給出精準回答的技術",
-      "canonicalArticle": "prompt-engineering",
-      "link": "/articles/prompt-engineering/"
+      "displayName": "系統提示詞",
+      "shortDesc": "在 AI 設定裡寫一次、之後每次對話都自動生效的常駐指令，讓 AI 記住你是誰、要什麼",
+      "canonicalArticle": "set-system-prompt",
+      "link": "/articles/set-system-prompt/"
     },
     "RAG": {
       "displayName": "RAG（檢索增強生成）",
@@ -336,8 +336,8 @@
   "articles": [
     {
       "slug": "caffeinate-keep-mac-awake",
-      "title": "Mac 一睡著 AI Agent 就斷線？用 caffeinate 讓 OpenClaw、Hermes 整夜不中斷",
-      "description": "叫 Agent 跑一件要好幾個鐘頭的事，去泡杯咖啡回來卻發現 Mac 睡著、任務斷在一半、Telegram 也叫不動它？macOS 內建的 caffeinate 指令能讓電腦保持清醒、服務不中斷。本文把 -dimsu 五個參數逐一講清楚，附常用寫法與最容易踩的坑。",
+      "title": "caffeinate 是什麼？讓 Mac 不睡、AI Agent 整夜不斷線（含怎麼停止）",
+      "description": "caffeinate 是 macOS 內建指令，作用是防止 Mac 進入睡眠，讓 OpenClaw、Hermes 這類長時間跑的 AI Agent 不因電腦休眠而斷線。這篇白話講 caffeinate 是什麼、-dimsu 五個參數各做什麼、常用寫法，以及怎麼用 killall caffeinate 停止，附最容易踩的坑。",
       "scene": "基礎使用",
       "difficulty": "入門",
       "contentType": "troubleshoot",
@@ -440,6 +440,28 @@
         "Telegram Bot"
       ],
       "link": "/articles/openclaw-first-run/"
+    },
+    {
+      "slug": "set-system-prompt",
+      "title": "系統提示詞怎麼設？ChatGPT、Claude、Gemini、Grok「給 AI 的指令」一次教會你",
+      "description": "別再每次打開 AI 都重講一遍自己是誰。系統提示詞（自訂指令）設定一次、之後每次對話自動生效。這篇手把手帶你在 ChatGPT、Claude、Gemini、Grok 四大 AI 裡各設好一次，附一段可直接複製的新手模板。",
+      "scene": "基礎使用",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "Prompt",
+        "設定",
+        "OpenAI",
+        "Anthropic",
+        "Google"
+      ],
+      "prerequisites": [],
+      "modules": [],
+      "concepts_defined": [
+        "Prompt Engineering"
+      ],
+      "concepts_referenced": [],
+      "link": "/articles/set-system-prompt/"
     },
     {
       "slug": "docker-n8n-mac",
@@ -615,8 +637,8 @@
     },
     {
       "slug": "windows-wsl-guide",
-      "title": "WSL 完整教學：讓你的 Windows 擁有 Linux 超能力",
-      "description": "WSL（Windows Subsystem for Linux）是 Windows 用戶安裝 OpenClaw 的最佳方案。從安裝、設定到日常使用，一次搞定。",
+      "title": "WSL 是什麼？Windows 安裝 WSL 2、啟動與常見錯誤完整教學",
+      "description": "WSL（Windows Subsystem for Linux）讓你在 Windows 裡跑真正的 Linux，不用虛擬機。這篇白話解釋 WSL 是什麼、怎麼用 wsl --install 安裝 WSL 2、如何啟動與確認，以及最常見的錯誤（wsl --install 沒反應、虛擬化沒開）怎麼解。",
       "scene": "安裝與部署",
       "difficulty": "入門",
       "contentType": "tutorial",
@@ -1202,7 +1224,6 @@
         "Skill"
       ],
       "concepts_referenced": [
-        "Prompt Engineering",
         "PKM"
       ],
       "link": "/articles/openclaw-skill/"
@@ -1270,8 +1291,8 @@
     },
     {
       "slug": "ai-api-key-guide",
-      "title": "AI 模型 API Key 申請指南：OpenAI、Anthropic、Google、OpenRouter 一次搞定",
-      "description": "一步步教你申請 AI 模型的 API Key。不管你選哪家，照著做就能拿到讓 OpenClaw 運作的鑰匙。",
+      "title": "AI 模型 API Key 怎麼申請（含免費方案）：OpenAI、Anthropic、Google、OpenRouter 一次搞定",
+      "description": "API Key 是讓程式用你的帳號呼叫 AI 的密碼。這篇一步步教你申請 AI 模型 API Key，含 Google、Anthropic、OpenRouter 的免費方案，照著做就能拿到讓 OpenClaw 運作的鑰匙。",
       "scene": "環境準備",
       "difficulty": "入門",
       "contentType": "tutorial",
@@ -1302,8 +1323,8 @@
     },
     {
       "slug": "cli-guide",
-      "title": "CLI 入門指南：命令列到底是什麼？為什麼 AI 離不開它？",
-      "description": "命令列介面（CLI）是 OpenClaw 的手和腳。了解 CLI 的原理、常見工具、以及它為什麼是 AI 時代最強大的操作方式。",
+      "title": "CLI 是什麼？命令列介面（Command-Line Interface）白話完整介紹",
+      "description": "CLI（Command-Line Interface，命令列介面）就是用打字指令、而不是滑鼠來操作電腦。這篇用白話解釋 CLI 是什麼、和 GUI／終端機／Shell 差在哪、常見指令有哪些，完全沒基礎也看得懂。",
       "scene": "環境準備",
       "difficulty": "入門",
       "contentType": "guide",
@@ -1331,7 +1352,7 @@
     },
     {
       "slug": "github-developer-settings-tokens",
-      "title": "GitHub 開發者設定導覽：Fine-grained Token、SSH/GPG 金鑰在哪管理",
+      "title": "GitHub Developer settings 在哪？開發者設定與 Personal Access Token 完整導覽",
       "description": "搞不清楚 GitHub 的 Personal Access Token、SSH/GPG 金鑰、GitHub Apps 在哪設定？這篇帶你認識 Settings → Developer settings 底下各個頁面，重點講解較安全的 Fine-grained Token，以及操作敏感設定時的 passkey 二次驗證。",
       "scene": "環境準備",
       "difficulty": "中級",
@@ -1527,8 +1548,7 @@
         "ReAct"
       ],
       "concepts_referenced": [
-        "Agent",
-        "Prompt Engineering"
+        "Agent"
       ],
       "link": "/articles/cot-and-reasoning/"
     },
@@ -1575,12 +1595,11 @@
         "openclaw-first-run"
       ],
       "modules": [],
-      "concepts_defined": [
-        "Prompt Engineering"
-      ],
+      "concepts_defined": [],
       "concepts_referenced": [
         "Skill",
         "Soul",
+        "Prompt Engineering",
         "CoT"
       ],
       "link": "/articles/prompt-engineering/"
@@ -2049,7 +2068,8 @@
       "concepts_defined": [],
       "concepts_referenced": [
         "Skill",
-        "Harness"
+        "Harness",
+        "Prompt Engineering"
       ],
       "link": "/articles/from-prompt-to-skill/"
     },
