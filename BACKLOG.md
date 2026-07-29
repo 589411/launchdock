@@ -5,7 +5,7 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
-_（空——2026-07-10 兩篇新文已收尾 commit+push，見下方最近完成。開場可從「來自監控／規劃」挑一件。）_
+- [ ] [大功能] **藍鴨組合器：會員登入＋提示詞儲存**（分支 `feat/prompt-builder`，devplan=`prompt-builder-auth-devplan.md`）。**改用既有 Supabase 登入、不導 Firebase**。M1（`saved_prompts` 表 + RLS + 20 則上限，已套 production 並實測）、M2–M4（`/tools/prompt-builder/` 移植頁 + 儲存/CRUD island）已 commit、build 綠。**待辦**：① 瀏覽器實測（登入→存→重整→跨使用者擋讀，需 env+Google 帳號）；② Q2 職業卡是否會員限定、Q3 登入是否勾電子報（Joseph 決）；③ 站上入口（Header 工具下拉／set-system-prompt 文章）；④ push 分支；⑤ **英文版工具**（需翻 PAIN/ROLE/PREF/TUNE 內容 + 生 `/en/tools/prompt-builder/`）。
 
 ## 📡 來自監控（系統自動產生，新項目補在最上）
 
