@@ -24,6 +24,7 @@ export const ui = {
     'nav.tools': '工具',
     'nav.tools.lab': '藍鴨實驗室 · AI 實例庫',
     'nav.tools.masters': '大師專家團 · 隨選 AI 專家',
+    'nav.tools.builder': '系統提示詞組合器 · 選一選就生成',
     'footer.tools': '工具站',
 
     // Site identity
@@ -85,6 +86,7 @@ export const ui = {
     'nav.tools': 'Tools',
     'nav.tools.lab': 'Launchdock Lab · AI demo library',
     'nav.tools.masters': 'Masters Hub · on-demand AI experts',
+    'nav.tools.builder': 'System Prompt Builder · pick & generate',
     'footer.tools': 'Tool apps',
 
     // Site identity
