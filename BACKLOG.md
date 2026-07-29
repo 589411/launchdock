@@ -5,13 +5,13 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+- [ ] [大功能] **藍鴨組合器：會員登入＋提示詞儲存**（已合 main 2026-07-29，devplan=`prompt-builder-auth-devplan.md`）。**改用既有 Supabase 登入、不導 Firebase**。M1（`saved_prompts` 表 + RLS + 20 則上限，已套 production 並實測）、M2–M4（`/tools/prompt-builder/` 移植頁 + 儲存/CRUD island）+ 站上入口（Header 工具下拉、prompt-engineering 文章 CTA）已上線。**剩待辦**：① 瀏覽器實測（登入→存→重整→跨使用者擋讀，需 env+Google 帳號）；② Q2 職業卡是否會員限定、Q3 登入是否勾電子報（Joseph 決）；③ **英文版工具**（需翻 PAIN/ROLE/PREF/TUNE 內容 + 生 `/en/tools/prompt-builder/`）；④ 導流 CTA 現指 `prompt-engineering`，main 上已有 `set-system-prompt` 文章，可再補一條 CTA 過去。
 
 ### 2026-07-22 對帳自動化工作流（分支 feat/workflow-reconcile，未 push）
 - [ ] [內容] `workflow-reconcile` 中英雙版 `modules: []` 未接講義線 → 從 `launchdock-lab/data/modules.yaml` 挑對的 M0x 填入 — handout
 - [ ] [內容] 「自動化工作流」目前只是 tag（自由字串，零 schema 變更）。若這條線長到 3+ 篇，考慮升級成 `scene` enum（改 content.config.ts + i18n + articles/index scene 表）— 內容架構
 - [ ] [i18n] 英文版文章連的是中文介面的 `/workflows/reconcile/`（文中已註明）。要做英文互動頁需把 wizard 340 行文案 i18n 化 + 開 `/en/workflows/reconcile/` — i18n
 - [ ] [內容] 這條若成系列，下一條工作流題目待定（候選：表單→CRM 自動貼、發票/收據擷取）— 內容規劃
-_（空——2026-07-10 兩篇新文已收尾 commit+push，見下方最近完成。開場可從「來自監控／規劃」挑一件。）_
 
 ## 📡 來自監控（系統自動產生，新項目補在最上）
 

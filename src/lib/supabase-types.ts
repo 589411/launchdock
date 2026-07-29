@@ -150,6 +150,31 @@ export interface Database {
           notification_preferences?: NotificationPreferences;
         };
       };
+      saved_prompts: {
+        Row: {
+          id: string;
+          user_id: string;
+          title: string;
+          body: string;
+          selections: Record<string, unknown>;
+          platform: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          title: string;
+          body: string;
+          selections?: Record<string, unknown>;
+          platform?: string | null;
+        };
+        Update: {
+          title?: string;
+          body?: string;
+          selections?: Record<string, unknown>;
+          platform?: string | null;
+        };
+      };
       events: {
         Row: {
           id: string;

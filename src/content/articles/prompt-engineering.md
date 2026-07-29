@@ -41,6 +41,8 @@ stuckOptions:
 
 差別在哪？就是 **Prompt 工程**。
 
+> 🧩 **不想從零寫？** 試試藍鴨的 [系統提示詞組合器](/tools/prompt-builder/)——勾選你的痛點與偏好，自動組出一段能貼進 ChatGPT／Claude／Gemini／Grok 的個人化系統提示詞。不用寫程式，登入還能把常用的存起來重複用。
+
 ---
 
 ## Prompt 的基本結構

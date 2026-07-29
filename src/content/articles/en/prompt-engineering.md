@@ -41,6 +41,8 @@ You are a senior marketing manager. Please write a year-end partnership review l
 
 What's the difference? That's **prompt engineering**.
 
+> 🧩 **Don't want to write from scratch?** Try LaunchDock's [System Prompt Builder](/tools/prompt-builder/) — tick your pain points and preferences, and it assembles a personalized system prompt you can paste into ChatGPT / Claude / Gemini / Grok. No coding, and once you sign in you can save the ones you use often.
+
 ---
 
 ## The Basic Structure of a Prompt
