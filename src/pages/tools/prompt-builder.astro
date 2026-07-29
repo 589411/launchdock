@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PromptBuilder from '../../components/PromptBuilder.tsx';
+---
+
+<BaseLayout
+  title="系統提示詞組合器"
+  description="選一選，組出一段能貼進 ChatGPT／Gemini／Claude／Grok 的個人化系統提示詞。不用寫程式，登入還能把常用的存起來。"
+>
+  <div class="max-w-[720px] mx-auto px-5 py-10">
+    <div class="border-b border-surface-lighter pb-4 mb-2">
+      <div class="font-mono text-xs tracking-[0.14em] text-brand uppercase">LaunchDock · 工具</div>
+      <h1 class="text-2xl font-semibold mt-1.5 mb-1">系統提示詞組合器</h1>
+      <p class="text-text-secondary text-sm">
+        選一選，組出一段能貼進 ChatGPT／Gemini／Claude／Grok 的個人化設定。不用寫程式。
+      </p>
+    </div>
+
+    <PromptBuilder client:load />
+  </div>
+</BaseLayout>
