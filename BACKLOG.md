@@ -5,7 +5,7 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
-- [ ] [活動] **8/26 藍鴨小聚（階②「把專屬提示詞存起來」）＋ 原生報名確認信**。event 已更新（標題/主題/Meet 連結 `meet.google.com/qqg-zvio-mks`/原生報名/2hr），**仍 draft**。原生報名 RLS 已實測可用（登入→報名→卡片顯示 Meet 連結）。**確認信（Resend）在本專案從未接過**（函式未部署、無 webhook、pg_net 未裝）。待辦：① 部署 `send-registration-confirmation`（已改內容：信裡帶 Meet 連結）② 開 pg_net + 建 event_registrations INSERT webhook ③ **Joseph 設 `RESEND_API_KEY` secret** ④ **Joseph 在 Resend 驗證 launchdock.app 寄件網域** ⑤ 測試帳號報名收信驗證 ⑥ 發布 event。
+- [ ] [活動] **8/26 藍鴨小聚（階②「把專屬提示詞存起來」）**——**2026-07-30 Joseph 說先下架（日期可能有變數），event 設回 draft**（標題/主題/Meet 連結 `meet.google.com/qqg-zvio-mks`/原生報名/2hr 都留著，要復活改 published 即可）。首頁 hero banner 已從 8/26 改指 `/tools/prompt-builder/`。原生報名 RLS 已實測可用。**確認信（Resend）管線已建好**（函式部署+改內容帶 Meet 連結、pg_net、event_registrations INSERT webhook migration 011/012，計數 RPC 013 修好），**唯一卡點＝Resend key 與 verified 網域不同帳號**：現有 key 打 `apcs.launchdock.app`（子網域、9 個月前另個帳號驗的）回 403 未驗證 → 需 Joseph 讓「API key 與 verified 網域同一 Resend 帳號」（或在 key 所屬帳號驗網域）。復活活動時：確認 Resend 帳號一致 → 測試帳號報名收信 → 改 published + banner 改回。
 - [ ] [營運・每月] **每月藍鴨小聚都要更新 `events.meet_link`**（新 Google Meet 房間）。確認信與 EventCard 都讀這欄；建活動必填。詳見 memory `meetup-monthly-meet-link`。
 - [ ] [大功能] **藍鴨組合器：會員登入＋提示詞儲存**（已合 main 2026-07-29，devplan=`prompt-builder-auth-devplan.md`）。**改用既有 Supabase 登入、不導 Firebase**。M1（`saved_prompts` 表 + RLS + 20 則上限，已套 production 並實測）、M2–M4（`/tools/prompt-builder/` 移植頁 + 儲存/CRUD island）+ 站上入口（Header 工具下拉、prompt-engineering 文章 CTA）已上線。**剩待辦**：① 瀏覽器實測（登入→存→重整→跨使用者擋讀，需 env+Google 帳號）；② Q2 職業卡是否會員限定、Q3 登入是否勾電子報（Joseph 決）；③ **英文版工具**（需翻 PAIN/ROLE/PREF/TUNE 內容 + 生 `/en/tools/prompt-builder/`）；④ 導流 CTA 現指 `prompt-engineering`，main 上已有 `set-system-prompt` 文章，可再補一條 CTA 過去。
 
