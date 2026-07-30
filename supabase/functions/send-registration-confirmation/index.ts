@@ -23,7 +23,7 @@ Deno.serve(async (req) => {
     // Fetch event details
     const { data: event } = await supabase
       .from('events')
-      .select('title, event_date, location, description')
+      .select('title, event_date, location, description, meet_link')
       .eq('id', record.event_id)
       .single();
 
@@ -55,17 +55,18 @@ Deno.serve(async (req) => {
       preheader: `你已成功報名 ${event.title}`,
       body: `
         <p>嗨 ${profile.display_name}！</p>
-        <p>你已成功報名以下活動：</p>
+        <p>你已成功報名以下活動，這封信就是你的入場憑證，開始前記得回來找它 👇</p>
         <div style="background: #0f172a; border-radius: 8px; padding: 16px; margin: 16px 0;">
           <p style="margin: 4px 0; font-size: 16px; color: #f1f5f9; font-weight: 600;">${event.title}</p>
           <p style="margin: 4px 0; font-size: 13px;">📅 ${dateStr} ${timeStr}</p>
           ${event.location ? `<p style="margin: 4px 0; font-size: 13px;">📍 ${event.location}</p>` : ''}
+          ${event.meet_link ? `<p style="margin: 12px 0 4px; font-size: 13px;">📹 線上會議室（活動當天點這裡加入）：</p><p style="margin: 4px 0;"><a href="${event.meet_link}" style="color: #58a6ff; font-size: 14px; word-break: break-all;">${event.meet_link}</a></p>` : ''}
         </div>
-        <p>活動前我們會再用 Email 提醒你，記得關注收件匣！</p>
+        <p>活動前我們會再用 Email 提醒你一次，記得關注收件匣！</p>
       `,
-      ctaText: '查看活動詳情',
-      ctaUrl: 'https://launchdock.app/events',
-      footerNote: '如需取消報名，請前往活動頁面操作。',
+      ctaText: event.meet_link ? '加入線上會議室' : '查看活動詳情',
+      ctaUrl: event.meet_link || 'https://launchdock.app/events',
+      footerNote: '如需取消報名，請前往活動頁面操作。會議室連結為報名者專屬，請勿外流。',
     });
 
     const result = await sendEmail({
