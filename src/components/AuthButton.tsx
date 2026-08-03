@@ -208,6 +208,12 @@ export default function AuthButton() {
                 >
                   📊 回饋監控
                 </a>
+                <a
+                  href="/admin/quiz-live/"
+                  className="block px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-lighter transition-colors"
+                >
+                  🎯 班級測驗
+                </a>
               </>
             )}
           </div>

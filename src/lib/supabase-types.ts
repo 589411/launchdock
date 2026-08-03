@@ -11,6 +11,7 @@ export type RegistrationStatus = 'registered' | 'waitlist' | 'cancelled' | 'atte
 export type EmailType = 'registration_confirmation' | 'event_reminder' | 'event_update' | 'new_article';
 export type EventType = 'meetup' | 'course' | 'workshop';
 export type PaymentStatus = 'not_required' | 'pending' | 'paid' | 'refunded';
+export type QuizSessionStatus = 'open' | 'closed';
 
 export interface Database {
   public: {
@@ -275,8 +276,49 @@ export interface Database {
           error_message?: string | null;
         };
       };
+      quiz_sessions: {
+        Row: {
+          id: string;
+          code: string;
+          title: string;
+          status: QuizSessionStatus;
+          created_by: string | null;
+          created_at: string;
+          closed_at: string | null;
+        };
+        Insert: {
+          code: string;
+          title: string;
+          status?: QuizSessionStatus;
+          created_by?: string | null;
+        };
+      };
+      quiz_responses: {
+        Row: {
+          id: number;
+          session_id: string;
+          participant_id: string;
+          answers: Record<string, number>;
+          scores: Record<string, number>;
+          primary_level: number;
+          gap_dimension: string | null;
+          submitted_at: string;
+        };
+        Insert: {
+          session_id: string;
+          participant_id: string;
+          answers: Record<string, number>;
+          scores: Record<string, number>;
+          primary_level: number;
+          gap_dimension?: string | null;
+        };
+      };
     };
     Functions: {
+      resolve_quiz_session: {
+        Args: { p_code: string };
+        Returns: { id: string; title: string }[];
+      };
       increment_helpful: {
         Args: { answer_id_input: string; fingerprint_input: string };
         Returns: number;

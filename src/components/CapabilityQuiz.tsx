@@ -8,6 +8,7 @@ import {
   type QuizResult,
   type LocalizedText,
 } from '../data/quiz';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 interface ArticleMeta {
   title: string;
@@ -22,6 +23,28 @@ interface Props {
 }
 
 const STORAGE_KEY = 'launchdock-quiz-result';
+const PARTICIPANT_KEY = 'launchdock-quiz-participant';
+
+/** 匿名作答者識別碼——只存在自己的瀏覽器，僅用來讓後台去重（重交取最新一筆） */
+function getParticipantId(): string {
+  try {
+    let id = localStorage.getItem(PARTICIPANT_KEY);
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem(PARTICIPANT_KEY, id);
+    }
+    return id;
+  } catch {
+    return `anon-${Math.random().toString(36).slice(2)}`;
+  }
+}
+
+interface ClassSession {
+  id: string;
+  title: string;
+}
+
+type SubmitState = 'idle' | 'sending' | 'sent' | 'failed';
 
 export default function CapabilityQuiz({ locale, articles }: Props) {
   const L = locale === 'en' ? 'en' : 'zh';
@@ -30,6 +53,10 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [current, setCurrent] = useState(0);
   const [result, setResult] = useState<QuizResult | null>(null);
+
+  // 課堂模式：網址帶 ?code=ABC123 時，作答結果會匿名送到該場次
+  const [session, setSession] = useState<ClassSession | null>(null);
+  const [submitState, setSubmitState] = useState<SubmitState>('idle');
 
   // 還原上次結果
   useEffect(() => {
@@ -46,6 +73,35 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
       /* ignore */
     }
   }, []);
+
+  // 解析課堂代碼（查不到就靜靜退回一般模式，不打斷作答）
+  useEffect(() => {
+    const code = new URLSearchParams(window.location.search).get('code');
+    if (!code || !isSupabaseConfigured()) return;
+    supabase
+      .rpc('resolve_quiz_session', { p_code: code.trim() })
+      .then(({ data, error }) => {
+        if (error) return;
+        const row = Array.isArray(data) ? data[0] : data;
+        if (row?.id) setSession({ id: row.id, title: row.title });
+      });
+  }, []);
+
+  /** 把結果匿名送進課堂場次（不含姓名、email、任何身分） */
+  async function submitToClass(sess: ClassSession, r: QuizResult, ans: Record<string, number>) {
+    setSubmitState('sending');
+    const scores: Record<string, number> = {};
+    for (const d of r.dimensions) scores[d.key] = Math.round(d.pct * 100) / 100;
+    const { error } = await supabase.from('quiz_responses').insert({
+      session_id: sess.id,
+      participant_id: getParticipantId(),
+      answers: ans,
+      scores,
+      primary_level: r.primaryLevel,
+      gap_dimension: r.gap?.key ?? null,
+    });
+    setSubmitState(error ? 'failed' : 'sent');
+  }
 
   const t = {
     intro: { zh: '2 分鐘 AI 能力測驗', en: '2-Minute AI Capability Check' },
@@ -65,6 +121,16 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
     retake: { zh: '重新測驗', en: 'Retake' },
     readMore: { zh: '推薦閱讀', en: 'Recommended reading' },
     allDone: { zh: '看完所有教學', en: 'Browse all tutorials' },
+    classMode: { zh: '課堂模式', en: 'Class mode' },
+    classNote: {
+      zh: '你的作答會匿名併入本班統計（不含姓名、email），老師只看得到全班分佈。',
+      en: 'Your answers join the class stats anonymously (no name, no email). The instructor only sees group distribution.',
+    },
+    sending: { zh: '送出中…', en: 'Sending…' },
+    sent: { zh: '已送出到本班統計', en: 'Submitted to class stats' },
+    failed: { zh: '送出失敗（結果仍已保留在本機）', en: 'Submit failed (your result is still saved locally)' },
+    retrySend: { zh: '重試送出', en: 'Retry' },
+    sendNow: { zh: '送出到本班統計', en: 'Submit to class stats' },
   };
 
   function pick(qid: string, optIdx: number) {
@@ -80,6 +146,7 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
       } catch {
         /* ignore */
       }
+      if (session) void submitToClass(session, r, next);
     }
   }
 
@@ -87,11 +154,50 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
     setAnswers({});
     setCurrent(0);
     setResult(null);
+    setSubmitState('idle');
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch {
       /* ignore */
     }
+  }
+
+  // 課堂模式橫幅（一般模式回傳 null，畫面完全不變）
+  function classBanner() {
+    if (!session) return null;
+    const canSend = result && (submitState === 'idle' || submitState === 'failed');
+    const statusText =
+      submitState === 'sending' ? tr(t.sending) : submitState === 'sent' ? `✅ ${tr(t.sent)}` : submitState === 'failed' ? `⚠️ ${tr(t.failed)}` : null;
+    return (
+      <div
+        className="rounded-xl px-4 py-3 mb-6 border text-sm"
+        style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-brand)' }}
+      >
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-xs font-semibold px-2 py-0.5 rounded" style={{ backgroundColor: 'var(--color-brand)', color: '#fff' }}>
+            {tr(t.classMode)}
+          </span>
+          <span className="font-medium">{session.title}</span>
+        </div>
+        <p className="mt-2 text-xs" style={{ color: 'var(--color-text-muted)' }}>
+          🔒 {tr(t.classNote)}
+        </p>
+        {statusText && (
+          <p className="mt-2 text-xs" style={{ color: submitState === 'failed' ? '#f59e0b' : 'var(--color-brand-light)' }}>
+            {statusText}
+          </p>
+        )}
+        {canSend && (
+          <button
+            onClick={() => submitToClass(session, result!, answers)}
+            className="mt-2 px-3 py-1.5 rounded-lg text-xs font-medium text-white"
+            style={{ backgroundColor: 'var(--color-brand)' }}
+          >
+            {submitState === 'failed' ? tr(t.retrySend) : tr(t.sendNow)}
+          </button>
+        )}
+      </div>
+    );
   }
 
   // ── 結果畫面 ──────────────────────────────────────────────
@@ -103,6 +209,7 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
 
     return (
       <div className="max-w-[760px] mx-auto">
+        {classBanner()}
         {/* 缺口橫幅（主角） */}
         <div
           className="rounded-2xl p-6 mb-8 border"
@@ -219,6 +326,7 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
 
   return (
     <div className="max-w-[640px] mx-auto">
+      {classBanner()}
       <div className="text-center mb-6">
         <h1 className="text-2xl font-extrabold tracking-tight">{tr(t.intro)}</h1>
         <p className="text-sm mt-2" style={{ color: 'var(--color-text-secondary)' }}>{tr(t.introSub)}</p>

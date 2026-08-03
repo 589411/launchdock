@@ -5,6 +5,7 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+- [ ] [功能] **班級測驗（quiz 團體班模式）2026-08-03 已實作＋DB 已上 production，尚未真人實測**。用途＝上課前 3 分鐘快速掌握本班程度（線上＋實體同一條連結），當場決定今天講哪一階。做法：`/admin/quiz-live` 建場次拿 6 碼代碼 → 學員開 `launchdock.app/quiz/?code=XXXXXX` → 後台每 5 秒更新「本班平均程度 / 最多人卡在 / 程度分佈 / 四項解鎖率 / 逐題分佈（可摺疊）」。全匿名（只存瀏覽器隨機 token，無姓名 email）；anon 只能交卷不能讀，場次代碼不可列舉（`resolve_quiz_session` SECURITY DEFINER）。**剩待辦**：① 真人瀏覽器實測一輪（建場次→手機作答→後台看到數字）；② 決定要不要加 QR code（實體班掃碼最順，需加 `qrcode` 依賴或內嵌 encoder）；③ 選配：課前/課後同場次對照（加 `phase` 欄位）＝可產出「這堂課推進多少」的成效圖，對企業內訓報價有用；④ 選配：加 3–5 題有正解的觀念題（現有 12 題是自評無對錯，只看得出「卡在哪一階」，看不出「哪個觀念錯」）。
 - [ ] [活動] **8/26 藍鴨小聚（階②「把專屬提示詞存起來」）**——**2026-07-30 Joseph 說先下架（日期可能有變數），event 設回 draft**（標題/主題/Meet 連結 `meet.google.com/qqg-zvio-mks`/原生報名/2hr 都留著，要復活改 published 即可）。首頁 hero banner 已從 8/26 改指 `/tools/prompt-builder/`。原生報名 RLS 已實測可用。**確認信（Resend）管線已建好**（函式部署+改內容帶 Meet 連結、pg_net、event_registrations INSERT webhook migration 011/012，計數 RPC 013 修好），**唯一卡點＝Resend key 與 verified 網域不同帳號**：現有 key 打 `apcs.launchdock.app`（子網域、9 個月前另個帳號驗的）回 403 未驗證 → 需 Joseph 讓「API key 與 verified 網域同一 Resend 帳號」（或在 key 所屬帳號驗網域）。復活活動時：確認 Resend 帳號一致 → 測試帳號報名收信 → 改 published + banner 改回。
 - [ ] [營運・每月] **每月藍鴨小聚都要更新 `events.meet_link`**（新 Google Meet 房間）。確認信與 EventCard 都讀這欄；建活動必填。詳見 memory `meetup-monthly-meet-link`。
 - [ ] [大功能] **藍鴨組合器：會員登入＋提示詞儲存**（已合 main 2026-07-29，devplan=`prompt-builder-auth-devplan.md`）。**改用既有 Supabase 登入、不導 Firebase**。M1（`saved_prompts` 表 + RLS + 20 則上限，已套 production 並實測）、M2–M4（`/tools/prompt-builder/` 移植頁 + 儲存/CRUD island）+ 站上入口（Header 工具下拉、prompt-engineering 文章 CTA）已上線。**剩待辦**：① 瀏覽器實測（登入→存→重整→跨使用者擋讀，需 env+Google 帳號）；② Q2 職業卡是否會員限定、Q3 登入是否勾電子報（Joseph 決）；③ **英文版工具**（需翻 PAIN/ROLE/PREF/TUNE 內容 + 生 `/en/tools/prompt-builder/`）；④ 導流 CTA 現指 `prompt-engineering`，main 上已有 `set-system-prompt` 文章，可再補一條 CTA 過去。
@@ -63,8 +64,8 @@
   **Phase 3（選配）**：開課前主動提醒用 push，省著用那 200 配額。
   **關鍵關聯**：這是 external_url 退場所指「正式模式」的最終形態——三件事（LINE 會員 / 8/26 正式報名 / external_url 退場）同一決策。
 - [ ] [技術債] `events.external_url`（Google 表單外部報名）是**過渡機制**。等正式模式（站上原生報名＋Resend 自動信）在真實場次驗證穩定後，讓 external_url 退場、全部走原生，避免使用者「先填表單、後轉原生」的二次轉換。退場＝新活動一律留空 external_url（程式分支保留無妨）。⚠️ 與「LINE 會員導入」相關：若登入改走 LINE Login、報名走 LINE，退場的目標形態會變，兩者一起想 — 2026-07-10 Joseph 提
-- [ ] [功能] AI 能力測驗後續：用途定位＝講座/課程暖場 + 體驗課評估。可考慮 → 結果分享圖卡(OG)、
-      存 Supabase 做分析、講師後台看學員分佈、依結果 email 推薦清單
+- [ ] [功能] AI 能力測驗後續：用途定位＝講座/課程暖場 + 體驗課評估。✅ **存 Supabase + 講師後台看學員分佈已完成（2026-08-03，見「進行中」）**。
+      仍可考慮 → 結果分享圖卡(OG)、依結果 email 推薦清單
 - [ ] [缺圖] `ai-agent-browsers` 待補 2 張截圖：comet-browser、chatgpt-atlas（中英共用）
 - [ ] 寫一篇關於loop 的短文，現在最紅的loop 其實是定時觸發，hook,等綜合體，可以調用現有的agent, skill ,mcp 等自動完成任務 — 來自 LINE 2026-06-19 21:11 ✍️ → src/content/articles/_drafts/idea-20260619-7cfa7c.md
 - [ ] （範例）為 lab demo `gas-line-push` 寫一篇對應教學文
