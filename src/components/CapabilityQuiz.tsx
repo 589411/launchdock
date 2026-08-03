@@ -42,6 +42,8 @@ function getParticipantId(): string {
 interface ClassSession {
   id: string;
   title: string;
+  /** 課前測 / 課後測——由後台切換，學員端只顯示 */
+  phase: 'pre' | 'post';
 }
 
 type SubmitState = 'idle' | 'sending' | 'sent' | 'failed';
@@ -57,6 +59,8 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
   // 課堂模式：網址帶 ?code=ABC123 時，作答結果會匿名送到該場次
   const [session, setSession] = useState<ClassSession | null>(null);
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
+  /** 這次開頁有沒有真的重新作答（課後測不能拿還原自 localStorage 的舊答案充數） */
+  const [answeredNow, setAnsweredNow] = useState(false);
 
   // 還原上次結果
   useEffect(() => {
@@ -83,7 +87,7 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
       .then(({ data, error }) => {
         if (error) return;
         const row = Array.isArray(data) ? data[0] : data;
-        if (row?.id) setSession({ id: row.id, title: row.title });
+        if (row?.id) setSession({ id: row.id, title: row.title, phase: row.phase === 'post' ? 'post' : 'pre' });
       });
   }, []);
 
@@ -131,6 +135,13 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
     failed: { zh: '送出失敗（結果仍已保留在本機）', en: 'Submit failed (your result is still saved locally)' },
     retrySend: { zh: '重試送出', en: 'Retry' },
     sendNow: { zh: '送出到本班統計', en: 'Submit to class stats' },
+    phasePre: { zh: '課前測', en: 'Pre-class' },
+    phasePost: { zh: '課後測', en: 'Post-class' },
+    retakeForPost: {
+      zh: '這是課後測——請重新作答一次，看看這堂課帶你走了多遠。',
+      en: 'This is the post-class check — answer again to see how far this session moved you.',
+    },
+    retakeNow: { zh: '重新作答', en: 'Answer again' },
   };
 
   function pick(qid: string, optIdx: number) {
@@ -141,6 +152,7 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
     } else {
       const r = scoreQuiz(next);
       setResult(r);
+      setAnsweredNow(true);
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers: next, at: Date.now() }));
       } catch {
@@ -155,6 +167,7 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
     setCurrent(0);
     setResult(null);
     setSubmitState('idle');
+    setAnsweredNow(false);
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch {
@@ -165,7 +178,9 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
   // 課堂模式橫幅（一般模式回傳 null，畫面完全不變）
   function classBanner() {
     if (!session) return null;
-    const canSend = result && (submitState === 'idle' || submitState === 'failed');
+    // 課後測：手上若是還原自上次的舊結果，要求重做，別把課前的答案當成課後成績送出
+    const needsRetake = session.phase === 'post' && !!result && !answeredNow && submitState === 'idle';
+    const canSend = result && !needsRetake && (submitState === 'idle' || submitState === 'failed');
     const statusText =
       submitState === 'sending' ? tr(t.sending) : submitState === 'sent' ? `✅ ${tr(t.sent)}` : submitState === 'failed' ? `⚠️ ${tr(t.failed)}` : null;
     return (
@@ -178,6 +193,15 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
             {tr(t.classMode)}
           </span>
           <span className="font-medium">{session.title}</span>
+          <span
+            className="text-xs font-semibold px-2 py-0.5 rounded"
+            style={{
+              backgroundColor: session.phase === 'post' ? '#f59e0b' : 'var(--color-surface-lighter)',
+              color: session.phase === 'post' ? '#1a1a1a' : 'var(--color-text-secondary)',
+            }}
+          >
+            {tr(session.phase === 'post' ? t.phasePost : t.phasePre)}
+          </span>
         </div>
         <p className="mt-2 text-xs" style={{ color: 'var(--color-text-muted)' }}>
           🔒 {tr(t.classNote)}
@@ -186,6 +210,20 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
           <p className="mt-2 text-xs" style={{ color: submitState === 'failed' ? '#f59e0b' : 'var(--color-brand-light)' }}>
             {statusText}
           </p>
+        )}
+        {needsRetake && (
+          <>
+            <p className="mt-2 text-xs" style={{ color: '#f59e0b' }}>
+              {tr(t.retakeForPost)}
+            </p>
+            <button
+              onClick={retake}
+              className="mt-2 px-3 py-1.5 rounded-lg text-xs font-medium text-white"
+              style={{ backgroundColor: 'var(--color-brand)' }}
+            >
+              {tr(t.retakeNow)}
+            </button>
+          </>
         )}
         {canSend && (
           <button

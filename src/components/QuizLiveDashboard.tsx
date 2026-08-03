@@ -9,11 +9,14 @@ import AdminGuard from './AdminGuard';
 // 隱私：畫面只呈現聚合數字，永遠不顯示個別作答者（可安全投影）。
 // ============================================================
 
+type Phase = 'pre' | 'post';
+
 interface SessionRow {
   id: string;
   code: string;
   title: string;
   status: 'open' | 'closed';
+  phase: Phase;
   created_at: string;
 }
 
@@ -23,7 +26,59 @@ interface ResponseRow {
   scores: Record<string, number>;
   primary_level: number;
   gap_dimension: string | null;
+  phase: Phase;
   submitted_at: string;
+}
+
+/** 同一人重複作答只算最新一筆 */
+function latestPerParticipant(rows: ResponseRow[]): Map<string, ResponseRow> {
+  const latest = new Map<string, ResponseRow>();
+  for (const r of rows) latest.set(r.participant_id, r); // 依 submitted_at 遞增，後者覆蓋前者
+  return latest;
+}
+
+/** 一個階段的聚合統計 */
+function computeStats(rows: ResponseRow[]) {
+  const n = rows.length;
+
+  const levelCounts = [0, 0, 0, 0]; // L1..L4
+  for (const r of rows) levelCounts[Math.min(4, Math.max(1, r.primary_level)) - 1]++;
+
+  const gapCounts: Record<string, number> = { none: 0 };
+  for (const d of dimensions) gapCounts[d.key] = 0;
+  for (const r of rows) gapCounts[r.gap_dimension ?? 'none']++;
+
+  const unlockRate: Record<DimensionKey, number> = { chat: 0, documents: 0, tools: 0, automation: 0 };
+  for (const d of dimensions) {
+    const unlocked = rows.filter((r) => (r.scores?.[d.key] ?? 0) >= config.unlockThreshold).length;
+    unlockRate[d.key] = n > 0 ? unlocked / n : 0;
+  }
+
+  const avgLevel = n > 0 ? rows.reduce((sum, r) => sum + r.primary_level, 0) / n : 0;
+
+  // 主要卡點 = 最多人卡住的維度（不含全解鎖）
+  let topGap: { key: string; count: number } | null = null;
+  for (const d of dimensions) {
+    const c = gapCounts[d.key];
+    if (c > 0 && (!topGap || c > topGap.count)) topGap = { key: d.key, count: c };
+  }
+
+  // 逐題選項分佈
+  const perQuestion = questions.map((q) => {
+    const counts = q.options.map(() => 0);
+    let answered = 0;
+    for (const r of rows) {
+      const pick = r.answers?.[q.id];
+      if (typeof pick === 'number' && counts[pick] !== undefined) {
+        counts[pick]++;
+        answered++;
+      }
+    }
+    const lowest = counts[0] ?? 0;
+    return { q, counts, answered, lowestShare: answered > 0 ? lowest / answered : 0 };
+  });
+
+  return { n, levelCounts, gapCounts, unlockRate, avgLevel, topGap, perQuestion };
 }
 
 /** 代碼字元集刻意排除易混淆的 0/O/1/I，方便口頭唸給實體學員 */
@@ -58,7 +113,7 @@ function QuizLive() {
   const loadSessions = useCallback(async () => {
     const { data, error } = await supabase
       .from('quiz_sessions')
-      .select('id, code, title, status, created_at')
+      .select('id, code, title, status, phase, created_at')
       .order('created_at', { ascending: false })
       .limit(20);
     if (error) {
@@ -72,7 +127,7 @@ function QuizLive() {
   const loadResponses = useCallback(async (sessionId: string) => {
     const { data, error } = await supabase
       .from('quiz_responses')
-      .select('participant_id, answers, scores, primary_level, gap_dimension, submitted_at')
+      .select('participant_id, answers, scores, primary_level, gap_dimension, phase, submitted_at')
       .eq('session_id', sessionId)
       .order('submitted_at', { ascending: true });
     if (error) {
@@ -115,7 +170,7 @@ function QuizLive() {
     const { data, error } = await supabase
       .from('quiz_sessions')
       .insert({ code: generateCode(), title, created_by: session?.userId ?? null })
-      .select('id, code, title, status, created_at')
+      .select('id, code, title, status, phase, created_at')
       .single();
     setCreating(false);
     if (error) {
@@ -141,52 +196,61 @@ function QuizLive() {
     setSessions((prev) => prev.map((s) => (s.id === active.id ? { ...s, status: next } : s)));
   }
 
-  // ── 統計（同一人重複作答只算最新一筆） ──────────────────────
-  const stats = useMemo(() => {
-    const latest = new Map<string, ResponseRow>();
-    for (const r of responses) latest.set(r.participant_id, r); // 依 submitted_at 遞增，後者覆蓋前者
-    const rows = [...latest.values()];
-    const n = rows.length;
-
-    const levelCounts = [0, 0, 0, 0]; // L1..L4
-    for (const r of rows) levelCounts[Math.min(4, Math.max(1, r.primary_level)) - 1]++;
-
-    const gapCounts: Record<string, number> = { none: 0 };
-    for (const d of dimensions) gapCounts[d.key] = 0;
-    for (const r of rows) gapCounts[r.gap_dimension ?? 'none']++;
-
-    const unlockRate: Record<DimensionKey, number> = { chat: 0, documents: 0, tools: 0, automation: 0 };
-    for (const d of dimensions) {
-      const unlocked = rows.filter((r) => (r.scores?.[d.key] ?? 0) >= config.unlockThreshold).length;
-      unlockRate[d.key] = n > 0 ? unlocked / n : 0;
+  /** 課後把場次切到 post，學員重開同一條連結再做一次（作答的 phase 由 DB trigger 決定） */
+  async function togglePhase() {
+    if (!active) return;
+    const next: Phase = active.phase === 'post' ? 'pre' : 'post';
+    const { error } = await supabase.from('quiz_sessions').update({ phase: next }).eq('id', active.id);
+    if (error) {
+      setError(error.message);
+      return;
     }
+    setSessions((prev) => prev.map((s) => (s.id === active.id ? { ...s, phase: next } : s)));
+  }
 
-    const avgLevel = n > 0 ? rows.reduce((sum, r) => sum + r.primary_level, 0) / n : 0;
+  // ── 統計（分課前／課後兩階段，同一人重複作答只算最新一筆） ──────
+  const { preStats, postStats, delta } = useMemo(() => {
+    const preMap = latestPerParticipant(responses.filter((r) => r.phase !== 'post'));
+    const postMap = latestPerParticipant(responses.filter((r) => r.phase === 'post'));
+    const preRows = [...preMap.values()];
+    const postRows = [...postMap.values()];
 
-    // 主要卡點 = 最多人卡住的維度（不含全解鎖）
-    let topGap: { key: string; count: number } | null = null;
-    for (const d of dimensions) {
-      const c = gapCounts[d.key];
-      if (c > 0 && (!topGap || c > topGap.count)) topGap = { key: d.key, count: c };
-    }
+    // 成效對照：優先用「課前課後都做過」的人配對算，人人可比才公平
+    const pairedIds = [...postMap.keys()].filter((id) => preMap.has(id));
+    const avg = (rows: ResponseRow[]) =>
+      rows.length > 0 ? rows.reduce((s, r) => s + r.primary_level, 0) / rows.length : 0;
+    const pairedPre = pairedIds.map((id) => preMap.get(id)!);
+    const pairedPost = pairedIds.map((id) => postMap.get(id)!);
+    const usePaired = pairedIds.length > 0;
 
-    // 逐題選項分佈
-    const perQuestion = questions.map((q) => {
-      const counts = q.options.map(() => 0);
-      let answered = 0;
-      for (const r of rows) {
-        const pick = r.answers?.[q.id];
-        if (typeof pick === 'number' && counts[pick] !== undefined) {
-          counts[pick]++;
-          answered++;
-        }
-      }
-      const lowest = counts[0] ?? 0;
-      return { q, counts, answered, lowestShare: answered > 0 ? lowest / answered : 0 };
+    const before = usePaired ? avg(pairedPre) : avg(preRows);
+    const after = usePaired ? avg(pairedPost) : avg(postRows);
+
+    const unlockDelta = dimensions.map((d) => {
+      const rate = (rows: ResponseRow[]) =>
+        rows.length > 0
+          ? rows.filter((r) => (r.scores?.[d.key] ?? 0) >= config.unlockThreshold).length / rows.length
+          : 0;
+      return {
+        key: d.key,
+        name: d.name.zh,
+        before: rate(usePaired ? pairedPre : preRows),
+        after: rate(usePaired ? pairedPost : postRows),
+      };
     });
 
-    return { n, rows, levelCounts, gapCounts, unlockRate, avgLevel, topGap, perQuestion };
+    return {
+      preStats: computeStats(preRows),
+      postStats: computeStats(postRows),
+      delta:
+        preRows.length > 0 && postRows.length > 0
+          ? { before, after, diff: after - before, pairedCount: pairedIds.length, usePaired, unlockDelta }
+          : null,
+    };
   }, [responses]);
+
+  const currentPhase: Phase = active?.phase === 'post' ? 'post' : 'pre';
+  const stats = currentPhase === 'post' ? postStats : preStats;
 
   const joinUrl = active ? `${typeof window !== 'undefined' ? window.location.origin : 'https://launchdock.app'}/quiz/?code=${active.code}` : '';
 
@@ -254,7 +318,9 @@ function QuizLive() {
               請學員打開
             </p>
             <p className="text-lg font-semibold mb-2">launchdock.app/quiz</p>
-            <p className="text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>課堂代碼</p>
+            <p className="text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>
+              課堂代碼 · 現在收的是{currentPhase === 'post' ? '「課後測」' : '「課前測」'}
+            </p>
             <p className="text-5xl font-extrabold tracking-[0.2em]" style={{ color: 'var(--color-brand-light)' }}>
               {active.code}
             </p>
@@ -273,6 +339,16 @@ function QuizLive() {
               >
                 {active.status === 'open' ? '⏹ 結束收件' : '▶️ 重新開放'}
               </button>
+              <button
+                onClick={togglePhase}
+                className="px-3 py-1.5 rounded-lg text-xs font-medium"
+                style={{
+                  backgroundColor: currentPhase === 'post' ? '#f59e0b' : 'var(--color-surface-lighter)',
+                  color: currentPhase === 'post' ? '#1a1a1a' : 'var(--color-text-primary)',
+                }}
+              >
+                {currentPhase === 'post' ? '↩︎ 切回課前測' : '🎓 切到課後測'}
+              </button>
             </div>
             <p className="mt-3 text-xs break-all" style={{ color: 'var(--color-text-muted)' }}>{joinUrl}</p>
           </div>
@@ -282,7 +358,7 @@ function QuizLive() {
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-extrabold">{stats.n}</span>
               <span className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-                份已交{expected.trim() && ` / ${expected.trim()} 人`}
+                份{currentPhase === 'post' ? '課後測' : '課前測'}已交{expected.trim() && ` / ${expected.trim()} 人`}
               </span>
             </div>
             <div className="flex items-center gap-3 text-xs" style={{ color: 'var(--color-text-muted)' }}>
@@ -305,9 +381,60 @@ function QuizLive() {
             </div>
           </div>
 
+          {/* 成效對照：課前 vs 課後（兩階段都有資料才出現） */}
+          {delta && (
+            <div className="rounded-2xl p-5 mb-8 border" style={{ backgroundColor: 'var(--color-surface-light)', borderColor: '#f59e0b' }}>
+              <div className="flex items-baseline justify-between gap-3 flex-wrap mb-4">
+                <p className="text-sm font-semibold">🎓 這堂課的成效</p>
+                <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+                  {delta.usePaired
+                    ? `課前課後都做過的 ${delta.pairedCount} 人配對比較`
+                    : `尚無配對到的人，暫以全體平均比較（課前 ${preStats.n} 份 / 課後 ${postStats.n} 份）`}
+                </p>
+              </div>
+              <div className="flex items-center justify-center gap-4 flex-wrap mb-5">
+                <div className="text-center">
+                  <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>課前</p>
+                  <p className="text-3xl font-extrabold">L{delta.before.toFixed(1)}</p>
+                </div>
+                <span className="text-2xl" style={{ color: 'var(--color-text-muted)' }}>→</span>
+                <div className="text-center">
+                  <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>課後</p>
+                  <p className="text-3xl font-extrabold" style={{ color: 'var(--color-brand-light)' }}>
+                    L{delta.after.toFixed(1)}
+                  </p>
+                </div>
+                <div className="text-center">
+                  <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>推進</p>
+                  <p className="text-3xl font-extrabold" style={{ color: delta.diff > 0 ? '#22c55e' : 'var(--color-text-muted)' }}>
+                    {delta.diff > 0 ? '+' : ''}
+                    {delta.diff.toFixed(1)}
+                  </p>
+                </div>
+              </div>
+              <p className="text-xs font-semibold mb-2" style={{ color: 'var(--color-text-muted)' }}>四項能力解鎖率變化</p>
+              <div className="space-y-2">
+                {delta.unlockDelta.map((d) => (
+                  <div key={d.key} className="flex items-center gap-3">
+                    <span className="text-sm w-[30%] shrink-0" style={{ color: 'var(--color-text-secondary)' }}>{d.name}</span>
+                    <div className="flex-1 h-5 rounded relative overflow-hidden" style={{ backgroundColor: 'var(--color-surface-lighter)' }}>
+                      <div className="h-full absolute inset-y-0 left-0" style={{ width: `${d.after * 100}%`, backgroundColor: 'var(--color-brand)' }} />
+                      <div className="h-full absolute inset-y-0 left-0 border-r-2" style={{ width: `${d.before * 100}%`, backgroundColor: 'rgba(0,0,0,0.25)', borderColor: 'var(--color-text-muted)' }} />
+                    </div>
+                    <span className="text-xs w-28 text-right shrink-0" style={{ color: 'var(--color-text-muted)' }}>
+                      {Math.round(d.before * 100)}% → {Math.round(d.after * 100)}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {stats.n === 0 ? (
             <p className="text-center py-16 text-sm" style={{ color: 'var(--color-text-muted)' }}>
-              等待第一份作答…（學員送出後 5 秒內會出現）
+              {currentPhase === 'post'
+                ? '已切到課後測——請學員重開同一條連結再做一次（等第一份送出）'
+                : '等待第一份作答…（學員送出後 5 秒內會出現）'}
             </p>
           ) : (
             <>

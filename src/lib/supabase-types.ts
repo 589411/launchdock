@@ -12,6 +12,7 @@ export type EmailType = 'registration_confirmation' | 'event_reminder' | 'event_
 export type EventType = 'meetup' | 'course' | 'workshop';
 export type PaymentStatus = 'not_required' | 'pending' | 'paid' | 'refunded';
 export type QuizSessionStatus = 'open' | 'closed';
+export type QuizPhase = 'pre' | 'post';
 
 export interface Database {
   public: {
@@ -282,6 +283,7 @@ export interface Database {
           code: string;
           title: string;
           status: QuizSessionStatus;
+          phase: QuizPhase;
           created_by: string | null;
           created_at: string;
           closed_at: string | null;
@@ -290,6 +292,7 @@ export interface Database {
           code: string;
           title: string;
           status?: QuizSessionStatus;
+          phase?: QuizPhase;
           created_by?: string | null;
         };
       };
@@ -302,6 +305,7 @@ export interface Database {
           scores: Record<string, number>;
           primary_level: number;
           gap_dimension: string | null;
+          phase: QuizPhase;
           submitted_at: string;
         };
         Insert: {
@@ -317,7 +321,7 @@ export interface Database {
     Functions: {
       resolve_quiz_session: {
         Args: { p_code: string };
-        Returns: { id: string; title: string }[];
+        Returns: { id: string; title: string; phase: QuizPhase }[];
       };
       increment_helpful: {
         Args: { answer_id_input: string; fingerprint_input: string };
