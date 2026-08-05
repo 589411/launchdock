@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
+**最後更新：** 2026-08-05（**班級測驗：DEMO01 測試資料已清空＋QR code 已內建**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 📈 SEO 成效量測（進行中，等 08-10 驗收）
@@ -16,13 +16,21 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
+**2026-08-05 班級測驗：DEMO01 測試資料已清空 + QR code 已內建** ⬅️ 最新
+- **緣起**：Joseph 說「測驗功能我沒看到」。查證結果＝**功能早就上線且已 push**（`674c70a`/`e6b581c`，production `/quiz/`、`/admin/quiz-live/` 皆 200），沒看到是因為**刻意隱藏**：`/quiz/` 沒帶 `?code=` 對一般訪客完全不變、`/admin/quiz-live/` 要 Google 登入才顯示內容。**這是設計，不是 bug**——但也代表沒有任何自然入口會讓人「不小心發現」它。
+- **① DEMO01 已清乾淨**：刪 19 份作答（課前 10／課後 9）＋場次本身。現在 `quiz_sessions=0`、`quiz_responses=0`，production DB 零測試殘留。**下次要看後台長怎樣得自己開一場新的。**
+- **② QR code 已內建**（推翻先前「手動轉、不加依賴」的決定，Joseph 8/05 指示）：加 `qrcode` ^1.5.4 依賴；投影區改成左「代碼大字」右「QR」並排，QR 已帶 `?code=`，實體班掃了直接進作答頁不用手打；**點 QR 可放大到 `min(60vh,460px)` 投影**，再點縮小。產圖 640px（放大不糊），顯示尺寸由 CSS 控。
+- **技術**：`import('qrcode')` 動態載入 → Vite 切成獨立 chunk `browser.*.js`（25.8KB），**只有後台掛載時才下載，173 個公開頁零成本**；產圖失敗時靜默降級成「只顯示代碼」，不擋畫面。
+- **驗證（已跑）**：`npm run build` 綠 173 頁；**QR round-trip 實測 PASS**——用元件裡一模一樣的參數（width 640／margin 1／ecc M）產圖，再用 jsQR 解碼回來，字串與原網址完全相同（`https://launchdock.app/quiz/?code=A1B2C3`）；dist 確認 chunk 有切開。
+- **沒驗到的**：**講師後台實際畫面我從沒看過**（AdminGuard 要 Google 登入，本機 preview 又踩下面那個 `/auth/callback` 無斜線 404 的既有坑）。左右並排版面、放大投影的實際觀感**只有你能確認**。→ **下一個動作：你上 `/admin/quiz-live/` 登入，開一場新場次，看 QR 版面順不順、投影出來後排掃不掃得到。**
+
 **2026-08-04 班級測驗加「課前／課後」成效對照（migration 015，已 push）** ⬅️ 最新
 - **設計＝單一場次雙階段**（不是開兩場）：同一組代碼、同一條連結，老師課後在後台按「🎓 切到課後測」，學員重開同連結再做一次；配對靠同一顆瀏覽器的匿名 `participant_id`。現場只需唸一次代碼。
 - **phase 由伺服器決定，不信前端**：`BEFORE INSERT` trigger `set_quiz_response_phase()` 直接抄當下場次的 phase。**已實測**：anon 硬送 `phase:"post"` 而場次仍是 pre → 入庫被蓋回 `pre`。
 - **後台新增**：階段切換鈕、「現在收的是課前測/課後測」標示、**🎓 這堂課的成效**區塊（課前 L→課後 L→推進值＋四項解鎖率前後疊圖），優先用「課前課後都做過」的人**配對比較**（無配對才退回全體平均，介面會註明）。
 - **學員端**：橫幅顯示課前測/課後測 badge；課後測時若手上是還原自 localStorage 的舊結果，**擋掉補送、改要求「重新作答」**（否則會把課前答案當課後成績送出）。
 - **驗證**：build 綠 173 頁；trigger 防竄改實測過；瀏覽器實跑課後測流程（同一顆瀏覽器 pre=L1 → post=L4，phase 正確）。**唯一沒跑到的仍是講師後台畫面**（需 Google 登入）。
-- **測試資料**：production 留著場次 **DEMO01**（課前 9 份／課後 9 份，含 8 位假學員），登入後台即可看到成效對照長怎樣（預期：課前 L1.9 → 課後 L2.8，推進 +0.9，配對 9 人）。**看完告訴我，我清掉。**
+- **測試資料**：production 留著場次 **DEMO01**（課前 9 份／課後 9 份，含 8 位假學員），登入後台即可看到成效對照長怎樣（預期：課前 L1.9 → 課後 L2.8，推進 +0.9，配對 9 人）。~~**看完告訴我，我清掉。**~~ → **2026-08-05 已清空**（見上一條）。
 
 **2026-08-03 班級測驗（quiz 團體班模式）已做完，等真人實測＋Joseph 決定 push** ⬅️ 最新
 - **要解的問題**（Joseph 8/03 提）：上課前想快速知道「本班同學程度在哪」，線上與實體學員都算，好當場調整課程內容。

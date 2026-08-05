@@ -254,6 +254,36 @@ function QuizLive() {
 
   const joinUrl = active ? `${typeof window !== 'undefined' ? window.location.origin : 'https://launchdock.app'}/quiz/?code=${active.code}` : '';
 
+  // QR code：實體班掃碼直接進作答頁（含代碼，學員不用手打）
+  // 動態 import 讓 qrcode 只在瀏覽器載入，不進 SSR bundle
+  const [qrDataUrl, setQrDataUrl] = useState('');
+  const [qrBig, setQrBig] = useState(false);
+  useEffect(() => {
+    if (!joinUrl) {
+      setQrDataUrl('');
+      return;
+    }
+    let cancelled = false;
+    import('qrcode')
+      .then(({ default: QRCode }) =>
+        QRCode.toDataURL(joinUrl, {
+          width: 640, // 產大張，投影放大不糊；顯示尺寸由 CSS 控制
+          margin: 1,
+          errorCorrectionLevel: 'M',
+          color: { dark: '#000000', light: '#ffffff' },
+        }),
+      )
+      .then((url) => {
+        if (!cancelled) setQrDataUrl(url);
+      })
+      .catch(() => {
+        if (!cancelled) setQrDataUrl(''); // 產不出來就只顯示代碼，不擋畫面
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [joinUrl]);
+
   // ── 畫面 ────────────────────────────────────────────────
   return (
     <div>
@@ -314,16 +344,46 @@ function QuizLive() {
         <>
           {/* 加入資訊（可投影） */}
           <div className="rounded-2xl p-6 mb-6 border text-center" style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-brand)' }}>
-            <p className="text-xs uppercase tracking-wide mb-1" style={{ color: 'var(--color-text-muted)' }}>
-              請學員打開
-            </p>
-            <p className="text-lg font-semibold mb-2">launchdock.app/quiz</p>
-            <p className="text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>
-              課堂代碼 · 現在收的是{currentPhase === 'post' ? '「課後測」' : '「課前測」'}
-            </p>
-            <p className="text-5xl font-extrabold tracking-[0.2em]" style={{ color: 'var(--color-brand-light)' }}>
-              {active.code}
-            </p>
+            <div className="flex items-center justify-center gap-8 flex-wrap">
+              {/* 手打代碼（線上班） */}
+              <div>
+                <p className="text-xs uppercase tracking-wide mb-1" style={{ color: 'var(--color-text-muted)' }}>
+                  請學員打開
+                </p>
+                <p className="text-lg font-semibold mb-2">launchdock.app/quiz</p>
+                <p className="text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>
+                  課堂代碼 · 現在收的是{currentPhase === 'post' ? '「課後測」' : '「課前測」'}
+                </p>
+                <p className="text-5xl font-extrabold tracking-[0.2em]" style={{ color: 'var(--color-brand-light)' }}>
+                  {active.code}
+                </p>
+              </div>
+
+              {/* 掃碼（實體班）：QR 已帶代碼，掃了直接進作答頁 */}
+              {qrDataUrl && (
+                <div>
+                  <p className="text-xs uppercase tracking-wide mb-2" style={{ color: 'var(--color-text-muted)' }}>
+                    或直接掃碼
+                  </p>
+                  <button
+                    onClick={() => setQrBig((v) => !v)}
+                    title={qrBig ? '縮小' : '放大投影'}
+                    className="block rounded-lg overflow-hidden transition-all"
+                    style={{ lineHeight: 0, backgroundColor: '#fff', padding: 8 }}
+                  >
+                    <img
+                      src={qrDataUrl}
+                      alt={`掃碼加入班級測驗，課堂代碼 ${active.code}`}
+                      style={{ width: qrBig ? 'min(60vh, 460px)' : 176, height: 'auto', display: 'block' }}
+                    />
+                  </button>
+                  <p className="text-[11px] mt-2" style={{ color: 'var(--color-text-muted)' }}>
+                    {qrBig ? '點一下縮小' : '點一下放大投影'}
+                  </p>
+                </div>
+              )}
+            </div>
+
             <div className="flex items-center justify-center gap-3 mt-4 flex-wrap">
               <button
                 onClick={() => navigator.clipboard?.writeText(joinUrl)}
