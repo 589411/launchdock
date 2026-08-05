@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-08-05（**班級測驗：DEMO01 測試資料已清空＋QR code 已內建**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
+**最後更新：** 2026-08-05（**90人併發壓測 PASS＋後台首次實看＋8/06 工研院場次 `25ZEA9` 待命**；同日 DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 📈 SEO 成效量測（進行中，等 08-10 驗收）
@@ -16,6 +16,16 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
+**2026-08-05 90 人併發壓測 PASS ＋ 後台畫面首次實看 ＋ 8/06 工研院場次待命** ⬅️ 最新
+- **背景**：Joseph 明天（8/06）有真課「0806工研院消費行為洞察與預測」，場次已自建＝**代碼 `25ZEA9`**（status=open、phase=pre、responses=0，隨時可上場）。他問「90 人同時用會有問題嗎」。
+- **壓測（對 production 實打，非推論）**：建臨時場次 `LOAD90` → 用 anon key 同時發 **90 人 × (1 RPC 換場次 + 1 交卷) = 180 requests**（走真實 PostgREST + RLS + phase trigger）。**結果全綠**：RPC 90/90 → 200、交卷 90/90 → 201、**零失敗零限流**；全部打完 5.9 秒；交卷耗時 最快 0.23s／中位 **0.64s**／最慢 3.83s（最慢那筆是我單機硬開 90 條並發自己塞住，真實情境是 90 支不同手機，只會更好）。
+- **資料正確性**：90 列、90 個不同 `participant_id`、phase 全部正確是 `pre`（trigger 沒漏）。**後台實測吃得下**：儀表板正確顯示「90 份課前測已交／本班平均 L2.0／程度分佈」，沒有變慢或截斷。
+- **流量**：90 列 ≈ **35kB／次輪詢**，每 5 秒一次 ≈ 25MB/hr。Supabase **free 方案**（org `averna`）月流量 5GB → 一堂課約 50MB，**完全夠**；但別把後台開著放整天。
+- ✅ **後台畫面首次親眼確認**（用 Joseph 已登入的 Chrome）：左「代碼大字」右「QR」並排正確、「點一下放大投影」在、三顆操作鈕（複製連結／結束收件／切到課後測）都在、底下顯示完整作答網址。**先前 STATUS 一直記「我沒看過後台」——此條已解除。**
+- **DB 在 `ap-south-1`（孟買）**：台灣過去 RTT 約 100–150ms，已內含在上面的實測數字裡，不是問題但別誤以為在東京。
+- **壓測資料已清乾淨**：`LOAD90` 場次＋90 列全刪，現在 DB 只剩工研院那一場（0 筆）。
+- **仍沒驗到（唯一剩的）**：**手機實機作答**。macOS Chrome 視窗縮不到 390px，我逼不出真手機 viewport。程式碼層面最可疑的一處＝結果頁 `CapabilityQuiz.tsx:310` 的 `grid grid-cols-2` **沒有 mobile breakpoint**，窄螢幕每格只剩 ~170px 要塞「維度名 L2」+「已解鎖 · 75%」，可能擠。→ **開課前請用手機掃 QR 真做完一次 12 題**（2 分鐘），重點看結果頁那四格。
+
 **2026-08-05 班級測驗：DEMO01 測試資料已清空 + QR code 已內建** ⬅️ 最新
 - **緣起**：Joseph 說「測驗功能我沒看到」。查證結果＝**功能早就上線且已 push**（`674c70a`/`e6b581c`，production `/quiz/`、`/admin/quiz-live/` 皆 200），沒看到是因為**刻意隱藏**：`/quiz/` 沒帶 `?code=` 對一般訪客完全不變、`/admin/quiz-live/` 要 Google 登入才顯示內容。**這是設計，不是 bug**——但也代表沒有任何自然入口會讓人「不小心發現」它。
 - **① DEMO01 已清乾淨**：刪 19 份作答（課前 10／課後 9）＋場次本身。現在 `quiz_sessions=0`、`quiz_responses=0`，production DB 零測試殘留。**下次要看後台長怎樣得自己開一場新的。**
