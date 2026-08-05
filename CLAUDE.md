@@ -309,6 +309,7 @@ src/i18n/utils.ts            ← i18n helpers
 src/data/concepts.yaml       ← 受控概念定義（displayName、aliases、canonical article）
 public/images/articles/*/    ← 文章圖片（按 slug 分資料夾）
 docs/article-registry.json   ← ⭐ 概念×文章交叉索引（生成文章前必讀）
+docs/class-quiz-runbook.md   ← ⭐ 班級測驗現場手冊（後台/學員網址、場次代碼、現場流程、送出失敗處理）
 docs/image-workflow.md       ← 圖片工作流程完整文檔（含 auto-capture 串接說明）
 docs/llm-article-prompt.md   ← LLM 生成文章時的 @img 與概念連結規則
 scripts/add-image.sh         ← 圖片工作流程 CLI
