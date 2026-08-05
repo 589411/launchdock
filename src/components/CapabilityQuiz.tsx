@@ -132,7 +132,10 @@ export default function CapabilityQuiz({ locale, articles }: Props) {
     },
     sending: { zh: '送出中…', en: 'Sending…' },
     sent: { zh: '已送出到本班統計', en: 'Submitted to class stats' },
-    failed: { zh: '送出失敗（結果仍已保留在本機）', en: 'Submit failed (your result is still saved locally)' },
+    failed: {
+      zh: '送出失敗，可能是網路不穩。等幾秒再按一次「重試送出」就好——你的答案已保留在本機，不會不見。若重試多次都失敗，請告訴講師。',
+      en: 'Submit failed — likely a flaky network. Wait a few seconds and tap “Retry”. Your answers are saved locally and won’t be lost. If it keeps failing, tell your instructor.',
+    },
     retrySend: { zh: '重試送出', en: 'Retry' },
     sendNow: { zh: '送出到本班統計', en: 'Submit to class stats' },
     phasePre: { zh: '課前測', en: 'Pre-class' },
