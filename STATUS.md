@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-08-05（**90人併發壓測 PASS＋後台首次實看＋8/06 工研院場次 `25ZEA9` 待命**；同日 DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
+**最後更新：** 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋8/06 工研院場次 `25ZEA9` 待命**；同日 DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 📈 SEO 成效量測（進行中，等 08-10 驗收）
@@ -16,6 +16,16 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
+**2026-08-05 手機實測踩到「送出失敗」→ 已定位＋訊息已修｜8/06 工研院場次待命** ⬅️ 最新
+- **🎓 明天上課用的**：場次 **`25ZEA9`**「0806工研院消費行為洞察與預測」，status=open／phase=pre／**responses=0（測試資料已清空，乾淨待命）**。學員連結 `https://launchdock.app/quiz/?code=25ZEA9`，或投影後台的 QR。
+- **⛔ 現場最重要的一條紅線**：**全班交完前，絕對不要按「⏹ 結束收件」**。交卷的 RLS 是 `WITH CHECK is_quiz_session_open(session_id)`，只認 `status='open'`；一按下去，所有還在作答的人交卷會**當場 401 失敗**。這顆鈕是**下課後**才按的。
+- **Joseph 手機實測回報「送出失敗」→ 已 repro 並定位**：用 anon key 打同一支 API 重現出 `42501 / HTTP 401 new row violates row-level security policy`，證明失敗當下 `status≠open`。**不是 bug、不是程式錯**，是場次被關（後台按到「結束收件」）。後來場次回到 open，他重試就成功了。
+- **已排除自動關閉**：此 DB **無 pg_cron、`quiz_sessions` 上零 trigger** → 狀態不會自己變，只有人按才會關。所以明天不會無故中斷。
+- **答案不會掉**：交卷失敗時本機保留結果＋提供「重試送出」，學員不必重做 12 題。
+- **已修（`6ccb8eb`，Joseph 指示）**：交卷失敗訊息從乾巴巴的「送出失敗（結果仍已保留在本機）」→ **可行動指引**：「送出失敗，可能是網路不穩。等幾秒再按一次『重試送出』就好——你的答案已保留在本機，不會不見。若重試多次都失敗，請告訴講師。」中英雙語。**理由（Joseph 的判斷，正確）**：教室現場最常見的其實是 wifi／Cloudflare 抖動，不是場次被關，學員需要的是「等幾秒再按一次」而不是知道 RLS 是什麼。build 綠 173 頁。
+- **前情**（同日稍早）：90 人併發壓測 PASS（180 requests 全綠、中位 0.64s、後台吃得下 90 筆、35kB/輪詢）；後台畫面首次親眼確認（左代碼右 QR 並排正確）；DEMO01＋LOAD90 壓測資料全清。
+- **仍沒驗到**：結果頁 `CapabilityQuiz.tsx:310` 的 `grid grid-cols-2` 在窄螢幕是否擠（Joseph 手機跑完 12 題但沒回報版面問題，暫視為可接受）。
+
 **2026-08-05 90 人併發壓測 PASS ＋ 後台畫面首次實看 ＋ 8/06 工研院場次待命** ⬅️ 最新
 - **背景**：Joseph 明天（8/06）有真課「0806工研院消費行為洞察與預測」，場次已自建＝**代碼 `25ZEA9`**（status=open、phase=pre、responses=0，隨時可上場）。他問「90 人同時用會有問題嗎」。
 - **壓測（對 production 實打，非推論）**：建臨時場次 `LOAD90` → 用 anon key 同時發 **90 人 × (1 RPC 換場次 + 1 交卷) = 180 requests**（走真實 PostgREST + RLS + phase trigger）。**結果全綠**：RPC 90/90 → 200、交卷 90/90 → 201、**零失敗零限流**；全部打完 5.9 秒；交卷耗時 最快 0.23s／中位 **0.64s**／最慢 3.83s（最慢那筆是我單機硬開 90 條並發自己塞住，真實情境是 90 支不同手機，只會更好）。
