@@ -153,6 +153,11 @@ function PollLive() {
     setActiveId((data as SessionRow).id);
   }
 
+  /** 把題庫的一題轉成寫進場次的形狀（帶上段落與討論題） */
+  function toActive(q: PollQuestion): PollActiveQuestion {
+    return { id: q.id, text: q.text, options: q.options, segment: q.segment, discuss: q.discuss };
+  }
+
   /** 出題：把整題寫進場次，學員重新整理就看得到 */
   async function ask(q: PollActiveQuestion | null) {
     if (!active) return;
@@ -162,6 +167,14 @@ function PollLive() {
       return;
     }
     setSessions((prev) => prev.map((s) => (s.id === active.id ? { ...s, poll_active: q } : s)));
+  }
+
+  /** 停下來討論：學員端收起選項、改顯示討論題。
+   *  ⚠️ 這只是畫面狀態，**不動場次 status**——場次一關全班交卷全失敗（runbook 紅線）。
+   *  所以按下去不會有任何人送出失敗，晚到的人也還是投得進來。 */
+  async function toggleDiscuss() {
+    if (!activeQ) return;
+    await ask({ ...activeQ, locked: !activeQ.locked });
   }
 
   function askCustom() {
@@ -345,7 +358,11 @@ function PollLive() {
           {!project && (
             <>
               {/* 出題 */}
-              <p className="text-sm font-semibold mb-2">出題（學員按「更新」就會看到）</p>
+              <p className="text-sm font-semibold mb-1">出題（學員按「更新」就會看到）</p>
+              <p className="text-xs mb-2" style={{ color: 'var(--color-text-muted)' }}>
+                **學員一次只看得到一題**——出哪題就只有哪題。跑完該段的 Colab 再出題，
+                收完票按「⏸ 停下來討論」，全班停在同一個問題上。
+              </p>
               {([3, 4] as const).map((day) => (
                 <div key={day} className="mb-3">
                   <p className="text-xs mb-1.5" style={{ color: 'var(--color-text-muted)' }}>
@@ -355,13 +372,13 @@ function PollLive() {
                     {questions
                       .filter((q) => q.day === day)
                       .map((q) => (
-                        <AskButton key={q.id} q={q} isActive={activeQ?.id === q.id} answered={answeredPerQuestion[q.id]} onAsk={() => ask({ id: q.id, text: q.text, options: q.options })} />
+                        <AskButton key={q.id} q={q} isActive={activeQ?.id === q.id} answered={answeredPerQuestion[q.id]} onAsk={() => ask(toActive(q))} />
                       ))}
                   </div>
                 </div>
               ))}
               <div className="flex flex-wrap gap-1.5 mb-4">
-                <AskButton q={warmupQuestion} isActive={activeQ?.id === warmupQuestion.id} answered={answeredPerQuestion[warmupQuestion.id]} onAsk={() => ask({ id: warmupQuestion.id, text: warmupQuestion.text, options: warmupQuestion.options })} />
+                <AskButton q={warmupQuestion} isActive={activeQ?.id === warmupQuestion.id} answered={answeredPerQuestion[warmupQuestion.id]} onAsk={() => ask(toActive(warmupQuestion))} />
                 {activeQ && (
                   <button onClick={() => ask(null)} className="px-3 py-1.5 rounded-lg text-xs border" style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-surface-lighter)', color: 'var(--color-text-muted)' }}>
                     ⏸ 收起題目
@@ -402,6 +419,9 @@ function PollLive() {
           {/* ── 投影區 ─────────────────────────────────── */}
           {activeQ && stats ? (
             <div className="rounded-2xl p-6 border-2 mb-6" style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-brand)' }}>
+              <p className="text-xs mb-2" style={{ color: 'var(--color-text-muted)' }}>
+                {activeQ.segment ?? activePreset?.segment ?? '課堂投票'}
+              </p>
               <div className="flex items-baseline justify-between gap-3 flex-wrap mb-4">
                 <div className="flex items-baseline gap-2 flex-wrap">
                   {activePreset && (
@@ -416,11 +436,30 @@ function PollLive() {
                     {stats.n}
                   </span>
                   <span>票{expected.trim() && ` / ${expected.trim()} 人`}</span>
+                  <button
+                    onClick={toggleDiscuss}
+                    className="px-2.5 py-1 rounded-lg font-medium"
+                    style={{
+                      backgroundColor: activeQ.locked ? '#f59e0b' : 'var(--color-surface-lighter)',
+                      color: activeQ.locked ? '#1a1a1a' : 'var(--color-text-primary)',
+                    }}
+                  >
+                    {activeQ.locked ? '▶️ 繼續收票' : '⏸ 停下來討論'}
+                  </button>
                   <button onClick={() => setProject((v) => !v)} className="underline">
                     {project ? '↩︎ 離開投影' : '🖥 投影模式'}
                   </button>
                 </div>
               </div>
+
+              {activeQ.locked && (
+                <div className="rounded-xl px-4 py-3 mb-4" style={{ backgroundColor: 'var(--color-surface)' }}>
+                  <p className="text-xs font-semibold mb-1" style={{ color: '#f59e0b' }}>
+                    💬 討論中——學員端已收起選項，改看這個問題
+                  </p>
+                  <p className={project ? 'text-2xl' : 'text-sm'}>{activeQ.discuss ?? activePreset?.discuss ?? ''}</p>
+                </div>
+              )}
 
               {stats.n === 0 ? (
                 <p className="text-center py-12 text-sm" style={{ color: 'var(--color-text-muted)' }}>

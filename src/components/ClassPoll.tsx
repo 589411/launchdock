@@ -1,20 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
-import { questions, warmupQuestion, industries, type PollQuestion } from '../data/class-poll';
+import { warmupQuestion, questions, industries, OTHER_INDUSTRY, INDUSTRY_MAX_LEN } from '../data/class-poll';
 import type { PollActiveQuestion } from '../lib/supabase-types';
 
 // ============================================================
 // 課堂即時投票 — 學員端
 // ------------------------------------------------------------
 // 設計要點：
-//   1. **不輪詢。** 即時是投影給全班看的，不是給學員看的。
+//   1. **一次只看得到一題。** 投票是「課程中間停下來的互動」，不是問卷——
+//      八題一次列出來，學員會走馬看花地一路投完，然後整堂課的互動點就沒了。
+//      畫面最上面標明「Day 3 · 段 2 · N1 商品關聯」，學員一眼知道自己在哪一段。
+//   2. **不輪詢。** 即時是投影給全班看的，不是給學員看的。
 //      講師口頭喊「請重新整理」，學員按一下按鈕就好——
 //      學員端也輪詢的話，一堂課 75 萬次請求。
-//   2. 全匿名，不需登入。participant_id 只存在自己的瀏覽器。
-//   3. **一鍵投票**：點選項即送出，不必再按確認。30 秒內全班到齊。
+//   3. 全匿名，不需登入。participant_id 只存在自己的瀏覽器。
+//   4. **一鍵投票**：點選項即送出，不必再按確認。30 秒內全班到齊。
 //      想補一句話的人再展開選填欄（講師會匿名念出來）。
-//   4. 講師還沒出題、或網路壞掉時，八題全列在下面，學員可以自己往下投——
-//      永遠不會出現「我不知道現在要幹嘛」。
+//   5. 講師按「停下來討論」後，選項收起、改顯示討論題——
+//      **這是節奏用的畫面狀態，不是權限**（場次整堂課都不能關，見 runbook 紅線）。
 // ============================================================
 
 const PARTICIPANT_KEY = 'launchdock-quiz-participant'; // 與 AI 能力測驗共用同一顆匿名 id
@@ -52,6 +55,9 @@ function writeVote(sessionId: string, questionId: string, choiceIndex: number) {
   }
 }
 
+/** 題號徽章（Q3…Q10）——跟學員手上的講義同一組編號 */
+const PRESETS = [warmupQuestion, ...questions];
+
 interface PollSession {
   id: string;
   title: string;
@@ -66,12 +72,13 @@ export default function ClassPoll() {
   const [code, setCode] = useState('');
   const [codeInput, setCodeInput] = useState('');
   const [industry, setIndustry] = useState('');
+  const [industryTyping, setIndustryTyping] = useState(false);
+  const [industryDraft, setIndustryDraft] = useState('');
   const [votes, setVotes] = useState<Record<string, number>>({});
-  const [sending, setSending] = useState<string | null>(null);
-  const [failed, setFailed] = useState<string | null>(null);
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const [openId, setOpenId] = useState<string | null>(null);
-  const [noteFor, setNoteFor] = useState<string | null>(null);
+  const [noteOpen, setNoteOpen] = useState(false);
   const [note, setNote] = useState('');
   const [noteSent, setNoteSent] = useState(false);
 
@@ -111,17 +118,28 @@ export default function ClassPoll() {
     void resolve(urlCode);
   }, [resolve]);
 
+  const enterCode = (v: string) => {
+    if (!v.trim()) return;
+    setCode(v.trim());
+    setStatus('loading');
+    void resolve(v);
+  };
+
   async function refresh() {
     if (!code) return;
     setRefreshing(true);
+    const before = session?.active?.id;
     await resolve(code);
     setRefreshing(false);
-    setNoteFor(null);
-    setNote('');
-    setNoteSent(false);
+    // 換題了才清掉留言框，否則學員打到一半按更新會被清空
+    if (session?.active?.id !== before) {
+      setNoteOpen(false);
+      setNote('');
+      setNoteSent(false);
+    }
   }
 
-  function chooseIndustry(v: string) {
+  function saveIndustry(v: string) {
     setIndustry(v);
     try {
       localStorage.setItem(INDUSTRY_KEY, v);
@@ -131,10 +149,10 @@ export default function ClassPoll() {
   }
 
   // ── 投票 ────────────────────────────────────────────────
-  async function vote(q: { id: string; options: string[] }, idx: number, withNote?: string) {
+  async function vote(q: PollActiveQuestion, idx: number, withNote?: string) {
     if (!session) return;
-    setSending(q.id);
-    setFailed(null);
+    setSending(true);
+    setFailed(false);
     const { error } = await supabase.from('poll_responses').insert({
       session_id: session.id,
       participant_id: getParticipantId(),
@@ -144,9 +162,9 @@ export default function ClassPoll() {
       note: withNote?.trim() ? withNote.trim().slice(0, 200) : null,
       industry: industry || null,
     });
-    setSending(null);
+    setSending(false);
     if (error) {
-      setFailed(q.id);
+      setFailed(true);
       return;
     }
     setVotes((prev) => ({ ...prev, [q.id]: idx }));
@@ -172,28 +190,13 @@ export default function ClassPoll() {
           <input
             value={codeInput}
             onChange={(e) => setCodeInput(e.target.value.toUpperCase())}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && codeInput.trim()) {
-                setCode(codeInput.trim());
-                setStatus('loading');
-                void resolve(codeInput);
-              }
-            }}
+            onKeyDown={(e) => e.key === 'Enter' && enterCode(codeInput)}
             placeholder="課堂代碼"
             className="flex-1 px-3 py-3 rounded-lg text-center text-lg tracking-[0.2em] border"
-            style={{
-              backgroundColor: 'var(--color-surface)',
-              borderColor: 'var(--color-surface-lighter)',
-              color: 'var(--color-text-primary)',
-            }}
+            style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-surface-lighter)', color: 'var(--color-text-primary)' }}
           />
           <button
-            onClick={() => {
-              if (!codeInput.trim()) return;
-              setCode(codeInput.trim());
-              setStatus('loading');
-              void resolve(codeInput);
-            }}
+            onClick={() => enterCode(codeInput)}
             className="px-5 rounded-lg text-sm font-medium text-white"
             style={{ backgroundColor: 'var(--color-brand)' }}
           >
@@ -212,215 +215,199 @@ export default function ClassPoll() {
     );
   }
 
-  const active = session.active;
-  const activePreset = active ? [warmupQuestion, ...questions].find((q) => q.id === active.id) : undefined;
-
-  return (
-    <div>
-      {/* 業態：選一次，之後每票都帶著 */}
-      <div className="rounded-xl p-4 mb-6 border" style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-surface-lighter)' }}>
-        <p className="text-xs mb-2" style={{ color: 'var(--color-text-muted)' }}>
-          你的業態（選一次就好，講師會用它做跨業態對照）
+  // 業態還沒選 → 先問業態（只有第一次），問完才進投票
+  if (!industry) {
+    return (
+      <div className="py-6">
+        <p className="text-lg font-bold mb-1">先選一次你的業態</p>
+        <p className="text-sm mb-5" style={{ color: 'var(--color-text-secondary)' }}>
+          整堂課只問這一次。講師會用它做<b>跨業態對照</b>——同一個問題，你這行和隔壁行的答案常常差很多，
+          那個落差就是這堂課最有價值的部分。
         </p>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {industries.map((v) => (
             <button
               key={v}
-              onClick={() => chooseIndustry(v)}
-              className="px-2.5 py-1.5 rounded-lg text-xs border transition-all"
-              style={{
-                backgroundColor: industry === v ? 'var(--color-brand)' : 'var(--color-surface)',
-                borderColor: industry === v ? 'var(--color-brand)' : 'var(--color-surface-lighter)',
-                color: industry === v ? '#fff' : 'var(--color-text-secondary)',
-              }}
+              onClick={() => saveIndustry(v)}
+              className="px-3 py-2.5 rounded-lg text-sm border transition-all"
+              style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-surface-lighter)', color: 'var(--color-text-primary)' }}
             >
               {v}
             </button>
           ))}
+          <button
+            onClick={() => setIndustryTyping(true)}
+            className="px-3 py-2.5 rounded-lg text-sm border transition-all"
+            style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-surface-lighter)', color: 'var(--color-text-secondary)' }}
+          >
+            ✏️ {OTHER_INDUSTRY}（自己打）
+          </button>
         </div>
+        {industryTyping && (
+          <div className="flex gap-2 mt-4">
+            <input
+              autoFocus
+              value={industryDraft}
+              onChange={(e) => setIndustryDraft(e.target.value.slice(0, INDUSTRY_MAX_LEN))}
+              onKeyDown={(e) => e.key === 'Enter' && industryDraft.trim() && saveIndustry(industryDraft.trim())}
+              placeholder="例：寵物用品、房仲、水電工程"
+              className="flex-1 px-3 py-2.5 rounded-lg text-sm border"
+              style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-surface-lighter)', color: 'var(--color-text-primary)' }}
+            />
+            <button
+              onClick={() => industryDraft.trim() && saveIndustry(industryDraft.trim())}
+              disabled={!industryDraft.trim()}
+              className="px-4 rounded-lg text-sm font-medium text-white disabled:opacity-40"
+              style={{ backgroundColor: 'var(--color-brand)' }}
+            >
+              確定
+            </button>
+          </div>
+        )}
       </div>
+    );
+  }
 
-      {/* 現在這一題 */}
-      {active ? (
-        <div className="rounded-2xl p-5 mb-6 border-2" style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-brand)' }}>
-          <div className="flex items-baseline justify-between gap-3 mb-3 flex-wrap">
-            <span className="text-xs font-semibold px-2 py-0.5 rounded" style={{ backgroundColor: 'var(--color-brand)', color: '#fff' }}>
-              {activePreset?.label ?? '現在這一題'}
+  const active = session.active;
+  const preset = active ? PRESETS.find((q) => q.id === active.id) : undefined;
+  const segment = active?.segment ?? preset?.segment;
+  const discuss = active?.discuss ?? preset?.discuss;
+  const picked = active ? votes[active.id] : undefined;
+  const locked = !!active?.locked;
+
+  return (
+    <div>
+      {/* 等講師出題 */}
+      {!active ? (
+        <div className="rounded-2xl p-8 my-8 border text-center" style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-surface-lighter)' }}>
+          <p className="text-3xl mb-3">⏳</p>
+          <p className="text-base font-semibold mb-2">等講師出題</p>
+          <p className="text-sm mb-5" style={{ color: 'var(--color-text-secondary)' }}>
+            投票會跟著課程一段一段來。講師喊「開始投票」的時候，按下面更新。
+          </p>
+          <button
+            onClick={refresh}
+            className="px-5 py-2.5 rounded-lg text-sm font-medium text-white"
+            style={{ backgroundColor: 'var(--color-brand)' }}
+          >
+            {refreshing ? '更新中…' : '🔄 更新'}
+          </button>
+        </div>
+      ) : (
+        <>
+          {/* 這一題掛在課程的哪一段 */}
+          <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ backgroundColor: 'var(--color-surface-lighter)', color: 'var(--color-text-secondary)' }}>
+              {segment ?? '課堂投票'}
             </span>
             <button onClick={refresh} className="text-xs underline" style={{ color: 'var(--color-text-muted)' }}>
               {refreshing ? '更新中…' : '🔄 換題了？點我更新'}
             </button>
           </div>
-          <p className="text-xl font-bold mb-4 leading-snug">{active.text}</p>
-          <OptionList
-            options={active.options}
-            picked={votes[active.id]}
-            sending={sending === active.id}
-            onPick={(i) => vote(active, i)}
-          />
-          {failed === active.id && (
-            <p className="text-xs mt-3" style={{ color: '#f87171' }}>
-              送出失敗，可能是網路不穩。等幾秒再點一次就好；若一直失敗請告訴講師。
-            </p>
-          )}
 
-          {votes[active.id] !== undefined && (
-            <div className="mt-4">
-              {noteFor === active.id ? (
-                <>
-                  <textarea
-                    value={note}
-                    onChange={(e) => setNote(e.target.value.slice(0, 200))}
-                    rows={3}
-                    placeholder="例：我們抓 28 天，因為保養品差不多那時候用完"
-                    className="w-full px-3 py-2 rounded-lg text-sm border"
-                    style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-surface-lighter)', color: 'var(--color-text-primary)' }}
-                  />
-                  <div className="flex items-center gap-3 mt-2">
-                    <button
-                      onClick={() => vote(active, votes[active.id], note)}
-                      disabled={!note.trim() || sending === active.id}
-                      className="px-3 py-1.5 rounded-lg text-xs font-medium text-white disabled:opacity-40"
-                      style={{ backgroundColor: 'var(--color-brand)' }}
-                    >
-                      {sending === active.id ? '送出中…' : '送出這句話'}
-                    </button>
-                    <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                      {noteSent ? '✅ 已送出，講師會匿名念出來' : `${note.length}/200 · 匿名，不會顯示是誰`}
-                    </span>
-                  </div>
-                </>
-              ) : (
-                <button onClick={() => setNoteFor(active.id)} className="text-xs underline" style={{ color: 'var(--color-text-secondary)' }}>
-                  ＋ 補一句話（選填，講師會匿名念出來）
-                </button>
-              )}
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="rounded-2xl p-6 mb-6 border text-center" style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-surface-lighter)' }}>
-          <p className="text-sm mb-3" style={{ color: 'var(--color-text-secondary)' }}>
-            講師還沒出題。等他喊「開始投票」再按下面的更新，或直接往下自己投。
-          </p>
-          <button onClick={refresh} className="text-sm underline" style={{ color: 'var(--color-brand-light)' }}>
-            {refreshing ? '更新中…' : '🔄 更新'}
-          </button>
-        </div>
+          <div className="rounded-2xl p-5 border-2" style={{ backgroundColor: 'var(--color-surface-light)', borderColor: locked ? '#f59e0b' : 'var(--color-brand)' }}>
+            {preset && (
+              <span className="inline-block text-xs font-bold px-2 py-0.5 rounded mb-3" style={{ backgroundColor: 'var(--color-brand)', color: '#fff' }}>
+                {preset.label}
+              </span>
+            )}
+            <p className="text-xl font-bold mb-4 leading-snug">{active.text}</p>
+
+            {locked ? (
+              /* 討論階段：收起選項，把全班的注意力拉回討論 */
+              <div>
+                <div className="rounded-xl px-4 py-4 mb-3" style={{ backgroundColor: 'var(--color-surface)' }}>
+                  <p className="text-sm font-semibold mb-2" style={{ color: '#f59e0b' }}>💬 投票結束，現在全班討論</p>
+                  {discuss && <p className="text-base leading-relaxed">{discuss}</p>}
+                </div>
+                <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+                  {picked !== undefined ? `你選的是：${active.options[picked] ?? ''}` : '你這題沒有投到。'}
+                </p>
+              </div>
+            ) : (
+              <>
+                <div className="space-y-2">
+                  {active.options.map((opt, i) => {
+                    const isPicked = picked === i;
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => vote(active, i)}
+                        disabled={sending}
+                        className="w-full text-left px-4 py-4 rounded-xl text-base border-2 transition-all disabled:opacity-60"
+                        style={{
+                          backgroundColor: isPicked ? 'var(--color-brand)' : 'var(--color-surface)',
+                          borderColor: isPicked ? 'var(--color-brand)' : 'var(--color-surface-lighter)',
+                          color: isPicked ? '#fff' : 'var(--color-text-primary)',
+                        }}
+                      >
+                        {isPicked ? '✓ ' : ''}
+                        {opt}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {failed && (
+                  <p className="text-xs mt-3" style={{ color: '#f87171' }}>
+                    送出失敗，可能是網路不穩。等幾秒再點一次就好；若一直失敗請告訴講師。
+                  </p>
+                )}
+
+                {picked !== undefined && (
+                  <>
+                    <p className="text-xs mt-3" style={{ color: 'var(--color-text-muted)' }}>
+                      已送出。改變主意可以直接改點別的，講師看的是你最後一次。
+                    </p>
+                    <div className="mt-4">
+                      {noteOpen ? (
+                        <>
+                          <textarea
+                            value={note}
+                            onChange={(e) => setNote(e.target.value.slice(0, 200))}
+                            rows={3}
+                            placeholder="例：我們抓 28 天，因為保養品差不多那時候用完"
+                            className="w-full px-3 py-2 rounded-lg text-sm border"
+                            style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-surface-lighter)', color: 'var(--color-text-primary)' }}
+                          />
+                          <div className="flex items-center gap-3 mt-2">
+                            <button
+                              onClick={() => vote(active, picked, note)}
+                              disabled={!note.trim() || sending}
+                              className="px-3 py-1.5 rounded-lg text-xs font-medium text-white disabled:opacity-40"
+                              style={{ backgroundColor: 'var(--color-brand)' }}
+                            >
+                              {sending ? '送出中…' : '送出這句話'}
+                            </button>
+                            <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+                              {noteSent ? '✅ 已送出，講師會匿名念出來' : `${note.length}/200 · 匿名，不會顯示是誰`}
+                            </span>
+                          </div>
+                        </>
+                      ) : (
+                        <button onClick={() => setNoteOpen(true)} className="text-xs underline" style={{ color: 'var(--color-text-secondary)' }}>
+                          ＋ 補一句話（選填，講師會匿名念出來）
+                        </button>
+                      )}
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+        </>
       )}
 
-      {/* 全部題目：講師沒出題、網路壞掉、或中途才加入時的退路 */}
-      <p className="text-xs mb-3" style={{ color: 'var(--color-text-muted)' }}>
-        全部題目（跟你手上的講義同編號，可以自己先投）
-      </p>
-      <div className="space-y-2">
-        {([3, 4] as const).map((day) => (
-          <div key={day}>
-            <p className="text-xs font-semibold mt-4 mb-2" style={{ color: 'var(--color-text-muted)' }}>
-              {day === 3 ? 'Day 3（8/12）' : 'Day 4（8/14）'}
-            </p>
-            {questions
-              .filter((q) => q.day === day)
-              .map((q) => (
-                <QuestionCard
-                  key={q.id}
-                  q={q}
-                  open={openId === q.id}
-                  picked={votes[q.id]}
-                  sending={sending === q.id}
-                  failed={failed === q.id}
-                  onToggle={() => setOpenId((v) => (v === q.id ? null : q.id))}
-                  onPick={(i) => vote(q, i)}
-                />
-              ))}
-          </div>
-        ))}
+      {/* 業態（選好之後縮成一行，可改） */}
+      <div className="flex items-center justify-center gap-2 mt-8 text-xs" style={{ color: 'var(--color-text-muted)' }}>
+        <span>你的業態：{industry}</span>
+        <button onClick={() => { saveIndustry(''); setIndustryTyping(false); setIndustryDraft(''); }} className="underline">
+          改
+        </button>
       </div>
-
-      <p className="text-xs mt-8 text-center" style={{ color: 'var(--color-text-muted)' }}>
+      <p className="text-xs mt-2 text-center" style={{ color: 'var(--color-text-muted)' }}>
         全匿名——不收姓名、email、任何身分。講師只看得到全班分布。
       </p>
-    </div>
-  );
-}
-
-function QuestionCard({
-  q,
-  open,
-  picked,
-  sending,
-  failed,
-  onToggle,
-  onPick,
-}: {
-  q: PollQuestion;
-  open: boolean;
-  picked?: number;
-  sending: boolean;
-  failed: boolean;
-  onToggle: () => void;
-  onPick: (i: number) => void;
-}) {
-  return (
-    <div className="rounded-xl border mb-2" style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-surface-lighter)' }}>
-      <button onClick={onToggle} className="w-full text-left px-4 py-3 flex items-center gap-2">
-        <span className="text-xs font-semibold shrink-0" style={{ color: 'var(--color-brand-light)' }}>
-          {q.label}
-        </span>
-        <span className="text-sm flex-1">{q.text}</span>
-        {picked !== undefined && <span className="text-xs shrink-0" style={{ color: '#22c55e' }}>✓ 已投</span>}
-      </button>
-      {open && (
-        <div className="px-4 pb-4">
-          <OptionList options={q.options} picked={picked} sending={sending} onPick={onPick} />
-          {failed && (
-            <p className="text-xs mt-2" style={{ color: '#f87171' }}>
-              送出失敗，等幾秒再點一次。
-            </p>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function OptionList({
-  options,
-  picked,
-  sending,
-  onPick,
-}: {
-  options: string[];
-  picked?: number;
-  sending: boolean;
-  onPick: (i: number) => void;
-}) {
-  return (
-    <div className="space-y-2">
-      {options.map((opt, i) => {
-        const isPicked = picked === i;
-        return (
-          <button
-            key={i}
-            onClick={() => onPick(i)}
-            disabled={sending}
-            className="w-full text-left px-4 py-3 rounded-xl text-base border-2 transition-all disabled:opacity-60"
-            style={{
-              backgroundColor: isPicked ? 'var(--color-brand)' : 'var(--color-surface)',
-              borderColor: isPicked ? 'var(--color-brand)' : 'var(--color-surface-lighter)',
-              color: isPicked ? '#fff' : 'var(--color-text-primary)',
-            }}
-          >
-            {isPicked ? '✓ ' : ''}
-            {opt}
-          </button>
-        );
-      })}
-      {picked !== undefined && (
-        <p className="text-xs pt-1" style={{ color: 'var(--color-text-muted)' }}>
-          已送出。改變主意可以直接改點別的，講師看的是你最後一次。
-        </p>
-      )}
     </div>
   );
 }

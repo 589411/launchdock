@@ -20,6 +20,14 @@ export interface PollActiveQuestion {
   id: string;
   text: string;
   options: string[];
+  /** 學員端顯示「這一題掛在課程的哪一段」——投票是課程中間的互動，不是問卷 */
+  segment?: string;
+  /** 講師按「停下來討論」：學員端收起選項，改顯示討論題。
+   *  這是**節奏用的畫面狀態，不是權限**——RLS 仍然開著（場次整堂課都不能關），
+   *  所以按下去不會有任何人交卷失敗。 */
+  locked?: boolean;
+  /** 討論階段給學員看的討論題 */
+  discuss?: string;
 }
 
 export interface Database {
