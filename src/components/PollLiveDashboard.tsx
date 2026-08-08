@@ -360,7 +360,7 @@ function PollLive() {
               {/* 出題 */}
               <p className="text-sm font-semibold mb-1">出題（學員按「更新」就會看到）</p>
               <p className="text-xs mb-2" style={{ color: 'var(--color-text-muted)' }}>
-                **學員一次只看得到一題**——出哪題就只有哪題。跑完該段的 Colab 再出題，
+                <b>學員一次只看得到一題</b>——出哪題就只有哪題。跑完該段的 Colab 再出題，
                 收完票按「⏸ 停下來討論」，全班停在同一個問題上。
               </p>
               {([3, 4] as const).map((day) => (
@@ -571,7 +571,9 @@ function PollLive() {
                   <b>Colab 先跑出：</b>{activePreset.colab}
                 </p>
               )}
-              <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--color-text-primary)' }}>{activePreset.script}</p>
+              <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--color-text-primary)' }}>
+                <Emphasized text={activePreset.script} />
+              </p>
               {activePreset.fallback && (
                 <div className="overflow-x-auto">
                   <p className="text-xs mb-2" style={{ color: 'var(--color-text-muted)' }}>🔒 備案：沒人分享時講這張跨業態對照</p>
@@ -597,7 +599,7 @@ function PollLive() {
               )}
               {activePreset.fallbackNote && (
                 <p className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>
-                  <b>🔒 備案：</b>{activePreset.fallbackNote}
+                  <b>🔒 備案：</b><Emphasized text={activePreset.fallbackNote} />
                 </p>
               )}
             </div>
@@ -612,6 +614,16 @@ function PollLive() {
         </>
       )}
     </div>
+  );
+}
+
+/** 題庫的講師台詞是用 markdown 的 **粗體** 寫的（那是講師要加重語氣的地方），
+ *  直接塞進 JSX 會原樣顯示星號。這裡把它渲染成真的粗體。 */
+function Emphasized({ text }: { text: string }) {
+  return (
+    <>
+      {text.split('**').map((part, i) => (i % 2 === 1 ? <b key={i}>{part}</b> : <span key={i}>{part}</span>))}
+    </>
   );
 }
 
