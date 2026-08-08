@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
+**最後更新：** 2026-08-08（**課堂即時投票（class poll）已實作＋migration 016 已上 production＋匿名 RLS 12 項端到端驗過＋學員端真瀏覽器實測寫進 production；講師端畫面尚未真人看過（需 Google 登入）**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 📈 SEO 成效量測（進行中，等 08-10 驗收）
@@ -16,7 +16,31 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**2026-08-05 手機實測踩到「送出失敗」→ 已定位＋訊息已修｜8/06 工研院場次待命** ⬅️ 最新
+**2026-08-08 課堂即時投票已做完，卡在「講師端沒有人看過」** ⬅️ 最新
+
+### 🔴 只有 Joseph 做得了的兩件事（8/12 上課前）
+
+1. **開講師端看一眼版面**——<https://launchdock.app/admin/poll-live/>（Google 登入）。
+   production 留了一筆測試場次 **`DEMO12`**，裡面有 1 票 + 1 則匿名留言，開了就有圖可看。
+   要看的是：出題鈕→長條圖→匿名留言牆→勾「業態交叉表」→按「🖥 投影模式」字夠不夠大。
+   **這是整個功能唯一沒被任何人看過的部分**（AdminGuard 要登入，AI 代不了）。
+   看完刪掉：`DELETE FROM quiz_sessions WHERE code = 'DEMO12';`
+2. **用手機真投一次**——<https://launchdock.app/poll/?code=DEMO12>。
+   學員一定用手機，桌機驗過不算數（上一輪 quiz 就是這樣踩到的）。
+
+### 🟡 之後
+
+3. **8/12 當天**：建場次 → 投影代碼＋QR → 先出 `Q0` 暖身（測通系統＋點名）→ 照
+   `docs/class-poll-runbook.md` 跑。**⛔ 那天不要開 `/admin/quiz-live/`**（那頁才有「結束收件」，
+   誤按一次全班投不了）。
+4. **8/12 建議 Google 表單並行保險**（HANDOFF §五之三 的時程建議），8/14 再全押站上版本。
+   Day 4 只有 3 題，失敗也能無縫退回表單。
+5. **改題庫必跑 `npm run poll:check`**——講義已經印出去，題號/選項差一個字，
+   學員當場就會問「我這題是哪一題」。
+
+---
+
+**2026-08-05 手機實測踩到「送出失敗」→ 已定位＋訊息已修｜8/06 工研院場次待命**
 - **🎓 明天上課用的**：場次 **`25ZEA9`**「0806工研院消費行為洞察與預測」，status=open／phase=pre／**responses=0（測試資料已清空，乾淨待命）**。學員連結 `https://launchdock.app/quiz/?code=25ZEA9`，或投影後台的 QR。
 - **⛔ 現場最重要的一條紅線**：**全班交完前，絕對不要按「⏹ 結束收件」**。交卷的 RLS 是 `WITH CHECK is_quiz_session_open(session_id)`，只認 `status='open'`；一按下去，所有還在作答的人交卷會**當場 401 失敗**。這顆鈕是**下課後**才按的。
 - **Joseph 手機實測回報「送出失敗」→ 已 repro 並定位**：用 anon key 打同一支 API 重現出 `42501 / HTTP 401 new row violates row-level security policy`，證明失敗當下 `status≠open`。**不是 bug、不是程式錯**，是場次被關（後台按到「結束收件」）。後來場次回到 open，他重試就成功了。
@@ -46,7 +70,19 @@
 - **仍沒驗到的（只有真人上課會浮現）**：① **手機作答流程零實測**——實體班掃 QR 必然用手機開，但 12 題介面／送出／localStorage 都只在桌機驗過，**這是最可能出包的一塊**；② **從沒多人同時作答**（`participant_id` 靠瀏覽器區分，邏輯無誤但沒實跑）；③ 課後測切換的現場操作沒真人跑過（8/04 只用同一顆瀏覽器模擬 pre→post）。
 - **下一個動作**：開課前先用手機掃碼真做完一次 12 題（2 分鐘，補掉 ① 的空白）。**操作提醒**：場次目前 0，上課前要先建一場；收完記得按「⏹ 結束收件」，否則連結一直開著。
 
-**2026-08-04 班級測驗加「課前／課後」成效對照（migration 015，已 push）** ⬅️ 最新
+**2026-08-08 課堂即時投票 class poll（migration 016 已上 production，尚未 push）** ⬅️ 最新
+- **為什麼**：日晴生活零售 AI 課 8/12（Day 3）、8/14（Day 4）要用。跑完 Colab 得到一個數字 → 問全班「這個數字在你那行是多少？」→ 投影分布 → 挑極端值邀請分享。正本規格＝`sunlit-retail-sim/wp9-colab/HANDOFF.md` §五之三。
+- **為什麼不塞進既有 quiz**：`quiz_responses` 的 schema 硬綁能力測驗（`scores`/`primary_level`/`gap_dimension` 都 NOT NULL），參數題沒有分數也沒有等級 → **開姊妹表 `poll_responses`，共用 `quiz_sessions`**（同一組代碼、同一個 QR、`is_quiz_session_open()` 直接複用）。
+- **關鍵簡化：學員端不輪詢。** 即時是投影給全班看的，講師口頭喊「請重新整理」即可。學員端也輪詢的話一堂課 75 萬次請求。這一刀砍掉 90% 複雜度。
+- **⛔ 紅線落實成程式**：`/admin/poll-live/` **故意沒有「結束收件」鈕**（poll 模式整堂課都在收件，中途誤按一次全班掛）。場次若是關閉狀態，講師端會出紅色橫幅導去 quiz-live 重新開放。上課那天不要開 quiz-live 那一頁。
+- **產物**：`supabase/migrations/016_create_class_polls.sql`（`poll_responses` + `quiz_sessions.poll_active` JSONB + `resolve_quiz_session` 多回傳一欄）、`src/data/class-poll.ts`（八題唯一策展點，含講師台詞與跨業態備案）、`src/components/ClassPoll.tsx`（學員端 `/poll/`）、`src/components/PollLiveDashboard.tsx`（講師端 `/admin/poll-live/`）、`scripts/check-poll-alignment.mjs`（`npm run poll:check`）、`docs/class-poll-runbook.md`、nav ×5。
+- **⭐ 題目對齊已機器驗證**：`npm run poll:check` 拿 `sunlit-retail-sim/wp9-colab/handouts/day{3,4}-學員講義-v2.md` 對撞題庫，**8/8 題的題目、選項、Day、出場順序逐字一致**。過程中修掉兩個真的錯：① Day 4 段號寫錯（Q7 在段 1 我寫段 2、Q10 在段 2 我寫段 3）② Q10 備案表第四列文字沒照講義。**講義印出去了，這個腳本以後每次改題庫都要跑。**
+- **驗證（已跑）**：`npm run build` 綠 175 頁（+2）。migration 已套 production `lxudxtpfenotkpgmhomq`，anon key 實打 REST **12 項全過**：代碼換場次（含 poll_active）／投票 201／讀別人的票＝空／列舉場次＝空／投到不存在場次被擋／**匿名 UPDATE 改不動別人的票**（PostgREST 回 204 但 0 列受影響，已用 service role 查證原值未變）／**匿名 DELETE 刪不掉**／note 201 字被 CHECK 擋／choice_index 99 被 CHECK 擋／關閉場次後代碼換不到＋投不進去／**迴歸：AI 能力測驗交卷仍 201**（resolve_quiz_session 被 DROP 重建過）。security advisor **零新增**。測試資料已刪乾淨。
+- **學員端真瀏覽器實測**：本機 dev + production DB，選業態→投票→補一句話，兩筆都正確落庫（含中文 note、業態、選項文字）。**同一人重投＝多插一列，後台取最新**（不開 UPDATE 權限的既定設計）。
+- **🔴 沒驗到的**：① **講師端畫面我本人沒看過**——AdminGuard 要 Google 登入，我不能代登。出題、長條圖、匿名留言牆、業態交叉表、投影模式**全部只有程式邏輯正確，版面沒人看過**。② 手機實機沒測（學員一定用手機）。③ 沒有多人同時投票過。
+- **🧹 待清**：production 還留著一筆測試場次 `DEMO12`（`[TEST] 本機畫面驗收 勿用`，含我投的 2 筆）——**刻意留著讓 Joseph 開講師端就有圖可看**。看完請刪：`DELETE FROM quiz_sessions WHERE code = 'DEMO12';`
+
+**2026-08-04 班級測驗加「課前／課後」成效對照（migration 015，已 push）**
 - **設計＝單一場次雙階段**（不是開兩場）：同一組代碼、同一條連結，老師課後在後台按「🎓 切到課後測」，學員重開同連結再做一次；配對靠同一顆瀏覽器的匿名 `participant_id`。現場只需唸一次代碼。
 - **phase 由伺服器決定，不信前端**：`BEFORE INSERT` trigger `set_quiz_response_phase()` 直接抄當下場次的 phase。**已實測**：anon 硬送 `phase:"post"` 而場次仍是 pre → 入庫被蓋回 `pre`。
 - **後台新增**：階段切換鈕、「現在收的是課前測/課後測」標示、**🎓 這堂課的成效**區塊（課前 L→課後 L→推進值＋四項解鎖率前後疊圖），優先用「課前課後都做過」的人**配對比較**（無配對才退回全體平均，介面會註明）。

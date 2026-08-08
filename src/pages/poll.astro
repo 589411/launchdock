@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ClassPoll from '../components/ClassPoll.tsx';
+---
+
+<BaseLayout title="課堂投票" description="課堂即時投票：點一個選項，看全班分布。">
+  <div class="max-w-[560px] mx-auto px-4 py-10">
+    <ClassPoll client:load />
+  </div>
+</BaseLayout>

@@ -14,6 +14,14 @@ export type PaymentStatus = 'not_required' | 'pending' | 'paid' | 'refunded';
 export type QuizSessionStatus = 'open' | 'closed';
 export type QuizPhase = 'pre' | 'post';
 
+/** 課堂即時投票：現在投影的那一題（整題存進 quiz_sessions.poll_active，
+ *  講師可現場打字出題，不必改程式碼重新部署） */
+export interface PollActiveQuestion {
+  id: string;
+  text: string;
+  options: string[];
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -284,6 +292,8 @@ export interface Database {
           title: string;
           status: QuizSessionStatus;
           phase: QuizPhase;
+          /** 現在投影哪一題（課堂即時投票用；null = 還沒出題） */
+          poll_active: PollActiveQuestion | null;
           created_by: string | null;
           created_at: string;
           closed_at: string | null;
@@ -293,6 +303,7 @@ export interface Database {
           title: string;
           status?: QuizSessionStatus;
           phase?: QuizPhase;
+          poll_active?: PollActiveQuestion | null;
           created_by?: string | null;
         };
       };
@@ -317,11 +328,33 @@ export interface Database {
           gap_dimension?: string | null;
         };
       };
+      poll_responses: {
+        Row: {
+          id: number;
+          session_id: string;
+          participant_id: string;
+          question_id: string;
+          choice_index: number;
+          choice_text: string;
+          note: string | null;
+          industry: string | null;
+          submitted_at: string;
+        };
+        Insert: {
+          session_id: string;
+          participant_id: string;
+          question_id: string;
+          choice_index: number;
+          choice_text: string;
+          note?: string | null;
+          industry?: string | null;
+        };
+      };
     };
     Functions: {
       resolve_quiz_session: {
         Args: { p_code: string };
-        Returns: { id: string; title: string; phase: QuizPhase }[];
+        Returns: { id: string; title: string; phase: QuizPhase; poll_active: PollActiveQuestion | null }[];
       };
       increment_helpful: {
         Args: { answer_id_input: string; fingerprint_input: string };

@@ -20,7 +20,7 @@ export default defineConfig({
   },
 
   integrations: [react(), sitemap({
-    filter: (page) => !page.includes('/admin/') && !page.includes('/auth/'),
+    filter: (page) => !page.includes('/admin/') && !page.includes('/auth/') && !page.includes('/poll/'),
     i18n: {
       defaultLocale: 'zh-tw',
       locales: { 'zh-tw': 'zh-TW', en: 'en' },

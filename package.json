@@ -9,7 +9,8 @@
     "astro": "astro",
     "registry": "node scripts/generate-article-registry.mjs",
     "handout": "node scripts/generate-handout.mjs",
-    "orphans": "node scripts/find-orphan-images.mjs"
+    "orphans": "node scripts/find-orphan-images.mjs",
+    "poll:check": "node scripts/check-poll-alignment.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
