@@ -60,6 +60,14 @@
 - [ ] [缺圖] ollama-openclaw-windows：缺 4 張（圖庫已有 16 檔，這 4 個 id 尚未拍，需 Windows）— @img
 
 ## 💡 來自規劃（你或 AI 提議的新內容）
+- [ ] [內容] **給 `google-colab-guide` 配一份可下載的乾淨範例 notebook**（Joseph 2026-08-09 提）。
+      ⛔ **不能直接放課程版 `00_Hello.ipynb`**——它讀 `sunlit.launchdock.app/data` 四支 CSV、含通關碼 md5 邏輯、寫著班名；
+      放檔案比放截圖更嚴重（可執行程式碼＋明文 URL，且進 public repo 就永久刪不掉）。
+      做法：**另寫一份通用版**（資料用 numpy 自行生成，保留「能不能跑／讀資料／畫圖／滑桿」四段結構），
+      放 `public/files/hello-colab.ipynb` → 文章給下載連結。**這樣流程剛好閉環**：讀者下載 → 上傳自己 Drive →
+      雙擊 → 看到「無法預覽」→ 照文章做。⚠️ 不要用 Google Drive 公開分享（連結會露出擁有者帳號，
+      正是這次遮掉的東西；且一鍵開 Colab 會跳過文章要教的那一關）。選配：再加 GitHub +
+      `colab.research.google.com/github/...` badge 當「懶人一鍵開」的補充路徑 — 內容規劃
 - [ ] [概念] **決定要不要把「Colab／Google Colaboratory」加進 `src/data/concepts.yaml`**（canonical 指 `google-colab-guide`）。
       加了以後全站提到 Colab 會自動連過來；因為會動到既有文章的渲染，2026-08-09 那次沒替 Joseph 決定 — concepts
 - [ ] [內容・支線] 桌面那批 Colab 截圖裡，**「暖身四關說明頁」與「通關碼」兩張沒用進通用文章**（課程味太重）。
