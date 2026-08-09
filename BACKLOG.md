@@ -69,8 +69,11 @@
 - [ ] [SEO] **`api key`／`google api key` 決定不投資**（排名 25.7／45.2＝第 3~5 頁，改標題無效），
       改攻已驗證有效的長尾（`ollama cloud api key` 已 2 點擊／122 曝光／排名 8.6）。若哪天要拉這兩個字，
       需要的是內容深度＋內鏈，不是文案 — SEO
-- [ ] [SEO・待 Joseph] **GSC「搜尋外觀」分頁手動確認 FAQ／schema 有無見效**——程式化點擊試四種方式都切不過去，
-      這輪無法判定。點開看有沒有「常見問題」列，有數字就補進 `docs/seo-after-2026-08-10.md` 第 5 節 — SEO
+- [x] [SEO] ~~GSC「搜尋外觀」確認 FAQ／schema 有無見效~~ → **2026-08-10 Joseph 手動確認：完全無資料（零豐富結果）**。
+      但 schema 驗證通過（線上首頁 `@type=FAQPage`、8 題結構完整），最可能是 Google 只給政府／醫療 FAQ 版位。
+      **決策：停止投資 FAQ rich result**，FAQ 價值改押「給 AI 搜尋／LLM 讀」（同 `llms.txt` 方向）。詳見報告第 5 節 — SEO
+- [ ] [SEO・選配] 用 GSC**網址審查**查首頁，看「已偵測到的項目」有無「常見問題」——列出＝Google 解析成功
+      只是不給版位（政策說成立）；沒列出＝才是技術問題。純粹是把上一條的結論釘死，不影響決策 — SEO
 - [ ] [內容] **`line-oa-translation-bot`：23 張圖已遮好躺在 staging，但文章從沒寫**（2026-08-09 清桌面時對照發現）。
       `~/Desktop/captures/_staging/line-oa-translation-bot/`（01–23-clean.png），repo 內除了
       `docs/reverse-article-from-screenshots.md` 完全沒有這個 slug。這是「有圖缺文」——跟 BACKLOG 其他
