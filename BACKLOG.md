@@ -64,7 +64,16 @@
       `~/Desktop/captures/_staging/line-oa-translation-bot/`（01–23-clean.png），repo 內除了
       `docs/reverse-article-from-screenshots.md` 完全沒有這個 slug。這是「有圖缺文」——跟 BACKLOG 其他
       「缺圖債」剛好相反，寫起來成本最低（遮罩這關已經過了）。順帶：`deploy-line-bot-cloudflare-workers`
-      也有 6 張 clean 但站上查不到該篇（SOP 文件說它是首次實作產物，可能在別 repo 或後來沒留），要確認一下 — 內容規劃
+      也有 6 張 clean 但站上查不到該篇（SOP 文件說它是首次實作產物，可能在別 repo 或後來沒留），要確認一下。
+      **內容夠成篇**（2026-08-09 抽看 01/09/17/23）：LINE OA「藍鴨2號-中英泰文翻譯」→ 擴充功能 → 啟用
+      Messaging API（選服務提供者）→ Make.com 模板 `Send automated replies to messages using ChatGPT and Line`
+      → LINE Developers 設 webhook → **Verify 噴 `The webhook returned an HTTP status code other than 200.(302 Found)`**
+      ——最後這張是現成的 troubleshoot 素材（錯誤字串可逐字寫進 code block 吃 SEO）。
+      ⚠️ **但這批 `-clean.png` 不能直接用，要再遮一輪**（抽 4 張就有 2 張漏）：
+      ① `23-clean.png` 網址列 `developers.line.biz/console/channel/2010305157/messaging-api` 的 **channel ID 明文未遮**，
+      且 Webhook URL `https://script.google.com/macros/s/AKfycbyQtqEG…ec` **GAS 部署 ID 前段明文**（後段才馬賽克
+      ——正是 solutions.md 記的「OCR 對長亂數整段抓不到」）；② `09-clean.png` 的服務提供者清單列出
+      **十個 provider 名稱**（含疑似客戶與教會專案），屬商業資訊，公開前要 Joseph 判斷哪些能露 — 內容規劃
 - [ ] [內容] **給 `google-colab-guide` 配一份可下載的乾淨範例 notebook**（Joseph 2026-08-09 提）。
       ⛔ **不能直接放課程版 `00_Hello.ipynb`**——它讀 `sunlit.launchdock.app/data` 四支 CSV、含通關碼 md5 邏輯、寫著班名；
       放檔案比放截圖更嚴重（可執行程式碼＋明文 URL，且進 public repo 就永久刪不掉）。
