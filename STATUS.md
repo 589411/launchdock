@@ -34,11 +34,18 @@
   `NameError` 沒照順序跑 → 執行階段→全部執行、閒置回收。
 - **已驗證**：`add-image.sh --validate` 15/15 有效；`npm run build` 綠（177 頁，中英兩頁都出）；
   build 出的 HTML grep `jjaimark|sunlit.launchdock|SUNLIT-57DC|Joseph Chang` 皆 0。
-- **🔴 待 Joseph 做**：① **review 遮罩圖**（`public/images/articles/google-colab-guide/`，
-  重點看 `google-account-consent.png`、`warning-not-authored-by-google.png` 兩張原本有真名/email 的）
-  → 沒問題就 commit + push（Cloudflare Pages 會自動 build，sitemap 自動更新）；
-  ② 決定**要不要把「Colab／Google Colaboratory」加進 `src/data/concepts.yaml`**
-  （canonical 指這篇，之後全站提到 Colab 會自動連過來；改它會動到既有 47 篇的渲染，所以沒替你決定）。
+- **已 commit 未 push**：`cbeed6c`（文章＋15 張圖）／`66a7fa5`（補遮 `google-account-consent.png`
+  的 OAuth 網址列——Joseph 覆核時抓到的，`part=AJi8h…` 雖是已失效的一次性狀態，但長得像 token、
+  留在教學圖上等於錯誤示範）／`0507475`＋BACKLOG 更新。
+- **🔴 唯一待 Joseph 做的**：**review 遮罩圖後說一聲就 push**
+  （`public/images/articles/google-colab-guide/`，重點是 `warning-not-authored-by-google.png`；
+  `google-account-consent.png` 已按你的指正重遮過）。push 後 Cloudflare Pages 自動 build、sitemap 自動更新。
+- **🅿️ 已停車，8/12、8/14 上完課再討論（Joseph 2026-08-09 指示，不要在主線推進）**：
+  ① 「Colab／Google Colaboratory」要不要進 `concepts.yaml`；
+  ② 給本文配一份**可下載的乾淨範例 notebook**（紅線＝不得放課程版 `00_Hello.ipynb`，
+  做法與理由見 `BACKLOG.md` 來自規劃區）；
+  ③ 「宣告有收費服務」的路徑（結論＝**不打包委訓課**，改開 `/services/` 頁或用自有 handout 講義線，
+  記在 `~/github/dev-harness/IDEAS.md`）。
 - **判斷紀錄（供日後對帳）**：依 CLAUDE.md「FAQ 同步規則」判定**不加**首頁 FAQ——
   Colab 偏資料分析，離站上主線（OpenClaw／AI agent）較遠，關鍵字放 frontmatter `stuckOptions` 即可。
 
