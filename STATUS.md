@@ -4,11 +4,33 @@
 **最後更新：** 2026-08-09（晚）（**新文章 `google-colab-guide`「Google Colab 新手教學」中英雙版已寫好、15 張圖已本機遮罩＋人眼覆核、build 綠 177 頁、尚未 commit**——從桌面 20 張 Colab 截圖反推，走 `docs/reverse-article-from-screenshots.md` 流程；定位經 Joseph 拍板＝**通用 Colab 教學、不強調課程**，課程資料端點 `sunlit.launchdock.app/data` 依指示遮掉。詳見下方「下一個具體動作」最新條）｜前次 2026-08-09（**課堂即時投票已上 production 並照 Joseph 手機實測回饋改版：一次只出一題＋綁課程段落＋停下來討論、業態擴到 14 個並可自己打字**；commit `cff0f71`／`66f43c7`／`daa70d7` 皆已 push。**講師端畫面仍沒有人看過**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-08（課堂即時投票初版＋migration 016 上 production＋匿名 RLS 12 項端到端驗過）｜前次 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
-## 📈 SEO 成效量測（進行中，等 08-10 驗收）
+## 📈 SEO 成效量測（**✅ 2026-08-10 已驗收，見 `docs/seo-after-2026-08-10.md`**）
+
+**驗收結論（一句話）**：**量大成功、質一半成功**。日均點擊 ×2.4、曝光 ×2.8（但須扣掉 07-18
+索引修正的貢獻＋before/after 視窗重疊 15 天，別全記在標題上）；`caffeinate`（**62 點擊全站第一**、
+CTR 6.3%、排名 4.8）與 `openrouter`（CTR 0.8%→1.1%、點擊 5→12）證明標題公式有效。
+**最大缺口＝`cli-guide`：4,136 曝光（全站 12%）但 CTR 只 0.7%、排名 7.6**——人已到門口沒進來，是門面問題。
+`api key`(排名 25.7)／`google api key`(排名 45.2) 則是**排名沒進視線，改標題無效**，建議不投資、改攻長尾。
+
+**➡️ 下一個動作（SEO 線）**：只做一件事——**改 `cli-guide` 標題後半段**（把「命令列介面（Command-Line
+Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 caffeinate 那種「具體場景／可帶走的結果」，
+建議：`CLI 是什麼？從零看懂命令列：跟 GUI／終端機／Shell 差在哪（附 10 個必學指令）`），
+兩週後（~08-24）**單看它的 CTR**。CTR 0.7%→3% ≈ +90 點擊／28 天。
+
+**待補（需 Joseph 手動）**：GSC「搜尋外觀」分頁我用程式化點擊試了四種方式都切不過去，
+所以 **FAQ／schema 是否見效這輪無法判定**。你手動點開那個分頁看有沒有「常見問題」列，
+告訴我數字我就補進報告。（首頁 CTR 12.9% 主要是品牌字帶的，不能歸因 FAQ。）
+
+<details><summary>原始計畫（已完成，保留供對帳）</summary>
 2026-07-23~25 上線一批 SEO 改動（Hero 換臉、8 篇文章標題/description/FAQ、首頁資料驅動 FAQ+schema、meetup 招牌），**現在太早看不出成效**（GSC 資料延遲+需重爬）。已建立閉環：
 - **改版前基準**：`docs/seo-baseline-2026-07-27.md`——GSC 近3月總覽（點擊656/曝光40.1K/CTR1.6%/排名14.1）+ 成效計分卡（cli 1345曝光、github developer settings 444、api key 154、google api key 146 這些高曝光低點擊頁的 before CTR）+ **判讀框架（after 落哪格→有效複製/文案再改/催爬/換槓桿）** + 變更清單供歸因。
 - **回撈排程**：cloud agent `trig_01S94FvRh8HvBgV7wRfgAeSQ`，2026-08-10 09:00 台北觸發，會自動產 `docs/seo-after-2026-08-10.md` 對照草稿（before 帶好、after 留白）。**它撈不到 GSC**（雲端登不進），到時需人開瀏覽器撈「最近28天」數字填進去。
 - **下一步（08-10）**：撈 GSC after → 逐列比計分卡 CTR → 依判讀框架決定「複製成功公式 or 再修文案 or 催爬」。這就是「是否進步／再修正」的依據。
+- ✅ **已於 2026-08-10 執行完畢**（用已登入 Chrome 撈，排程 agent 如預期撈不到 GSC）。
+  **流程改進記下**：這次 before 是「近 3 個月」、after 是「近 28 天」，**兩窗重疊 15 天**且 before
+  含站還小的低流量期 → 日均倍數會高估。**下次一律用同長度、不重疊的兩窗**（GSC 內建「比較」功能可直接做）。
+
+</details>
 
 ## 一句話現況
 旗艦教學站（Astro，47 篇文章）。07-05 大整理：內容制度正本上線（EDITORIAL + 兩個任務範本 +

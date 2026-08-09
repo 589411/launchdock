@@ -60,6 +60,17 @@
 - [ ] [缺圖] ollama-openclaw-windows：缺 4 張（圖庫已有 16 檔，這 4 個 id 尚未拍，需 Windows）— @img
 
 ## 💡 來自規劃（你或 AI 提議的新內容）
+- [ ] [SEO・最高價值] **改 `cli-guide` 標題後半段**（2026-08-10 驗收結論，見 `docs/seo-after-2026-08-10.md`）。
+      它一頁吃全站 12% 曝光（4,136）但 CTR 只 0.7%、排名 7.6＝**人到門口沒進來**。
+      現行後半「命令列介面（Command-Line Interface）白話完整介紹」＝同義詞重複＋自我描述；
+      對照贏家 caffeinate（CTR 6.3%）的後半是「讓 Mac 不睡、AI Agent 整夜不斷線（含怎麼停止）」＝場景＋收穫。
+      建議：`CLI 是什麼？從零看懂命令列：跟 GUI／終端機／Shell 差在哪（附 10 個必學指令）`。
+      改完 ~08-24 單看它 CTR。次要對象：`dev-cli-tools-mac`(478/2.9%)、`en/grok-connect-github`(521/3.3%) — SEO
+- [ ] [SEO] **`api key`／`google api key` 決定不投資**（排名 25.7／45.2＝第 3~5 頁，改標題無效），
+      改攻已驗證有效的長尾（`ollama cloud api key` 已 2 點擊／122 曝光／排名 8.6）。若哪天要拉這兩個字，
+      需要的是內容深度＋內鏈，不是文案 — SEO
+- [ ] [SEO・待 Joseph] **GSC「搜尋外觀」分頁手動確認 FAQ／schema 有無見效**——程式化點擊試四種方式都切不過去，
+      這輪無法判定。點開看有沒有「常見問題」列，有數字就補進 `docs/seo-after-2026-08-10.md` 第 5 節 — SEO
 - [ ] [內容] **`line-oa-translation-bot`：23 張圖已遮好躺在 staging，但文章從沒寫**（2026-08-09 清桌面時對照發現）。
       `~/Desktop/captures/_staging/line-oa-translation-bot/`（01–23-clean.png），repo 內除了
       `docs/reverse-article-from-screenshots.md` 完全沒有這個 slug。這是「有圖缺文」——跟 BACKLOG 其他
