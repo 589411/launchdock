@@ -1,6 +1,6 @@
 ---
-title: "CLI 是什麼？命令列介面（Command-Line Interface）白話完整介紹"
-description: "CLI（Command-Line Interface，命令列介面）就是用打字指令、而不是滑鼠來操作電腦。這篇用白話解釋 CLI 是什麼、和 GUI／終端機／Shell 差在哪、常見指令有哪些，完全沒基礎也看得懂。"
+title: "CLI 是什麼？10 分鐘上手命令列，跟終端機／Shell 差在哪（附 18 個常用指令）"
+description: "CLI（Command-Line Interface，命令列介面）就是改用打字指令、而不是滑鼠來操作電腦。這篇用白話從零講起：CLI 跟終端機、Shell、GUI 到底差在哪、新手最常用的 18 個指令（分 6 類）、管道怎麼把指令串起來，以及為什麼現在的 AI Agent 幾乎都跑在 CLI 上。完全沒基礎也看得懂，基本操作 10 分鐘就能上手。"
 contentType: "guide"
 scene: "環境準備"
 difficulty: "入門"

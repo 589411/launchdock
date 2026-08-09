@@ -1,6 +1,6 @@
 ---
-title: "CLI Beginner's Guide: What Is the Command Line and Why Can't AI Live Without It?"
-description: "The command-line interface (CLI) is the hands and feet of OpenClaw. Understand how CLI works, common tools, and why it's the most powerful way to operate in the AI era."
+title: "What Is a CLI? Start Using the Command Line in 10 Minutes (Terminal vs Shell vs GUI, +18 Commands)"
+description: "A CLI (command-line interface) means typing commands instead of clicking with a mouse. This guide starts from zero: how a CLI actually differs from the terminal, the shell, and a GUI; the 18 commands beginners use most (grouped into 6 kinds); how pipes chain commands together; and why almost every AI agent today runs on the CLI. No background needed — and the basics take about 10 minutes to pick up."
 contentType: "guide"
 scene: "env-setup"
 difficulty: "beginner"
