@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-07-27T15:35:22.309Z",
+  "_generated": "2026-08-09T11:46:31.797Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -1398,6 +1398,29 @@
         "Google Cloud"
       ],
       "link": "/articles/google-api-key-guide/"
+    },
+    {
+      "slug": "google-colab-guide",
+      "title": "Google Colab 新手教學：Drive 的 .ipynb 打不開？裝好 Colab 就能按 ▶ 跑程式",
+      "description": "別人分享一個 .ipynb 檔給你，在 Google 雲端硬碟點開卻只看到「無法預覽」和一顆下載鈕？這篇從「連結更多應用程式」裝上 Google Colaboratory 開始，帶你走完授權、用 Colab 開檔、認識一格一格的程式碼、按 ▶ 執行、看懂輸出、拉滑桿改參數、下載結果。全程不用寫一行程式，也不用在自己電腦裝 Python。",
+      "scene": "環境準備",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "Colab",
+        "Google",
+        "Python",
+        "安裝",
+        "設定"
+      ],
+      "prerequisites": [],
+      "modules": [
+        "M07",
+        "M03"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/google-colab-guide/"
     },
     {
       "slug": "ollama-cloud-api-key",

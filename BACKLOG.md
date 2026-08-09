@@ -60,6 +60,11 @@
 - [ ] [缺圖] ollama-openclaw-windows：缺 4 張（圖庫已有 16 檔，這 4 個 id 尚未拍，需 Windows）— @img
 
 ## 💡 來自規劃（你或 AI 提議的新內容）
+- [ ] [概念] **決定要不要把「Colab／Google Colaboratory」加進 `src/data/concepts.yaml`**（canonical 指 `google-colab-guide`）。
+      加了以後全站提到 Colab 會自動連過來；因為會動到既有文章的渲染，2026-08-09 那次沒替 Joseph 決定 — concepts
+- [ ] [內容・支線] 桌面那批 Colab 截圖裡，**「暖身四關說明頁」與「通關碼」兩張沒用進通用文章**（課程味太重）。
+      若之後要做「課程課前作業指引」（給 8/12、8/14 學員），這兩張是現成素材，原圖仍在
+      `~/Desktop/captures/_staging/colab-open-shared-notebook/`（09-raw、16-raw）。Joseph 2026-08-09 選了通用定位，此為支線 — 內容規劃
 - [ ] [商模] **vibe coding 課 × 限時能力包**試營運實驗 → 正本在 `docs/ROADMAP.md`（2026-07-10 訂）。關鍵洞察：`memory-mcp` 已是 remote read-only MCP，限時能力包架構已存在、只差限時 token 授權層。待辦鉤子：① memory-mcp 加限時 token ② 從 launchdock-lab 選 2–3 個「保證會贏」demo 任務 ③ 查 LINE OA 推播方案 ④ 文章「分享到 LINE」按鈕 ⑤ 關閉存取當下的訂閱 off-ramp。月底試營運驗三個數字（付費轉換/續訂率/任務完成率）。demo 任務課程腳本已選定 → `docs/vibe-coding-demo-tasks.md`。**首選 SME 主菜＝`589411/line-booking-course`（LINE 會員預約系統，L0–L8 閘門課＋安裝包＋答案版 fallback），第一場只做 L3 LIFF 認人查堂數**；備選核心 A sdd 規格書、核心 B-備選 bible-atlas 單頁網站。**下一步：預建 LINE channel/LIFF＋demo Firebase → 普通模型 dry-run 驗 H3**。
 - [ ] [大功能] **藍鴨導入 LINE 會員系統**（Joseph 2026-07-10 提）。**2026-07-10 討論定案的三塊設計**（Joseph 拍板）：① **LINE 登入**（降門檻、合台灣習慣）；② **文章一鍵分享到 LINE**；③ **課程通知走「使用者詢問→自動回覆」而非主動推播**——因為免費 OA 主動推播是 200 則/月、且算「人數×則數」（100 好友 broadcast 一次吃 100 則），名單一長就爆；改用 **reply message（免費、無上限，但只能回應用戶當下訊息、有 replyToken 時間窗、做不到排程主動推）**。主動提醒（開課前）省著用 push、只推已報名者。
   **Phase 1a 已完成（2026-07-10，不需 channel，build 綠+瀏覽器實測）**：① `ShareToLine.astro`（LINE it! share URL，塞 ArticleLayout→47 篇自動有）已上；② migration 008（email 可空 + handle_new_user 容忍無 email）**已寫、未套 production**。
@@ -76,6 +81,10 @@
 - [ ] （範例）盤點 46 篇文章中截圖過舊、需重拍的
 
 ## ✅ 最近完成（保留最近 5 筆，舊的刪）
+- 2026-08-09 **新文章 `google-colab-guide`「Google Colab 新手教學」中英雙版**（尚未 commit，等 Joseph review 遮罩圖）：
+  從桌面 20 張截圖反推，照 `docs/reverse-article-from-screenshots.md`（複用 hit）。15 張圖本機遮罩＋人眼覆核，
+  build 綠、`--validate` 15/15。定位經 Joseph 拍板＝通用 Colab 教學（不強調課程），`sunlit.launchdock.app/data` 依指示遮掉。
+  主打痛點「Drive 的 .ipynb 無法預覽」＋「公司 Workspace 帳號被鎖 Colab」。詳見 STATUS「下一個具體動作」。
 - 2026-07-10 藍鴨小聚上站露出 + 原生 events 加 `external_url`（報名可導外部表單）：首頁 hero banner（中英）+ migration 007 + EventCard/AdminEvents 改；production 建 7/29 場並瀏覽器實測，已上線
 - 2026-07-10 `dont-fomo-ai-tools`（中英）：測驗「工具力」橋接文，接 quiz.ts levels[3] 首位。掛 M01、build 綠、瀏覽器實測結果頁首位命中，已 commit+push
 - 2026-07-10 `caffeinate-keep-mac-awake`（中英）：防 Mac 休眠斷線 troubleshoot 文，登錄 caffeinate 概念。掛 M01、build 綠、概念連結實測生效，已 commit+push

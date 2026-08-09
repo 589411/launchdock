@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-08-09（**課堂即時投票已上 production 並照 Joseph 手機實測回饋改版：一次只出一題＋綁課程段落＋停下來討論、業態擴到 14 個並可自己打字**；commit `cff0f71`／`66f43c7`／`daa70d7` 皆已 push。**講師端畫面仍沒有人看過**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-08（課堂即時投票初版＋migration 016 上 production＋匿名 RLS 12 項端到端驗過）｜前次 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
+**最後更新：** 2026-08-09（晚）（**新文章 `google-colab-guide`「Google Colab 新手教學」中英雙版已寫好、15 張圖已本機遮罩＋人眼覆核、build 綠 177 頁、尚未 commit**——從桌面 20 張 Colab 截圖反推，走 `docs/reverse-article-from-screenshots.md` 流程；定位經 Joseph 拍板＝**通用 Colab 教學、不強調課程**，課程資料端點 `sunlit.launchdock.app/data` 依指示遮掉。詳見下方「下一個具體動作」最新條）｜前次 2026-08-09（**課堂即時投票已上 production 並照 Joseph 手機實測回饋改版：一次只出一題＋綁課程段落＋停下來討論、業態擴到 14 個並可自己打字**；commit `cff0f71`／`66f43c7`／`daa70d7` 皆已 push。**講師端畫面仍沒有人看過**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-08（課堂即時投票初版＋migration 016 上 production＋匿名 RLS 12 項端到端驗過）｜前次 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 📈 SEO 成效量測（進行中，等 08-10 驗收）
@@ -16,7 +16,35 @@
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
-**2026-08-09 課堂即時投票改版完成，仍卡在「講師端沒有人看過」** ⬅️ 最新
+
+> ⚠️ **8/12 上課是硬期限，最高優先仍是下面那條「開講師端看版面」**（只有 Joseph 做得了）。
+> 下面這條新文章是內容線，不擋上課。
+
+**2026-08-09（晚）新文章 `google-colab-guide` 中英雙版已完成，待 Joseph review 遮罩圖後 commit + push** ⬅️ 最新
+
+從桌面 2026-08-08 那 20 張 Colab 截圖反推成文章，流程照 `docs/reverse-article-from-screenshots.md`（複用 hit，沒重造）。
+
+- **產物**：`src/content/articles/google-colab-guide.md` + `en/google-colab-guide.md`，
+  `public/images/articles/google-colab-guide/` 15 張（寬縮 1800，共 4.9MB）。
+  scene=環境準備／difficulty=入門／modules=[M07, M03]／order=4。
+- **主軸（Joseph 拍板：通用，不強調課程）**：Drive 的 `.ipynb` 顯示「無法預覽」→
+  選擇開啟工具 → 連結更多應用程式 → Marketplace 裝 Colaboratory → 授權 → 用 Colab 開 →
+  一格一格按 ▶ → 「並非由 Google 編寫」警告 → 輸出在下方 → 表單滑桿改參數（**改完要重跑**）→
+  下載多檔權限彈窗。常見狀況收了「公司 Workspace 帳號被管理員鎖 Colab」（最難當場救）、
+  `NameError` 沒照順序跑 → 執行階段→全部執行、閒置回收。
+- **已驗證**：`add-image.sh --validate` 15/15 有效；`npm run build` 綠（177 頁，中英兩頁都出）；
+  build 出的 HTML grep `jjaimark|sunlit.launchdock|SUNLIT-57DC|Joseph Chang` 皆 0。
+- **🔴 待 Joseph 做**：① **review 遮罩圖**（`public/images/articles/google-colab-guide/`，
+  重點看 `google-account-consent.png`、`warning-not-authored-by-google.png` 兩張原本有真名/email 的）
+  → 沒問題就 commit + push（Cloudflare Pages 會自動 build，sitemap 自動更新）；
+  ② 決定**要不要把「Colab／Google Colaboratory」加進 `src/data/concepts.yaml`**
+  （canonical 指這篇，之後全站提到 Colab 會自動連過來；改它會動到既有 47 篇的渲染，所以沒替你決定）。
+- **判斷紀錄（供日後對帳）**：依 CLAUDE.md「FAQ 同步規則」判定**不加**首頁 FAQ——
+  Colab 偏資料分析，離站上主線（OpenClaw／AI agent）較遠，關鍵字放 frontmatter `stuckOptions` 即可。
+
+---
+
+**2026-08-09 課堂即時投票改版完成，仍卡在「講師端沒有人看過」**
 
 ### 🔴 明天第一件事：開講師端看版面（只有 Joseph 做得了）
 
