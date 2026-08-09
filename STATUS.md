@@ -37,7 +37,20 @@
 - **已 commit 未 push**：`cbeed6c`（文章＋15 張圖）／`66a7fa5`（補遮 `google-account-consent.png`
   的 OAuth 網址列——Joseph 覆核時抓到的，`part=AJi8h…` 雖是已失效的一次性狀態，但長得像 token、
   留在教學圖上等於錯誤示範）／`0507475`＋BACKLOG 更新。
-- **🔴 唯一待 Joseph 做的**：**review 遮罩圖後說一聲就 push**
+- **🔴🔴 資安待確認（2026-08-09 抽查發現，最高優先於本條其餘項目）**：
+  `google-api-key-guide/043.png` 曾有 **Google OAuth 用戶端密碼 `GOCSPX-…` 完整明文**
+  （含完整 client ID，專案 **`openclaw-api-1`**，用戶端「電腦用戶端 1」，建立 2026-02-25），
+  已 push 到 public repo 約半年。圖已遮（`fdc31a0`，座標黑框、重掃 0 命中），
+  **但值仍在 git 歷史 blob，任何人 checkout 舊 commit 就看得到**。
+  ➡️ **要做的事：開 Google Cloud Console 確認該專案／用戶端是否還存在**——
+  Joseph 記得「這個專案也取消了」，但**launchdock、memory、git log 全部查無任何紀錄**
+  （唯一提到它的是 2026-08-09 新寫的那條）。
+  - 若專案已刪 → secret 已是死的，**在此補一行「已於 ____ 刪除、確認無效」就結案**。
+  - 若專案還在 → 刪除該 OAuth 用戶端或重設密碼（遮圖不算根治，見 memory `solutions.md`）。
+  - ⚠️ 教訓：這次之所以要靠記憶，就是因為當初作廢／取消**沒留紀錄**。不論結果如何都要寫回來。
+- **✅ 已完成**：Joseph review 過遮罩圖後已 push（`debacdd`→`fdc31a0`），
+  中英兩頁已上線並實測（canonical／內文／15 張圖 `image/png`／sitemap／機敏字串 0）。
+- ~~**🔴 唯一待 Joseph 做的**：review 遮罩圖後說一聲就 push~~
   （`public/images/articles/google-colab-guide/`，重點是 `warning-not-authored-by-google.png`；
   `google-account-consent.png` 已按你的指正重遮過）。push 後 Cloudflare Pages 自動 build、sitemap 自動更新。
 - **🅿️ 已停車，8/12、8/14 上完課再討論（Joseph 2026-08-09 指示，不要在主線推進）**：
