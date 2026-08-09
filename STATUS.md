@@ -37,7 +37,11 @@
 - **已 commit 未 push**：`cbeed6c`（文章＋15 張圖）／`66a7fa5`（補遮 `google-account-consent.png`
   的 OAuth 網址列——Joseph 覆核時抓到的，`part=AJi8h…` 雖是已失效的一次性狀態，但長得像 token、
   留在教學圖上等於錯誤示範）／`0507475`＋BACKLOG 更新。
-- **🔴🔴 資安待確認（2026-08-09 抽查發現，最高優先於本條其餘項目）**：
+- **✅ 資安已結案（2026-08-09）**：**Joseph 於 Google Cloud Console 查無 `openclaw-api-1` 專案
+  → 專案已刪除，其下 OAuth 用戶端與該 client secret 隨之失效**，git 歷史裡那份已是死值、無需
+  rewrite 歷史。（若日後想 100% 嚴謹，可去 IAM 與管理 → 管理資源 → 篩「待刪除」複查，
+  Google 刪專案有約 30 天寬限期；實務上進入待刪除即停止服務。）以下保留原始脈絡供日後對帳：
+- ~~**🔴🔴 資安待確認（2026-08-09 抽查發現）**~~：
   `google-api-key-guide/043.png` 曾有 **Google OAuth 用戶端密碼 `GOCSPX-…` 完整明文**
   （含完整 client ID，專案 **`openclaw-api-1`**，用戶端「電腦用戶端 1」，建立 2026-02-25），
   已 push 到 public repo 約半年。圖已遮（`fdc31a0`，座標黑框、重掃 0 命中），
