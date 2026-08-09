@@ -60,6 +60,11 @@
 - [ ] [缺圖] ollama-openclaw-windows：缺 4 張（圖庫已有 16 檔，這 4 個 id 尚未拍，需 Windows）— @img
 
 ## 💡 來自規劃（你或 AI 提議的新內容）
+- [ ] [內容] **`line-oa-translation-bot`：23 張圖已遮好躺在 staging，但文章從沒寫**（2026-08-09 清桌面時對照發現）。
+      `~/Desktop/captures/_staging/line-oa-translation-bot/`（01–23-clean.png），repo 內除了
+      `docs/reverse-article-from-screenshots.md` 完全沒有這個 slug。這是「有圖缺文」——跟 BACKLOG 其他
+      「缺圖債」剛好相反，寫起來成本最低（遮罩這關已經過了）。順帶：`deploy-line-bot-cloudflare-workers`
+      也有 6 張 clean 但站上查不到該篇（SOP 文件說它是首次實作產物，可能在別 repo 或後來沒留），要確認一下 — 內容規劃
 - [ ] [內容] **給 `google-colab-guide` 配一份可下載的乾淨範例 notebook**（Joseph 2026-08-09 提）。
       ⛔ **不能直接放課程版 `00_Hello.ipynb`**——它讀 `sunlit.launchdock.app/data` 四支 CSV、含通關碼 md5 邏輯、寫著班名；
       放檔案比放截圖更嚴重（可執行程式碼＋明文 URL，且進 public repo 就永久刪不掉）。
