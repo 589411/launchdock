@@ -1,0 +1,44 @@
+---
+// 這頁的存在本身就是修正：Cloudflare Pages 找不到檔案又沒有 404.html 時，
+// 會退回送 index.html 並回 HTTP 200 —— 也就是「任何打錯的網址都變成首頁的複製品」。
+// 有了 dist/404.html，Pages 才會對未匹配路徑回真正的 404 狀態。
+// 詳見 docs/seo-indexing-fix.md §七。
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="找不到這一頁"
+  description="這個網址不存在或已經搬家。從這裡回到首頁、瀏覽所有教學，或告訴我們哪個連結壞了。"
+>
+  <div class="max-w-2xl mx-auto px-4 py-20 text-center">
+    <p class="text-6xl font-bold text-brand mb-4">404</p>
+    <h1 class="text-3xl font-bold mb-4">找不到這一頁</h1>
+    <p class="text-text-secondary mb-10">
+      這個網址不存在，或是文章搬過家。<br />
+      不是你的問題——下面三個出口任選一個。
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-3 justify-center mb-12">
+      <a
+        href="/"
+        class="px-6 py-3 bg-brand hover:bg-brand-dark text-white rounded-lg font-medium transition-colors"
+      >回首頁</a>
+      <a
+        href="/articles/"
+        class="px-6 py-3 border border-surface-lighter hover:border-brand/50 text-text-secondary hover:text-text-primary rounded-lg font-medium transition-all"
+      >看所有教學</a>
+      <a
+        href="https://github.com/589411/launchdock/discussions"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-6 py-3 border border-surface-lighter hover:border-brand/50 text-text-secondary hover:text-text-primary rounded-lg font-medium transition-all"
+      >回報壞連結</a>
+    </div>
+
+    <p class="text-sm text-text-secondary">
+      從別的網站點連結進來的？
+      <a href="https://github.com/589411/launchdock/discussions" target="_blank" rel="noopener noreferrer" class="text-brand hover:underline">告訴我們是哪一個</a>，
+      我們會補上轉址。
+    </p>
+  </div>
+</BaseLayout>

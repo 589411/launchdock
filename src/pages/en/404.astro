@@ -1,0 +1,43 @@
+---
+// English 404. Cloudflare Pages serves the closest 404.html, so /en/404.html
+// covers everything under /en/*. See docs/seo-indexing-fix.md §七.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  lang="en"
+  title="Page not found"
+  description="This URL doesn't exist or the page has moved. Head back home, browse all tutorials, or tell us which link is broken."
+>
+  <div class="max-w-2xl mx-auto px-4 py-20 text-center">
+    <p class="text-6xl font-bold text-brand mb-4">404</p>
+    <h1 class="text-3xl font-bold mb-4">Page not found</h1>
+    <p class="text-text-secondary mb-10">
+      This URL doesn't exist, or the tutorial has moved.<br />
+      Not your fault — pick one of the three exits below.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-3 justify-center mb-12">
+      <a
+        href="/en/"
+        class="px-6 py-3 bg-brand hover:bg-brand-dark text-white rounded-lg font-medium transition-colors"
+      >Back home</a>
+      <a
+        href="/en/articles/"
+        class="px-6 py-3 border border-surface-lighter hover:border-brand/50 text-text-secondary hover:text-text-primary rounded-lg font-medium transition-all"
+      >All tutorials</a>
+      <a
+        href="https://github.com/589411/launchdock/discussions"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-6 py-3 border border-surface-lighter hover:border-brand/50 text-text-secondary hover:text-text-primary rounded-lg font-medium transition-all"
+      >Report a broken link</a>
+    </div>
+
+    <p class="text-sm text-text-secondary">
+      Followed a link from another site?
+      <a href="https://github.com/589411/launchdock/discussions" target="_blank" rel="noopener noreferrer" class="text-brand hover:underline">Tell us which one</a>
+      and we'll add a redirect.
+    </p>
+  </div>
+</BaseLayout>

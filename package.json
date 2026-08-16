@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/emit-en-404.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "registry": "node scripts/generate-article-registry.mjs",
