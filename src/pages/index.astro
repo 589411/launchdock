@@ -203,7 +203,7 @@ const articlesMeta = allArticles.map(a => ({
         const articleCount = isAnchor ? 0 : countArticles(section.scenes);
         const href = isAnchor
           ? section.anchor!
-          : `/articles?scene=${encodeURIComponent(section.scenes![0])}`;
+          : `/articles/?scene=${encodeURIComponent(section.scenes![0])}`;
 
         return (
           <SceneCard

@@ -53,9 +53,13 @@ export function getAlternatePath(url: URL, targetLang: Locale): string {
 
 /**
  * Returns the base articles path for the given locale.
- * zh-tw → /articles
- * en    → /en/articles
+ * zh-tw → /articles/
+ * en    → /en/articles/
+ *
+ * Trailing slash is mandatory: the site is served with `trailingSlash: 'always'`,
+ * so a slashless link (incl. `?query` variants like `/articles?scene=X`) eats a
+ * 308 and shows up in Search Console as "Page with redirect". See docs/seo-indexing-fix.md.
  */
 export function articlesPath(lang: Locale): string {
-  return lang === defaultLocale ? '/articles' : `/${lang}/articles`;
+  return lang === defaultLocale ? '/articles/' : `/${lang}/articles/`;
 }
