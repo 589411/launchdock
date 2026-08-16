@@ -21,6 +21,15 @@ CTR 6.3%、排名 4.8）與 `openrouter`（CTR 0.8%→1.1%、點擊 5→12）證
 **選配加速**：去 GSC → 網址審查 → 貼 `https://launchdock.app/articles/cli-guide/` → 「要求建立索引」催爬
 （改標題要等 Google 重爬才會生效；我這邊程式化點 GSC 按鈕試過四次都被擋，這步要你手動）。
 
+**🆕 2026-08-16 GSC「遭到 noindex 標記排除」通知＝虛驚，不用修。**
+受影響**只有 1 筆**：`https://sunlit.launchdock.app/`（`~/github/sunlit-site`，日晴生活**虛構教學站**，
+README 明載全站 `noindex, nofollow`）。GSC property 是**網域層級**（`sc-domain:launchdock.app`），
+所以子網域都算進來。主站與 `lab.` / `daily-bread.` 實測（含 Googlebot UA）**皆無 noindex 或 X-Robots-Tag**。
+⛔ 不要改用 robots.txt Disallow 擋（Google 爬不到就看不到 noindex，反而可能被收錄）。細節見 `docs/seo-indexing-fix.md` §五。
+**順帶發現（待辦）**：同張報表「頁面會重新導向」仍 **114 筆**、且七類的「驗證」欄幾乎全是「**尚未開始**」——
+七月 trailing-slash 修正後似乎沒真的按下 GSC 的「驗證修正」。這與上面「程式化點 GSC 按鈕被擋」是同一件事，
+**要 Joseph 手動按**：頁面索引報表 → 點進「頁面會重新導向」→ 右上「驗證修正」。
+
 <details><summary>原始建議（已執行，保留供對帳）</summary>
 
 只做一件事——**改 `cli-guide` 標題後半段**（把「命令列介面（Command-Line

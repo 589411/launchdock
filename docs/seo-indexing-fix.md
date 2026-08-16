@@ -88,4 +88,55 @@ curl -s https://launchdock.app/ | grep 'hreflang="en"'
 
 ---
 
-**Last updated:** 2026-07-18
+---
+
+## 五、2026-08-16：「遭到 noindex 標記排除」＝**刻意的，不用修**
+
+**通知內容**：Search Console 說「有部分網頁未編入索引，新原因：遭到『noindex』標記排除」。
+
+**查證結果（實測，非推測）**：受影響網頁只有 **1 筆** ——
+
+| 網址 | 首次偵測 | 上次檢索 |
+|---|---|---|
+| `https://sunlit.launchdock.app/` | 2026/8/8 | 2026/8/6 |
+
+那是 `~/github/sunlit-site`（GitHub Pages 提供）——「日晴生活」**虛構教學站**，
+給「用 LLM 做資料分析」課程當教具。該站 README 明寫「全站頁面皆標記 `noindex, nofollow`」，
+線上 HTML 實測也確認 `<meta name="robots" content="noindex, nofollow">`。
+**是我們自己加的，Google 只是照做並回報。**
+
+會出現在 launchdock.app 的報表，是因為 GSC property 是**網域層級**（`sc-domain:launchdock.app`），
+**所有子網域都算進來**（`sunlit.` / `lab.` / `daily-bread.` …）。
+
+**結論：不用做任何事。**
+
+- ⛔ **不要**改成用 `robots.txt` Disallow 擋 —— 那會讓 Google 爬不到、也就**看不到 noindex**，
+  反而可能靠外部反向連結被收錄（正是本站文章 `ai-share-link-not-private` 寫的坑）。
+- 假店家／假評論／假交易被收進搜尋結果才是真問題，noindex 是正解。
+- GSC 這類「網站自己的意圖」原因**沒有忽略鈕**，之後每次重爬還是會列著。看到就跳過。
+
+**主站是乾淨的**：launchdock.app 原始碼與線上頁面（含用 Googlebot UA 實測）
+**沒有任何 noindex meta，也沒有 `X-Robots-Tag` header**；`lab.` / `daily-bread.` 子網域同樣乾淨。
+
+### 順帶記錄：當天 GSC 頁面索引總覽（資料截至 2026/8/3）
+
+已建立索引 **165**／未建立索引 **153**，7 個原因：
+
+| 原因 | 來源 | 網頁數 |
+|---|---|---|
+| 頁面會重新導向 | 網站 | **114** |
+| 替代頁面（有適當的標準標記） | 網站 | 12 |
+| 這是重複網頁；使用者未選取標準網頁 | 網站 | 4 |
+| 遭到「noindex」標記排除 | 網站 | 1 ← 本次通知，刻意 |
+| 找不到網頁 (404) | 網站 | 1（`/cdn-cgi/l/email-protection`，正常） |
+| 已檢索 - 目前尚未建立索引 | Google | 16 |
+| 已找到 - 目前尚未建立索引 | Google | 5（驗證**通過**） |
+
+⚠️ **未解的疑點（待查支線）**：七月的 trailing-slash 全站修正就是要消掉「頁面會重新導向」，
+但到 8/3 仍有 **114 筆**，且「驗證」欄全部是「**尚未開始**」——
+**第四節 checklist 的第 2 步（對每一類按「驗證修正」）看來沒有真的按下去**。
+下次進 GSC 先做那件事，再判斷是資料延遲還是仍有漏網的無斜線連結來源。
+
+---
+
+**Last updated:** 2026-08-16
