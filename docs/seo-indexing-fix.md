@@ -313,6 +313,52 @@ curl -o /dev/null -w "%{http_code}" https://launchdock.app/en/articles/gemini-ap
 **驗證**：build 179 頁綠；`dist/404.html`（`lang="zh-TW"`）與 `dist/en/404.html`（`lang="en"`）都在；
 兩頁都不在 sitemap（仍 168 筆）；全站無斜線內部連結仍 0 種 / 0 個。
 
+### 7-4　那 12 筆「替代頁面（有適當的標準標記）」＝ 6 正常 + 6 soft-404 產物
+
+查完了，切得很乾淨——**假設證實，而且比預期強：整整一半是 soft-404 造出來的**。
+
+**A 組（6 筆）正常，永遠會在這桶**——`?scene=` 篩選頁，canonical 全部正確指回列表頁。
+這正是「替代頁面（有適當標準標記）」該有的樣子，**是 dedupe 生效的證據，不是錯誤**。
+
+| 網址 | 上次檢索 | canonical（實測） |
+|---|---|---|
+| `/en/articles/?scene=core` / `basics` / `intro` | 8/9、8/8、8/8 | `/en/articles/` |
+| `/articles/?scene=環境準備` / `鴨編的碎碎念` / `知識與進階` | 8/3 | `/articles/` |
+
+**B 組（6 筆）全部是不存在的頁面**——以前一律回 200 + 首頁 HTML、canonical 烘的是 `/`
+⇒ Google 完全合理地判成「首頁的替代頁面」：
+
+| 網址 | 為什麼不存在 | 修正前 | 修正後（實測） |
+|---|---|---|---|
+| `/articles/gemini-api-setup`（＋帶斜線版） | 真正的 slug 是 `gemini-gas-ordering-system` | 200 + 首頁 | **404** |
+| `/articles/ollama-openclaw`（＋帶斜線版） | 只有英文版 | 200 + 首頁 | **404** |
+| `/en/workflows/inbox/` | 沒有英文版 | 200 + 首頁 | **404** |
+| `/en/meetup/` | 沒有英文版 | 200 + 首頁 | **404** |
+
+➡️ **可證偽的驗收點**：重爬後這桶預期 **12 → 6**，B 組那 6 筆改列到「找不到網頁 (404)」。
+
+### 7-5　補洞：`/en/404/` 自己會回 200（修 404 時引進的）
+
+Astro 把巢狀的 `en/404.astro` 當一般頁面輸出成 `dist/en/404/index.html`
+⇒ `https://launchdock.app/en/404/` 實際回 **200**；而每個 `/en/*` 的 404 回應又用 canonical
+指向它 ⇒ 等於造了一個**可被索引的「Page not found」頁**。
+
+**已修**（commit `9665e2e`）：`BaseLayout` 加 `noindex` prop（additive、預設 `false`，其他頁行為不變）。
+開啟時輸出 `<meta name="robots" content="noindex, follow">`，**並且不輸出 canonical/hreflang**——
+不該被索引的頁沒道理提名自己當任何人的標準網頁。
+
+線上實測（部署後）：
+
+| 網址 | 狀態 | robots | canonical | hreflang |
+|---|---|---|---|---|
+| `/en/404/` | 200 | `noindex, follow` | 無 | 無 |
+| `/zzz-fake/` | **404** | `noindex, follow` | 無 | 無 |
+| `/en/zzz-fake/` | **404** | `noindex, follow` | 無 | 無 |
+| `/`、`/articles/token-economics/`、`/en/articles/hermes-agent/`、`/en/articles/?scene=core` | 200 | 無 | ✅ 有 | ✅ 有 |
+
+> **日後維護**：任何不該進索引的頁（404、純功能頁）都用 `<BaseLayout noindex …>`，
+> 不要手寫 meta，也不要只靠 robots.txt（擋掉爬取＝Google 看不到 noindex，見 §五）。
+
 ---
 
 **Last updated:** 2026-08-17

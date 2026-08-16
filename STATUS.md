@@ -42,8 +42,15 @@ README 明載全站 `noindex, nofollow`）。GSC property 是**網域層級**（
   已加 `src/pages/404.astro` + `src/pages/en/404.astro`。
   **坑**：Astro 只對根目錄的 `404.astro` 輸出成 `dist/404.html`，巢狀的變 `en/404/index.html`，
   而 Cloudflare 是往上找最近的 `404.html` ⇒ 加了 `scripts/emit-en-404.mjs` 串進 `npm run build` 複製一份。
-- 📌 **下一個 SEO 待辦**：等重爬後回頭看「替代頁面（有適當標準標記）12 筆」有沒有掉——
-  若 soft-404 真是它的來源，這桶應該會縮。
+- ✅ **那 12 筆也查完了**（§7-4）：**6 筆正常**（`?scene=` 篩選頁，canonical 正確＝dedupe 生效的證據）
+  ＋ **6 筆是 soft-404 產物**（`gemini-api-setup`、`ollama-openclaw`、`/en/workflows/inbox/`、`/en/meetup/`
+  這些不存在的頁，以前回 200＋首頁）。假設證實：**這桶一半是 soft-404 造的**。
+- 🔧 **補洞**（commit `9665e2e`）：`/en/404/` 自己會回 200（Astro 巢狀 404 當一般頁輸出），
+  等於造了可被索引的「Page not found」頁。已在 `BaseLayout` 加 `noindex` prop
+  （輸出 robots noindex 且不輸出 canonical/hreflang），兩個 404 頁套用。線上驗過。
+- 📌 **下一個 SEO 驗收點（可證偽）**：等重爬後看「替代頁面」**12 → 6**、
+  B 組那 6 筆是否改列到「找不到網頁 (404)」。這是 soft-404 修正唯一的客觀證據。
+  ⚠️ 一樣**不要按驗證修正**——這桶的 A 組 6 筆本來就該在那，按了必失敗。
 
 <details><summary>原始建議（已執行，保留供對帳）</summary>
 
