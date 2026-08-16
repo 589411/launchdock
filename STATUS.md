@@ -26,9 +26,11 @@ CTR 6.3%、排名 4.8）與 `openrouter`（CTR 0.8%→1.1%、點擊 5→12）證
 README 明載全站 `noindex, nofollow`）。GSC property 是**網域層級**（`sc-domain:launchdock.app`），
 所以子網域都算進來。主站與 `lab.` / `daily-bread.` 實測（含 Googlebot UA）**皆無 noindex 或 X-Robots-Tag**。
 ⛔ 不要改用 robots.txt Disallow 擋（Google 爬不到就看不到 noindex，反而可能被收錄）。細節見 `docs/seo-indexing-fix.md` §五。
-**順帶發現（待辦）**：同張報表「頁面會重新導向」仍 **114 筆**、且七類的「驗證」欄幾乎全是「**尚未開始**」——
-七月 trailing-slash 修正後似乎沒真的按下 GSC 的「驗證修正」。這與上面「程式化點 GSC 按鈕被擋」是同一件事，
-**要 Joseph 手動按**：頁面索引報表 → 點進「頁面會重新導向」→ 右上「驗證修正」。
+**同張報表「頁面會重新導向」114 筆＝✅ 已結案，不是待辦**（2026-08-17 查證，見 `docs/seo-indexing-fix.md` §六）。
+一句話：**那是七月修好之後的正常殘影，不要再去按「驗證修正」**——按了必失敗，因為「成功」的定義
+是那些網址不再轉址，而我們要它們繼續轉。實測：sitemap 168 筆全帶斜線、逐筆打全部 200 零轉址；
+GSC 那 114 筆全是 7/18 之前的**無斜線舊網址**（`/articles/xxx`），308 → 帶斜線版（200、在 sitemap、已收錄）；
+現在線上頁面已不再產生任何無斜線內部連結（首頁/列表/文章頁實測皆 0）。源頭已斷，數字會自然衰減（以月計）。
 
 <details><summary>原始建議（已執行，保留供對帳）</summary>
 
