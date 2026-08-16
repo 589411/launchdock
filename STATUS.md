@@ -35,7 +35,15 @@ README 明載全站 `noindex, nofollow`）。GSC property 是**網域層級**（
 - ⛔ **不要按 GSC「驗證修正」**：該桶通過條件＝網址不再轉址，與我們的意圖相反；105 筆殘影會讓它必然失敗。
   **判準記住：「驗證修正」不改變任何東西，只是重爬計時器 → 沒真的改過線上的東西就別按。**
 - ⛔ **不要期待數字自然掉**：Google 對已知 308 會回訪以年計，常卡著不動。**把這個數字永久除名，別當健康指標。**
-- 📌 **下一個 SEO 待辦（真 bug 候選）**：查「這是重複網頁；使用者未選取標準網頁」那 4 筆是哪 4 個、補 canonical。
+- ✅ **那 4 筆已查完**（`docs/seo-indexing-fix.md` §七）：canonical 沒問題，是 7/18 前的舊資料，不用修。
+- 🔴 **但撈到一個活的真 bug 並已修：全站 soft-404**（commit `2dd4da8`）。站上原本**沒有任何 404 頁**，
+  Cloudflare Pages 就退回送首頁並回 **HTTP 200** ⇒ 打錯字的網址、外部壞連結全變成「首頁的複製品」，
+  而且**壞連結監控全失效**（都回 200，CLAUDE.md 內容 loop 的「來自監控：壞連結」等於白跑）。
+  已加 `src/pages/404.astro` + `src/pages/en/404.astro`。
+  **坑**：Astro 只對根目錄的 `404.astro` 輸出成 `dist/404.html`，巢狀的變 `en/404/index.html`，
+  而 Cloudflare 是往上找最近的 `404.html` ⇒ 加了 `scripts/emit-en-404.mjs` 串進 `npm run build` 複製一份。
+- 📌 **下一個 SEO 待辦**：等重爬後回頭看「替代頁面（有適當標準標記）12 筆」有沒有掉——
+  若 soft-404 真是它的來源，這桶應該會縮。
 
 <details><summary>原始建議（已執行，保留供對帳）</summary>
 

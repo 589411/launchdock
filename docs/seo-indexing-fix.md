@@ -254,7 +254,64 @@ canonical 正確指回 `https://launchdock.app/articles/`——但它在吃檢�
 | 已檢索 - 尚未建立索引 | ⛔ 不能也不該 | 來源是「Google 系統」，是品質／預算判斷，沒有「修正」可驗證 |
 | 已找到 - 尚未建立索引 | ✅ 已通過 | 無事 |
 
-**下一個待辦（真 bug 候選）**：查「這是重複網頁；使用者未選取標準網頁」那 4 筆是哪 4 個、補 canonical。
+**那 4 筆已查完 → 見 §七**（結論：canonical 沒問題，是 7/18 前的舊資料；但查的過程撞到一個活的真 bug）。
+
+---
+
+---
+
+## 七、2026-08-17：那 4 筆「未選取標準網頁」沒問題，但撈到全站 soft-404
+
+### 7-1　4 筆「這是重複網頁；使用者未選取標準網頁」＝ 7/18 前的舊資料
+
+| 網址 | 上次檢索 | 現在的 canonical |
+|---|---|---|
+| `/en/articles/?scene=advanced` | 2026/6/20 | ✅ `https://launchdock.app/en/articles/` |
+| `/en/articles/?scene=env-setup` | 2026/6/5 | ✅ 同上 |
+| `/en/articles/?scene=integration` | 2026/5/31 | ✅ 同上 |
+| `/en/articles/gemini-api-setup` | 2026/7/12 | ✅ `https://launchdock.app/` |
+
+**四筆的最後檢索日全部早於 7/18 的 canonical 修正**，當時那些頁面確實沒宣告 canonical
+→ Google 只能自己挑 → 落進這桶。現在四筆都有正確 canonical。趨勢線也對得上：
+這桶在 7/12 前後從 **12 掉到 4**。⇒ **沒有東西可修，一樣不要按驗證。**
+
+### 7-2　🔴 但 `/en/articles/gemini-api-setup` 這個 slug 根本不存在——而它回 200
+
+真正的 slug 是 `gemini-gas-ordering-system`。追下去發現**全站 soft-404**：
+
+```bash
+curl -o /dev/null -w "%{http_code}" https://launchdock.app/zzz-nonexistent/                 # → 200
+curl -o /dev/null -w "%{http_code}" https://launchdock.app/articles/totally-fake-slug-123/  # → 200
+curl -o /dev/null -w "%{http_code}" https://launchdock.app/en/articles/gemini-api-setup     # → 200
+# 而且內容是首頁：<title>首頁 | 藍鴨 LaunchDock…</title>
+```
+
+**病因**：repo 裡沒有任何 404 頁——`src/pages/404.astro` 不存在、`dist/404.html` 不存在、
+也沒有 `_redirects`。Cloudflare Pages 找不到檔案又沒有 `404.html`，就退回送 `index.html` 並回 200。
+
+**後果**（這桶跟前面那些不一樣，是**開放**的、會持續長大）：
+
+1. 打錯字的網址、外部的壞連結，全都變成「**首頁的複製品**」——很可能就是
+   「替代頁面（有適當的標準標記）」12 筆的來源（那些頁的 canonical 是首頁烘進去的 `/`）。
+2. **任何壞連結監控都失效**（全部回 200），CLAUDE.md 內容 loop 裡「來自監控：壞連結」那條等於白跑。
+3. Google 永遠不會知道該把死網址剔除。
+
+### 7-3　✅ 已修（commit `2dd4da8`）
+
+| 檔案 | 作用 |
+|---|---|
+| `src/pages/404.astro` | 中文 404，三個出口：回首頁／看所有教學／回報壞連結 |
+| `src/pages/en/404.astro` | 英文 404（`lang="en"`） |
+| `scripts/emit-en-404.mjs` + `package.json` `build` | 見下方「坑」 |
+
+**坑：Astro 只對「根目錄」的 `404.astro` 特別輸出成 `dist/404.html`。**
+巢狀的 `src/pages/en/404.astro` 走一般 directory 格式 → `dist/en/404/index.html`。
+但 Cloudflare Pages 找 404 處理器時是**往上找最近的 `404.html`**，所以 `/en/*` 吃不到英文版。
+⇒ 加一支 post-build 腳本複製成 `dist/en/404.html`，並串進 `npm run build`
+（刻意做成找不到來源就印 warning 走人，不讓改頁面結構時連帶炸掉部署）。
+
+**驗證**：build 179 頁綠；`dist/404.html`（`lang="zh-TW"`）與 `dist/en/404.html`（`lang="en"`）都在；
+兩頁都不在 sitemap（仍 168 筆）；全站無斜線內部連結仍 0 種 / 0 個。
 
 ---
 
