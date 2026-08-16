@@ -11,6 +11,12 @@ interface Props {
   lang?: Locale;
   /** Canonical URL for SEO (optional) */
   canonicalUrl?: string;
+  /**
+   * Keep this page out of the index entirely (404 pages, etc).
+   * Emits `noindex` and drops canonical/hreflang — a page that shouldn't be
+   * indexed has no business nominating itself as anyone's canonical.
+   */
+  noindex?: boolean;
 }
 
 const {
@@ -20,6 +26,7 @@ const {
     ? 'LaunchDock — Step-by-step interactive AI tutorials. Learn how to run OpenClaw from scratch.'
     : '藍鴨 LaunchDock — 手把手實作的互動式 AI 教學空間，帶你把 OpenClaw 龍蝦 AI Agent 真正跑起來',
   canonicalUrl,
+  noindex = false,
 } = Astro.props;
 
 const htmlLang = lang === 'zh-tw' ? 'zh-TW' : 'en';
@@ -54,11 +61,17 @@ const canonical = canonicalUrl || `${site}${path}`;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
-    <link rel="canonical" href={canonical} />
-    <!-- hreflang for SEO -->
-    <link rel="alternate" hreflang="zh-TW" href={`${site}${zhPath}`} />
-    <link rel="alternate" hreflang="en" href={`${site}${enPath}`} />
-    <link rel="alternate" hreflang="x-default" href={`${site}${zhPath}`} />
+    {noindex ? (
+      <meta name="robots" content="noindex, follow" />
+    ) : (
+      <>
+        <link rel="canonical" href={canonical} />
+        <!-- hreflang for SEO -->
+        <link rel="alternate" hreflang="zh-TW" href={`${site}${zhPath}`} />
+        <link rel="alternate" hreflang="en" href={`${site}${enPath}`} />
+        <link rel="alternate" hreflang="x-default" href={`${site}${zhPath}`} />
+      </>
+    )}
     <title>{titleTemplate}</title>
     <script is:inline>
       (function() {
