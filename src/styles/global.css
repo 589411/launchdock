@@ -1820,7 +1820,9 @@ a.progress-step:hover .progress-dot {
   color: var(--color-text-secondary);
   font-size: 0.75rem;
   line-height: 1.4;
-  white-space: nowrap;
+  /* 定位父層是那個 inline <a>（很窄），沒有 width 的話 tooltip 會被擠成一行兩個字；
+     width:max-content 讓它照內容展開，再由 max-width 收在 280px。英文說明較長，這行是必要的。 */
+  width: max-content;
   max-width: 280px;
   white-space: normal;
   z-index: 50;

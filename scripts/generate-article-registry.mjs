@@ -34,7 +34,7 @@ function parseSimpleYaml(text) {
     if (/^\s*#/.test(line) || /^\s*$/.test(line)) continue;
 
     // Top-level key (no leading whitespace, ends with colon)
-    const topMatch = line.match(/^([A-Za-z][^:]*?):\s*$/);
+    const topMatch = line.match(/^([^\s#][^:]*?):\s*$/);
     if (topMatch) {
       if (currentTopKey && currentObj) result[currentTopKey] = currentObj;
       currentTopKey = topMatch[1].trim();
@@ -193,6 +193,7 @@ const output = {
       {
         displayName: c.displayName,
         shortDesc: c.shortDesc,
+        shortDescEn: c.shortDescEn,
         canonicalArticle: c.canonicalArticle,
         link: `/articles/${c.canonicalArticle}/`,
       },

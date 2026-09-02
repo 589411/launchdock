@@ -35,7 +35,7 @@ function parseSimpleYaml(text: string): Record<string, ConceptEntry> {
   for (const line of text.split('\n')) {
     if (/^\s*#/.test(line) || /^\s*$/.test(line)) continue;
 
-    const topMatch = line.match(/^([A-Za-z][^:]*?):\s*$/);
+    const topMatch = line.match(/^([^\s#][^:]*?):\s*$/);
     if (topMatch) {
       if (currentTopKey && currentObj) result[currentTopKey] = currentObj;
       currentTopKey = topMatch[1].trim();

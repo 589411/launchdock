@@ -5,6 +5,16 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+- [x] [i18n] **英文頁面的概念 tooltip 已改成英文**（2026-09-02）：`concepts.yaml` 全部 60 個概念補上 `shortDescEn`，
+      `remark-concept-links` 在英文文章用 `shortDescEn`（沒填才退回中文）。順手修掉兩個一起浮出來的問題：
+      ① **tooltip 寬度**：定位父層是很窄的 inline `<a>`，`max-width:280px` 對它無效 → tooltip 被擠成一行兩個字
+         （中文因為字密看不太出來，英文一換上去就露餡）。加 `width: max-content` 解決，中英都變好看。
+      ② 🔴 **parser 吃掉中文名概念（既有真 bug，已修）**：三份簡易 YAML parser 的鍵名 regex 是 `^([A-Za-z]...`，
+         只認英文字母開頭 → `系統提示詞`／`分享連結不等於私密連結`／`語音輸入補上下文` 三個概念**整個消失**，
+         而且它們的欄位會往上覆蓋前一個概念——`Prompt Engineering` 的 displayName/canonical 實際上被換成了
+         「語音輸入補上下文」→`voice-input-ai-context`。改成 `^([^\s#]...` 後三個概念復活：
+         `set-system-prompt` 現在有 **10 篇**自動連結（之前是 0），`prompt-engineering` 恢復 2 篇。
+         修了三處：`plugins/remark-concept-links.mjs`、`scripts/generate-article-registry.mjs`、`src/components/RelatedArticles.astro`。
 - [ ] [內容] **新文章 `git-guide`「Git 是什麼？零基礎版本控制教學」中英雙版已寫好，build 綠（181 頁），尚未 commit——等 Joseph 人工 gate**（EDITORIAL §7：AI 不得代替 Joseph 發佈）。
       角度＝**2026 版**：不教背指令（CLI agent 會下），教「AI 一次改 12 個檔案、Cmd+Z 救不回來」為什麼讓觀念比五年前更重要；
       四個地方（工作區/暫存區/本地倉庫/遠端）→ 用 `gh repo create --source=. --private --push` 一行上 GitHub → 兩台電腦同步。
@@ -71,6 +81,11 @@
 - [ ] [缺圖] ollama-openclaw-windows：缺 4 張（圖庫已有 16 檔，這 4 個 id 尚未拍，需 Windows）— @img
 
 ## 💡 來自規劃（你或 AI 提議的新內容）
+- [ ] [i18n] **英文文章頁還有三塊是中文**（2026-09-02 做 tooltip 時看到的，都不是新問題）：
+      ① 文章 meta 寫死中文「📝 建立：2026年9月2日 / ✅ 最後驗證」；② 卡關回饋條整條中文；
+      ③ 底部「📖 延伸閱讀」——`RelatedArticles.astro` 永遠讀中文 collection、連 `/articles/`，
+      所以英文讀者會看到五張中文卡片。③ 影響最大（是版面內容不是 hover），修法＝元件加 `lang` prop、
+      英文時讀 `articlesEn` 並連 `/en/articles/`，標題與難度/分鐘字串走 `src/i18n/ui.ts` — i18n
 - [x] [i18n] ~~**英文文章的概念連結會連到中文 canonical，而且會自連自己**~~ → **2026-09-02 已修**（`plugins/remark-concept-links.mjs`）：
       currentSlug 改成剝掉 `en/` 前綴（英文版不再自連），並加 `linkFor()`——英文版優先連 `/en/articles/<canonical>/`，
       該 canonical 沒有英文版時才退回中文版。清快取重 build 驗過：**英文自連 0 篇**，英文概念連結已指向 `/en/`。

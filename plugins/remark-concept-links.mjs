@@ -32,7 +32,7 @@ function parseSimpleYaml(text) {
   for (const line of text.split('\n')) {
     if (/^\s*#/.test(line) || /^\s*$/.test(line)) continue;
 
-    const topMatch = line.match(/^([A-Za-z][^:]*?):\s*$/);
+    const topMatch = line.match(/^([^\s#][^:]*?):\s*$/);
     if (topMatch) {
       if (currentTopKey && currentObj) result[currentTopKey] = currentObj;
       currentTopKey = topMatch[1].trim();
@@ -120,6 +120,7 @@ function getConceptEntries() {
         conceptName: name,
         displayName: c.displayName || name,
         shortDesc: c.shortDesc || '',
+        shortDescEn: c.shortDescEn || '',
         canonicalArticle: c.canonicalArticle || '',
       });
     }
@@ -145,6 +146,10 @@ export default function remarkConceptLinks() {
     const currentSlug = file?.data?.astro?.frontmatter?.slug
       || filePath.match(/articles\/(?:en\/)?(.+?)\.md/)?.[1]
       || '';
+
+    // 英文版 tooltip 用 shortDescEn（沒填才退回中文），避免英文頁面出現中文說明
+    const descFor = (entry) =>
+      (isEn && entry.shortDescEn) ? entry.shortDescEn : entry.shortDesc;
 
     // 英文版優先連英文 canonical（該篇有英文版才連，否則退回中文版）
     const linkFor = (canonical) =>
@@ -204,7 +209,7 @@ export default function remarkConceptLinks() {
           // Add linked concept
           newChildren.push({
             type: 'html',
-            value: `<a href="${linkFor(entry.canonicalArticle)}" class="concept-link" data-tooltip="${entry.shortDesc}" title="${entry.shortDesc}">${match[0]}</a>`,
+            value: `<a href="${linkFor(entry.canonicalArticle)}" class="concept-link" data-tooltip="${descFor(entry)}" title="${descFor(entry)}">${match[0]}</a>`,
           });
 
           linked.add(entry.conceptName);

@@ -1,346 +1,424 @@
 {
-  "_generated": "2026-09-02T13:39:19.998Z",
+  "_generated": "2026-09-02T13:50:37.785Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
       "displayName": "OpenClaw",
       "shortDesc": "開源 AI Agent 框架，串接 LLM、工具與自動化工作流的中控台",
+      "shortDescEn": "Open-source AI agent framework — the control center wiring up LLMs, tools, and automated workflows",
       "canonicalArticle": "why-openclaw",
       "link": "/articles/why-openclaw/"
     },
     "KimiClaw": {
       "displayName": "KimiClaw",
       "shortDesc": "基於 OpenClaw 架構的雲端版本，零安裝即用",
+      "shortDescEn": "A cloud-hosted version built on OpenClaw's architecture, with nothing to install",
       "canonicalArticle": "deploy-openclaw-cloud",
       "link": "/articles/deploy-openclaw-cloud/"
     },
     "LLM": {
       "displayName": "大型語言模型 (LLM)",
       "shortDesc": "ChatGPT、Claude、Gemini 背後的 AI 模型技術",
+      "shortDescEn": "The AI model technology behind ChatGPT, Claude, and Gemini",
       "canonicalArticle": "llm-guide",
       "link": "/articles/llm-guide/"
     },
     "Token": {
       "displayName": "Token",
       "shortDesc": "AI 模型處理文字的基本計量單位，也是計費依據",
+      "shortDescEn": "The basic unit a model measures text in — and what you are billed on",
       "canonicalArticle": "token-economics",
       "link": "/articles/token-economics/"
     },
     "Provider": {
       "displayName": "Provider（模型供應商）",
       "shortDesc": "AI 模型的供應商，如 OpenAI、Google、Anthropic",
+      "shortDescEn": "A supplier of AI models, such as OpenAI, Google, or Anthropic",
       "canonicalArticle": "llm-guide",
       "link": "/articles/llm-guide/"
     },
     "API Key": {
       "displayName": "API Key",
       "shortDesc": "存取 AI 模型服務的身份憑證",
+      "shortDescEn": "The credential that identifies you when you call an AI model service",
       "canonicalArticle": "ai-api-key-guide",
       "link": "/articles/ai-api-key-guide/"
     },
     "Ollama": {
       "displayName": "Ollama",
       "shortDesc": "在本機輕鬆運行開源 LLM 的工具；也提供雲端模型與 API 金鑰",
+      "shortDescEn": "Runs open-source LLMs on your own machine, and also offers cloud models and API keys",
       "canonicalArticle": "ollama-openclaw-mac",
       "link": "/articles/ollama-openclaw-mac/"
     },
     "Hermes": {
       "displayName": "Hermes Agent",
       "shortDesc": "Nous Research 開發的開源 AI Agent，具備跨 session 記憶、自動技能建立與 70+ 內建技能",
+      "shortDescEn": "An open-source AI agent by Nous Research, with cross-session memory, self-authored skills, and 70+ built-in skills",
       "canonicalArticle": "hermes-agent",
       "link": "/articles/hermes-agent/"
     },
     "OpenRouter": {
       "displayName": "OpenRouter",
       "shortDesc": "一把 API Key 存取多家模型的中繼平台（LLM 閘道）",
+      "shortDescEn": "One API key that reaches models from many providers (an LLM gateway)",
       "canonicalArticle": "openrouter-free-llm-api-key",
       "link": "/articles/openrouter-free-llm-api-key/"
     },
     "Agent": {
       "displayName": "Agent（AI 代理）",
       "shortDesc": "能自主決策、使用工具完成任務的 AI 實體",
+      "shortDescEn": "An AI that decides on its own and uses tools to finish a task",
       "canonicalArticle": "openclaw-agent",
       "link": "/articles/openclaw-agent/"
     },
     "Computer Use": {
       "displayName": "Computer Use（電腦操作）",
       "shortDesc": "讓 AI 直接操作電腦或瀏覽器（點按鈕、填表單、跨頁把任務做完）的能力",
+      "shortDescEn": "Letting an AI operate a computer or browser directly: clicking buttons, filling forms, carrying a task across pages",
       "canonicalArticle": "ai-agent-browsers",
       "link": "/articles/ai-agent-browsers/"
     },
     "Skill": {
       "displayName": "Skill（技能）",
       "shortDesc": "OpenClaw 中可重複執行的自動化工作流模板",
+      "shortDescEn": "A reusable automation template that OpenClaw can run on demand",
       "canonicalArticle": "openclaw-skill",
       "link": "/articles/openclaw-skill/"
     },
     "Harness": {
       "displayName": "Harness",
       "shortDesc": "包在模型外的控制與治理層，負責設邊界、驗證成果、錯誤回復與調度，決定 Agent 的可靠度",
+      "shortDescEn": "The control and governance layer wrapped around the model — sets boundaries, verifies results, recovers from errors, and schedules work; it decides how reliable an agent is",
       "canonicalArticle": "ai-agent-anatomy",
       "link": "/articles/ai-agent-anatomy/"
     },
     "Soul": {
       "displayName": "Soul（人設）",
       "shortDesc": "定義 Agent 的記憶、個性與成長能力的設定系統",
+      "shortDescEn": "The configuration system defining an agent's memory, personality, and capacity to grow",
       "canonicalArticle": "openclaw-soul",
       "link": "/articles/openclaw-soul/"
     },
     "MCP": {
       "displayName": "MCP 協定",
       "shortDesc": "讓 AI 自動學會使用外部工具的標準協定，AI 的 USB 接口",
+      "shortDescEn": "The standard protocol that lets an AI pick up external tools on its own — a USB port for AI",
       "canonicalArticle": "mcp-protocol",
       "link": "/articles/mcp-protocol/"
     },
     "Gateway": {
       "displayName": "Gateway",
       "shortDesc": "OpenClaw 的核心服務，監聽 port 18789",
+      "shortDescEn": "OpenClaw's core service, listening on port 18789",
       "canonicalArticle": "openclaw-first-run",
       "link": "/articles/openclaw-first-run/"
     },
     "AI 控制邊界": {
       "displayName": "AI 控制邊界",
       "shortDesc": "AI 工具能力範圍的分類框架：從對話框內到外部操控、內部整合、全托管，理解每層工具的本質差異",
+      "shortDescEn": "A framework for classifying how far an AI tool can reach: inside the chat box, out to your apps, into your systems, or fully managed",
       "canonicalArticle": "which-ai-tool-for-you",
       "link": "/articles/which-ai-tool-for-you/"
     },
     "Prompt Engineering": {
+      "displayName": "Prompt 工程",
+      "shortDesc": "設計有效的 AI 指令，讓模型給出精準回答的技術",
+      "shortDescEn": "Writing AI instructions that actually get you a precise answer",
+      "canonicalArticle": "prompt-engineering",
+      "link": "/articles/prompt-engineering/"
+    },
+    "系統提示詞": {
+      "displayName": "系統提示詞",
+      "shortDesc": "在 AI 設定裡寫一次、之後每次對話都自動生效的常駐指令，讓 AI 記住你是誰、要什麼",
+      "shortDescEn": "A standing instruction you write once in the settings and that applies to every conversation, so the AI remembers who you are and what you want",
+      "canonicalArticle": "set-system-prompt",
+      "link": "/articles/set-system-prompt/"
+    },
+    "分享連結不等於私密連結": {
+      "displayName": "分享連結 ≠ 私密連結",
+      "shortDesc": "AI 的「分享」按鈕預設是產生公開網頁，可能被搜尋引擎索引——不等於只傳給特定人",
+      "shortDescEn": "An AI's Share button publishes a public web page by default — it can be indexed by search engines, and it is not a private link to one person",
+      "canonicalArticle": "ai-share-link-not-private",
+      "link": "/articles/ai-share-link-not-private/"
+    },
+    "語音輸入補上下文": {
       "displayName": "語音輸入補上下文",
       "shortDesc": "用語音把大量背景快速倒給 AI，讓 LLM 幫你把非結構化的思緒重組成結構——補足上下文最省力的方式",
+      "shortDescEn": "Dumping a lot of background to an AI by voice and letting the LLM restructure your unsorted thinking — the cheapest way to supply context",
       "canonicalArticle": "voice-input-ai-context",
       "link": "/articles/voice-input-ai-context/"
     },
     "RAG": {
       "displayName": "RAG（檢索增強生成）",
       "shortDesc": "讓 AI 先查資料再回答，大幅減少幻覺的技術",
+      "shortDescEn": "Having the AI look things up before answering, which sharply reduces hallucination",
       "canonicalArticle": "rag-explained",
       "link": "/articles/rag-explained/"
     },
     "Agent Memory": {
       "displayName": "Agent 記憶系統",
       "shortDesc": "讓 AI Agent 跨 session 持久累積、管理與演進知識的機制",
+      "shortDescEn": "The mechanism that lets an AI agent accumulate, manage, and evolve knowledge across sessions",
       "canonicalArticle": "ai-agent-memory-guide",
       "link": "/articles/ai-agent-memory-guide/"
     },
     "Context Engineering": {
       "displayName": "Context Engineering（上下文工程）",
       "shortDesc": "管理 AI 模型 context window 使用效率的技術，包含壓縮、排程與優先化",
+      "shortDescEn": "Managing how efficiently a model's context window is used: compression, scheduling, and prioritization",
       "canonicalArticle": "ai-agent-memory-guide",
       "link": "/articles/ai-agent-memory-guide/"
     },
     "CoT": {
       "displayName": "Chain-of-Thought（思維鏈）",
       "shortDesc": "讓 AI 一步步推理、展示思考過程的 Prompt 技巧",
+      "shortDescEn": "A prompting technique that makes the AI reason step by step and show its work",
       "canonicalArticle": "cot-and-reasoning",
       "link": "/articles/cot-and-reasoning/"
     },
     "ReAct": {
       "displayName": "ReAct",
       "shortDesc": "結合推理與行動的 Agent 架構：思考→行動→觀察→決策",
+      "shortDescEn": "An agent architecture pairing reasoning with action: think, act, observe, decide",
       "canonicalArticle": "cot-and-reasoning",
       "link": "/articles/cot-and-reasoning/"
     },
     "Embedding": {
       "displayName": "Embedding（向量嵌入）",
       "shortDesc": "將文字轉為數值向量，用於語義搜尋和記憶系統",
+      "shortDescEn": "Turning text into numeric vectors, used for semantic search and memory systems",
       "canonicalArticle": "rag-explained",
       "link": "/articles/rag-explained/"
     },
     "Transformer": {
       "displayName": "Transformer",
       "shortDesc": "現代 AI 大語言模型的核心架構，使用自注意力機制",
+      "shortDescEn": "The core architecture behind modern large language models, built on self-attention",
       "canonicalArticle": "ai-tech-evolution",
       "link": "/articles/ai-tech-evolution/"
     },
     "Context Window": {
       "displayName": "Context Window（上下文窗口）",
       "shortDesc": "AI 模型一次能處理的最大文字長度",
+      "shortDescEn": "The most text a model can take in at once",
       "canonicalArticle": "ai-tech-evolution",
       "link": "/articles/ai-tech-evolution/"
     },
     "Multi-Agent": {
       "displayName": "Multi-Agent（多代理系統）",
       "shortDesc": "多個 AI Agent 分工合作完成複雜任務",
+      "shortDescEn": "Several AI agents dividing up a complex task and working together",
       "canonicalArticle": "multi-agent-swarm",
       "link": "/articles/multi-agent-swarm/"
     },
     "Swarm": {
       "displayName": "蜂群智能 (Swarm)",
       "shortDesc": "去中心化的多 Agent 協作模式，模仿蜂群的集體智能",
+      "shortDescEn": "A decentralized multi-agent pattern modeled on the collective intelligence of a hive",
       "canonicalArticle": "multi-agent-swarm",
       "link": "/articles/multi-agent-swarm/"
     },
     "Fallback": {
       "displayName": "Fallback（備援機制）",
       "shortDesc": "主要模型失敗時自動切換到備用模型的機制",
+      "shortDescEn": "Automatically switching to a backup model when the primary one fails",
       "canonicalArticle": "openclaw-model-config",
       "link": "/articles/openclaw-model-config/"
     },
     "Telegram Bot": {
       "displayName": "Telegram Bot",
       "shortDesc": "透過 Telegram 隨時隨地與你的 OpenClaw Agent 對話",
+      "shortDescEn": "Talk to your OpenClaw agent from anywhere through Telegram",
       "canonicalArticle": "telegram-integration",
       "link": "/articles/telegram-integration/"
     },
     "LIFF": {
       "displayName": "LIFF",
       "shortDesc": "LINE 的前端框架，把你的網頁包成可在 LINE App 內直接開啟、並取得使用者身分的小程式",
+      "shortDescEn": "LINE's front-end framework: wraps your web page into a mini app that opens inside the LINE app and can identify the user",
       "canonicalArticle": "create-line-login-liff-app",
       "link": "/articles/create-line-login-liff-app/"
     },
     "LINE Login": {
       "displayName": "LINE Login",
       "shortDesc": "LINE 的 OAuth 登入機制，讓使用者用 LINE 身分一鍵登入你的網頁；LIFF App 必須掛在 LINE Login channel 底下",
+      "shortDescEn": "LINE's OAuth sign-in, letting people log into your site with their LINE identity; a LIFF app must sit under a LINE Login channel",
       "canonicalArticle": "create-line-login-liff-app",
       "link": "/articles/create-line-login-liff-app/"
     },
     "Firebase": {
       "displayName": "Firebase",
       "shortDesc": "Google 的後端即服務平台，替純前端網站外包登入、資料庫與託管，免自架伺服器",
+      "shortDescEn": "Google's backend-as-a-service — outsources login, database, and hosting for a pure front-end site, with no server to run",
       "canonicalArticle": "firebase-create-project",
       "link": "/articles/firebase-create-project/"
     },
     "Firebase Authentication": {
       "displayName": "Firebase Authentication",
       "shortDesc": "Firebase 的登入服務，一鍵接上 Google、email、匿名等多種登入方式",
+      "shortDescEn": "Firebase's sign-in service: Google, email, anonymous, and more, wired up in one step",
       "canonicalArticle": "firebase-enable-google-login",
       "link": "/articles/firebase-enable-google-login/"
     },
     "Firestore": {
       "displayName": "Firestore",
       "shortDesc": "Firebase 的雲端 NoSQL 資料庫，前端可直接讀寫並即時同步，靠安全規則保護",
+      "shortDescEn": "Firebase's cloud NoSQL database — the front end reads and writes it directly with live sync, protected by security rules",
       "canonicalArticle": "firebase-firestore-rules-deploy",
       "link": "/articles/firebase-firestore-rules-deploy/"
     },
     "PKM": {
       "displayName": "個人知識管理 (PKM)",
       "shortDesc": "系統化收集、整理、連結知識，讓資訊變成洞見",
+      "shortDescEn": "Collecting, organizing, and linking knowledge systematically, so information turns into insight",
       "canonicalArticle": "pkm-system",
       "link": "/articles/pkm-system/"
     },
     "Zeabur": {
       "displayName": "Zeabur",
       "shortDesc": "台灣團隊打造的雲端部署平台，一鍵部署 OpenClaw",
+      "shortDescEn": "A cloud deployment platform built by a Taiwanese team, with one-click OpenClaw deployment",
       "canonicalArticle": "deploy-openclaw-cloud",
       "link": "/articles/deploy-openclaw-cloud/"
     },
     "Docker": {
       "displayName": "Docker",
       "shortDesc": "容器化部署工具，用於自建伺服器部署 OpenClaw",
+      "shortDescEn": "Container tooling, used here to deploy OpenClaw on your own server",
       "canonicalArticle": "deploy-openclaw-cloud",
       "link": "/articles/deploy-openclaw-cloud/"
     },
     "n8n": {
       "displayName": "n8n",
       "shortDesc": "開源、可自架的工作流程自動化工具，用視覺化節點串接不同系統，也能接上 LLM",
+      "shortDescEn": "An open-source, self-hostable workflow automation tool: visual nodes that connect systems, LLMs included",
       "canonicalArticle": "what-is-n8n",
       "link": "/articles/what-is-n8n/"
     },
     "WSL": {
       "displayName": "WSL（Windows Subsystem for Linux）",
       "shortDesc": "在 Windows 上運行 Linux 環境的子系統",
+      "shortDescEn": "The subsystem that runs a Linux environment on Windows",
       "canonicalArticle": "windows-wsl-guide",
       "link": "/articles/windows-wsl-guide/"
     },
     "CLI": {
       "displayName": "CLI（命令列介面）",
       "shortDesc": "用文字指令操作電腦的介面，AI Agent 執行工具的主要方式",
+      "shortDescEn": "The interface where you operate a computer by typing commands, and the main way AI agents run tools",
       "canonicalArticle": "cli-guide",
       "link": "/articles/cli-guide/"
     },
     "Homebrew": {
       "displayName": "Homebrew",
       "shortDesc": "macOS 上最常用的套件管理工具",
+      "shortDescEn": "The most widely used package manager on macOS",
       "canonicalArticle": "install-openclaw-macos",
       "link": "/articles/install-openclaw-macos/"
     },
     "Shell": {
       "displayName": "Shell（殼層）",
       "shortDesc": "等待你輸入指令的程式，你跟作業系統之間的翻譯官",
+      "shortDescEn": "The program waiting for your commands — your translator to the operating system",
       "canonicalArticle": "cli-guide",
       "link": "/articles/cli-guide/"
     },
     "caffeinate": {
       "displayName": "caffeinate",
       "shortDesc": "macOS 內建指令，讓電腦保持清醒不進入休眠，避免長時間跑的 Agent 斷線",
+      "shortDescEn": "A built-in macOS command that keeps your machine awake, so a long-running agent doesn't get cut off",
       "canonicalArticle": "caffeinate-keep-mac-awake",
       "link": "/articles/caffeinate-keep-mac-awake/"
     },
     "QMD": {
       "displayName": "QMD",
       "shortDesc": "OpenClaw 的結構化記憶格式，YAML-based",
+      "shortDescEn": "OpenClaw's structured, YAML-based memory format",
       "canonicalArticle": "rag-explained",
       "link": "/articles/rag-explained/"
     },
     "Google Cloud Console": {
       "displayName": "Google Cloud Console",
       "shortDesc": "Google 雲端服務的管理介面，用於啟用 API",
+      "shortDescEn": "The admin interface for Google's cloud services, where you enable APIs",
       "canonicalArticle": "google-api-key-guide",
       "link": "/articles/google-api-key-guide/"
     },
     "Google Apps Script": {
       "displayName": "Google Apps Script (GAS)",
       "shortDesc": "Google 內建免費的雲端程式環境，能讓試算表、表單、文件自動化運作",
+      "shortDescEn": "Google's free built-in cloud scripting environment for automating Sheets, Forms, and Docs",
       "canonicalArticle": "gemini-gas-ordering-system",
       "link": "/articles/gemini-gas-ordering-system/"
     },
     "Gemini": {
       "displayName": "Gemini",
       "shortDesc": "Google 的大型語言模型，可透過網頁版或 API 使用，擅長多模態與程式生成",
+      "shortDescEn": "Google's large language model, available on the web or via API, strong at multimodal work and code generation",
       "canonicalArticle": "google-api-key-guide",
       "link": "/articles/google-api-key-guide/"
     },
     "OAuth": {
       "displayName": "OAuth",
       "shortDesc": "安全的第三方授權協定，用於 Google API 存取",
+      "shortDescEn": "The secure third-party authorization protocol used to access Google APIs",
       "canonicalArticle": "google-api-key-guide",
       "link": "/articles/google-api-key-guide/"
     },
     "Make": {
       "displayName": "Make（Integromat）",
       "shortDesc": "視覺化的零程式碼自動化平台，用「模組串模組」把不同服務串成自動流程（scenario）",
+      "shortDescEn": "A visual, no-code automation platform that chains services together module by module into scenarios",
       "canonicalArticle": "make-gmail-sheets-automation",
       "link": "/articles/make-gmail-sheets-automation/"
     },
     "Google Cloud": {
       "displayName": "Google Cloud（GCP）",
       "shortDesc": "Google 的雲端平台，建專案、啟用 API、發 OAuth 憑證都在這裡完成",
+      "shortDescEn": "Google's cloud platform, where you create projects, enable APIs, and issue OAuth credentials",
       "canonicalArticle": "google-cloud-oauth-api-setup",
       "link": "/articles/google-cloud-oauth-api-setup/"
     },
     "Kaggle": {
       "displayName": "Kaggle",
       "shortDesc": "全球最大的資料科學與機器學習社群，可下載資料集、在雲端跑 Notebook、參加競賽",
+      "shortDescEn": "The largest data science and machine learning community: datasets, cloud notebooks, and competitions",
       "canonicalArticle": "kaggle-account-signup",
       "link": "/articles/kaggle-account-signup/"
     },
     "Looker Studio": {
       "displayName": "Looker Studio（數據分析）",
       "shortDesc": "Google 免費的資料視覺化工具，可接 CSV、試算表、BigQuery 做互動式儀表板",
+      "shortDescEn": "Google's free data visualization tool — connect a CSV, a spreadsheet, or BigQuery and build interactive dashboards",
       "canonicalArticle": "looker-studio-csv-analysis",
       "link": "/articles/looker-studio-csv-analysis/"
     },
     "Grok": {
       "displayName": "Grok",
       "shortDesc": "xAI 推出的 AI 助理，可透過連接器操作 GitHub、Gmail 等外部服務",
+      "shortDescEn": "xAI's assistant, which can operate GitHub, Gmail, and other services through connectors",
       "canonicalArticle": "grok-connect-github",
       "link": "/articles/grok-connect-github/"
     },
     "Connector": {
       "displayName": "連接器（Connector）",
       "shortDesc": "把 AI 接上外部服務的授權通道，讓 AI 不只是回答、而是能實際去操作你的帳號",
+      "shortDescEn": "The authorized channel that plugs an AI into an external service, so it can act on your account instead of only answering",
       "canonicalArticle": "grok-connect-github",
       "link": "/articles/grok-connect-github/"
     },
     "Git": {
       "displayName": "Git",
       "shortDesc": "幫專案建立「存檔點」的版本控制工具，裝在你自己的電腦上，離線也能回到任何一個歷史版本",
+      "shortDescEn": "The version control tool that creates save points for your project; it lives on your own computer and can return to any point in history, even offline",
       "canonicalArticle": "git-guide",
       "link": "/articles/git-guide/"
     },
     "GitHub": {
       "displayName": "GitHub",
       "shortDesc": "全世界最多人用的程式碼託管平台，放 Git 倉庫的雲端拷貝，也是異地同步與協作的中繼站",
+      "shortDescEn": "The most widely used code hosting platform: a cloud copy of your Git repository, and the relay point for syncing across machines and collaborating",
       "canonicalArticle": "github-account-signup",
       "link": "/articles/github-account-signup/"
     }
@@ -469,9 +547,12 @@
       ],
       "prerequisites": [],
       "modules": [],
-      "concepts_defined": [],
+      "concepts_defined": [
+        "系統提示詞"
+      ],
       "concepts_referenced": [
-        "Prompt Engineering"
+        "分享連結不等於私密連結",
+        "語音輸入補上下文"
       ],
       "link": "/articles/set-system-prompt/"
     },
@@ -1242,6 +1323,7 @@
         "Skill"
       ],
       "concepts_referenced": [
+        "Prompt Engineering",
         "PKM"
       ],
       "link": "/articles/openclaw-skill/"
@@ -1268,6 +1350,8 @@
       ],
       "concepts_referenced": [
         "Agent",
+        "Prompt Engineering",
+        "系統提示詞",
         "RAG",
         "Agent Memory",
         "Embedding",
@@ -1624,7 +1708,8 @@
         "ReAct"
       ],
       "concepts_referenced": [
-        "Agent"
+        "Agent",
+        "Prompt Engineering"
       ],
       "link": "/articles/cot-and-reasoning/"
     },
@@ -1671,11 +1756,15 @@
         "openclaw-first-run"
       ],
       "modules": [],
-      "concepts_defined": [],
+      "concepts_defined": [
+        "Prompt Engineering"
+      ],
       "concepts_referenced": [
         "Skill",
         "Soul",
-        "Prompt Engineering",
+        "系統提示詞",
+        "分享連結不等於私密連結",
+        "語音輸入補上下文",
         "CoT"
       ],
       "link": "/articles/prompt-engineering/"
@@ -2099,7 +2188,9 @@
       ],
       "prerequisites": [],
       "modules": [],
-      "concepts_defined": [],
+      "concepts_defined": [
+        "分享連結不等於私密連結"
+      ],
       "concepts_referenced": [],
       "link": "/articles/ai-share-link-not-private/"
     },
@@ -2164,7 +2255,8 @@
       "concepts_defined": [],
       "concepts_referenced": [
         "Skill",
-        "Harness"
+        "Harness",
+        "系統提示詞"
       ],
       "link": "/articles/from-prompt-to-skill/"
     },
@@ -2223,7 +2315,7 @@
       "prerequisites": [],
       "modules": [],
       "concepts_defined": [
-        "Prompt Engineering"
+        "語音輸入補上下文"
       ],
       "concepts_referenced": [],
       "link": "/articles/voice-input-ai-context/"
