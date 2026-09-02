@@ -59,6 +59,7 @@ export const ui = {
     'article.share.line': '分享到 LINE',
     'article.share.hint': '覺得有用？分享給也在弄髒雙手的朋友',
     'article.breadcrumb.home': '藍鴨 LaunchDock',
+    'article.related.title': '延伸閱讀',
 
     // Articles list page
     'articles.title': '所有教學文章',
@@ -122,6 +123,7 @@ export const ui = {
     'article.share.line': 'Share on LINE',
     'article.share.hint': 'Found this useful? Share it with a friend who’s also getting their hands dirty',
     'article.breadcrumb.home': 'LaunchDock',
+    'article.related.title': 'Further Reading',
 
     // Articles list page
     'articles.title': 'All Tutorials',

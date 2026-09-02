@@ -8,12 +8,15 @@
 import { getCollection } from 'astro:content';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { sceneKeyToLabel, difficultyKeyToLabel, type Locale } from '../i18n/ui';
+import { articlesPath, useTranslations } from '../i18n/utils';
 
 interface Props {
   slug: string;
   tags: string[];
   prerequisites?: string[];
   scene?: string;
+  lang?: Locale;
 }
 
 interface ConceptEntry {
@@ -87,7 +90,8 @@ const concepts = parseSimpleYaml(conceptsRaw);
 
 // ── Compute related articles for this slug ──────────────
 
-const { slug, tags, prerequisites = [], scene } = Astro.props;
+const { slug, tags, prerequisites = [], scene, lang = 'zh-tw' } = Astro.props;
+const t = useTranslations(lang);
 
 const relatedSlugs = new Map<string, number>(); // slug → relevance score
 
@@ -126,14 +130,19 @@ const topSlugs = [...relatedSlugs.entries()]
   .slice(0, 5)
   .map(([s]) => s);
 
-// Fetch article data for these slugs
-const allArticles = await getCollection('articles', ({ data }) => !data.archived);
+// Fetch article data for these slugs — 英文頁要讀英文 collection，
+// 否則英文讀者會看到一排中文卡片、連到中文文章（2026-09-02 修）。
+// 概念關聯本身是語系無關的（concepts.yaml 只記 slug），所以上面的計分不用改。
+const allArticles = lang === 'en'
+  ? await getCollection('articlesEn', ({ data }) => !data.archived)
+  : await getCollection('articles', ({ data }) => !data.archived);
 const articleMap = new Map(allArticles.map((a) => [a.id, a]));
 
 const relatedArticles = topSlugs
   .map((s) => articleMap.get(s))
   .filter(Boolean);
 
+// 中文文章的 scene 存中文 label、英文文章存中性 key，兩種都要查得到
 const SCENE_ICONS: Record<string, string> = {
   '認識 OpenClaw': '🧭',
   '環境準備': '🔑',
@@ -141,34 +150,50 @@ const SCENE_ICONS: Record<string, string> = {
   '基礎使用': '🚀',
   '核心功能': '🧩',
   '整合與自動化': '⚡',
+  '自動化工作流': '⚡',
   '知識與進階': '📚',
   '鴨編的碎碎念': '🦆',
+  intro: '🧭',
+  'env-setup': '🔑',
+  install: '💻',
+  basics: '🚀',
+  core: '🧩',
+  integration: '⚡',
+  automation: '⚡',
+  advanced: '📚',
+  blog: '🦆',
 };
+
+const base = articlesPath(lang);
+const sceneLabels = sceneKeyToLabel[lang];
+const diffLabels = difficultyKeyToLabel[lang];
+const BEGINNER = ['入門', 'beginner'];
+const INTERMEDIATE = ['中級', 'intermediate'];
 ---
 
 {relatedArticles.length > 0 && (
   <section class="related-articles">
-    <h2 class="related-articles-title">📖 延伸閱讀</h2>
+    <h2 class="related-articles-title">📖 {t('article.related.title')}</h2>
     <div class="related-articles-grid">
       {relatedArticles.map((article) => (
         <a
-          href={`/articles/${article!.id}/`}
+          href={`${base}${article!.id}/`}
           class="related-article-card"
         >
           <div class="related-article-scene">
             <span>{SCENE_ICONS[article!.data.scene] || '📄'}</span>
-            <span>{article!.data.scene}</span>
+            <span>{sceneLabels[article!.data.scene] ?? article!.data.scene}</span>
           </div>
           <h3 class="related-article-name">{article!.data.title}</h3>
           <p class="related-article-desc">{article!.data.description}</p>
           <div class="related-article-meta">
             <span class={`related-article-difficulty ${
-              article!.data.difficulty === '入門' ? 'beginner' :
-              article!.data.difficulty === '中級' ? 'intermediate' : 'advanced'
+              BEGINNER.includes(article!.data.difficulty) ? 'beginner' :
+              INTERMEDIATE.includes(article!.data.difficulty) ? 'intermediate' : 'advanced'
             }`}>
-              {article!.data.difficulty}
+              {diffLabels[article!.data.difficulty] ?? article!.data.difficulty}
             </span>
-            <span class="related-article-time">⏱ {article!.data.estimatedMinutes} 分鐘</span>
+            <span class="related-article-time">⏱ {`${article!.data.estimatedMinutes}${lang === 'en' ? ' ' : ''}${t('articles.minutes')}`}</span>
           </div>
         </a>
       ))}

@@ -5,6 +5,12 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+- [x] [i18n] **英文文章頁的「延伸閱讀」已改成英文**（2026-09-02）：`RelatedArticles.astro` 加 `lang` prop，
+      英文時讀 `articlesEn` collection、連 `/en/articles/`，標題／場景／難度／分鐘全走 `src/i18n/ui.ts`
+      （新增 `article.related.title` 中英兩則）。全站稽核：英文卡片 209 張**零中文連結、零壞連結**，
+      中文頁 210 張不受影響，中英每篇卡片數完全對齊。
+      順手補了 `en/google-gemma4.md` 漏掉的 `prerequisites: ollama-openclaw-mac`（中文版有、英文版沒有，
+      是內容不對齊不是程式問題——這也證明這套稽核抓得出中英 frontmatter 漂移）。
 - [x] [i18n] **英文頁面的概念 tooltip 已改成英文**（2026-09-02）：`concepts.yaml` 全部 60 個概念補上 `shortDescEn`，
       `remark-concept-links` 在英文文章用 `shortDescEn`（沒填才退回中文）。順手修掉兩個一起浮出來的問題：
       ① **tooltip 寬度**：定位父層是很窄的 inline `<a>`，`max-width:280px` 對它無效 → tooltip 被擠成一行兩個字
@@ -81,11 +87,11 @@
 - [ ] [缺圖] ollama-openclaw-windows：缺 4 張（圖庫已有 16 檔，這 4 個 id 尚未拍，需 Windows）— @img
 
 ## 💡 來自規劃（你或 AI 提議的新內容）
-- [ ] [i18n] **英文文章頁還有三塊是中文**（2026-09-02 做 tooltip 時看到的，都不是新問題）：
-      ① 文章 meta 寫死中文「📝 建立：2026年9月2日 / ✅ 最後驗證」；② 卡關回饋條整條中文；
-      ③ 底部「📖 延伸閱讀」——`RelatedArticles.astro` 永遠讀中文 collection、連 `/articles/`，
-      所以英文讀者會看到五張中文卡片。③ 影響最大（是版面內容不是 hover），修法＝元件加 `lang` prop、
-      英文時讀 `articlesEn` 並連 `/en/articles/`，標題與難度/分鐘字串走 `src/i18n/ui.ts` — i18n
+- [ ] [i18n] **英文文章頁還剩兩塊是中文**（2026-09-02 盤點；③ 延伸閱讀當天已修掉）：
+      ① 文章 meta 寫死中文「📝 建立：2026年9月2日 / ✅ 最後驗證」（`ArticleMeta.astro`）；
+      ② 兩條回饋 UI 整條中文——文章開頭的卡關提示（`article.stuck.*` 有英文 key，但看起來沒吃到）
+      與文末的「這篇文章對你有幫助嗎？發射成功／有用／卡關了／救命」（`EmotionFeedback.tsx`，
+      React island，字串寫死在元件裡沒走 i18n）。兩者都在英文頁面正中央，讀者一定看得到 — i18n
 - [x] [i18n] ~~**英文文章的概念連結會連到中文 canonical，而且會自連自己**~~ → **2026-09-02 已修**（`plugins/remark-concept-links.mjs`）：
       currentSlug 改成剝掉 `en/` 前綴（英文版不再自連），並加 `linkFor()`——英文版優先連 `/en/articles/<canonical>/`，
       該 canonical 沒有英文版時才退回中文版。清快取重 build 驗過：**英文自連 0 篇**，英文概念連結已指向 `/en/`。

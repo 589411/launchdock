@@ -8,7 +8,7 @@ createdAt: "2026-04-23"
 verifiedAt: "2026-04-23"
 archived: false
 order: 5
-prerequisites: ["llm-guide"]
+prerequisites: ["llm-guide", "ollama-openclaw-mac"]
 estimatedMinutes: 10
 tags: ["LLM", "Ollama", "OpenClaw", "Google", "開源"]
 stuckOptions:

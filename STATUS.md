@@ -119,6 +119,10 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
      且欄位往上覆蓋——`Prompt Engineering` 的 canonical 實際上變成了 `voice-input-ai-context`。
      三份 parser 全改成 `^([^\s#]...`；`set-system-prompt` 的自動連結從 **0 篇 → 10 篇**。
      **教訓**：手寫的簡易 parser 失敗時不報錯，只是安靜地少東西——概念數對不上時要當成訊號。
+- ✅ **2026-09-02 第四批（Joseph 指示「延伸閱讀也修」）**：`RelatedArticles.astro` 加 `lang` prop，
+  英文頁改讀 `articlesEn`、連 `/en/articles/`、標題與場景/難度/分鐘走 i18n（新增 `article.related.title`）。
+  稽核：英文 209 張卡片零中文連結零壞連結、中英卡片數完全對齊。順手補上 `en/google-gemma4.md`
+  漏掉的一個 prerequisite。**英文頁還剩兩塊中文**（文章 meta 日期、兩條回饋 UI），已列進 BACKLOG。
 - 🕳️ **踩到一個會騙人的坑（已記進記憶池）**：改 remark 插件／`concepts.yaml` 後 `npm run build` **綠燈但不重新渲染**
   （Astro content 快取只認 `.md` 變動）。我第一次驗收因此得出「Git 概念零影響」的錯誤結論。
   **凡驗收 build-time 插件效果，先 `rm -rf .astro node_modules/.astro dist` 再量。**
