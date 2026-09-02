@@ -12,13 +12,14 @@
  * 5. 跳過：已經是連結內的文字、code block、heading
  */
 
-import { readFileSync } from 'fs';
+import { readFileSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { visit } from 'unist-util-visit';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CONCEPTS_FILE = join(__dirname, '..', 'src', 'data', 'concepts.yaml');
+const EN_ARTICLES_DIR = join(__dirname, '..', 'src', 'content', 'articles', 'en');
 
 // ── Parse concepts.yaml (same minimal parser as registry script) ────
 
@@ -78,6 +79,24 @@ function parseSimpleYaml(text) {
   return result;
 }
 
+// ── 英文版文章清單（決定概念連結要指中文版還是英文版）─────
+
+let enSlugs = null;
+
+function getEnSlugs() {
+  if (enSlugs) return enSlugs;
+  try {
+    enSlugs = new Set(
+      readdirSync(EN_ARTICLES_DIR)
+        .filter((f) => f.endsWith('.md'))
+        .map((f) => f.replace(/\.md$/, ''))
+    );
+  } catch {
+    enSlugs = new Set();
+  }
+  return enSlugs;
+}
+
 // ── Load concept data ───────────────────────────────────
 
 let conceptEntries = null;
@@ -102,7 +121,6 @@ function getConceptEntries() {
         displayName: c.displayName || name,
         shortDesc: c.shortDesc || '',
         canonicalArticle: c.canonicalArticle || '',
-        link: `/articles/${c.canonicalArticle}/`,
       });
     }
   }
@@ -120,10 +138,19 @@ export default function remarkConceptLinks() {
     const entries = getConceptEntries();
     const linked = new Set(); // Track which concepts we've already linked in this file
 
-    // Determine current article slug (to skip self-linking)
+    // Determine current article slug (to skip self-linking).
+    // 英文版路徑是 articles/en/<slug>.md，要剝掉 en/ 前綴，否則英文版會連到自己的中文版。
+    const filePath = file?.history?.[0] || '';
+    const isEn = /articles\/en\/[^/]+\.md$/.test(filePath);
     const currentSlug = file?.data?.astro?.frontmatter?.slug
-      || file?.history?.[0]?.match(/articles\/(.+?)\.md/)?.[1]
+      || filePath.match(/articles\/(?:en\/)?(.+?)\.md/)?.[1]
       || '';
+
+    // 英文版優先連英文 canonical（該篇有英文版才連，否則退回中文版）
+    const linkFor = (canonical) =>
+      isEn && getEnSlugs().has(canonical)
+        ? `/en/articles/${canonical}/`
+        : `/articles/${canonical}/`;
 
     visit(tree, 'text', (node, index, parent) => {
       // Skip if parent is heading, link, code, or inlineCode
@@ -177,7 +204,7 @@ export default function remarkConceptLinks() {
           // Add linked concept
           newChildren.push({
             type: 'html',
-            value: `<a href="${entry.link}" class="concept-link" data-tooltip="${entry.shortDesc}" title="${entry.shortDesc}">${match[0]}</a>`,
+            value: `<a href="${linkFor(entry.canonicalArticle)}" class="concept-link" data-tooltip="${entry.shortDesc}" title="${entry.shortDesc}">${match[0]}</a>`,
           });
 
           linked.add(entry.conceptName);

@@ -5,6 +5,17 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+- [ ] [內容] **新文章 `git-guide`「Git 是什麼？零基礎版本控制教學」中英雙版已寫好，build 綠（181 頁），尚未 commit——等 Joseph 人工 gate**（EDITORIAL §7：AI 不得代替 Joseph 發佈）。
+      角度＝**2026 版**：不教背指令（CLI agent 會下），教「AI 一次改 12 個檔案、Cmd+Z 救不回來」為什麼讓觀念比五年前更重要；
+      四個地方（工作區/暫存區/本地倉庫/遠端）→ 用 `gh repo create --source=. --private --push` 一行上 GitHub → 兩台電腦同步。
+      **零缺圖債**：三張概念圖全部手寫 SVG（`save-points-vs-cloud-drive` / `git-four-places` / `two-machines-diverge`），
+      已在瀏覽器逐張看過無文字溢出；全篇 0 個 `@img`（因為走 CLI，不需要 UI 截圖）。
+      **站上真實素材入文**：① 兩台機器累積 6 個沒推的 commit 撞上（全域憲法那條坑）② `.env`／金鑰進 git 歷史＝去平台作廢才是唯一解（2026-07-23 事故）。
+      **剩待辦**：① Joseph review 後 commit＋push；② ~4 週後看 GSC「git 教學／git 是什麼」長尾有沒有進來（這是站上第一篇吃 Git 字的文章）。
+- [x] [概念] **`Git` 與 `GitHub` 兩個概念都已加進 `src/data/concepts.yaml`**（2026-09-02，Joseph 拍板加 GitHub）。
+      清快取重 build 後的真實命中：**Git 8 篇**（cli-guide／deploy-openclaw-cloud／dev-cli-tools-mac／firebase-firestore-rules-deploy／media-guide 及對應英文版；錨文字＝「Git」「版控」）、
+      **GitHub 25 篇**（錨文字全部是「GitHub」，無誤連）。
+      ⚠️ **先前寫「Git 對既有文章零渲染變更」是錯的**——那是量到 Astro content 舊快取，見下方那條坑。
 - [ ] [功能] **課堂即時投票 class poll（2026-08-08 已實作＋migration 016 已上 production，尚未 push、講師端沒人看過）**。用途＝日晴生活零售 AI 課 8/12（Day 3）、8/14（Day 4）：跑完 Colab 出現一個數字 → 問全班「這個數字在你那行是多少？」→ 投影分布 → 挑極端值邀請分享。做法：`/admin/poll-live/` 建場次（**與 AI 能力測驗共用 `quiz_sessions`**，同一組代碼同一個 QR）→ 點題出題 → 學員開 `launchdock.app/poll/?code=XXXXXX` 點選項。**學員端刻意不輪詢**（即時是投影給全班看的，講師喊「請重新整理」即可，省 75 萬次請求）。八題題號 Q3–Q10 已印在學員講義上，`npm run poll:check` 逐字對撞，改題庫必跑。⛔ 講師端**故意沒有「結束收件」鈕**（poll 整堂課都在收件，誤按一次全班掛），那顆鈕只在 quiz-live。
 ✅ **2026-08-09 依 Joseph 手機實測回饋改版**（`66f43c7`）：學員端**一次只看得到一題**並標明所屬課程段落（原本八題一次列完像問卷，走馬看花一路投完就把整堂課的互動點用光）；講師端加「⏸ 停下來討論」（只改畫面不動場次 status，按下去不會有人送出失敗）；業態擴到 14 個含傳產／製造，「其他」可自己打字。
 **剩待辦**：① **講師端畫面真人實測（唯一沒被任何人看過的部分，需 Google 登入，AI 代不了）**——重點看投影模式的字級；② 手機實機投一次（Joseph 已投過一次，改版後尚未再投）；③ production 測試場次 `DEMO12` 看完要刪；④ 8/12 建議 Google 表單並行保險，8/14 再全押；⑤ 選配：把八題以外的通用場景（每場講座暖場）收成長期資產，BACKLOG 原本那條「AI 能力測驗後續：講座/課程暖場」定位剛好對上；⑥ 選配：晚到的學員補不了前面的題（現行設計取捨），若之後覺得需要，可加「已經問過的」摺疊區。
@@ -60,6 +71,13 @@
 - [ ] [缺圖] ollama-openclaw-windows：缺 4 張（圖庫已有 16 檔，這 4 個 id 尚未拍，需 Windows）— @img
 
 ## 💡 來自規劃（你或 AI 提議的新內容）
+- [x] [i18n] ~~**英文文章的概念連結會連到中文 canonical，而且會自連自己**~~ → **2026-09-02 已修**（`plugins/remark-concept-links.mjs`）：
+      currentSlug 改成剝掉 `en/` 前綴（英文版不再自連），並加 `linkFor()`——英文版優先連 `/en/articles/<canonical>/`，
+      該 canonical 沒有英文版時才退回中文版。清快取重 build 驗過：**英文自連 0 篇**，英文概念連結已指向 `/en/`。
+      原始問題描述：。`plugins/remark-concept-links.mjs` 抓 currentSlug 用
+      `articles/(.+?)\.md`，英文版路徑取出來是 `en/git-guide` ≠ canonical `git-guide` → 判定不是自己 → 連過去。
+      **這是既有全站行為**（`en/ai-agent-anatomy` 早就把 Harness 連到 `/articles/ai-agent-anatomy/`），不是這次造成的。
+      修法很小：currentSlug 去掉 `en/` 前綴；順帶可讓英文版連到 `/en/articles/<canonical>/`（若該篇有英文版）— i18n
 - [x] [SEO] ~~**改 `cli-guide` 標題後半段**~~ → **2026-08-10 已改（中英雙版，`33943e7`）**，下一步＝~08-24 單看該頁 CTR。原始分析：（2026-08-10 驗收結論，見 `docs/seo-after-2026-08-10.md`）。
       它一頁吃全站 12% 曝光（4,136）但 CTR 只 0.7%、排名 7.6＝**人到門口沒進來**。
       現行後半「命令列介面（Command-Line Interface）白話完整介紹」＝同義詞重複＋自我描述；

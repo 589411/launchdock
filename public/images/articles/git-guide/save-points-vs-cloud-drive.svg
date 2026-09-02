@@ -1,0 +1,50 @@
+<svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <rect x="1" y="1" width="798" height="428" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="40" y="46" font-size="22" font-weight="bold" fill="#0f3460">雲端硬碟 vs Git：差在「你回得去哪裡」</text>
+
+  <!-- left: cloud drive -->
+  <rect x="32" y="72" width="352" height="316" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="56" y="104" font-size="16" font-weight="bold" fill="#d32f2f">雲端硬碟／自動同步</text>
+  <text x="56" y="128" font-size="13" fill="#8b949e">只保留「現在這一刻」的樣子</text>
+
+  <g font-size="13" fill="#24292f">
+    <rect x="56" y="146" width="304" height="34" rx="6" fill="#fdecea" stroke="#f5c2c0"/>
+    <text x="70" y="168">週一：能跑的版本</text>
+    <text x="330" y="168" text-anchor="end" fill="#d32f2f">被覆蓋</text>
+
+    <rect x="56" y="190" width="304" height="34" rx="6" fill="#fdecea" stroke="#f5c2c0"/>
+    <text x="70" y="212">週二：AI 改了 12 個檔案</text>
+    <text x="330" y="212" text-anchor="end" fill="#d32f2f">被覆蓋</text>
+
+    <rect x="56" y="234" width="304" height="34" rx="6" fill="#ffffff" stroke="#d0d7de"/>
+    <text x="70" y="256">週三：壞掉了</text>
+    <text x="330" y="256" text-anchor="end" font-weight="bold" fill="#24292f">← 你只有這個</text>
+  </g>
+  <rect x="56" y="288" width="304" height="76" rx="8" fill="#fdecea" stroke="#d32f2f"/>
+  <text x="70" y="314" font-size="14" font-weight="bold" fill="#d32f2f">結果：回不去</text>
+  <text x="70" y="338" font-size="13" fill="#24292f">「昨天還好好的」＝你也說不出</text>
+  <text x="70" y="356" font-size="13" fill="#24292f">昨天到底長什麼樣</text>
+
+  <!-- right: git -->
+  <rect x="416" y="72" width="352" height="316" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="440" y="104" font-size="16" font-weight="bold" fill="#2e7d32">Git：一連串存檔點</text>
+  <text x="440" y="128" font-size="13" fill="#8b949e">每個存檔點都還在，隨時跳回去</text>
+
+  <line x1="456" y1="156" x2="456" y2="270" stroke="#2e7d32" stroke-width="2"/>
+  <g font-size="13" fill="#24292f">
+    <circle cx="456" cy="163" r="7" fill="#2e7d32"/>
+    <text x="478" y="168">週一：能跑的版本</text>
+    <circle cx="456" cy="207" r="7" fill="#2e7d32"/>
+    <text x="478" y="212">週二：AI 改了 12 個檔案</text>
+    <circle cx="456" cy="251" r="7" fill="#2e7d32"/>
+    <text x="478" y="256">週三：壞掉了</text>
+  </g>
+  <path d="M 600 256 C 660 256 660 168 604 168" fill="none" stroke="#1976d2" stroke-width="2" stroke-dasharray="5 4"/>
+  <polygon points="604,163 592,168 604,173" fill="#1976d2"/>
+  <text x="668" y="216" font-size="12" fill="#1976d2" text-anchor="middle">跳回去</text>
+
+  <rect x="440" y="288" width="304" height="76" rx="8" fill="#e8f5e9" stroke="#2e7d32"/>
+  <text x="454" y="314" font-size="14" font-weight="bold" fill="#2e7d32">結果：回得去，而且看得出差在哪</text>
+  <text x="454" y="338" font-size="13" fill="#24292f">「週二那一版是好的」→ 一行指令</text>
+  <text x="454" y="356" font-size="13" fill="#24292f">就回到那一刻的全部檔案</text>
+</svg>

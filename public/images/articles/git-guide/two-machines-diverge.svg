@@ -1,0 +1,55 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d32f2f"/>
+    </marker>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2e7d32"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="798" height="498" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="40" y="46" font-size="22" font-weight="bold" fill="#0f3460">兩台電腦分岔：怎麼發生的，怎麼不發生</text>
+
+  <!-- BAD -->
+  <rect x="28" y="70" width="740" height="182" rx="10" fill="#ffffff" stroke="#f5c2c0"/>
+  <text x="48" y="98" font-size="16" font-weight="bold" fill="#d32f2f">✗ 沒先 pull 就開工</text>
+
+  <text x="48" y="128" font-size="13" font-weight="bold" fill="#8b949e">筆電</text>
+  <line x1="100" y1="146" x2="330" y2="146" stroke="#d32f2f" stroke-width="2"/>
+  <circle cx="120" cy="146" r="7" fill="#8b949e"/>
+  <circle cx="240" cy="146" r="7" fill="#d32f2f"/>
+  <text x="240" y="132" font-size="12" fill="#d32f2f" text-anchor="middle">改了 A 檔</text>
+  <path d="M 250 146 L 330 146" stroke="#d32f2f" stroke-width="2" marker-end="url(#a1)"/>
+  <text x="392" y="150" font-size="13" font-weight="bold" fill="#2e7d32">已 push</text>
+
+  <text x="48" y="196" font-size="13" font-weight="bold" fill="#8b949e">桌機</text>
+  <line x1="100" y1="214" x2="330" y2="214" stroke="#d32f2f" stroke-width="2"/>
+  <circle cx="120" cy="214" r="7" fill="#8b949e"/>
+  <circle cx="240" cy="214" r="7" fill="#d32f2f"/>
+  <text x="240" y="238" font-size="12" fill="#d32f2f" text-anchor="middle">在「舊的那份」上也改了 A 檔</text>
+  <path d="M 250 214 L 330 214" stroke="#d32f2f" stroke-width="2" marker-end="url(#a1)"/>
+
+  <rect x="404" y="188" width="348" height="52" rx="8" fill="#fdecea" stroke="#d32f2f"/>
+  <text x="418" y="210" font-size="13" font-weight="bold" fill="#d32f2f">push 被拒：Updates were rejected</text>
+  <text x="418" y="230" font-size="12" fill="#24292f">（提示 fetch first／整合遠端變更）→ 要收拾了</text>
+
+  <text x="48" y="278" font-size="13" fill="#8b949e">兩邊的起點是同一個，但各自往前走了一步 → 遠端不知道要聽誰的。</text>
+
+  <!-- GOOD -->
+  <rect x="28" y="298" width="740" height="182" rx="10" fill="#ffffff" stroke="#a5d6a7"/>
+  <text x="48" y="326" font-size="16" font-weight="bold" fill="#2e7d32">✓ 開工第一件事：git pull --rebase</text>
+
+  <text x="48" y="356" font-size="13" font-weight="bold" fill="#8b949e">桌機</text>
+  <line x1="100" y1="374" x2="600" y2="374" stroke="#2e7d32" stroke-width="2"/>
+  <circle cx="120" cy="374" r="7" fill="#8b949e"/>
+  <circle cx="300" cy="374" r="7" fill="#1976d2"/>
+  <text x="300" y="358" font-size="12" fill="#1976d2" text-anchor="middle">先把筆電那步拉下來</text>
+  <circle cx="470" cy="374" r="7" fill="#2e7d32"/>
+  <text x="470" y="358" font-size="12" fill="#2e7d32" text-anchor="middle">再開始改</text>
+  <path d="M 480 374 L 600 374" stroke="#2e7d32" stroke-width="2" marker-end="url(#a2)"/>
+  <text x="662" y="378" font-size="13" font-weight="bold" fill="#2e7d32">push 一次過</text>
+
+  <rect x="100" y="404" width="652" height="56" rx="8" fill="#e8f5e9" stroke="#2e7d32"/>
+  <text x="116" y="428" font-size="13" font-weight="bold" fill="#2e7d32">一條直線，沒有岔路，就沒有東西要合併。</text>
+  <text x="116" y="450" font-size="12" fill="#24292f">代價：開工前多打一行字。省下的：一次分岔收拾平均 10～30 分鐘，而且是在你最急的時候。</text>
+</svg>

@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-08-17（**SEO：GSC 七桶全部歸類完畢，找到並修掉三個真 bug**——① 場景連結漏補斜線 `142ac22` ② **全站 soft-404**（不存在的網址回 200＋首頁，壞連結監控一直是失效的）`2dd4da8` ③ `/en/404/` 自己可被索引 `9665e2e`。結論：**七桶沒有一桶需要按「驗證修正」**。詳見 `docs/seo-indexing-fix.md` §五~七與下方 SEO 段落）｜前次 2026-08-09（晚）（**新文章 `google-colab-guide`「Google Colab 新手教學」中英雙版已寫好、15 張圖已本機遮罩＋人眼覆核、build 綠 177 頁、尚未 commit**——從桌面 20 張 Colab 截圖反推，走 `docs/reverse-article-from-screenshots.md` 流程；定位經 Joseph 拍板＝**通用 Colab 教學、不強調課程**，課程資料端點 `sunlit.launchdock.app/data` 依指示遮掉。詳見下方「下一個具體動作」最新條）｜前次 2026-08-09（**課堂即時投票已上 production 並照 Joseph 手機實測回饋改版：一次只出一題＋綁課程段落＋停下來討論、業態擴到 14 個並可自己打字**；commit `cff0f71`／`66f43c7`／`daa70d7` 皆已 push。**講師端畫面仍沒有人看過**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-08（課堂即時投票初版＋migration 016 上 production＋匿名 RLS 12 項端到端驗過）｜前次 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
+**最後更新：** 2026-09-02（**新文章 `git-guide`「Git 是什麼？零基礎版本控制教學」中英雙版已寫好、三張概念圖手寫 SVG 已瀏覽器逐張看過、build 綠 181 頁、零缺圖債、尚未 commit**——等 Joseph 人工 gate。同時 `concepts.yaml` 新增 `Git`＋`GitHub` 兩個概念（實際命中 8 篇／25 篇），並修好英文版概念連結自連中文版的老問題。詳見下方「下一個具體動作」最新條）｜前次 2026-08-17（**SEO：GSC 七桶全部歸類完畢，找到並修掉三個真 bug**——① 場景連結漏補斜線 `142ac22` ② **全站 soft-404**（不存在的網址回 200＋首頁，壞連結監控一直是失效的）`2dd4da8` ③ `/en/404/` 自己可被索引 `9665e2e`。結論：**七桶沒有一桶需要按「驗證修正」**。詳見 `docs/seo-indexing-fix.md` §五~七與下方 SEO 段落）｜前次 2026-08-09（晚）（**新文章 `google-colab-guide`「Google Colab 新手教學」中英雙版已寫好、15 張圖已本機遮罩＋人眼覆核、build 綠 177 頁、尚未 commit**——從桌面 20 張 Colab 截圖反推，走 `docs/reverse-article-from-screenshots.md` 流程；定位經 Joseph 拍板＝**通用 Colab 教學、不強調課程**，課程資料端點 `sunlit.launchdock.app/data` 依指示遮掉。詳見下方「下一個具體動作」最新條）｜前次 2026-08-09（**課堂即時投票已上 production 並照 Joseph 手機實測回饋改版：一次只出一題＋綁課程段落＋停下來討論、業態擴到 14 個並可自己打字**；commit `cff0f71`／`66f43c7`／`daa70d7` 皆已 push。**講師端畫面仍沒有人看過**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-08（課堂即時投票初版＋migration 016 上 production＋匿名 RLS 12 項端到端驗過）｜前次 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 📈 SEO 成效量測（**✅ 2026-08-10 已驗收，見 `docs/seo-after-2026-08-10.md`**）
@@ -88,6 +88,35 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 圖庫 94MB→70MB、講義線打通（modules → handout）。全部改動已本地 build 驗證通過、尚未 commit。
 
 ## 下一個具體動作 ⭐
+
+**2026-09-02 新文章 `git-guide` 中英雙版已完成，待 Joseph gate 後 commit + push** ⬅️ 最新
+
+站上 47 篇從來沒有一篇講版控（`deploy-to-github-pages` 只順手用過 `git push`）——這是真缺口，不是重造輪子。
+角度是 Joseph 指定的 **2026 版**：不教背指令（CLI agent 會下），教「AI 一次改 12 個檔案、Cmd+Z 救不回來」
+為什麼讓**觀念變得比五年前更重要**；然後用 `gh repo create --source=. --private --push` 一行上 GitHub、
+`git pull --rebase` 做兩台電腦異地同步。
+
+- **產物**：`src/content/articles/git-guide.md` + `en/git-guide.md`（各 477 行）、
+  `public/images/articles/git-guide/` 三張**手寫 SVG 概念圖**（雲端硬碟 vs 存檔點／四個地方×三個指令／兩台分岔）。
+- **零缺圖債**：全篇 **0 個 `@img`**——因為走 CLI 路線不需要 UI 截圖，概念圖照 H3 全部用 SVG。
+- **機械檢查全過**：H1 build 綠（181 頁）、H2 無佔位符、H3 無概念圖欠條、H4 已加 `Git` 概念＋跑過 `npm run registry`、
+  H5 中英雙版同 slug、H6 SVG 手寫無截圖無 PII、H7 `git 2.49.0`／`gh 2.74.0`／`gh repo create` 旗標當天在本機查證。
+- **站上真實經驗入文**（這是別的 Git 教學抄不走的部分）：① 兩台機器累積 6 個沒推的 commit 撞上；
+  ② `.env`／金鑰進了 git 歷史＝**去平台作廢金鑰才是唯一解**（2026-07-23 事故）。
+- **瀏覽器實測**：`npm run preview` 逐張看過三張 SVG，無文字溢出、表格無破版。
+- ⛔ **未 commit**（EDITORIAL §7：AI 不得代替 Joseph 按發佈）。Joseph review 後：
+  `git add src/content/articles/git-guide.md src/content/articles/en/git-guide.md public/images/articles/git-guide/ src/data/concepts.yaml docs/article-registry.json BACKLOG.md STATUS.md && git commit && git push`
+- **下一個可證偽的量測**：~2026-10-01 看 GSC 有沒有「git 教學／git 是什麼／版本控制」長尾進來（站上第一篇吃 Git 字的文章）。
+- ✅ **同批一起做掉的兩件事**（Joseph 2026-09-02 指示）：
+  ① `concepts.yaml` 加 `GitHub`（canonical `github-account-signup`）→ 全站 **25 篇**的第一個「GitHub」自動連過去；`Git` 則命中 **8 篇**。
+  ② 修 `plugins/remark-concept-links.mjs`：英文版不再把概念連到自己的中文版（currentSlug 剝掉 `en/`），
+     且英文版優先連 `/en/articles/<canonical>/`（沒有英文版才退回中文）。英文自連 0 篇。
+- 🕳️ **踩到一個會騙人的坑（已記進記憶池）**：改 remark 插件／`concepts.yaml` 後 `npm run build` **綠燈但不重新渲染**
+  （Astro content 快取只認 `.md` 變動）。我第一次驗收因此得出「Git 概念零影響」的錯誤結論。
+  **凡驗收 build-time 插件效果，先 `rm -rf .astro node_modules/.astro dist` 再量。**
+
+> ⚠️ 下面 8/12 那段警語已過期（課程日已過），留著只為對帳。
+
 
 > ⚠️ **8/12 上課是硬期限，最高優先仍是下面那條「開講師端看版面」**（只有 Joseph 做得了）。
 > 下面這條新文章是內容線，不擋上課。

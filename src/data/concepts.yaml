@@ -437,3 +437,19 @@ Connector:
   shortDesc: "把 AI 接上外部服務的授權通道，讓 AI 不只是回答、而是能實際去操作你的帳號"
   canonicalArticle: "grok-connect-github"
   relatedArticles: ["chatgpt-connect-github", "mcp-protocol", "llm-tool-calling-era"]
+
+# ── 版本控制（2026-09-02 新增）────────────────────────────
+
+Git:
+  displayName: "Git"
+  aliases: ["Git", "版本控制", "版控"]
+  shortDesc: "幫專案建立「存檔點」的版本控制工具，裝在你自己的電腦上，離線也能回到任何一個歷史版本"
+  canonicalArticle: "git-guide"
+  relatedArticles: ["deploy-to-github-pages", "github-account-signup", "dev-cli-tools-mac", "cli-guide"]
+
+GitHub:
+  displayName: "GitHub"
+  aliases: ["GitHub", "github"]
+  shortDesc: "全世界最多人用的程式碼託管平台，放 Git 倉庫的雲端拷貝，也是異地同步與協作的中繼站"
+  canonicalArticle: "github-account-signup"
+  relatedArticles: ["git-guide", "deploy-to-github-pages", "github-developer-settings-tokens", "dev-cli-tools-mac"]

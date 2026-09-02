@@ -1,0 +1,73 @@
+<svg viewBox="0 0 800 470" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1976d2"/>
+    </marker>
+    <marker id="arwBack" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b949e"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="798" height="468" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="40" y="46" font-size="22" font-weight="bold" fill="#0f3460">四個地方，三個指令：檔案是怎麼一路走到 GitHub 的</text>
+
+  <!-- your computer box -->
+  <rect x="28" y="72" width="560" height="230" rx="10" fill="#ffffff" stroke="#d0d7de" stroke-dasharray="6 4"/>
+  <text x="44" y="96" font-size="13" font-weight="bold" fill="#8b949e">你的電腦（沒網路也能做完這三格）</text>
+
+  <!-- 1 workspace -->
+  <rect x="48" y="112" width="152" height="112" rx="8" fill="#e3f0fb" stroke="#1976d2"/>
+  <text x="124" y="142" font-size="15" font-weight="bold" fill="#1976d2" text-anchor="middle">① 工作區</text>
+  <text x="124" y="166" font-size="12" fill="#24292f" text-anchor="middle">你正在編輯的</text>
+  <text x="124" y="184" font-size="12" fill="#24292f" text-anchor="middle">那些檔案本身</text>
+  <text x="124" y="208" font-size="12" fill="#8b949e" text-anchor="middle">＝資料夾裡看到的</text>
+
+  <!-- 2 index -->
+  <rect x="232" y="112" width="152" height="112" rx="8" fill="#fff7e6" stroke="#e0a300"/>
+  <text x="308" y="142" font-size="15" font-weight="bold" fill="#a97400" text-anchor="middle">② 暫存區</text>
+  <text x="308" y="166" font-size="12" fill="#24292f" text-anchor="middle">這次存檔要放</text>
+  <text x="308" y="184" font-size="12" fill="#24292f" text-anchor="middle">哪幾個改動</text>
+  <text x="308" y="208" font-size="12" fill="#8b949e" text-anchor="middle">＝挑揀台</text>
+
+  <!-- 3 local repo -->
+  <rect x="416" y="112" width="152" height="112" rx="8" fill="#e8f5e9" stroke="#2e7d32"/>
+  <text x="492" y="142" font-size="15" font-weight="bold" fill="#2e7d32" text-anchor="middle">③ 本地倉庫</text>
+  <text x="492" y="166" font-size="12" fill="#24292f" text-anchor="middle">存檔點正式生效</text>
+  <text x="492" y="184" font-size="12" fill="#24292f" text-anchor="middle">（回得去了）</text>
+  <text x="492" y="208" font-size="12" fill="#8b949e" text-anchor="middle">＝ .git 資料夾</text>
+
+  <!-- 4 remote -->
+  <rect x="628" y="112" width="140" height="112" rx="8" fill="#f3e8fd" stroke="#7e3ff2"/>
+  <text x="698" y="142" font-size="15" font-weight="bold" fill="#7e3ff2" text-anchor="middle">④ 遠端倉庫</text>
+  <text x="698" y="166" font-size="12" fill="#24292f" text-anchor="middle">GitHub 上的</text>
+  <text x="698" y="184" font-size="12" fill="#24292f" text-anchor="middle">同一份拷貝</text>
+  <text x="698" y="208" font-size="12" fill="#8b949e" text-anchor="middle">＝異地同步點</text>
+
+  <!-- arrows forward -->
+  <line x1="204" y1="150" x2="226" y2="150" stroke="#1976d2" stroke-width="2" marker-end="url(#arw)"/>
+  <text x="215" y="140" font-size="11" font-weight="bold" fill="#1976d2" text-anchor="middle">add</text>
+  <line x1="388" y1="150" x2="410" y2="150" stroke="#1976d2" stroke-width="2" marker-end="url(#arw)"/>
+  <text x="399" y="140" font-size="11" font-weight="bold" fill="#1976d2" text-anchor="middle">commit</text>
+  <line x1="572" y1="150" x2="622" y2="150" stroke="#1976d2" stroke-width="2" marker-end="url(#arw)"/>
+  <text x="597" y="140" font-size="11" font-weight="bold" fill="#1976d2" text-anchor="middle">push</text>
+
+  <!-- arrow back: pull -->
+  <path d="M 690 240 L 690 268 L 130 268 L 130 232" fill="none" stroke="#8b949e" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arwBack)"/>
+  <text x="410" y="262" font-size="12" font-weight="bold" fill="#8b949e" text-anchor="middle">pull（換一台電腦時，先做這個）</text>
+
+  <!-- observation row -->
+  <rect x="28" y="322" width="740" height="124" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="48" y="350" font-size="15" font-weight="bold" fill="#0f3460">你要看得懂的三個「儀表板」（不改東西，隨便按）</text>
+  <g font-size="13" fill="#24292f">
+    <rect x="48" y="366" width="230" height="62" rx="8" fill="#f8fafc" stroke="#d0d7de"/>
+    <text x="62" y="390" font-size="13" font-weight="bold" fill="#1976d2">git status</text>
+    <text x="62" y="412">現在哪些檔案在①、哪些在②</text>
+
+    <rect x="292" y="366" width="230" height="62" rx="8" fill="#f8fafc" stroke="#d0d7de"/>
+    <text x="306" y="390" font-size="13" font-weight="bold" fill="#1976d2">git diff</text>
+    <text x="306" y="412">改動的內容逐行長什麼樣</text>
+
+    <rect x="536" y="366" width="232" height="62" rx="8" fill="#f8fafc" stroke="#d0d7de"/>
+    <text x="550" y="390" font-size="13" font-weight="bold" fill="#1976d2">git log --oneline</text>
+    <text x="550" y="412">到目前為止存過哪些檔點</text>
+  </g>
+</svg>

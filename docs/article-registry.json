@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-08-09T11:46:31.797Z",
+  "_generated": "2026-09-02T13:39:19.998Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -331,6 +331,18 @@
       "shortDesc": "把 AI 接上外部服務的授權通道，讓 AI 不只是回答、而是能實際去操作你的帳號",
       "canonicalArticle": "grok-connect-github",
       "link": "/articles/grok-connect-github/"
+    },
+    "Git": {
+      "displayName": "Git",
+      "shortDesc": "幫專案建立「存檔點」的版本控制工具，裝在你自己的電腦上，離線也能回到任何一個歷史版本",
+      "canonicalArticle": "git-guide",
+      "link": "/articles/git-guide/"
+    },
+    "GitHub": {
+      "displayName": "GitHub",
+      "shortDesc": "全世界最多人用的程式碼託管平台，放 Git 倉庫的雲端拷貝，也是異地同步與協作的中繼站",
+      "canonicalArticle": "github-account-signup",
+      "link": "/articles/github-account-signup/"
     }
   },
   "articles": [
@@ -504,7 +516,10 @@
       ],
       "modules": [],
       "concepts_defined": [],
-      "concepts_referenced": [],
+      "concepts_referenced": [
+        "Git",
+        "GitHub"
+      ],
       "link": "/articles/dev-cli-tools-mac/"
     },
     {
@@ -704,7 +719,10 @@
       "prerequisites": [],
       "modules": [],
       "concepts_defined": [],
-      "concepts_referenced": [],
+      "concepts_referenced": [
+        "Git",
+        "GitHub"
+      ],
       "link": "/articles/deploy-to-github-pages/"
     },
     {
@@ -1322,8 +1340,8 @@
     },
     {
       "slug": "cli-guide",
-      "title": "CLI 是什麼？命令列介面（Command-Line Interface）白話完整介紹",
-      "description": "CLI（Command-Line Interface，命令列介面）就是用打字指令、而不是滑鼠來操作電腦。這篇用白話解釋 CLI 是什麼、和 GUI／終端機／Shell 差在哪、常見指令有哪些，完全沒基礎也看得懂。",
+      "title": "CLI 是什麼？10 分鐘上手命令列，跟終端機／Shell 差在哪（附 18 個常用指令）",
+      "description": "CLI（Command-Line Interface，命令列介面）就是改用打字指令、而不是滑鼠來操作電腦。這篇用白話從零講起：CLI 跟終端機、Shell、GUI 到底差在哪、新手最常用的 18 個指令（分 6 類）、管道怎麼把指令串起來，以及為什麼現在的 AI Agent 幾乎都跑在 CLI 上。完全沒基礎也看得懂，基本操作 10 分鐘就能上手。",
       "scene": "環境準備",
       "difficulty": "入門",
       "contentType": "guide",
@@ -1345,9 +1363,39 @@
       "concepts_referenced": [
         "WSL",
         "Homebrew",
-        "caffeinate"
+        "caffeinate",
+        "Git"
       ],
       "link": "/articles/cli-guide/"
+    },
+    {
+      "slug": "git-guide",
+      "title": "Git 是什麼？零基礎版本控制教學：讓 CLI 工具替你下指令，推上 GitHub 兩台電腦同步",
+      "description": "不用背指令也能開始用 Git。這篇先把觀念講清楚：Git 跟雲端硬碟差在哪、Git 跟 GitHub 差在哪、檔案怎麼從「工作區」一路走到 GitHub。然後帶你用 CLI 工具（含 Claude Code 這類 AI 指令列助手）從零建立第一個版控專案、推上 GitHub、在第二台電腦接著做。附 AI 時代的三條紅線與六個常見錯誤。",
+      "scene": "環境準備",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "Git",
+        "GitHub",
+        "設定",
+        "整合",
+        "安裝"
+      ],
+      "prerequisites": [
+        "cli-guide",
+        "github-account-signup"
+      ],
+      "modules": [
+        "M02"
+      ],
+      "concepts_defined": [
+        "Git"
+      ],
+      "concepts_referenced": [
+        "GitHub"
+      ],
+      "link": "/articles/git-guide/"
     },
     {
       "slug": "github-developer-settings-tokens",
@@ -1365,7 +1413,9 @@
       "prerequisites": [],
       "modules": [],
       "concepts_defined": [],
-      "concepts_referenced": [],
+      "concepts_referenced": [
+        "GitHub"
+      ],
       "link": "/articles/github-developer-settings-tokens/"
     },
     {
@@ -1484,8 +1534,12 @@
       ],
       "prerequisites": [],
       "modules": [],
-      "concepts_defined": [],
-      "concepts_referenced": [],
+      "concepts_defined": [
+        "GitHub"
+      ],
+      "concepts_referenced": [
+        "Git"
+      ],
       "link": "/articles/github-account-signup/"
     },
     {
