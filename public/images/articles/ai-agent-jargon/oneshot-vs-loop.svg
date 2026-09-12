@@ -1,0 +1,63 @@
+<svg viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <defs>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2e7d32"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="798" height="428" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="28" y="38" font-size="20" font-weight="bold" fill="#0f3460">為什麼 200 張不能一口氣丟給它</text>
+
+  <!-- BAD -->
+  <rect x="24" y="56" width="752" height="152" rx="10" fill="#fff5f5" stroke="#d32f2f"/>
+  <text x="44" y="82" font-size="14.5" font-weight="bold" fill="#d32f2f">❌ 一次全丟進去</text>
+  <text x="44" y="104" font-size="12" fill="#8b949e">「這 200 張收據，幫我整理成報帳表」</text>
+
+  <text x="44" y="140" font-size="11.5" fill="#8b949e">它的 context window（一次讀得下的量）</text>
+  <rect x="44" y="150" width="300" height="38" rx="6" fill="#ffffff" stroke="#d32f2f"/>
+  <rect x="50" y="156" width="288" height="26" rx="4" fill="#f8b4b4"/>
+  <text x="194" y="174" font-size="12" fill="#7f1d1d" text-anchor="middle">已經滿了</text>
+  <rect x="352" y="156" width="26" height="26" rx="4" fill="#f8b4b4" opacity="0.7"/>
+  <rect x="384" y="156" width="26" height="26" rx="4" fill="#f8b4b4" opacity="0.45"/>
+  <rect x="416" y="156" width="26" height="26" rx="4" fill="#f8b4b4" opacity="0.25"/>
+  <text x="352" y="200" font-size="11.5" fill="#d32f2f">裝不下的，就被擠出去了</text>
+
+  <text x="500" y="146" font-size="12.5" fill="#24292f">後面的把前面的擠掉 →</text>
+  <text x="500" y="168" font-size="12.5" font-weight="bold" fill="#d32f2f">它開始漏單、開始編金額</text>
+  <text x="500" y="190" font-size="11.5" fill="#8b949e">而且你看不出是哪幾張出錯</text>
+
+  <!-- GOOD -->
+  <rect x="24" y="228" width="752" height="176" rx="10" fill="#f1f8f4" stroke="#2e7d32"/>
+  <text x="44" y="254" font-size="14.5" font-weight="bold" fill="#2e7d32">✅ 分批餵，每批只留一句摘要</text>
+  <text x="44" y="276" font-size="12" fill="#8b949e">這件事就叫 Context 工程：決定「這一輪它眼前該有哪些東西」</text>
+
+  <rect x="44" y="292" width="120" height="66" rx="7" fill="#ffffff" stroke="#2e7d32"/>
+  <text x="104" y="318" font-size="12.5" fill="#24292f" text-anchor="middle">第 1～20 張</text>
+  <text x="104" y="340" font-size="11.5" fill="#8b949e" text-anchor="middle">放得下</text>
+
+  <rect x="196" y="304" width="92" height="42" rx="7" fill="#e8f5e9" stroke="#2e7d32" stroke-dasharray="4 3"/>
+  <text x="242" y="322" font-size="11.5" fill="#2e7d32" text-anchor="middle">留一句摘要</text>
+  <text x="242" y="338" font-size="11" fill="#8b949e" text-anchor="middle">「已處理 20 張」</text>
+
+  <rect x="320" y="292" width="120" height="66" rx="7" fill="#ffffff" stroke="#2e7d32"/>
+  <text x="380" y="318" font-size="12.5" fill="#24292f" text-anchor="middle">第 21～40 張</text>
+  <text x="380" y="340" font-size="11.5" fill="#8b949e" text-anchor="middle">也放得下</text>
+
+  <text x="468" y="330" font-size="16" fill="#8b949e" text-anchor="middle">⋯</text>
+
+  <rect x="496" y="292" width="120" height="66" rx="7" fill="#ffffff" stroke="#2e7d32"/>
+  <text x="556" y="318" font-size="12.5" fill="#24292f" text-anchor="middle">第 181～200 張</text>
+  <text x="556" y="340" font-size="11.5" fill="#8b949e" text-anchor="middle">一樣放得下</text>
+
+  <path d="M 168 325 L 192 325" stroke="#2e7d32" stroke-width="2" marker-end="url(#g)"/>
+  <path d="M 292 325 L 316 325" stroke="#2e7d32" stroke-width="2" marker-end="url(#g)"/>
+  <path d="M 444 325 L 456 325" stroke="#2e7d32" stroke-width="2" marker-end="url(#g)"/>
+  <path d="M 480 325 L 492 325" stroke="#2e7d32" stroke-width="2" marker-end="url(#g)"/>
+  <path d="M 620 325 L 644 325" stroke="#2e7d32" stroke-width="2" marker-end="url(#g)"/>
+
+  <rect x="648" y="292" width="112" height="66" rx="7" fill="#ffffff" stroke="#0f3460"/>
+  <text x="704" y="318" font-size="12.5" font-weight="bold" fill="#0f3460" text-anchor="middle">報帳表</text>
+  <text x="704" y="340" font-size="11.5" fill="#8b949e" text-anchor="middle">200 列都在</text>
+
+  <text x="44" y="384" font-size="12" fill="#2e7d32">每一輪都放得下 → 它不需要靠「印象」作答 → 你事後查得出每一列是從哪張收據來的</text>
+</svg>

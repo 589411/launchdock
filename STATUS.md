@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-09-02（**新文章 `git-guide`「Git 是什麼？零基礎版本控制教學」中英雙版已上線並線上驗收通過**——Joseph 當場 gate 通過，三個 commit `5374cdc`／`7cb4846`／`593ca88` 已 push，Cloudflare Pages 部署完成、中英頁與三張 SVG 線上皆 200。同批還做完三件 i18n／概念系統的修正：① `concepts.yaml` 新增 `Git`＋`GitHub`（實際命中 8 篇／25 篇）② 英文頁概念連結不再自連中文版、**60 個概念全部補英文 tooltip（`shortDescEn`）**、tooltip 寬度修正 ③ 英文頁「延伸閱讀」改讀英文 collection。並揪出修掉 **YAML parser 吃掉三個中文名概念**的既有真 bug（`set-system-prompt` 自動連結 0 篇 → 10 篇，線上已驗）。詳見下方「下一個具體動作」最新條）｜前次 2026-08-17（**SEO：GSC 七桶全部歸類完畢，找到並修掉三個真 bug**——① 場景連結漏補斜線 `142ac22` ② **全站 soft-404**（不存在的網址回 200＋首頁，壞連結監控一直是失效的）`2dd4da8` ③ `/en/404/` 自己可被索引 `9665e2e`。結論：**七桶沒有一桶需要按「驗證修正」**。詳見 `docs/seo-indexing-fix.md` §五~七與下方 SEO 段落）｜前次 2026-08-09（晚）（**新文章 `google-colab-guide`「Google Colab 新手教學」中英雙版已寫好、15 張圖已本機遮罩＋人眼覆核、build 綠 177 頁、尚未 commit**——從桌面 20 張 Colab 截圖反推，走 `docs/reverse-article-from-screenshots.md` 流程；定位經 Joseph 拍板＝**通用 Colab 教學、不強調課程**，課程資料端點 `sunlit.launchdock.app/data` 依指示遮掉。詳見下方「下一個具體動作」最新條）｜前次 2026-08-09（**課堂即時投票已上 production 並照 Joseph 手機實測回饋改版：一次只出一題＋綁課程段落＋停下來討論、業態擴到 14 個並可自己打字**；commit `cff0f71`／`66f43c7`／`daa70d7` 皆已 push。**講師端畫面仍沒有人看過**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-08（課堂即時投票初版＋migration 016 上 production＋匿名 RLS 12 項端到端驗過）｜前次 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
+**最後更新：** 2026-09-12（**新文章 `ai-agent-jargon`「Prompt 工程、Context 工程、Loop、Harness 是什麼？用整理 200 張收據一次看懂」中英雙版已上線**——Joseph 當天 preview 後 gate 通過並指示 push。Joseph 拍板：實例＝整理 200 張收據做報帳表、定位＝碎碎念觀點文。零缺圖債（兩張手寫 SVG，0 個 @img）；新增 `Loop` 概念進 `concepts.yaml`。詳見下方「下一個具體動作」最新條）｜前次 2026-09-02（**新文章 `git-guide`「Git 是什麼？零基礎版本控制教學」中英雙版已上線並線上驗收通過**——Joseph 當場 gate 通過，三個 commit `5374cdc`／`7cb4846`／`593ca88` 已 push，Cloudflare Pages 部署完成、中英頁與三張 SVG 線上皆 200。同批還做完三件 i18n／概念系統的修正：① `concepts.yaml` 新增 `Git`＋`GitHub`（實際命中 8 篇／25 篇）② 英文頁概念連結不再自連中文版、**60 個概念全部補英文 tooltip（`shortDescEn`）**、tooltip 寬度修正 ③ 英文頁「延伸閱讀」改讀英文 collection。並揪出修掉 **YAML parser 吃掉三個中文名概念**的既有真 bug（`set-system-prompt` 自動連結 0 篇 → 10 篇，線上已驗）。詳見下方「下一個具體動作」最新條）｜前次 2026-08-17（**SEO：GSC 七桶全部歸類完畢，找到並修掉三個真 bug**——① 場景連結漏補斜線 `142ac22` ② **全站 soft-404**（不存在的網址回 200＋首頁，壞連結監控一直是失效的）`2dd4da8` ③ `/en/404/` 自己可被索引 `9665e2e`。結論：**七桶沒有一桶需要按「驗證修正」**。詳見 `docs/seo-indexing-fix.md` §五~七與下方 SEO 段落）｜前次 2026-08-09（晚）（**新文章 `google-colab-guide`「Google Colab 新手教學」中英雙版已寫好、15 張圖已本機遮罩＋人眼覆核、build 綠 177 頁、尚未 commit**——從桌面 20 張 Colab 截圖反推，走 `docs/reverse-article-from-screenshots.md` 流程；定位經 Joseph 拍板＝**通用 Colab 教學、不強調課程**，課程資料端點 `sunlit.launchdock.app/data` 依指示遮掉。詳見下方「下一個具體動作」最新條）｜前次 2026-08-09（**課堂即時投票已上 production 並照 Joseph 手機實測回饋改版：一次只出一題＋綁課程段落＋停下來討論、業態擴到 14 個並可自己打字**；commit `cff0f71`／`66f43c7`／`daa70d7` 皆已 push。**講師端畫面仍沒有人看過**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-08（課堂即時投票初版＋migration 016 上 production＋匿名 RLS 12 項端到端驗過）｜前次 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 📈 SEO 成效量測（**✅ 2026-08-10 已驗收，見 `docs/seo-after-2026-08-10.md`**）
@@ -89,7 +89,42 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
-**2026-09-02 新文章 `git-guide` 中英雙版已上線；下一個動作＝~10/01 看 GSC 長尾** ⬅️ 最新
+**2026-09-12 新文章 `ai-agent-jargon`（四個 AI 名詞解釋）中英雙版已 gate 通過並 push** ⬅️ 最新
+
+Joseph 給的題目＝「用實例說明 harness / loop / prompt engineering / context engineering」。
+**先查既有覆蓋**（複用優先）：站上已有 `ai-agent-anatomy`（Harness 三層）、`openclaw-agent`（Agent Loop 四步）、
+`prompt-engineering`、`ai-agent-memory-guide`（Context Engineering 的 canonical）——所以新文章**不重講定義**，
+定位改成「**四個詞的分工與邊界**」，用同一個實例貫穿。兩個決策由 Joseph 當場拍板：
+① 實例＝**整理 200 張收據做報帳表**（非技術讀者零門檻）② 定位＝**碎碎念觀點文**（scene 鴨編的碎碎念、difficulty 入門）。
+
+- **產物**：`src/content/articles/ai-agent-jargon.md` + `en/ai-agent-jargon.md`（各約 200 行）、
+  `public/images/articles/ai-agent-jargon/` **兩張手寫 SVG**（四詞在同一任務上的位置圖／一次丟 vs 分批餵）。
+- **核心骨架**：Prompt＝**交代**、Context＝**給料**、Loop＝**節奏**、Harness＝**驗收**；
+  每個詞都寫「它管什麼問題／在報帳這件事上長什麼樣／漏掉會怎樣」，最後收成一張對照表 ＋ 四句「評估 AI 工具該問的話」。
+- **零缺圖債**：全篇 **0 個 `@img`**（概念圖照 H3 全部 SVG）。
+- **機械檢查全過**：H1 build 綠（**183 頁**，較先前 181 +2）、H2 無佔位符、H3 無概念圖欠條、
+  H4 已加 `Loop` 概念（canonical=`ai-agent-jargon`）＋跑過 `npm run registry`（78 篇／61 概念）、
+  H5 中英雙版同 slug、H6 SVG 手寫、已 grep 掃過無人名/email/主機名/金鑰/私有端點、
+  H7 不適用（全篇未引用任何工具的價格或版本）。
+- **連結驗證**：兩頁所有站內連結逐一比對 dist 實體檔案，**零死連結**（唯二命中是 `?scene=` 查詢字串，非死連）；
+  英文頁 7 個概念連結**全部指向 `/en/`**；兩張 SVG 在中英頁皆正確引用且已進 dist。
+- 🐛 **順手擋掉一個會誤連的坑**：`Loop` 的 alias 原本放了「迴圈」，實際 build 後發現它命中
+  `openclaw-agent`「一直在同一步驟**迴圈**」與 `token-economics`「無限**迴圈**」——**那是程式失控的語境，
+  不是 Agent Loop 的正常節奏**，連過去會誤導。alias 收窄成 `Agent Loop / Agent 迴圈 / Loop（迴圈）/ Loop`，
+  重 build 後誤連 0 篇。（教訓：新概念的 alias 若是常用中文字，一定要 build 完回頭看實際命中處。）
+- ✅ **Joseph gate 通過（2026-09-12）**：跑過 `npm run preview` 實看，兩頁與兩張 SVG 本機皆 200。
+  gate 時 Joseph 指出一處用語要改成台灣用語：「怎麼把活**幹**完」→「怎麼把**任務做**完」、
+  「**幹**壞了怎麼辦」→「**做**壞了怎麼辦」（共三處，含對照表那列）。已改並重 build 綠。
+  順手掃過全文與兩張 SVG 有無其他大陸慣用語（視頻／質量／軟件／屏幕／信息／默認／用戶／數據／調用／優化／靠譜…）→ **零命中**。
+  stuckOptions 的「懂這個幹嘛？」經判斷是台灣自然口語，保留。
+- ⭐ **下一個具體動作（唯一待辦）**：~2026-10-10 看 GSC 有沒有「context engineering 是什麼／
+  prompt engineering 差別／harness 是什麼」長尾進來（站上第一篇正面吃這兩個字的文章）。
+- **選配**：判斷要不要進首頁 FAQ（依 CLAUDE.md FAQ 同步規則，候選＝「Prompt 工程跟 Context 工程差在哪？」，
+  全表 ~10 則上限，加就得汰換最弱的一則）——**Joseph 尚未決定**。
+
+---
+
+**2026-09-02 新文章 `git-guide` 中英雙版已上線；下一個動作＝~10/01 看 GSC 長尾**
 
 站上 47 篇從來沒有一篇講版控（`deploy-to-github-pages` 只順手用過 `git push`）——這是真缺口，不是重造輪子。
 角度是 Joseph 指定的 **2026 版**：不教背指令（CLI agent 會下），教「AI 一次改 12 個檔案、Cmd+Z 救不回來」

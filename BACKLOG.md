@@ -5,6 +5,20 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+- [x] [內容] **新文章 `ai-agent-jargon`「Prompt 工程、Context 工程、Loop、Harness 是什麼？用整理 200 張收據一次看懂」中英雙版已上線**（2026-09-12，Joseph preview 後 gate 通過）。
+      題目來自 Joseph：「用實例說明 harness / loop / prompt engineering / context engineering」。
+      **定位經查既有覆蓋後收斂**：站上已有 `ai-agent-anatomy`(Harness)／`openclaw-agent`(Agent Loop)／
+      `prompt-engineering`／`ai-agent-memory-guide`(Context Eng canonical) → 新文章**不重講定義**，
+      改講「**四個詞的分工與邊界**」：Prompt＝交代、Context＝給料、Loop＝節奏、Harness＝驗收。
+      實例與定位由 Joseph 當場拍板（200 張收據報帳表／碎碎念觀點文）。
+      **零缺圖債**：兩張手寫 SVG（`four-terms-map` 四詞在同一任務的位置／`oneshot-vs-loop` 一次丟 vs 分批餵），全篇 0 個 `@img`。
+      **新概念**：`Loop` 已進 `concepts.yaml`（canonical=本文）。⚠️ alias 原放「迴圈」會誤命中
+      `openclaw-agent`「一直在同一步驟迴圈」與 `token-economics`「無限迴圈」（程式失控語境 ≠ Agent Loop），
+      已收窄成 `Agent Loop / Agent 迴圈 / Loop（迴圈）/ Loop`，重 build 後誤連 0 篇。
+      **gate 時的修正**：Joseph 指出「怎麼把活幹完／幹壞了怎麼辦」要改成台灣用語 →「怎麼把任務做完／做壞了怎麼辦」（三處，含對照表）。
+      順手掃全文＋兩張 SVG 有無其他大陸慣用語 → 零命中。
+      **剩待辦**：① ~2026-10-10 看 GSC「context engineering 是什麼／prompt engineering 差別」長尾（站上第一篇吃這兩個字的文章）；
+      ② 選配：判斷要不要進首頁 FAQ（依 CLAUDE.md「新增文章時的 FAQ 同步規則」，候選問題＝「Prompt 工程跟 Context 工程差在哪？」）— Joseph 尚未決定。
 - [x] [i18n] **英文文章頁的「延伸閱讀」已改成英文**（2026-09-02）：`RelatedArticles.astro` 加 `lang` prop，
       英文時讀 `articlesEn` collection、連 `/en/articles/`，標題／場景／難度／分鐘全走 `src/i18n/ui.ts`
       （新增 `article.related.title` 中英兩則）。全站稽核：英文卡片 209 張**零中文連結、零壞連結**，
@@ -48,6 +62,14 @@
 - [ ] [內容] 這條若成系列，下一條工作流題目待定（候選：表單→CRM 自動貼、發票/收據擷取）— 內容規劃
 
 ## 📡 來自監控（系統自動產生，新項目補在最上）
+
+### 2026-09-12 寫 ai-agent-jargon 時順手發現
+- [ ] [i18n] **英文文章頁尾的「討論區」連到中文首頁**：既有慣例（`en/ai-agent-anatomy` 等）寫 `/#discussion`，
+      因為 `src/pages/en/index.astro` **根本沒有 `#discussion` 錨點**（中文 `index.astro:285` 有，FAQ 改版時保留了）。
+      新文章已照既有慣例寫 `/#discussion`（至少不是死錨），但英文讀者會被丟到中文首頁。
+      要解需在英文首頁補錨點或改連別處 — i18n
+- [ ] [i18n] **英文文章共用中文 SVG 概念圖**：`git-guide` 三張、`ai-agent-jargon` 兩張皆如此（只有 alt 改英文）。
+      這是既有慣例不是這次造成的，但英文讀者看到的圖是中文。要解＝每張圖出英文版（成本不低，Joseph 決定要不要投資）— i18n
 
 ### 2026-07-05 大整理 session（cowork 全面掃描 + 動工）
 - [x] [安全] Supabase 安全加固 07-05 完成(migration 006 已上 production + commit):4 個 SECURITY DEFINER view

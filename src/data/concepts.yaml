@@ -214,6 +214,14 @@ Context Engineering:
   canonicalArticle: "ai-agent-memory-guide"
   relatedArticles: ["rag-explained", "token-economics", "ai-tech-evolution"]
 
+Loop:
+  displayName: "Loop（迴圈）"
+  aliases: ["Agent Loop", "Agent 迴圈", "Loop（迴圈）", "Loop"]
+  shortDesc: "Agent 把一件大事拆成一輪一輪做完的節奏：做一輪、看結果、再決定下一輪，而不是一問一答"
+  shortDescEn: "The rhythm an agent works in — do a round, look at the result, then decide the next round, instead of one question and one answer"
+  canonicalArticle: "ai-agent-jargon"
+  relatedArticles: ["openclaw-agent", "ai-agent-anatomy", "cot-and-reasoning"]
+
 CoT:
   displayName: "Chain-of-Thought（思維鏈）"
   aliases: ["CoT", "Chain-of-Thought", "思維鏈"]
