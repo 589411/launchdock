@@ -56,7 +56,7 @@ Compare that with:
 
 (CSV is just a spreadsheet file Excel can open. You have to go into that much detail, because "sort these out" is every bit as vague to an AI as it is to someone on their first day.)
 
-Same model, same receipts. Rewriting that one paragraph alone changes the result dramatically. That's [prompt engineering](/en/articles/prompt-engineering/) — **turning the standard in your head into words the other side can act on.**
+Same model, same receipts. Rewriting that one paragraph alone changes the result dramatically. That's prompt engineering — **turning the standard in your head into words the other side can act on.**
 
 > <img src="/images/dock_head_s.png" alt="Blue Duck" width="24" style="vertical-align: middle;"> **Put another way**: a prompt is a food order. Say "I'll have a meal" and the cook has to guess. Say "beef noodle soup, light on noodles, extra broth, no cilantro" and you might actually get what you wanted.
 
@@ -78,13 +78,13 @@ So what happens if you dump all 200 receipts in at once?
 
 Once the early ones are pushed out, the AI does not tell you "I can't see those anymore." It **keeps writing from impression** — which is exactly how you end up with that report that's beautiful at the top and fabricated at the bottom.
 
-So the job becomes: **feed it 20 receipts this round, keep a one-line summary ("20 processed, running total 8,400"), then feed the next batch.** Deciding what goes in, what stays, and what can be dropped — that is [context engineering](/en/articles/ai-agent-memory-guide/).
+So the job becomes: **feed it 20 receipts this round, keep a one-line summary ("20 processed, running total 8,400"), then feed the next batch.** Deciding what goes in, what stays, and what can be dropped — that is context engineering.
 
 > <img src="/images/dock_head_s.png" alt="Blue Duck" width="24" style="vertical-align: middle;"> **Blue Duck says**: prompt engineering is *what you say*; context engineering is *what's on its desk*. These two get confused constantly, but the difference is easy to hold onto — **one manages the instruction, the other manages the material.** Speak as clearly as you like to an empty desk; no expense report will appear.
 
 **Skip it and**: entries go missing, amounts get invented, and you can't tell which ones went wrong.
 
-Worth adding: everything on that desk costs money — every batch burns [tokens](/en/articles/token-economics/). Good context engineering isn't just more accurate, it's cheaper.
+Worth adding: everything on that desk costs money — every batch burns tokens. Good context engineering isn't just more accurate, it's cheaper.
 
 ---
 
@@ -101,7 +101,7 @@ But 200 receipts can't be solved in one shot. It has to **go around**:
 3. Check the amount against the receipt
 4. Move to the next one and let the previous one go
 
-Then back to step 1. Two hundred times. That cycle — finish a round, look at the result, decide what the next round does — is the **loop**. The Think → Act → Observe → Decide cycle in our [Agent](/en/articles/openclaw-agent/) article is describing the same thing.
+Then back to step 1. Two hundred times. That cycle — finish a round, look at the result, decide what the next round does — is the **loop**. The Think → Act → Observe → Decide cycle in our [OpenClaw Agent Complete Guide](/en/articles/openclaw-agent/) is describing the same thing.
 
 The point of a loop isn't repetition. **The point is that at the end of each round it looks at the result before deciding what comes next.** This receipt is unreadable? Flag it and carry on, rather than stalling the whole batch. That's also the real dividing line between an agent and a chatbot.
 
@@ -122,9 +122,9 @@ The first three are all about getting the work done. But one question is still u
 - It's on iteration 300 and still going. Who calls time?
 - It decides to "helpfully tidy up" by deleting your old report. Who stops it?
 
-Whatever makes those calls is the [harness](/en/articles/ai-agent-anatomy/). It's the control layer wrapped around the model, responsible for **setting boundaries, verifying results, handling errors, and deciding when to stop.**
+Whatever makes those calls is the harness. It's the control layer wrapped around the model, responsible for **setting boundaries, verifying results, handling errors, and deciding when to stop.**
 
-In [Anatomy of an AI Agent](/en/articles/ai-agent-anatomy/) Blue Duck compared it to the head chef in a kitchen. Here's a version closer to your situation: **the harness is the person standing next to the intern, signing off on the work.** However diligent the intern is, with nobody checking, the wrong answer ships anyway.
+In [Dissecting an AI Agent](/en/articles/ai-agent-anatomy/) Blue Duck compared it to the head chef in a kitchen. Here's a version closer to your situation: **the harness is the person standing next to the intern, signing off on the work.** However diligent the intern is, with nobody checking, the wrong answer ships anyway.
 
 > <img src="/images/dock_head_s.png" alt="Blue Duck" width="24" style="vertical-align: middle;"> **Blue Duck says**: a model has no way of knowing "I'm not sure." It was trained to always produce an answer — which is why the rule "don't invent anything, stop and ask when unsure" always has to come from outside, from a person or a program. **That's why you can't skip the harness.**
 
@@ -183,7 +183,7 @@ You don't need to buy anything. The ChatGPT, Gemini, or Claude you already have 
 
 Afterwards you'll feel it clearly: **the consistency of the result has very little to do with which model you picked.**
 
-As for loop and harness — those are what you need when you want the whole thing to **run to completion without you watching**. That's [agent](/en/articles/openclaw-agent/) territory.
+As for loop and harness — those are what you need when you want the whole thing to **run to completion without you watching**. That's agent territory.
 
 > <img src="/images/dock_head_s.png" alt="Blue Duck" width="24" style="vertical-align: middle;"> To close in one line: **the model decides how smart it is; these four decide whether it's useful.** And all four are within your control.
 
