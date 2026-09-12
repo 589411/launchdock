@@ -117,6 +117,12 @@ Joseph 給的題目＝「用實例說明 harness / loop / prompt engineering / c
   「**幹**壞了怎麼辦」→「**做**壞了怎麼辦」（共三處，含對照表那列）。已改並重 build 綠。
   順手掃過全文與兩張 SVG 有無其他大陸慣用語（視頻／質量／軟件／屏幕／信息／默認／用戶／數據／調用／優化／靠譜…）→ **零命中**。
   stuckOptions 的「懂這個幹嘛？」經判斷是台灣自然口語，保留。
+- 🐛 **push 後自查揪出一個違反院規的地方（commit `163f3ee` 已修）**：記憶池 solutions.md「坑已解①」寫著
+  **概念名詞不要手動加連結**（Remark 插件會自動連 concepts.yaml 首次出現），我寫文時手動連了
+  Prompt 工程／Context Engineering／Harness／Agent／Token 五個概念名 → 本文內同一詞出現手動＋自動兩個連結
+  指向同一頁。已全部改回純文字交給插件，要指向特定文章的地方改用**文章標題**當錨文字（規則允許的形式）。
+  驗證：中英兩版本文內每個概念各自只連一次。**根因＝開場 grep 記憶池用的是 harness／context engineering，
+  撈不到那條**（那行關鍵字沒有這些詞）→ 已回 solutions.md 補關鍵字並記為北極星 reuse miss。
 - ⭐ **下一個具體動作（唯一待辦）**：~2026-10-10 看 GSC 有沒有「context engineering 是什麼／
   prompt engineering 差別／harness 是什麼」長尾進來（站上第一篇正面吃這兩個字的文章）。
 - **選配**：判斷要不要進首頁 FAQ（依 CLAUDE.md FAQ 同步規則，候選＝「Prompt 工程跟 Context 工程差在哪？」，
