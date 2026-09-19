@@ -1,7 +1,7 @@
 # STATUS — launchdock
 
 > 單一真相。每次離開前更新（全域憲法收尾鐵律）。
-**最後更新：** 2026-09-12（**新文章 `ai-agent-jargon`「Prompt 工程、Context 工程、Loop、Harness 是什麼？用整理 200 張收據一次看懂」中英雙版已上線**——Joseph 當天 preview 後 gate 通過並指示 push。Joseph 拍板：實例＝整理 200 張收據做報帳表、定位＝碎碎念觀點文。零缺圖債（兩張手寫 SVG，0 個 @img）；新增 `Loop` 概念進 `concepts.yaml`。詳見下方「下一個具體動作」最新條）｜前次 2026-09-02（**新文章 `git-guide`「Git 是什麼？零基礎版本控制教學」中英雙版已上線並線上驗收通過**——Joseph 當場 gate 通過，三個 commit `5374cdc`／`7cb4846`／`593ca88` 已 push，Cloudflare Pages 部署完成、中英頁與三張 SVG 線上皆 200。同批還做完三件 i18n／概念系統的修正：① `concepts.yaml` 新增 `Git`＋`GitHub`（實際命中 8 篇／25 篇）② 英文頁概念連結不再自連中文版、**60 個概念全部補英文 tooltip（`shortDescEn`）**、tooltip 寬度修正 ③ 英文頁「延伸閱讀」改讀英文 collection。並揪出修掉 **YAML parser 吃掉三個中文名概念**的既有真 bug（`set-system-prompt` 自動連結 0 篇 → 10 篇，線上已驗）。詳見下方「下一個具體動作」最新條）｜前次 2026-08-17（**SEO：GSC 七桶全部歸類完畢，找到並修掉三個真 bug**——① 場景連結漏補斜線 `142ac22` ② **全站 soft-404**（不存在的網址回 200＋首頁，壞連結監控一直是失效的）`2dd4da8` ③ `/en/404/` 自己可被索引 `9665e2e`。結論：**七桶沒有一桶需要按「驗證修正」**。詳見 `docs/seo-indexing-fix.md` §五~七與下方 SEO 段落）｜前次 2026-08-09（晚）（**新文章 `google-colab-guide`「Google Colab 新手教學」中英雙版已寫好、15 張圖已本機遮罩＋人眼覆核、build 綠 177 頁、尚未 commit**——從桌面 20 張 Colab 截圖反推，走 `docs/reverse-article-from-screenshots.md` 流程；定位經 Joseph 拍板＝**通用 Colab 教學、不強調課程**，課程資料端點 `sunlit.launchdock.app/data` 依指示遮掉。詳見下方「下一個具體動作」最新條）｜前次 2026-08-09（**課堂即時投票已上 production 並照 Joseph 手機實測回饋改版：一次只出一題＋綁課程段落＋停下來討論、業態擴到 14 個並可自己打字**；commit `cff0f71`／`66f43c7`／`daa70d7` 皆已 push。**講師端畫面仍沒有人看過**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-08（課堂即時投票初版＋migration 016 上 production＋匿名 RLS 12 項端到端驗過）｜前次 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
+**最後更新：** 2026-09-19（**新文章 `mcp-servers-picks`「MCP Server 該裝哪些？2026 年 12 個有公信力的精選＋三條安全鐵律」中英雙版已寫好、build 綠 185 頁、本機 preview 中、尚未 commit——等 Joseph gate**。定位＝「MCP 是什麼」交給既有 `mcp-protocol`，新文只講「挑選濾網＋精選清單＋安全」；兩張手寫 SVG、2 個真實 UI `@img`（Claude Connectors 頁／Notion OAuth）。同批把 `mcp-protocol` 中英版過時的 Server 清單改成一段話＋連新文，新增 `Tool Poisoning` 概念。詳見下方「下一個具體動作」最新條）｜前次 2026-09-12（**新文章 `ai-agent-jargon`「Prompt 工程、Context 工程、Loop、Harness 是什麼？用整理 200 張收據一次看懂」中英雙版已上線**——Joseph 當天 preview 後 gate 通過並指示 push。Joseph 拍板：實例＝整理 200 張收據做報帳表、定位＝碎碎念觀點文。零缺圖債（兩張手寫 SVG，0 個 @img）；新增 `Loop` 概念進 `concepts.yaml`。詳見下方「下一個具體動作」最新條）｜前次 2026-09-02（**新文章 `git-guide`「Git 是什麼？零基礎版本控制教學」中英雙版已上線並線上驗收通過**——Joseph 當場 gate 通過，三個 commit `5374cdc`／`7cb4846`／`593ca88` 已 push，Cloudflare Pages 部署完成、中英頁與三張 SVG 線上皆 200。同批還做完三件 i18n／概念系統的修正：① `concepts.yaml` 新增 `Git`＋`GitHub`（實際命中 8 篇／25 篇）② 英文頁概念連結不再自連中文版、**60 個概念全部補英文 tooltip（`shortDescEn`）**、tooltip 寬度修正 ③ 英文頁「延伸閱讀」改讀英文 collection。並揪出修掉 **YAML parser 吃掉三個中文名概念**的既有真 bug（`set-system-prompt` 自動連結 0 篇 → 10 篇，線上已驗）。詳見下方「下一個具體動作」最新條）｜前次 2026-08-17（**SEO：GSC 七桶全部歸類完畢，找到並修掉三個真 bug**——① 場景連結漏補斜線 `142ac22` ② **全站 soft-404**（不存在的網址回 200＋首頁，壞連結監控一直是失效的）`2dd4da8` ③ `/en/404/` 自己可被索引 `9665e2e`。結論：**七桶沒有一桶需要按「驗證修正」**。詳見 `docs/seo-indexing-fix.md` §五~七與下方 SEO 段落）｜前次 2026-08-09（晚）（**新文章 `google-colab-guide`「Google Colab 新手教學」中英雙版已寫好、15 張圖已本機遮罩＋人眼覆核、build 綠 177 頁、尚未 commit**——從桌面 20 張 Colab 截圖反推，走 `docs/reverse-article-from-screenshots.md` 流程；定位經 Joseph 拍板＝**通用 Colab 教學、不強調課程**，課程資料端點 `sunlit.launchdock.app/data` 依指示遮掉。詳見下方「下一個具體動作」最新條）｜前次 2026-08-09（**課堂即時投票已上 production 並照 Joseph 手機實測回饋改版：一次只出一題＋綁課程段落＋停下來討論、業態擴到 14 個並可自己打字**；commit `cff0f71`／`66f43c7`／`daa70d7` 皆已 push。**講師端畫面仍沒有人看過**，詳見下方「下一個具體動作」最新條）｜前次 2026-08-08（課堂即時投票初版＋migration 016 上 production＋匿名 RLS 12 項端到端驗過）｜前次 2026-08-05（**8/06 工研院場次 `25ZEA9` 待命；「送出失敗」已定位＝場次被關非 bug，訊息已改成可行動指引**；同日 90人併發壓測 PASS＋後台首次實看＋DEMO01 已清空＋QR code 已內建，詳見下方「下一個具體動作」最新條）｜前次 2026-08-03（**班級測驗（quiz 團體班模式）已實作＋migration 014 已上 production＋匿名 RLS 端到端驗過，尚未真人實測、尚未 push**，詳見下方「下一個具體動作」最新條）｜前次 2026-07-27（**新文章 `set-system-prompt` 系統提示詞四平台教學中英雙版——本地 build 綠、9 張圖本機遮罩＋兩輪覆核、尚未 push，等 Joseph review 遮罩圖，詳見下方「下一個具體動作」最新條**）｜前次 2026-07-24（**首頁討論區換成 FAQ + 鴨聚招牌改字**——commit `bb39e8f`：① Hero pill『鴨聚·Assemble！』→『免費·限額／7/29 線上工作坊｜兩小時親手寫第一段 AI 系統提示詞』（英文版 pill 一併改）② `<HomeDiscussion>`（停 100+ 天像荒廢、打臉 Hero）→ **資料驅動 FAQ**（`89af33d`，取代先前寫死版）：唯一來源 `src/data/home-faq.ts`，畫面 `<details>` 與 FAQPage JSON-LD 都由它 `.map()` 生成（不會 drift），保留 `#discussion` 錨點，底部留真人求助入口；移除 HomeDiscussion import。CLAUDE.md 已加「新增文章時的 FAQ 同步規則」（首頁 FAQ 只改 home-faq.ts、~10 則上限）。✅ **meetup.astro 也已對齊**（commit `0978b9f`：title/description/eyebrow 從內行人「鴨聚 Assemble」改成「7/29 免費線上工作坊｜兩小時，親手寫出你的第一段 AI 系統提示詞」，跟首頁 pill 一致；H1/內文本就對齊未動）。前段：SEO 灘頭堡落地：cowork 7 篇 + caffeinate 文章 SEO 優化已上線——commit `2b268d3`，錯誤碼文字化 + 高曝光文章 CTR 優化，只動標題/description/開頭/FAQ；同日還做了 ① 首頁 Hero 中英換臉（Hermes 排 OpenClaw 前）② redact 漏 key 資安事故止血 + 記坑 ③ 刪 50 張孤兒圖(21.9MB)+加 `npm run orphans` 稽核工具。`HANDOFF_hero_reface.md` 任務完成已刪）
 **整體狀態：** 🟢 進行中（2026-07-18 另修 Search Console 122 頁未索引：trailing-slash+canonical 全站修正已上線，見 docs/seo-indexing-fix.md）
 
 ## 📈 SEO 成效量測（**✅ 2026-08-10 已驗收，見 `docs/seo-after-2026-08-10.md`**）
@@ -89,7 +89,34 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
-**2026-09-12 新文章 `ai-agent-jargon`（四個 AI 名詞解釋）中英雙版已 gate 通過並 push** ⬅️ 最新
+**2026-09-19 新文章 `mcp-servers-picks`（MCP Server 精選＋安全鐵律）中英雙版已寫好，等 Joseph gate** ⬅️ 最新
+
+Joseph 給的題目＝「找目前有公信力、安全、有代表性的 MCP 服務，新增一篇介紹」。
+**先查既有覆蓋**：站上已有 `mcp-protocol`（概念文，2026-02 寫，內含一段已過時的 Server 清單——那批 Anthropic 參考實作
+GitHub/Slack/PostgreSQL 現已封存）→ 新文**不重講 MCP 是什麼**，定位＝「該裝哪些、怎麼判斷安不安全」。Joseph 拍板：
+① 精選（三層濾網＋約 12 個）而非大而全 ② 實際連接示範以 Claude Desktop 一鍵 connector 為主、Claude Code 一行指令、OpenClaw 只連回舊文。
+
+- **查證備忘（工程師D）**：✅ 官方參考實作現況與封存清單（modelcontextprotocol/servers）✅ Remote URL：GitHub／Notion／Slack／
+  Stripe／Sentry 取自 Claude Code 官方 docs；Context7／Supabase／Playwright 取自各自官方 repo/docs ✅ Tool Poisoning 已是 OWASP
+  正式條目 ✅ 43%／66% 數字出處 Practical DevSecOps 2026 統計 ✅ 2026-04 JHU 團隊 PR 標題注入事件（Practical DevSecOps 轉述）
+  ❓ Claude 連接器目錄「50+」為 2026-02 第三方數字，文中已寫「截至 2026 年 2 月」句式。
+- **產物**：`src/content/articles/mcp-servers-picks.md` + `en/`、`public/images/articles/mcp-servers-picks/` 兩張手寫 SVG
+  （三層濾網漏斗／Remote vs 本機）、**2 個 `@img` 欠條**（`claude-connectors-browse`、`notion-oauth-authorize`，都是真實 UI，合 H3）。
+- **同批修改**：`mcp-protocol.md` 中英「目前有哪些 MCP Server」整段換成一段話＋連新文（verifiedAt **未**動，因只重驗這一段）；
+  `concepts.yaml` 新增 `Tool Poisoning`（canonical=新文）、MCP 的 relatedArticles 加新文；`npm run registry` → 79 篇／62 概念。
+- **機械檢查**：H1 build 綠 **185 頁**（+2）、H2 無佔位符、H3 概念圖皆 SVG、H4 已跑 registry、H5 中英同 slug、
+  H6 SVG 手寫無機敏、H7 全部 URL／指令當天查證、`verifiedAt: 2026-09-19`。
+- 🐛 **build 後回頭看實際命中揪出一個誤連**：「左下角個**人設**定」被 Soul 的 alias「人設」吃掉 → 已改寫成「帳號選單 → Settings」。
+  **Soul alias「人設」是全站地雷**（任何含「個人設定」的句子都會中），已記進 BACKLOG 監控區。
+- **手動連結紀律**：照 solutions.md 規則，概念名詞全交給插件，站內連結一律用**文章標題**當錨文字；驗證中英兩頁每個概念各只自動連一次。
+- ⭐ **下一個具體動作**：Joseph 跑 `npm run preview` 看 `/articles/mcp-servers-picks/` 與 `/en/…`（本 session 已在 :4321 起了一份）
+  → gate 通過後 commit＋push（commit 範圍：兩篇新文、兩張 SVG、mcp-protocol 中英、concepts.yaml、article-registry.json、STATUS、BACKLOG）
+  → 之後補兩張 UI 截圖：`./scripts/add-image.sh mcp-servers-picks ~/Desktop/*.png`，插圖後必跑機敏掃描。
+- **選配**：首頁 FAQ 候選「MCP Server 該裝哪些？」——高搜尋需求待 GSC 驗證，**Joseph 未決定**。
+
+---
+
+**2026-09-12 新文章 `ai-agent-jargon`（四個 AI 名詞解釋）中英雙版已 gate 通過並 push**
 
 Joseph 給的題目＝「用實例說明 harness / loop / prompt engineering / context engineering」。
 **先查既有覆蓋**（複用優先）：站上已有 `ai-agent-anatomy`（Harness 三層）、`openclaw-agent`（Agent Loop 四步）、

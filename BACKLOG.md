@@ -63,6 +63,13 @@
 
 ## 📡 來自監控（系統自動產生，新項目補在最上）
 
+### 2026-09-19 寫 mcp-servers-picks 時順手發現
+- [ ] [概念連結] **Soul 的 alias「人設」會誤吃「個人設定」**：`concepts.yaml` Soul aliases 含「人設」，任何寫到「個**人設**定」的句子
+      都會被連到 openclaw-soul。本次新文已改寫避開，但全站其他文章未掃。建議把「人設」從 alias 移除或改成「AI 人設」— 概念系統
+- [ ] [缺圖] `mcp-servers-picks` 欠 2 張真實 UI 截圖：`claude-connectors-browse`、`notion-oauth-authorize`（中英共用）— 圖片
+- [ ] [內容] `mcp-protocol` 的「在 OpenClaw 中使用 MCP」段（`openclaw mcp install`／`config.yaml` 寫法）自 2026-02 未重驗，
+      新文只連回去沒重寫；若 OpenClaw 現已支援 Remote MCP URL，該段應補 Remote 寫法 — 內容時效
+
 ### 2026-09-12 寫 ai-agent-jargon 時順手發現
 - [ ] [i18n] **英文文章頁尾的「討論區」連到中文首頁**：既有慣例（`en/ai-agent-anatomy` 等）寫 `/#discussion`，
       因為 `src/pages/en/index.astro` **根本沒有 `#discussion` 錨點**（中文 `index.astro:285` 有，FAQ 改版時保留了）。
@@ -179,6 +186,9 @@
 - [ ] （範例）盤點 46 篇文章中截圖過舊、需重拍的
 
 ## ✅ 最近完成（保留最近 5 筆，舊的刪）
+- 2026-09-19 **新文章 `mcp-servers-picks`「MCP Server 該裝哪些？12 個精選＋三條安全鐵律」中英雙版**（build 綠 185 頁，等 Joseph gate 後 commit）：
+  三層濾網（誰維護／Remote vs 本機／在不在審查目錄）＋ 12 個官方維護精選 ＋ OWASP Tool Poisoning 三鐵律；兩張 SVG、2 個 UI @img 欠條。
+  同批更新 `mcp-protocol` 過時清單、新增 `Tool Poisoning` 概念。詳見 STATUS「下一個具體動作」。
 - 2026-08-09 **新文章 `google-colab-guide`「Google Colab 新手教學」中英雙版**（尚未 commit，等 Joseph review 遮罩圖）：
   從桌面 20 張截圖反推，照 `docs/reverse-article-from-screenshots.md`（複用 hit）。15 張圖本機遮罩＋人眼覆核，
   build 綠、`--validate` 15/15。定位經 Joseph 拍板＝通用 Colab 教學（不強調課程），`sunlit.launchdock.app/data` 依指示遮掉。
