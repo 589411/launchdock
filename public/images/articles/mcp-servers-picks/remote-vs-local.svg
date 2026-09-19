@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 440" font-family="-apple-system, 'Noto Sans TC', 'PingFang TC', sans-serif" font-size="15">
+  <title>Remote MCP 與本機 MCP 的差別：程式在誰的機器上跑、拿的是誰的權限</title>
+  <rect width="880" height="440" fill="#f8fafc"/>
+  <text x="440" y="36" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">同樣叫 MCP Server，跑在哪裡差很多</text>
+
+  <!-- LEFT: Remote -->
+  <rect x="30" y="60" width="400" height="350" rx="14" fill="#fff" stroke="#22c55e" stroke-width="2"/>
+  <text x="230" y="90" text-anchor="middle" font-size="18" font-weight="700" fill="#14532d">Remote（遠端託管）</text>
+  <!-- your computer -->
+  <rect x="60" y="120" width="140" height="90" rx="10" fill="#e2e8f0"/>
+  <text x="130" y="152" text-anchor="middle" font-weight="600" fill="#334155">你的電腦</text>
+  <text x="130" y="176" text-anchor="middle" fill="#475569">只有 AI 客戶端</text>
+  <text x="130" y="196" text-anchor="middle" fill="#475569">（Claude / OpenClaw）</text>
+  <!-- vendor -->
+  <rect x="260" y="120" width="140" height="90" rx="10" fill="#dcfce7"/>
+  <text x="330" y="152" text-anchor="middle" font-weight="600" fill="#14532d">廠商的伺服器</text>
+  <text x="330" y="176" text-anchor="middle" fill="#166534">MCP Server 在這跑</text>
+  <text x="330" y="196" text-anchor="middle" fill="#166534">例：mcp.notion.com</text>
+  <path d="M200 165 L260 165" stroke="#22c55e" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="230" y="155" text-anchor="middle" font-size="12" fill="#166534">HTTPS + OAuth</text>
+  <g fill="#14532d">
+    <text x="60" y="250">✅ 授權像「用 Google 登入」，可隨時撤銷</text>
+    <text x="60" y="280">✅ 拿到的只是那個服務的權限</text>
+    <text x="60" y="310">✅ 不用裝 Node／Python，不用管更新</text>
+    <text x="60" y="340">⚠️ 你的資料會經過廠商（本來就在那）</text>
+    <text x="60" y="370">⚠️ 廠商倒了、改價，你跟著受影響</text>
+  </g>
+
+  <!-- RIGHT: Local -->
+  <rect x="450" y="60" width="400" height="350" rx="14" fill="#fff" stroke="#f59e0b" stroke-width="2"/>
+  <text x="650" y="90" text-anchor="middle" font-size="18" font-weight="700" fill="#78350f">本機（stdio，裝在你電腦）</text>
+  <rect x="480" y="120" width="340" height="90" rx="10" fill="#fef3c7"/>
+  <text x="650" y="150" text-anchor="middle" font-weight="600" fill="#78350f">你的電腦</text>
+  <text x="650" y="176" text-anchor="middle" fill="#92400e">AI 客戶端 ＋ MCP Server 都在這跑</text>
+  <text x="650" y="196" text-anchor="middle" fill="#92400e">例：npx @playwright/mcp</text>
+  <g fill="#78350f">
+    <text x="480" y="250">✅ 能碰你的檔案、瀏覽器、終端機</text>
+    <text x="480" y="280">✅ 資料不出門（適合本機檔案、離線）</text>
+    <text x="480" y="310">⚠️ 用你的帳號權限跑：它能做的＝你能做的</text>
+    <text x="480" y="340">⚠️ 裝之前等於「執行一段別人的程式」</text>
+    <text x="480" y="370">⚠️ 要自己更新、自己看它有沒有被下毒</text>
+  </g>
+
+  <text x="440" y="430" text-anchor="middle" font-size="13" fill="#64748b">判斷口訣：先找 Remote 版；沒有 Remote 版、又非得碰本機資源，才裝本機版。</text>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#22c55e"/></marker></defs>
+</svg>

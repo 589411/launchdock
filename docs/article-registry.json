@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-09-12T09:55:47.527Z",
+  "_generated": "2026-09-19T12:56:48.098Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -106,6 +106,13 @@
       "shortDescEn": "The standard protocol that lets an AI pick up external tools on its own — a USB port for AI",
       "canonicalArticle": "mcp-protocol",
       "link": "/articles/mcp-protocol/"
+    },
+    "Tool Poisoning": {
+      "displayName": "Tool Poisoning（工具下毒）",
+      "shortDesc": "壞人把指令藏在 MCP 工具的說明或回傳內容裡，AI 當成可信上下文照做——OWASP 已列為正式攻擊條目",
+      "shortDescEn": "An attacker hides instructions inside an MCP tool's description or response; the AI treats them as trusted context and obeys — now an official OWASP attack entry",
+      "canonicalArticle": "mcp-servers-picks",
+      "link": "/articles/mcp-servers-picks/"
     },
     "Gateway": {
       "displayName": "Gateway",
@@ -1252,6 +1259,35 @@
       "link": "/articles/gemini-gas-ordering-system/"
     },
     {
+      "slug": "mcp-servers-picks",
+      "title": "MCP Server 該裝哪些？2026 年 12 個有公信力的精選，加三條不會被下毒的安全鐵律",
+      "description": "登錄站上有 12 萬個 MCP Server，但 43% 有命令注入漏洞。鴨編給你三層濾網、12 個官方維護的精選，以及在 Claude Desktop／Claude Code 接上第一個 MCP 的最短路徑。",
+      "scene": "核心功能",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "MCP",
+        "Agent",
+        "Anthropic",
+        "設定",
+        "整合"
+      ],
+      "prerequisites": [
+        "mcp-protocol"
+      ],
+      "modules": [
+        "M01",
+        "M05"
+      ],
+      "concepts_defined": [
+        "Tool Poisoning"
+      ],
+      "concepts_referenced": [
+        "MCP"
+      ],
+      "link": "/articles/mcp-servers-picks/"
+    },
+    {
       "slug": "mcp-protocol",
       "title": "MCP 協定：AI 的 USB 接口，讓工具即插即用",
       "description": "Model Context Protocol 讓 AI 能連接任何工具。了解 MCP 如何運作，以及它為什麼是 OpenClaw 的核心骨架。",
@@ -1272,6 +1308,7 @@
       ],
       "concepts_referenced": [
         "Harness",
+        "Tool Poisoning",
         "Telegram Bot",
         "Connector"
       ],
@@ -2399,6 +2436,7 @@
         "Harness"
       ],
       "concepts_referenced": [
+        "Tool Poisoning",
         "Loop"
       ],
       "link": "/articles/ai-agent-anatomy/"

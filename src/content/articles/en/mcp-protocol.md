@@ -227,37 +227,14 @@ openclaw mcp test google-drive
 
 ## What MCP Servers Are Available?
 
-The ecosystem is growing fast. Here are the major Servers as of early 2026:
+The ecosystem is growing extremely fast — as of September 2026 the major registries list over 120,000 servers combined, most of them unreviewed.
+Note that the Anthropic reference servers an earlier version of this article listed (GitHub, Slack, PostgreSQL, etc.) **have since been archived**, replaced by official versions maintained by each vendor.
 
-### Productivity Tools
+Blue Duck split "which ones to install, and how to judge whether they're safe" into its own article:
+**[Which MCP Servers Should You Install? 12 Trustworthy Picks for 2026, Plus Three Rules That Keep You From Getting Poisoned](/en/articles/mcp-servers-picks/)**.
+It gives you a three-layer filter (who maintains it / remote vs. local / whether it's in a reviewed directory) and a categorized shortlist.
 
-| MCP Server | Features | Difficulty |
-|---|---|---|
-| Google Drive | Search, read/write files | ⭐ Easy |
-| Google Calendar | Schedule management | ⭐ Easy |
-| Gmail | Send/receive emails | ⭐⭐ Medium |
-| Notion | Knowledge base operations | ⭐ Easy |
-| Slack | Send/reply messages | ⭐ Easy |
-| Telegram | Chatbot | ⭐⭐ Medium |
-
-### Developer Tools
-
-| MCP Server | Features | Difficulty |
-|---|---|---|
-| GitHub | Repo / Issue / PR management | ⭐⭐ Medium |
-| Database (PostgreSQL) | Database queries | ⭐⭐ Medium |
-| Docker | Container management | ⭐⭐⭐ Advanced |
-| Kubernetes | Cluster management | ⭐⭐⭐ Advanced |
-
-### Data Sources
-
-| MCP Server | Features | Difficulty |
-|---|---|---|
-| Web Search | Web search | ⭐ Easy |
-| Web Scraper | Web scraping | ⭐⭐ Medium |
-| RSS | RSS feeds | ⭐ Easy |
-
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> You can find the full list on [ClawHub](https://clawhub.dev).
+> <img src="/images/dock_head_s.png" alt="Blue Duck" width="24" style="vertical-align: middle;"> Want to browse yourself? The Claude Connectors Directory (claude.com/connectors) and the official MCP Registry (registry.modelcontextprotocol.io) are currently the two places where someone reviews entries before they go live.
 
 ---
 

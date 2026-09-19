@@ -227,37 +227,14 @@ openclaw mcp test google-drive
 
 ## 目前有哪些 MCP Server？
 
-生態系快速成長中，以下是截至 2026 年初的主要 Server：
+生態系成長極快——截至 2026 年 9 月，各大登錄站合計已超過 12 萬個 Server，但其中大多數沒有人審查過，
+而且本文早期版本列的 GitHub、Slack、PostgreSQL 等 Anthropic 參考實作**現已封存**，改由各廠商自己維護官方版。
 
-### 生產力工具
+鴨編把「該裝哪些、怎麼判斷安不安全」獨立成一篇：
+**[《MCP Server 該裝哪些？2026 年 12 個有公信力的精選，加三條不會被下毒的安全鐵律》](/articles/mcp-servers-picks/)**。
+那篇給你三層濾網（誰維護／Remote 還是本機／在不在有審查的目錄）與分類精選表。
 
-| MCP Server | 功能 | 難度 |
-|---|---|---|
-| Google Drive | 搜尋、讀寫檔案 | ⭐ 簡單 |
-| Google Calendar | 行程管理 | ⭐ 簡單 |
-| Gmail | 收發郵件 | ⭐⭐ 中等 |
-| Notion | 知識庫操作 | ⭐ 簡單 |
-| Slack | 發訊迴覆 | ⭐ 簡單 |
-| Telegram | 聊天機器人 | ⭐⭐ 中等 |
-
-### 開發工具
-
-| MCP Server | 功能 | 難度 |
-|---|---|---|
-| GitHub | Repo / Issue / PR 管理 | ⭐⭐ 中等 |
-| Database (PostgreSQL) | 資料庫查詢 | ⭐⭐ 中等 |
-| Docker | 容器管理 | ⭐⭐⭐ 進階 |
-| Kubernetes | 叢集管理 | ⭐⭐⭐ 進階 |
-
-### 資料來源
-
-| MCP Server | 功能 | 難度 |
-|---|---|---|
-| Web Search | 網路搜尋 | ⭐ 簡單 |
-| Web Scraper | 爬取網頁 | ⭐⭐ 中等 |
-| RSS | RSS 訂閱 | ⭐ 簡單 |
-
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 完整清單可以在 [ClawHub](https://clawhub.dev) 上查看。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> 想自己逛：Claude 連接器目錄（claude.com/connectors）與官方 MCP Registry（registry.modelcontextprotocol.io）是目前兩個「有人看過才上架」的地方。
 
 ---
 

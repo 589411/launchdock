@@ -15,6 +15,7 @@ const homeFaq: HomeFaqItem[] = [
   { q: '執行 ollama launch hermes 跳出 Error: unknown integration: hermes 怎麼辦？', a: '你的 Ollama 版本太舊——hermes 這個整合要 Ollama 夠新才有。更新 Ollama、完全重開、再跑一次即可。', href: '/articles/hermes-agent/', linkText: 'Hermes Agent 快速上手' },
   { q: '系統提示詞是什麼？', a: '系統提示詞是 AI 的「人設／設定檔」，決定它怎麼回應你——同一個 AI，換一段系統提示詞就像換了個人。', href: '/meetup/', linkText: '7/29 免費工作坊帶你寫一段' },
   { q: 'Mac 跑長任務跑到一半睡著、任務斷掉？', a: '用 macOS 內建的 caffeinate 讓電腦別睡，服務就不會中斷。', href: '/articles/caffeinate-keep-mac-awake/', linkText: 'caffeinate 是什麼' },
+  { q: 'MCP Server 該裝哪些？隨便裝會有風險嗎？', a: '會。登錄站上有 12 萬個 MCP Server，但多數沒人審過，接錯一個 AI 可能被藏在內容裡的指令下毒。先挑廠商官方、Remote（OAuth）版、在 Claude 連接器目錄裡的，十來個就夠用。', href: '/articles/mcp-servers-picks/', linkText: '12 個有公信力的 MCP 精選＋三條安全鐵律' },
   { q: '要花錢嗎？會不會很貴？', a: '入門幾乎零成本：OpenClaw 免費，模型可用 Google／OpenRouter 的免費額度先玩，衝量前記得設花費上限。', href: '/articles/token-economics/', linkText: 'Token 計費怎麼算' },
   { q: '我卡住了、出現看不懂的錯誤怎麼辦？', a: '把「完整的錯誤訊息」原封不動複製下來，到下面的鴨聚或討論區貼給我們——別自己硬扛，貼上紅字最快解。' },
 ];

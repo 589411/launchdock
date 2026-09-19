@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="-apple-system, 'Noto Sans TC', 'PingFang TC', sans-serif" font-size="16">
+  <title>挑 MCP Server 的三層濾網：誰維護、怎麼連、在不在目錄</title>
+  <rect width="880" height="520" fill="#f8fafc"/>
+  <text x="440" y="40" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">12 萬個 MCP Server → 你只需要留下的那幾個</text>
+
+  <!-- top pile -->
+  <g fill="#cbd5e1">
+    <rect x="60" y="70" width="760" height="46" rx="8"/>
+  </g>
+  <text x="440" y="99" text-anchor="middle" fill="#334155" font-weight="600">2026-09 各大登錄站合計約 122,000 個 Server（大多數沒人審過）</text>
+
+  <!-- funnel -->
+  <g stroke="#94a3b8" stroke-width="2" fill="none">
+    <path d="M60 116 L160 236"/><path d="M820 116 L720 236"/>
+    <path d="M160 236 L240 356"/><path d="M720 236 L640 356"/>
+    <path d="M240 356 L320 456"/><path d="M640 356 L560 456"/>
+  </g>
+
+  <!-- filter 1 -->
+  <rect x="120" y="150" width="640" height="70" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="140" y="178" font-weight="700" fill="#1e3a8a">濾網 1｜誰維護？</text>
+  <text x="140" y="204" fill="#1e3a8a">廠商官方 ＞ MCP 專案參考實作 ＞ 個人／社群（先問「出事找誰」）</text>
+
+  <!-- filter 2 -->
+  <rect x="200" y="270" width="480" height="70" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="220" y="298" font-weight="700" fill="#14532d">濾網 2｜怎麼連？</text>
+  <text x="220" y="324" fill="#14532d">Remote（OAuth、廠商託管）＞ 本機安裝（拿你電腦的權限跑）</text>
+
+  <!-- filter 3 -->
+  <rect x="280" y="380" width="320" height="70" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="300" y="408" font-weight="700" fill="#78350f">濾網 3｜在不在有審查的目錄？</text>
+  <text x="300" y="434" fill="#78350f">Claude 連接器目錄／官方 MCP Registry</text>
+
+  <!-- output -->
+  <rect x="320" y="470" width="240" height="40" rx="20" fill="#0f172a"/>
+  <text x="440" y="496" text-anchor="middle" fill="#fff" font-weight="700">剩下十來個，夠用了</text>
+</svg>

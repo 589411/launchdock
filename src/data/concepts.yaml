@@ -136,7 +136,15 @@ MCP:
   shortDesc: "讓 AI 自動學會使用外部工具的標準協定，AI 的 USB 接口"
   shortDescEn: "The standard protocol that lets an AI pick up external tools on its own — a USB port for AI"
   canonicalArticle: "mcp-protocol"
-  relatedArticles: ["openclaw-agent", "telegram-integration"]
+  relatedArticles: ["mcp-servers-picks", "openclaw-agent", "telegram-integration"]
+
+Tool Poisoning:
+  displayName: "Tool Poisoning（工具下毒）"
+  aliases: ["Tool Poisoning（工具下毒）", "Tool Poisoning", "工具下毒", "MCP Tool Poisoning"]
+  shortDesc: "壞人把指令藏在 MCP 工具的說明或回傳內容裡，AI 當成可信上下文照做——OWASP 已列為正式攻擊條目"
+  shortDescEn: "An attacker hides instructions inside an MCP tool's description or response; the AI treats them as trusted context and obeys — now an official OWASP attack entry"
+  canonicalArticle: "mcp-servers-picks"
+  relatedArticles: ["mcp-protocol", "ai-agent-anatomy"]
 
 Gateway:
   displayName: "Gateway"
