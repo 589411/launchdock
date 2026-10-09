@@ -15,6 +15,8 @@ export interface Product {
   summary: { zh: string; en: string };
   stack: string[];
   url?: string;
+  /** 英文頁改連的網址（子站有英文版時用），沒寫就用 url */
+  urlEn?: string;
   /** 內部工具：沒有公開網址 */
   internal?: boolean;
 }
@@ -100,6 +102,7 @@ export const products: Product[] = [
     },
     stack: ['Claude Code', 'Claude Code Skills', 'GitHub Actions'],
     url: 'https://lab.launchdock.app',
+    urlEn: 'https://lab.launchdock.app/en/',
   },
   {
     id: 'masters',
