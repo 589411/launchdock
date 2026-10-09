@@ -457,6 +457,7 @@ production 留著測試場次 **`DEMO12`**（`poll_active` 已設成 Q3，內有
   根本解是搬進獨立 schema / 獨立 project——只要還共用 anon key 風險就掛著（尚未動）。
 
 ## 進度脈絡（新的在上）
+- 2026-10-10 英文站所有 Lab 連結改連 `lab.launchdock.app/en/`（`6dc44dc` 產品頁卡片，`products.ts` 新增選填 `urlEn`；`5a10d6f` Header 工具選單桌機＋手機、Footer）；中文站不變。英文首頁沒有「學完，拿去用」區塊，所以沒有 Lab 卡片要改
 - 2026-10-10 產品頁 `/products/`、`/en/products/` 上線（`1cc2cef`）：改產品內容只改 `src/data/products.ts`。同日 lab.launchdock.app 也開了英文版 `/en/`（在 launchdock-lab repo）。
 - 2026-07-19 導流量測（來源端追蹤，不依賴子站分析）：查出 lab/masters 都無分析工具→改在主站量。① migration `009_create_outbound_clicks`（新增 outbound_clicks 表，anon-insert RLS，同 004 pattern，**已套 production** lxudxtpfenotkpgmhomq）；② `OutboundTracker.astro`（BaseLayout 全站，一個委派 click listener 記 {target,placement,fingerprint,referrer,path} 進 Supabase，靠 isSupabaseConfigured 閘門，本機無 env 會被 tree-shake 成 no-op＝正常）；③ 8 個入口連結掛 `data-track-outbound`/`data-placement`（home-card/header/header-mobile/footer）；④ `/admin/traffic` 導流儀表板（TrafficDashboard.tsx，總點擊/→Lab/→Masters/近7天＋各位置成效表＋最有效徽章）。**已用 5 筆 seed row 對 production 實測儀表板正確、再刪除**。全部 push main。
 - 2026-07-19 生態系導流閉環（含常駐入口）：① 首頁 `index.astro` 加「學完，拿去用」入口區塊（Lab／Masters 兩張卡）；② Header 加「🧰 工具」hover 下拉（純 CSS 無 JS）＋ mobile menu 內嵌連結；③ Footer 加 實驗室／大師團 連結；i18n 補 `nav.tools*` 中英 key；順手把 desktop nav 收成 gap-4＋whitespace-nowrap 讓 7 個項目在筆電單行不折。全部 build 綠 + 瀏覽器實測（文章頁確認全站生效）+ push main。同日兩子站也各加「← 回藍鴨主站」連結（masters-hub、launchdock-lab，已 push）。→ 主站↔子站雙向流量閉環完成。可選再加：卡片/連結掛 UTM 參數以量測導流。
