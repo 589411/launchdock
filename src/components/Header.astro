@@ -68,7 +68,7 @@ const navItems = [
               <span class="text-sm font-semibold text-text-primary">🧩 {t('nav.tools.builder')}</span>
               <span class="block text-xs text-text-muted mt-0.5">{lang === 'en' ? 'On-site tool · free to try' : '本站工具 · 免費試用'}</span>
             </a>
-            <a href="https://lab.launchdock.app" target="_blank" rel="noopener" data-track-outbound="lab" data-placement="header" class="block px-4 py-2.5 hover:bg-surface-light transition-colors">
+            <a href={lang === 'en' ? 'https://lab.launchdock.app/en/' : 'https://lab.launchdock.app'} target="_blank" rel="noopener" data-track-outbound="lab" data-placement="header" class="block px-4 py-2.5 hover:bg-surface-light transition-colors">
               <span class="text-sm font-semibold text-text-primary">🧪 {t('nav.tools.lab')}</span>
               <span class="block text-xs text-text-muted mt-0.5">lab.launchdock.app ↗</span>
             </a>
@@ -130,7 +130,7 @@ const navItems = [
         <a href="/tools/prompt-builder/" class="block text-text-secondary hover:text-text-primary transition-colors text-sm font-medium py-2">
           🧩 {t('nav.tools.builder')}
         </a>
-        <a href="https://lab.launchdock.app" target="_blank" rel="noopener" data-track-outbound="lab" data-placement="header-mobile" class="block text-text-secondary hover:text-text-primary transition-colors text-sm font-medium py-2">
+        <a href={lang === 'en' ? 'https://lab.launchdock.app/en/' : 'https://lab.launchdock.app'} target="_blank" rel="noopener" data-track-outbound="lab" data-placement="header-mobile" class="block text-text-secondary hover:text-text-primary transition-colors text-sm font-medium py-2">
           🧪 {t('nav.tools.lab')} ↗
         </a>
         <a href="https://masters.launchdock.app" target="_blank" rel="noopener" data-track-outbound="masters" data-placement="header-mobile" class="block text-text-secondary hover:text-text-primary transition-colors text-sm font-medium py-2">
