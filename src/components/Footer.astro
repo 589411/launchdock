@@ -41,6 +41,12 @@ const isEn = lang === 'en';
           🎓 {isEn ? 'Masters' : '大師團'}
         </a>
         <a
+          href={isEn ? '/en/products/' : '/products/'}
+          class="text-text-muted hover:text-accent2 transition-colors text-sm"
+        >
+          {isEn ? 'Products' : '產品'}
+        </a>
+        <a
           href="https://github.com/589411/launchdock"
           target="_blank"
           rel="noopener noreferrer"

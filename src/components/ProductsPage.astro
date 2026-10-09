@@ -1,0 +1,116 @@
+---
+import { products, type ProductTier } from '../data/products';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'zh-tw' } = Astro.props;
+const isEn = lang === 'en';
+const k = isEn ? 'en' : 'zh';
+
+const copy = {
+  eyebrow: isEn ? 'Built with Claude' : 'Built with Claude',
+  h1: isEn ? 'What we build with Claude' : '我們用 Claude 打造的產品',
+  lead: isEn
+    ? 'LaunchDock is a one-person AI education studio in Taiwan. We teach non-technical teams to put AI to work — and we ship our own products on Claude, so every lesson comes from something we actually run.'
+    : '藍鴨 LaunchDock 是台灣的一人 AI 教育工作室。我們教非技術團隊把 AI 用進工作，也用 Claude 打造自己的產品——每一堂課教的，都是我們自己真的在跑的東西。',
+  contact: isEn ? 'Partnerships & inquiries' : '合作洽詢',
+  live: isEn ? 'Open ↗' : '開啟 ↗',
+  internal: isEn ? 'Internal tool · no public URL' : '內部工具 · 未對外公開',
+  planned: isEn ? 'Planned' : '規劃中',
+};
+
+const tiers: { id: ProductTier; title: string; desc: string; accent: string }[] = [
+  {
+    id: 'api',
+    title: isEn ? 'Running on the Claude API' : '執行時直接呼叫 Claude API',
+    desc: isEn
+      ? 'Products where Claude does the work at runtime — for learners, students and course participants.'
+      : '產品運作時由 Claude 負責核心工作，服務學員、學生與課程參與者。',
+    accent: '#d97757',
+  },
+  {
+    id: 'code',
+    title: isEn ? 'Developed and maintained with Claude Code' : '用 Claude Code 開發與維運',
+    desc: isEn
+      ? 'The sites and tools behind LaunchDock. Claude Code writes, tests and maintains them alongside us, following playbooks kept in each repo.'
+      : '藍鴨背後的站與工具。Claude Code 依各 repo 裡的操作手冊，和我們一起撰寫、測試與維運。',
+    accent: '#2f8f9d',
+  },
+  {
+    id: 'roadmap',
+    title: isEn ? 'On the roadmap' : '接下來要做的',
+    desc: isEn
+      ? 'Not built yet. These turn what we teach into services small businesses can subscribe to.'
+      : '尚未開發。把我們教的東西，變成中小企業可以直接訂閱的服務。',
+    accent: '#f59e0b',
+  },
+];
+---
+
+<div class="max-w-[900px] mx-auto px-4 sm:px-6 py-12">
+  <p class="text-xs font-semibold tracking-widest uppercase text-[#d97757] mb-3">{copy.eyebrow}</p>
+  <h1 class="text-3xl sm:text-4xl font-bold mb-4">{copy.h1}</h1>
+  <p class="text-text-secondary leading-relaxed max-w-2xl mb-12">{copy.lead}</p>
+
+  {tiers.map((tier) => {
+    const items = products.filter((p) => p.tier === tier.id);
+    return (
+      <section class="mb-14" id={tier.id}>
+        <div class="flex items-center gap-3 mb-2">
+          <span class="w-2.5 h-2.5 rounded-full" style={`background:${tier.accent}`}></span>
+          <h2 class="text-xl font-bold">{tier.title}</h2>
+        </div>
+        <p class="text-text-secondary text-sm mb-6">{tier.desc}</p>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          {items.map((p) => {
+            const Tag = p.url ? 'a' : 'div';
+            const linkProps = p.url
+              ? { href: p.url, target: '_blank', rel: 'noopener', 'data-track-outbound': `product-${p.id}`, 'data-placement': 'products' }
+              : {};
+            return (
+              <Tag
+                {...linkProps}
+                class={`group relative block rounded-2xl bg-surface-light border border-surface-lighter overflow-hidden transition-all duration-200 ${p.url ? 'hover:-translate-y-0.5 hover:shadow-md' : ''}`}
+              >
+                <div class="absolute top-0 left-0 w-full h-1" style={`background:${tier.accent}`}></div>
+                <div class="p-6">
+                  <div class="flex items-start justify-between gap-3 mb-3">
+                    <span class="text-3xl leading-none">{p.icon}</span>
+                    <span class="text-xs text-text-muted text-right">
+                      {p.url ? p.url.replace('https://', '') : p.internal ? copy.internal : copy.planned}
+                    </span>
+                  </div>
+                  <h3 class="text-lg font-bold mb-1">{p.name[k]}</h3>
+                  <p class="text-xs font-semibold mb-3" style={`color:${tier.accent}`}>{p.tagline[k]}</p>
+                  <p class="text-text-secondary text-sm leading-relaxed mb-4">{p.summary[k]}</p>
+                  <div class="flex flex-wrap gap-1.5">
+                    {p.stack.map((s) => (
+                      <span class="text-[11px] px-2 py-0.5 rounded-full border border-surface-lighter text-text-muted">{s}</span>
+                    ))}
+                  </div>
+                  {p.url && (
+                    <span class="inline-block mt-4 text-sm font-medium text-text-primary">{copy.live}</span>
+                  )}
+                </div>
+              </Tag>
+            );
+          })}
+        </div>
+      </section>
+    );
+  })}
+
+  <section class="rounded-2xl border border-surface-lighter p-6 text-center">
+    <h2 class="text-lg font-bold mb-2">{copy.contact}</h2>
+    <p class="text-text-secondary text-sm mb-3">
+      {isEn
+        ? 'Corporate training, AI adoption for small businesses, and collaborations.'
+        : '企業內訓、中小企業 AI 導入、課程與產品合作。'}
+    </p>
+    <a href="mailto:joseph@launchdock.app" class="font-semibold text-accent2 hover:underline">joseph@launchdock.app</a>
+  </section>
+</div>
