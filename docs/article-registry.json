@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-09-19T12:56:48.098Z",
+  "_generated": "2026-10-09T16:11:38.150Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -1466,6 +1466,26 @@
         "OAuth"
       ],
       "link": "/articles/ai-api-key-guide/"
+    },
+    {
+      "slug": "claude-team-setup",
+      "title": "Claude Team 方案怎麼申請？從付款、邀請成員到 Gmail 網域設定一次走完",
+      "description": "想讓公司 2 個人以上一起用 Claude、統一付款、對話不拿去訓練模型？這篇用實際截圖走完 Claude Team 申請：從帳號選單升級、選席位與付款、建立團隊，到邀請成員、把 Gmail 加進允許網域、關掉會被白嫖的邀請連結，最後成員收信加入、決定個人帳號去留。附 2026 年 10 月台灣實付價格。",
+      "scene": "環境準備",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "Anthropic",
+        "申請",
+        "設定"
+      ],
+      "prerequisites": [],
+      "modules": [
+        "M06"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/claude-team-setup/"
     },
     {
       "slug": "cli-guide",

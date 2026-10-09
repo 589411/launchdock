@@ -63,6 +63,8 @@
 
 ## 📡 來自監控（系統自動產生，新項目補在最上）
 
+- 2026-10-10 `claude-team-setup` 英文版 UI 標籤為中文介面翻譯推測，有英文介面截圖時校一次；首頁 FAQ 是否加「Claude Team 怎麼申請」待 Joseph 決定。
+
 ### 2026-09-19 寫 mcp-servers-picks 時順手發現
 - [ ] [概念連結] **Soul 的 alias「人設」會誤吃「個人設定」**：`concepts.yaml` Soul aliases 含「人設」，任何寫到「個**人設**定」的句子
       都會被連到 openclaw-soul。本次新文已改寫避開，但全站其他文章未掃。建議把「人設」從 alias 移除或改成「AI 人設」— 概念系統
