@@ -101,7 +101,7 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 - **英文版 UI 標籤是翻譯推測**（截圖是中文介面），如 "Get Team plan"、"Organization and access"。
 - **機械檢查**：H1 build 綠 189 頁、H2 無佔位符、H3 全為真實 UI 截圖、H4 registry 80 篇／62 概念（無新概念）、H5 中英同 slug、H6 掃描 clean、`npm run orphans` 0。自動概念連結 0 個（無誤連）。**未在瀏覽器實際預覽頁面。**
 - ✅ 線上中英頁與圖片皆 200（commit `beb90c6`）。⭐ **下一個具體動作**：
-  決定是否加首頁 FAQ「Claude Team 怎麼申請？」（目前 9 則，還有 1 個空位）；順手作廢舊邀請連結。
+  無（本篇結案）。Joseph 決定**不加**首頁 FAQ；舊邀請連結 2026-10-10 實測已顯示「Invalid invite link」，已失效。
 
 ---
 
