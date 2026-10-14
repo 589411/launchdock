@@ -261,3 +261,5 @@ Team 方案包含的重點功能：Claude Code 與 Cowork、Claude Design、Micr
 - 幫加入的同事決定個人帳號的去留
 
 **下一步**：團隊開好後，最值得先做的一件事是寫好**組織指示**——讓全公司的 Claude 用同一套口吻與規範回答。寫法可以參考〈[系統提示詞怎麼設？ChatGPT、Claude、Gemini、Grok「給 AI 的指令」一次教會你](/articles/set-system-prompt/)〉，原理一模一樣，只是作用範圍從你一個人擴大到整個團隊。
+
+> 👥 **團隊成員怎麼加入？** 如果你是被邀請的那一方，看〈[被邀請加入 Claude Team 團隊怎麼做？](/articles/join-claude-team/)〉。

@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-10-09T16:11:38.150Z",
+  "_generated": "2026-10-14T16:12:03.639Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -1667,6 +1667,27 @@
       ],
       "concepts_referenced": [],
       "link": "/articles/openrouter-free-llm-api-key/"
+    },
+    {
+      "slug": "join-claude-team",
+      "title": "被邀請加入 Claude Team 團隊怎麼做？收信、接受邀請到找到共用專案一次走完",
+      "description": "同事或老闆說「我邀你進 Claude 團隊了」，然後呢？這篇用實際截圖走完成員端流程：收信點 Accept invite、確認用對帳號、決定個人帳號要不要保留，進去後再帶你看團隊多給了什麼——組織技能、連接器、共用專案，以及怎麼把共用專案釘在側欄。",
+      "scene": "環境準備",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "Anthropic",
+        "設定"
+      ],
+      "prerequisites": [
+        "claude-team-setup"
+      ],
+      "modules": [
+        "M06"
+      ],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/join-claude-team/"
     },
     {
       "slug": "github-account-signup",

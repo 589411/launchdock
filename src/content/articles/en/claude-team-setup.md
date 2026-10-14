@@ -261,3 +261,5 @@ No. Team requires at least 2 seats, and you're billed for at least 2. If it's ju
 - Help coworkers decide what to do with their personal accounts
 
 **Next step**: once the team is set up, the most valuable thing to do first is write your **organization instructions**, so Claude answers in the same voice and follows the same rules for everyone. For how to write them, see [How to Set a System Prompt in ChatGPT, Claude, Gemini & Grok](/en/articles/set-system-prompt/). The idea is identical; the scope just grows from you to your whole team.
+
+> 👥 **How do members join?** If you are the one being invited, see [How to Join a Claude Team You've Been Invited To](/en/articles/join-claude-team/).
