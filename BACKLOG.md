@@ -5,6 +5,7 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+- [x] [內容] **新文章 `join-claude-team`「被邀請加入 Claude Team 團隊怎麼做？」中英雙版已上線**（2026-10-15，`834b108`）。`claude-team-setup` 成員端延伸篇，9 張 2026-10-14 截圖。剩待辦：首頁 FAQ 要不要加（預設不加，Joseph 未決定）。
 - [x] [內容] **新文章 `ai-agent-jargon`「Prompt 工程、Context 工程、Loop、Harness 是什麼？用整理 200 張收據一次看懂」中英雙版已上線**（2026-09-12，Joseph preview 後 gate 通過）。
       題目來自 Joseph：「用實例說明 harness / loop / prompt engineering / context engineering」。
       **定位經查既有覆蓋後收斂**：站上已有 `ai-agent-anatomy`(Harness)／`openclaw-agent`(Agent Loop)／
