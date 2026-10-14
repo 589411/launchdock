@@ -89,14 +89,14 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
-**2026-10-15 新文章 `join-claude-team`（成員端加入 Claude Team）中英雙版已 push** ⬅️ 最新
+**2026-10-15 新文章 `join-claude-team`（成員端加入 Claude Team）中英雙版已上線，結案** ⬅️ 最新
 
 - **來源**：桌面 10 張 `CleanShot 2026-10-14 23.22–23.59`，用 9 張（23.57.21 與 23.59.11 重複）。Sonnet subagent 撰寫、主 session 審查。
 - **內容**：收信 → 確認 Accepting as → Keep both accounts／只用團隊 → You're here! → Customize（組織技能、連接器）→ Projects 三分頁 → 釘選共用專案。Step 1 直接引用上一篇 `invite-email-gmail.png`。`claude-team-setup` 中英文末各加一句連到新文。
 - **遮罩**：團隊名、邀請人（含頭像首字母）、Accepting as email、成員列第三方帳號、側欄對話／釘選、網址列、組織技能名稱、左下帳號區；裁桌布與書籤列。scan 0 命中＋主 session 逐張人眼覆核 9 張。
 - **推測項**：英文版管理者端「Add member／Add 1 member」為翻譯；帳號切換入口在左下角係依 toast 推論；「只用團隊後悔了」寫聯絡客服、未實測。
 - **機械檢查**：build 綠 191 頁、orphans 0、registry 81 篇／62 概念（無新概念）。未在瀏覽器實際預覽。
-- ⭐ **下一個具體動作**：Joseph 決定要不要加首頁 FAQ（候選：「被邀請加入 Claude Team 要怎麼做？」，上一篇決定不加，預設也不加）。其餘結案。
+- ✅ 線上中英頁與圖片皆 200。⭐ **下一個具體動作**：無（本篇結案）。Joseph 2026-10-15 決定**不加**首頁 FAQ。
 
 ---
 
