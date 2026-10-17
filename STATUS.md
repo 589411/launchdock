@@ -89,6 +89,9 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
+**2026-10-17 圖片壓縮列為硬規則**：`docs/EDITORIAL.md` 新增 **H8（截圖上架前必須壓縮：≤1800px、256 色 PNG、單張 ≤150KB）**，Joseph 指示「基本、一定要做」；`claude-team-setup` 17 張已重壓 3.2MB→1.3MB（`5eada38`）。
+⭐ **下一個具體動作**：另開 session 做 BACKLOG「全站圖片省流量」——rehype 補 `loading="lazy"` ＋ 48 張 >500KB 大圖重壓（壓完人眼確認遮罩）。
+
 **2026-10-15 新文章 `join-claude-team`（成員端加入 Claude Team）中英雙版已上線，結案** ⬅️ 最新
 
 - **來源**：桌面 10 張 `CleanShot 2026-10-14 23.22–23.59`，用 9 張（23.57.21 與 23.59.11 重複）。Sonnet subagent 撰寫、主 session 審查。
