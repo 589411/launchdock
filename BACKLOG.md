@@ -5,6 +5,7 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+- [ ] [效能] **全站圖片省流量**（2026-10-17 發現）：`public/images/articles/` 共 79MB、>500KB 有 48 張（public/ 圖 Astro 不優化）；渲染出的 `<img>` 沒有 `loading="lazy"`，整篇圖一次全載。做法：① 加 rehype 插件給文章圖補 `loading="lazy" decoding="async"`（最省、一次到位）② 大圖用 256 色 PNG 量化重壓（`claude-team-setup` 實測 3.2MB→1.3MB，畫質無感），每張壓完要人眼確認遮罩仍在。建議另開 session 做。
 - [x] [內容] **新文章 `join-claude-team`「被邀請加入 Claude Team 團隊怎麼做？」中英雙版已上線**（2026-10-15，`834b108`）。`claude-team-setup` 成員端延伸篇，9 張 2026-10-14 截圖。Joseph 決定不加首頁 FAQ，結案。
 - [x] [內容] **新文章 `ai-agent-jargon`「Prompt 工程、Context 工程、Loop、Harness 是什麼？用整理 200 張收據一次看懂」中英雙版已上線**（2026-09-12，Joseph preview 後 gate 通過）。
       題目來自 Joseph：「用實例說明 harness / loop / prompt engineering / context engineering」。
