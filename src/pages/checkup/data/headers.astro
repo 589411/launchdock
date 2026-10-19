@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeaderTester from '../../../components/datalab/HeaderTester.tsx';
+---
+
+<BaseLayout title="欄名測試頁" description="貼上檔案的欄位名稱，看顧客數據戰情室會怎麼辨識。" noindex>
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <HeaderTester client:load />
+  </div>
+</BaseLayout>

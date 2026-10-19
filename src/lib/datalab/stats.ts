@@ -1,3 +1,14 @@
+/** 迴圈版 min／max：Math.min(...arr) 在元素超過約 12 萬個時會丟出「Maximum call stack size exceeded」 */
+export function minMax(values: number[]): { min: number; max: number } {
+  let min = Infinity;
+  let max = -Infinity;
+  for (const v of values) {
+    if (v < min) min = v;
+    if (v > max) max = v;
+  }
+  return { min, max };
+}
+
 export function median(values: number[]): number {
   return quantile(values, 0.5);
 }

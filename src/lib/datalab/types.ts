@@ -25,6 +25,8 @@ export interface Txn {
 export interface Line {
   txnId: string;
   sku: string;
+  /** 分組用的品類（商品關聯分析的單位）：日晴用子品類；自有資料用「品類」欄，沒有就用商品欄 */
+  category?: string;
   qty: number;
   amount: number;
 }

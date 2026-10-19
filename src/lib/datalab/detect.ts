@@ -1,0 +1,193 @@
+import type { Table } from './types';
+import { parseAmount, parseFlexibleDay } from './normalize';
+
+import { NAME_LIKE, NEGATIVE, NOT_AMOUNT, SYNONYMS, WEAK_SYNONYMS, type FieldKey } from '../../data/import-profiles';
+
+export type { FieldKey };
+
+export const REQUIRED_FIELDS: FieldKey[] = ['customerId', 'date', 'amount'];
+
+export const FIELD_LABEL: Record<FieldKey, string> = {
+  customerId: '顧客編號（會員編號）',
+  date: '交易日期',
+  amount: '金額',
+  orderId: '單號（訂單／發票）',
+  product: '商品名稱',
+  category: '商品品類',
+  isReturn: '是否退貨',
+  store: '門市／店別',
+  channel: '通路',
+  quantity: '數量',
+  unitPrice: '單價',
+};
+
+export type Confidence = 'sure' | 'guess' | 'none';
+
+export interface FieldGuess {
+  /** 欄位索引；-1 表示沒找到 */
+  col: number;
+  confidence: Confidence;
+}
+
+export type Mapping = Record<FieldKey, FieldGuess>;
+
+const norm = (h: string) => h.toLowerCase().replace(/[\s_\-./()（）]/g, '');
+
+function headerScore(field: FieldKey, header: string): number {
+  const h = norm(header);
+  if (!h) return 0;
+  let best = 0;
+  for (const syn of SYNONYMS[field]) {
+    if (h === syn) best = Math.max(best, 100);
+    else if (syn.length >= 2 && h.includes(syn)) best = Math.max(best, 70);
+  }
+  if (best < 60 && WEAK_SYNONYMS[field]?.includes(h)) best = 60;
+  if (NEGATIVE[field]?.test(header)) best = Math.min(best, 10);
+  if ((field === 'customerId' || field === 'orderId') && NAME_LIKE.test(header) && !/(id|編號|代號|號)/i.test(header)) best = Math.min(best, 20);
+  if (field === 'amount' && NOT_AMOUNT.test(header) && !/(total|line|amount|金額|小計)/i.test(header)) best = Math.min(best, 20);
+  return best;
+}
+
+const TRUTHY = new Set(['true', '1', 'y', 'yes', '是', '退貨', '退', 'r', 'refund', 'returned']);
+const FALSY = new Set(['false', '0', 'n', 'no', '否', '', '正常', 'f']);
+
+export function parseBoolish(v: string): boolean | null {
+  const s = v.trim().toLowerCase();
+  if (TRUTHY.has(s)) return true;
+  if (FALSY.has(s)) return false;
+  return null;
+}
+
+function sampleCol(t: Table, ci: number, n = 500): string[] {
+  const out: string[] = [];
+  for (const r of t.rows) {
+    const v = (r[ci] ?? '').trim();
+    if (v !== '') out.push(v);
+    if (out.length >= n) break;
+  }
+  return out;
+}
+
+function valueScore(field: FieldKey, vals: string[]): number {
+  if (vals.length === 0) return 0;
+  const frac = (fn: (v: string) => boolean) => vals.filter(fn).length / vals.length;
+  const uniq = new Set(vals).size / vals.length;
+  switch (field) {
+    case 'date':
+      return frac((v) => parseFlexibleDay(v) !== null) >= 0.9 ? 60 : 0;
+    case 'amount': {
+      const numeric = frac((v) => parseAmount(v) !== null);
+      return numeric >= 0.9 ? 25 : 0;
+    }
+    case 'isReturn':
+      return frac((v) => parseBoolish(v) !== null) >= 0.95 && new Set(vals.map((v) => v.toLowerCase())).size <= 4 ? 40 : 0;
+    case 'customerId':
+      // 顧客會重複出現：不是幾乎全不同（那更像單號），也不是只有幾個值（那更像類別）
+      return uniq < 0.95 && new Set(vals).size >= 3 ? 20 : 0;
+    case 'orderId':
+      return uniq > 0.3 ? 15 : 0;
+    case 'store':
+    case 'channel':
+    case 'category':
+      return new Set(vals).size <= Math.max(30, vals.length * 0.05) ? 10 : 0;
+    default:
+      return 0;
+  }
+}
+
+/**
+ * 自動偵測欄位對應。每個標準欄位挑一個最高分的欄，欄不重複使用。
+ * 分數＝欄名比對（0–100）＋值的樣式檢查；
+ * 「確定」＝欄名與值都對得上；「猜的」＝只有其中一項；「找不到」＝分數太低。
+ */
+export function detectMapping(t: Table): Mapping {
+  const fields = Object.keys(SYNONYMS) as FieldKey[];
+  const samples = t.headers.map((_, ci) => sampleCol(t, ci));
+  const cand: { field: FieldKey; col: number; score: number; hdr: number; val: number }[] = [];
+  for (const f of fields) {
+    t.headers.forEach((h, ci) => {
+      const hdr = headerScore(f, h);
+      const val = valueScore(f, samples[ci]);
+      // 欄名完全對不上時，只有「日期」「是否退貨」這類樣式很獨特的欄位才靠值猜
+      const score = hdr + (hdr > 0 || f === 'date' || f === 'isReturn' ? val : 0);
+      if (score > 0) cand.push({ field: f, col: ci, score, hdr, val });
+    });
+  }
+  cand.sort((a, b) => b.score - a.score);
+
+  const result = Object.fromEntries(fields.map((f) => [f, { col: -1, confidence: 'none' }])) as Mapping;
+  const usedCols = new Set<number>();
+  const doneFields = new Set<FieldKey>();
+  for (const c of cand) {
+    if (usedCols.has(c.col) || doneFields.has(c.field)) continue;
+    const minScore = c.field === 'date' || c.field === 'isReturn' ? 55 : 60;
+    if (c.score < minScore) continue;
+    usedCols.add(c.col);
+    doneFields.add(c.field);
+    // 日期、金額、是否退貨一定要值也對得上才算確定；其餘欄位欄名完全吻合就夠了
+    const valueChecked = c.field === 'date' || c.field === 'amount' || c.field === 'isReturn';
+    const sure = valueChecked ? c.hdr >= 70 && c.val > 0 : c.hdr >= 100 || (c.hdr >= 70 && c.val > 0);
+    // 同一個欄位有兩欄幾乎同分（例如「含稅金額」與「未稅金額」）：不替使用者決定，標成「猜的」請他確認
+    const ambiguous = cand.some((o) => o.field === c.field && o.col !== c.col && o.hdr >= 70 && o.score >= c.score - 5);
+    result[c.field] = { col: c.col, confidence: sure && !ambiguous ? 'sure' : 'guess' };
+  }
+  return result;
+}
+
+/** 只有欄名、沒有資料時的偵測（欄名測試頁用）：日期、金額等要靠資料值確認的欄位，信心度最高只到「猜的」 */
+export function detectFromHeaders(headers: string[]): { table: Table; mapping: Mapping } {
+  const table: Table = { name: 'headers', headers, rows: [] };
+  return { table, mapping: detectMapping(table) };
+}
+
+/** 以欄名（而不是索引）記住對應，隔天重新上傳同一份格式時可以自動套用 */
+export function mappingToNames(t: Table, m: Mapping): Partial<Record<FieldKey, string>> {
+  const out: Partial<Record<FieldKey, string>> = {};
+  for (const [k, g] of Object.entries(m) as [FieldKey, FieldGuess][]) {
+    if (g.col >= 0 && t.headers[g.col] !== undefined) out[k] = t.headers[g.col];
+  }
+  return out;
+}
+
+export function mappingFromNames(t: Table, names: Partial<Record<FieldKey, string>>): Mapping | null {
+  const fields = Object.keys(SYNONYMS) as FieldKey[];
+  const res = Object.fromEntries(fields.map((f) => [f, { col: -1, confidence: 'none' as Confidence }])) as Mapping;
+  let hit = 0;
+  for (const f of fields) {
+    const name = names[f];
+    if (name === undefined) continue;
+    const ci = t.headers.indexOf(name);
+    if (ci >= 0) {
+      res[f] = { col: ci, confidence: 'sure' };
+      hit++;
+    }
+  }
+  return hit > 0 ? res : null;
+}
+
+/**
+ * 必要欄位還缺哪些。金額可以由「數量 × 單價」推出來，所以兩者都有時就不算缺金額。
+ */
+export function requiredMissing(m: Mapping): FieldKey[] {
+  const out: FieldKey[] = [];
+  if (m.customerId.col < 0) out.push('customerId');
+  if (m.date.col < 0) out.push('date');
+  if (m.amount.col < 0 && !(m.quantity.col >= 0 && m.unitPrice.col >= 0)) out.push('amount');
+  return out;
+}
+
+/** 各分析模組需要哪些欄位；缺欄位時要用白話說明為什麼停用 */
+export function missingFor(m: Mapping, need: FieldKey[]): FieldKey[] {
+  return need.filter((f) => m[f].col < 0);
+}
+
+export function templateCsv(): string {
+  return [
+    'order_id,date,customer_id,product,category,amount,is_return,store',
+    'A0001,2025-01-03,C001,保濕乳液,保養,680,0,台北店',
+    'A0001,2025-01-03,C001,洗面乳,保養,320,0,台北店',
+    'A0002,2025-01-05,C002,綜合維他命,保健,1200,0,線上',
+    'A0003,2025-01-09,,洗面乳,保養,320,0,台北店',
+    'A0004,2025-01-12,C001,保濕乳液,保養,-680,1,台北店',
+  ].join('\n') + '\n';
+}

@@ -54,13 +54,13 @@ export const segmentInfo: Record<SegmentKey, SegmentInfo> = {
 /** 日晴生活（虛構零售品牌）公開教學資料，由瀏覽器即時抓取，本站不另存一份 */
 export const sunlit = {
   baseUrl: 'https://sunlit.launchdock.app/data/',
-  files: ['members', 'transactions', 'txn_items'] as const,
+  files: ['members', 'transactions', 'txn_items', 'products'] as const,
 };
 
 /** 內建小樣本（由 scripts/build-datalab-sample.mjs 抽樣產生，個資已改成假值） */
 export const sample = {
   baseUrl: '/datalab/sample/',
-  files: ['members', 'transactions', 'txn_items'] as const,
+  files: ['members', 'transactions', 'txn_items', 'products'] as const,
 };
 
 /**

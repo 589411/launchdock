@@ -133,3 +133,29 @@ export function repurchaseIntervals(ds: Dataset): number[] {
   }
   return out;
 }
+
+export interface CustomerStats {
+  customers: number;
+  /** 只買過一次的顧客數 */
+  onceOnly: number;
+  /** 累計消費最高的 20% 顧客，貢獻的營收比例 0..1（帕雷托） */
+  top20Share: number;
+  /** 回購間隔中位數（天），沒有回購紀錄為 0 */
+  medianInterval: number;
+}
+
+/** 幾個「AI 最常算錯、但答案只有一個」的顧客層級數字，給工作坊核對用 */
+export function customerStats(res: RfmResult, ds: Dataset): CustomerStats {
+  const cs = res.customers;
+  const sorted = [...cs].map((c) => c.m).sort((a, b) => b - a);
+  const total = sorted.reduce((s, v) => s + v, 0);
+  const k = Math.ceil(cs.length * 0.2);
+  const top = sorted.slice(0, k).reduce((s, v) => s + v, 0);
+  const iv = repurchaseIntervals(ds);
+  return {
+    customers: cs.length,
+    onceOnly: cs.filter((c) => c.f === 1).length,
+    top20Share: total ? top / total : 0,
+    medianInterval: iv.length ? median(iv) : 0,
+  };
+}

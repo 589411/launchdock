@@ -15,6 +15,7 @@ const load = (f) => toTable(f, decodeBuffer(bytesOf(readFileSync(`${dir}/${f}.cs
 const members = load('members');
 const txns = load('transactions');
 const items = load('txn_items');
+const products = load('products');
 
 function mulberry32(a) {
   return () => {
@@ -83,4 +84,6 @@ mkdirSync(out, { recursive: true });
 writeFileSync(`${out}members.csv`, toCsv(members.headers, memRows));
 writeFileSync(`${out}transactions.csv`, toCsv(txns.headers, txRows));
 writeFileSync(`${out}txn_items.csv`, toCsv(items.headers, itemRows));
+// 商品主檔（商品關聯分析要用 sku → 子品類）；日晴的商品是虛構的，整份複製
+writeFileSync(`${out}products.csv`, toCsv(products.headers, products.rows));
 console.log(`樣本：${memRows.length} 位會員、${txRows.length} 筆交易（匿名 ${anonPick.length}）、${itemRows.length} 列明細`);
