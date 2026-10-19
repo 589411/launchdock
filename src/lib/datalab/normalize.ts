@@ -1,5 +1,6 @@
 import type { Dataset, Day, Line, Table, Txn } from './types';
 import type { Mapping } from './detect';
+import { LINE_AMOUNT_HEADER, ORDER_TOTAL_HEADER } from '../../data/import-profiles';
 import { colIndex } from './csv';
 
 /** 支援 2025-01-01T21:37:00、2025-01-01、2025/1/2 15:39 三種寫法；只取日期 */
@@ -149,8 +150,6 @@ export interface OwnBuildResult extends BuildResult {
 }
 
 const TRUTHY_RETURN = new Set(['true', '1', 'y', 'yes', '是', '退貨', '退', 'r', 'refund', 'returned']);
-const ORDER_TOTAL_HEADER = /(實收|訂單金額|訂單總額|總額|總計|合計|應收|total(?!.*line)|order.?amount)/i;
-const LINE_AMOUNT_HEADER = /(小計|明細|line|subtotal|item)/i;
 const FIELD_NAME_ZH: Record<string, string> = { customerId: '顧客編號', date: '交易日期', amount: '金額（或「數量」加「單價」）' };
 
 /**

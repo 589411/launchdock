@@ -1,19 +1,9 @@
 import type { Table } from './types';
 import { parseAmount, parseFlexibleDay } from './normalize';
 
-/** 上傳資料的標準欄位。前三個是必要欄位，其餘有就能開啟更多分析 */
-export type FieldKey =
-  | 'customerId'
-  | 'date'
-  | 'amount'
-  | 'orderId'
-  | 'product'
-  | 'category'
-  | 'isReturn'
-  | 'store'
-  | 'channel'
-  | 'quantity'
-  | 'unitPrice';
+import { NAME_LIKE, NEGATIVE, NOT_AMOUNT, SYNONYMS, WEAK_SYNONYMS, type FieldKey } from '../../data/import-profiles';
+
+export type { FieldKey };
 
 export const REQUIRED_FIELDS: FieldKey[] = ['customerId', 'date', 'amount'];
 
@@ -41,35 +31,6 @@ export interface FieldGuess {
 
 export type Mapping = Record<FieldKey, FieldGuess>;
 
-/** 欄名同義詞（中英文）。比對時先轉小寫並去掉空白、底線、連字號 */
-const SYNONYMS: Record<FieldKey, string[]> = {
-  customerId: ['customerid', 'custid', 'cid', 'memberid', 'member', 'customer', 'userid', 'uid', '會員編號', '會員代號', '會員卡號', '會員', '客戶編號', '客戶代號', '客戶id', '客戶', '顧客編號', '顧客', '卡號', '手機'],
-  date: ['date', 'datetime', 'txndate', 'txndatetime', 'orderdate', 'saledate', 'purchasedate', 'time', '交易日期', '交易時間', '訂單日期', '銷售日期', '購買日期', '消費日期', '結帳日期', '日期', '時間'],
-  amount: ['amount', 'totalamount', 'total', 'lineamount', 'sales', 'revenue', 'amt', 'subtotal', '金額', '實收金額', '實收', '銷售金額', '交易金額', '訂單金額', '小計', '總額', '總金額', '營業額', '消費金額'],
-  orderId: ['orderid', 'orderno', 'ordernumber', 'txnid', 'transactionid', 'invoice', 'invoiceno', 'receipt', 'ticket', '單號', '訂單編號', '訂單號', '交易編號', '發票號碼', '發票', '銷貨單號', '流水號'],
-  product: ['product', 'productname', 'item', 'itemname', 'sku', 'goods', '商品名稱', '商品', '品名', '品項', '產品名稱', '產品', '貨號', '料號'],
-  category: ['category', 'productcategory', 'cat', 'subcategory', 'class', '商品類別', '商品品類', '品類', '類別', '分類', '大類', '中類'],
-  isReturn: ['isreturn', 'return', 'refund', 'isrefund', '是否退貨', '退貨註記', '退貨', '退款'],
-  store: ['store', 'storeid', 'storename', 'shop', 'branch', 'outlet', '門市', '店別', '分店', '店名', '門店', '店號', '店代號'],
-  channel: ['channel', 'saleschannel', '通路', '渠道', '管道', '銷售通路'],
-  quantity: ['qty', 'quantity', 'count', '數量', '件數', '銷售數量'],
-  unitPrice: ['unitprice', 'price', 'sellprice', '單價', '售價', '銷售單價'],
-};
-
-/**
- * 欄名帶有這些字眼就不是該欄位：出生日期不是交易日期、會員等級不是會員編號。
- * （兩者的欄名都含有「日期」「會員」，光比對同義詞會得到同分甚至誤判成「確定」。）
- */
-const NEGATIVE: Partial<Record<FieldKey, RegExp>> = {
-  date: /(出生|生日|birth|到期|expire|expiry|有效|建立|created|註冊|加入|入會|更新|updated)/i,
-  customerId: /(等級|級別|level|tier|類型|type|狀態|status|日期|date|名稱|姓名|name|數量|count)/i,
-};
-
-/** 看起來是「名稱／姓名」的欄位不該被當成編號欄 */
-const NAME_LIKE = /(名稱|姓名|name)/i;
-/** 單價、成本不是交易金額 */
-const NOT_AMOUNT = /(unit|單價|cost|成本|price)/i;
-
 const norm = (h: string) => h.toLowerCase().replace(/[\s_\-./()（）]/g, '');
 
 function headerScore(field: FieldKey, header: string): number {
@@ -80,6 +41,7 @@ function headerScore(field: FieldKey, header: string): number {
     if (h === syn) best = Math.max(best, 100);
     else if (syn.length >= 2 && h.includes(syn)) best = Math.max(best, 70);
   }
+  if (best < 60 && WEAK_SYNONYMS[field]?.includes(h)) best = 60;
   if (NEGATIVE[field]?.test(header)) best = Math.min(best, 10);
   if ((field === 'customerId' || field === 'orderId') && NAME_LIKE.test(header) && !/(id|編號|代號|號)/i.test(header)) best = Math.min(best, 20);
   if (field === 'amount' && NOT_AMOUNT.test(header) && !/(total|line|amount|金額|小計)/i.test(header)) best = Math.min(best, 20);
@@ -165,9 +127,17 @@ export function detectMapping(t: Table): Mapping {
     // 日期、金額、是否退貨一定要值也對得上才算確定；其餘欄位欄名完全吻合就夠了
     const valueChecked = c.field === 'date' || c.field === 'amount' || c.field === 'isReturn';
     const sure = valueChecked ? c.hdr >= 70 && c.val > 0 : c.hdr >= 100 || (c.hdr >= 70 && c.val > 0);
-    result[c.field] = { col: c.col, confidence: sure ? 'sure' : 'guess' };
+    // 同一個欄位有兩欄幾乎同分（例如「含稅金額」與「未稅金額」）：不替使用者決定，標成「猜的」請他確認
+    const ambiguous = cand.some((o) => o.field === c.field && o.col !== c.col && o.hdr >= 70 && o.score >= c.score - 5);
+    result[c.field] = { col: c.col, confidence: sure && !ambiguous ? 'sure' : 'guess' };
   }
   return result;
+}
+
+/** 只有欄名、沒有資料時的偵測（欄名測試頁用）：日期、金額等要靠資料值確認的欄位，信心度最高只到「猜的」 */
+export function detectFromHeaders(headers: string[]): { table: Table; mapping: Mapping } {
+  const table: Table = { name: 'headers', headers, rows: [] };
+  return { table, mapping: detectMapping(table) };
 }
 
 /** 以欄名（而不是索引）記住對應，隔天重新上傳同一份格式時可以自動套用 */

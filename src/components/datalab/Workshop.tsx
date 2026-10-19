@@ -17,7 +17,8 @@ import { UNLOCK_STORAGE_KEY } from '../../data/datalab';
 import { days, fillPrompt, segments, type SegmentDef } from '../../data/workshop';
 import type { Dataset, HealthReport, RfmResult, Table } from '../../lib/datalab/types';
 import type { TouchpointResult } from '../../lib/datalab/touchpoints';
-import { card, HealthView, InsightView, muted, PromptBox, ReportView, RfmView, secondary, TouchpointView } from './views';
+import { buildDiagnosticReport, diagnoseStructure } from '../../lib/datalab/diagnose';
+import { card, DiagCopyButton, HealthView, InsightView, muted, PromptBox, ReportView, RfmView, secondary, TouchpointView } from './views';
 
 type Source = 'sample' | 'sunlit' | 'own';
 
@@ -85,6 +86,7 @@ export default function Workshop() {
   const [pending, setPending] = useState<Pending | null>(null);
   const [busy, setBusy] = useState<Source | 'file' | null>(null);
   const [error, setError] = useState('');
+  const [errorFile, setErrorFile] = useState<'csv' | 'xlsx' | '未知'>('未知');
   const [unlocked, setUnlocked] = useState(false);
   const [code, setCode] = useState('');
   const [codeError, setCodeError] = useState('');
@@ -214,6 +216,7 @@ export default function Workshop() {
       const mapping = (remembered && mappingFromNames(table, remembered)) || detectMapping(table);
       setPending({ table, mapping, fileName: file.name, notice: remembered ? `${notice} 已套用你上次確認過的欄位對應。`.trim() : notice });
     } catch (e) {
+      setErrorFile(/\.xlsx$/i.test(file.name) ? 'xlsx' : /\.(csv|tsv|txt)$/i.test(file.name) ? 'csv' : '未知');
       setError(e instanceof Error ? e.message : '讀取檔案失敗');
     } finally {
       setBusy(null);
@@ -310,6 +313,7 @@ export default function Workshop() {
           setCode={setCode}
           codeError={codeError}
           error={error}
+          errorReport={error && errorFile ? buildDiagnosticReport({ fileType: errorFile, rowCount: 0, headers: null, note: error }) : ''}
           saveLocal={saveLocal}
           setSaveLocal={setSaveLocal}
           saved={saved}
@@ -371,6 +375,8 @@ function Start(props: {
   setCode: (s: string) => void;
   codeError: string;
   error: string;
+  /** 讀檔失敗時可複製給講師的診斷（不含任何資料與欄名） */
+  errorReport: string;
   saveLocal: boolean;
   setSaveLocal: (b: boolean) => void;
   saved: SavedData | null;
@@ -466,7 +472,10 @@ function Start(props: {
       </div>
 
       {props.error && (
-        <p className="text-sm rounded-xl px-4 py-3 border" style={{ ...card, borderColor: '#f59e0b' }} role="alert">{props.error}</p>
+        <div className="rounded-xl px-4 py-3 border space-y-2" style={{ ...card, borderColor: '#f59e0b' }}>
+          <p className="text-sm" role="alert">{props.error}</p>
+          {props.errorReport && <DiagCopyButton text={props.errorReport} label="複製錯誤狀況給講師（不含資料）" />}
+        </div>
       )}
     </div>
   );
@@ -478,6 +487,9 @@ function MappingStep(props: { pending: Pending; setMapping: (m: Mapping) => void
   const fields = Object.keys(FIELD_LABEL) as FieldKey[];
   const ordered = [...REQUIRED_FIELDS, ...fields.filter((f) => !REQUIRED_FIELDS.includes(f))];
   const missing = requiredMissing(mapping);
+  const diagnosis = diagnoseStructure(table.headers, mapping);
+  const fileType = /\.xlsx$/i.test(fileName) ? 'xlsx' : 'csv';
+  const report = buildDiagnosticReport({ fileType, rowCount: table.rows.length, headers: table.headers, mapping });
   const samples = (ci: number, f: FieldKey) => {
     const out: string[] = [];
     for (const r of table.rows) {
@@ -497,6 +509,14 @@ function MappingStep(props: { pending: Pending; setMapping: (m: Mapping) => void
         </p>
         {notice && <p className="text-xs mt-2" style={muted}>{notice}</p>}
       </div>
+      {diagnosis.kind !== 'flat' && (
+        <div className="rounded-xl p-4 border space-y-2" style={{ ...card, borderColor: '#f59e0b' }}>
+          <p className="font-semibold text-sm">{diagnosis.title}</p>
+          <p className="text-sm" style={secondary}>{diagnosis.explain}</p>
+          <p className="text-sm"><b>這份資料能做什麼：</b>{diagnosis.canDo}</p>
+          <ul className="text-sm list-disc pl-5 space-y-1" style={secondary}>{diagnosis.steps.map((st) => <li key={st}>{st}</li>)}</ul>
+        </div>
+      )}
       <div className="space-y-2">
         {ordered.map((f) => {
           const g = mapping[f];
@@ -532,9 +552,10 @@ function MappingStep(props: { pending: Pending; setMapping: (m: Mapping) => void
         </p>
       )}
       {props.error && <p className="text-sm rounded-xl px-4 py-3 border" style={{ ...card, borderColor: '#f59e0b' }} role="alert">{props.error}</p>}
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         <button disabled={missing.length > 0} onClick={props.onConfirm} className="px-5 py-2.5 rounded-lg text-sm font-medium text-white disabled:opacity-50" style={{ backgroundColor: 'var(--color-brand)' }}>確認，開始第一段</button>
         <button onClick={props.onCancel} className="px-5 py-2.5 rounded-lg text-sm" style={{ backgroundColor: 'var(--color-surface-lighter)' }}>重新選檔案</button>
+        <DiagCopyButton text={report} />
       </div>
       {props.saveLocal && <p className="text-xs" style={muted}>你勾選了「存在這台電腦」，確認後會存進這個瀏覽器。</p>}
     </div>

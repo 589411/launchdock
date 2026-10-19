@@ -242,6 +242,39 @@ function Heat({ grid, max }: { grid: number[][]; max: number }) {
   );
 }
 
+/** 複製文字到剪貼簿；失敗時退回 execCommand，回傳是否成功 */
+export async function copyText(text: string): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand('copy');
+    ta.remove();
+    return ok;
+  }
+}
+
+/** 複製診斷報告的按鈕：報告只含欄位名稱與偵測結果，沒有任何資料列 */
+export function DiagCopyButton({ text, label = '複製診斷報告（只含欄位名稱，沒有資料）' }: { text: string; label?: string }) {
+  const [state, setState] = useState<'idle' | 'ok' | 'fail'>('idle');
+  return (
+    <button
+      onClick={async () => {
+        setState((await copyText(text)) ? 'ok' : 'fail');
+        setTimeout(() => setState('idle'), 2200);
+      }}
+      className="px-4 py-2 rounded-lg text-sm"
+      style={{ backgroundColor: 'var(--color-surface-lighter)' }}
+    >
+      {state === 'ok' ? '已複製 ✓' : state === 'fail' ? '複製失敗，請手動選取' : label}
+    </button>
+  );
+}
+
 export function PromptBox({ title, text }: { title: string; text: string }) {
   const [copied, setCopied] = useState(false);
   const [failed, setFailed] = useState(false);

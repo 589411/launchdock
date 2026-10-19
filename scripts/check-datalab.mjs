@@ -5,7 +5,9 @@ import { parseCSV, toTable, decodeBuffer, tableFromRows, looksLikeDataHeaders } 
 import { parseDay, buildDatasetFromSunlitSchema } from '../src/lib/datalab/normalize.ts';
 import { runHealth } from '../src/lib/datalab/health.ts';
 import { runRfm, repurchaseIntervals, classify, customerStats } from '../src/lib/datalab/rfm.ts';
-import { detectMapping, mappingToNames, mappingFromNames, templateCsv, missingFor, requiredMissing } from '../src/lib/datalab/detect.ts';
+import { detectMapping, mappingToNames, mappingFromNames, templateCsv, missingFor, requiredMissing, detectFromHeaders } from '../src/lib/datalab/detect.ts';
+import { diagnoseStructure, buildDiagnosticReport, parseHeaderBlocks } from '../src/lib/datalab/diagnose.ts';
+import { SYNONYMS } from '../src/data/import-profiles.ts';
 import { buildDatasetFromMapping, parseFlexibleDay, parseAmount } from '../src/lib/datalab/normalize.ts';
 import { runHealthOwn } from '../src/lib/datalab/health-own.ts';
 import { runTouchpoints } from '../src/lib/datalab/touchpoints.ts';
@@ -206,6 +208,36 @@ for (let r = 1; r <= 5; r++) for (let fm = 1; fm <= 5; fm++) for (const f of [1,
   const rb = buildReport({ sourceLabel: 'x', dataset: bg.b.dataset, health: hb.report, rfm: runRfm(bg.b.dataset), touch: runTouchpoints(bg.b.dataset), notes: {}, claims: {} }, { showAmounts: false });
   if (!rb.range.from) errors.push('13 萬列報告沒有日期範圍');
   if (performance.now() - t0 > 8000) errors.push(`13 萬列太慢：${Math.round(performance.now() - t0)} ms`);
+}
+
+// ── 欄名診斷：常見 ERP／POS／手打 Excel 的欄名組合（沒有真實學員檔案前的代用測試）────
+{
+  const kind = (h) => { const { mapping } = detectFromHeaders(h); return diagnoseStructure(h, mapping).kind; };
+  const maps = (h) => { const { mapping } = detectFromHeaders(h); return Object.fromEntries(Object.entries(mapping).filter(([, g]) => g.col >= 0).map(([k, g]) => [k, h[g.col]])); };
+  const erp = ['單據日期', '客戶代號', '客戶名稱', '品號', '品名', '規格', '數量', '單價', '未稅金額', '含稅金額', '稅額', '業務員'];
+  eq('ERP 銷貨明細：類型', kind(erp), 'flat');
+  eq('ERP 銷貨明細：對應', [maps(erp).date, maps(erp).customerId, maps(erp).quantity, maps(erp).unitPrice], ['單據日期', '客戶代號', '數量', '單價']);
+  eq('ERP 含稅／未稅同分：標成「猜的」請使用者確認', detectFromHeaders(erp).mapping.amount.confidence, 'guess');
+  eq('客戶名稱不會被當成顧客編號', maps(erp).customerId, '客戶代號');
+  eq('商品：有品名時選品名，不選品號', maps(erp).product, '品名');
+  eq('商品：只有品號時仍可使用', maps(['單據日期', '客戶代號', '品號', '金額']).product, '品號');
+  eq('月報表：類型', kind(['品名', '1月', '2月', '3月', '4月', '5月', '6月', '合計']), 'pivot');
+  eq('年度報表：類型', kind(['門市', '2023', '2024', '2025']), 'pivot');
+  eq('會員主檔：類型', kind(['會員編號', '姓名', '手機', '生日', '性別', '會員等級', '入會日期', '地址']), 'members');
+  eq('訂單明細：類型', kind(['單號', '品號', '品名', '數量', '單價']), 'items');
+  eq('沒有顧客：類型', kind(['結帳日期', '發票號碼', '實收金額', '付款方式']), 'noCustomer');
+  eq('手打 Excel 口語欄名', [kind(['日期', '客人', '買了什麼', '多少錢']), maps(['日期', '客人', '買了什麼', '多少錢']).customerId], ['flat', '客人']);
+  eq('範本：類型', kind(['order_id', 'date', 'customer_id', 'product', 'category', 'amount', 'is_return', 'store']), 'flat');
+  eq('什麼都對不上：類型', kind(['甲', '乙', '丙']), 'unknown');
+  // 同義詞資料檔：每個詞都必須是小寫且不含空白、底線、連字號（比對時欄名會先這樣正規化）
+  for (const [f, words] of Object.entries(SYNONYMS)) for (const w of words) if (w !== w.toLowerCase().replace(/[\s_\-./()（）]/g, '')) errors.push(`同義詞 ${f}:${w} 不符合正規化格式`);
+  // 診斷報告：只含欄名；沒有標題列時完全不列欄名
+  const rep = buildDiagnosticReport({ fileType: 'xlsx', rowCount: 120, headers: erp, mapping: detectFromHeaders(erp).mapping });
+  if (!rep.includes('客戶代號') || !rep.includes('資料列數：120')) errors.push('診斷報告少了欄名或列數');
+  const leak = buildDiagnosticReport({ fileType: 'csv', rowCount: 10, headers: null, note: '第一列看起來是資料' });
+  if (/王小明|0912/.test(leak) || !leak.includes('為保護個資不列出')) errors.push('沒有標題列時診斷報告不可列出欄名');
+  // 欄名測試頁：多組分隔
+  eq('欄名分組（--- 與逗號、Tab、換行）', parseHeaderBlocks('a,b,c\n---\nd\te\n\n\nf\ng\nh'), [['a', 'b', 'c'], ['d', 'e'], ['f', 'g', 'h']]);
 }
 
 // 接觸點（日晴完整資料）與工作坊核對數字

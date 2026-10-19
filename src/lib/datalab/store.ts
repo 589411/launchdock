@@ -149,20 +149,29 @@ export async function loadData(): Promise<SavedData | null> {
   }
 }
 
-/** 清掉這台電腦上所有紀錄：存起來的資料、欄位對應記憶、進度與心得 */
+/**
+ * 清掉這台電腦上所有紀錄：存起來的資料、欄位對應記憶、進度與心得。
+ * 順序刻意是「先同步清 localStorage、再等 IndexedDB」：使用者按下去立刻重新整理時，
+ * 至少欄位對應與進度已經清掉了，不會留下等 IndexedDB 刪完才清的空窗。
+ */
 export async function clearAllLocal(): Promise<void> {
-  await clearData();
   clearProgress();
   try {
     localStorage.removeItem(MAPPING_KEY);
+  } catch {
+    /* ignore */
+  }
+  await clearData(true);
+  try {
     localStorage.removeItem(SAVED_FLAG);
   } catch {
     /* ignore */
   }
 }
 
-export async function clearData(): Promise<void> {
-  if (!hasSavedFlag()) return;
+/** force：即使本機沒有「曾經存過」的旗標也去刪（旗標可能被單獨清掉，資料卻還在） */
+export async function clearData(force = false): Promise<void> {
+  if (!force && !hasSavedFlag()) return;
   try {
     const db = await openDb();
     await new Promise<void>((res, rej) => {
