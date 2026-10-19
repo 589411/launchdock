@@ -41,6 +41,18 @@ const shadow = scoreCheckup({ ...all(2), people_rule: 0, people_tools: 0, people
 if (!shadow.warnings.some((w) => w.id === 'shadow_ai')) err('影子 AI 規則沒觸發');
 if (lo.warnings.length || hi.warnings.length) err('全低或全高不該有警示');
 
+// 整體階段不超過最弱面向 + 1：四面向全滿分、人員面向 avg 0.67（階段 2）→ 整體不得為 4
+const capped = scoreCheckup({ ...all(3), people_rule: 0, people_tools: 0, people_line: 2 });
+if (capped.overallStage > 3) err(`整體階段沒有被最弱面向封頂：${capped.overallStage}`);
+// 「發展不均」的較弱面向必須與結果頁的 weakest 一致
+const mismatch = scoreCheckup({ ...all(3), strategy_consensus: 1, strategy_budget: 0, strategy_position: 0, people_rule: 0, people_tools: 0, people_line: 0 });
+const uneven = mismatch.warnings.find((w) => w.id === 'uneven');
+if (uneven && uneven.lo !== mismatch.weakest.key) err(`uneven.lo(${uneven.lo}) 與 weakest(${mismatch.weakest.key}) 不一致`);
+// 具體規則已點名同一個較弱面向時，不再重複跳「發展不均」
+const dup = scoreCheckup({ ...all(3), decision_basis: 0, decision_sparring: 0, decision_test: 0 });
+if (!dup.warnings.some((w) => w.id === 'data_no_decision')) err('data_no_decision 沒觸發');
+if (dup.warnings.some((w) => w.id === 'uneven')) err('uneven 與 data_no_decision 重複');
+
 if (errors.length) {
   console.error('❌ 體檢自檢失敗:\n- ' + errors.join('\n- '));
   process.exit(1);

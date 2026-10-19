@@ -138,10 +138,10 @@ export const questions: Question[] = [
     dimension: 'strategy',
     text: '你說得出公司現在哪些事是「人問 AI」、哪些事是「AI 自己做」嗎？',
     options: [
-      { score: 0, text: '說不出來，公司沒在用' },
+      { score: 0, text: '說不出來' },
       { score: 1, text: '說得出，目前全是人問 AI（聊天、查資料）' },
       { score: 2, text: '有一兩件事是 AI 在固定流程裡先做，人再驗收' },
-      { score: 3, text: '盤點過，也清楚下一步要讓 AI 接手哪一段' },
+      { score: 3, text: '已有多件由 AI 先做，而且盤點過下一段要交給 AI 的' },
     ],
   },
 
@@ -173,7 +173,7 @@ export const questions: Question[] = [
     dimension: 'data',
     text: '同業動態、市場消息，公司怎麼蒐集？',
     options: [
-      { score: 0, text: '沒有系統地蒐集' },
+      { score: 0, text: '沒人在留意' },
       { score: 1, text: '靠自己滑到什麼看什麼' },
       { score: 2, text: '定期請 AI 或工具整理，再由人閱讀' },
       { score: 3, text: '自動蒐集整理，固定送到該看的人手上' },
@@ -210,8 +210,8 @@ export const questions: Question[] = [
     options: [
       { score: 0, text: '都在他腦袋裡' },
       { score: 1, text: '偶爾口頭交接' },
-      { score: 2, text: '有寫成文件或 SOP，但沒人維護' },
-      { score: 3, text: '有文件，而且能讓 AI 讀來輔助新人或回答問題' },
+      { score: 2, text: '有寫成文件或 SOP，但沒有更新' },
+      { score: 3, text: '有人維護，需要時也能讓 AI 讀來輔助新人' },
     ],
   },
 
@@ -276,11 +276,11 @@ export const questions: Question[] = [
   {
     id: 'people_line',
     dimension: 'people',
-    text: '哪些事「可以交給 AI」、哪些事「絕對不能交」，公司有劃線嗎？',
+    text: '哪些工作「可以交給 AI」、哪些一定要人把關（例如對外回覆客戶、報價、人事決定），公司有劃線嗎？',
     options: [
       { score: 0, text: '沒想過' },
       { score: 1, text: '心裡有感覺，但沒說清楚' },
-      { score: 2, text: '有劃線（例如客戶個資、合約不上傳）' },
+      { score: 2, text: '有劃線（例如對外回覆與報價一定要人審過）' },
       { score: 3, text: '劃線寫成規則，並依風險分級' },
     ],
   },
@@ -302,7 +302,7 @@ export const advice: Record<DimensionKey, Record<StageLevel, Advice>> = {
       next: '指定一位負責人，為最成功的那一件定一個數字（省多少時間、少多少錯誤），每月檢視一次。',
     },
     4: {
-      diagnosis: '策略與投入都有章法，優勢是能持續累積。',
+      diagnosis: '策略與投入已上軌道，成果會持續累積。',
       next: '風險是自滿。每季重新盤點一次「還有哪一段可以讓 AI 接手」，並淘汰沒效果的投入。',
     },
   },
@@ -366,7 +366,7 @@ export const advice: Record<DimensionKey, Record<StageLevel, Advice>> = {
       next: '今天先做兩件事：問一次大家都在用什麼工具；明確說「客戶個資、合約、財務報表不能貼進 AI」。',
     },
     2: {
-      diagnosis: '有基本規則，但工具與帳號仍然分散，難以管理。',
+      diagnosis: '有提醒或初步規則，但工具與帳號仍然分散，難以管理。',
       next: '統一選一兩種公司認可的工具與帳號，並把「哪些資料能交、哪些不能交」寫成一頁。',
     },
     3: {
@@ -387,16 +387,20 @@ export interface ImbalanceRule {
   /** 可用 {hi}、{lo} 代入較高／較低的面向名稱 */
   detail: string;
   /** 回傳 null 表示沒觸發；回傳物件則為要代入的面向名稱 */
-  check: (stageOf: Record<DimensionKey, StageLevel>) => { hi?: DimensionKey; lo?: DimensionKey } | null;
+  check: (
+    stageOf: Record<DimensionKey, StageLevel>,
+    avgOf: Record<DimensionKey, number>,
+  ) => { hi?: DimensionKey; lo?: DimensionKey } | null;
 }
 
-function maxMin(stageOf: Record<DimensionKey, StageLevel>) {
+/** 以平均分挑最高／最低面向（與結果頁的「最該先補」同一把尺，避免兩處指到不同面向） */
+function maxMin(avgOf: Record<DimensionKey, number>) {
   const keys = dimensions.map((d) => d.key);
   let hi = keys[0];
   let lo = keys[0];
   for (const k of keys) {
-    if (stageOf[k] > stageOf[hi]) hi = k;
-    if (stageOf[k] < stageOf[lo]) lo = k;
+    if (avgOf[k] > avgOf[hi]) hi = k;
+    if (avgOf[k] < avgOf[lo]) lo = k;
   }
   return { hi, lo };
 }
@@ -406,7 +410,7 @@ export const imbalanceRules: ImbalanceRule[] = [
     id: 'shadow_ai',
     headline: '有人在用，但沒有規範',
     detail:
-      '其他面向已經有在用 AI，但「人員、工具與資料安全」還停在最前面。這是中小企業最常見的風險：資料可能已經流出去，而公司還不知道。建議優先補這一塊。',
+      '其他面向已經有在用 AI，但「人員、工具與資料安全」還停在第一階段。這是中小企業最常見的風險：資料可能已經流出去，而公司還不知道。建議優先補這一塊。',
     check: (s) => {
       if (s.people > 1) return null;
       const others = (['strategy', 'data', 'process', 'decision'] as DimensionKey[]).filter((k) => s[k] >= 2);
@@ -429,8 +433,8 @@ export const imbalanceRules: ImbalanceRule[] = [
     id: 'uneven',
     headline: '發展不均',
     detail: '「{hi}」與「{lo}」落差兩階以上。落差太大時，走得快的那一塊常被走得慢的拖住。先補「{lo}」，整體才會一起往前。',
-    check: (s) => {
-      const { hi, lo } = maxMin(s);
+    check: (s, avg) => {
+      const { hi, lo } = maxMin(avg);
       return s[hi] - s[lo] >= 2 ? { hi, lo } : null;
     },
   },
@@ -501,13 +505,21 @@ export function scoreCheckup(answers: Record<string, number>): CheckupResult {
   const weakest = dimResults.reduce((w, d) => (d.avg < w.avg ? d : w), dimResults[0]);
 
   const stageOf = Object.fromEntries(dimResults.map((d) => [d.key, d.stage])) as Record<DimensionKey, StageLevel>;
+  const avgOf = Object.fromEntries(dimResults.map((d) => [d.key, d.avg])) as Record<DimensionKey, number>;
   const warnings: FiredWarning[] = [];
   for (const rule of imbalanceRules) {
-    const hit = rule.check(stageOf);
-    if (hit) warnings.push({ id: rule.id, ...hit });
+    const hit = rule.check(stageOf, avgOf);
+    if (!hit) continue;
+    // 通用的「發展不均」若指著同一個較弱面向，前面更具體的規則已經說過了，不重複
+    if (rule.id === 'uneven' && warnings.some((w) => w.lo === hit.lo)) continue;
+    warnings.push({ id: rule.id, ...hit });
   }
 
-  return { dimensions: dimResults, overallStage: toStage(overallAvg), overallAvg, weakest, warnings };
+  // 整體階段不超過最弱面向 + 1：四個面向很強、一個面向很弱時，不該拿到「制度化」
+  const minStage = Math.min(...dimResults.map((d) => d.stage)) as number;
+  const overallStage = Math.min(toStage(overallAvg), minStage + 1) as StageLevel;
+
+  return { dimensions: dimResults, overallStage, overallAvg, weakest, warnings };
 }
 
 // ── 在地化（英文以 id 對應 checkup.en.ts，沒填就退回中文） ──────────

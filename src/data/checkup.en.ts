@@ -11,7 +11,7 @@ export interface CheckupEn {
 export const en: CheckupEn = {
   stages: {
     1: {
-      name: 'Watching',
+      name: 'Wait-and-see',
       blurb: 'Not started yet, or only just hearing about it. AI has not touched your day-to-day work.',
     },
     2: {
@@ -76,10 +76,10 @@ export const en: CheckupEn = {
     strategy_position: {
       text: 'Can you say which things at the company are "people asking AI" today and which are "AI doing the work itself"?',
       options: [
-        'I cannot say; the company is not using it',
-        'I can say it: right now everything is people asking AI (chatting, looking things up)',
+        'I cannot say',
+        'Yes: right now it\'s all people asking AI (chatting, looking things up)',
         'One or two tasks already run through a fixed process where AI does the first pass and a person checks it',
-        'We have taken stock, and we know which part AI should take over next',
+        'Several tasks already start with AI, and we have mapped out what to hand over next',
       ],
     },
     data_report: {
@@ -97,14 +97,14 @@ export const en: CheckupEn = {
         'They ask someone and wait until the numbers are compiled',
         'The numbers exist, but they are scattered across different files or systems',
         'There is a fixed summary sheet or dashboard, but someone has to update it',
-        'Opening it shows the latest numbers, updated automatically',
+        'The latest numbers are there whenever I open it, updated automatically',
       ],
     },
     data_external: {
       text: 'How does the company keep track of competitor moves and market news?',
       options: [
-        'No systematic tracking',
-        'Whoever scrolls past something reads it',
+        'Nobody is watching it',
+        'We read whatever we happen to come across',
         'AI or a tool gathers it regularly, and a person reads the summary',
         'It is gathered and organized automatically, and sent to the right people on a schedule',
       ],
@@ -132,8 +132,8 @@ export const en: CheckupEn = {
       options: [
         'It is all in one person\'s head',
         'Handovers happen occasionally, by word of mouth',
-        'Written up as documents or SOPs, but nobody maintains them',
-        'Written up, and AI can read them to help new staff or answer questions',
+        'Written up as documents or SOPs, but not kept up to date',
+        'Someone maintains them, and AI can read them to help new staff when needed',
       ],
     },
     decision_basis: {
@@ -182,11 +182,11 @@ export const en: CheckupEn = {
       ],
     },
     people_line: {
-      text: 'Has the company drawn a line between tasks that "can go to AI" and those that "must never go to AI"?',
+      text: 'Has the company drawn a line between work that "can go to AI" and work that always needs a person to check it (for example, replying to customers, quoting, HR decisions)?',
       options: [
         'We have never thought about it',
         'We have a feeling about it, but it is not spelled out',
-        'There is a line (for example, customer personal data and contracts are not uploaded)',
+        'There is a line (for example, customer replies and quotes must always be reviewed by a person)',
         'The line is written as rules and graded by risk',
       ],
     },
@@ -205,7 +205,7 @@ export const en: CheckupEn = {
       next: 'Name one owner, set a number for the most successful task (time saved, fewer errors), and review it once a month.',
     },
     'strategy.4': {
-      diagnosis: 'Your strategy and spending are well organized, and your advantage is that it keeps building up over time.',
+      diagnosis: 'Your strategy and spending are on track, and the gains keep compounding.',
       next: 'The risk now is complacency. Each quarter, review which parts of the work AI could still take over, and drop the spending that is not paying off.',
     },
     'data.1': {
@@ -261,7 +261,7 @@ export const en: CheckupEn = {
       next: 'Do two things today: ask everyone once which tools they are using, and state clearly that customer personal data, contracts, and financial statements may not be pasted into AI.',
     },
     'people.2': {
-      diagnosis: 'There are basic rules, but tools and accounts are still scattered, which makes them hard to manage.',
+      diagnosis: 'There are reminders or basic rules, but tools and accounts are still scattered, which makes them hard to manage.',
       next: 'Choose one or two approved tools and accounts for the company, and write up on one page which data can be shared and which cannot.',
     },
     'people.3': {

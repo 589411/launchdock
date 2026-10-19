@@ -223,6 +223,7 @@ export default function AICheckup({ locale, articles }: Props) {
         <h3 className="text-lg font-semibold mb-4">{tr(ui.breakdown)}</h3>
         <div className="flex flex-col items-center mb-4">
           <RadarChart
+            ariaLabel={tr(ui.breakdown)}
             dims={result.dimensions.map((d) => ({
               label: content.dimensions.find((x) => x.key === d.key)?.short ?? d.key,
               pct: d.pct,

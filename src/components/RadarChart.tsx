@@ -4,7 +4,7 @@ export interface RadarDim {
   pct: number; // 0..1
   isGap: boolean;
 }
-export function RadarChart({ dims }: { dims: RadarDim[] }) {
+export function RadarChart({ dims, ariaLabel = 'capability radar' }: { dims: RadarDim[]; ariaLabel?: string }) {
   // viewBox 比圖本身寬，留兩側空間給軸標籤，避免被切掉
   const W = 320;
   const H = 250;
@@ -24,7 +24,7 @@ export function RadarChart({ dims }: { dims: RadarDim[] }) {
   const dataPath = dataPoints.map((p) => `${p.x},${p.y}`).join(' ');
 
   return (
-    <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} style={{ maxWidth: W }} role="img" aria-label="capability radar">
+    <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} style={{ maxWidth: W }} role="img" aria-label={ariaLabel}>
       {/* 格線環 */}
       {rings.map((ring) => (
         <polygon
