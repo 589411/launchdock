@@ -11,6 +11,15 @@ function numOf(s: string | undefined): number {
   return Number.isFinite(v) ? v : 0;
 }
 
+export const DECISIONS = [
+  { rule: '匿名交易不進客戶分析', why: '沒有會員編號就不知道是誰，無法算 R／F／M。營收仍計入整體。' },
+  { rule: '退貨不算一次購買', why: '退貨不增加購買頻次、不當成最近消費日；但會從該顧客的消費金額扣除。' },
+  { rule: '日期統一轉成日期（不看時分）', why: '混用的寫法先統一，才能排序與計算天數。' },
+  { rule: '不對明細做無腦去重', why: '同單買兩件會產生一模一樣的兩列；先用交易總額對帳，確認是合法重複再保留。' },
+  { rule: '個資欄位預設不納入分析與提示詞', why: 'email、電話、姓名分析不需要；要複製給 AI 工具的內容只含彙總數字。' },
+  { rule: '基準日＝資料最後一天 + 1', why: '用資料本身的最後一天而不是「今天」，否則舊資料會全部看起來像流失客。' },
+];
+
 export interface HealthFacts {
   [key: string]: number | Record<string, number>;
 }
@@ -272,14 +281,7 @@ export function runHealth(tables: Record<string, Table>): { report: HealthReport
 
   const pii = scanPii(tables);
 
-  const decisions = [
-    { rule: '匿名交易不進客戶分析', why: '沒有會員編號就不知道是誰，無法算 R／F／M。營收仍計入整體。' },
-    { rule: '退貨不算一次購買', why: '退貨不增加購買頻次、不當成最近消費日；但會從該顧客的消費金額扣除。' },
-    { rule: '日期統一轉成日期（不看時分）', why: '混用的寫法先統一，才能排序與計算天數。' },
-    { rule: '不對明細做無腦去重', why: '同單買兩件會產生一模一樣的兩列；先用交易總額對帳，確認是合法重複再保留。' },
-    { rule: '個資欄位預設不納入分析與提示詞', why: 'email、電話、姓名分析不需要；要複製給 AI 工具的內容只含彙總數字。' },
-    { rule: '基準日＝資料最後一天 + 1', why: '用資料本身的最後一天而不是「今天」，否則舊資料會全部看起來像流失客。' },
-  ];
+  const decisions = DECISIONS;
 
   return { report: { checks, pii, decisions, rows }, facts };
 }

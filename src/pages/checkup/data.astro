@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import DataLab from '../../components/datalab/DataLab.tsx';
+import Workshop from '../../components/datalab/Workshop.tsx';
 ---
 
 <BaseLayout
@@ -8,6 +8,16 @@ import DataLab from '../../components/datalab/DataLab.tsx';
   description="用一份顧客交易資料走一遍資料健檢與 RFM 客群分群，並產生可貼給自己 AI 工具的提示詞。全程在瀏覽器計算，資料不會上傳。"
 >
   <div class="max-w-[900px] mx-auto px-6 py-12">
-    <DataLab client:load />
+    <Workshop client:load />
   </div>
 </BaseLayout>
+
+<style is:global>
+  @media print {
+    /* 列印（存成 PDF）時只留報告本身 */
+    body * { visibility: hidden !important; }
+    #datalab-report, #datalab-report * { visibility: visible !important; }
+    #datalab-report { position: absolute; left: 0; top: 0; width: 100%; border: none !important; }
+    .no-print { display: none !important; }
+  }
+</style>

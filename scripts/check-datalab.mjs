@@ -4,7 +4,14 @@ import { readFileSync, existsSync } from 'node:fs';
 import { parseCSV, toTable, decodeBuffer } from '../src/lib/datalab/csv.ts';
 import { parseDay, buildDatasetFromSunlitSchema } from '../src/lib/datalab/normalize.ts';
 import { runHealth } from '../src/lib/datalab/health.ts';
-import { runRfm, repurchaseIntervals, classify } from '../src/lib/datalab/rfm.ts';
+import { runRfm, repurchaseIntervals, classify, customerStats } from '../src/lib/datalab/rfm.ts';
+import { detectMapping, mappingToNames, mappingFromNames, templateCsv, missingFor } from '../src/lib/datalab/detect.ts';
+import { buildDatasetFromMapping, parseFlexibleDay, parseAmount } from '../src/lib/datalab/normalize.ts';
+import { runHealthOwn } from '../src/lib/datalab/health-own.ts';
+import { runTouchpoints } from '../src/lib/datalab/touchpoints.ts';
+import { compareClaim, parseClaim, expectedValues } from '../src/lib/datalab/check.ts';
+import { buildReport, reportToText } from '../src/lib/datalab/report.ts';
+import { segments as workshopSegments, fillPrompt } from '../src/data/workshop.ts';
 import { scanPii, mask } from '../src/lib/datalab/pii.ts';
 import { quantile, median } from '../src/lib/datalab/stats.ts';
 import { segmentInfo } from '../src/data/datalab.ts';
@@ -99,6 +106,72 @@ for (let r = 1; r <= 5; r++) for (let fm = 1; fm <= 5; fm++) for (const f of [1,
   if (f2.find((f) => f.column === 'name')?.maskedSample !== '王***') errors.push('姓名遮罩應只留一個字');
 }
 
+// ── 自有資料：欄位偵測、轉換、健檢 ───────────────────────────────
+{
+  // 範本本身必須能被偵測為「全部確定」並轉成可用的 Dataset
+  const t = toTable('範本', templateCsv());
+  const m = detectMapping(t);
+  eq('範本欄位偵測', Object.fromEntries(Object.entries(m).filter(([, g]) => g.col >= 0).map(([k, g]) => [k, [t.headers[g.col], g.confidence]])), {
+    customerId: ['customer_id', 'sure'], date: ['date', 'sure'], amount: ['amount', 'sure'], orderId: ['order_id', 'sure'],
+    product: ['product', 'sure'], category: ['category', 'sure'], isReturn: ['is_return', 'sure'], store: ['store', 'sure'],
+  });
+  const b = buildDatasetFromMapping(t, m);
+  eq('範本：單號重複 → 明細解讀', b.stats.lineLevel, true);
+  eq('範本：交易數（A0001 兩列合成一筆）', b.dataset.txns.length, 4);
+  eq('範本：A0001 金額加總', b.dataset.txns.find((x) => x.id === 'A0001').amount, 1000);
+  eq('範本：退貨（旗標且金額負）', b.dataset.txns.find((x) => x.id === 'A0004').isReturn, true);
+  eq('範本：匿名交易', b.dataset.txns.find((x) => x.id === 'A0003').customerId, null);
+  eq('範本：缺欄位判斷', missingFor(m, ['customerId', 'date', 'amount', 'product']).length, 0);
+  const h = runHealthOwn(t, m, b, b.dataset);
+  eq('自有健檢：匿名 1、退貨 1', [h.facts.anonymous, h.facts.returns], [1, 1]);
+  eq('自有健檢：樣本太小要警告', h.report.checks.some((c) => c.id === 'own_small'), true);
+}
+{
+  // 中文欄名、民國年、Excel 序號、NT$ 與括號負數、通路欄
+  const t = toTable('中文', '訂單編號,交易日期,會員編號,商品名稱,銷售金額,退貨,通路\nT1,114/01/02,M1,乳液,"NT$1,200",否,門市\nT2,114/01/05,M1,洗面乳,(300),是,線上\nT3,114/02/01,,乳液,680,否,門市\n');
+  const m = detectMapping(t);
+  eq('中文欄名偵測', Object.fromEntries(Object.entries(m).filter(([, g]) => g.col >= 0).map(([k, g]) => [k, t.headers[g.col]])), {
+    customerId: '會員編號', date: '交易日期', amount: '銷售金額', orderId: '訂單編號', product: '商品名稱', isReturn: '退貨', channel: '通路',
+  });
+  const b = buildDatasetFromMapping(t, m);
+  eq('中文：金額解析與退貨', b.dataset.txns.map((x) => [x.id, x.amount, x.isReturn]), [['T1', 1200, false], ['T2', -300, true], ['T3', 680, false]]);
+  eq('中文：民國年', b.dataset.txns[0].day, parseFlexibleDay('2025-01-02'));
+  eq('中文：以逐筆解讀（單號不重複）', b.stats.lineLevel, false);
+  // 欄名記憶：隔天用同一種格式重傳時自動套用
+  const names = mappingToNames(t, m);
+  const again = mappingFromNames(t, names);
+  eq('欄名記憶可還原', again.amount.col, m.amount.col);
+}
+{
+  // 沒有任何有用欄名：日期靠樣式猜，其餘找不到並明確回報缺欄位
+  const t = toTable('亂欄名', 'a,b,c\nx,2025-01-02,100\ny,2025-01-03,200\n');
+  const m = detectMapping(t);
+  eq('無欄名：日期用值猜', [t.headers[m.date.col], m.date.confidence], ['b', 'guess']);
+  eq('無欄名：缺顧客與金額', missingFor(m, ['customerId', 'date', 'amount']), ['customerId', 'amount']);
+  eq('缺欄位不建立 Dataset', buildDatasetFromMapping(t, m).dataset, null);
+  // 單價不是交易金額
+  const t2 = toTable('單價', 'customer,date,unit_price,total_amount\nA,2025-01-02,10,30\n');
+  eq('單價 vs 總額', t2.headers[detectMapping(t2).amount.col], 'total_amount');
+  eq('顧客名稱不是顧客編號', t2 && detectMapping(toTable('n', 'customer_name,date,amount\nA,2025-01-02,5\n')).customerId.col, -1);
+}
+// 接觸點（日晴完整資料）與工作坊核對數字
+
+// ── 工作坊：核對與報告 ──────────────────────────────────────────
+{
+  const spec = (u) => ({ id: 'x', label: 'x', unit: u, hint: '' });
+  eq('核對：筆數必須完全一致', [compareClaim(spec('count'), '1,817 筆', 1817).status, compareClaim(spec('count'), '1800', 1817).status], ['match', 'off']);
+  eq('核對：百分比容許 ±1 個百分點', [compareClaim(spec('percent'), '63%', 63.01).status, compareClaim(spec('percent'), '60%', 63.01).status], ['match', 'off']);
+  eq('核對：百分比寫成小數', parseClaim('0.63', 'percent', 63.0), 63);
+  eq('核對：天數 ±1', [compareClaim(spec('days'), '49 天', 48).status, compareClaim(spec('days'), '60', 48).status], ['match', 'off']);
+  eq('核對：空白或無數字', [compareClaim(spec('count'), '', 5).status, compareClaim(spec('count'), '不知道', 5).status], ['empty', 'empty']);
+  // 每個工作坊段落的檢核項都必須有對應的標準答案
+  const okKeys = new Set(['memberShare', 'anonymousCount', 'returnCount', 'onceOnly', 'top20Share', 'medianInterval']);
+  for (const seg of workshopSegments) for (const c of seg.checks ?? []) if (!okKeys.has(c.id)) errors.push(`段落 ${seg.id} 的檢核項 ${c.id} 沒有標準答案`);
+  eq('提示詞欄位代入', fillPrompt('欄位：{columns}', ['a', 'b']), '欄位：a、b');
+  const ids = workshopSegments.map((s) => s.id);
+  eq('段落 id 不重複', new Set(ids).size, ids.length);
+}
+
 // ── 日晴資料：對照獨立算出的參考答案 ────────────────────────────
 const dir = process.env.SUNLIT_DATA ?? '/home/user/589411/sunlit-site/data';
 if (!existsSync(`${dir}/transactions.csv`)) {
@@ -157,6 +230,25 @@ if (!existsSync(`${dir}/transactions.csv`)) {
       const c = byId[s.member_id];
       eq(`sample ${s.member_id}`, c && [c.r, c.f, c.m, c.rScore, c.fScore, c.mScore, c.fm, segmentInfo[c.segment].name], [s.R_days, s.F, s.M, s.R_score, s.F_score, s.M_score, s.FM, s.segment]);
     }
+    const cst = customerStats(res, dataset);
+    eq('customerStats.onceOnly', cst.onceOnly, exp.rfm.customers_F_eq_1);
+    eq('customerStats.top20Share（獨立計算 0.63014…）', Math.round(cst.top20Share * 10000) / 10000, 0.6301);
+    eq('customerStats.medianInterval', cst.medianInterval, exp.repurchase.median);
+    const tp = runTouchpoints(dataset);
+    eq('接觸點：匿名交易', tp.anonymousTxns, exp.txn_anonymous);
+    eq('接觸點：門市筆數', Object.fromEntries(tp.byStore.map((x) => [x.label, x.count])), exp.txn_store_codes);
+    eq('接觸點：每月合計等於交易數', tp.monthly.reduce((s, x) => s + x.count, 0), dataset.txns.length);
+    // 報告：預設不含金額；勾選才含；摘要文字不得出現個資欄位的值
+    const tpR = runTouchpoints(dataset);
+    const input = { sourceLabel: '日晴完整資料', dataset, health: report, rfm: res, touch: tpR, notes: { d1s1: '匿名交易太多' }, claims: { 'd1s1.memberShare': '70%', 'd1s2.anonymousCount': '1817' } };
+    const rep = buildReport(input, { showAmounts: false });
+    eq('報告：預設不含金額', [rep.revenue, rep.segments.every((x) => x.sumM === undefined)], [undefined, true]);
+    eq('報告：含金額時才有', buildReport(input, { showAmounts: true }).revenue !== undefined, true);
+    eq('報告：核對結果', rep.checks.map((c) => c.status), ['off', 'match']);
+    const txt = reportToText(rep);
+    if (/NT\$/.test(txt)) errors.push('預設的摘要文字不應出現金額');
+    if (/@icloud|@gmail|@yahoo/.test(txt)) errors.push('摘要文字出現 email');
+    if (!txt.includes('匿名交易太多')) errors.push('摘要文字少了學員的心得');
     const iv = repurchaseIntervals(dataset);
     eq('repurchase.n', iv.length, exp.repurchase.intervals_n);
     eq('repurchase.median', median(iv), exp.repurchase.median);

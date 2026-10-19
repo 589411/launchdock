@@ -1,27 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
-import { buildDatasetFromSunlitSchema, dayToString } from '../../lib/datalab/normalize';
-import { runHealth } from '../../lib/datalab/health';
-import { runRfm } from '../../lib/datalab/rfm';
+import { useState } from 'react';
+import { dayToString } from '../../lib/datalab/normalize';
 import { healthPrompt, rfmPrompt, segmentMessagePrompt } from '../../lib/datalab/prompts';
-import { isValidUnlockCode, loadSample, loadSunlit } from '../../lib/datalab/sources';
-import { segmentInfo, UNLOCK_STORAGE_KEY } from '../../data/datalab';
-import type { Dataset, HealthReport, Level, PiiKind, RfmResult } from '../../lib/datalab/types';
+import { segmentInfo } from '../../data/datalab';
+import type { HealthReport, Level, PiiKind, RfmResult } from '../../lib/datalab/types';
+import type { TouchpointResult, Slice } from '../../lib/datalab/touchpoints';
+import type { ReportModel } from '../../lib/datalab/report';
 
-type SourceKind = 'sample' | 'sunlit';
-type Tab = 'health' | 'rfm';
-
-interface Loaded {
-  source: SourceKind;
-  dataset: Dataset;
-  health: HealthReport;
-  rfm: RfmResult;
-}
-
-const card = { backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-surface-lighter)' } as const;
-const muted = { color: 'var(--color-text-muted)' } as const;
-const secondary = { color: 'var(--color-text-secondary)' } as const;
-const pct = (x: number) => `${(x * 100).toFixed(1)}%`;
-const money = (n: number) => `NT$${Math.round(n).toLocaleString()}`;
+export const card = { backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-surface-lighter)' } as const;
+export const muted = { color: 'var(--color-text-muted)' } as const;
+export const secondary = { color: 'var(--color-text-secondary)' } as const;
+export const pct = (x: number) => `${(x * 100).toFixed(1)}%`;
+export const money = (n: number) => `NT$${Math.round(n).toLocaleString()}`;
 
 const LEVEL: Record<Level, { label: string; color: string }> = {
   warn: { label: '要注意', color: '#f59e0b' },
@@ -40,254 +29,8 @@ const PII_LABEL: Record<PiiKind, string> = {
   quasi: '準識別碼',
 };
 
-export default function DataLab() {
-  const [loaded, setLoaded] = useState<Loaded | null>(null);
-  const [loading, setLoading] = useState<SourceKind | null>(null);
-  const [error, setError] = useState('');
-  const [tab, setTab] = useState<Tab>('health');
-  const [unlocked, setUnlocked] = useState(false);
-  const [code, setCode] = useState('');
-  const [codeError, setCodeError] = useState('');
-  const [stage, setStage] = useState<number | null>(null);
-  // 連點或同時觸發兩次載入時，只採用最後一次的結果
-  const reqId = useRef(0);
-
-  useEffect(() => {
-    try {
-      setUnlocked(sessionStorage.getItem(UNLOCK_STORAGE_KEY) === '1');
-    } catch {
-      /* ignore */
-    }
-    const s = Number(new URLSearchParams(window.location.search).get('stage'));
-    if (s >= 1 && s <= 4) setStage(s);
-  }, []);
-
-  async function load(kind: SourceKind) {
-    const id = ++reqId.current;
-    setError('');
-    setLoading(kind);
-    try {
-      const tables = kind === 'sample' ? await loadSample() : await loadSunlit();
-      if (id !== reqId.current) return;
-      const built = buildDatasetFromSunlitSchema(tables, kind);
-      if (!built.dataset) throw new Error(built.error ?? '資料格式無法解析');
-      const { report } = runHealth(tables);
-      setLoaded({ source: kind, dataset: built.dataset, health: report, rfm: runRfm(built.dataset) });
-      setTab('health');
-    } catch (e) {
-      if (id !== reqId.current) return;
-      setError(
-        kind === 'sunlit'
-          ? `無法載入日晴完整資料（${e instanceof Error ? e.message : '未知錯誤'}）。可能是網路不穩，或對方網站不允許從這裡讀取。你可以先用內建小樣本，流程完全一樣。`
-          : `載入失敗（${e instanceof Error ? e.message : '未知錯誤'}）`,
-      );
-    } finally {
-      if (id === reqId.current) setLoading(null);
-    }
-  }
-
-  async function unlock() {
-    if (await isValidUnlockCode(code)) {
-      setCodeError('');
-      setUnlocked(true);
-      try {
-        sessionStorage.setItem(UNLOCK_STORAGE_KEY, '1');
-      } catch {
-        /* ignore */
-      }
-      void load('sunlit');
-    } else {
-      setCodeError('密碼不正確，請向提供密碼的人確認。');
-    }
-  }
-
-  function clearData() {
-    reqId.current++;
-    setLoaded(null);
-    setError('');
-  }
-
-  const intro =
-    stage === null
-      ? null
-      : stage <= 2
-        ? '你的體檢結果顯示資料這一塊還在起步，建議先從「資料健檢」開始：先看清資料可以信到什麼程度，再做分析。'
-        : '你的體檢結果顯示資料基礎已經有了，可以直接進「客群分群」，看看哪一群最值錢、哪一群最該先處理。';
-
-  return (
-    <div className="max-w-[820px] mx-auto">
-      <div className="text-center mb-6">
-        <h1 className="text-2xl font-extrabold tracking-tight">顧客數據戰情室</h1>
-        <p className="text-sm mt-2" style={secondary}>
-          用一份顧客交易資料，走一遍「資料健檢 → 客群分群」，並產生可以貼給你自己 AI 工具的提示詞。
-        </p>
-        {intro && (
-          <p className="text-sm mt-3 rounded-xl px-4 py-3 border" style={{ ...card, borderColor: 'var(--color-brand)' }}>
-            {intro}
-          </p>
-        )}
-      </div>
-
-      <div className="rounded-xl px-4 py-3 mb-6 border text-sm" style={card}>
-        🔒 <b>全部在你的瀏覽器裡計算，資料不會上傳到任何地方。</b>
-        <span style={muted}> 不信的話，打開瀏覽器開發者工具的 Network 分頁：你只會看到下載資料的請求，沒有任何上傳。</span>
-      </div>
-
-      {!loaded ? (
-        <SourcePicker
-          loading={loading}
-          unlocked={unlocked}
-          code={code}
-          setCode={setCode}
-          codeError={codeError}
-          error={error}
-          onSample={() => void load('sample')}
-          onSunlit={() => void load('sunlit')}
-          onUnlock={() => void unlock()}
-        />
-      ) : (
-        <>
-          <div className="flex items-center justify-between gap-3 flex-wrap rounded-xl px-4 py-3 mb-4 border text-sm" style={card}>
-            <span>
-              <b>{loaded.source === 'sample' ? '內建小樣本' : '日晴生活完整資料'}</b>
-              <span style={muted}>
-                {' '}
-                · {loaded.dataset.txns.length.toLocaleString()} 筆交易 · 截至 {dayToString(loaded.dataset.asOf - 1)}
-              </span>
-            </span>
-            <button onClick={clearData} className="text-xs underline" style={muted}>
-              清除資料、換一份
-            </button>
-          </div>
-
-          <div className="flex gap-2 mb-5" role="tablist">
-            {(
-              [
-                ['health', '① 資料健檢與個資掃描'],
-                ['rfm', '② 客群分群（RFM）'],
-              ] as [Tab, string][]
-            ).map(([k, label]) => (
-              <button
-                key={k}
-                role="tab"
-                aria-selected={tab === k}
-                onClick={() => setTab(k)}
-                className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-                style={{
-                  backgroundColor: tab === k ? 'var(--color-brand)' : 'var(--color-surface-lighter)',
-                  color: tab === k ? '#fff' : 'var(--color-text-primary)',
-                }}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-
-          {tab === 'health' ? <HealthView health={loaded.health} /> : <RfmView rfm={loaded.rfm} />}
-        </>
-      )}
-    </div>
-  );
-}
-
-// ── 選資料來源 ────────────────────────────────────────────────
-function SourcePicker(props: {
-  loading: SourceKind | null;
-  unlocked: boolean;
-  code: string;
-  setCode: (s: string) => void;
-  codeError: string;
-  error: string;
-  onSample: () => void;
-  onSunlit: () => void;
-  onUnlock: () => void;
-}) {
-  const busy = props.loading !== null;
-  return (
-    <div className="space-y-4">
-      <h2 className="text-lg font-semibold">選一份資料開始</h2>
-
-      <div className="rounded-2xl p-5 border" style={card}>
-        <h3 className="font-semibold">內建小樣本</h3>
-        <p className="text-sm mt-1" style={secondary}>
-          150 位會員、約 1,000 筆交易。是虛構零售品牌「日晴生活」資料的縮小版，保留了真實資料會有的毛病（匿名交易、退貨、日期格式混用…），email 都已換成假的。任何人都能直接用。
-        </p>
-        <button
-          disabled={busy}
-          onClick={props.onSample}
-          className="mt-3 px-4 py-2 rounded-lg text-sm font-medium text-white disabled:opacity-60"
-          style={{ backgroundColor: 'var(--color-brand)' }}
-        >
-          {props.loading === 'sample' ? '載入中…' : '用內建小樣本開始'}
-        </button>
-      </div>
-
-      <div className="rounded-2xl p-5 border" style={card}>
-        <h3 className="font-semibold">日晴生活完整資料</h3>
-        <p className="text-sm mt-1" style={secondary}>
-          1,200 位會員、8,000 筆交易、18 個月的完整版。輸入日晴後台的密碼即可載入。
-        </p>
-        {props.unlocked ? (
-          <button
-            disabled={busy}
-            onClick={props.onSunlit}
-            className="mt-3 px-4 py-2 rounded-lg text-sm font-medium text-white disabled:opacity-60"
-            style={{ backgroundColor: 'var(--color-brand)' }}
-          >
-            {props.loading === 'sunlit' ? '載入中…' : '載入完整資料'}
-          </button>
-        ) : (
-          <div className="mt-3 flex gap-2 flex-wrap">
-            <input
-              type="password"
-              value={props.code}
-              onChange={(e) => props.setCode(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && !busy && props.code.trim() !== '' && props.onUnlock()}
-              placeholder="日晴後台密碼"
-              aria-label="日晴後台密碼"
-              className="px-3 py-2 rounded-lg border text-sm"
-              style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-surface-lighter)' }}
-            />
-            <button
-              disabled={busy || props.code.trim() === ''}
-              onClick={props.onUnlock}
-              className="px-4 py-2 rounded-lg text-sm font-medium text-white disabled:opacity-60"
-              style={{ backgroundColor: 'var(--color-brand)' }}
-            >
-              解鎖並載入
-            </button>
-          </div>
-        )}
-        {props.codeError && (
-          <p className="text-xs mt-2" style={{ color: '#f59e0b' }} role="alert">
-            {props.codeError}
-          </p>
-        )}
-        <p className="text-xs mt-3" style={muted}>
-          這個密碼只是用來對應課堂進度，資料本身是公開的教學資料。
-        </p>
-      </div>
-
-      <div className="rounded-2xl p-5 border border-dashed" style={{ borderColor: 'var(--color-surface-lighter)' }}>
-        <h3 className="font-semibold" style={secondary}>
-          上傳你自己的資料
-        </h3>
-        <p className="text-sm mt-1" style={muted}>
-          即將推出：上傳 CSV，自動偵測欄位並讓你確認，同樣全程在瀏覽器裡計算。
-        </p>
-      </div>
-
-      {props.error && (
-        <p className="text-sm rounded-xl px-4 py-3 border" style={{ ...card, borderColor: '#f59e0b' }} role="alert">
-          {props.error}
-        </p>
-      )}
-    </div>
-  );
-}
-
 // ── 資料健檢 ──────────────────────────────────────────────────
-function HealthView({ health }: { health: HealthReport }) {
+export function HealthView({ health }: { health: HealthReport }) {
   const order: Level[] = ['warn', 'info', 'ok'];
   const checks = [...health.checks].sort((a, b) => order.indexOf(a.level) - order.indexOf(b.level));
   return (
@@ -375,7 +118,7 @@ function HealthView({ health }: { health: HealthReport }) {
 }
 
 // ── RFM ───────────────────────────────────────────────────────
-function RfmView({ rfm }: { rfm: RfmResult }) {
+export function RfmView({ rfm }: { rfm: RfmResult }) {
   const n = rfm.customers.length;
   const maxShare = Math.max(...rfm.segments.map((s) => Math.max(s.countShare, s.revenueShare)), 0.01);
   const gridMax = Math.max(...rfm.grid.flat(), 1);
@@ -448,7 +191,7 @@ function RfmView({ rfm }: { rfm: RfmResult }) {
   );
 }
 
-function Bar({ value, color, label }: { value: number; color: string; label: string }) {
+export function Bar({ value, color, label }: { value: number; color: string; label: string }) {
   return (
     <div className="h-2 rounded-full mb-1" style={{ backgroundColor: 'var(--color-surface)' }} role="img" aria-label={`${label} ${(value * 100).toFixed(0)}%`}>
       <div className="h-full rounded-full" style={{ width: `${Math.max(value * 100, 1)}%`, backgroundColor: color }} />
@@ -499,7 +242,7 @@ function Heat({ grid, max }: { grid: number[][]; max: number }) {
   );
 }
 
-function PromptBox({ title, text }: { title: string; text: string }) {
+export function PromptBox({ title, text }: { title: string; text: string }) {
   const [copied, setCopied] = useState(false);
   const [failed, setFailed] = useState(false);
   async function copy() {
@@ -537,5 +280,178 @@ function PromptBox({ title, text }: { title: string; text: string }) {
         </button>
       </div>
     </details>
+  );
+}
+
+
+// ── 接觸點 ────────────────────────────────────────────────────
+export function TouchpointView({ touch }: { touch: TouchpointResult }) {
+  const maxMonth = Math.max(...touch.monthly.map((m) => Math.abs(m.revenue)), 1);
+  const maxWd = Math.max(...touch.weekday, 1);
+  const wdLabel = ['日', '一', '二', '三', '四', '五', '六'];
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-2 gap-3">
+        <div className="rounded-xl p-4 border text-center" style={card}>
+          <p className="text-2xl font-extrabold">{pct(touch.memberShare)}</p>
+          <p className="text-xs mt-1" style={muted}>
+            有顧客編號的交易佔比（{touch.memberTxns.toLocaleString()} / {touch.txns.toLocaleString()} 筆）
+          </p>
+        </div>
+        <div className="rounded-xl p-4 border text-center" style={card}>
+          <p className="text-2xl font-extrabold">{pct(touch.memberRevenueShare)}</p>
+          <p className="text-xs mt-1" style={muted}>有顧客編號的交易佔營收比</p>
+        </div>
+      </div>
+      <p className="text-sm" style={secondary}>
+        沒有顧客編號的交易，營收照算，但之後所有「顧客層級」的分析（分群、回購）都看不到它們。這個比例越低，你對顧客的了解就越像盲人摸象。
+      </p>
+
+      {touch.byStore.length > 1 && <SliceBars title="各門市／店別" slices={touch.byStore} />}
+      {touch.byChannel.length > 1 && <SliceBars title="各通路" slices={touch.byChannel} />}
+
+      <section>
+        <h3 className="text-lg font-semibold mb-3">每月營收與筆數</h3>
+        <div className="flex items-end gap-1 h-32" role="img" aria-label="每月營收長條圖">
+          {touch.monthly.map((m) => (
+            <div key={m.month} className="flex-1 min-w-0 flex flex-col items-center justify-end h-full" title={`${m.month}：${m.count} 筆`}>
+              <div className="w-full rounded-t" style={{ height: `${Math.max((Math.abs(m.revenue) / maxMonth) * 100, 2)}%`, backgroundColor: 'var(--color-brand)' }} />
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-between text-xs mt-1" style={muted}>
+          <span>{touch.monthly[0]?.month}</span>
+          <span>{touch.monthly[touch.monthly.length - 1]?.month}</span>
+        </div>
+      </section>
+
+      <section>
+        <h3 className="text-lg font-semibold mb-3">一週哪幾天交易最多</h3>
+        <div className="flex items-end gap-2 h-24">
+          {touch.weekday.map((n, i) => (
+            <div key={i} className="flex-1 flex flex-col items-center justify-end h-full">
+              <div className="w-full rounded-t" style={{ height: `${Math.max((n / maxWd) * 100, 2)}%`, backgroundColor: 'var(--color-brand)' }} title={`週${wdLabel[i]}：${n} 筆`} />
+              <span className="text-xs mt-1" style={muted}>{wdLabel[i]}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function SliceBars({ title, slices }: { title: string; slices: Slice[] }) {
+  const total = slices.reduce((s, x) => s + Math.max(x.revenue, 0), 0) || 1;
+  const max = Math.max(...slices.map((x) => x.revenue / total), 0.01);
+  return (
+    <section>
+      <h3 className="text-lg font-semibold mb-3">{title}</h3>
+      <div className="space-y-2">
+        {slices.slice(0, 12).map((s) => (
+          <div key={s.label}>
+            <div className="flex justify-between text-sm mb-1">
+              <b>{s.label}</b>
+              <span style={muted}>營收 {pct(Math.max(s.revenue, 0) / total)} · 有顧客編號 {pct(s.memberShare)}</span>
+            </div>
+            <Bar value={Math.max(s.revenue, 0) / total / max} color="var(--color-brand)" label="營收" />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ── AI 解讀與把關 ─────────────────────────────────────────────
+export function InsightView({ health, rfm }: { health: HealthReport; rfm: RfmResult }) {
+  return (
+    <div className="space-y-5">
+      <p className="text-sm" style={secondary}>
+        把下面任一份提示詞貼到你的 AI 工具。它們只含彙總數字，沒有任何個人資料。拿到報告後，用下面的問題逐條檢查。
+      </p>
+      <PromptBox title="提示詞 A：解讀資料健檢" text={healthPrompt(health)} />
+      <PromptBox title="提示詞 B：解讀客群分群" text={rfmPrompt(rfm)} />
+      <PromptBox title="提示詞 C：每一群各寫一則訊息" text={segmentMessagePrompt(rfm)} />
+      <div className="rounded-xl p-4 border" style={card}>
+        <h4 className="font-semibold text-sm mb-2">AI 報告把關清單</h4>
+        <ul className="text-sm space-y-1.5 list-disc pl-5" style={secondary}>
+          <li>報告裡每一個數字，都能在我貼給它的表格裡找到嗎？找不到的就是它編的。</li>
+          <li>它有沒有把「相關」說成「因果」？（例如「冠軍客群因為收到簡訊所以買得多」）</li>
+          <li>它的建議，有沒有說明怎麼知道有沒有效？沒有的話，要求它補上對照組的設計。</li>
+          <li>它有沒有提到資料的限制（匿名交易被排除、樣本大小）？沒提就是少了一段。</li>
+          <li>換個問法再問一次，結論會不會變？會變的結論先別全信。</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// ── 一頁報告 ──────────────────────────────────────────────────
+export function ReportView({ r }: { r: ReportModel }) {
+  const ok = { match: '✅ 一致', off: '⚠️ 有出入', empty: '—' } as const;
+  return (
+    <article id="datalab-report" className="rounded-2xl border p-6 space-y-5" style={card}>
+      <header>
+        <p className="text-xs" style={muted}>顧客數據分析成果 · {r.generatedAt}</p>
+        <h2 className="text-2xl font-extrabold mt-1">我的顧客數據分析</h2>
+        <p className="text-sm mt-2" style={secondary}>
+          資料：{r.sourceLabel}｜{r.range.from} 至 {r.range.to}｜{r.txns.toLocaleString()} 筆交易、{r.customers.toLocaleString()} 位顧客
+          {r.revenue !== undefined && `｜淨營收 ${money(r.revenue)}`}
+        </p>
+      </header>
+
+      <section>
+        <h3 className="font-semibold mb-2">主要發現</h3>
+        <ul className="text-sm space-y-1 list-disc pl-5">{r.findings.map((f) => <li key={f}>{f}</li>)}</ul>
+      </section>
+
+      <section>
+        <h3 className="font-semibold mb-2">客群分佈</h3>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-left text-xs" style={muted}>
+              <th className="py-1">客群</th><th className="py-1">人數</th><th className="py-1">佔客數</th><th className="py-1">佔營收</th>
+              {r.segments.some((s) => s.sumM !== undefined) && <th className="py-1">累計消費</th>}
+            </tr>
+          </thead>
+          <tbody>
+            {r.segments.map((s) => (
+              <tr key={s.name} className="border-t" style={{ borderColor: 'var(--color-surface-lighter)' }}>
+                <td className="py-1">{s.name}</td><td className="py-1">{s.count}</td><td className="py-1">{pct(s.countShare)}</td><td className="py-1">{pct(s.revenueShare)}</td>
+                {s.sumM !== undefined && <td className="py-1">{money(s.sumM)}</td>}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      {r.healthWarnings.length > 0 && (
+        <section>
+          <h3 className="font-semibold mb-2">資料要注意</h3>
+          <ul className="text-sm space-y-1 list-disc pl-5">{r.healthWarnings.map((w) => <li key={w}>{w}</li>)}</ul>
+        </section>
+      )}
+
+      {r.checks.length > 0 && (
+        <section>
+          <h3 className="font-semibold mb-2">我跟 AI 的數字核對</h3>
+          <ul className="text-sm space-y-1">
+            {r.checks.map((c) => (
+              <li key={c.label}>{c.label}　我的 AI：<b>{c.mine}</b>　標準算法：<b>{c.expected}</b>　{ok[c.status]}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {r.notes.length > 0 && (
+        <section>
+          <h3 className="font-semibold mb-2">我學到</h3>
+          <ul className="text-sm space-y-2">{r.notes.map((n) => <li key={n.title}><b>{n.title}：</b>{n.text}</li>)}</ul>
+        </section>
+      )}
+
+      <footer className="text-xs pt-3 border-t" style={{ ...muted, borderColor: 'var(--color-surface-lighter)' }}>
+        由藍鴨 LaunchDock 顧客數據戰情室產生，資料只在本機計算，沒有上傳。
+      </footer>
+    </article>
   );
 }
