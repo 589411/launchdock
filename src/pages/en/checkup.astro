@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AICheckup from '../../components/AICheckup.tsx';
+import { getCollection } from 'astro:content';
+import { allRecommendedSlugs } from '../../data/checkup';
+
+const recommendedSlugs = new Set<string>(allRecommendedSlugs);
+
+const allArticles = await getCollection('articlesEn', ({ data }) => !data.archived);
+const articles: Record<string, { title: string; description: string; url: string }> = {};
+for (const a of allArticles) {
+  if (recommendedSlugs.has(a.id)) {
+    articles[a.id] = {
+      title: a.data.title,
+      description: a.data.description,
+      url: `/en/articles/${a.id}/`,
+    };
+  }
+}
+---
+
+<BaseLayout title="Company AI Adoption Check-up" lang="en" description="A 3-minute, 15-question check-up: see which stage of AI adoption your company is at across strategy, data, processes, decisions and people/security, with concrete next steps.">
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <AICheckup client:load locale="en" articles={articles} />
+  </div>
+</BaseLayout>

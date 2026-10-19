@@ -64,6 +64,10 @@ const navItems = [
               <span class="text-sm font-semibold text-text-primary">🛠️ {t('nav.products')}</span>
               <span class="block text-xs text-text-muted mt-0.5">{lang === 'en' ? 'Everything we run on Claude' : '藍鴨用 Claude 做的所有東西'}</span>
             </a>
+            <a href={lang === 'en' ? '/en/checkup/' : '/checkup/'} class="block px-4 py-2.5 hover:bg-surface-light transition-colors border-b border-surface-lighter">
+              <span class="text-sm font-semibold text-text-primary">📋 {t('nav.checkup')}</span>
+              <span class="block text-xs text-text-muted mt-0.5">{lang === 'en' ? '3 minutes · see which stage you are at' : '3 分鐘 · 看公司走到哪一階段'}</span>
+            </a>
             <a href="/tools/prompt-builder/" class="block px-4 py-2.5 hover:bg-surface-light transition-colors border-b border-surface-lighter">
               <span class="text-sm font-semibold text-text-primary">🧩 {t('nav.tools.builder')}</span>
               <span class="block text-xs text-text-muted mt-0.5">{lang === 'en' ? 'On-site tool · free to try' : '本站工具 · 免費試用'}</span>
@@ -126,6 +130,9 @@ const navItems = [
         <span class="block text-xs font-semibold text-text-muted uppercase tracking-wide py-1">🧰 {t('nav.tools')}</span>
         <a href={lang === 'en' ? '/en/products/' : '/products/'} class="block text-text-secondary hover:text-text-primary transition-colors text-sm font-medium py-2">
           🛠️ {t('nav.products')}
+        </a>
+        <a href={lang === 'en' ? '/en/checkup/' : '/checkup/'} class="block text-text-secondary hover:text-text-primary transition-colors text-sm font-medium py-2">
+          📋 {t('nav.checkup')}
         </a>
         <a href="/tools/prompt-builder/" class="block text-text-secondary hover:text-text-primary transition-colors text-sm font-medium py-2">
           🧩 {t('nav.tools.builder')}

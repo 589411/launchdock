@@ -89,6 +89,8 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
+**2026-10-19 企業 AI 導入體檢 `/checkup/`（中英）M1 已實作**：分支 `feat/checkup`，build 綠 193 頁，四情境 Playwright 驗過（含手機寬度），`/quiz/` 回歸正常（雷達圖已抽成共用 `RadarChart.tsx`）。公開版、純前端、不碰資料庫。唯一策展點 `src/data/checkup.ts`，自檢 `npx tsx scripts/check-checkup.mjs`。**待 Joseph 審題目措辭與階段名稱後 push**；M2（課程前測模式，migration 017）未做，詳見 BACKLOG 進行中第一條。
+
 **2026-10-17 圖片壓縮列為硬規則**：`docs/EDITORIAL.md` 新增 **H8（截圖上架前必須壓縮：≤1800px、256 色 PNG、單張 ≤150KB）**，Joseph 指示「基本、一定要做」；`claude-team-setup` 17 張已重壓 3.2MB→1.3MB（`5eada38`）。
 ⭐ **下一個具體動作**：另開 session 做 BACKLOG「全站圖片省流量」——rehype 補 `loading="lazy"` ＋ 48 張 >500KB 大圖重壓（壓完人眼確認遮罩）。
 
