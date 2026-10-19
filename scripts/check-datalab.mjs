@@ -11,6 +11,9 @@ import { SYNONYMS } from '../src/data/import-profiles.ts';
 import { buildDatasetFromMapping, parseFlexibleDay, parseAmount } from '../src/lib/datalab/normalize.ts';
 import { runHealthOwn } from '../src/lib/datalab/health-own.ts';
 import { runTouchpoints } from '../src/lib/datalab/touchpoints.ts';
+import { runRepurchase } from '../src/lib/datalab/repurchase.ts';
+import { runBasket } from '../src/lib/datalab/basket.ts';
+import { runValue } from '../src/lib/datalab/value.ts';
 import { compareClaim, parseClaim, expectedValues } from '../src/lib/datalab/check.ts';
 import { buildReport, reportToText } from '../src/lib/datalab/report.ts';
 import { segments as workshopSegments, fillPrompt } from '../src/data/workshop.ts';
@@ -251,7 +254,7 @@ for (let r = 1; r <= 5; r++) for (let fm = 1; fm <= 5; fm++) for (const f of [1,
   eq('核對：天數 ±1', [compareClaim(spec('days'), '49 天', 48).status, compareClaim(spec('days'), '60', 48).status], ['match', 'off']);
   eq('核對：空白或無數字', [compareClaim(spec('count'), '', 5).status, compareClaim(spec('count'), '不知道', 5).status], ['empty', 'empty']);
   // 每個工作坊段落的檢核項都必須有對應的標準答案
-  const okKeys = new Set(['memberShare', 'anonymousCount', 'returnCount', 'onceOnly', 'top20Share', 'medianInterval']);
+  const okKeys = new Set(['memberShare', 'anonymousCount', 'returnCount', 'onceOnly', 'top20Share', 'medianInterval', 'repeatRate', 'repeatRevenueShare', 'topPairCount']);
   for (const seg of workshopSegments) for (const c of seg.checks ?? []) if (!okKeys.has(c.id)) errors.push(`段落 ${seg.id} 的檢核項 ${c.id} 沒有標準答案`);
   eq('提示詞欄位代入', fillPrompt('欄位：{columns}', ['a', 'b']), '欄位：a、b');
   const ids = workshopSegments.map((s) => s.id);
@@ -335,6 +338,32 @@ if (!existsSync(`${dir}/transactions.csv`)) {
     if (/NT\$/.test(txt)) errors.push('預設的摘要文字不應出現金額');
     if (/@icloud|@gmail|@yahoo/.test(txt)) errors.push('摘要文字出現 email');
     if (!txt.includes('匿名交易太多')) errors.push('摘要文字少了學員的心得');
+
+    // ── 第 2 天：回購、價值、商品關聯（對照獨立 Python 參考答案）──
+    {
+      const d2raw = JSON.parse(readFileSync(new URL('./fixtures/datalab-expected-day2.json', import.meta.url), 'utf8'));
+      const d2 = { ...d2raw.partA, ...d2raw.partB, ...d2raw.partC };
+      const rp = runRepurchase(dataset, res);
+      const r4 = (x) => Math.round(x * 10000) / 10000;
+      eq('回購：有購買紀錄的顧客', rp.eligible, d2.eligible_customers);
+      eq('回購：回頭客人數', rp.repeatCustomers, d2.repeat_customers);
+      eq('回購：回購率', r4(rp.repeatRate), d2.repeat_rate);
+      eq('回購：回頭客營收佔比', r4(rp.repeatRevenueShare), d2.repeat_revenue_share);
+      eq('回購：間隔數', rp.intervals, d2.intervals_n);
+      eq('回購：中位數／P25／P75', [rp.median, rp.p25, rp.p75], [d2.intervals_median, d2.intervals_p25, d2.intervals_p75]);
+      eq('回購：區間直方圖', rp.buckets.map((b) => b.count), d2.histogram_counts);
+      eq('回購：該回來了的人數', rp.dueNow, d2.due_now_count);
+      const va = runValue(dataset, res);
+      const r2 = (x) => Math.round(x * 100) / 100;
+      eq('價值：客單價平均／中位數', [r2(va.aovMean), r2(va.aovMedian)], [d2.aov_mean, d2.aov_median]);
+      eq('價值：每位顧客累計消費平均／中位數', [r2(va.spendMean), r2(va.spendMedian)], [d2.spend_per_customer_mean, d2.spend_per_customer_median]);
+      eq('價值：三層營收佔比加總為 1', Math.round(va.tiers.reduce((x, t) => x + t.share, 0) * 1e6) / 1e6, 1);
+      const bk = runBasket(dataset);
+      eq('商品關聯：購物籃數、門檻、符合門檻的配對數', [bk.baskets, bk.minCount, bk.eligiblePairs], [d2.baskets_N, d2.min_count, d2.eligible_pairs_count]);
+      const norm = (t) => ({ a: t.a, b: t.b, n_ab: t.nAB, n_a: t.nA, n_b: t.nB, lift: r4(t.lift), conf_a_to_b: r4(t.confAB), conf_b_to_a: r4(t.confBA) });
+      eq('商品關聯：前 5 名（依 lift）', bk.topByLift.slice(0, 5).map(norm), d2.top5_by_lift);
+      eq('商品關聯：前 5 名（依次數）', bk.topByCount.slice(0, 5).map(norm), d2.top5_by_count);
+    }
     const iv = repurchaseIntervals(dataset);
     eq('repurchase.n', iv.length, exp.repurchase.intervals_n);
     eq('repurchase.median', median(iv), exp.repurchase.median);

@@ -6,6 +6,9 @@ import { runHealth } from '../../lib/datalab/health';
 import { runHealthOwn } from '../../lib/datalab/health-own';
 import { runRfm } from '../../lib/datalab/rfm';
 import { runTouchpoints } from '../../lib/datalab/touchpoints';
+import { runRepurchase, type RepurchaseResult } from '../../lib/datalab/repurchase';
+import { runBasket, type BasketResult } from '../../lib/datalab/basket';
+import { runValue, type ValueResult } from '../../lib/datalab/value';
 import { mask } from '../../lib/datalab/pii';
 import { buildReport, reportToText } from '../../lib/datalab/report';
 import { compareClaim, expectedValues, formatExpected } from '../../lib/datalab/check';
@@ -14,11 +17,11 @@ import {
   clearAllLocal, loadData, loadProgress, recallMapping, rememberMapping, saveData, saveProgress, type Progress, type SavedData,
 } from '../../lib/datalab/store';
 import { UNLOCK_STORAGE_KEY } from '../../data/datalab';
-import { days, fillPrompt, segments, type SegmentDef } from '../../data/workshop';
+import { days, fillPrompt, visibleSegments, type SegmentDef } from '../../data/workshop';
 import type { Dataset, HealthReport, RfmResult, Table } from '../../lib/datalab/types';
 import type { TouchpointResult } from '../../lib/datalab/touchpoints';
 import { buildDiagnosticReport, diagnoseStructure } from '../../lib/datalab/diagnose';
-import { card, DiagCopyButton, HealthView, InsightView, muted, PromptBox, ReportView, RfmView, secondary, TouchpointView } from './views';
+import { BasketView, card, DiagCopyButton, HealthView, Insight2View, InsightView, muted, PromptBox, RepurchaseView, ReportView, RfmView, secondary, TouchpointView, ValueView } from './views';
 
 type Source = 'sample' | 'sunlit' | 'own';
 
@@ -29,6 +32,9 @@ interface Loaded {
   health: HealthReport;
   rfm: RfmResult;
   touch: TouchpointResult;
+  repurchase: RepurchaseResult;
+  basket: BasketResult;
+  value: ValueResult;
   /** 給「先自己試」提示詞用的欄位名稱（只有欄名，沒有資料） */
   columns: string[];
 }
@@ -48,7 +54,18 @@ const SOURCE_LABEL: Record<Source, string> = { sample: '內建小樣本', sunlit
 
 function finalize(source: Source, dataset: Dataset, health: HealthReport, columns: string[]): Loaded {
   const rfm = runRfm(dataset);
-  return { source, label: SOURCE_LABEL[source], dataset, health, rfm, touch: runTouchpoints(dataset), columns };
+  return {
+    source,
+    label: SOURCE_LABEL[source],
+    dataset,
+    health,
+    rfm,
+    touch: runTouchpoints(dataset),
+    repurchase: runRepurchase(dataset, rfm),
+    basket: runBasket(dataset),
+    value: runValue(dataset, rfm),
+    columns,
+  };
 }
 
 /** 自己的資料一律用中性的名稱，檔名不進健檢、提示詞或報告（檔名可能含公司或人名） */
@@ -62,6 +79,9 @@ async function readFile(file: File): Promise<{ table: Table; notice: string }> {
   let notice = '';
   if (/\.xlsx$/i.test(file.name)) {
     // 只有選了 Excel 檔才載入解析器，其他人不會多下載任何東西
+    if (typeof DecompressionStream === 'undefined') {
+      throw new Error('這個瀏覽器版本太舊，讀不了 Excel 檔。請在 Excel 裡「另存新檔」成 CSV 再上傳，或改用最新版的 Chrome、Edge 或 Safari。');
+    }
     const { readXlsx } = await import('../../lib/datalab/xlsx');
     const sheets = await readXlsx(buf);
     if (sheets.length === 0) throw new Error('這個 Excel 檔裡沒有任何工作表。');
@@ -87,6 +107,8 @@ export default function Workshop() {
   const [busy, setBusy] = useState<Source | 'file' | null>(null);
   const [error, setError] = useState('');
   const [errorFile, setErrorFile] = useState<'csv' | 'xlsx' | '未知'>('未知');
+  /** 錯誤來自哪裡：日晴完整資料載入失敗時要提供「再試一次」 */
+  const [errorSource, setErrorSource] = useState<'sunlit' | 'sample' | 'file' | null>(null);
   const [unlocked, setUnlocked] = useState(false);
   const [code, setCode] = useState('');
   const [codeError, setCodeError] = useState('');
@@ -125,7 +147,7 @@ export default function Workshop() {
 
   useEffect(() => saveProgress(progress), [progress]);
 
-  const visible = useMemo(() => segments.filter((sg) => sg.day <= ceiling), [ceiling]);
+  const visible = useMemo(() => visibleSegments(ceiling), [ceiling]);
   const isOpen = useCallback((i: number) => i === 0 || progress.completed.includes(visible[i - 1]?.id), [progress.completed, visible]);
 
   // 自己的資料沒有存在這台電腦時，離開或重新整理頁面就會遺失，先提醒
@@ -182,6 +204,7 @@ export default function Workshop() {
       start(finalize(kind, built.dataset, runHealth(tables).report, SUNLIT_COLUMNS));
     } catch (e) {
       if (id !== reqId.current) return;
+      setErrorSource(kind);
       setError(
         kind === 'sunlit'
           ? `無法載入日晴完整資料（${e instanceof Error ? e.message : '未知錯誤'}）。可能是網路不穩，或對方網站不允許從這裡讀取。你可以先用內建小樣本，流程完全一樣。`
@@ -193,7 +216,14 @@ export default function Workshop() {
   }
 
   async function unlock() {
-    if (await isValidUnlockCode(code)) {
+    let valid = false;
+    try {
+      valid = await isValidUnlockCode(code);
+    } catch {
+      setCodeError('這個瀏覽器無法驗證密碼（可能不是安全連線，或版本太舊）。請改用內建小樣本，流程完全一樣。');
+      return;
+    }
+    if (valid) {
       setCodeError('');
       setUnlocked(true);
       try {
@@ -216,6 +246,7 @@ export default function Workshop() {
       const mapping = (remembered && mappingFromNames(table, remembered)) || detectMapping(table);
       setPending({ table, mapping, fileName: file.name, notice: remembered ? `${notice} 已套用你上次確認過的欄位對應。`.trim() : notice });
     } catch (e) {
+      setErrorSource('file');
       setErrorFile(/\.xlsx$/i.test(file.name) ? 'xlsx' : /\.(csv|tsv|txt)$/i.test(file.name) ? 'csv' : '未知');
       setError(e instanceof Error ? e.message : '讀取檔案失敗');
     } finally {
@@ -313,7 +344,8 @@ export default function Workshop() {
           setCode={setCode}
           codeError={codeError}
           error={error}
-          errorReport={error && errorFile ? buildDiagnosticReport({ fileType: errorFile, rowCount: 0, headers: null, note: error }) : ''}
+          errorReport={error && errorFile && errorSource === 'file' ? buildDiagnosticReport({ fileType: errorFile, rowCount: 0, headers: null, note: error }) : ''}
+          errorSource={errorSource}
           saveLocal={saveLocal}
           setSaveLocal={setSaveLocal}
           saved={saved}
@@ -327,7 +359,7 @@ export default function Workshop() {
       )}
 
       {!loaded && pending && (
-        <MappingStep pending={pending} setMapping={(m) => setPending({ ...pending, mapping: m })} onConfirm={() => void confirmMapping()} onCancel={reset} error={error} saveLocal={saveLocal} />
+        <MappingStep pending={pending} setMapping={(m) => setPending({ ...pending, mapping: m })} onConfirm={() => void confirmMapping()} onCancel={reset} onSample={() => void loadCurated('sample')} error={error} saveLocal={saveLocal} />
       )}
 
       {loaded && (
@@ -377,6 +409,7 @@ function Start(props: {
   error: string;
   /** 讀檔失敗時可複製給講師的診斷（不含任何資料與欄名） */
   errorReport: string;
+  errorSource: 'sunlit' | 'sample' | 'file' | null;
   saveLocal: boolean;
   setSaveLocal: (b: boolean) => void;
   saved: SavedData | null;
@@ -474,7 +507,15 @@ function Start(props: {
       {props.error && (
         <div className="rounded-xl px-4 py-3 border space-y-2" style={{ ...card, borderColor: '#f59e0b' }}>
           <p className="text-sm" role="alert">{props.error}</p>
-          {props.errorReport && <DiagCopyButton text={props.errorReport} label="複製錯誤狀況給講師（不含資料）" />}
+          <div className="flex gap-2 flex-wrap">
+            {props.errorSource === 'sunlit' && (
+              <button disabled={busy} onClick={props.onSunlit} className="px-4 py-2 rounded-lg text-sm font-medium text-white disabled:opacity-60" style={{ backgroundColor: 'var(--color-brand)' }}>再試一次</button>
+            )}
+            {props.errorSource !== 'sample' && (
+              <button disabled={busy} onClick={props.onSample} className="px-4 py-2 rounded-lg text-sm" style={{ backgroundColor: 'var(--color-surface-lighter)' }}>先用內建小樣本繼續</button>
+            )}
+            {props.errorReport && <DiagCopyButton text={props.errorReport} label="複製錯誤狀況給講師（不含資料）" />}
+          </div>
         </div>
       )}
     </div>
@@ -482,7 +523,7 @@ function Start(props: {
 }
 
 // ── 欄位對應 ──────────────────────────────────────────────────
-function MappingStep(props: { pending: Pending; setMapping: (m: Mapping) => void; onConfirm: () => void; onCancel: () => void; error: string; saveLocal: boolean }) {
+function MappingStep(props: { pending: Pending; setMapping: (m: Mapping) => void; onConfirm: () => void; onCancel: () => void; onSample: () => void; error: string; saveLocal: boolean }) {
   const { table, mapping, fileName, notice } = props.pending;
   const fields = Object.keys(FIELD_LABEL) as FieldKey[];
   const ordered = [...REQUIRED_FIELDS, ...fields.filter((f) => !REQUIRED_FIELDS.includes(f))];
@@ -557,43 +598,51 @@ function MappingStep(props: { pending: Pending; setMapping: (m: Mapping) => void
         <button onClick={props.onCancel} className="px-5 py-2.5 rounded-lg text-sm" style={{ backgroundColor: 'var(--color-surface-lighter)' }}>重新選檔案</button>
         <DiagCopyButton text={report} />
       </div>
+      <p className="text-xs" style={muted}>
+        卡住超過幾分鐘就別硬撐，不要讓全班等你：
+        <button onClick={props.onSample} className="underline ml-1">先用內建小樣本繼續</button>
+        ，流程完全一樣，之後再回頭處理自己的資料。
+      </p>
       {props.saveLocal && <p className="text-xs" style={muted}>你勾選了「存在這台電腦」，確認後會存進這個瀏覽器。</p>}
     </div>
   );
 }
 
-// ── 進度列 ────────────────────────────────────────────────────
+// ── 進度列（依天分組） ─────────────────────────────────────────
 function Stepper(props: { visible: SegmentDef[]; idx: number; setIdx: (i: number) => void; isOpen: (i: number) => boolean; completed: string[]; ceiling: number }) {
+  const groups = days.filter((d) => d.open && d.day <= props.ceiling).map((d) => ({ d, items: props.visible.map((sg, i) => ({ sg, i })).filter((x) => x.sg.day === d.day) }));
+  const comingSoon = days.filter((d) => !d.open && d.day <= props.ceiling);
   return (
-    <div className="mb-5 no-print">
-      <nav className="flex items-center gap-2 flex-wrap" aria-label="工作坊進度">
-        {props.visible.map((sg, i) => {
-          const done = props.completed.includes(sg.id);
-          const open = props.isOpen(i);
-          const cur = i === props.idx;
-          return (
-            <button
-              key={sg.id}
-              aria-current={cur ? 'step' : undefined}
-              aria-label={`第 ${sg.day} 天 段 ${sg.order}：${sg.title}${open ? '' : '（尚未解鎖）'}${done ? '（已完成）' : ''}`}
-              disabled={!open}
-              onClick={() => props.setIdx(i)}
-              className="w-9 h-9 rounded-full text-sm font-semibold border transition-colors disabled:opacity-40"
-              style={{
-                backgroundColor: cur ? 'var(--color-brand)' : done ? 'var(--color-surface-lighter)' : 'var(--color-surface)',
-                borderColor: cur || done ? 'var(--color-brand)' : 'var(--color-surface-lighter)',
-                color: cur ? '#fff' : 'var(--color-text-primary)',
-              }}
-            >
-              {done && !cur ? '✓' : i + 1}
-            </button>
-          );
-        })}
-        <span className="text-xs ml-2" style={muted}>
-          {days.filter((d) => d.day <= props.ceiling && !d.open).length > 0 || props.ceiling >= 2 ? '第 2 至 4 天陸續開放' : ''}
-        </span>
-      </nav>
-    </div>
+    <nav className="mb-5 no-print flex flex-wrap gap-x-5 gap-y-3" aria-label="工作坊進度">
+      {groups.map(({ d, items }) => (
+        <div key={d.day} className="flex items-center gap-2">
+          <span className="text-xs font-semibold" style={muted}>第 {d.day} 天</span>
+          {items.map(({ sg, i }) => {
+            const done = props.completed.includes(sg.id);
+            const open = props.isOpen(i);
+            const cur = i === props.idx;
+            return (
+              <button
+                key={sg.id}
+                aria-current={cur ? 'step' : undefined}
+                aria-label={`第 ${sg.day} 天 段 ${sg.order}：${sg.title}${open ? '' : '（尚未解鎖）'}${done ? '（已完成）' : ''}`}
+                disabled={!open}
+                onClick={() => props.setIdx(i)}
+                className="w-9 h-9 rounded-full text-sm font-semibold border transition-colors disabled:opacity-40"
+                style={{
+                  backgroundColor: cur ? 'var(--color-brand)' : done ? 'var(--color-surface-lighter)' : 'var(--color-surface)',
+                  borderColor: cur || done ? 'var(--color-brand)' : 'var(--color-surface-lighter)',
+                  color: cur ? '#fff' : 'var(--color-text-primary)',
+                }}
+              >
+                {done && !cur ? '✓' : sg.order}
+              </button>
+            );
+          })}
+        </div>
+      ))}
+      {comingSoon.length > 0 && <span className="text-xs self-center" style={muted}>第 {comingSoon.map((d) => d.day).join('、')} 天陸續開放</span>}
+    </nav>
   );
 }
 
@@ -621,7 +670,9 @@ function Slide(props: {
   }, [props.autoFocus, seg.id]);
   const dayDef = days.find((d) => d.day === seg.day)!;
   const done = progress.completed.includes(seg.id);
-  const exp = useMemo(() => expectedValues(loaded.dataset, loaded.touch, loaded.rfm), [loaded]);
+  const exp = useMemo(() => expectedValues(loaded.dataset, loaded.touch, loaded.rfm, { repurchase: loaded.repurchase, basket: loaded.basket }), [loaded]);
+  // 算不出標準答案的核對項（例如資料沒有商品欄的「商品關聯」）直接略過
+  const checks = (seg.checks ?? []).filter((c) => Number.isFinite(exp[c.id]));
   const prompt = seg.tryPrompt ? fillPrompt(seg.tryPrompt, loaded.columns) : '';
   const isReport = seg.view === 'report';
 
@@ -647,10 +698,10 @@ function Slide(props: {
             </Step>
           )}
 
-          {seg.checks && seg.checks.length > 0 && (
+          {checks.length > 0 && (
             <Step n={prompt ? 3 : 2} title="記下你的 AI 算出的數字（選填，用來對答案）">
               <div className="space-y-2">
-                {seg.checks.map((c) => (
+                {checks.map((c) => (
                   <label key={c.id} className="block text-sm">
                     {c.label}
                     <input
@@ -675,9 +726,9 @@ function Slide(props: {
             </div>
           ) : (
             <Step n="✓" title="對答案">
-              {seg.checks && seg.checks.length > 0 && (
+              {checks.length > 0 && (
                 <div className="space-y-2 mb-4">
-                  {seg.checks.map((c) => {
+                  {checks.map((c) => {
                     const r = compareClaim(c, progress.claims[`${seg.id}.${c.id}`], exp[c.id]);
                     return (
                       <div key={c.id} className="rounded-xl p-3 border text-sm" style={{ ...card, borderColor: r.status === 'off' ? '#f59e0b' : card.borderColor }}>
@@ -696,6 +747,10 @@ function Slide(props: {
               {seg.view === 'health' && <HealthView health={loaded.health} />}
               {seg.view === 'rfm' && <RfmView rfm={loaded.rfm} />}
               {seg.view === 'insight' && <InsightView health={loaded.health} rfm={loaded.rfm} />}
+              {seg.view === 'repurchase' && <RepurchaseView r={loaded.repurchase} />}
+              {seg.view === 'basket' && <BasketView b={loaded.basket} />}
+              {seg.view === 'value' && <ValueView v={loaded.value} repeatRevenueShare={loaded.repurchase.repeatRevenueShare} />}
+              {seg.view === 'insight2' && <Insight2View repurchase={loaded.repurchase} basket={loaded.basket} value={loaded.value} />}
             </Step>
           )}
 
@@ -753,7 +808,11 @@ function ReportBox({ loaded, progress }: { loaded: Loaded; progress: Progress })
   const [showAmounts, setShowAmounts] = useState(false);
   const [copied, setCopied] = useState<'ok' | 'fail' | null>(null);
   const model = useMemo(
-    () => buildReport({ sourceLabel: loaded.label, dataset: loaded.dataset, health: loaded.health, rfm: loaded.rfm, touch: loaded.touch, notes: progress.notes, claims: progress.claims }, { showAmounts }),
+    () =>
+      buildReport(
+        { sourceLabel: loaded.label, dataset: loaded.dataset, health: loaded.health, rfm: loaded.rfm, touch: loaded.touch, notes: progress.notes, claims: progress.claims, repurchase: loaded.repurchase, basket: loaded.basket, value: loaded.value },
+        { showAmounts },
+      ),
     [loaded, progress, showAmounts],
   );
   async function copy() {

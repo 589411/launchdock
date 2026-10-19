@@ -1,0 +1,159 @@
+{
+  "asOf_day": 20635,
+  "notes": [
+    "asOf_day = max day over all transactions + 1 (days since 1970-01-01).",
+    "Purchase days = distinct calendar days of non-return txns; consecutive differences use sorted distinct days so all intervals >= 1.",
+    "Histogram buckets inclusive on integer intervals; 181+ is >=181.",
+    "due_now: strict > 1.5*personal median of own differences; only repeat customers (>=2 purchase days).",
+    "AOV over all non-return txns (member and anonymous) using total_amount; spend per customer uses M (floored at 0).",
+    "Basket items restricted to txn_items of non-return txns whose sku is in products; duplicate skus in products would take last row's subcategory (empty-string subcategory treated as a group if present).",
+    "lift ties compared on unrounded lift; output lift rounded to 4 decimals.",
+    "Quantiles: statistics.quantiles(n=4, method='inclusive') on pooled intervals."
+  ],
+  "partA": {
+    "due_now_count": 244,
+    "eligible_customers": 1200,
+    "histogram_buckets": [
+      "0-7",
+      "8-14",
+      "15-30",
+      "31-60",
+      "61-90",
+      "91-180",
+      "181+"
+    ],
+    "histogram_counts": [
+      248,
+      342,
+      881,
+      1904,
+      964,
+      478,
+      68
+    ],
+    "intervals_median": 48,
+    "intervals_n": 4885,
+    "intervals_p25": 24.0,
+    "intervals_p75": 67.0,
+    "repeat_customers": 780,
+    "repeat_rate": 0.65,
+    "repeat_revenue_share": 0.9031
+  },
+  "partB": {
+    "aov_mean": 829.75,
+    "aov_median": 630.0,
+    "spend_per_customer_mean": 2886.06,
+    "spend_per_customer_median": 1248.5
+  },
+  "partC": {
+    "baskets_N": 7880,
+    "baskets_with_2plus_groups": 6015,
+    "distinct_groups": 17,
+    "eligible_pairs_count": 84,
+    "min_count": 79,
+    "top5_by_count": [
+      {
+        "a": "零食",
+        "b": "飲料",
+        "conf_a_to_b": 0.3815,
+        "conf_b_to_a": 0.3705,
+        "lift": 0.9909,
+        "n_a": 2946,
+        "n_ab": 1124,
+        "n_b": 3034
+      },
+      {
+        "a": "沖泡即食",
+        "b": "零食",
+        "conf_a_to_b": 0.4135,
+        "conf_b_to_a": 0.3506,
+        "lift": 1.1061,
+        "n_a": 2498,
+        "n_ab": 1033,
+        "n_b": 2946
+      },
+      {
+        "a": "沖泡即食",
+        "b": "飲料",
+        "conf_a_to_b": 0.3715,
+        "conf_b_to_a": 0.3059,
+        "lift": 0.9649,
+        "n_a": 2498,
+        "n_ab": 928,
+        "n_b": 3034
+      },
+      {
+        "a": "收納整理",
+        "b": "零食",
+        "conf_a_to_b": 0.3495,
+        "conf_b_to_a": 0.276,
+        "lift": 0.9349,
+        "n_a": 2326,
+        "n_ab": 813,
+        "n_b": 2946
+      },
+      {
+        "a": "收納整理",
+        "b": "飲料",
+        "conf_a_to_b": 0.316,
+        "conf_b_to_a": 0.2423,
+        "lift": 0.8207,
+        "n_a": 2326,
+        "n_ab": 735,
+        "n_b": 3034
+      }
+    ],
+    "top5_by_lift": [
+      {
+        "a": "哺育用品",
+        "b": "尿布濕巾",
+        "conf_a_to_b": 0.9088,
+        "conf_b_to_a": 0.7099,
+        "lift": 18.2221,
+        "n_a": 307,
+        "n_ab": 279,
+        "n_b": 393
+      },
+      {
+        "a": "嬰童清潔",
+        "b": "尿布濕巾",
+        "conf_a_to_b": 0.8908,
+        "conf_b_to_a": 0.5394,
+        "lift": 17.8605,
+        "n_a": 238,
+        "n_ab": 212,
+        "n_b": 393
+      },
+      {
+        "a": "哺育用品",
+        "b": "嬰童清潔",
+        "conf_a_to_b": 0.4723,
+        "conf_b_to_a": 0.6092,
+        "lift": 15.6379,
+        "n_a": 307,
+        "n_ab": 145,
+        "n_b": 238
+      },
+      {
+        "a": "基礎營養",
+        "b": "機能保健",
+        "conf_a_to_b": 0.29,
+        "conf_b_to_a": 0.2825,
+        "lift": 2.6791,
+        "n_a": 831,
+        "n_ab": 241,
+        "n_b": 853
+      },
+      {
+        "a": "基礎營養",
+        "b": "銀髮保健",
+        "conf_a_to_b": 0.1239,
+        "conf_b_to_a": 0.25,
+        "lift": 2.3706,
+        "n_a": 831,
+        "n_ab": 103,
+        "n_b": 412
+      }
+    ]
+  }
+}

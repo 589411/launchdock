@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { dayToString } from '../../lib/datalab/normalize';
-import { healthPrompt, rfmPrompt, segmentMessagePrompt } from '../../lib/datalab/prompts';
+import { basketPrompt, healthPrompt, repurchasePrompt, rfmPrompt, segmentMessagePrompt, valuePrompt } from '../../lib/datalab/prompts';
+import type { RepurchaseResult } from '../../lib/datalab/repurchase';
+import type { BasketResult } from '../../lib/datalab/basket';
+import type { ValueResult } from '../../lib/datalab/value';
 import { segmentInfo } from '../../data/datalab';
 import type { HealthReport, Level, PiiKind, RfmResult } from '../../lib/datalab/types';
 import type { TouchpointResult, Slice } from '../../lib/datalab/touchpoints';
@@ -486,5 +489,171 @@ export function ReportView({ r }: { r: ReportModel }) {
         由藍鴨 LaunchDock 顧客數據戰情室產生，資料只在本機計算，沒有上傳。
       </footer>
     </article>
+  );
+}
+
+
+// ── 第 2 天：回購週期 ─────────────────────────────────────────
+export function RepurchaseView({ r }: { r: RepurchaseResult }) {
+  const max = Math.max(...r.buckets.map((b) => b.count), 1);
+  return (
+    <div className="space-y-5">
+      <div className="grid grid-cols-3 gap-3">
+        <Stat value={pct(r.repeatRate)} label={`回購率（${r.repeatCustomers}／${r.eligible} 位）`} />
+        <Stat value={`${r.median} 天`} label="回購間隔中位數" />
+        <Stat value={`${r.dueNow} 位`} label="已超過自己的回購節奏" />
+      </div>
+      <p className="text-sm" style={secondary}>
+        <b>怎麼算的：</b>「購買日」是顧客有非退貨交易的那一天，同一天買兩次只算一個購買日；回購間隔是同一位顧客相鄰兩個購買日相隔的天數；
+        回購率是買過 2 個購買日以上的顧客，除以有購買紀錄的顧客。
+      </p>
+      <section>
+        <h3 className="text-lg font-semibold mb-3">回購間隔分佈（共 {r.intervals.toLocaleString()} 次）</h3>
+        <div className="space-y-2">
+          {r.buckets.map((b) => (
+            <div key={b.label}>
+              <div className="flex justify-between text-sm mb-1">
+                <span>{b.label}</span>
+                <span style={muted}>{b.count.toLocaleString()} 次 · {pct(r.intervals ? b.count / r.intervals : 0)}</span>
+              </div>
+              <Bar value={b.count / max} color="var(--color-brand)" label={b.label} />
+            </div>
+          ))}
+        </div>
+        <p className="text-xs mt-2" style={muted}>
+          中位數 {r.median} 天；一半的回購落在 {r.p25} 至 {r.p75} 天之間。想設「回購提醒」，通常放在多數人回來之前一點。
+        </p>
+      </section>
+      <p className="text-sm rounded-xl px-4 py-3 border" style={card}>
+        <b>「已超過自己的回購節奏」</b>是指：這位回頭客距離上次購買的天數，已經超過他自己平常回購間隔的 1.5 倍。
+        這群人最適合收到提醒，但也包含早已不來的人，所以要搭配對照組測試有沒有效。
+      </p>
+    </div>
+  );
+}
+
+function Stat({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="rounded-xl p-3 border text-center" style={card}>
+      <p className="text-xl font-extrabold">{value}</p>
+      <p className="text-xs mt-1" style={muted}>{label}</p>
+    </div>
+  );
+}
+
+// ── 第 2 天：商品關聯 ─────────────────────────────────────────
+export function BasketView({ b }: { b: BasketResult }) {
+  if (!b.available) {
+    return (
+      <p className="text-sm rounded-xl px-4 py-3 border" style={{ ...card, borderColor: '#f59e0b' }} role="status">
+        這一段目前無法進行。{b.reason}
+        <span className="block mt-2" style={muted}>你可以直接進入下一段；想練習這一段，可以回到開頭改用示範資料。</span>
+      </p>
+    );
+  }
+  const table = (title: string, rows: BasketResult['topByLift']) => (
+    <section>
+      <h3 className="text-lg font-semibold mb-2">{title}</h3>
+      <div className="rounded-xl border overflow-x-auto" style={card}>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-left text-xs" style={muted}>
+              <th className="px-3 py-2">品類配對</th>
+              <th className="px-3 py-2">同時出現</th>
+              <th className="px-3 py-2">lift</th>
+              <th className="px-3 py-2">A→B／B→A</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.slice(0, 8).map((x) => (
+              <tr key={`${x.a}|${x.b}`} className="border-t" style={{ borderColor: 'var(--color-surface-lighter)' }}>
+                <td className="px-3 py-2">{x.a} × {x.b}</td>
+                <td className="px-3 py-2 whitespace-nowrap">{x.nAB.toLocaleString()} 次</td>
+                <td className="px-3 py-2">{x.lift.toFixed(2)}</td>
+                <td className="px-3 py-2 whitespace-nowrap">{(x.confAB * 100).toFixed(0)}% ／ {(x.confBA * 100).toFixed(0)}%</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+  return (
+    <div className="space-y-5">
+      <p className="text-sm" style={secondary}>
+        共 {b.baskets.toLocaleString()} 個購物籃（一張非退貨的單就是一個）、{b.groups} 個品類。同一張單同一品類只算一次，只看兩兩配對，
+        同時出現至少 {b.minCount} 次才列入（避免偶然）。
+      </p>
+      {table('依 lift 排序：最「不只是熱賣」的配對', b.topByLift)}
+      {table('依同時出現次數排序：最常一起出現的配對', b.topByCount)}
+      <div className="rounded-xl p-4 border text-sm space-y-1" style={card}>
+        <p><b>lift 怎麼看：</b>同時出現的比例，除以兩者各自出現比例的乘積。</p>
+        <ul className="list-disc pl-5" style={secondary}>
+          <li>接近 1：兩者只是剛好都熱賣，沒有特別的關聯。</li>
+          <li>明顯大於 1：比「碰巧同時出現」更常一起買，值得做組合推薦或陳列。</li>
+          <li><b>次數最多的配對常常 lift 接近 1</b>：光看次數會被熱賣品誤導，這就是為什麼要兩種排序一起看。</li>
+        </ul>
+        <p className="text-xs" style={muted}>A→B 的意思是「買了 A 的單裡，有多少比例也買了 B」。</p>
+      </div>
+    </div>
+  );
+}
+
+// ── 第 2 天：顧客價值 ─────────────────────────────────────────
+export function ValueView({ v, repeatRevenueShare }: { v: ValueResult; repeatRevenueShare: number }) {
+  return (
+    <div className="space-y-5">
+      <div className="grid grid-cols-2 gap-3">
+        <Stat value={money(v.spendMedian)} label={`每位顧客累計消費中位數（平均 ${money(v.spendMean)}）`} />
+        <Stat value={money(v.aovMedian)} label={`客單價中位數（平均 ${money(v.aovMean)}）`} />
+        <Stat value={pct(repeatRevenueShare)} label="回頭客貢獻的營收" />
+        <Stat value={pct(v.top20Share)} label="累計消費前 20% 顧客貢獻的營收" />
+      </div>
+      <p className="text-sm" style={secondary}>
+        <b>平均和中位數差很多，就代表有少數大客戶把平均拉高。</b>用平均來規劃（例如「每位顧客約花 {money(v.spendMean)}」）會高估一般顧客，
+        中位數更接近「典型顧客」。
+      </p>
+      <section>
+        <h3 className="text-lg font-semibold mb-3">營收集中在哪些顧客</h3>
+        <div className="space-y-2">
+          {v.tiers.map((t) => (
+            <div key={t.label}>
+              <div className="flex justify-between text-sm mb-1">
+                <b>{t.label}</b>
+                <span style={muted}>{t.customers.toLocaleString()} 位 · 貢獻 {pct(t.share)} 的營收</span>
+              </div>
+              <Bar value={t.share} color="var(--color-brand)" label={t.label} />
+            </div>
+          ))}
+        </div>
+      </section>
+      <p className="text-xs" style={muted}>
+        累計消費＝非退貨金額加上該顧客的退貨（退貨為負），最低 0；沒有顧客編號的交易不納入顧客層級統計，但客單價會包含它們。
+      </p>
+    </div>
+  );
+}
+
+// ── 第 2 天：AI 解讀與把關 ────────────────────────────────────
+export function Insight2View({ repurchase, basket, value }: { repurchase: RepurchaseResult; basket: BasketResult; value: ValueResult }) {
+  return (
+    <div className="space-y-5">
+      <p className="text-sm" style={secondary}>
+        把下面任一份提示詞貼到你的 AI 工具。它們只含彙總數字，沒有任何個人資料。拿到報告後，用下面的問題逐條檢查。
+      </p>
+      <PromptBox title="提示詞 A：解讀購買週期" text={repurchasePrompt(repurchase)} />
+      <PromptBox title="提示詞 B：解讀商品關聯" text={basketPrompt(basket)} />
+      <PromptBox title="提示詞 C：解讀顧客價值" text={valuePrompt(value, repurchase.repeatRevenueShare)} />
+      <div className="rounded-xl p-4 border" style={card}>
+        <h4 className="font-semibold text-sm mb-2">這一天特別要檢查的地方</h4>
+        <ul className="text-sm space-y-1.5 list-disc pl-5" style={secondary}>
+          <li><b>「相關」被說成「因果」</b>：AI 常寫「因為買了 A，所以也會買 B」。資料只能說兩者常一起出現，不能說誰造成誰。</li>
+          <li><b>用次數而不是 lift</b>：它推薦的「常一起買」，是不是只是兩個都很熱賣的東西？要求它同時給 lift。</li>
+          <li><b>平均數誤導</b>：它說「每位顧客平均花…」，有沒有同時給中位數？營收集中時，平均會高估典型顧客。</li>
+          <li><b>回購提醒的時間點</b>：它建議第幾天提醒？依據是中位數還是 P75？請它說明理由。</li>
+          <li><b>沒有說怎麼驗證</b>：每個建議都該附上「怎麼知道有沒有效」（要有對照組），沒有的就要求補上。</li>
+        </ul>
+      </div>
+    </div>
   );
 }

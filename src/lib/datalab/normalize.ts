@@ -81,7 +81,16 @@ export function buildDatasetFromSunlitSchema(
     const c = colIndex(it, 'qty');
     const d = colIndex(it, 'line_amount');
     if (a >= 0 && b >= 0 && c >= 0 && d >= 0) {
-      lines = it.rows.map((r) => ({ txnId: r[a], sku: r[b], qty: num(r[c] ?? ''), amount: num(r[d] ?? '') }));
+      // 商品關聯分析以「子品類」為單位：由商品主檔（sku → subcategory）帶入
+      const groupOf = new Map<string, string>();
+      const pr = tables.products;
+      if (pr) {
+        const ps = colIndex(pr, 'sku');
+        const psub = colIndex(pr, 'subcategory');
+        const pcat = colIndex(pr, 'category');
+        if (ps >= 0) for (const r of pr.rows) groupOf.set(r[ps], ((psub >= 0 ? r[psub] : '') || (pcat >= 0 ? r[pcat] : '') || '').trim());
+      }
+      lines = it.rows.map((r) => ({ txnId: r[a], sku: r[b], category: groupOf.get(r[b]) || undefined, qty: num(r[c] ?? ''), amount: num(r[d] ?? '') }));
     }
   }
 
@@ -178,13 +187,14 @@ export function buildDatasetFromMapping(t: Table, m: Mapping): OwnBuildResult {
   if (need.length) return { dataset: null, error: `缺少必要欄位：${need.map((k) => FIELD_NAME_ZH[k]).join('、')}` };
   const cOrd = m.orderId.col;
   const cProd = m.product.col >= 0 ? m.product.col : m.category.col;
+  const cCat = m.category.col;
   const cRet = m.isReturn.col;
   const cStore = m.store.col;
   const cChan = m.channel.col;
 
   let droppedDate = 0;
   let droppedAmount = 0;
-  type Row = { key: string; order: string; cust: string | null; day: number; amt: number; ret: boolean; sku: string; store?: string; channel?: string };
+  type Row = { key: string; order: string; cust: string | null; day: number; amt: number; ret: boolean; sku: string; cat: string; store?: string; channel?: string };
   const rows: Row[] = [];
   t.rows.forEach((r, i) => {
     const day = parseFlexibleDay(r[cDate] ?? '');
@@ -218,6 +228,8 @@ export function buildDatasetFromMapping(t: Table, m: Mapping): OwnBuildResult {
       amt,
       ret,
       sku: cProd >= 0 ? (r[cProd] ?? '').trim() : '',
+      // 商品關聯的分組：有「品類」欄就用品類，否則用商品本身
+      cat: cCat >= 0 ? (r[cCat] ?? '').trim() : cProd >= 0 ? (r[cProd] ?? '').trim() : '',
       store,
       channel: cChan >= 0 ? (r[cChan] ?? '').trim() || undefined : undefined,
     });
@@ -264,11 +276,11 @@ export function buildDatasetFromMapping(t: Table, m: Mapping): OwnBuildResult {
         store: first.store,
         channel: first.channel,
       });
-      for (const x of g) lines.push({ txnId: `${first.order}@${first.day}`, sku: x.sku, qty: 1, amount: x.amt });
+      for (const x of g) lines.push({ txnId: `${first.order}@${first.day}`, sku: x.sku, category: x.cat || undefined, qty: 1, amount: x.amt });
     }
   } else {
     txns = rows.map((r) => ({ id: r.order, customerId: r.cust, day: r.day, amount: r.amt, isReturn: r.ret, store: r.store, channel: r.channel }));
-    if (cProd >= 0) lines = rows.map((r) => ({ txnId: r.order, sku: r.sku, qty: 1, amount: r.amt }));
+    if (cProd >= 0) lines = rows.map((r) => ({ txnId: r.order, sku: r.sku, category: r.cat || undefined, qty: 1, amount: r.amt }));
   }
 
   let maxDay = -Infinity;

@@ -5,6 +5,9 @@ import { segmentInfo } from '../../data/datalab';
 import { segments as workshopSegments, type CheckSpec } from '../../data/workshop';
 import { compareClaim, expectedValues, formatExpected } from './check';
 import { minMax } from './stats';
+import type { RepurchaseResult } from './repurchase';
+import type { BasketResult } from './basket';
+import type { ValueResult } from './value';
 
 export interface ReportInput {
   sourceLabel: string;
@@ -14,6 +17,10 @@ export interface ReportInput {
   touch: TouchpointResult;
   notes: Record<string, string>;
   claims: Record<string, string>;
+  /** 第 2 天的分析（沒有就不放進報告） */
+  repurchase?: RepurchaseResult;
+  basket?: BasketResult;
+  value?: ValueResult;
 }
 
 export interface ReportModel {
@@ -27,6 +34,18 @@ export interface ReportModel {
   revenue?: number;
   segments: { name: string; count: number; countShare: number; revenueShare: number; sumM?: number }[];
   findings: string[];
+  /** 第 2 天：行為與價值（只有彙總；金額要勾選才有） */
+  day2?: {
+    repeatRate: number;
+    repeatRevenueShare: number;
+    medianInterval: number;
+    dueNow: number;
+    topPairs: { a: string; b: string; nAB: number; lift: number }[];
+    basketNote?: string;
+    top20Share: number;
+    aovMedian?: number;
+    spendMedian?: number;
+  };
   healthWarnings: string[];
   piiColumns: string[];
   checks: { label: string; mine: string; expected: string; status: 'match' | 'off' | 'empty' }[];
@@ -48,7 +67,8 @@ export function buildReport(inp: ReportInput, opts: { showAmounts: boolean }): R
   if (top) findings.push(`「${segmentInfo[top.key].name}」貢獻最多營收（${pct(top.revenueShare)}），只佔顧客 ${pct(top.countShare)}。`);
   if (biggest && biggest.key !== top?.key) findings.push(`人數最多的是「${segmentInfo[biggest.key].name}」（${pct(biggest.countShare)}），營收貢獻 ${pct(biggest.revenueShare)}。`);
 
-  const exp = expectedValues(dataset, touch, rfm);
+  const day2in = inp.repurchase && inp.basket ? { repurchase: inp.repurchase, basket: inp.basket } : undefined;
+  const exp = expectedValues(dataset, touch, rfm, day2in);
   const checks: ReportModel['checks'] = [];
   const notes: ReportModel['notes'] = [];
   for (const seg of workshopSegments) {
@@ -60,6 +80,25 @@ export function buildReport(inp: ReportInput, opts: { showAmounts: boolean }): R
     }
     const note = inp.notes[seg.id]?.trim();
     if (note && seg.takeawayLabel) notes.push({ title: seg.takeawayLabel.replace(/…$/, ''), text: note });
+  }
+
+  let day2: ReportModel['day2'];
+  if (inp.repurchase && inp.basket && inp.value) {
+    const r = inp.repurchase;
+    findings.push(`有 ${(r.repeatRate * 100).toFixed(1)}% 的顧客回頭買過（買過 2 個購買日以上），他們貢獻了 ${(r.repeatRevenueShare * 100).toFixed(1)}% 的營收；回購間隔中位數 ${r.median} 天。`);
+    const tp = inp.basket.available ? inp.basket.topByLift[0] : undefined;
+    if (tp) findings.push(`最常一起買的是「${tp.a}」和「${tp.b}」（同時出現 ${tp.nAB} 次，lift ${tp.lift.toFixed(1)}）。`);
+    day2 = {
+      repeatRate: r.repeatRate,
+      repeatRevenueShare: r.repeatRevenueShare,
+      medianInterval: r.median,
+      dueNow: r.dueNow,
+      topPairs: inp.basket.available ? inp.basket.topByLift.slice(0, 3).map((x) => ({ a: x.a, b: x.b, nAB: x.nAB, lift: x.lift })) : [],
+      basketNote: inp.basket.available ? undefined : inp.basket.reason,
+      top20Share: inp.value.top20Share,
+      aovMedian: opts.showAmounts ? inp.value.aovMedian : undefined,
+      spendMedian: opts.showAmounts ? inp.value.spendMedian : undefined,
+    };
   }
 
   return {
@@ -78,6 +117,7 @@ export function buildReport(inp: ReportInput, opts: { showAmounts: boolean }): R
       sumM: opts.showAmounts ? s.sumM : undefined,
     })),
     findings,
+    day2,
     healthWarnings: health.checks.filter((c) => c.level === 'warn').map((c) => c.title),
     piiColumns: health.pii.map((p) => `${p.table}.${p.column}`),
     checks,
@@ -97,6 +137,16 @@ export function reportToText(r: ReportModel): string {
   L.push('');
   L.push('◼ 客群分佈（佔客數／佔營收）');
   r.segments.forEach((s) => L.push(`- ${s.name}：${s.count} 人，${pct(s.countShare)}／${pct(s.revenueShare)}`));
+  if (r.day2) {
+    const d = r.day2;
+    L.push('');
+    L.push('◼ 行為與價值（第 2 天）');
+    L.push(`- 回購率 ${pct(d.repeatRate)}；回頭客貢獻 ${pct(d.repeatRevenueShare)} 的營收；回購間隔中位數 ${d.medianInterval} 天；已超過回購節奏的顧客 ${d.dueNow} 位`);
+    L.push(`- 累計消費最高的 20% 顧客貢獻 ${pct(d.top20Share)} 的營收`);
+    if (d.aovMedian !== undefined) L.push(`- 客單價中位數 NT$${Math.round(d.aovMedian).toLocaleString()}；每位顧客累計消費中位數 NT$${Math.round(d.spendMedian ?? 0).toLocaleString()}`);
+    d.topPairs.forEach((p) => L.push(`- 常一起買：${p.a} × ${p.b}（${p.nAB} 次，lift ${p.lift.toFixed(1)}）`));
+    if (d.basketNote) L.push(`- 商品關聯：${d.basketNote}`);
+  }
   if (r.healthWarnings.length) {
     L.push('');
     L.push('◼ 資料要注意');
