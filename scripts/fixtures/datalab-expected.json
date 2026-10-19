@@ -38,7 +38,7 @@
   "notes": [
     "asOf_day = max day over all txns + 1; day = calendar date part, both ISO and YYYY/M/D forms.",
     "Eligible customers need >=1 non-return txn; return txns attributed to customer add (negative) total_amount to M, M floored at 0 (returns from customers with no non-return txn ignored).",
-    "Scores: exact integer ceil; ties share score. FM=(F+M+1)//2.",
+    "Scores: exact integer ceil; ties share score. FM=(F+M+1)//2. Segments (first match wins; R,FM = scores, F = raw purchase count): 1 新客潛力 R>=4&F==1; 2 冠軍 R>=4&FM>=4; 3 忠誠 R>=3&FM>=3&F>=2; 4 高價值快流失 R<=2&FM>=4; 5 需關注 R>=3; 6 沉睡 R==2; 7 流失 otherwise.",
     "Campaign n counts target ROWS (no member dedupe); treatment = is_control_group != '1'. Campaign stats omitted (note field) if absent from campaigns.csv. 'contacted' and 'control' counted over all rows of the campaign.",
     "recon: txns with >=1 item; sum of line_amount incl. return txns as-is; recon_equal_minus_discount only if not already equal.",
     "txn_returns uses strip().lower()=='true'. Repurchase: members with non-return txns (member_id non-empty), distinct days; intervals pooled across members; quantiles 'inclusive' method.",
@@ -192,6 +192,7 @@
         "segment": "流失"
       }
     ],
+    "segment_counts_total": 1200,
     "冠軍": {
       "count": 366,
       "median_F": 9.0,
@@ -200,18 +201,18 @@
       "sum_M": 1808153
     },
     "忠誠": {
-      "count": 265,
-      "median_F": 7,
-      "median_M": 1175,
-      "median_R_days": 61,
-      "sum_M": 764392
+      "count": 238,
+      "median_F": 7.0,
+      "median_M": 1085.0,
+      "median_R_days": 61.0,
+      "sum_M": 731388
     },
     "新客潛力": {
-      "count": 27,
-      "median_F": 1,
-      "median_M": 700,
-      "median_R_days": 22,
-      "sum_M": 18755
+      "count": 36,
+      "median_F": 1.0,
+      "median_M": 910.0,
+      "median_R_days": 28.5,
+      "sum_M": 29947
     },
     "沉睡": {
       "count": 115,
@@ -221,18 +222,18 @@
       "sum_M": 97962
     },
     "流失": {
-      "count": 219,
+      "count": 217,
       "median_F": 1,
       "median_M": 810,
-      "median_R_days": 417,
-      "sum_M": 181048
+      "median_R_days": 418,
+      "sum_M": 179693
     },
     "需關注": {
-      "count": 63,
+      "count": 83,
       "median_F": 1,
-      "median_M": 720,
-      "median_R_days": 98,
-      "sum_M": 45037
+      "median_M": 880,
+      "median_R_days": 96,
+      "sum_M": 68204
     },
     "高價值快流失": {
       "count": 145,

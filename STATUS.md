@@ -89,7 +89,7 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
-**2026-10-19（晚）顧客數據戰情室 M1 已實作**：分支 `feat/data-war-room`（疊在 `feat/checkup`），`/checkup/data/`：資料健檢＋個資掃描、RFM 分群，資料來源＝內建小樣本／日晴完整資料（後台密碼軟性解鎖，資料本身公開，不得暗示有保護）。全部瀏覽器端計算。自檢 `scripts/check-datalab.mjs` 對照獨立 Python 參考答案逐項吻合。**待辦**：預覽網址驗日晴站跨網站讀取；Joseph 審；M2 自帶資料、M3 回購＋關聯、M4 活動成效、M5 英文版與導覽入口（見 BACKLOG）。體檢 M2「課程前測模式」已取消（前後測是開課單位權責）。
+**2026-10-19（晚）顧客數據戰情室 M1 已實作**：分支 `feat/data-war-room`（疊在 `feat/checkup`），`/checkup/data/`：資料健檢＋個資掃描、RFM 分群，資料來源＝內建小樣本／日晴完整資料（後台密碼軟性解鎖，資料本身公開，不得暗示有保護）。全部瀏覽器端計算。自檢 `scripts/check-datalab.mjs` 對照獨立 Python 參考答案逐項吻合。**待辦**：預覽網址驗日晴站跨網站讀取；Joseph 審；M2 自帶資料、M3 回購＋關聯、M4 活動成效、M5 英文版與導覽入口（見 BACKLOG）。體檢 M2「課程前測模式」已取消（前後測不在我們的範圍）。
 
 **2026-10-19 企業 AI 導入體檢 `/checkup/`（中英）M1 已實作**：分支 `feat/checkup`，build 綠 193 頁，四情境 Playwright 驗過（含手機寬度），`/quiz/` 回歸正常（雷達圖已抽成共用 `RadarChart.tsx`）。公開版、純前端、不碰資料庫。唯一策展點 `src/data/checkup.ts`，自檢 `npx tsx scripts/check-checkup.mjs`。**待 Joseph 審題目措辭與階段名稱後 push**；M2（課程前測模式，migration 017）未做，詳見 BACKLOG 進行中第一條。
 

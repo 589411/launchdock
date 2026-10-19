@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { buildDatasetFromSunlitSchema, dayToString } from '../../lib/datalab/normalize';
 import { runHealth } from '../../lib/datalab/health';
 import { runRfm } from '../../lib/datalab/rfm';
@@ -49,6 +49,8 @@ export default function DataLab() {
   const [code, setCode] = useState('');
   const [codeError, setCodeError] = useState('');
   const [stage, setStage] = useState<number | null>(null);
+  // 連點或同時觸發兩次載入時，只採用最後一次的結果
+  const reqId = useRef(0);
 
   useEffect(() => {
     try {
@@ -61,23 +63,26 @@ export default function DataLab() {
   }, []);
 
   async function load(kind: SourceKind) {
+    const id = ++reqId.current;
     setError('');
     setLoading(kind);
     try {
       const tables = kind === 'sample' ? await loadSample() : await loadSunlit();
+      if (id !== reqId.current) return;
       const built = buildDatasetFromSunlitSchema(tables, kind);
       if (!built.dataset) throw new Error(built.error ?? '資料格式無法解析');
       const { report } = runHealth(tables);
       setLoaded({ source: kind, dataset: built.dataset, health: report, rfm: runRfm(built.dataset) });
       setTab('health');
     } catch (e) {
+      if (id !== reqId.current) return;
       setError(
         kind === 'sunlit'
           ? `無法載入日晴完整資料（${e instanceof Error ? e.message : '未知錯誤'}）。可能是網路不穩，或對方網站不允許從這裡讀取。你可以先用內建小樣本，流程完全一樣。`
           : `載入失敗（${e instanceof Error ? e.message : '未知錯誤'}）`,
       );
     } finally {
-      setLoading(null);
+      if (id === reqId.current) setLoading(null);
     }
   }
 
@@ -92,11 +97,12 @@ export default function DataLab() {
       }
       void load('sunlit');
     } else {
-      setCodeError('密碼不正確，請向講師確認。');
+      setCodeError('密碼不正確，請向提供密碼的人確認。');
     }
   }
 
   function clearData() {
+    reqId.current++;
     setLoaded(null);
     setError('');
   }
@@ -124,7 +130,7 @@ export default function DataLab() {
 
       <div className="rounded-xl px-4 py-3 mb-6 border text-sm" style={card}>
         🔒 <b>全部在你的瀏覽器裡計算，資料不會上傳到任何地方。</b>
-        <span style={muted}> 不信的話，打開瀏覽器開發者工具的 Network 分頁，你會看到沒有任何檔案被送出。</span>
+        <span style={muted}> 不信的話，打開瀏覽器開發者工具的 Network 分頁：你只會看到下載資料的請求，沒有任何上傳。</span>
       </div>
 
       {!loaded ? (
@@ -154,7 +160,7 @@ export default function DataLab() {
             </button>
           </div>
 
-          <div className="flex gap-2 mb-5">
+          <div className="flex gap-2 mb-5" role="tablist">
             {(
               [
                 ['health', '① 資料健檢與個資掃描'],
@@ -163,6 +169,8 @@ export default function DataLab() {
             ).map(([k, label]) => (
               <button
                 key={k}
+                role="tab"
+                aria-selected={tab === k}
                 onClick={() => setTab(k)}
                 className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
                 style={{
@@ -217,7 +225,7 @@ function SourcePicker(props: {
       <div className="rounded-2xl p-5 border" style={card}>
         <h3 className="font-semibold">日晴生活完整資料</h3>
         <p className="text-sm mt-1" style={secondary}>
-          1,200 位會員、8,000 筆交易、18 個月，課堂使用的完整版。輸入課程後台的密碼即可載入。
+          1,200 位會員、8,000 筆交易、18 個月的完整版。輸入日晴後台的密碼即可載入。
         </p>
         {props.unlocked ? (
           <button
@@ -232,12 +240,11 @@ function SourcePicker(props: {
           <div className="mt-3 flex gap-2 flex-wrap">
             <input
               type="password"
-              inputMode="numeric"
               value={props.code}
               onChange={(e) => props.setCode(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && props.onUnlock()}
-              placeholder="課程後台密碼"
-              aria-label="課程後台密碼"
+              onKeyDown={(e) => e.key === 'Enter' && !busy && props.code.trim() !== '' && props.onUnlock()}
+              placeholder="日晴後台密碼"
+              aria-label="日晴後台密碼"
               className="px-3 py-2 rounded-lg border text-sm"
               style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-surface-lighter)' }}
             />
@@ -252,7 +259,7 @@ function SourcePicker(props: {
           </div>
         )}
         {props.codeError && (
-          <p className="text-xs mt-2" style={{ color: '#f59e0b' }}>
+          <p className="text-xs mt-2" style={{ color: '#f59e0b' }} role="alert">
             {props.codeError}
           </p>
         )}
@@ -271,7 +278,7 @@ function SourcePicker(props: {
       </div>
 
       {props.error && (
-        <p className="text-sm rounded-xl px-4 py-3 border" style={{ ...card, borderColor: '#f59e0b' }}>
+        <p className="text-sm rounded-xl px-4 py-3 border" style={{ ...card, borderColor: '#f59e0b' }} role="alert">
           {props.error}
         </p>
       )}
@@ -408,7 +415,7 @@ function RfmView({ rfm }: { rfm: RfmResult }) {
       <section>
         <h3 className="text-lg font-semibold mb-1">熱度圖：最近消費 × 頻次金額</h3>
         <p className="text-xs mb-3" style={muted}>
-          橫軸是頻次與金額的綜合分（越右越高），縱軸是最近消費（越上面越近）。顏色越深，人越多。
+          縱軸是「最近一次購買距今多久」，把所有顧客排序後分成五等，最上面是最近的前 20%；橫軸是「買幾次、花多少」的綜合分，分成五等，越右邊越多。格子裡的數字是人數，顏色越深人越多。
         </p>
         <Heat grid={rfm.grid} max={gridMax} />
       </section>
@@ -452,13 +459,15 @@ function Bar({ value, color, label }: { value: number; color: string; label: str
 function Heat({ grid, max }: { grid: number[][]; max: number }) {
   // 上面是 R 分高（最近）：把 rScore 5 排在第一列
   const rows = [5, 4, 3, 2, 1];
+  const rowLabel: Record<number, string> = { 5: '最近', 4: '較近', 3: '中間', 2: '較久', 1: '很久' };
+  const colLabel: Record<number, string> = { 1: '少', 2: '', 3: '', 4: '', 5: '多' };
   return (
     <div className="max-w-[420px] mx-auto">
       <div className="grid gap-1" style={{ gridTemplateColumns: 'auto repeat(5, 1fr)' }}>
         {rows.map((r) => (
           <div key={r} className="contents">
-            <span className="text-xs self-center pr-1" style={muted}>
-              R{r}
+            <span className="text-xs self-center pr-1 whitespace-nowrap" style={muted}>
+              {rowLabel[r]}
             </span>
             {[1, 2, 3, 4, 5].map((fm) => {
               const v = grid[r - 1][fm - 1];
@@ -471,7 +480,7 @@ function Heat({ grid, max }: { grid: number[][]; max: number }) {
                     opacity: v === 0 ? 0.08 : 0.2 + 0.8 * (v / max),
                     color: '#fff',
                   }}
-                  title={`R${r} × FM${fm}：${v} 人`}
+                  title={`最近消費「${rowLabel[r]}」× 頻次金額第 ${fm} 等：${v} 人`}
                 >
                   {v || ''}
                 </div>
@@ -482,7 +491,7 @@ function Heat({ grid, max }: { grid: number[][]; max: number }) {
         <span />
         {[1, 2, 3, 4, 5].map((fm) => (
           <span key={fm} className="text-xs text-center" style={muted}>
-            FM{fm}
+            {colLabel[fm]}
           </span>
         ))}
       </div>
@@ -492,19 +501,26 @@ function Heat({ grid, max }: { grid: number[][]; max: number }) {
 
 function PromptBox({ title, text }: { title: string; text: string }) {
   const [copied, setCopied] = useState(false);
+  const [failed, setFailed] = useState(false);
   async function copy() {
+    let done = false;
     try {
       await navigator.clipboard.writeText(text);
+      done = true;
     } catch {
       const ta = document.createElement('textarea');
       ta.value = text;
       document.body.appendChild(ta);
       ta.select();
-      document.execCommand('copy');
+      done = document.execCommand('copy');
       ta.remove();
     }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1800);
+    setCopied(done);
+    setFailed(!done);
+    setTimeout(() => {
+      setCopied(false);
+      setFailed(false);
+    }, 2200);
   }
   return (
     <details className="rounded-xl border" style={card}>
@@ -517,7 +533,7 @@ function PromptBox({ title, text }: { title: string; text: string }) {
           {text}
         </pre>
         <button onClick={() => void copy()} className="mt-3 px-4 py-2 rounded-lg text-sm font-medium text-white" style={{ backgroundColor: 'var(--color-brand)' }}>
-          {copied ? '已複製 ✓' : '複製提示詞'}
+          {copied ? '已複製 ✓' : failed ? '複製失敗，請手動選取上方文字' : '複製提示詞'}
         </button>
       </div>
     </details>

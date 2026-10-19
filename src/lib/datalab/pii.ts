@@ -1,11 +1,14 @@
 import type { PiiFinding, PiiKind, Table } from './types';
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE = /^(?:\+?886[-\s]?|0)(?:9\d{2}[-\s]?\d{3}[-\s]?\d{3}|[2-8][-\s]?\d{7,8})$/;
+const PHONE = /^(?:\+?886[-\s]?|0)?(?:9\d{2}[-\s]?\d{3}[-\s]?\d{3}|\(?0?[2-8]\)?[-\s]?\d{3,4}[-\s]?\d{4})$/;
 const NATIONAL_ID = /^[A-Z][12]\d{8}$/;
 const HEX_HASH = /^[0-9a-f]{16,}$/i;
+/** 純數字的長編號（訂單號等）不是雜湊：至少要有一個 a–f 字母，或長度剛好是常見雜湊長度 */
+const isHash = (v: string) => HEX_HASH.test(v) && (/[a-f]/i.test(v) || [32, 40, 64].includes(v.length));
 
-const NAME_HINT = /(姓名|真實姓名|客戶名稱|顧客名稱|\bname\b|full_?name|customer_?name)/i;
+// 只認「人的名字」：避免把 product_name、store_name 這類欄位誤判成個資
+const NAME_HINT = /(姓名|客戶名稱|顧客名稱|會員名稱|^(name|full_?name|customer_?name|member_?name|contact_?name)$)/i;
 const ADDRESS_HINT = /(地址|住址|address|addr)/i;
 const QUASI_HINT = /(birth|生日|出生|gender|sex|性別|zip|郵遞區號)/i;
 
@@ -29,12 +32,16 @@ function isCard(v: string): boolean {
   return /^\d{13,19}$/.test(d) && luhn(d);
 }
 
-/** 遮罩：email 留首字與網域；其餘只留前兩碼。絕不回傳原值 */
+/** 遮罩：email 只留首字與網域尾端；其餘只留第一碼。絕不回傳原值 */
 export function mask(v: string): string {
   const s = v.trim();
   const at = s.indexOf('@');
-  if (at > 0) return `${s[0]}***${s.slice(at)}`;
-  return `${s.slice(0, 2)}***`;
+  if (at > 0) {
+    const dom = s.slice(at + 1);
+    const dot = dom.lastIndexOf('.');
+    return `${s[0]}***@${dom[0] ?? ''}***${dot >= 0 ? dom.slice(dot) : ''}`;
+  }
+  return `${s.slice(0, 1)}***`;
 }
 
 const NOTES: Record<PiiKind, string> = {
@@ -69,7 +76,7 @@ export function scanPii(tables: Record<string, Table>): PiiFinding[] {
         ['national_id', (v) => NATIONAL_ID.test(v), 0.5],
         ['phone', (v) => PHONE.test(v), 0.5],
         ['card', isCard, 0.8],
-        ['hash', (v) => HEX_HASH.test(v), 0.5],
+        ['hash', isHash, 0.5],
       ];
       for (const [k, fn, min] of tests) {
         const r = hit(fn);
@@ -84,7 +91,8 @@ export function scanPii(tables: Record<string, Table>): PiiFinding[] {
         if (NAME_HINT.test(h)) kind = 'name';
         else if (ADDRESS_HINT.test(h)) kind = 'address';
         else if (QUASI_HINT.test(h)) kind = 'quasi';
-        if (kind) eg = sample[0] ?? '';
+        // 準識別碼（出生年、性別…）的值本身就是分類資料，不顯示範例
+        if (kind) eg = kind === 'quasi' ? '' : (sample[0] ?? '');
       }
       if (kind) {
         out.push({

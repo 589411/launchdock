@@ -32,12 +32,18 @@ function cumulativeGE(values: number[]): Map<number, number> {
   return m;
 }
 
+/**
+ * 由上往下，第一條命中就歸群。rScore／fm 是分數（1..5），f 是實際購買次數。
+ * 「只買過一次」要最先判斷：否則最近才第一次買、但金額高的人會被當成「冠軍」或「忠誠」，
+ * 而他們其實還沒有回購過。「忠誠」另外要求買過至少兩次。最近有消費、但頻次金額偏低的人
+ * 歸「需關注」，不會掉到「流失」。
+ */
 export function classify(rScore: number, fm: number, f: number): SegmentKey {
-  if (rScore >= 4 && fm >= 4) return 'champion';
-  if (rScore >= 3 && fm >= 3) return 'loyal';
   if (rScore >= 4 && f === 1) return 'newPotential';
+  if (rScore >= 4 && fm >= 4) return 'champion';
+  if (rScore >= 3 && fm >= 3 && f >= 2) return 'loyal';
   if (rScore <= 2 && fm >= 4) return 'atRiskBig';
-  if (rScore === 3) return 'attention';
+  if (rScore >= 3) return 'attention';
   if (rScore === 2) return 'dormant';
   return 'lost';
 }

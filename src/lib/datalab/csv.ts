@@ -47,7 +47,8 @@ export function parseCSV(text: string): string[][] {
           i++;
         } else inQuote = false;
       } else field += ch;
-    } else if (ch === '"') {
+    } else if (ch === '"' && field === '') {
+      // 只有欄位一開始的引號才算「開始引用」；5" wide 這種欄位中間的引號就是普通字元
       inQuote = true;
     } else if (ch === delim) {
       row.push(field);

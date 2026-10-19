@@ -1,8 +1,9 @@
 import type { HealthCheck, HealthReport, Table } from './types';
 import { colIndex } from './csv';
 import { scanPii } from './pii';
+import { parseDay } from './normalize';
+import { quantile } from './stats';
 
-const ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/;
 const pct = (n: number, total: number) => (total ? `${((n / total) * 100).toFixed(1)}%` : '0%');
 
 function numOf(s: string | undefined): number {
@@ -68,20 +69,59 @@ export function runHealth(tables: Record<string, Table>): { report: HealthReport
     }
 
     if (iDt >= 0) {
-      const bad = tx.rows.filter((r) => !ISO.test((r[iDt] ?? '').trim())).length;
-      facts.txn_non_iso_dates = bad;
+      // 以「樣式」分組（數字都換成 9）：只有出現多種樣式才算不一致，整欄都是 2025/01/02 不該被當成問題
+      const patterns = new Map<string, number>();
+      let unparseable = 0;
+      const days: number[] = [];
+      for (const r of tx.rows) {
+        const v = (r[iDt] ?? '').trim();
+        const key = v.replace(/\d/g, '9');
+        patterns.set(key, (patterns.get(key) ?? 0) + 1);
+        const d = parseDay(v);
+        if (d === null) unparseable++;
+        else days.push(d);
+      }
+      const majority = Math.max(...patterns.values());
+      const minority = total - majority;
+      facts.txn_minority_date_format = minority;
       checks.push({
         id: 'txn_date_format',
         table: 'transactions',
-        level: bad > 0 ? 'warn' : 'ok',
-        title: bad > 0 ? `日期格式不一致：${bad} 筆和其他筆寫法不同` : '日期格式一致',
+        level: patterns.size > 1 ? 'warn' : 'ok',
+        title: patterns.size > 1 ? `日期格式不一致：${minority} 筆和其他筆寫法不同` : '日期格式一致',
         detail:
-          bad > 0
-            ? '同一欄混著兩種日期寫法（例如 2025-01-02T15:39:00 與 2025/01/02 15:39）。排序、算天數前一定要先統一，否則會算錯或被丟掉。這裡已統一轉成日期。'
-            : '所有日期都是同一種格式，可以直接排序與計算。',
-        count: bad,
+          patterns.size > 1
+            ? '同一欄混著不同的日期寫法（例如 2025-01-02T15:39:00 與 2025/01/02 15:39）。排序、算天數前一定要先統一，否則會算錯或被丟掉。這裡已統一轉成日期。'
+            : '所有日期都是同一種寫法，可以直接排序與計算。',
+        count: minority,
         total,
       });
+      if (unparseable > 0) {
+        checks.push({
+          id: 'txn_date_unparseable',
+          table: 'transactions',
+          level: 'warn',
+          title: `有 ${unparseable} 筆日期無法辨識，分析時已略過`,
+          detail: '可能是空白、不存在的日期（例如 2 月 31 日），或目前不支援的寫法（例如民國年）。這些交易不會進入任何分析，請先修正再重跑。',
+          count: unparseable,
+          total,
+        });
+      }
+      if (days.length > 0) {
+        const min = Math.min(...days);
+        const max = Math.max(...days);
+        const p99 = quantile(days, 0.99);
+        const far = max - p99 > 366;
+        checks.push({
+          id: 'txn_date_range',
+          table: 'transactions',
+          level: far ? 'warn' : 'info',
+          title: `交易日期範圍：${new Date(min * 86400000).toISOString().slice(0, 10)} 至 ${new Date(max * 86400000).toISOString().slice(0, 10)}`,
+          detail: far
+            ? '最晚的日期離其他資料很遠，很可能是輸入錯誤。分群會以「資料最後一天」當基準日，一個過頭的日期會讓所有人都看起來像流失客，請先確認。'
+            : '分群的「基準日」會用資料最後一天再加一天，不用今天，所以舊資料也能正常分析。',
+        });
+      }
     }
 
     if (iStore >= 0) {
@@ -141,11 +181,11 @@ export function runHealth(tables: Record<string, Table>): { report: HealthReport
           level: other > 0 ? 'warn' : 'ok',
           title:
             other === 0
-              ? `交易總額與明細對得上（${equal} 筆相等、${minusDisc} 筆為「明細 − 折扣」）`
+              ? `交易總額與明細對得上（${equal} 筆相等、${minusDisc} 筆為「明細 − 折扣」${noItems > 0 ? `；另有 ${noItems} 筆沒有明細，無法對帳` : ''}）`
               : `有 ${other} 筆交易總額對不上明細`,
           detail:
             other === 0
-              ? '拿「交易總額」和「明細加總」對帳，全部吻合，代表這兩個檔案可以放心串在一起。（折扣筆的差額剛好等於折扣金額。）'
+              ? `拿「交易總額」和「明細加總」對帳，有明細的交易全部吻合，代表這兩個檔案可以放心串在一起。（折扣筆的差額剛好等於折扣金額。）${noItems > 0 ? '沒有明細的交易只能算整體營收，無法做商品層級分析。' : ''}`
               : '這些交易的總額既不等於明細加總、也不等於「加總 − 折扣」。先查清楚原因（漏匯出？手動改價？）再做商品層級的分析。',
           count: other,
           total: tx.rows.length - noItems,

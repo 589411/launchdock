@@ -5,8 +5,14 @@ import { colIndex } from './csv';
 export function parseDay(s: string): Day | null {
   const m = s.trim().match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
   if (!m) return null;
-  const t = Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
-  return Number.isNaN(t) ? null : Math.round(t / 86400000);
+  const y = Number(m[1]);
+  const mo = Number(m[2]);
+  const d = Number(m[3]);
+  const t = Date.UTC(y, mo - 1, d);
+  const back = new Date(t);
+  // 2025-02-31 會被 Date 自動進位成 3 月 3 日；轉回去對不上就視為不合法
+  if (back.getUTCFullYear() !== y || back.getUTCMonth() !== mo - 1 || back.getUTCDate() !== d) return null;
+  return Math.round(t / 86400000);
 }
 
 export function dayToString(d: Day): string {

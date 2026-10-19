@@ -30,13 +30,18 @@ eq('csv 分號分隔', parseCSV('a;b\n1;2\n'), [['a', 'b'], ['1', '2']]);
 eq('csv Tab 分隔', parseCSV('a\tb\n1\t2\n'), [['a', 'b'], ['1', '2']]);
 eq('csv 末行無換行', parseCSV('a,b\n1,2'), [['a', 'b'], ['1', '2']]);
 eq('csv 空欄位', parseCSV('a,b,c\n1,,3\n'), [['a', 'b', 'c'], ['1', '', '3']]);
+eq('csv 欄位中間的引號不是開頭', parseCSV('name,qty\nTV 5" wide,1\nx,2\n'), [['name', 'qty'], ['TV 5" wide', '1'], ['x', '2']]);
 // Big5：「會員」的 Big5 位元組
 eq('Big5 解碼', decodeBuffer(new Uint8Array([0xb7, 0x7c, 0xad, 0xfb]).buffer), '會員');
 eq('UTF-8 解碼', decodeBuffer(new TextEncoder().encode('會員').buffer), '會員');
 eq('parseDay ISO', parseDay('2025-01-01T21:37:00'), parseDay('2025/1/1 08:00'));
 eq('parseDay 不合法', parseDay('abc'), null);
+eq('parseDay 不存在的日期（2/31）', parseDay('2025-02-31'), null);
+eq('parseDay 不存在的月份', parseDay('2025-13-01'), null);
+eq('parseDay 閏日', [parseDay('2024-02-29') !== null, parseDay('2025-02-29')], [true, null]);
 eq('分位數', [quantile([1, 2, 3, 4], 0.25), quantile([1, 2, 3, 4], 0.75), median([5, 1, 3])], [1.75, 3.25, 3]);
-eq('mask email', mask('tsai.yijun27@icloud.com'), 't***@icloud.com');
+eq('mask email', mask('tsai.yijun27@icloud.com'), 't***@i***.com');
+eq('mask 姓名只留一個字', mask('王小明'), '王***');
 
 // RFM 同值手算：3 位顧客，N=3
 {
@@ -63,10 +68,21 @@ eq('mask email', mask('tsai.yijun27@icloud.com'), 't***@icloud.com');
   // N=3：A 的 F/M 是最大 → 5 分；R 最近 → 5 分
   eq('RFM A 分數', [byId.A.rScore, byId.A.fScore, byId.A.mScore], [5, 5, 5]);
 }
-eq('分群優先序 冠軍', classify(5, 5, 7), 'champion');
+eq('分群 冠軍', classify(5, 5, 7), 'champion');
 eq('分群 新客潛力', classify(5, 1, 1), 'newPotential');
+eq('分群：最近才第一次買、但金額高 → 新客潛力（不是冠軍／忠誠）', classify(5, 5, 1), 'newPotential');
+eq('分群：R3 只買一次、FM 高 → 需關注（不是忠誠）', classify(3, 4, 1), 'attention');
+eq('分群：忠誠要買過兩次', classify(3, 3, 2), 'loyal');
+eq('分群：最近有買、買過多次、但 FM 低 → 需關注（不掉到流失）', classify(5, 2, 3), 'attention');
 eq('分群 高價值快流失', classify(1, 5, 9), 'atRiskBig');
+eq('分群 沉睡', classify(2, 2, 3), 'dormant');
 eq('分群 流失', classify(1, 1, 1), 'lost');
+// 規則涵蓋所有組合：最近有買（R>=3）的人不可被分到沉睡或流失
+for (let r = 1; r <= 5; r++) for (let fm = 1; fm <= 5; fm++) for (const f of [1, 2, 5]) {
+  const k = classify(r, fm, f);
+  if (!k) errors.push(`分群沒有涵蓋 R${r} FM${fm} F${f}`);
+  if (r >= 3 && (k === 'lost' || k === 'dormant')) errors.push(`最近有買（R${r}）卻被分到 ${k}`);
+}
 
 // PII：不同型態
 {
@@ -75,6 +91,12 @@ eq('分群 流失', classify(1, 1, 1), 'lost');
   eq('PII 偵測', kinds, { email: 'email', phone: 'phone', tw_id: 'national_id', card: 'card', hash: 'hash' });
   const samples = scanPii({ t }).map((f) => f.maskedSample).join('|');
   if (/a@b\.com|4111111111111111|A123456789/.test(samples)) errors.push('PII 範例沒有遮罩');
+  // 市話寫法、純數字長編號（不是雜湊）、product_name（不是姓名）、準識別碼不顯示範例
+  const t2 = toTable('t2', 'tel,order_no,product_name,name,birth_year\n02-2345-6789,1234567890123456,保濕乳液,王小明,1989\n(02)23456789,1234567890123457,洗面乳,李小華,1990\n');
+  const f2 = scanPii({ t2 });
+  eq('PII 市話／數字編號／欄名', Object.fromEntries(f2.map((f) => [f.column, f.kind])), { tel: 'phone', name: 'name', birth_year: 'quasi' });
+  if (f2.find((f) => f.column === 'birth_year')?.maskedSample !== '') errors.push('準識別碼不應顯示範例');
+  if (f2.find((f) => f.column === 'name')?.maskedSample !== '王***') errors.push('姓名遮罩應只留一個字');
 }
 
 // ── 日晴資料：對照獨立算出的參考答案 ────────────────────────────
@@ -93,7 +115,7 @@ if (!existsSync(`${dir}/transactions.csv`)) {
   eq('txn_anonymous', facts.txn_anonymous, exp.txn_anonymous);
   eq('txn_returns', facts.txn_returns, exp.txn_returns);
   eq('txn_returns_with_member', facts.txn_returns_with_member, exp.txn_returns_with_member);
-  eq('txn_non_iso_dates', facts.txn_non_iso_dates, exp.txn_slash_dates);
+  eq('txn_minority_date_format', facts.txn_minority_date_format, exp.txn_slash_dates);
   eq('txn_store_codes', facts.txn_store_codes, exp.txn_store_codes);
   eq('items 重複列', facts.items_exact_duplicate_rows, exp.items_exact_duplicate_rows);
   eq('recon_equal', facts.recon_equal, exp.recon_equal);

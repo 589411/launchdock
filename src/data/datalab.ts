@@ -35,8 +35,8 @@ export const segmentInfo: Record<SegmentKey, SegmentInfo> = {
   },
   attention: {
     name: '需關注',
-    blurb: '最近消費落在中間，熱度正在變淡。',
-    action: '在他們變成沉睡之前，用新品或回購提醒拉一把。',
+    blurb: '最近還有消費，但頻次或金額偏低，或是熱度正在變淡。',
+    action: '在他們變成沉睡之前，用新品或回購提醒拉一把，把他們養成熟客。',
   },
   dormant: {
     name: '沉睡',

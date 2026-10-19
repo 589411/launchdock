@@ -29,6 +29,7 @@ ${pii}
 
 export function rfmPrompt(res: RfmResult): string {
   const rows = res.segments
+    .filter((s) => s.count > 0)
     .map(
       (s) =>
         `| ${segmentInfo[s.key].name} | ${s.count} | ${pct(s.countShare)} | ${pct(s.revenueShare)} | ${Math.round(s.medianR)} 天 | ${s.medianF} 次 | ${money(s.medianM)} |`,
@@ -52,7 +53,7 @@ ${rows}
 export function segmentMessagePrompt(res: RfmResult): string {
   const rows = res.segments
     .filter((s) => s.count > 0)
-    .map((s) => `- ${segmentInfo[s.key].name}（${s.count} 人）：${segmentInfo[s.key].blurb}${segmentInfo[s.key].action}`)
+    .map((s) => `- ${segmentInfo[s.key].name}（${s.count} 人）：${segmentInfo[s.key].blurb} ${segmentInfo[s.key].action}`)
     .join('\n');
   return `你是品牌文案寫手。我把顧客分成以下幾群，請針對每一群各寫一則 LINE 訊息（40 字內、語氣親切不推銷），並在每則後面用一句話說明這則訊息的目的與怎麼衡量有沒有效。
 
