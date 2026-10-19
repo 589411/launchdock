@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { decodeBuffer, toTable } from '../../lib/datalab/csv';
+import { decodeBuffer, looksLikeDataHeaders, parseCSV, tableFromRows } from '../../lib/datalab/csv';
 import { buildDatasetFromMapping, buildDatasetFromSunlitSchema, dayToString } from '../../lib/datalab/normalize';
-import { detectMapping, FIELD_LABEL, mappingFromNames, mappingToNames, REQUIRED_FIELDS, templateCsv, type FieldKey, type Mapping } from '../../lib/datalab/detect';
+import { detectMapping, FIELD_LABEL, mappingFromNames, mappingToNames, REQUIRED_FIELDS, requiredMissing, templateCsv, type FieldKey, type Mapping } from '../../lib/datalab/detect';
 import { runHealth } from '../../lib/datalab/health';
 import { runHealthOwn } from '../../lib/datalab/health-own';
 import { runRfm } from '../../lib/datalab/rfm';
@@ -11,7 +11,7 @@ import { buildReport, reportToText } from '../../lib/datalab/report';
 import { compareClaim, expectedValues, formatExpected } from '../../lib/datalab/check';
 import { isValidUnlockCode, loadSample, loadSunlit } from '../../lib/datalab/sources';
 import {
-  clearData, clearProgress, loadData, loadProgress, recallMapping, rememberMapping, saveData, saveProgress, type Progress, type SavedData,
+  clearAllLocal, loadData, loadProgress, recallMapping, rememberMapping, saveData, saveProgress, type Progress, type SavedData,
 } from '../../lib/datalab/store';
 import { UNLOCK_STORAGE_KEY } from '../../data/datalab';
 import { days, fillPrompt, segments, type SegmentDef } from '../../data/workshop';
@@ -42,6 +42,7 @@ interface Pending {
 const SUNLIT_COLUMNS = ['txn_id', 'txn_datetime', 'store_id', 'member_id', 'channel', 'payment_method', 'total_amount', 'discount_amount', 'campaign_id', 'is_return'];
 const MAX_BYTES = 20 * 1024 * 1024;
 const MAX_ROWS = 200_000;
+const MAX_COLS = 200;
 const SOURCE_LABEL: Record<Source, string> = { sample: '內建小樣本', sunlit: '日晴生活完整資料', own: '你自己的資料' };
 
 function finalize(source: Source, dataset: Dataset, health: HealthReport, columns: string[]): Loaded {
@@ -49,14 +50,8 @@ function finalize(source: Source, dataset: Dataset, health: HealthReport, column
   return { source, label: SOURCE_LABEL[source], dataset, health, rfm, touch: runTouchpoints(dataset), columns };
 }
 
-/** 工作表的第一列不一定是欄名（常有標題列），挑「前 20 列裡第一個填得夠滿的列」當欄名 */
-function tableFromRows(name: string, rows: string[][]): Table {
-  const filled = rows.slice(0, 20).map((r) => r.filter((c) => c.trim() !== '').length);
-  const max = Math.max(...filled, 0);
-  const hi = filled.findIndex((n) => n >= Math.max(2, Math.ceil(max * 0.6)));
-  const h = hi < 0 ? 0 : hi;
-  return { name, headers: (rows[h] ?? []).map((x) => x.trim()), rows: rows.slice(h + 1) };
-}
+/** 自己的資料一律用中性的名稱，檔名不進健檢、提示詞或報告（檔名可能含公司或人名） */
+const OWN_TABLE = '你的資料';
 
 async function readFile(file: File): Promise<{ table: Table; notice: string }> {
   if (file.size > MAX_BYTES) throw new Error('檔案超過 20 MB。請先拆小，或只保留需要的欄位。');
@@ -70,13 +65,18 @@ async function readFile(file: File): Promise<{ table: Table; notice: string }> {
     const sheets = await readXlsx(buf);
     if (sheets.length === 0) throw new Error('這個 Excel 檔裡沒有任何工作表。');
     const best = sheets.reduce((a, b) => (b.rows.length > a.rows.length ? b : a));
-    table = tableFromRows(file.name, best.rows);
+    table = tableFromRows(OWN_TABLE, best.rows);
     if (sheets.length > 1) notice = `這個檔案有 ${sheets.length} 個工作表，我使用資料最多的「${best.name}」。`;
   } else {
-    table = toTable(file.name, decodeBuffer(buf));
+    table = tableFromRows(OWN_TABLE, parseCSV(decodeBuffer(buf)));
   }
   if (table.rows.length === 0 || table.headers.length < 2) throw new Error('讀不到資料。請確認檔案第一列是欄位名稱，而且至少有兩欄。');
+  if (table.headers.length > MAX_COLS) throw new Error(`欄位超過 ${MAX_COLS} 欄，這比較像報表而不是交易明細。請整理成「一列一筆交易」再上傳。`);
   if (table.rows.length > MAX_ROWS) throw new Error(`資料超過 ${MAX_ROWS.toLocaleString()} 列，瀏覽器可能跑不動。請先篩選日期範圍或拆成多份。`);
+  // 沒有標題列的檔案：第一列其實是資料，會被當成欄名進到提示詞、報告與本機紀錄，所以直接擋下
+  if (looksLikeDataHeaders(table.headers)) {
+    throw new Error('第一列看起來是資料（例如日期、電話或 email），不是欄位名稱。請在最上面加一列欄位名稱再上傳。');
+  }
   return { table, notice };
 }
 
@@ -90,6 +90,9 @@ export default function Workshop() {
   const [codeError, setCodeError] = useState('');
   const [saveLocal, setSaveLocal] = useState(false);
   const [saved, setSaved] = useState<SavedData | null>(null);
+  /** 這份資料是否已存在這台電腦（沒存的話，離開頁面會遺失） */
+  const [persisted, setPersisted] = useState(false);
+  const [navCount, setNavCount] = useState(0);
   const [ceiling, setCeiling] = useState(4);
   const [stage, setStage] = useState<number | null>(null);
   const [progress, setProgress] = useState<Progress>({ completed: [], notes: {}, claims: {} });
@@ -97,7 +100,11 @@ export default function Workshop() {
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
   // 連點或同時觸發兩次載入時，只採用最後一次的結果
   const reqId = useRef(0);
-  const savedHealth = useRef<HealthReport | null>(null);
+
+  const go = useCallback((i: number) => {
+    setIdx(i);
+    setNavCount((c) => c + 1);
+  }, []);
 
   useEffect(() => {
     try {
@@ -119,26 +126,46 @@ export default function Workshop() {
   const visible = useMemo(() => segments.filter((sg) => sg.day <= ceiling), [ceiling]);
   const isOpen = useCallback((i: number) => i === 0 || progress.completed.includes(visible[i - 1]?.id), [progress.completed, visible]);
 
+  // 自己的資料沒有存在這台電腦時，離開或重新整理頁面就會遺失，先提醒
+  useEffect(() => {
+    if (!loaded || loaded.source !== 'own' || persisted) return;
+    const warn = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+    window.addEventListener('beforeunload', warn);
+    return () => window.removeEventListener('beforeunload', warn);
+  }, [loaded, persisted]);
+
   // 鍵盤 ← → 切換段落（在輸入框裡打字時不攔截）
   useEffect(() => {
     if (!loaded) return;
     const onKey = (e: KeyboardEvent) => {
       const el = e.target as HTMLElement | null;
-      if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
-      if (e.key === 'ArrowRight' && idx < visible.length - 1 && isOpen(idx + 1)) setIdx(idx + 1);
-      if (e.key === 'ArrowLeft' && idx > 0) setIdx(idx - 1);
+      // 只在沒有聚焦在表單或按鈕上時才當成翻頁（避免搶走下拉選單、輸入框的方向鍵）
+      if (el && el !== document.body && el.id !== 'seg-title') return;
+      if (e.key === 'ArrowRight' && idx < visible.length - 1 && isOpen(idx + 1)) go(idx + 1);
+      if (e.key === 'ArrowLeft' && idx > 0) go(idx - 1);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [loaded, idx, visible.length, isOpen]);
+  }, [loaded, idx, visible.length, isOpen, go]);
 
-  function start(l: Loaded) {
+  function start(l: Loaded, isPersisted = false) {
+    // 進度、心得與核對數字都屬於「那一份資料」：換了資料，舊的答案與核對結果不能沿用
+    let sum = 0;
+    for (const t of l.dataset.txns) sum += t.amount;
+    const fp = `${l.source}:${l.dataset.txns.length}:${l.dataset.asOf}:${Math.round(sum)}`;
+    if (progress.fingerprint !== fp) setProgress({ fingerprint: fp, completed: [], notes: {}, claims: {} });
     setLoaded(l);
+    setPersisted(isPersisted);
     setPending(null);
     setIdx(0);
+    setNavCount(0);
     setRevealed({});
     setError('');
   }
+
 
   // ── 載入：內建樣本／日晴完整資料 ──
   async function loadCurated(kind: 'sample' | 'sunlit') {
@@ -195,29 +222,39 @@ export default function Workshop() {
 
   async function confirmMapping() {
     if (!pending) return;
-    const built = buildDatasetFromMapping(pending.table, pending.mapping);
-    if (!built.dataset) {
-      setError(built.error ?? '資料無法解析');
-      return;
+    setError('');
+    try {
+      const built = buildDatasetFromMapping(pending.table, pending.mapping);
+      if (!built.dataset) {
+        setError(built.error ?? '資料無法解析');
+        return;
+      }
+      const { report } = runHealthOwn(pending.table, pending.mapping, built, built.dataset);
+      rememberMapping(pending.table.headers, mappingToNames(pending.table, pending.mapping));
+      let persistedNow = false;
+      if (saveLocal) {
+        const rec: SavedData = { dataset: built.dataset, health: report, columns: pending.table.headers, fileName: pending.fileName, savedAt: Date.now() };
+        persistedNow = await saveData(rec);
+        if (persistedNow) setSaved(rec);
+        else setError('這個瀏覽器不允許把資料存在這台電腦（可能是無痕模式或儲存空間被封鎖）。你仍可以繼續，只是下次要重新上傳。');
+      }
+      start(finalize('own', built.dataset, report, pending.table.headers), persistedNow);
+    } catch (e) {
+      setError(`處理資料時發生錯誤：${e instanceof Error ? e.message : '未知錯誤'}。請檢查欄位對應，或換一份較小的檔案。`);
     }
-    const { report } = runHealthOwn(pending.table, pending.mapping, built, built.dataset);
-    rememberMapping(pending.table.headers, mappingToNames(pending.table, pending.mapping));
-    if (saveLocal) {
-      await saveData({ dataset: built.dataset, health: report, columns: pending.table.headers, fileName: pending.fileName, savedAt: Date.now() });
-      setSaved({ dataset: built.dataset, health: report, columns: pending.table.headers, fileName: pending.fileName, savedAt: Date.now() });
-    }
-    start(finalize('own', built.dataset, report, pending.table.headers));
   }
 
   function useSaved() {
     if (!saved) return;
-    savedHealth.current = saved.health;
-    start(finalize('own', saved.dataset, saved.health, saved.columns));
+    start(finalize('own', saved.dataset, saved.health, saved.columns), true);
   }
 
+  /** 清掉這台電腦上所有紀錄：存起來的資料、欄位對應記憶、進度與心得 */
   async function forgetSaved() {
-    await clearData();
+    await clearAllLocal();
     setSaved(null);
+    setPersisted(false);
+    setProgress({ completed: [], notes: {}, claims: {} });
   }
 
   function reset() {
@@ -229,14 +266,13 @@ export default function Workshop() {
 
   function complete(sg: SegmentDef) {
     if (!progress.completed.includes(sg.id)) setProgress({ ...progress, completed: [...progress.completed, sg.id] });
-    if (idx < visible.length - 1) setIdx(idx + 1);
+    if (idx < visible.length - 1) go(idx + 1);
     window.scrollTo({ top: 0 });
   }
 
   function restartProgress() {
-    clearProgress();
-    setProgress({ completed: [], notes: {}, claims: {} });
-    setIdx(0);
+    setProgress({ fingerprint: progress.fingerprint, completed: [], notes: {}, claims: {} });
+    go(0);
     setRevealed({});
   }
 
@@ -263,7 +299,7 @@ export default function Workshop() {
 
       <div className="rounded-xl px-4 py-3 mb-6 border text-sm no-print" style={card}>
         🔒 <b>全部在你的瀏覽器裡計算，資料不會上傳到任何地方。</b>
-        <span style={muted}> 不信的話，打開瀏覽器開發者工具的 Network 分頁：你只會看到下載資料的請求，沒有任何上傳。</span>
+        <span style={muted}> 不信的話，打開瀏覽器開發者工具的 Network 分頁，再選你的檔案：你會看到沒有任何請求帶著你的資料出去（只有網頁本身的程式與字型下載）。</span>
       </div>
 
       {!loaded && !pending && (
@@ -303,7 +339,7 @@ export default function Workshop() {
             </span>
           </div>
 
-          <Stepper visible={visible} idx={idx} setIdx={setIdx} isOpen={isOpen} completed={progress.completed} ceiling={ceiling} />
+          <Stepper visible={visible} idx={idx} setIdx={go} isOpen={isOpen} completed={progress.completed} ceiling={ceiling} />
 
           <Slide
             key={visible[idx].id}
@@ -316,8 +352,9 @@ export default function Workshop() {
             revealed={!!revealed[visible[idx].id] || progress.completed.includes(visible[idx].id)}
             setRevealed={() => setRevealed({ ...revealed, [visible[idx].id]: true })}
             onComplete={() => complete(visible[idx])}
-            onPrev={() => setIdx(idx - 1)}
-            onNext={() => isOpen(idx + 1) && setIdx(idx + 1)}
+            onPrev={() => go(idx - 1)}
+            onNext={() => isOpen(idx + 1) && go(idx + 1)}
+            autoFocus={navCount > 0}
             canNext={idx < visible.length - 1 && isOpen(idx + 1)}
           />
         </>
@@ -363,7 +400,7 @@ function Start(props: {
           </p>
           <div className="mt-3 flex gap-2">
             <button onClick={props.onUseSaved} className="px-4 py-2 rounded-lg text-sm font-medium text-white" style={{ backgroundColor: 'var(--color-brand)' }}>繼續使用</button>
-            <button onClick={props.onForgetSaved} className="px-4 py-2 rounded-lg text-sm" style={{ backgroundColor: 'var(--color-surface-lighter)' }}>清除這份資料</button>
+            <button onClick={props.onForgetSaved} className="px-4 py-2 rounded-lg text-sm" style={{ backgroundColor: 'var(--color-surface-lighter)' }}>清除這台電腦上的所有紀錄</button>
           </div>
         </div>
       )}
@@ -425,7 +462,7 @@ function Start(props: {
           </div>
         )}
         {props.codeError && <p className="text-xs mt-2" style={{ color: '#f59e0b' }} role="alert">{props.codeError}</p>}
-        <p className="text-xs mt-3" style={muted}>這個密碼只是用來對應課堂進度，資料本身是公開的教學資料。</p>
+        <p className="text-xs mt-3" style={muted}>這個密碼只是讓你取得示範資料；資料本身是公開的教學資料，並不是受保護的內容。</p>
       </div>
 
       {props.error && (
@@ -440,7 +477,7 @@ function MappingStep(props: { pending: Pending; setMapping: (m: Mapping) => void
   const { table, mapping, fileName, notice } = props.pending;
   const fields = Object.keys(FIELD_LABEL) as FieldKey[];
   const ordered = [...REQUIRED_FIELDS, ...fields.filter((f) => !REQUIRED_FIELDS.includes(f))];
-  const missing = REQUIRED_FIELDS.filter((f) => mapping[f].col < 0);
+  const missing = requiredMissing(mapping);
   const samples = (ci: number, f: FieldKey) => {
     const out: string[] = [];
     for (const r of table.rows) {
@@ -491,7 +528,7 @@ function MappingStep(props: { pending: Pending; setMapping: (m: Mapping) => void
       </div>
       {missing.length > 0 && (
         <p className="text-sm rounded-xl px-4 py-3 border" style={{ ...card, borderColor: '#f59e0b' }} role="alert">
-          還缺必要欄位：{missing.map((f) => FIELD_LABEL[f]).join('、')}。沒有它們就無法分析；如果你的檔案真的沒有，請先補上再重新上傳。
+          還缺必要欄位：{missing.map((f) => (f === 'amount' ? '金額（或同時有「數量」與「單價」）' : FIELD_LABEL[f])).join('、')}。沒有它們就無法分析；如果你的檔案真的沒有，請先補上再重新上傳。
         </p>
       )}
       {props.error && <p className="text-sm rounded-xl px-4 py-3 border" style={{ ...card, borderColor: '#f59e0b' }} role="alert">{props.error}</p>}
@@ -508,7 +545,7 @@ function MappingStep(props: { pending: Pending; setMapping: (m: Mapping) => void
 function Stepper(props: { visible: SegmentDef[]; idx: number; setIdx: (i: number) => void; isOpen: (i: number) => boolean; completed: string[]; ceiling: number }) {
   return (
     <div className="mb-5 no-print">
-      <div className="flex items-center gap-2 flex-wrap" role="tablist" aria-label="工作坊進度">
+      <nav className="flex items-center gap-2 flex-wrap" aria-label="工作坊進度">
         {props.visible.map((sg, i) => {
           const done = props.completed.includes(sg.id);
           const open = props.isOpen(i);
@@ -516,9 +553,8 @@ function Stepper(props: { visible: SegmentDef[]; idx: number; setIdx: (i: number
           return (
             <button
               key={sg.id}
-              role="tab"
-              aria-selected={cur}
-              aria-label={`第 ${sg.day} 天 段 ${sg.order}：${sg.title}${open ? '' : '（尚未解鎖）'}`}
+              aria-current={cur ? 'step' : undefined}
+              aria-label={`第 ${sg.day} 天 段 ${sg.order}：${sg.title}${open ? '' : '（尚未解鎖）'}${done ? '（已完成）' : ''}`}
               disabled={!open}
               onClick={() => props.setIdx(i)}
               className="w-9 h-9 rounded-full text-sm font-semibold border transition-colors disabled:opacity-40"
@@ -535,7 +571,7 @@ function Stepper(props: { visible: SegmentDef[]; idx: number; setIdx: (i: number
         <span className="text-xs ml-2" style={muted}>
           {days.filter((d) => d.day <= props.ceiling && !d.open).length > 0 || props.ceiling >= 2 ? '第 2 至 4 天陸續開放' : ''}
         </span>
-      </div>
+      </nav>
     </div>
   );
 }
@@ -554,8 +590,14 @@ function Slide(props: {
   onPrev: () => void;
   onNext: () => void;
   canNext: boolean;
+  autoFocus: boolean;
 }) {
   const { seg, loaded, progress } = props;
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  // 翻到下一段後，把焦點移到新的標題，讀螢幕的人才知道內容換了
+  useEffect(() => {
+    if (props.autoFocus) headingRef.current?.focus();
+  }, [props.autoFocus, seg.id]);
   const dayDef = days.find((d) => d.day === seg.day)!;
   const done = progress.completed.includes(seg.id);
   const exp = useMemo(() => expectedValues(loaded.dataset, loaded.touch, loaded.rfm), [loaded]);
@@ -567,7 +609,8 @@ function Slide(props: {
       <p className="text-xs font-semibold no-print" style={{ color: 'var(--color-brand-light)' }}>
         第 {seg.day} 天 · {dayDef.title} · 段 {props.index + 1}/{props.count}
       </p>
-      <h2 id="seg-title" className="text-xl font-extrabold mt-1 no-print">{seg.title}</h2>
+      <h2 id="seg-title" ref={headingRef} tabIndex={-1} className="text-xl font-extrabold mt-1 no-print outline-none">{seg.title}</h2>
+      <p className="sr-only" aria-live="polite">第 {props.index + 1} 段，共 {props.count} 段：{seg.title}</p>
       <p className="text-sm mt-1 no-print" style={secondary}>{seg.goal}</p>
 
       {!isReport && (
@@ -639,6 +682,7 @@ function Slide(props: {
             <Step n="✎" title="我學到">
               <label className="block text-sm">
                 {seg.takeawayLabel}
+                <span className="block text-xs" style={muted}>會出現在你的報告裡，請不要寫顧客個人資料。</span>
                 <textarea
                   value={progress.notes[seg.id] ?? ''}
                   onChange={(e) => props.setProgress({ ...progress, notes: { ...progress.notes, [seg.id]: e.target.value } })}
@@ -721,7 +765,7 @@ function ReportBox({ loaded, progress }: { loaded: Loaded; progress: Progress })
             {copied === 'ok' ? '已複製 ✓' : copied === 'fail' ? '複製失敗，請手動選取' : '複製摘要文字'}
           </button>
         </div>
-        <p className="text-xs mt-2" style={muted}>列印時選「另存為 PDF」。報告裡不會出現任何顧客個人資料。</p>
+        <p className="text-xs mt-2" style={muted}>列印時選「另存為 PDF」。報告只有彙總數字、欄位名稱與你自己寫的心得；心得會原樣出現，請不要寫入顧客個人資料。</p>
       </div>
       <ReportView r={model} />
     </div>

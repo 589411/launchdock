@@ -92,11 +92,11 @@ export function buildDatasetFromSunlitSchema(
 
 /**
  * 比 parseDay 寬鬆，給上傳資料用：
- * ISO／斜線、2025年1月2日、2025.01.02、20250102、民國年 114/01/02（3 位數年份 +1911）、
- * Excel 序號（整數或含小數，約 2000 至 2100 年）。解析不出來回傳 null。
+ * ISO／斜線、2025年1月2日、2025.01.02、20250102、民國年 114/01/02 與 1140102（3 位數年份 +1911）、
+ * Excel 序號（整數或含小數，約 2000 至 2100 年）。全形數字會先轉成半形。解析不出來回傳 null。
  */
 export function parseFlexibleDay(raw: string): Day | null {
-  const s = raw.trim();
+  const s = raw.normalize('NFKC').trim();
   if (!s) return null;
   const iso = parseDay(s);
   if (iso !== null) return iso;
@@ -106,7 +106,8 @@ export function parseFlexibleDay(raw: string): Day | null {
   if (m) return parseDay(`${m[1]}-${m[2]}-${m[3]}`);
   m = s.match(/^(\d{4})(\d{2})(\d{2})$/);
   if (m) return parseDay(`${m[1]}-${m[2]}-${m[3]}`);
-  m = s.match(/^(\d{3})[/.\-年](\d{1,2})[/.\-月](\d{1,2})/);
+  // 民國年：114/01/02、114-01-02、114年1月2日，以及緊湊的 1140102
+  m = s.match(/^(\d{3})[/.\-年](\d{1,2})[/.\-月](\d{1,2})/) ?? s.match(/^(\d{3})(\d{2})(\d{2})$/);
   if (m && Number(m[1]) >= 100 && Number(m[1]) <= 199) return parseDay(`${Number(m[1]) + 1911}-${m[2]}-${m[3]}`);
   if (/^\d{5}(\.\d+)?$/.test(s)) {
     const serial = Math.floor(Number(s));
@@ -116,9 +117,9 @@ export function parseFlexibleDay(raw: string): Day | null {
   return null;
 }
 
-/** 金額：去掉 NT$、$、元、千分位、空白；(100) 與 −100 視為負數；解析不出來回傳 null */
+/** 金額：全形轉半形；去掉 NT$、$、元、千分位、空白；(100) 與 −100 視為負數；解析不出來回傳 null */
 export function parseAmount(raw: string): number | null {
-  let s = raw.trim().replace(/NT\$|\$|元|塊|,|\s/gi, '').replace(/[−–]/g, '-');
+  let s = raw.normalize('NFKC').trim().replace(/NT\$|\$|元|塊|,|\s/gi, '').replace(/[−–]/g, '-');
   if (!s) return null;
   let neg = false;
   const paren = s.match(/^\((.*)\)$/);
@@ -137,6 +138,10 @@ export interface OwnBuildStats {
   droppedAmount: number;
   /** 以「一列＝一個商品明細」解讀（單號重複出現） */
   lineLevel: boolean;
+  /** 金額欄是「整張單的總額」並重複寫在每一列：每張單只取一次，不加總 */
+  orderLevelAmount: boolean;
+  /** 金額由「數量 × 單價」推算 */
+  derivedAmount: boolean;
 }
 
 export interface OwnBuildResult extends BuildResult {
@@ -144,20 +149,34 @@ export interface OwnBuildResult extends BuildResult {
 }
 
 const TRUTHY_RETURN = new Set(['true', '1', 'y', 'yes', '是', '退貨', '退', 'r', 'refund', 'returned']);
+const ORDER_TOTAL_HEADER = /(實收|訂單金額|訂單總額|總額|總計|合計|應收|total(?!.*line)|order.?amount)/i;
+const LINE_AMOUNT_HEADER = /(小計|明細|line|subtotal|item)/i;
+const FIELD_NAME_ZH: Record<string, string> = { customerId: '顧客編號', date: '交易日期', amount: '金額（或「數量」加「單價」）' };
 
 /**
  * 以欄位對應把上傳的一張扁平表轉成 Dataset。
- * - 單號欄有重複（一張單多列）→ 以「明細」解讀：每張單的金額＝各列加總，日期與顧客取第一列。
+ * - 單號欄有重複（一張單多列）→ 以「明細」解讀。交易的身分是「單號＋日期＋門市」：
+ *   許多 POS 的流水號每天重新編號，只看單號會把不同天的單併在一起；退貨單沿用原發票號碼、但日期不同，也會自然分開。
+ * - 一張單的金額＝各列加總；但如果金額欄是「整張單的總額」並重複寫在每一列（欄名像「實收金額」，
+ *   且多列的單幾乎都是同一個數字），就只取一次，不加總。
  * - 沒有單號或單號不重複 → 一列就是一筆交易。
  * - 退貨：有「是否退貨」旗標或金額為負；旗標為退貨但金額是正數時轉成負數（才能從消費金額扣除）。
+ *   一張單裡只有部分明細退貨，整張單仍算一次購買（淨額為負、或每一列都是退貨才算退貨單）。
+ * - 沒有金額欄但有「數量」與「單價」→ 金額＝數量 × 單價。
  * - 日期或金額解析不出來的列會略過並計數（健檢會告訴使用者）。
  */
 export function buildDatasetFromMapping(t: Table, m: Mapping): OwnBuildResult {
-  const need = (['customerId', 'date', 'amount'] as const).filter((f) => m[f].col < 0);
-  if (need.length) return { dataset: null, error: `缺少必要欄位：${need.join('、')}` };
   const cCust = m.customerId.col;
   const cDate = m.date.col;
   const cAmt = m.amount.col;
+  const cQty = m.quantity.col;
+  const cUnit = m.unitPrice.col;
+  const derive = cAmt < 0 && cQty >= 0 && cUnit >= 0;
+  const need: string[] = [];
+  if (cCust < 0) need.push('customerId');
+  if (cDate < 0) need.push('date');
+  if (cAmt < 0 && !derive) need.push('amount');
+  if (need.length) return { dataset: null, error: `缺少必要欄位：${need.map((k) => FIELD_NAME_ZH[k]).join('、')}` };
   const cOrd = m.orderId.col;
   const cProd = m.product.col >= 0 ? m.product.col : m.category.col;
   const cRet = m.isReturn.col;
@@ -166,7 +185,7 @@ export function buildDatasetFromMapping(t: Table, m: Mapping): OwnBuildResult {
 
   let droppedDate = 0;
   let droppedAmount = 0;
-  type Row = { order: string; cust: string | null; day: number; amt: number; ret: boolean; sku: string; store?: string; channel?: string };
+  type Row = { key: string; order: string; cust: string | null; day: number; amt: number; ret: boolean; sku: string; store?: string; channel?: string };
   const rows: Row[] = [];
   t.rows.forEach((r, i) => {
     const day = parseFlexibleDay(r[cDate] ?? '');
@@ -174,7 +193,14 @@ export function buildDatasetFromMapping(t: Table, m: Mapping): OwnBuildResult {
       droppedDate++;
       return;
     }
-    let amt = parseAmount(r[cAmt] ?? '');
+    let amt: number | null;
+    if (derive) {
+      const q = parseAmount(r[cQty] ?? '');
+      const u = parseAmount(r[cUnit] ?? '');
+      amt = q === null || u === null ? null : q * u;
+    } else {
+      amt = parseAmount(r[cAmt] ?? '');
+    }
     if (amt === null) {
       droppedAmount++;
       return;
@@ -183,50 +209,73 @@ export function buildDatasetFromMapping(t: Table, m: Mapping): OwnBuildResult {
     const ret = flagged || amt < 0;
     if (flagged && amt > 0) amt = -amt;
     const cust = (r[cCust] ?? '').trim();
+    const store = cStore >= 0 ? (r[cStore] ?? '').trim() || undefined : undefined;
+    const order = cOrd >= 0 && (r[cOrd] ?? '').trim() !== '' ? r[cOrd].trim() : `row${i + 1}`;
     rows.push({
-      order: cOrd >= 0 && (r[cOrd] ?? '').trim() !== '' ? r[cOrd].trim() : `row${i + 1}`,
+      key: cOrd >= 0 ? `${order}|${day}|${store ?? ''}` : `row${i + 1}`,
+      order,
       cust: cust === '' ? null : cust,
       day,
       amt,
       ret,
       sku: cProd >= 0 ? (r[cProd] ?? '').trim() : '',
-      store: cStore >= 0 ? (r[cStore] ?? '').trim() || undefined : undefined,
+      store,
       channel: cChan >= 0 ? (r[cChan] ?? '').trim() || undefined : undefined,
     });
   });
   if (rows.length === 0) return { dataset: null, error: '沒有任何一列同時有可辨識的日期與金額' };
 
-  const counts = new Map<string, number>();
-  for (const r of rows) counts.set(r.order, (counts.get(r.order) ?? 0) + 1);
-  const lineLevel = cOrd >= 0 && counts.size < rows.length * 0.98;
+  const groups = new Map<string, Row[]>();
+  for (const r of rows) {
+    const g = groups.get(r.key);
+    if (g) g.push(r);
+    else groups.set(r.key, [r]);
+  }
+  const lineLevel = cOrd >= 0 && groups.size < rows.length * 0.98;
+
+  // 金額欄是不是「整張單的總額，重複寫在每一列」
+  let orderLevelAmount = false;
+  if (lineLevel && cAmt >= 0 && ORDER_TOTAL_HEADER.test(t.headers[cAmt] ?? '') && !LINE_AMOUNT_HEADER.test(t.headers[cAmt] ?? '')) {
+    let multi = 0;
+    let same = 0;
+    for (const g of groups.values()) {
+      if (g.length < 2) continue;
+      multi++;
+      if (g.every((x) => x.amt === g[0].amt)) same++;
+    }
+    orderLevelAmount = multi > 0 && same / multi >= 0.8;
+  }
 
   let txns: Txn[];
   let lines: Line[] | undefined;
   if (lineLevel) {
-    const byOrder = new Map<string, Txn>();
     lines = [];
-    for (const r of rows) {
-      let tx = byOrder.get(r.order);
-      if (!tx) {
-        tx = { id: r.order, customerId: r.cust, day: r.day, amount: 0, isReturn: false, store: r.store, channel: r.channel };
-        byOrder.set(r.order, tx);
-      }
-      if (tx.customerId === null && r.cust) tx.customerId = r.cust;
-      tx.amount += r.amt;
-      if (r.ret) tx.isReturn = true;
-      lines.push({ txnId: r.order, sku: r.sku, qty: 1, amount: r.amt });
+    txns = [];
+    for (const g of groups.values()) {
+      const first = g[0];
+      const cust = g.find((x) => x.cust !== null)?.cust ?? null;
+      const amount = orderLevelAmount ? first.amt : g.reduce((s, x) => s + x.amt, 0);
+      const retLines = g.filter((x) => x.ret).length;
+      txns.push({
+        id: `${first.order}@${first.day}`,
+        customerId: cust,
+        day: first.day,
+        amount,
+        isReturn: amount < 0 || retLines === g.length,
+        store: first.store,
+        channel: first.channel,
+      });
+      for (const x of g) lines.push({ txnId: `${first.order}@${first.day}`, sku: x.sku, qty: 1, amount: x.amt });
     }
-    txns = [...byOrder.values()];
-    // 整張單加總後為負，也視為退貨
-    for (const tx of txns) if (tx.amount < 0) tx.isReturn = true;
   } else {
     txns = rows.map((r) => ({ id: r.order, customerId: r.cust, day: r.day, amount: r.amt, isReturn: r.ret, store: r.store, channel: r.channel }));
     if (cProd >= 0) lines = rows.map((r) => ({ txnId: r.order, sku: r.sku, qty: 1, amount: r.amt }));
   }
 
-  const maxDay = txns.reduce((mx, x) => (x.day > mx ? x.day : mx), -Infinity);
+  let maxDay = -Infinity;
+  for (const x of txns) if (x.day > maxDay) maxDay = x.day;
   return {
     dataset: { source: 'own', asOf: maxDay + 1, txns, lines },
-    stats: { rows: t.rows.length, droppedDate, droppedAmount, lineLevel },
+    stats: { rows: t.rows.length, droppedDate, droppedAmount, lineLevel, orderLevelAmount, derivedAmount: derive },
   };
 }

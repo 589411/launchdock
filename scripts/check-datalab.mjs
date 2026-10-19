@@ -1,11 +1,11 @@
 // 顧客數據戰情室自檢：以獨立（Python）算出的參考答案比對 TypeScript 實作，加上合成邊界案例。
 // 用法：npx tsx scripts/check-datalab.mjs   （日晴資料路徑可用環境變數 SUNLIT_DATA 指定）
 import { readFileSync, existsSync } from 'node:fs';
-import { parseCSV, toTable, decodeBuffer } from '../src/lib/datalab/csv.ts';
+import { parseCSV, toTable, decodeBuffer, tableFromRows, looksLikeDataHeaders } from '../src/lib/datalab/csv.ts';
 import { parseDay, buildDatasetFromSunlitSchema } from '../src/lib/datalab/normalize.ts';
 import { runHealth } from '../src/lib/datalab/health.ts';
 import { runRfm, repurchaseIntervals, classify, customerStats } from '../src/lib/datalab/rfm.ts';
-import { detectMapping, mappingToNames, mappingFromNames, templateCsv, missingFor } from '../src/lib/datalab/detect.ts';
+import { detectMapping, mappingToNames, mappingFromNames, templateCsv, missingFor, requiredMissing } from '../src/lib/datalab/detect.ts';
 import { buildDatasetFromMapping, parseFlexibleDay, parseAmount } from '../src/lib/datalab/normalize.ts';
 import { runHealthOwn } from '../src/lib/datalab/health-own.ts';
 import { runTouchpoints } from '../src/lib/datalab/touchpoints.ts';
@@ -118,9 +118,9 @@ for (let r = 1; r <= 5; r++) for (let fm = 1; fm <= 5; fm++) for (const f of [1,
   const b = buildDatasetFromMapping(t, m);
   eq('範本：單號重複 → 明細解讀', b.stats.lineLevel, true);
   eq('範本：交易數（A0001 兩列合成一筆）', b.dataset.txns.length, 4);
-  eq('範本：A0001 金額加總', b.dataset.txns.find((x) => x.id === 'A0001').amount, 1000);
-  eq('範本：退貨（旗標且金額負）', b.dataset.txns.find((x) => x.id === 'A0004').isReturn, true);
-  eq('範本：匿名交易', b.dataset.txns.find((x) => x.id === 'A0003').customerId, null);
+  eq('範本：A0001 金額加總', b.dataset.txns.find((x) => x.id.startsWith('A0001')).amount, 1000);
+  eq('範本：退貨（旗標且金額負）', b.dataset.txns.find((x) => x.id.startsWith('A0004')).isReturn, true);
+  eq('範本：匿名交易', b.dataset.txns.find((x) => x.id.startsWith('A0003')).customerId, null);
   eq('範本：缺欄位判斷', missingFor(m, ['customerId', 'date', 'amount', 'product']).length, 0);
   const h = runHealthOwn(t, m, b, b.dataset);
   eq('自有健檢：匿名 1、退貨 1', [h.facts.anonymous, h.facts.returns], [1, 1]);
@@ -154,6 +154,60 @@ for (let r = 1; r <= 5; r++) for (let fm = 1; fm <= 5; fm++) for (const f of [1,
   eq('單價 vs 總額', t2.headers[detectMapping(t2).amount.col], 'total_amount');
   eq('顧客名稱不是顧客編號', t2 && detectMapping(toTable('n', 'customer_name,date,amount\nA,2025-01-02,5\n')).customerId.col, -1);
 }
+// ── 審查找到的真實資料問題（POS 欄名、訂單合併、規模）──────────────
+{
+  const build = (csv) => { const t = toTable('t', csv); const m = detectMapping(t); return { t, m, b: buildDatasetFromMapping(t, m) }; };
+  // 出生日期不是交易日期、會員等級不是會員編號
+  const a = build('會員卡號,出生日期,銷貨日期,會員等級,實收金額\nM1,1990-01-01,2025-03-01,金卡,500\nM2,1985-05-05,2025-03-02,銀卡,300\nM3,1999-09-09,2025-03-03,金卡,200\nM1,1990-01-01,2025-03-04,金卡,100\n');
+  eq('POS 欄名：交易日期選銷貨日期', a.t.headers[a.m.date.col], '銷貨日期');
+  eq('POS 欄名：顧客編號選會員卡號', a.t.headers[a.m.customerId.col], '會員卡號');
+  // 金額欄是整張單的總額、重複在每一列：只取一次
+  const o = build('單號,銷貨日期,會員卡號,商品名稱,實收金額\nA1,2025-03-01,M1,乳液,430\nA1,2025-03-01,M1,洗面乳,430\nA2,2025-03-02,M2,乳液,300\nA2,2025-03-02,M2,面膜,300\n');
+  eq('整張單總額重複：不加總', [o.b.stats.orderLevelAmount, o.b.dataset.txns.map((x) => x.amount)], [true, [430, 300]]);
+  // 金額欄是明細小計：要加總
+  const l = build('單號,銷貨日期,會員卡號,商品名稱,小計\nA1,2025-03-01,M1,乳液,430\nA1,2025-03-01,M1,洗面乳,300\nA2,2025-03-02,M2,乳液,300\n');
+  eq('明細小計：加總', [l.b.stats.orderLevelAmount, l.b.dataset.txns.map((x) => x.amount)], [false, [730, 300]]);
+  // 流水號每天重編：不同天的同號單不能併在一起
+  const d = build('流水號,銷貨日期,會員卡號,金額\n1,2025-03-01,M1,100\n1,2025-03-01,M1,50\n1,2025-03-02,M2,200\n1,2025-03-02,M2,10\n2,2025-03-02,M3,70\n');
+  eq('流水號每天重編：以單號＋日期區分', d.b.dataset.txns.length, 3);
+  // 同一張單裡部分明細退貨：整張單仍是一次購買
+  const pr = build('單號,銷貨日期,會員卡號,金額,退貨\nA1,2025-03-01,M1,300,否\nA1,2025-03-01,M1,100,是\nA2,2025-03-02,M2,50,否\n');
+  eq('部分退貨：整張單不當成退貨', pr.b.dataset.txns.find((x) => x.id.startsWith('A1')).isReturn, false);
+  eq('部分退貨：淨額', pr.b.dataset.txns.find((x) => x.id.startsWith('A1')).amount, 200);
+  // 退貨單沿用原發票號碼、日期不同：不會把「單號重複」誤判成明細模式
+  const rr = build('發票,銷貨日期,會員卡號,金額\nI1,2025-03-01,M1,100\nI2,2025-03-01,M2,200\nI3,2025-03-02,M3,300\nI4,2025-03-02,M4,400\nI1,2025-03-09,M1,-100\n');
+  eq('退貨沿用發票號碼：仍逐筆解讀', rr.b.stats.lineLevel, false);
+  // 全形、民國 7 碼
+  eq('全形日期與民國七碼', [parseFlexibleDay('２０２５-０１-０２'), parseFlexibleDay('1140102')], [parseFlexibleDay('2025-01-02'), parseFlexibleDay('2025-01-02')]);
+  eq('全形金額', parseAmount('１，２００'), 1200);
+  // 只有數量與單價：金額由乘積推出
+  const q = build('會員卡號,銷貨日期,數量,單價\nM1,2025-03-01,2,150\nM2,2025-03-02,1,80\n');
+  eq('數量×單價', [requiredMissing(q.m), q.b.dataset.txns.map((x) => x.amount), q.b.stats.derivedAmount], [[], [300, 80], true]);
+  eq('缺金額的錯誤訊息用白話', buildDatasetFromMapping(toTable('t', '會員卡號,銷貨日期\nM1,2025-03-01\n'), detectMapping(toTable('t', '會員卡號,銷貨日期\nM1,2025-03-01\n'))).error, '缺少必要欄位：金額（或「數量」加「單價」）');
+  // 日期位數不同不算格式不一致；同一人大小寫不同要警告
+  const sh = build('單號,銷貨日期,會員卡號,金額\nA1,2025/1/2,M1,10\nA2,2025/12/25,m1,20\nA3,2025/3/9,M2,30\n');
+  const hh = runHealthOwn(sh.t, sh.m, sh.b, sh.b.dataset);
+  eq('位數不同不報日期不一致', hh.report.checks.some((c) => c.id === 'own_date_format'), false);
+  eq('編號大小寫碰撞', hh.facts.id_case_collisions, 1);
+  // 沒有標題列的檔案：第一列是資料
+  eq('偵測沒有標題列', [looksLikeDataHeaders(['王小明', '0912-345-678', '2025-01-02']), looksLikeDataHeaders(['a@b.com', 'x']), looksLikeDataHeaders(['單號', '日期', '金額'])], [true, true, false]);
+  // 標題列在第三列的 POS 匯出
+  const tf = tableFromRows('x', [['某某公司銷售明細', '', ''], ['', '', ''], ['單號', '日期', '金額'], ['A1', '2025-01-01', '100']]);
+  eq('跳過標題列', [tf.headers, tf.rows.length], [['單號', '日期', '金額'], 1]);
+  // UTF-16（Excel「Unicode 文字」）
+  const u16 = new Uint8Array([0xff, 0xfe, ...[...'a,b\n1,2\n'].flatMap((c) => [c.charCodeAt(0), 0])]);
+  eq('UTF-16 CSV', parseCSV(decodeBuffer(u16.buffer)), [['a', 'b'], ['1', '2']]);
+  // 13 萬列不崩潰（Math.min(...arr) 在這個規模會爆堆疊）
+  const big = ['單號,銷貨日期,會員卡號,金額'];
+  for (let i = 0; i < 130000; i++) big.push(`B${i},2025-0${1 + (i % 9)}-1${i % 9},M${i % 5000},${10 + (i % 90)}`);
+  const t0 = performance.now();
+  const bg = build(big.join('\n'));
+  const hb = runHealthOwn(bg.t, bg.m, bg.b, bg.b.dataset);
+  const rb = buildReport({ sourceLabel: 'x', dataset: bg.b.dataset, health: hb.report, rfm: runRfm(bg.b.dataset), touch: runTouchpoints(bg.b.dataset), notes: {}, claims: {} }, { showAmounts: false });
+  if (!rb.range.from) errors.push('13 萬列報告沒有日期範圍');
+  if (performance.now() - t0 > 8000) errors.push(`13 萬列太慢：${Math.round(performance.now() - t0)} ms`);
+}
+
 // 接觸點（日晴完整資料）與工作坊核對數字
 
 // ── 工作坊：核對與報告 ──────────────────────────────────────────

@@ -16,6 +16,8 @@ const STORE = 'kv';
 const DATA_KEY = 'own-dataset';
 
 export interface Progress {
+  /** 這份進度屬於哪一份資料（來源＋筆數＋基準日＋金額合計）；換資料時進度與核對數字要一併重來 */
+  fingerprint?: string;
   completed: string[];
   /** segmentId → 學員寫的心得 */
   notes: Record<string, string>;
@@ -31,6 +33,7 @@ export function loadProgress(): Progress {
     if (!raw) return emptyProgress();
     const p = JSON.parse(raw);
     return {
+      fingerprint: typeof p.fingerprint === 'string' ? p.fingerprint : undefined,
       completed: Array.isArray(p.completed) ? p.completed : [],
       notes: p.notes && typeof p.notes === 'object' ? p.notes : {},
       claims: p.claims && typeof p.claims === 'object' ? p.claims : {},
@@ -106,15 +109,32 @@ export async function saveData(d: SavedData): Promise<boolean> {
       tx.objectStore(STORE).put(d, DATA_KEY);
       tx.oncomplete = () => res();
       tx.onerror = () => rej(tx.error);
+      tx.onabort = () => rej(tx.error);
     });
     db.close();
+    try {
+      localStorage.setItem(SAVED_FLAG, '1');
+    } catch {
+      /* ignore */
+    }
     return true;
   } catch {
     return false;
   }
 }
 
+/** 是否曾經存過資料：沒存過就不要去開 IndexedDB（開啟本身會在使用者的瀏覽器裡建立一個空資料庫） */
+const SAVED_FLAG = 'datalab-has-saved-data';
+export function hasSavedFlag(): boolean {
+  try {
+    return localStorage.getItem(SAVED_FLAG) === '1';
+  } catch {
+    return false;
+  }
+}
+
 export async function loadData(): Promise<SavedData | null> {
+  if (!hasSavedFlag()) return null;
   try {
     const db = await openDb();
     const v = await new Promise<SavedData | null>((res, rej) => {
@@ -129,7 +149,20 @@ export async function loadData(): Promise<SavedData | null> {
   }
 }
 
+/** 清掉這台電腦上所有紀錄：存起來的資料、欄位對應記憶、進度與心得 */
+export async function clearAllLocal(): Promise<void> {
+  await clearData();
+  clearProgress();
+  try {
+    localStorage.removeItem(MAPPING_KEY);
+    localStorage.removeItem(SAVED_FLAG);
+  } catch {
+    /* ignore */
+  }
+}
+
 export async function clearData(): Promise<void> {
+  if (!hasSavedFlag()) return;
   try {
     const db = await openDb();
     await new Promise<void>((res, rej) => {

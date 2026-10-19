@@ -47,6 +47,6 @@ export function compareClaim(spec: CheckSpec, raw: string | undefined, expected:
 
 export function formatExpected(spec: CheckSpec, v: number): string {
   if (spec.unit === 'percent') return `${v.toFixed(1)}%`;
-  if (spec.unit === 'days') return `${Math.round(v * 10) / 10} 天`;
+  if (spec.unit === 'days') return v === 0 ? '沒有人買過兩次（無法計算）' : `${Math.round(v * 10) / 10} 天`;
   return `${Math.round(v).toLocaleString()}`;
 }

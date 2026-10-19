@@ -4,6 +4,7 @@ import { dayToString } from './normalize';
 import { segmentInfo } from '../../data/datalab';
 import { segments as workshopSegments, type CheckSpec } from '../../data/workshop';
 import { compareClaim, expectedValues, formatExpected } from './check';
+import { minMax } from './stats';
 
 export interface ReportInput {
   sourceLabel: string;
@@ -37,8 +38,7 @@ const pct = (x: number) => `${(x * 100).toFixed(1)}%`;
 export function buildReport(inp: ReportInput, opts: { showAmounts: boolean }): ReportModel {
   const { dataset, health, rfm, touch } = inp;
   const days = dataset.txns.map((t) => t.day);
-  const from = Math.min(...days);
-  const to = Math.max(...days);
+  const { min: from, max: to } = minMax(days);
   const segs = rfm.segments.filter((s) => s.count > 0);
   const top = [...segs].sort((a, b) => b.revenueShare - a.revenueShare)[0];
   const biggest = [...segs].sort((a, b) => b.countShare - a.countShare)[0];

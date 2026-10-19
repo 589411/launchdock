@@ -35,6 +35,8 @@ function slices(ds: Dataset, pick: (t: Dataset['txns'][number]) => string | unde
     if (t.customerId !== null) a.member++;
     m.set(k, a);
   }
+  // 一個欄位如果有幾十種以上的值，它多半不是「門市／通路」（可能對應錯欄位），不拿來畫圖
+  if (m.size > 60) return [];
   return [...m.entries()]
     .map(([label, a]) => ({ label, count: a.count, revenue: a.revenue, memberShare: a.count ? a.member / a.count : 0 }))
     .sort((x, y) => y.revenue - x.revenue);

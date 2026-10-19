@@ -9,10 +9,19 @@ export interface XlsxSheet {
 const ERR_INVALID = '這個檔案不是有效的 Excel（.xlsx）檔';
 const ERR_XLS = '這是舊版 .xls 格式，請用 Excel 另存成 .xlsx 或 CSV';
 const ERR_PASSWORD = '這個檔案有密碼保護，請先在 Excel 取消密碼再上傳';
-const KNOWN_ERRORS = new Set([ERR_INVALID, ERR_XLS, ERR_PASSWORD]);
+const ERR_TOO_BIG = '這個 Excel 檔太大（解壓縮後的內容超過上限）。請先另存成較小的檔案，或只保留需要的欄位與日期範圍';
+const KNOWN_ERRORS = new Set([ERR_INVALID, ERR_XLS, ERR_PASSWORD, ERR_TOO_BIG]);
 
 const DEFAULT_MAX_ROWS = 300000;
-const MAX_COLS = 16384; // Excel 欄數上限（XFD），避免惡意座標撐爆記憶體
+// 資料表很少超過 500 欄；上限放低，避免一個遠在 XFD1 的雜訊儲存格把每一列都撐成 16384 格
+const MAX_COLS = 512;
+// 防炸彈：單一項目、全部項目解壓縮後的大小上限，與壓縮倍率上限（正常的試算表約 10 倍以內）
+const MAX_ENTRY_BYTES = 100 * 1024 * 1024;
+const MAX_TOTAL_BYTES = 300 * 1024 * 1024;
+const MAX_RATIO = 200;
+const MAX_SHEETS = 50;
+// 列數 × 欄數的總格數上限，避免稀疏座標把記憶體撐爆
+const MAX_CELLS = 25_000_000;
 
 // ───────────────────────── ZIP ─────────────────────────
 
@@ -81,13 +90,39 @@ function readZipDirectory(b: Uint8Array): Map<string, ZipEntry> {
   return entries;
 }
 
-async function inflateRaw(data: Uint8Array): Promise<Uint8Array> {
-  const stream = new Blob([data as BlobPart]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
-  return new Uint8Array(await new Response(stream).arrayBuffer());
+/** 解壓縮預算：一次 readXlsx 呼叫內所有項目共用 */
+interface Budget {
+  total: number;
+}
+
+/** 分段讀取解壓縮串流，超過上限就中止（不先把整個結果放進記憶體） */
+async function inflateRaw(data: Uint8Array, budget: Budget): Promise<Uint8Array> {
+  const limit = Math.min(MAX_ENTRY_BYTES, data.length * MAX_RATIO + 1024 * 1024, MAX_TOTAL_BYTES - budget.total);
+  const reader = new Blob([data as BlobPart]).stream().pipeThrough(new DecompressionStream('deflate-raw')).getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    size += value.length;
+    if (size > limit) {
+      await reader.cancel().catch(() => undefined);
+      throw new Error(ERR_TOO_BIG);
+    }
+    chunks.push(value);
+  }
+  budget.total += size;
+  const out = new Uint8Array(size);
+  let o = 0;
+  for (const c of chunks) {
+    out.set(c, o);
+    o += c.length;
+  }
+  return out;
 }
 
 /** 讀一個 ZIP 項目：以「中央目錄」的大小為準；本機標頭只用來算資料起點（它的 extra 長度可能與中央目錄不同） */
-async function readEntry(b: Uint8Array, e: ZipEntry): Promise<Uint8Array> {
+async function readEntry(b: Uint8Array, e: ZipEntry, budget: Budget): Promise<Uint8Array> {
   if (e.flags & 1) throw new Error(ERR_PASSWORD); // 傳統 ZIP 加密
   const dv = new DataView(b.buffer, b.byteOffset, b.byteLength);
   const o = e.localOffset;
@@ -96,8 +131,12 @@ async function readEntry(b: Uint8Array, e: ZipEntry): Promise<Uint8Array> {
   const end = start + e.compSize;
   if (end > b.length) throw new Error(ERR_INVALID);
   const raw = b.subarray(start, end);
-  if (e.method === 0) return raw;
-  if (e.method === 8) return inflateRaw(raw);
+  if (e.method === 0) {
+    budget.total += raw.length;
+    if (budget.total > MAX_TOTAL_BYTES) throw new Error(ERR_TOO_BIG);
+    return raw;
+  }
+  if (e.method === 8) return inflateRaw(raw, budget);
   throw new Error(ERR_INVALID);
 }
 
@@ -139,20 +178,65 @@ function parseAttrs(s: string): Record<string, string> {
  * 不 trim：xml:space="preserve" 與否都原樣保留前後空白。
  */
 function collectText(xml: string): string {
-  if (xml.indexOf('<rPh') !== -1) xml = xml.replace(/<rPh\b[\s\S]*?<\/rPh>/g, '');
+  if (xml.indexOf('<rPh') !== -1) xml = stripElements(xml, 'rPh');
   const parts: string[] = [];
-  for (const m of xml.matchAll(/<t\b[^>]*?(?:\/>|>([\s\S]*?)<\/t>)/g)) {
-    if (m[1]) parts.push(m[1]);
-  }
+  scanElements(xml, 't', (inner) => {
+    if (inner) parts.push(inner);
+  });
   return decodeText(parts.join('')); // 一次 join，避免逐段字串相加
 }
 
 function parseSharedStrings(xml: string): string[] {
   const out: string[] = [];
-  for (const m of xml.matchAll(/<si\b[^>]*?(?:\/>|>([\s\S]*?)<\/si>)/g)) {
-    out.push(m[1] ? collectText(m[1]) : '');
-  }
+  scanElements(xml, 'si', (inner) => out.push(inner ? collectText(inner) : ''));
   return out;
+}
+
+/**
+ * 依序掃描 <tag …>內容</tag> 與自閉合 <tag/>，對每個元素呼叫 fn（自閉合時內容為 ''）。
+ * 用 indexOf 而不是 [\s\S]*? 的正規式：沒有結束標籤時直接停止，不會每個開頭標籤都掃到檔尾而變成平方時間。
+ */
+function scanElements(xml: string, tag: string, fn: (inner: string) => void): void {
+  const open = '<' + tag;
+  const close = '</' + tag + '>';
+  let pos = 0;
+  for (;;) {
+    const i = xml.indexOf(open, pos);
+    if (i === -1) return;
+    const after = xml.charCodeAt(i + open.length);
+    // 後面必須是空白、> 或 /，否則是別的標籤（例如 <t 與 <tr、<si 與 <sizes）
+    if (!(after === 62 || after === 47 || after === 32 || after === 9 || after === 10 || after === 13)) {
+      pos = i + open.length;
+      continue;
+    }
+    const gt = xml.indexOf('>', i + open.length);
+    if (gt === -1) return;
+    if (xml.charCodeAt(gt - 1) === 47) {
+      fn('');
+      pos = gt + 1;
+      continue;
+    }
+    const end = xml.indexOf(close, gt + 1);
+    if (end === -1) return;
+    fn(xml.slice(gt + 1, end));
+    pos = end + close.length;
+  }
+}
+
+/** 移除所有 <tag>…</tag>（用於剔除注音 rPh）；沒有結束標籤就保留剩餘內容 */
+function stripElements(xml: string, tag: string): string {
+  const open = '<' + tag;
+  const close = '</' + tag + '>';
+  let out = '';
+  let pos = 0;
+  for (;;) {
+    const i = xml.indexOf(open, pos);
+    if (i === -1) return out + xml.slice(pos);
+    const end = xml.indexOf(close, i);
+    if (end === -1) return out + xml.slice(pos);
+    out += xml.slice(pos, i);
+    pos = end + close.length;
+  }
 }
 
 // ───────────────────────── 樣式與日期 ─────────────────────────
@@ -350,6 +434,7 @@ function parseSheet(xml: string, ctx: SheetContext, maxRows: number): string[][]
 
   // 補洞並補齊成矩形（寬度為整張表實際用到的最大欄）
   const width = maxCol + 1;
+  if (rows.length * width > MAX_CELLS) throw new Error(ERR_TOO_BIG);
   for (const row of rows) {
     for (let i = 0; i < width; i++) if (row[i] === undefined) row[i] = '';
   }
@@ -382,9 +467,10 @@ export async function readXlsx(buf: ArrayBuffer, opts?: { maxRows?: number }): P
     if (entries.has('EncryptedPackage') || entries.has('EncryptionInfo')) throw new Error(ERR_PASSWORD);
 
     const utf8 = new TextDecoder('utf-8');
+    const budget: Budget = { total: 0 };
     const readText = async (path: string): Promise<string | null> => {
       const e = entries.get(path);
-      return e ? utf8.decode(await readEntry(bytes, e)) : null;
+      return e ? utf8.decode(await readEntry(bytes, e, budget)) : null;
     };
 
     const wbXml = await readText('xl/workbook.xml');
@@ -410,16 +496,24 @@ export async function readXlsx(buf: ArrayBuffer, opts?: { maxRows?: number }): P
     };
 
     const result: XlsxSheet[] = [];
+    const parsed = new Map<string, string[][]>(); // 多個 <sheet> 指向同一個檔案時只解壓、解析一次
     for (const m of wbXml.matchAll(/<sheet\b([^>]*?)\/?>/g)) {
+      if (result.length >= MAX_SHEETS) break;
       const a = parseAttrs(m[1]);
       // r:id 的命名空間前綴理論上可以不叫 r，所以找任何 *:id
       const idKey = Object.keys(a).find((k) => k === 'id' || k.endsWith(':id'));
       const rel = idKey ? rels.get(a[idKey]) : undefined;
       if (!rel) throw new Error(ERR_INVALID);
       if (rel.type && !rel.type.endsWith('/worksheet')) continue; // 圖表工作表等沒有儲存格資料
-      const xml = await readText(resolveTarget(rel.target));
-      if (xml === null) throw new Error(ERR_INVALID);
-      result.push({ name: a.name ?? '', rows: parseSheet(xml, ctx, maxRows) });
+      const path = resolveTarget(rel.target);
+      let rows = parsed.get(path);
+      if (rows === undefined) {
+        const xml = await readText(path);
+        if (xml === null) throw new Error(ERR_INVALID);
+        rows = parseSheet(xml, ctx, maxRows);
+        parsed.set(path, rows);
+      }
+      result.push({ name: a.name ?? '', rows });
     }
     return result;
   } catch (e) {

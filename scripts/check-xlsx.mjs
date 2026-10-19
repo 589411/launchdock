@@ -217,6 +217,55 @@ await test('沒有 r 屬性的列與格依序排列', async () => {
   deepStrictEqual((await readXlsx(buf))[0].rows, [['1', '2'], ['3', '']]);
 });
 
+// ── 3b. 惡意／異常檔案：不能讓分頁凍結或崩潰（審查找到的三種情況） ─────────
+const MSG_TOO_BIG = '這個 Excel 檔太大（解壓縮後的內容超過上限）。請先另存成較小的檔案，或只保留需要的欄位與日期範圍';
+await test('防護：遠方的雜訊儲存格（XFD1＋第 20 萬列）不會把每列撐成上萬格', async () => {
+  const buf = await makeZip([
+    { name: 'xl/workbook.xml', data: workbookXml },
+    { name: 'xl/_rels/workbook.xml.rels', data: relsXml },
+    { name: 'xl/worksheets/sheet1.xml', data: sheetXml('<row r="1"><c r="A1" t="inlineStr"><is><t>a</t></is></c><c r="XFD1" t="inlineStr"><is><t>stray</t></is></c></row><row r="200000"><c r="A200000" t="inlineStr"><is><t>z</t></is></c></row>') },
+  ]);
+  const t0 = performance.now();
+  const rows = (await readXlsx(buf))[0].rows;
+  const ms = performance.now() - t0;
+  if (ms > 3000) throw new Error(`太慢：${ms} ms`);
+  strictEqual(rows[0].length, 1); // XFD1 超過欄數上限，被忽略
+  strictEqual(rows[199999][0], 'z');
+});
+await test('防護：解壓縮炸彈（極小檔案解開後上百 MB）會被擋下，不先吃光記憶體', async () => {
+  const big = workbookXml + ' '.repeat(150 * 1024 * 1024);
+  const raw = await deflateRaw(enc.encode(big));
+  const buf = await makeZip([{ name: 'xl/workbook.xml', method: 8, raw, size: big.length, data: '' }]);
+  if (buf.byteLength > 2 * 1024 * 1024) throw new Error('測試檔不夠小，炸彈失去意義：' + buf.byteLength);
+  await rejectsWith(buf, MSG_TOO_BIG);
+});
+await test('防護：同一個工作表被列 3000 次，只解析一次且有數量上限', async () => {
+  const sheets = Array.from({ length: 3000 }, (_, i) => `<sheet name="S${i}" sheetId="${i + 1}" r:id="rId1"/>`).join('');
+  const buf = await makeZip([
+    { name: 'xl/workbook.xml', data: `<workbook ${NS} ${RNS}><sheets>${sheets}</sheets></workbook>` },
+    { name: 'xl/_rels/workbook.xml.rels', data: relsXml },
+    { name: 'xl/worksheets/sheet1.xml', data: sheetXml('<row r="1"><c r="A1" t="inlineStr"><is><t>ok</t></is></c></row>') },
+  ]);
+  const t0 = performance.now();
+  const out = await readXlsx(buf);
+  const ms = performance.now() - t0;
+  if (ms > 2000) throw new Error(`太慢：${ms} ms`);
+  strictEqual(out.length, 50);
+  strictEqual(out[0].rows[0][0], 'ok');
+});
+await test('防護：沒有結束標籤的 sharedStrings（6 萬個 <si>）不會變成平方時間', async () => {
+  const buf = await makeZip([
+    { name: 'xl/workbook.xml', data: workbookXml },
+    { name: 'xl/_rels/workbook.xml.rels', data: relsXml },
+    { name: 'xl/sharedStrings.xml', data: `<sst ${NS}>` + '<si><t>x'.repeat(60000) + '</sst>' },
+    { name: 'xl/worksheets/sheet1.xml', data: sheetXml('<row r="1"><c r="A1" t="s"><v>0</v></c></row>') },
+  ]);
+  const t0 = performance.now();
+  await readXlsx(buf);
+  const ms = performance.now() - t0;
+  if (ms > 1500) throw new Error(`太慢：${ms} ms`);
+});
+
 // ── 4. 效能：5 萬列 × 8 欄 ─────────────────────────────────────
 let perfMs = -1;
 await test('效能：50,000 列 × 8 欄 < 3000 ms（且內容正確）', async () => {

@@ -4,7 +4,7 @@ import type { OwnBuildResult } from './normalize';
 import { dayToString, parseFlexibleDay } from './normalize';
 import { DECISIONS } from './health';
 import { scanPii } from './pii';
-import { quantile } from './stats';
+import { minMax, quantile } from './stats';
 
 const pct = (n: number, total: number) => (total ? `${((n / total) * 100).toFixed(1)}%` : '0%');
 
@@ -29,9 +29,12 @@ export function runHealthOwn(
     table: table.name,
     level: 'info',
     title: `${total.toLocaleString()} 列、${table.headers.length} 欄；辨識出 ${dataset.txns.length.toLocaleString()} 筆交易`,
-    detail: stats.lineLevel
-      ? '你的檔案裡同一個單號出現在多列，所以我把「一列」當成一個商品明細，把同一單號的金額加總成一筆交易。'
-      : '每一列視為一筆交易。',
+    detail:
+      (stats.lineLevel
+        ? '你的檔案裡同一個單號出現在多列，所以我把「一列」當成一個商品明細；同一個單號、同一天、同一門市的列合成一筆交易。'
+        : '每一列視為一筆交易。') +
+      (stats.orderLevelAmount ? '金額欄看起來是整張單的總額（重複寫在每一列），所以每張單只取一次，沒有加總。' : '') +
+      (stats.derivedAmount ? '你的檔案沒有金額欄，金額是用「數量 × 單價」算出來的。' : ''),
     count: dataset.txns.length,
     total,
   });
@@ -67,12 +70,15 @@ export function runHealthOwn(
   const cDate = mapping.date.col;
   for (const r of table.rows) {
     const v = (r[cDate] ?? '').trim();
-    patterns.set(v.replace(/\d/g, '9'), (patterns.get(v.replace(/\d/g, '9')) ?? 0) + 1);
+    // 連續數字視為同一種樣式：2025/1/2 與 2025/12/25 只是位數不同，不是不同格式
+    const shape = v.replace(/\d+/g, '9');
+    patterns.set(shape, (patterns.get(shape) ?? 0) + 1);
     const d = parseFlexibleDay(v);
     if (d !== null) days.push(d);
   }
   if (patterns.size > 1) {
-    const majority = Math.max(...patterns.values());
+    let majority = 0;
+    for (const n of patterns.values()) if (n > majority) majority = n;
     checks.push({
       id: 'own_date_format',
       table: table.name,
@@ -84,8 +90,7 @@ export function runHealthOwn(
     });
   }
   if (days.length) {
-    const min = Math.min(...days);
-    const max = Math.max(...days);
+    const { min, max } = minMax(days);
     const far = max - quantile(days, 0.99) > 366;
     checks.push({
       id: 'own_date_range',
@@ -134,6 +139,38 @@ export function runHealthOwn(
       count: anon,
       total: dataset.txns.length,
     });
+  }
+  // 顧客編號的品質：大小寫不同被當成兩個人、Excel 把前導 0 吃掉
+  const ids = new Set<string>();
+  for (const t of dataset.txns) if (t.customerId !== null) ids.add(t.customerId);
+  const byLower = new Map<string, number>();
+  for (const id of ids) byLower.set(id.toLowerCase(), (byLower.get(id.toLowerCase()) ?? 0) + 1);
+  let caseCollisions = 0;
+  for (const n of byLower.values()) if (n > 1) caseCollisions++;
+  facts.id_case_collisions = caseCollisions;
+  if (caseCollisions > 0) {
+    checks.push({
+      id: 'own_id_case',
+      table: table.name,
+      level: 'warn',
+      title: `有 ${caseCollisions} 組顧客編號只差在大小寫（例如 M1 與 m1）`,
+      detail: '它們現在會被當成不同的顧客，分群與回購會被拆散。請回到來源把編號統一成同一種寫法。',
+      count: caseCollisions,
+    });
+  }
+  const idList = [...ids];
+  const numericIds = idList.filter((v) => /^\d+$/.test(v));
+  if (idList.length >= 10 && numericIds.length >= idList.length * 0.8) {
+    const lengths = new Set(numericIds.map((v) => v.length));
+    if (lengths.size > 1) {
+      checks.push({
+        id: 'own_id_zeros',
+        table: table.name,
+        level: 'info',
+        title: '顧客編號是純數字，而且長度不一',
+        detail: '如果編號原本有前導 0（例如 007），用 Excel 開啟後 0 會被去掉，同一個人可能被當成不同編號、或不同人被併在一起。請確認來源裡的編號格式。',
+      });
+    }
   }
   const returns = dataset.txns.filter((t) => t.isReturn).length;
   facts.returns = returns;

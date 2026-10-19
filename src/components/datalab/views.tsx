@@ -52,7 +52,7 @@ export function HealthView({ health }: { health: HealthReport }) {
               {c.detail.replace(/\*\*/g, '')}
             </p>
             <p className="text-xs mt-1" style={muted}>
-              來自 {c.table}.csv
+              來自 {/^[a-z_]+$/.test(c.table) ? `${c.table}.csv` : c.table}
             </p>
           </div>
         ))}

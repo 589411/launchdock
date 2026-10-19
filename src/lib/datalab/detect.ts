@@ -11,7 +11,9 @@ export type FieldKey =
   | 'category'
   | 'isReturn'
   | 'store'
-  | 'channel';
+  | 'channel'
+  | 'quantity'
+  | 'unitPrice';
 
 export const REQUIRED_FIELDS: FieldKey[] = ['customerId', 'date', 'amount'];
 
@@ -25,6 +27,8 @@ export const FIELD_LABEL: Record<FieldKey, string> = {
   isReturn: '是否退貨',
   store: '門市／店別',
   channel: '通路',
+  quantity: '數量',
+  unitPrice: '單價',
 };
 
 export type Confidence = 'sure' | 'guess' | 'none';
@@ -48,6 +52,17 @@ const SYNONYMS: Record<FieldKey, string[]> = {
   isReturn: ['isreturn', 'return', 'refund', 'isrefund', '是否退貨', '退貨註記', '退貨', '退款'],
   store: ['store', 'storeid', 'storename', 'shop', 'branch', 'outlet', '門市', '店別', '分店', '店名', '門店', '店號', '店代號'],
   channel: ['channel', 'saleschannel', '通路', '渠道', '管道', '銷售通路'],
+  quantity: ['qty', 'quantity', 'count', '數量', '件數', '銷售數量'],
+  unitPrice: ['unitprice', 'price', 'sellprice', '單價', '售價', '銷售單價'],
+};
+
+/**
+ * 欄名帶有這些字眼就不是該欄位：出生日期不是交易日期、會員等級不是會員編號。
+ * （兩者的欄名都含有「日期」「會員」，光比對同義詞會得到同分甚至誤判成「確定」。）
+ */
+const NEGATIVE: Partial<Record<FieldKey, RegExp>> = {
+  date: /(出生|生日|birth|到期|expire|expiry|有效|建立|created|註冊|加入|入會|更新|updated)/i,
+  customerId: /(等級|級別|level|tier|類型|type|狀態|status|日期|date|名稱|姓名|name|數量|count)/i,
 };
 
 /** 看起來是「名稱／姓名」的欄位不該被當成編號欄 */
@@ -65,6 +80,7 @@ function headerScore(field: FieldKey, header: string): number {
     if (h === syn) best = Math.max(best, 100);
     else if (syn.length >= 2 && h.includes(syn)) best = Math.max(best, 70);
   }
+  if (NEGATIVE[field]?.test(header)) best = Math.min(best, 10);
   if ((field === 'customerId' || field === 'orderId') && NAME_LIKE.test(header) && !/(id|編號|代號|號)/i.test(header)) best = Math.min(best, 20);
   if (field === 'amount' && NOT_AMOUNT.test(header) && !/(total|line|amount|金額|小計)/i.test(header)) best = Math.min(best, 20);
   return best;
@@ -177,6 +193,17 @@ export function mappingFromNames(t: Table, names: Partial<Record<FieldKey, strin
     }
   }
   return hit > 0 ? res : null;
+}
+
+/**
+ * 必要欄位還缺哪些。金額可以由「數量 × 單價」推出來，所以兩者都有時就不算缺金額。
+ */
+export function requiredMissing(m: Mapping): FieldKey[] {
+  const out: FieldKey[] = [];
+  if (m.customerId.col < 0) out.push('customerId');
+  if (m.date.col < 0) out.push('date');
+  if (m.amount.col < 0 && !(m.quantity.col >= 0 && m.unitPrice.col >= 0)) out.push('amount');
+  return out;
 }
 
 /** 各分析模組需要哪些欄位；缺欄位時要用白話說明為什麼停用 */

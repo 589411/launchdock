@@ -2,7 +2,7 @@ import type { HealthCheck, HealthReport, Table } from './types';
 import { colIndex } from './csv';
 import { scanPii } from './pii';
 import { parseDay } from './normalize';
-import { quantile } from './stats';
+import { minMax, quantile } from './stats';
 
 const pct = (n: number, total: number) => (total ? `${((n / total) * 100).toFixed(1)}%` : '0%');
 
@@ -90,7 +90,8 @@ export function runHealth(tables: Record<string, Table>): { report: HealthReport
         if (d === null) unparseable++;
         else days.push(d);
       }
-      const majority = Math.max(...patterns.values());
+      let majority = 0;
+      for (const n of patterns.values()) if (n > majority) majority = n;
       const minority = total - majority;
       facts.txn_minority_date_format = minority;
       checks.push({
@@ -117,8 +118,7 @@ export function runHealth(tables: Record<string, Table>): { report: HealthReport
         });
       }
       if (days.length > 0) {
-        const min = Math.min(...days);
-        const max = Math.max(...days);
+        const { min, max } = minMax(days);
         const p99 = quantile(days, 0.99);
         const far = max - p99 > 366;
         checks.push({
