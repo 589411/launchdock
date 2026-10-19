@@ -9,6 +9,9 @@ import { detectMapping, mappingToNames, mappingFromNames, templateCsv, missingFo
 import { diagnoseStructure, buildDiagnosticReport, parseHeaderBlocks } from '../src/lib/datalab/diagnose.ts';
 import { SYNONYMS } from '../src/data/import-profiles.ts';
 import { buildDatasetFromMapping, parseFlexibleDay, parseAmount } from '../src/lib/datalab/normalize.ts';
+import { runPersonalize, actionableRule } from '../src/lib/datalab/personalize.ts';
+import { runTriggers } from '../src/lib/datalab/triggers.ts';
+import { runExperiment, requiredPerGroup } from '../src/lib/datalab/experiment.ts';
 import { runHealthOwn } from '../src/lib/datalab/health-own.ts';
 import { runTouchpoints } from '../src/lib/datalab/touchpoints.ts';
 import { runRepurchase } from '../src/lib/datalab/repurchase.ts';
@@ -252,9 +255,10 @@ for (let r = 1; r <= 5; r++) for (let fm = 1; fm <= 5; fm++) for (const f of [1,
   eq('核對：百分比容許 ±1 個百分點', [compareClaim(spec('percent'), '63%', 63.01).status, compareClaim(spec('percent'), '60%', 63.01).status], ['match', 'off']);
   eq('核對：百分比寫成小數', parseClaim('0.63', 'percent', 63.0), 63);
   eq('核對：天數 ±1', [compareClaim(spec('days'), '49 天', 48).status, compareClaim(spec('days'), '60', 48).status], ['match', 'off']);
+  eq('核對：百分點 ±1', [compareClaim(spec('pp'), '14.6 個百分點', 14.6).status, compareClaim(spec('pp'), '20', 14.6).status], ['match', 'off']);
   eq('核對：空白或無數字', [compareClaim(spec('count'), '', 5).status, compareClaim(spec('count'), '不知道', 5).status], ['empty', 'empty']);
   // 每個工作坊段落的檢核項都必須有對應的標準答案
-  const okKeys = new Set(['memberShare', 'anonymousCount', 'returnCount', 'onceOnly', 'top20Share', 'medianInterval', 'repeatRate', 'repeatRevenueShare', 'topPairCount']);
+  const okKeys = new Set(['memberShare', 'anonymousCount', 'returnCount', 'onceOnly', 'top20Share', 'medianInterval', 'repeatRate', 'repeatRevenueShare', 'topPairCount', 'ruleAudience', 'triggerUnique', 'baselineRate', 'selectionGap', 'sampleSize']);
   for (const seg of workshopSegments) for (const c of seg.checks ?? []) if (!okKeys.has(c.id)) errors.push(`段落 ${seg.id} 的檢核項 ${c.id} 沒有標準答案`);
   eq('提示詞欄位代入', fillPrompt('欄位：{columns}', ['a', 'b']), '欄位：a、b');
   const ids = workshopSegments.map((s) => s.id);
@@ -363,6 +367,29 @@ if (!existsSync(`${dir}/transactions.csv`)) {
       const norm = (t) => ({ a: t.a, b: t.b, n_ab: t.nAB, n_a: t.nA, n_b: t.nB, lift: r4(t.lift), conf_a_to_b: r4(t.confAB), conf_b_to_a: r4(t.confBA) });
       eq('商品關聯：前 5 名（依 lift）', bk.topByLift.slice(0, 5).map(norm), d2.top5_by_lift);
       eq('商品關聯：前 5 名（依次數）', bk.topByCount.slice(0, 5).map(norm), d2.top5_by_count);
+      // ── 第 3、4 天：個人化、觸發、對照組（對照獨立 Python 參考答案）──
+      const d34 = JSON.parse(readFileSync(new URL('./fixtures/datalab-expected-day34.json', import.meta.url), 'utf8'));
+      const pz = runPersonalize(dataset, res, bk);
+      eq('個人化：推薦規則（方向、次數、lift、信心、對象）', pz.rules.map((r) => ({ from: r.from, to: r.to, nAB: r.nAB, lift: Math.round(r.lift * 1e6) / 1e6, conf: Math.round(r.conf * 1e6) / 1e6, audience: r.audience })),
+        d34.personalize.rules.map((r) => ({ from: r.from, to: r.to, nAB: r.nAB, lift: Math.round(r.lift * 1e6) / 1e6, conf: Math.round(r.conf * 1e6) / 1e6, audience: r.audience })));
+      eq('個人化：夠多人可推的第一條規則對象', actionableRule(pz)?.audience, d34.personalize.rules.find((r) => r.audience >= 30)?.audience);
+      for (const b of pz.briefs) {
+        const ref = d34.personalize.segments[b.key];
+        if (!ref) continue;
+        eq(`個人化：${b.key} 人數／medianR／偏好品類`, [b.count, b.medianR, b.topCats.map((c) => [c.category, c.customers, Math.round(c.index * 1e6) / 1e6])], [ref.count, ref.medianR, ref.topCats.map((c) => [c.category, c.customers, Math.round(c.index * 1e6) / 1e6])]);
+      }
+      const tg = runTriggers(dataset, res);
+      eq('觸發：母體人數', tg.eligible, d34.triggers.eligible);
+      for (const st of tg.stats) eq(`觸發：${st.def.id} 符合／去重`, [st.matched, st.unique], [d34.triggers[st.def.id].matched, d34.triggers[st.def.id].unique]);
+      eq('觸發：去重總人數／重疊人數', [tg.uniqueTotal, tg.overlapPeople], [d34.triggers.uniqueTotal, d34.triggers.overlapPeople]);
+      eq('觸發：t2 符合人數＝第 2 天的 dueNow', tg.stats.find((x) => x.def.id === 't2').matched, rp.dueNow);
+      const ex = runExperiment(dataset, res);
+      const rr = (x, k = 10) => Math.round(x * 10 ** k) / 10 ** k;
+      eq('對照組：對象人數、基準回購率', [ex.eligible, rr(ex.baseline)], [d34.experiment.n, rr(d34.experiment.baseline)]);
+      eq('對照組：隨機分兩組（salt 0）', [ex.split.nA, ex.split.nB, rr(ex.split.rateA), rr(ex.split.rateB)], [d34.experiment.split.nA, d34.experiment.split.nB, rr(d34.experiment.split.rateA), rr(d34.experiment.split.rateB)]);
+      eq('對照組：200 次分組的 2.5%／97.5%／超過 1 個百分點比例', [rr(ex.noise.p025Pp, 6), rr(ex.noise.p975Pp, 6), rr(ex.noise.shareOver1pp, 6)], [rr(d34.experiment.noise.p025, 6), rr(d34.experiment.noise.p975, 6), rr(d34.experiment.noise.shareOver1pp, 6)]);
+      eq('對照組：挑高消費組 vs 其他人', [ex.selected.nTop, ex.selected.nRest, rr(ex.selected.rateTop), rr(ex.selected.rateRest)], [d34.experiment.selected.nTop, d34.experiment.selected.nRest, rr(d34.experiment.selected.rateTop), rr(d34.experiment.selected.rateRest)]);
+      eq('樣本數公式（10% → 12%）', requiredPerGroup(0.1, 0.12), d34.sampleSize.n ?? Math.ceil(d34.sampleSize));
     }
     const iv = repurchaseIntervals(dataset);
     eq('repurchase.n', iv.length, exp.repurchase.intervals_n);

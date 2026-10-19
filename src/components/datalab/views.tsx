@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { dayToString } from '../../lib/datalab/normalize';
-import { basketPrompt, healthPrompt, repurchasePrompt, rfmPrompt, segmentMessagePrompt, valuePrompt } from '../../lib/datalab/prompts';
+import { basketPrompt, campaignPlanPrompt, healthPrompt, recommendPrompt, repurchasePrompt, rfmPrompt, segmentBriefPrompt, segmentMessagePrompt, triggerSpecPrompt, valuePrompt } from '../../lib/datalab/prompts';
 import type { RepurchaseResult } from '../../lib/datalab/repurchase';
 import type { BasketResult } from '../../lib/datalab/basket';
 import type { ValueResult } from '../../lib/datalab/value';
+import { actionableRule, MIN_RULE_AUDIENCE, type PersonalizeResult } from '../../lib/datalab/personalize';
+import { TRIGGER_PRIORITY, type TriggerResult } from '../../lib/datalab/triggers';
+import { minDetectablePp, requiredPerGroup, SAMPLE_SIZE_CASE, Z_ALPHA, Z_POWER, type ExperimentResult } from '../../lib/datalab/experiment';
+import type { Risk } from '../../lib/datalab/risks';
 import { segmentInfo } from '../../data/datalab';
 import type { HealthReport, Level, PiiKind, RfmResult } from '../../lib/datalab/types';
 import type { TouchpointResult, Slice } from '../../lib/datalab/touchpoints';
@@ -460,6 +464,55 @@ export function ReportView({ r }: { r: ReportModel }) {
         </table>
       </section>
 
+      {r.day2 && (
+        <section>
+          <h3 className="font-semibold mb-2">行為與價值（第 2 天）</h3>
+          <ul className="text-sm space-y-1 list-disc pl-5">
+            <li>回購率 {pct(r.day2.repeatRate)}；回頭客貢獻 {pct(r.day2.repeatRevenueShare)} 的營收；回購間隔中位數 {r.day2.medianInterval} 天；已超過回購節奏的顧客 {r.day2.dueNow} 位</li>
+            <li>累計消費最高的 20% 顧客貢獻 {pct(r.day2.top20Share)} 的營收</li>
+            {r.day2.aovMedian !== undefined && <li>客單價中位數 {money(r.day2.aovMedian)}；每位顧客累計消費中位數 {money(r.day2.spendMedian ?? 0)}</li>}
+            {r.day2.topPairs.map((p) => <li key={p.a + p.b}>常一起買：{p.a} × {p.b}（{p.nAB} 次，lift {p.lift.toFixed(1)}）</li>)}
+            {r.day2.basketNote && <li>商品關聯：{r.day2.basketNote}</li>}
+          </ul>
+        </section>
+      )}
+
+      {r.day3 && (
+        <section>
+          <h3 className="font-semibold mb-2">個人化與自動化（第 3 天）</h3>
+          <table className="w-full text-sm">
+            <thead><tr className="text-left text-xs" style={muted}><th className="py-1">觸發</th><th className="py-1">符合</th><th className="py-1">去重後</th></tr></thead>
+            <tbody>
+              {r.day3.triggers.map((t) => (
+                <tr key={t.name} className="border-t" style={{ borderColor: 'var(--color-surface-lighter)' }}><td className="py-1">{t.name}</td><td className="py-1">{t.matched}</td><td className="py-1">{t.unique}</td></tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="text-sm mt-2">去重後共 {r.day3.uniqueTotal} 位顧客會收到至少一則訊息（{r.day3.overlapPeople} 位同時符合多條）。</p>
+          {r.day3.rule && <p className="text-sm mt-1">推薦規則：買了「{r.day3.rule.from}」推薦「{r.day3.rule.to}」（lift {r.day3.rule.lift.toFixed(1)}，可推薦 {r.day3.rule.audience} 人）。</p>}
+          {r.day3.ruleNote && <p className="text-sm mt-1">推薦規則：{r.day3.ruleNote}</p>}
+        </section>
+      )}
+
+      {r.day4 && (
+        <section>
+          <h3 className="font-semibold mb-2">驗證與風險（第 4 天）</h3>
+          {r.day4.available ? (
+            <ul className="text-sm space-y-1 list-disc pl-5">
+              <li>什麼都沒做時，30 天基準回購率 {pct(r.day4.baseline)}；隨機分兩組的差距 95% 落在 {r.day4.noiseLowPp.toFixed(1)} 至 {r.day4.noiseHighPp.toFixed(1)} 個百分點</li>
+              <li>挑累計消費前 20% 的顧客，什麼都沒做就比其他人高 {r.day4.selectionGapPp.toFixed(1)} 個百分點，所以活動一定要從同一批對象隨機留對照組</li>
+            </ul>
+          ) : (
+            <p className="text-sm">對照組模擬：{r.day4.reason}</p>
+          )}
+          {r.day4.risks.length > 0 && (
+            <ul className="text-sm space-y-1 list-disc pl-5 mt-2">
+              {r.day4.risks.map((x) => <li key={x.title}>【{SEVERITY[x.severity].label}】{x.title}</li>)}
+            </ul>
+          )}
+        </section>
+      )}
+
       {r.healthWarnings.length > 0 && (
         <section>
           <h3 className="font-semibold mb-2">資料要注意</h3>
@@ -652,6 +705,311 @@ export function Insight2View({ repurchase, basket, value }: { repurchase: Repurc
           <li><b>平均數誤導</b>：它說「每位顧客平均花…」，有沒有同時給中位數？營收集中時，平均會高估典型顧客。</li>
           <li><b>回購提醒的時間點</b>：它建議第幾天提醒？依據是中位數還是 P75？請它說明理由。</li>
           <li><b>沒有說怎麼驗證</b>：每個建議都該附上「怎麼知道有沒有效」（要有對照組），沒有的就要求補上。</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// ── 第 3 天：推薦規則 ─────────────────────────────────────────
+export function RecommendView({ p }: { p: PersonalizeResult }) {
+  if (!p.rules.length) {
+    return (
+      <p className="text-sm rounded-xl px-4 py-3 border" style={{ ...card, borderColor: '#f59e0b' }} role="status">
+        這一段目前沒有可用的推薦規則。{p.rulesNote}
+        <span className="block mt-2" style={muted}>你可以直接進入下一段；想練習這一段，可以回到開頭改用示範資料。</span>
+      </p>
+    );
+  }
+  const best = actionableRule(p);
+  return (
+    <div className="space-y-5">
+      <p className="text-sm" style={secondary}>
+        規則來自上一天的「常一起買」：只留 lift ≥ 1.2 的配對，方向取信心較高的那邊。「推薦對象」＝買過前者、但從來沒買過後者的顧客。
+      </p>
+      <div className="rounded-xl border overflow-x-auto" style={card}>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="text-left text-xs" style={muted}>
+              <th className="px-3 py-2">規則</th><th className="px-3 py-2">同時出現</th><th className="px-3 py-2">lift</th><th className="px-3 py-2">信心</th><th className="px-3 py-2">推薦對象</th>
+            </tr>
+          </thead>
+          <tbody>
+            {p.rules.map((r) => (
+              <tr key={r.from + r.to} className="border-t" style={{ borderColor: 'var(--color-surface-lighter)' }}>
+                <td className="px-3 py-2">買了「{r.from}」→ 推薦「{r.to}」</td>
+                <td className="px-3 py-2 whitespace-nowrap">{r.nAB.toLocaleString()} 次</td>
+                <td className="px-3 py-2">{r.lift.toFixed(2)}</td>
+                <td className="px-3 py-2">{(r.conf * 100).toFixed(0)}%</td>
+                <td className="px-3 py-2 whitespace-nowrap"><b>{r.audience.toLocaleString()}</b> 人{r.audience < MIN_RULE_AUDIENCE && <span style={muted}>（太少）</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="rounded-xl p-4 border text-sm space-y-1" style={card}>
+        <p><b>lift 最高的規則，常常已經沒人可以推薦。</b></p>
+        <p style={secondary}>
+          買了 A 的人本來就幾乎都買了 B（例如嬰兒用品成套買），推薦等於重複提醒。真正值得做的，是 lift 夠高、<b>而且還有足夠多的人沒買過 B</b> 的規則（這裡門檻是至少 {MIN_RULE_AUDIENCE} 人）。
+        </p>
+        {best ? (
+          <p>這份資料裡第一條夠多人可推的規則：買了「{best.from}」→ 推薦「{best.to}」，可推薦 <b>{best.audience}</b> 人。</p>
+        ) : (
+          <p>這份資料裡沒有任何一條規則的推薦對象達 {MIN_RULE_AUDIENCE} 人，不建議硬做。</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── 第 3 天：分群文案 ─────────────────────────────────────────
+export function SegCopyView({ p, rfm }: { p: PersonalizeResult; rfm: RfmResult }) {
+  return (
+    <div className="space-y-5">
+      <div className="grid sm:grid-cols-2 gap-3">
+        {p.briefs.filter((b) => b.count > 0).map((b) => (
+          <div key={b.key} className="rounded-xl p-4 border" style={card}>
+            <p className="font-semibold text-sm">{segmentInfo[b.key].name} · {b.count} 人{b.small && <span className="ml-2 text-xs" style={{ color: '#f59e0b' }}>人數少，僅供參考</span>}</p>
+            <p className="text-xs mt-1" style={muted}>{segmentInfo[b.key].blurb}</p>
+            <p className="text-sm mt-2">
+              <b>最偏愛：</b>
+              {b.topCats.length ? b.topCats.map((c) => `${c.category}（${c.index.toFixed(1)}×）`).join('、') : '沒有品類資料，或人數太少看不出來'}
+            </p>
+            <p className="text-sm mt-1" style={secondary}><b>第一件事：</b>{segmentInfo[b.key].action}</p>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs" style={muted}>偏好指數（×）＝這群買過該品類的比例 ÷ 全體買過的比例；1× 是跟大家一樣，2× 是兩倍偏愛。</p>
+      <PromptBox title="提示詞：為每個客群寫訊息（只含彙總數字）" text={p.hasCategories ? segmentBriefPrompt(p) : segmentMessagePrompt(rfm)} />
+      <div className="rounded-xl p-4 border" style={card}>
+        <h4 className="font-semibold text-sm mb-2">AI 寫完之後，逐條檢查</h4>
+        <ul className="text-sm space-y-1.5 list-disc pl-5" style={secondary}>
+          <li><b>製造焦慮的字眼</b>：「最後機會」「限時」「只剩」，刪掉。</li>
+          <li><b>偷偷加上的優惠</b>：你沒提供折扣，它卻寫「享 9 折」？承諾了就要兌現。</li>
+          <li><b>讓人覺得被監視</b>：「我們發現你買過…」「看你很久沒來了」，改成中性的說法。</li>
+          <li><b>推論敏感特徵</b>：不要從購買品類推論健康、年齡、家庭狀況，並寫進訊息裡。</li>
+          <li><b>分不同客群，是不是只有換稱呼</b>：各群的訊息如果幾乎一樣，那分群就沒有用到。</li>
+          <li><b>沒有衡量方式</b>：每則都該說明怎麼知道有沒有效，而且要有不聯絡的對照組。</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// ── 第 3 天：自動化觸發清單 ───────────────────────────────────
+export function TriggersView({ t }: { t: TriggerResult }) {
+  const max = Math.max(...t.stats.map((s) => s.matched), 1);
+  return (
+    <div className="space-y-5">
+      <div className="grid grid-cols-3 gap-3">
+        <Stat value={`${t.eligible.toLocaleString()}`} label="有購買紀錄的顧客" />
+        <Stat value={`${t.uniqueTotal.toLocaleString()}`} label="去重後會收到訊息的人" />
+        <Stat value={`${t.overlapPeople.toLocaleString()}`} label="同時符合多條的人" />
+      </div>
+      <p className="text-sm" style={secondary}>
+        同一個人可能同時符合好幾條。如果每條各自發送，他會在同一天收到好幾則——所以要排優先序：{TRIGGER_PRIORITY.map((id) => id.toUpperCase()).join(' → ')}，只留第一條。
+      </p>
+      <div className="space-y-3">
+        {t.stats.map((s) => (
+          <div key={s.def.id} className="rounded-xl p-4 border" style={card}>
+            <div className="flex justify-between gap-3 flex-wrap">
+              <p className="font-semibold text-sm">{s.def.id.toUpperCase()}　{s.def.name}</p>
+              <p className="text-sm" style={muted}>符合 {s.matched.toLocaleString()} 人 · 去重後 {s.unique.toLocaleString()} 人</p>
+            </div>
+            <div className="mt-2"><Bar value={s.matched / max} color="var(--color-brand)" label={s.def.name} /></div>
+            <dl className="text-sm mt-3 space-y-1" style={secondary}>
+              <div><dt className="inline font-semibold">條件：</dt><dd className="inline">{s.def.condition}</dd></div>
+              <div><dt className="inline font-semibold">做法：</dt><dd className="inline">{s.def.action}</dd></div>
+              <div><dt className="inline font-semibold">不要打擾：</dt><dd className="inline">{s.def.suppress}</dd></div>
+              <div><dt className="inline font-semibold">衡量：</dt><dd className="inline">{s.def.metric}</dd></div>
+            </dl>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs" style={muted}>
+        門檻（30、90、180 天、1.5 倍、前 20%）是起點，不是真理。上線後依你的回購節奏調整；調整之前，先看第 2 天的回購間隔分佈。
+      </p>
+    </div>
+  );
+}
+
+export function Insight3View({ p, t }: { p: PersonalizeResult; t: TriggerResult }) {
+  return (
+    <div className="space-y-5">
+      <p className="text-sm" style={secondary}>把下面的提示詞貼到你的 AI 工具（只含彙總數字，沒有個人資料），請它寫成規格。</p>
+      <PromptBox title="提示詞 A：推薦規則的規格" text={recommendPrompt(p)} />
+      <PromptBox title="提示詞 B：自動化觸發的規格" text={triggerSpecPrompt(t)} />
+      <div className="rounded-xl p-4 border" style={card}>
+        <h4 className="font-semibold text-sm mb-2">審查規格時，特別檢查</h4>
+        <ul className="text-sm space-y-1.5 list-disc pl-5" style={secondary}>
+          <li><b>沒有頻率上限</b>：每人每 N 天最多幾則？沒有的話，四條觸發疊起來會變成轟炸。</li>
+          <li><b>沒有排除條件</b>：剛退貨、剛客訴、要求停止接收的人，是不是被排除？</li>
+          <li><b>憑空多出來的數字</b>：它引用了你沒給的轉換率、預期營收？一律刪掉。</li>
+          <li><b>沒有同意與停發機制</b>：沒寫「只發給同意的人」「附取消方式」，要它補上。</li>
+          <li><b>沒有對照組</b>：每條觸發都該寫「留一組不聯絡的人」，否則上線後永遠不知道有沒有效。</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// ── 第 4 天：對照組模擬 ───────────────────────────────────────
+export function ExperimentView({ e }: { e: ExperimentResult }) {
+  if (!e.available) {
+    return (
+      <p className="text-sm rounded-xl px-4 py-3 border" style={{ ...card, borderColor: '#f59e0b' }} role="status">
+        這一段目前無法進行。{e.reason}
+        <span className="block mt-2" style={muted}>你可以直接進入下一段；想練習這一段，可以回到開頭改用示範資料。</span>
+      </p>
+    );
+  }
+  const s = e.split;
+  return (
+    <div className="space-y-5">
+      <p className="text-sm" style={secondary}>
+        我們假裝在資料最後 30 天之前辦了一場活動，對象是活動前買過的 {e.eligible.toLocaleString()} 位顧客——<b>但實際上什麼都沒做</b>。看 30 天後有買的比例：
+      </p>
+      <div className="grid grid-cols-3 gap-3">
+        <Stat value={pct(e.baseline)} label="基準回購率（30 天）" />
+        <Stat value={`${s.diffPp >= 0 ? '+' : ''}${s.diffPp.toFixed(1)} 點`} label={`隨機兩組的差距（A ${pct(s.rateA)} · B ${pct(s.rateB)}）`} />
+        <Stat value={`${e.selected.diffPp >= 0 ? '+' : ''}${e.selected.diffPp.toFixed(1)} 點`} label="高消費組比其他人高" />
+      </div>
+      <section className="rounded-xl p-4 border space-y-2" style={card}>
+        <h3 className="font-semibold">① 隨機分兩組，差距也不是 0</h3>
+        <p className="text-sm" style={secondary}>
+          這次分組：A 組 {s.nA} 人、B 組 {s.nB} 人，差 {s.diffPp.toFixed(1)} 個百分點（信賴區間 {s.ciLowPp.toFixed(1)} 至 {s.ciHighPp.toFixed(1)}）。
+          重複隨機分組 {e.noise.splits} 次，95% 的情況，差距落在 <b>{e.noise.p025Pp.toFixed(1)} 至 {e.noise.p975Pp.toFixed(1)}</b> 個百分點；
+          有 {Math.round(e.noise.shareOver1pp * 100)}% 的分法差距超過 1 個百分點。
+        </p>
+        <p className="text-sm"><b>意思是：</b>如果你的活動「看起來」讓回購率提高了 1 個百分點，在這個客群大小下，那完全可能只是運氣。</p>
+      </section>
+      <section className="rounded-xl p-4 border space-y-2" style={card}>
+        <h3 className="font-semibold">② 挑好客人，成效一定看起來很好</h3>
+        <p className="text-sm" style={secondary}>
+          累計消費前 20% 的 {e.selected.nTop} 位顧客，30 天回購率 {pct(e.selected.rateTop)}；其他 {e.selected.nRest} 位只有 {pct(e.selected.rateRest)}。
+          什麼都沒做，就差 {e.selected.diffPp.toFixed(1)} 個百分點。
+        </p>
+        <p className="text-sm"><b>意思是：</b>如果你只對好客人發優惠，再跟沒收到的人比較，你會以為優惠有神效。正確做法是：先決定對象，<b>再從同一批對象裡隨機留一組不聯絡</b>。</p>
+      </section>
+      <p className="text-xs" style={muted}>
+        分組方式：用顧客編號算出固定的雜湊值，再與第幾次分組混合後分成兩組，所以每次重新整理結果都一樣、也不需要真的寄出任何東西。
+      </p>
+    </div>
+  );
+}
+
+// ── 第 4 天：對照組規劃器 ─────────────────────────────────────
+export function HoldoutView({ e, t }: { e: ExperimentResult; t: TriggerResult }) {
+  const options = [
+    ...(e.available ? [{ id: 'all', label: '活動前買過的全部顧客', n: e.eligible }] : []),
+    ...t.stats.filter((s) => s.unique > 0).map((s) => ({ id: s.def.id, label: `${s.def.id.toUpperCase()} ${s.def.name}`, n: s.unique })),
+  ];
+  const [pick, setPick] = useState(options[0]?.id ?? '');
+  const [holdout, setHoldout] = useState(20);
+  const [baseline, setBaseline] = useState(e.available ? Math.round(e.baseline * 1000) / 10 : 10);
+  const [lift, setLift] = useState(2);
+  const chosen = options.find((o) => o.id === pick) ?? options[0];
+  const p1 = baseline / 100;
+  const p2 = (baseline + lift) / 100;
+  const need = requiredPerGroup(p1, p2);
+  const nC = chosen ? Math.floor((chosen.n * holdout) / 100) : 0;
+  const nT = chosen ? chosen.n - nC : 0;
+  const mde = chosen ? minDetectablePp(p1, chosen.n, holdout / 100) : NaN;
+  const enough = Number.isFinite(need) && nC >= need && nT >= need;
+  const sampleCase = requiredPerGroup(SAMPLE_SIZE_CASE.p1, SAMPLE_SIZE_CASE.p2);
+  const field = 'mt-1 w-full px-3 py-2 rounded-lg border text-sm';
+  const fieldStyle = { backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-surface-lighter)' } as const;
+  return (
+    <div className="space-y-5">
+      <section className="rounded-xl p-4 border text-sm space-y-2" style={card}>
+        <h3 className="font-semibold">公式</h3>
+        <p>每組至少 n ＝ (zα + zβ)² × (p1(1−p1) + p2(1−p2)) ÷ (p2 − p1)²，無條件進位。</p>
+        <p style={secondary}>zα＝{Z_ALPHA}（顯著水準 5%，雙尾）、zβ＝{Z_POWER}（檢定力 80%：真的有效時，有八成機會看得出來）。這是教學用的近似值。</p>
+        <p style={secondary}>固定情境：基準 {SAMPLE_SIZE_CASE.p1 * 100}%，想偵測提升到 {SAMPLE_SIZE_CASE.p2 * 100}%，每組要 <b>{sampleCase.toLocaleString()}</b> 人。想偵測的差距減半，需要的人數大約變成四倍。</p>
+      </section>
+
+      {options.length === 0 ? (
+        <p className="text-sm" style={muted}>目前沒有可用的對象人數（資料太少），規劃器無法使用。</p>
+      ) : (
+        <section className="rounded-xl p-4 border space-y-4" style={card}>
+          <h3 className="font-semibold">用你的資料規劃</h3>
+          <div className="grid sm:grid-cols-2 gap-3">
+            <label className="text-sm">對象
+              <select value={pick} onChange={(ev) => setPick(ev.target.value)} className={field} style={fieldStyle}>
+                {options.map((o) => <option key={o.id} value={o.id}>{o.label}（{o.n.toLocaleString()} 人）</option>)}
+              </select>
+            </label>
+            <label className="text-sm">對照組比例（不聯絡的人）
+              <select value={holdout} onChange={(ev) => setHoldout(Number(ev.target.value))} className={field} style={fieldStyle}>
+                {[10, 20, 30, 50].map((v) => <option key={v} value={v}>{v}%</option>)}
+              </select>
+            </label>
+            <label className="text-sm">基準回購率（%，預設是第 1 段算出的）
+              <input type="number" min={1} max={90} step={0.1} value={baseline} onChange={(ev) => setBaseline(Math.min(90, Math.max(1, Number(ev.target.value) || 1)))} className={field} style={fieldStyle} />
+            </label>
+            <label className="text-sm">你預期的提升（百分點）
+              <input type="number" min={0.5} max={30} step={0.5} value={lift} onChange={(ev) => setLift(Math.min(30, Math.max(0.5, Number(ev.target.value) || 0.5)))} className={field} style={fieldStyle} />
+            </label>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            <Stat value={`${nT.toLocaleString()} / ${nC.toLocaleString()}`} label="發送組 / 對照組（人）" />
+            <Stat value={Number.isFinite(need) ? need.toLocaleString() : '—'} label="每組至少需要（人）" />
+            <Stat value={Number.isFinite(mde) ? `${mde.toFixed(1)} 點` : '—'} label="這樣的分法能可靠偵測的最小提升" />
+          </div>
+          <p className="text-sm rounded-lg px-3 py-2 border" style={{ ...card, borderColor: enough ? '#22c55e' : '#f59e0b' }} role="status">
+            {enough
+              ? `✅ 以你預期的提升 ${lift} 個百分點，這樣的分法夠大，有八成機會看出來。`
+              : `⚠️ 以你預期的提升 ${lift} 個百分點，每組需要 ${Number.isFinite(need) ? need.toLocaleString() : '—'} 人，你的對照組只有 ${nC.toLocaleString()} 人。這場活動就算有效，也很可能看不出來。可以：合併多次活動一起評估、拉長期間、換更大的對象，或只做預期效果更大的活動。`}
+          </p>
+          <p className="text-xs" style={muted}>
+            留對照組的代價是少寄給 {nC.toLocaleString()} 人，但沒有對照組，你永遠不知道這場活動是不是白做。基準回購率用的是整體的粗估，各群實際的基準可能更高或更低。
+          </p>
+        </section>
+      )}
+    </div>
+  );
+}
+
+// ── 第 4 天：風險清單 ─────────────────────────────────────────
+const SEVERITY: Record<Risk['severity'], { label: string; color: string }> = {
+  high: { label: '高', color: '#ef4444' },
+  medium: { label: '中', color: '#f59e0b' },
+  low: { label: '低', color: 'var(--color-brand-light)' },
+};
+
+export function RisksView({ risks }: { risks: Risk[] }) {
+  return (
+    <div className="space-y-4">
+      <p className="text-sm" style={secondary}>這份清單是依你的資料自己的特徵產生的。看完之後，選出你最擔心的兩條，把降低的做法寫在「我學到」。</p>
+      {risks.map((r) => (
+        <div key={r.id} className="rounded-xl p-4 border" style={{ ...card, borderColor: r.severity === 'high' ? SEVERITY.high.color : card.borderColor }}>
+          <div className="flex items-start gap-2">
+            <span className="text-xs font-semibold px-2 py-0.5 rounded shrink-0 mt-0.5" style={{ color: SEVERITY[r.severity].color, border: `1px solid ${SEVERITY[r.severity].color}` }}>{SEVERITY[r.severity].label}</span>
+            <p className="font-medium text-sm">{r.title}</p>
+          </div>
+          <p className="text-sm mt-2" style={secondary}>{r.detail}</p>
+          <p className="text-sm mt-1"><b>怎麼降低：</b>{r.mitigation}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── 第 4 天：AI 起草活動計畫 ──────────────────────────────────
+export function Insight4View({ e, t }: { e: ExperimentResult; t: TriggerResult }) {
+  return (
+    <div className="space-y-5">
+      <p className="text-sm" style={secondary}>把下面的提示詞貼到你的 AI 工具（只含彙總數字，沒有個人資料），請它起草一頁活動計畫。</p>
+      <PromptBox title="提示詞：起草一頁活動計畫" text={campaignPlanPrompt(e, t)} />
+      <div className="rounded-xl p-4 border" style={card}>
+        <h4 className="font-semibold text-sm mb-2">審查活動計畫時，特別檢查</h4>
+        <ul className="text-sm space-y-1.5 list-disc pl-5" style={secondary}>
+          <li><b>有沒有隨機留對照組</b>：而且是從「同一批對象」裡隨機留，不是拿別的客群當對照。</li>
+          <li><b>成功指標有沒有事先講好</b>：看完結果才挑「看起來有效」的指標，就是在騙自己。</li>
+          <li><b>只比較「有點開訊息」的人</b>：會點開的人本來就比較想買，這樣比較一定贏。</li>
+          <li><b>能不能判斷「無效」</b>：計畫要寫清楚什麼結果算有效、什麼算無效、什麼算「資料不夠，無法判斷」。</li>
+          <li><b>有沒有提前停止條件</b>：例如客訴暴增、取消訂閱率異常。</li>
+          <li><b>引用了你沒給的數字</b>：預期轉換率、預期營收，沒有依據的一律刪掉。</li>
         </ul>
       </div>
     </div>

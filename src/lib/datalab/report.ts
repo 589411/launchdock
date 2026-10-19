@@ -8,6 +8,10 @@ import { minMax } from './stats';
 import type { RepurchaseResult } from './repurchase';
 import type { BasketResult } from './basket';
 import type { ValueResult } from './value';
+import { actionableRule, type PersonalizeResult } from './personalize';
+import type { TriggerResult } from './triggers';
+import type { ExperimentResult } from './experiment';
+import type { Risk } from './risks';
 
 export interface ReportInput {
   sourceLabel: string;
@@ -21,6 +25,11 @@ export interface ReportInput {
   repurchase?: RepurchaseResult;
   basket?: BasketResult;
   value?: ValueResult;
+  /** 第 3、4 天（沒有就不放進報告） */
+  personalize?: PersonalizeResult;
+  triggers?: TriggerResult;
+  experiment?: ExperimentResult;
+  risks?: Risk[];
 }
 
 export interface ReportModel {
@@ -46,6 +55,24 @@ export interface ReportModel {
     aovMedian?: number;
     spendMedian?: number;
   };
+  /** 第 3 天：個人化與自動化 */
+  day3?: {
+    triggers: { name: string; matched: number; unique: number }[];
+    uniqueTotal: number;
+    overlapPeople: number;
+    rule?: { from: string; to: string; audience: number; lift: number };
+    ruleNote?: string;
+  };
+  /** 第 4 天：驗證與風險 */
+  day4?: {
+    available: boolean;
+    reason?: string;
+    baseline: number;
+    noiseLowPp: number;
+    noiseHighPp: number;
+    selectionGapPp: number;
+    risks: { severity: Risk['severity']; title: string }[];
+  };
   healthWarnings: string[];
   piiColumns: string[];
   checks: { label: string; mine: string; expected: string; status: 'match' | 'off' | 'empty' }[];
@@ -68,7 +95,8 @@ export function buildReport(inp: ReportInput, opts: { showAmounts: boolean }): R
   if (biggest && biggest.key !== top?.key) findings.push(`人數最多的是「${segmentInfo[biggest.key].name}」（${pct(biggest.countShare)}），營收貢獻 ${pct(biggest.revenueShare)}。`);
 
   const day2in = inp.repurchase && inp.basket ? { repurchase: inp.repurchase, basket: inp.basket } : undefined;
-  const exp = expectedValues(dataset, touch, rfm, day2in);
+  const day34in = inp.personalize && inp.triggers && inp.experiment ? { personalize: inp.personalize, triggers: inp.triggers, experiment: inp.experiment } : undefined;
+  const exp = expectedValues(dataset, touch, rfm, day2in, day34in);
   const checks: ReportModel['checks'] = [];
   const notes: ReportModel['notes'] = [];
   for (const seg of workshopSegments) {
@@ -101,6 +129,33 @@ export function buildReport(inp: ReportInput, opts: { showAmounts: boolean }): R
     };
   }
 
+  let day3: ReportModel['day3'];
+  if (inp.personalize && inp.triggers) {
+    const rule = actionableRule(inp.personalize);
+    day3 = {
+      triggers: inp.triggers.stats.map((x) => ({ name: x.def.name, matched: x.matched, unique: x.unique })),
+      uniqueTotal: inp.triggers.uniqueTotal,
+      overlapPeople: inp.triggers.overlapPeople,
+      rule: rule ? { from: rule.from, to: rule.to, audience: rule.audience, lift: rule.lift } : undefined,
+      ruleNote: rule ? undefined : inp.personalize.rulesNote ?? '沒有推薦對象夠多的規則。',
+    };
+    findings.push(`設計了 4 條自動化觸發，去重後有 ${inp.triggers.uniqueTotal} 位顧客會收到至少一則訊息（${inp.triggers.overlapPeople} 位同時符合多條）。`);
+  }
+  let day4: ReportModel['day4'];
+  if (inp.experiment) {
+    const e = inp.experiment;
+    day4 = {
+      available: e.available,
+      reason: e.reason,
+      baseline: e.baseline,
+      noiseLowPp: e.noise.p025Pp,
+      noiseHighPp: e.noise.p975Pp,
+      selectionGapPp: e.selected.diffPp,
+      risks: (inp.risks ?? []).map((r) => ({ severity: r.severity, title: r.title })),
+    };
+    if (e.available) findings.push(`什麼都沒做，隨機分兩組的回購率差距 95% 落在 ${e.noise.p025Pp.toFixed(1)} 至 ${e.noise.p975Pp.toFixed(1)} 個百分點；所以活動成效一定要有對照組。`);
+  }
+
   return {
     generatedAt: new Date().toISOString().slice(0, 10),
     sourceLabel: inp.sourceLabel,
@@ -118,6 +173,8 @@ export function buildReport(inp: ReportInput, opts: { showAmounts: boolean }): R
     })),
     findings,
     day2,
+    day3,
+    day4,
     healthWarnings: health.checks.filter((c) => c.level === 'warn').map((c) => c.title),
     piiColumns: health.pii.map((p) => `${p.table}.${p.column}`),
     checks,
@@ -146,6 +203,25 @@ export function reportToText(r: ReportModel): string {
     if (d.aovMedian !== undefined) L.push(`- 客單價中位數 NT$${Math.round(d.aovMedian).toLocaleString()}；每位顧客累計消費中位數 NT$${Math.round(d.spendMedian ?? 0).toLocaleString()}`);
     d.topPairs.forEach((p) => L.push(`- 常一起買：${p.a} × ${p.b}（${p.nAB} 次，lift ${p.lift.toFixed(1)}）`));
     if (d.basketNote) L.push(`- 商品關聯：${d.basketNote}`);
+  }
+  if (r.day3) {
+    const d = r.day3;
+    L.push('');
+    L.push('◼ 個人化與自動化（第 3 天）');
+    d.triggers.forEach((t) => L.push(`- ${t.name}：符合 ${t.matched} 人，去重後 ${t.unique} 人`));
+    L.push(`- 去重後共 ${d.uniqueTotal} 位顧客會收到至少一則訊息（${d.overlapPeople} 位同時符合多條）`);
+    if (d.rule) L.push(`- 推薦規則：買了「${d.rule.from}」推薦「${d.rule.to}」（lift ${d.rule.lift.toFixed(1)}，可推薦 ${d.rule.audience} 人）`);
+    if (d.ruleNote) L.push(`- 推薦規則：${d.ruleNote}`);
+  }
+  if (r.day4) {
+    const d = r.day4;
+    L.push('');
+    L.push('◼ 驗證與風險（第 4 天）');
+    if (d.available) {
+      L.push(`- 什麼都沒做時的基準回購率 ${pct(d.baseline)}（30 天）；隨機分兩組的差距 95% 落在 ${d.noiseLowPp.toFixed(1)} 至 ${d.noiseHighPp.toFixed(1)} 個百分點`);
+      L.push(`- 挑累計消費前 20% 的顧客，什麼都沒做就比其他人高 ${d.selectionGapPp.toFixed(1)} 個百分點，所以不能拿好客人當活動對象再跟其他人比`);
+    } else if (d.reason) L.push(`- 對照組模擬：${d.reason}`);
+    d.risks.forEach((x) => L.push(`- 風險（${x.severity === 'high' ? '高' : x.severity === 'medium' ? '中' : '低'}）：${x.title}`));
   }
   if (r.healthWarnings.length) {
     L.push('');

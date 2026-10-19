@@ -9,6 +9,10 @@ import { runTouchpoints } from '../../lib/datalab/touchpoints';
 import { runRepurchase, type RepurchaseResult } from '../../lib/datalab/repurchase';
 import { runBasket, type BasketResult } from '../../lib/datalab/basket';
 import { runValue, type ValueResult } from '../../lib/datalab/value';
+import { runPersonalize, type PersonalizeResult } from '../../lib/datalab/personalize';
+import { runTriggers, type TriggerResult } from '../../lib/datalab/triggers';
+import { runExperiment, type ExperimentResult } from '../../lib/datalab/experiment';
+import { buildRisks, type Risk } from '../../lib/datalab/risks';
 import { mask } from '../../lib/datalab/pii';
 import { buildReport, reportToText } from '../../lib/datalab/report';
 import { compareClaim, expectedValues, formatExpected } from '../../lib/datalab/check';
@@ -21,7 +25,7 @@ import { days, fillPrompt, visibleSegments, type SegmentDef } from '../../data/w
 import type { Dataset, HealthReport, RfmResult, Table } from '../../lib/datalab/types';
 import type { TouchpointResult } from '../../lib/datalab/touchpoints';
 import { buildDiagnosticReport, diagnoseStructure } from '../../lib/datalab/diagnose';
-import { BasketView, card, DiagCopyButton, HealthView, Insight2View, InsightView, muted, PromptBox, RepurchaseView, ReportView, RfmView, secondary, TouchpointView, ValueView } from './views';
+import { BasketView, card, DiagCopyButton, ExperimentView, HealthView, HoldoutView, Insight2View, Insight3View, Insight4View, InsightView, RecommendView, RisksView, SegCopyView, TriggersView, muted, PromptBox, RepurchaseView, ReportView, RfmView, secondary, TouchpointView, ValueView } from './views';
 
 type Source = 'sample' | 'sunlit' | 'own';
 
@@ -35,6 +39,10 @@ interface Loaded {
   repurchase: RepurchaseResult;
   basket: BasketResult;
   value: ValueResult;
+  personalize: PersonalizeResult;
+  triggers: TriggerResult;
+  experiment: ExperimentResult;
+  risks: Risk[];
   /** 給「先自己試」提示詞用的欄位名稱（只有欄名，沒有資料） */
   columns: string[];
 }
@@ -54,6 +62,12 @@ const SOURCE_LABEL: Record<Source, string> = { sample: '內建小樣本', sunlit
 
 function finalize(source: Source, dataset: Dataset, health: HealthReport, columns: string[]): Loaded {
   const rfm = runRfm(dataset);
+  const repurchase = runRepurchase(dataset, rfm);
+  const basket = runBasket(dataset);
+  const value = runValue(dataset, rfm);
+  const personalize = runPersonalize(dataset, rfm, basket);
+  const triggers = runTriggers(dataset, rfm);
+  const experiment = runExperiment(dataset, rfm);
   return {
     source,
     label: SOURCE_LABEL[source],
@@ -61,9 +75,13 @@ function finalize(source: Source, dataset: Dataset, health: HealthReport, column
     health,
     rfm,
     touch: runTouchpoints(dataset),
-    repurchase: runRepurchase(dataset, rfm),
-    basket: runBasket(dataset),
-    value: runValue(dataset, rfm),
+    repurchase,
+    basket,
+    value,
+    personalize,
+    triggers,
+    experiment,
+    risks: buildRisks({ dataset, health, rfm, repurchase, basket, value, experiment }),
     columns,
   };
 }
@@ -670,7 +688,7 @@ function Slide(props: {
   }, [props.autoFocus, seg.id]);
   const dayDef = days.find((d) => d.day === seg.day)!;
   const done = progress.completed.includes(seg.id);
-  const exp = useMemo(() => expectedValues(loaded.dataset, loaded.touch, loaded.rfm, { repurchase: loaded.repurchase, basket: loaded.basket }), [loaded]);
+  const exp = useMemo(() => expectedValues(loaded.dataset, loaded.touch, loaded.rfm, { repurchase: loaded.repurchase, basket: loaded.basket }, { personalize: loaded.personalize, triggers: loaded.triggers, experiment: loaded.experiment }), [loaded]);
   // 算不出標準答案的核對項（例如資料沒有商品欄的「商品關聯」）直接略過
   const checks = (seg.checks ?? []).filter((c) => Number.isFinite(exp[c.id]));
   const prompt = seg.tryPrompt ? fillPrompt(seg.tryPrompt, loaded.columns) : '';
@@ -751,6 +769,14 @@ function Slide(props: {
               {seg.view === 'basket' && <BasketView b={loaded.basket} />}
               {seg.view === 'value' && <ValueView v={loaded.value} repeatRevenueShare={loaded.repurchase.repeatRevenueShare} />}
               {seg.view === 'insight2' && <Insight2View repurchase={loaded.repurchase} basket={loaded.basket} value={loaded.value} />}
+              {seg.view === 'recommend' && <RecommendView p={loaded.personalize} />}
+              {seg.view === 'segcopy' && <SegCopyView p={loaded.personalize} rfm={loaded.rfm} />}
+              {seg.view === 'triggers' && <TriggersView t={loaded.triggers} />}
+              {seg.view === 'insight3' && <Insight3View p={loaded.personalize} t={loaded.triggers} />}
+              {seg.view === 'experiment' && <ExperimentView e={loaded.experiment} />}
+              {seg.view === 'holdout' && <HoldoutView e={loaded.experiment} t={loaded.triggers} />}
+              {seg.view === 'risks' && <RisksView risks={loaded.risks} />}
+              {seg.view === 'insight4' && <Insight4View e={loaded.experiment} t={loaded.triggers} />}
             </Step>
           )}
 
@@ -810,7 +836,7 @@ function ReportBox({ loaded, progress }: { loaded: Loaded; progress: Progress })
   const model = useMemo(
     () =>
       buildReport(
-        { sourceLabel: loaded.label, dataset: loaded.dataset, health: loaded.health, rfm: loaded.rfm, touch: loaded.touch, notes: progress.notes, claims: progress.claims, repurchase: loaded.repurchase, basket: loaded.basket, value: loaded.value },
+        { sourceLabel: loaded.label, dataset: loaded.dataset, health: loaded.health, rfm: loaded.rfm, touch: loaded.touch, notes: progress.notes, claims: progress.claims, repurchase: loaded.repurchase, basket: loaded.basket, value: loaded.value, personalize: loaded.personalize, triggers: loaded.triggers, experiment: loaded.experiment, risks: loaded.risks },
         { showAmounts },
       ),
     [loaded, progress, showAmounts],

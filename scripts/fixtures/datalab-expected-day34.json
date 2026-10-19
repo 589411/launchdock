@@ -1,0 +1,290 @@
+{
+  "asOf": 20635,
+  "experiment": {
+    "baseline": 0.2123519459,
+    "cutoff": 20605,
+    "n": 1182,
+    "noise": {
+      "p025": -5.0022452761,
+      "p975": 3.9998847605,
+      "shareOver1pp": 0.69
+    },
+    "selected": {
+      "k": 237,
+      "nRest": 945,
+      "nTop": 237,
+      "rateRest": 0.1830687831,
+      "rateTop": 0.3291139241,
+      "thr": 3400
+    },
+    "split": {
+      "nA": 607,
+      "nB": 575,
+      "rateA": 0.197693575,
+      "rateB": 0.227826087
+    }
+  },
+  "personalize": {
+    "all": {
+      "哺育用品": 42,
+      "基礎營養": 219,
+      "嬰童清潔": 43,
+      "尿布濕巾": 43,
+      "居家生活": 350,
+      "收納整理": 790,
+      "機能保健": 140,
+      "沖泡即食": 747,
+      "清潔用品": 608,
+      "臉部保養": 382,
+      "茶禮盒": 120,
+      "身體清潔": 505,
+      "銀髮保健": 60,
+      "零食": 809,
+      "頭髮護理": 338,
+      "飲料": 750,
+      "餅乾禮盒": 129
+    },
+    "everyone": 1200,
+    "rules": [
+      {
+        "audience": 0,
+        "conf": 0.9087947883,
+        "from": "哺育用品",
+        "lift": 18.2221448641,
+        "nAB": 279,
+        "to": "尿布濕巾"
+      },
+      {
+        "audience": 0,
+        "conf": 0.8907563025,
+        "from": "嬰童清潔",
+        "lift": 17.86045716,
+        "nAB": 212,
+        "to": "尿布濕巾"
+      },
+      {
+        "audience": 1,
+        "conf": 0.6092436975,
+        "from": "嬰童清潔",
+        "lift": 15.6379164043,
+        "nAB": 145,
+        "to": "哺育用品"
+      },
+      {
+        "audience": 154,
+        "conf": 0.2900120337,
+        "from": "基礎營養",
+        "lift": 2.6791264074,
+        "nAB": 241,
+        "to": "機能保健"
+      },
+      {
+        "audience": 36,
+        "conf": 0.25,
+        "from": "銀髮保健",
+        "lift": 2.3706377858,
+        "nAB": 103,
+        "to": "基礎營養"
+      }
+    ],
+    "segments": {
+      "atRiskBig": {
+        "count": 145,
+        "medianR": 203,
+        "small": false,
+        "topCats": [
+          {
+            "category": "臉部保養",
+            "customers": 95,
+            "index": 2.058133
+          },
+          {
+            "category": "茶禮盒",
+            "customers": 29,
+            "index": 2.0
+          },
+          {
+            "category": "身體清潔",
+            "customers": 111,
+            "index": 1.819051
+          }
+        ],
+        "withCategory": 145
+      },
+      "attention": {
+        "count": 83,
+        "medianR": 96,
+        "small": false,
+        "topCats": [
+          {
+            "category": "居家生活",
+            "customers": 20,
+            "index": 0.826162
+          },
+          {
+            "category": "機能保健",
+            "customers": 8,
+            "index": 0.826162
+          },
+          {
+            "category": "收納整理",
+            "customers": 39,
+            "index": 0.713741
+          }
+        ],
+        "withCategory": 83
+      },
+      "champion": {
+        "count": 366,
+        "medianR": 26.0,
+        "small": false,
+        "topCats": [
+          {
+            "category": "基礎營養",
+            "customers": 119,
+            "index": 1.78157
+          },
+          {
+            "category": "機能保健",
+            "customers": 72,
+            "index": 1.686183
+          },
+          {
+            "category": "嬰童清潔",
+            "customers": 22,
+            "index": 1.677469
+          }
+        ],
+        "withCategory": 366
+      },
+      "dormant": {
+        "count": 115,
+        "medianR": 199,
+        "small": false,
+        "topCats": [
+          {
+            "category": "身體清潔",
+            "customers": 49,
+            "index": 1.012484
+          },
+          {
+            "category": "基礎營養",
+            "customers": 16,
+            "index": 0.762359
+          },
+          {
+            "category": "收納整理",
+            "customers": 54,
+            "index": 0.713264
+          }
+        ],
+        "withCategory": 115
+      },
+      "lost": {
+        "count": 217,
+        "medianR": 418,
+        "small": false,
+        "topCats": [
+          {
+            "category": "頭髮護理",
+            "customers": 61,
+            "index": 0.998009
+          },
+          {
+            "category": "清潔用品",
+            "customers": 90,
+            "index": 0.818579
+          },
+          {
+            "category": "居家生活",
+            "customers": 51,
+            "index": 0.805793
+          }
+        ],
+        "withCategory": 217
+      },
+      "loyal": {
+        "count": 238,
+        "medianR": 61.0,
+        "small": false,
+        "topCats": [
+          {
+            "category": "哺育用品",
+            "customers": 13,
+            "index": 1.560624
+          },
+          {
+            "category": "嬰童清潔",
+            "customers": 13,
+            "index": 1.524331
+          },
+          {
+            "category": "尿布濕巾",
+            "customers": 13,
+            "index": 1.524331
+          }
+        ],
+        "withCategory": 238
+      },
+      "newPotential": {
+        "count": 36,
+        "medianR": 28.5,
+        "small": false,
+        "topCats": [
+          {
+            "category": "餅乾禮盒",
+            "customers": 6,
+            "index": 1.550388
+          },
+          {
+            "category": "身體清潔",
+            "customers": 15,
+            "index": 0.990099
+          },
+          {
+            "category": "臉部保養",
+            "customers": 10,
+            "index": 0.8726
+          }
+        ],
+        "withCategory": 36
+      }
+    },
+    "topByLiftLiftValues": [
+      18.222145,
+      17.860457,
+      15.637916,
+      2.679126,
+      2.370638,
+      2.352147,
+      2.199505,
+      2.193367,
+      2.108661,
+      2.074482
+    ]
+  },
+  "sampleSize": 3834,
+  "triggers": {
+    "eligible": 1200,
+    "overlapPeople": 112,
+    "t1": {
+      "matched": 18,
+      "unique": 18
+    },
+    "t2": {
+      "matched": 244,
+      "unique": 178
+    },
+    "t3": {
+      "matched": 96,
+      "unique": 9
+    },
+    "t4": {
+      "matched": 66,
+      "unique": 66
+    },
+    "top20K": 240,
+    "top20Threshold": 3489,
+    "uniqueTotal": 271
+  }
+}

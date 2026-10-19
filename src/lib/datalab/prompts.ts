@@ -2,6 +2,9 @@ import type { HealthReport, RfmResult } from './types';
 import type { RepurchaseResult } from './repurchase';
 import type { BasketResult } from './basket';
 import type { ValueResult } from './value';
+import type { PersonalizeResult } from './personalize';
+import type { TriggerResult } from './triggers';
+import { minDetectablePp, type ExperimentResult } from './experiment';
 import { segmentInfo } from '../../data/datalab';
 import { dayToString } from './normalize';
 
@@ -127,4 +130,74 @@ export function valuePrompt(v: ValueResult, repeatRevenueShare: number): string 
 3. 提出三個「提高顧客價值」的做法，並說明各自怎麼驗證有沒有效；
 4. 列出這份分析的限制。
 只能依據上面的數字回答，不要編造表外的數字。`;
+}
+
+export function segmentBriefPrompt(p: PersonalizeResult): string {
+  const rows = p.briefs
+    .filter((b) => b.count > 0)
+    .map((b) => {
+      const cats = b.topCats.length ? b.topCats.map((c) => `${c.category}（偏好指數 ${c.index.toFixed(1)}）`).join('、') : '（沒有品類資料或人數太少）';
+      return `- ${segmentInfo[b.key].name}（${b.count} 人${b.small ? '，人數很少，僅供參考' : ''}）：${segmentInfo[b.key].blurb} 最偏愛的品類：${cats}。第一件該做的事：${segmentInfo[b.key].action}`;
+    })
+    .join('\n');
+  return `你是品牌文案寫手。以下是我的顧客分群與每群的偏好（只有彙總，沒有任何個人資料）。偏好指數＝這群買過該品類的比例 ÷ 全體買過的比例，大於 1 代表這群特別偏愛。
+
+${rows}
+
+請針對每一群各寫一則 LINE 訊息（40 字內、語氣親切不推銷），並在每則後面用一句話說明這則訊息的目的、以及怎麼衡量有沒有效（要有不聯絡的對照組）。
+
+限制：
+- 不要使用「最後機會」「限時」「只剩」這類製造焦慮的詞；
+- 不要承諾我沒有提供的優惠、折扣或贈品；
+- 不要出現「我們發現你買過…」這類讓人覺得被監視的句子；
+- 不要出現任何個人姓名。`;
+}
+
+export function recommendPrompt(p: PersonalizeResult): string {
+  if (!p.rules.length) return `（這份資料目前沒有可用的推薦規則：${p.rulesNote ?? ''}）`;
+  const rows = p.rules.map((r) => `| 買了「${r.from}」→ 推薦「${r.to}」 | ${r.nAB} | ${r.lift.toFixed(2)} | ${(r.conf * 100).toFixed(0)}% | ${r.audience} |`).join('\n');
+  return `你是零售推薦系統顧問。以下是我從交易資料整理出的推薦規則（只有統計數字，沒有任何個人資料）。
+定義：lift 大於 1 代表比「碰巧都熱賣」更常一起買；信心＝買了前者的單，也買了後者的比例；推薦對象＝買過前者、但從沒買過後者的顧客數。
+
+| 規則 | 同時出現次數 | lift | 信心 | 推薦對象（人） |
+|---|---|---|---|---|
+${rows}
+
+請你把每一條規則寫成一份可以交給工程師的「規格」：觸發時機（顧客在哪個情境看到推薦）、顯示文案（20 字內）、排除條件（例如已買過、剛退貨）、頻率上限，以及怎麼衡量有沒有效（需要對照組）。
+只能依據上面的數字，不要編造表外的數字，也不要補上我沒有提供的優惠。`;
+}
+
+export function triggerSpecPrompt(t: TriggerResult): string {
+  const rows = t.stats
+    .map((s) => `| ${s.def.id.toUpperCase()} ${s.def.name} | ${s.def.condition} | ${s.matched} | ${s.unique} |`)
+    .join('\n');
+  return `你是行銷自動化顧問。以下是我設計的四條自動化觸發規則與符合人數（只有統計數字，沒有任何個人資料）。同一個人符合多條時，依 T4 → T2 → T1 → T3 的優先序只保留第一條。
+
+| 觸發 | 條件 | 符合人數 | 去重後 |
+|---|---|---|---|
+${rows}
+
+去重後總共有 ${t.uniqueTotal} 位顧客會收到至少一則訊息（有 ${t.overlapPeople} 位同時符合兩條以上）。
+
+請你：
+1. 為每一條觸發寫一份規格：觸發條件、訊息目的、建議的發送時機、排除條件、每人頻率上限、成功指標；
+2. 指出這四條之間會互相干擾的地方，並建議一個「全站頻率上限」；
+3. 每一條都要說明怎麼留對照組來驗證有沒有效；
+4. 提醒我上線前必須確認的合規事項（聯絡同意、停發機制）。
+只能依據上面的數字，不要編造表外的數字。`;
+}
+
+export function campaignPlanPrompt(e: ExperimentResult, t: TriggerResult): string {
+  if (!e.available) return `（這份資料目前無法做對照組模擬：${e.reason ?? ''}）`;
+  const biggest = [...t.stats].sort((a, b) => b.unique - a.unique)[0];
+  const mde = minDetectablePp(e.baseline, biggest.unique, 0.2);
+  return `你是行銷成效分析顧問。以下是我的資料特徵（只有統計數字，沒有任何個人資料）。
+
+- 活動前買過的顧客 ${e.eligible} 位；什麼都沒做時，30 天內回來購買的基準比例是 ${(e.baseline * 100).toFixed(1)}%。
+- 什麼都沒做、把顧客隨機分成兩組，兩組 30 天回購率的差距，95% 的情況落在 ${e.noise.p025Pp.toFixed(1)} 至 ${e.noise.p975Pp.toFixed(1)} 個百分點之間（重複分組 ${e.noise.splits} 次）。
+- 累計消費前 20% 的顧客，30 天回購率比其他人高 ${e.selected.diffPp.toFixed(1)} 個百分點（什麼都沒做）。
+- 我打算對「${biggest.def.name}」這群（去重後 ${biggest.unique} 人）做一次提醒活動，並留 20% 當對照組；以基準比例估算，這樣大約能可靠偵測到 ${Number.isFinite(mde) ? mde.toFixed(1) : '（對象太少，算不出來）'} 個百分點以上的提升。
+
+請你起草一頁活動計畫：目標與唯一的成功指標（事先講好）、對象與排除條件、怎麼隨機留對照組、活動期間與觀察期間、什麼結果算有效／無效／無法判斷、提前停止的條件，以及需要特別避免的錯誤（例如只比較有點開訊息的人）。
+只能依據上面的數字，不要編造表外的數字，不要承諾任何我沒有提供的優惠。`;
 }
