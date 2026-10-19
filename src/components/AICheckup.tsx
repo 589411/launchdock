@@ -52,6 +52,12 @@ const ui = {
   },
   retake: { zh: '重新體檢', en: 'Retake' },
   moreTutorials: { zh: '看所有教學', en: 'Browse all tutorials' },
+  dataCtaTitle: { zh: '想動手試試「數據」這一塊？', en: 'Want to try the data side hands-on?' },
+  dataCtaBody: {
+    zh: '用顧客數據戰情室走一遍：資料健檢、客群分群，還能產生貼給你自己 AI 工具的提示詞。全程在瀏覽器計算，資料不會上傳。',
+    en: '',
+  },
+  dataCtaButton: { zh: '進入顧客數據戰情室', en: '' },
   events: { zh: '看近期活動', en: 'See upcoming events' },
 } satisfies Record<string, UiText>;
 
@@ -121,6 +127,10 @@ export default function AICheckup({ locale, articles }: Props) {
     const atTop = result.weakest.stage === 4;
     const focusLabel = atTop ? ui.focusTopTitle : ui.focus;
     const focusNote = atTop ? ui.focusTop : allSame ? ui.focusSame : ui.focusNote;
+    // 戰情室目前只有中文版；數據面向的階段用來調整戰情室的開場文案
+    const dataStage = result.dimensions.find((d) => d.key === 'data')?.stage ?? 1;
+    const dataCtaHref = `/checkup/data/?from=checkup&stage=${dataStage}`;
+    const showDataCta = L === 'zh';
     const recCards = (recommended[focusKey] ?? [])
       .map((slug) => ({ slug, meta: articles[slug] }))
       .filter((x) => x.meta);
@@ -218,6 +228,26 @@ export default function AICheckup({ locale, articles }: Props) {
             </div>
           )}
         </div>
+
+
+        {showDataCta && (
+          <div
+            className="rounded-2xl p-5 mb-8 border"
+            style={{ backgroundColor: 'var(--color-surface-light)', borderColor: 'var(--color-brand)' }}
+          >
+            <h3 className="font-semibold">{tr(ui.dataCtaTitle)}</h3>
+            <p className="text-sm mt-1" style={{ color: 'var(--color-text-secondary)' }}>
+              {tr(ui.dataCtaBody)}
+            </p>
+            <a
+              href={dataCtaHref}
+              className="inline-block mt-3 px-5 py-2.5 rounded-lg text-sm font-medium text-white"
+              style={{ backgroundColor: 'var(--color-brand)' }}
+            >
+              {tr(ui.dataCtaButton)} →
+            </a>
+          </div>
+        )}
 
         {/* 五面向落點 */}
         <h3 className="text-lg font-semibold mb-4">{tr(ui.breakdown)}</h3>
