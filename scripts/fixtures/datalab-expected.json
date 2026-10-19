@@ -1,0 +1,271 @@
+{
+  "campaigns": {
+    "ANNIV2025": {
+      "contacted": 240,
+      "control": 60,
+      "control_group": {
+        "n": 60,
+        "rate": 0.7,
+        "repurchased_n": 42
+      },
+      "treatment": {
+        "n": 240,
+        "rate": 0.7042,
+        "repurchased_n": 169
+      }
+    },
+    "WAKE2026": {
+      "contacted": 135,
+      "control": 45,
+      "control_group": {
+        "n": 45,
+        "rate": 0.0444,
+        "repurchased_n": 2
+      },
+      "treatment": {
+        "n": 135,
+        "rate": 0.0519,
+        "repurchased_n": 7
+      }
+    }
+  },
+  "items_exact_duplicate_rows": 206,
+  "members_birth_year_empty": 72,
+  "members_email_dirty": 40,
+  "members_email_empty": 144,
+  "members_email_shared_groups": 40,
+  "members_email_shared_members": 80,
+  "notes": [
+    "asOf_day = max day over all txns + 1; day = calendar date part, both ISO and YYYY/M/D forms.",
+    "Eligible customers need >=1 non-return txn; return txns attributed to customer add (negative) total_amount to M, M floored at 0 (returns from customers with no non-return txn ignored).",
+    "Scores: exact integer ceil; ties share score. FM=(F+M+1)//2.",
+    "Campaign n counts target ROWS (no member dedupe); treatment = is_control_group != '1'. Campaign stats omitted (note field) if absent from campaigns.csv. 'contacted' and 'control' counted over all rows of the campaign.",
+    "recon: txns with >=1 item; sum of line_amount incl. return txns as-is; recon_equal_minus_discount only if not already equal.",
+    "txn_returns uses strip().lower()=='true'. Repurchase: members with non-return txns (member_id non-empty), distinct days; intervals pooled across members; quantiles 'inclusive' method.",
+    "Email shared groups: counted over non-empty normalised emails (strip().lower()). Median values are Python numbers (may be .5)."
+  ],
+  "recon_equal": 7310,
+  "recon_equal_minus_discount": 690,
+  "recon_other": 0,
+  "repurchase": {
+    "intervals_n": 4885,
+    "median": 48,
+    "p25": 24.0,
+    "p75": 67.0
+  },
+  "rfm": {
+    "asOf_day": 20635,
+    "customers": 1200,
+    "customers_F_eq_1": 420,
+    "customers_F_ge_2": 780,
+    "sample": [
+      {
+        "F": 7,
+        "FM": 3,
+        "F_score": 4,
+        "M": 935,
+        "M_score": 2,
+        "R_days": 82,
+        "R_score": 3,
+        "member_id": "M000001",
+        "segment": "忠誠"
+      },
+      {
+        "F": 10,
+        "FM": 5,
+        "F_score": 5,
+        "M": 4132,
+        "M_score": 5,
+        "R_days": 169,
+        "R_score": 2,
+        "member_id": "M000002",
+        "segment": "高價值快流失"
+      },
+      {
+        "F": 4,
+        "FM": 4,
+        "F_score": 3,
+        "M": 4070,
+        "M_score": 5,
+        "R_days": 87,
+        "R_score": 3,
+        "member_id": "M000003",
+        "segment": "忠誠"
+      },
+      {
+        "F": 3,
+        "FM": 4,
+        "F_score": 3,
+        "M": 2770,
+        "M_score": 4,
+        "R_days": 28,
+        "R_score": 4,
+        "member_id": "M000004",
+        "segment": "冠軍"
+      },
+      {
+        "F": 1,
+        "FM": 3,
+        "F_score": 2,
+        "M": 1280,
+        "M_score": 3,
+        "R_days": 203,
+        "R_score": 2,
+        "member_id": "M000005",
+        "segment": "沉睡"
+      },
+      {
+        "F": 1,
+        "FM": 2,
+        "F_score": 2,
+        "M": 665,
+        "M_score": 1,
+        "R_days": 93,
+        "R_score": 3,
+        "member_id": "M000006",
+        "segment": "需關注"
+      },
+      {
+        "F": 8,
+        "FM": 4,
+        "F_score": 4,
+        "M": 3413,
+        "M_score": 4,
+        "R_days": 173,
+        "R_score": 2,
+        "member_id": "M000007",
+        "segment": "高價值快流失"
+      },
+      {
+        "F": 1,
+        "FM": 2,
+        "F_score": 2,
+        "M": 360,
+        "M_score": 1,
+        "R_days": 212,
+        "R_score": 2,
+        "member_id": "M000008",
+        "segment": "沉睡"
+      },
+      {
+        "F": 12,
+        "FM": 4,
+        "F_score": 5,
+        "M": 1560,
+        "M_score": 3,
+        "R_days": 9,
+        "R_score": 5,
+        "member_id": "M000009",
+        "segment": "冠軍"
+      },
+      {
+        "F": 6,
+        "FM": 5,
+        "F_score": 4,
+        "M": 7460,
+        "M_score": 5,
+        "R_days": 30,
+        "R_score": 4,
+        "member_id": "M000010",
+        "segment": "冠軍"
+      },
+      {
+        "F": 8,
+        "FM": 3,
+        "F_score": 4,
+        "M": 950,
+        "M_score": 2,
+        "R_days": 21,
+        "R_score": 5,
+        "member_id": "M000011",
+        "segment": "忠誠"
+      },
+      {
+        "F": 1,
+        "FM": 2,
+        "F_score": 2,
+        "M": 590,
+        "M_score": 1,
+        "R_days": 335,
+        "R_score": 1,
+        "member_id": "M000012",
+        "segment": "流失"
+      }
+    ],
+    "冠軍": {
+      "count": 366,
+      "median_F": 9.0,
+      "median_M": 2675.0,
+      "median_R_days": 26.0,
+      "sum_M": 1808153
+    },
+    "忠誠": {
+      "count": 265,
+      "median_F": 7,
+      "median_M": 1175,
+      "median_R_days": 61,
+      "sum_M": 764392
+    },
+    "新客潛力": {
+      "count": 27,
+      "median_F": 1,
+      "median_M": 700,
+      "median_R_days": 22,
+      "sum_M": 18755
+    },
+    "沉睡": {
+      "count": 115,
+      "median_F": 1,
+      "median_M": 825,
+      "median_R_days": 199,
+      "sum_M": 97962
+    },
+    "流失": {
+      "count": 219,
+      "median_F": 1,
+      "median_M": 810,
+      "median_R_days": 417,
+      "sum_M": 181048
+    },
+    "需關注": {
+      "count": 63,
+      "median_F": 1,
+      "median_M": 720,
+      "median_R_days": 98,
+      "sum_M": 45037
+    },
+    "高價值快流失": {
+      "count": 145,
+      "median_F": 4,
+      "median_M": 2855,
+      "median_R_days": 203,
+      "sum_M": 547926
+    }
+  },
+  "rows": {
+    "campaign_targets": 480,
+    "campaigns": 15,
+    "members": 1200,
+    "products": 120,
+    "transactions": 8000,
+    "txn_items": 24786
+  },
+  "txn_anonymous": 1817,
+  "txn_returns": 120,
+  "txn_returns_with_member": 78,
+  "txn_slash_dates": 250,
+  "txn_slash_dates_matching_slash_pattern": 250,
+  "txn_store_codes": {
+    "S01": 1484,
+    "S02": 952,
+    "S03": 1728,
+    "S04": 1293,
+    "S05": 1364,
+    "S06": 672,
+    "S99": 507
+  },
+  "txn_with_campaign_id_counts": {
+    "ANNIV2025": 222
+  },
+  "txn_without_items": 0
+}
