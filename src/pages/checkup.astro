@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AICheckup from '../components/AICheckup.tsx';
+import { getCollection } from 'astro:content';
+import { allRecommendedSlugs } from '../data/checkup';
+
+// 只把推薦會用到的文章精簡 metadata 傳給 island
+const recommendedSlugs = new Set<string>(allRecommendedSlugs);
+
+const allArticles = await getCollection('articles', ({ data }) => !data.archived);
+const articles: Record<string, { title: string; description: string; url: string }> = {};
+for (const a of allArticles) {
+  if (recommendedSlugs.has(a.id)) {
+    articles[a.id] = {
+      title: a.data.title,
+      description: a.data.description,
+      url: `/articles/${a.id}/`,
+    };
+  }
+}
+---
+
+<BaseLayout title="企業 AI 導入體檢" description="3 分鐘 15 題，看看公司現在走到 AI 導入的哪一階段：定位與策略、數據報表、營運流程、決策驗證、人員與資料安全，並給你下一步建議。">
+  <div class="max-w-[900px] mx-auto px-6 py-12">
+    <AICheckup client:load locale="zh-tw" articles={articles} />
+  </div>
+</BaseLayout>

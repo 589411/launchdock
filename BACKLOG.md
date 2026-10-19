@@ -5,6 +5,12 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+- [ ] [產品] **企業 AI 導入體檢 `/checkup/`（中英）M1 已實作，build 綠 193 頁，尚未 push**（2026-10-19，分支 `feat/checkup`）。
+      目的：中小企業用 15 題判斷「公司導入 AI 走到哪一階段」，不是考試。四階段（觀望／個人嘗試／流程導入／制度化，分界＝誰在動手）× 五面向
+      （定位策略／數據報表／營運流程／決策驗證／人員與資料安全），結果規則式（不呼叫 LLM）：整體階段、雷達圖、各面向診斷＋下一步一件事、失衡警示（影子 AI 等）、推薦文章。
+      唯一策展點 `src/data/checkup.ts`（英文鏡像 `checkup.en.ts`，以 id 對應）；自檢 `npx tsx scripts/check-checkup.mjs`。`RadarChart` 已從 `CapabilityQuiz` 抽成共用元件。入口在 Header「工具」選單。
+      **剩待辦**：① Joseph 審題目措辭與階段名稱 ② push 前 `/quiz/` 已回歸驗過（雷達圖正常）③ **M2 課程前測模式未做**：`quiz_sessions` 加 `kind` 欄位（migration 017）＋ `QuizLiveDashboard` 依 kind 切資料來源，沿用場次代碼與 pre/post，階段值 1..4 剛好符合 `primary_level` CHECK。
+      ④ 上線後 ~4 週看 GSC 有無「AI 導入／企業 AI 評估」類長尾。
 - [ ] [效能] **全站圖片省流量**（2026-10-17 發現）：`public/images/articles/` 共 79MB、>500KB 有 48 張（public/ 圖 Astro 不優化）；渲染出的 `<img>` 沒有 `loading="lazy"`，整篇圖一次全載。做法：① 加 rehype 插件給文章圖補 `loading="lazy" decoding="async"`（最省、一次到位）② 大圖用 256 色 PNG 量化重壓（`claude-team-setup` 實測 3.2MB→1.3MB，畫質無感），每張壓完要人眼確認遮罩仍在。建議另開 session 做。
 - [x] [內容] **新文章 `join-claude-team`「被邀請加入 Claude Team 團隊怎麼做？」中英雙版已上線**（2026-10-15，`834b108`）。`claude-team-setup` 成員端延伸篇，9 張 2026-10-14 截圖。Joseph 決定不加首頁 FAQ，結案。
 - [x] [內容] **新文章 `ai-agent-jargon`「Prompt 工程、Context 工程、Loop、Harness 是什麼？用整理 200 張收據一次看懂」中英雙版已上線**（2026-09-12，Joseph preview 後 gate 通過）。
