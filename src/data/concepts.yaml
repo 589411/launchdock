@@ -394,6 +394,14 @@ CLI:
   canonicalArticle: "cli-guide"
   relatedArticles: ["why-not-windows-openclaw", "windows-wsl-guide", "install-openclaw-macos"]
 
+Claude Code:
+  displayName: "Claude Code"
+  aliases: ["Claude Code"]
+  shortDesc: "跑在終端機裡的 Claude，能讀寫你資料夾裡的檔案並執行指令"
+  shortDescEn: "Claude running in your terminal, able to read and edit files in your folder and run commands"
+  canonicalArticle: "install-claude-code"
+  relatedArticles: ["cli-guide", "claude-team-setup", "windows-wsl-guide"]
+
 Homebrew:
   displayName: "Homebrew"
   aliases: ["Homebrew", "homebrew", "brew"]
