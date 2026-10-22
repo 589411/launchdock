@@ -11,6 +11,7 @@ export interface HomeFaqItem {
 const homeFaq: HomeFaqItem[] = [
   { q: '完全不會寫程式，也能動手做 AI 嗎？', a: '可以。藍鴨所有教學都假設你零基礎——每步有截圖、每個卡點能回報、每個問題有人接。', href: '/articles/cli-guide/', linkText: '從「CLI 是什麼」開始' },
   { q: '我是 Windows，能用 OpenClaw 嗎？', a: '能。裝了 WSL（Windows Subsystem for Linux）就有完整的 Linux 環境，體驗跟 Mac 幾乎一樣。', href: '/articles/windows-wsl-guide/', linkText: 'WSL 安裝教學' },
+  { q: 'Claude Code 怎麼安裝？Windows 和 Mac 都能裝嗎？', a: '都能。現在不用裝 Node.js，貼一行官方指令就好：Mac 在終端機貼 curl 那行、Windows 在 PowerShell 貼 irm 那行，裝完開新視窗輸入 claude --version 確認。要注意免費版 claude.ai 帳號不能用，需要 Pro、Max、Team 等付費方案。', href: '/articles/install-claude-code/', linkText: 'Claude Code 安裝教學（Windows／Mac）' },
   { q: 'API Key 是什麼？哪裡拿免費的？', a: 'API Key 是一串像密碼的字串，讓程式用你的帳號呼叫 AI 模型。Google、Anthropic、OpenRouter 都有免費方案、不必綁卡。', href: '/articles/ai-api-key-guide/', linkText: 'API Key 怎麼申請（含免費方案）' },
   { q: '執行 ollama launch hermes 跳出 Error: unknown integration: hermes 怎麼辦？', a: '你的 Ollama 版本太舊——hermes 這個整合要 Ollama 夠新才有。更新 Ollama、完全重開、再跑一次即可。', href: '/articles/hermes-agent/', linkText: 'Hermes Agent 快速上手' },
   { q: '系統提示詞是什麼？', a: '系統提示詞是 AI 的「人設／設定檔」，決定它怎麼回應你——同一個 AI，換一段系統提示詞就像換了個人。', href: '/meetup/', linkText: '7/29 免費工作坊帶你寫一段' },
