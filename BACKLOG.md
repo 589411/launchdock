@@ -5,7 +5,7 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
-- [ ] [內容] **新文章 `karpathy-ai-funnel`「全世界用 AI 的人像一座漏斗：你大概站在第幾層？」中英雙版已寫好，已 commit 到分支 `article/karpathy-ai-funnel`（未併 main）——等 Joseph 人工 gate**（2026-10-30）。
+- [x] [內容] **新文章 `karpathy-ai-funnel`「全世界用 AI 的人像一座漏斗：你大概站在第幾層？」中英雙版已上線**（2026-10-30，`7d012cb`，Joseph gate 通過）。線上：https://launchdock.app/articles/karpathy-ai-funnel/ ／ https://launchdock.app/en/articles/karpathy-ai-funnel/
       來源＝Karpathy 2026-10-11（美國時間）貼文＋引用的 2026-04-09 舊文，事實只取素材檔；人數比例標明為他的「餐巾紙估算」。
       機械檢查：`npm run registry`、`npm run build` 已過；佔位符掃描 0 命中。主視覺 `ai-use-funnel.png` 由 Codex 生成（930×523、256 色、145KB，無文字無人像）。
       **新概念**：`能力鋸齒（Jaggedness）` 已進 `concepts.yaml`（canonical=本文）。

@@ -89,8 +89,8 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
-**2026-10-30 新文章 `karpathy-ai-funnel`（全世界用 AI 的四層漏斗）中英雙版已寫好，已 commit 在分支 `article/karpathy-ai-funnel`（preview 部署，未併 main）** ⬅️ 最新
-- ⭐ **下一個具體動作**：Joseph 看 preview gate → 併入 main 並 push 即上線。主視覺 Codex 生成、registry／build 已過。
+**2026-10-30 新文章 `karpathy-ai-funnel`（全世界用 AI 的四層漏斗）中英雙版已上線**（`7d012cb`，Joseph gate 通過） ⬅️ 最新
+- 線上：https://launchdock.app/articles/karpathy-ai-funnel/ ／ https://launchdock.app/en/articles/karpathy-ai-funnel/ ；主視覺 Codex 生成、registry／build 已過。結案（未加首頁 FAQ）。
 - 新概念 `能力鋸齒（Jaggedness）` 已登錄 `concepts.yaml`；未碰 Supabase、部署、LaunchDarkly。
 
 **2026-10-17 圖片壓縮列為硬規則**：`docs/EDITORIAL.md` 新增 **H8（截圖上架前必須壓縮：≤1800px、256 色 PNG、單張 ≤150KB）**，Joseph 指示「基本、一定要做」；`claude-team-setup` 17 張已重壓 3.2MB→1.3MB（`5eada38`）。
