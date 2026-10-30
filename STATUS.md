@@ -89,6 +89,10 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
+**2026-10-30 新文章 `karpathy-ai-funnel`（全世界用 AI 的四層漏斗）中英雙版已寫好，已 commit 在分支 `article/karpathy-ai-funnel`（preview 部署，未併 main）** ⬅️ 最新
+- ⭐ **下一個具體動作**：Joseph 看 preview gate → 併入 main 並 push 即上線。主視覺 Codex 生成、registry／build 已過。
+- 新概念 `能力鋸齒（Jaggedness）` 已登錄 `concepts.yaml`；未碰 Supabase、部署、LaunchDarkly。
+
 **2026-10-17 圖片壓縮列為硬規則**：`docs/EDITORIAL.md` 新增 **H8（截圖上架前必須壓縮：≤1800px、256 色 PNG、單張 ≤150KB）**，Joseph 指示「基本、一定要做」；`claude-team-setup` 17 張已重壓 3.2MB→1.3MB（`5eada38`）。
 ⭐ **下一個具體動作**：另開 session 做 BACKLOG「全站圖片省流量」——rehype 補 `loading="lazy"` ＋ 48 張 >500KB 大圖重壓（壓完人眼確認遮罩）。
 

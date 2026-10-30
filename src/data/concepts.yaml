@@ -537,3 +537,13 @@ GitHub:
   shortDescEn: "The most widely used code hosting platform: a cloud copy of your Git repository, and the relay point for syncing across machines and collaborating"
   canonicalArticle: "github-account-signup"
   relatedArticles: ["git-guide", "deploy-to-github-pages", "github-developer-settings-tokens", "dev-cli-tools-mac"]
+
+# ── 產業趨勢（2026-10-30 新增）────────────────────────────
+
+能力鋸齒:
+  displayName: "能力鋸齒（Jaggedness）"
+  aliases: ["能力鋸齒", "Jaggedness", "jaggedness"]
+  shortDesc: "AI 能力一塊一塊長、不是平均長高：高峰落在可驗證、有經濟價值的領域（如數學、程式），寫作等難打分數的領域進步較慢"
+  shortDescEn: "AI capability grows in uneven peaks rather than evenly: it peaks in verifiable, economically valuable domains like math and code, and lags in harder-to-score areas like writing"
+  canonicalArticle: "karpathy-ai-funnel"
+  relatedArticles: ["which-ai-tool-for-you", "llm-tool-calling-era", "ai-tech-evolution"]

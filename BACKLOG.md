@@ -5,6 +5,10 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+- [ ] [內容] **新文章 `karpathy-ai-funnel`「全世界用 AI 的人像一座漏斗：你大概站在第幾層？」中英雙版已寫好，已 commit 到分支 `article/karpathy-ai-funnel`（未併 main）——等 Joseph 人工 gate**（2026-10-30）。
+      來源＝Karpathy 2026-10-11（美國時間）貼文＋引用的 2026-04-09 舊文，事實只取素材檔；人數比例標明為他的「餐巾紙估算」。
+      機械檢查：`npm run registry`、`npm run build` 已過；佔位符掃描 0 命中。主視覺 `ai-use-funnel.png` 由 Codex 生成（930×523、256 色、145KB，無文字無人像）。
+      **新概念**：`能力鋸齒（Jaggedness）` 已進 `concepts.yaml`（canonical=本文）。
 - [ ] [內容] **新文章 `install-claude-code`「Claude Code 怎麼安裝？Windows／Mac」中英雙版已寫好，build 綠，尚未 commit——等 Joseph 人工 gate**（2026-10-22）。依官方 setup 文件當天查證；全是指令輸出，Joseph 決定不放截圖，0 個 @img、零缺圖債；已上線並加首頁 FAQ 第 10 則（home-faq.ts 已滿，下次新增要汰換最弱一則）。新增 `Claude Code` 概念＋跑過 registry。
 - [ ] [效能] **全站圖片省流量**（2026-10-17 發現）：`public/images/articles/` 共 79MB、>500KB 有 48 張（public/ 圖 Astro 不優化）；渲染出的 `<img>` 沒有 `loading="lazy"`，整篇圖一次全載。做法：① 加 rehype 插件給文章圖補 `loading="lazy" decoding="async"`（最省、一次到位）② 大圖用 256 色 PNG 量化重壓（`claude-team-setup` 實測 3.2MB→1.3MB，畫質無感），每張壓完要人眼確認遮罩仍在。建議另開 session 做。
 - [x] [內容] **新文章 `join-claude-team`「被邀請加入 Claude Team 團隊怎麼做？」中英雙版已上線**（2026-10-15，`834b108`）。`claude-team-setup` 成員端延伸篇，9 張 2026-10-14 截圖。Joseph 決定不加首頁 FAQ，結案。
