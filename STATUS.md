@@ -89,6 +89,10 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
+**2026-11-04 新文章 `ai-frontier-homestead`（你的生活就是一座月球礦場：用 AI 把日常資料挖成資產）中英雙版已寫好，待 Joseph gate** ⬅️ 最新
+- 檔案：`src/content/articles/ai-frontier-homestead.md`＋`en/`；scene 鴨編的碎碎念、0 個 @img（主視覺 `ai-frontier-pioneer.jpg` 已放正文拓荒段）。`npm run registry`／`npm run build`（197 頁）綠；佔位符掃描零命中。**未 commit、未 push**。
+- ⭐ **下一個具體動作**：Joseph 讀過後 gate → 同意的話 commit（只加這次的檔案＋`docs/article-registry.json`＋本條）→ 再 push。主視覺 491KB 偏大，若要守 H8 可另案重壓。
+
 **2026-10-30 新文章 `karpathy-ai-funnel`（全世界用 AI 的四層漏斗）中英雙版已上線**（`7d012cb`，Joseph gate 通過） ⬅️ 最新
 - 線上：https://launchdock.app/articles/karpathy-ai-funnel/ ／ https://launchdock.app/en/articles/karpathy-ai-funnel/ ；主視覺 Codex 生成、registry／build 已過。結案（未加首頁 FAQ）。
 - 新概念 `能力鋸齒（Jaggedness）` 已登錄 `concepts.yaml`；未碰 Supabase、部署、LaunchDarkly。

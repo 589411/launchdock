@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-10-30T01:07:30.952Z",
+  "_generated": "2026-11-04T02:40:20.329Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -2435,6 +2435,24 @@
       "concepts_defined": [],
       "concepts_referenced": [],
       "link": "/articles/ai-agents-build-line-booking-system/"
+    },
+    {
+      "slug": "ai-frontier-homestead",
+      "title": "你的生活就是一座月球礦場：用 AI 把日常資料挖成資產",
+      "description": "AI 時代的個人，像在月球上拓荒：地上有免費工具當補給，你每天的對話、報價、筆記，其實都是礦。這篇教你不寫程式、從一件小事開始，把日常資料挖成會重複生錢的資產，一步步蓋出自己的據點。",
+      "scene": "鴨編的碎碎念",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "Agent",
+        "Skill",
+        "LLM"
+      ],
+      "prerequisites": [],
+      "modules": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/ai-frontier-homestead/"
     },
     {
       "slug": "karpathy-ai-funnel",
