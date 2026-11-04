@@ -37,11 +37,12 @@ But the crates change. Free plans often get adjusted, and a credit you have toda
 
 The first step in mining isn't digging; it's surveying. Take a sheet of paper and write down what you produce every day and handle over and over.
 
-The three examples below are made-up scenarios for illustration only, not real cases. They're here to show you how to take inventory:
+The four examples below are made-up scenarios for illustration only, not real cases. They're here to show you how to take inventory:
 
-- **Imagine the breakfast shop owner around the corner**: the daily orders, the regulars' tastes, how business drops on rainy days.
-- **Imagine a violin teacher**: each student's practice progress, the mistakes they keep making, the practice methods the teacher explains again and again.
-- **Imagine a freelance designer**: past proposals, the questions clients keep asking, how quotes are calculated.
+- **Imagine a salesperson**: client correspondence, quotes you've already sent, the terms clients keep asking about, and which clients come back to buy again.
+- **Imagine a department manager**: weekly meeting notes, tasks you've delegated and their progress, and the same questions your team keeps asking.
+- **Imagine a beauty salon manager (service industry)**: common complaints and how you replied, regulars' preferences, and which time slots always end up overbooked.
+- **Imagine the owner of a small goods shop (retail)**: stock-in and stock-on-hand records, customers asking about sizes or whether something is in stock, which products sell best, and how customers react when something sells out.
 
 These look like small things, but they're all veins. Your ore is probably hiding in the category you pay the least attention to.
 
@@ -60,8 +61,8 @@ If two or more answers are "yes," it's worth digging. If you can't answer, set i
 Many people hear "AI automation" and back off, thinking it takes technical skill. In reality, mining rigs come in three levels, and you can upgrade one at a time:
 
 - **Manual**: Paste your material into an AI and ask it to organize it into a table, key points, or a reply draft. You can do this today, with no setup.
-- **Semi-automatic**: Write your usual way of doing things as a fixed prompt, or set up a small dedicated assistant that remembers your rules. For example, a teacher dictates today's progress after each class, and the AI turns it into a student progress record. (For how to write fixed instructions, see [How to Set a System Prompt](/en/articles/set-system-prompt/). For feeding context by speaking, see [Voice Input for AI Context](/en/articles/voice-input-ai-context/).)
-- **Automated**: Let an AI agent do work on a schedule. For example, a designer's assistant sorts new inquiries each week and drafts replies, and the designer only does the final check. This level takes more setup, so wait until the first two steps feel comfortable.
+- **Semi-automatic**: Write your usual way of doing things as a fixed prompt, or set up a small dedicated assistant that remembers your rules. For example, a manager dictates the key points after each meeting, and the AI turns them into meeting notes and an action-item list. (For how to write fixed instructions, see [How to Set a System Prompt](/en/articles/set-system-prompt/). For feeding context by speaking, see [Voice Input for AI Context](/en/articles/voice-input-ai-context/).)
+- **Automated**: Let an AI agent do work on a schedule. For example, a salesperson's assistant sorts new client inquiries each week and drafts quote replies, and the salesperson only does the final check. This level takes more setup, so wait until the first two steps feel comfortable.
 
 The rule is simple: **pick the most annoying, most repetitive task, and move it from manual to semi-automatic. That alone saves a lot of time.**
 
@@ -69,9 +70,10 @@ The rule is simple: **pick the most annoying, most repetitive task, and move it 
 
 Ore has to be refined before it's worth anything. "Activating an asset" means turning what's sitting in your phone, your computer, and your head into something that keeps creating value:
 
-- The breakfast shop owner writes down regulars' tastes as a list, which makes it possible to offer a "say one sentence and your usual is ordered" service, and to prep ingredients more accurately.
-- The violin teacher turns common mistakes and practice methods into handouts, which can later become online lessons or teaching material for new students.
-- The designer turns past proposals into a template library, so the next project doesn't start from scratch. In effect, capacity goes up.
+- The salesperson turns past quotes and client correspondence into a template library, so the next quote doesn't start from scratch. In effect, capacity goes up.
+- The manager turns meeting notes into a delegation template, so follow-ups after each meeting are less likely to slip through the cracks.
+- The salon manager turns common complaints and standard replies into a script list, so new staff get up to speed faster and customers don't have to wait as long.
+- The shop owner turns stock-in and stock-on-hand records into restocking rules, so they can order ahead and run out of stock less often.
 
 These are imagined scenarios, but the point is the same: **organize it once, and use it every time after.**
 
