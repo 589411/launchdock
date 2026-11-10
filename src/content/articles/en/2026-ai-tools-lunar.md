@@ -15,15 +15,14 @@ stuckOptions:
   "Is the free tier enough?": ["Is the free tier always worse than a paid plan?", "When do I actually need to upgrade?"]
   "What is the battery, exactly?": ["Do answers get more accurate once I pay?", "It stopped halfway: is that a quota issue or the wrong tool?"]
   "How do I build my own work system?": ["How is this different from knowledge management?", "What should I accumulate first?"]
+  "What is raw material? Isn't the finished product the goal?": ["What counts as raw material?", "How do I keep what I learn from a limited-time window?"]
 ---
 
 ## Imagine you have just landed on the moon
 
-Under your feet is a stretch of land nobody has worked yet. Your mission is simple: get settled, dig out something valuable, and make a life here.
+Getting chased around by "yet another new AI tool"? This piece does not hand you a shopping list. It gives you a way of thinking about tools: tools change, but what you are really building is your own work system.
 
-Start with whatever you have in your hands.
-
-This piece is for anyone who wants to get real work done with AI but does not want to be chased around by "yet another new tool." What you take away is not a shopping list but a way of thinking about tools.
+Under your feet is a stretch of land nobody has worked yet. Your mission is simple: get settled, dig out something valuable, and make a life here. Start with whatever you have in your hands.
 
 ## 1. Start with the small shovel
 
@@ -33,7 +32,7 @@ For most people, the first tool is free. You open a chat window, ask a question,
 
 That is the small shovel.
 
-A small shovel is slow. You have to bend over, and every so often you stop to catch your breath. But do not underestimate it: if you know what you are digging for, a small shovel still brings up valuable ore. A summary of a client's email, a first draft of meeting notes, the outline of a proposal. You can start all of these with a free tool, and plenty of people have their first "hey, this is actually useful" moment exactly this way.
+A small shovel is slow. You have to bend over, and every so often you stop to catch your breath. But do not underestimate it: if you know what you are digging for, a small shovel still brings up valuable ore. A summary of a client's email, a first draft of meeting notes, the outline of a proposal. You can start all of these with a free tool. A lot of people's first "hey, this is actually useful" moment comes from exactly this kind of small task.
 
 So the first reminder: **free does not mean worthless, and you do not need to rush to prove you are "ready to upgrade."** Use what you have and finish one small task you genuinely need done. That matters more than researching which shovel is newest or shiniest. If the endless tool lists are making you anxious, start with [AI Using Tools On Its Own Is Becoming the Baseline—So You Don't Need to FOMO](/en/articles/dont-fomo-ai-tools/).
 
@@ -45,7 +44,7 @@ As you keep digging, you notice that real work is never just one scoop.
 
 Today there is a whole stack of data to sort out, tomorrow you need to compare three documents, and the day after you have to repeat the same process ten times. The small shovel is not incapable here; it just takes too much effort and gets interrupted too easily.
 
-So some people switch to a power tool. A common way is a subscription, at roughly 20 US dollars a month. A power tool lets you do more in the same amount of time, and most people who have tried it feel the productivity gap.
+So some people switch to a power tool. A common way is a subscription, at about US$20 a month. A power tool lets you do more in the same amount of time, and people who have tried it often say the difference is obvious.
 
 Here is the part that is easy to mix up, so let me be clear: **the battery is how long and how much you can use the tool, meaning quota and endurance. It is not how smart the tool is, and certainly not how accurate its answers are.**
 

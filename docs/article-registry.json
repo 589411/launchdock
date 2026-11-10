@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-10-30T01:07:30.952Z",
+  "_generated": "2026-11-10T13:51:52.638Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -2238,6 +2238,24 @@
         "能力鋸齒"
       ],
       "link": "/articles/which-ai-tool-for-you/"
+    },
+    {
+      "slug": "2026-ai-tools-lunar",
+      "title": "2026 年，怎麼看待 AI 工具：從小鏟子到你的月球基地",
+      "description": "免費版是小鏟子、訂閱是電動工具、限時的最強模型是大型機具。這篇用一則月球拓荒的比喻，講清楚看待 AI 工具的方法：工具會換，你真正要蓋的是自己的工作系統。",
+      "scene": "鴨編的碎碎念",
+      "difficulty": "入門",
+      "contentType": "guide",
+      "tags": [
+        "LLM",
+        "Skill",
+        "Agent"
+      ],
+      "prerequisites": [],
+      "modules": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/2026-ai-tools-lunar/"
     },
     {
       "slug": "ai-speed-and-opportunity",
