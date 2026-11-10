@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-11-10T13:51:52.638Z",
+  "_generated": "2026-11-10T14:21:43.822Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
