@@ -15,7 +15,8 @@ stuckOptions:
   "Is the free tier enough?": ["Is the free tier always worse than a paid plan?", "When do I actually need to upgrade?"]
   "What is the battery, exactly?": ["Do answers get more accurate once I pay?", "It stopped halfway: is that a quota issue or the wrong tool?"]
   "How do I build my own work system?": ["How is this different from knowledge management?", "What should I accumulate first?"]
-  "What is raw material? Isn't the finished product the goal?": ["What counts as raw material?", "How do I keep what I learn from a limited-time window?"]
+  "What is a toolmachine? Is it just a Skill?": ["How is a toolmachine different from a script or a workflow?", "Do I have to write code to build one?"]
+  "When the discount ends, do my toolmachines still work?": ["Can an ordinary model still run what I built?", "If I switch to another tool later, does what I built still carry over?"]
 ---
 
 ## Imagine you have just landed on the moon
@@ -52,19 +53,19 @@ Think of it this way. Same power tool, small battery: it dies halfway and the wo
 
 So when you catch yourself thinking "why did it stop again halfway," ask first: am I hitting a quota limit, or is this tool simply wrong for the job? The two have different answers and different fixes. The picture above shows the whole journey from left to right: the charge runs out, the battery gets swapped, the digging continues, and at the far right someone still has to pick up a magnifying glass and check.
 
-## 3. Heavy machinery has a schedule: use the window to stock up raw material
+## 3. Heavy machinery has a schedule: seize the chance to build your own toolmachine
 
-![A large excavator on its scheduled run automatically sorting raw ore while the settler bags the material nearby](/images/articles/2026-ai-tools-lunar/03-excavator-promo.webp)
+![On the Moon, a sophisticated toolmachine is assembling and building smaller toolmachines, several finished ones lined up beside it, with a settler directing the work](/images/articles/2026-ai-tools-lunar/03-toolmachine-forge.webp)
 
-Sometimes you hit a rare moment: a particular period is unusually good value, or you happen to have access to the strongest model. It is like a mine that occasionally gets a big machine brought in, available for only a limited time.
+Sometimes you get a rare moment. A strong new model has just launched, and its trial period often comes with a discount. It is like a mine that occasionally gets a sophisticated heavy machine brought in, useful only for a limited stretch.
 
-When that happens, my advice is: **if there is a window, use it quickly.**
+When that happens, my advice is: **seize the chance, and turn your complex tasks into toolmachines of your own.**
 
-But where you spend it matters. When a large excavator starts up, scoop after scoop of rock goes onto the sorting line. What it does is dig out raw ore in bulk, automatically, and do a first pass of sorting. What you get is **raw material**, not finished gold bars.
+By "toolmachine" I mean a repeatable Skill, script, or workflow you can run again and again. It is not a one-off answer; it is a small machine that keeps working. The next time a similar job comes along, you call it out and it goes. Use the discount period to take a complicated task apart, step by step, and build it into a toolmachine.
 
-So what counts as raw material? It might be the way of asking that you only found after many tries. It might be a batch of tidy templates you can reuse later. It might be a first-hand feel for "this one is good at that, the other one fits this." These things stay with you after the window closes.
+Why do it now? Because when the discount or trial ends, the toolmachine is still in your hands, and you can keep running it on an ordinary model. The flip side: if you only watch the top model perform and never turn the process into a toolmachine you keep, then once the moment passes, all you have left is the memory of "it seemed amazing back then."
 
-The flip side: if you just leave the machine running and watch, without picking up and saving anything useful, then when the window closes all you have left is the memory of "it seemed amazing back then."
+A bonus comes along the way. Building a toolmachine will almost certainly turn up some raw ore: a prompt that finally worked, a batch of tidy templates. Keep those, but they are things you pick up on the way, not the goal. The main character is the machine you built with your own hands.
 
 ## 4. What you are really building is your own base
 
@@ -90,7 +91,7 @@ The small shovel, the power tool, and the heavy machinery are all in the end the
 
 ![The settler checking ore with a magnifying glass, with unverified raw ore and refined results on the workbench](/images/articles/2026-ai-tools-lunar/05-magnifier-refine.webp)
 
-With all that said, here is the most important thing.
+With all that said, this last checkpoint is one you cannot skip.
 
 **Paying does not automatically give you correct answers, and it does not automatically turn into gold.**
 
@@ -108,10 +109,12 @@ If you want to compress this piece into a few lines:
 
 - A free tool is a small shovel. Slow, but it digs up real things. Start there.
 - A subscription is a power tool. The battery is quota and endurance, not accuracy.
-- A rare window is heavy machinery. Use it to stock up raw material, not just for the spectacle.
+- A rare opportunity is heavy machinery. Use it to turn your complex tasks into toolmachines, not just for the spectacle.
 - What you are really building is your own working environment: Skills, a handy toolset, and an understanding of each model.
 - Paying does not guarantee gold. In the end, someone has to hold the magnifying glass.
 
-So this Monday, you do not need to rush to decide what to buy. Pick one thing you actually need to do, run it through the tools you already have, keep something that you can reuse, and then look over the result with your magnifying glass.
+So this Monday, you do not need to rush to decide what to buy. Pick one thing you actually need to do, start doing it right now with the tools you already have, keep something you can reuse, and then look over the result with your magnifying glass.
 
 That is how a base gets built, one brick at a time.
+
+Finally, here is the one thing I most want you to take away: **Start doing. Don't be afraid to get your hands dirty. Once you start accumulating experience, results get richer each time.** Tools will change and models will update, but the experience you earn by doing it yourself will stay with you.
