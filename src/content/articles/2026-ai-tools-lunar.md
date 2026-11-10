@@ -26,7 +26,7 @@ stuckOptions:
 
 ## 一、先拿起小鏟子
 
-![拓荒者在月球上用手動小鏟子挖出有價值的礦](/images/articles/2026-ai-tools-lunar/01-small-shovel.jpg)
+![拓荒者在月球上用手動小鏟子挖出有價值的礦](/images/articles/2026-ai-tools-lunar/01-small-shovel.webp)
 
 多數人的第一把工具是免費的。你開個對話視窗，問個問題，請它幫你整理一段文字，或者像搜尋一樣找點資料。
 
@@ -38,7 +38,7 @@ stuckOptions:
 
 ## 二、換上電動工具，差別在電池
 
-![小電池耗盡後換上較大電池，用電動工具繼續挖，右側仍要人工查核](/images/articles/2026-ai-tools-lunar/02-battery-journey.jpg)
+![小電池耗盡後換上較大電池，用電動工具繼續挖，右側仍要人工查核](/images/articles/2026-ai-tools-lunar/02-battery-journey.webp)
 
 挖著挖著，你會發現：真正的工作不會只有一鏟。
 
@@ -54,7 +54,7 @@ stuckOptions:
 
 ## 三、大型機具有檔期，要趁窗口累積原料
 
-![檔期中的大型挖掘機正在自動分選原礦，拓荒者在一旁把原料裝袋](/images/articles/2026-ai-tools-lunar/03-excavator-promo.jpg)
+![檔期中的大型挖掘機正在自動分選原礦，拓荒者在一旁把原料裝袋](/images/articles/2026-ai-tools-lunar/03-excavator-promo.webp)
 
 有時候你會遇到難得的時機：某個階段特別划算，或是剛好能用到最強的模型。就像礦場偶爾有大型機具進駐，只在一段時間內可用。
 
@@ -68,7 +68,7 @@ stuckOptions:
 
 ## 四、你真正在蓋的，是自己的基地
 
-![拓荒者站在月球根據地前，身旁有機器人、工具補給袋與技能路徑](/images/articles/2026-ai-tools-lunar/04-pioneer-base.jpg)
+![拓荒者站在月球根據地前，身旁有機器人、工具補給袋與技能路徑](/images/articles/2026-ai-tools-lunar/04-pioneer-base.webp)
 
 講到這裡，我想把話題從「工具」轉開一點。
 
@@ -88,7 +88,7 @@ stuckOptions:
 
 ## 五、最後一關：拿起放大鏡
 
-![拓荒者拿放大鏡查核礦石，工作台上有待確認的原礦與已精煉的成果](/images/articles/2026-ai-tools-lunar/05-magnifier-refine.jpg)
+![拓荒者拿放大鏡查核礦石，工作台上有待確認的原礦與已精煉的成果](/images/articles/2026-ai-tools-lunar/05-magnifier-refine.webp)
 
 說了這麼多，最後要講最重要的一件事。
 

@@ -26,7 +26,7 @@ Under your feet is a stretch of land nobody has worked yet. Your mission is simp
 
 ## 1. Start with the small shovel
 
-![A settler on the moon digging out valuable ore with a hand-operated small shovel](/images/articles/2026-ai-tools-lunar/01-small-shovel.jpg)
+![A settler on the moon digging out valuable ore with a hand-operated small shovel](/images/articles/2026-ai-tools-lunar/01-small-shovel.webp)
 
 For most people, the first tool is free. You open a chat window, ask a question, have it tidy up a paragraph, or look something up the way you would with a search engine.
 
@@ -38,7 +38,7 @@ So the first reminder: **free does not mean worthless, and you do not need to ru
 
 ## 2. Switch to a power tool: the difference is the battery
 
-![A small battery runs out, a larger one goes in, the power tool keeps digging, and on the right everything still needs a human check](/images/articles/2026-ai-tools-lunar/02-battery-journey.jpg)
+![A small battery runs out, a larger one goes in, the power tool keeps digging, and on the right everything still needs a human check](/images/articles/2026-ai-tools-lunar/02-battery-journey.webp)
 
 As you keep digging, you notice that real work is never just one scoop.
 
@@ -54,7 +54,7 @@ So when you catch yourself thinking "why did it stop again halfway," ask first: 
 
 ## 3. Heavy machinery has a schedule: use the window to stock up raw material
 
-![A large excavator on its scheduled run automatically sorting raw ore while the settler bags the material nearby](/images/articles/2026-ai-tools-lunar/03-excavator-promo.jpg)
+![A large excavator on its scheduled run automatically sorting raw ore while the settler bags the material nearby](/images/articles/2026-ai-tools-lunar/03-excavator-promo.webp)
 
 Sometimes you hit a rare moment: a particular period is unusually good value, or you happen to have access to the strongest model. It is like a mine that occasionally gets a big machine brought in, available for only a limited time.
 
@@ -68,7 +68,7 @@ The flip side: if you just leave the machine running and watch, without picking 
 
 ## 4. What you are really building is your own base
 
-![The settler standing in front of a moon base, with a robot, supply bags of tools, and a skill path beside them](/images/articles/2026-ai-tools-lunar/04-pioneer-base.jpg)
+![The settler standing in front of a moon base, with a robot, supply bags of tools, and a skill path beside them](/images/articles/2026-ai-tools-lunar/04-pioneer-base.webp)
 
 At this point I want to turn the conversation away from "tools" a little.
 
@@ -88,7 +88,7 @@ The small shovel, the power tool, and the heavy machinery are all in the end the
 
 ## 5. The final step: pick up the magnifying glass
 
-![The settler checking ore with a magnifying glass, with unverified raw ore and refined results on the workbench](/images/articles/2026-ai-tools-lunar/05-magnifier-refine.jpg)
+![The settler checking ore with a magnifying glass, with unverified raw ore and refined results on the workbench](/images/articles/2026-ai-tools-lunar/05-magnifier-refine.webp)
 
 With all that said, here is the most important thing.
 
