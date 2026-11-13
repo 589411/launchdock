@@ -5,6 +5,7 @@ import {
   latestKuaibaoEpisode,
   kuaibaoYoutubeWatchUrl,
   kuaibaoPodcastEpisodeUrl,
+  kuaibaoLatestUrl,
   formatKuaibaoDate,
 } from '../data/kuaibao';
 
@@ -54,6 +55,10 @@ const podcastUrl = kuaibaoPodcastEpisodeUrl();
         <li><a href={youtubeUrl} target="_blank" rel="noopener noreferrer">在 YouTube 觀看</a></li>
         <li><a href={podcastUrl} target="_blank" rel="noopener noreferrer">Podcast 單集頁</a></li>
       </ul>
+      <p>
+        分享這個連結，永遠是最新一集：
+        <a href={kuaibaoLatestUrl}>{kuaibaoLatestUrl}</a>
+      </p>
 
       <h2>聯絡我們</h2>
       <p>

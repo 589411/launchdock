@@ -5,6 +5,7 @@ import {
   latestKuaibaoEpisode,
   kuaibaoYoutubeWatchUrl,
   kuaibaoPodcastEpisodeUrl,
+  kuaibaoLatestEnUrl,
   formatKuaibaoDate,
 } from '../../data/kuaibao';
 
@@ -54,6 +55,10 @@ const podcastUrl = kuaibaoPodcastEpisodeUrl();
         <li><a href={youtubeUrl} target="_blank" rel="noopener noreferrer">Watch on YouTube</a></li>
         <li><a href={podcastUrl} target="_blank" rel="noopener noreferrer">Podcast episode page</a></li>
       </ul>
+      <p>
+        Share this link — it always goes to the latest episode:
+        <a href={kuaibaoLatestEnUrl}>{kuaibaoLatestEnUrl}</a>
+      </p>
 
       <h2>Contact</h2>
       <p>

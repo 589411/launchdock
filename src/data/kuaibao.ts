@@ -2,7 +2,8 @@
  * 藍鴨快報 — shared show links and the latest episode.
  *
  * Daily update: change `latestKuaibaoEpisode` only (date + youtubeId).
- * The homepage promo and both /kuaibao/ pages import this file.
+ * The homepage promo, both /kuaibao/ pages, and the /kuaibao/latest
+ * short link (generated into dist/_redirects at build time) all import this file.
  */
 export const kuaibaoShow = {
   youtubePlaylist: 'https://www.youtube.com/playlist?list=PLOEkqRg9_ZDk',
@@ -17,6 +18,12 @@ export const latestKuaibaoEpisode = {
   date: '2026-11-13',
   youtubeId: 'H7tk0zcjDko',
 } as const;
+
+/** Stable short links. Always 302 to the current `latestKuaibaoEpisode` after deploy. */
+export const kuaibaoLatestPath = '/kuaibao/latest/';
+export const kuaibaoLatestEnPath = '/en/kuaibao/latest/';
+export const kuaibaoLatestUrl = 'https://launchdock.app/kuaibao/latest/';
+export const kuaibaoLatestEnUrl = 'https://launchdock.app/en/kuaibao/latest/';
 
 export function kuaibaoYoutubeWatchUrl(id = latestKuaibaoEpisode.youtubeId) {
   return `https://youtu.be/${id}`;
