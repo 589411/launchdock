@@ -1,13 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  kuaibaoShow,
+  latestKuaibaoEpisode,
+  kuaibaoYoutubeWatchUrl,
+  kuaibaoPodcastEpisodeUrl,
+  formatKuaibaoDate,
+} from '../data/kuaibao';
 
 // TODO: Apple Podcasts 尚未送審，上架後再補連結（目前不放網址）。
 const links = [
-  { label: 'YouTube 播放清單', note: '所有集數都在這裡', href: 'https://www.youtube.com/playlist?list=PLOEkqRg9_ZDk' },
-  { label: 'Spotify', note: '用 Podcast 的方式收聽', href: 'https://open.spotify.com/show/6tSd8u5FX9XhHRZEUzvMvO' },
-  { label: 'Podcast RSS', note: '貼進你習慣的 Podcast App', href: 'https://podcast.launchdock.app/feed.xml' },
-  { label: 'YouTube 頻道「跟著Joseph學AI」', note: '更多 AI 實作影片', href: 'https://www.youtube.com/@跟著Joseph學AI' },
+  { label: 'YouTube 播放清單', note: '所有集數都在這裡', href: kuaibaoShow.youtubePlaylist },
+  { label: 'Spotify', note: '用 Podcast 的方式收聽', href: kuaibaoShow.spotify },
+  { label: 'Podcast RSS', note: '貼進你習慣的 Podcast App', href: kuaibaoShow.rss },
+  { label: 'YouTube 頻道「跟著Joseph學AI」', note: '更多 AI 實作影片', href: kuaibaoShow.youtubeChannel },
 ];
+
+const latestDate = formatKuaibaoDate(latestKuaibaoEpisode.date, 'zh-tw');
+const youtubeUrl = kuaibaoYoutubeWatchUrl();
+const podcastUrl = kuaibaoPodcastEpisodeUrl();
 ---
 
 <BaseLayout
@@ -38,16 +49,16 @@ const links = [
       </ul>
 
       <h2>最新一集</h2>
-      <p>2026/11/13</p>
+      <p>{latestDate}</p>
       <ul>
-        <li><a href="https://youtu.be/H7tk0zcjDko" target="_blank" rel="noopener noreferrer">在 YouTube 觀看</a></li>
-        <li><a href="https://podcast.launchdock.app/episodes/2026-11-13/" target="_blank" rel="noopener noreferrer">Podcast 單集頁</a></li>
+        <li><a href={youtubeUrl} target="_blank" rel="noopener noreferrer">在 YouTube 觀看</a></li>
+        <li><a href={podcastUrl} target="_blank" rel="noopener noreferrer">Podcast 單集頁</a></li>
       </ul>
 
       <h2>聯絡我們</h2>
       <p>
         想給節目建議、或有想聊的 AI 話題，歡迎來信：
-        <a href="mailto:podcast@launchdock.app">podcast@launchdock.app</a>
+        <a href={`mailto:${kuaibaoShow.contactEmail}`}>{kuaibaoShow.contactEmail}</a>
       </p>
     </div>
   </div>

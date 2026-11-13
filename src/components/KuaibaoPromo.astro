@@ -1,0 +1,313 @@
+---
+import type { Locale } from '../i18n/ui';
+import {
+  kuaibaoShow,
+  latestKuaibaoEpisode,
+  kuaibaoThumbnailUrl,
+  formatKuaibaoDate,
+} from '../data/kuaibao';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'zh-tw' } = Astro.props;
+const isEn = lang === 'en';
+const ep = latestKuaibaoEpisode;
+const dateLabel = formatKuaibaoDate(ep.date, isEn ? 'en' : 'zh-tw');
+const moreHref = isEn ? '/en/kuaibao/' : '/kuaibao/';
+const thumb = kuaibaoThumbnailUrl(ep.youtubeId);
+
+const copy = isEn
+  ? {
+      eyebrow: 'New daily',
+      title: 'Blue Duck Briefing: latest AI news from X',
+      pitch:
+        'Every day, about 3 minutes — the latest AI news from X, hosted by Joseph and Xiaowei. Episodes are in Mandarin.',
+      watch: 'Watch',
+      spotify: 'Listen on Spotify',
+      rss: 'Subscribe via RSS',
+      more: 'More episodes',
+      playLabel: `Play the latest episode (${dateLabel})`,
+      badge: `${dateLabel} · Latest`,
+      iframeTitle: 'Blue Duck Briefing — latest episode',
+    }
+  : {
+      eyebrow: '每天更新',
+      title: '藍鴨快報：來自 X 最新的 AI 新聞',
+      pitch: '每天約 3 分鐘，由 Joseph 主持、小薇搭檔，整理 X 上最新的 AI 消息。歡迎收看、收聽。',
+      watch: '看影片',
+      spotify: 'Spotify 收聽',
+      rss: '訂閱 RSS',
+      more: '更多集數',
+      playLabel: `播放最新一集（${dateLabel}）`,
+      badge: `${dateLabel} · 最新一集`,
+      iframeTitle: '藍鴨快報最新一集',
+    };
+---
+
+<section class="kuaibao-promo" aria-labelledby="kuaibao-promo-title" data-youtube-id={ep.youtubeId}>
+  <div class="kuaibao-promo-inner">
+    <div class="kuaibao-promo-copy">
+      <p class="kuaibao-promo-eyebrow">{copy.eyebrow}</p>
+      <h2 id="kuaibao-promo-title" class="kuaibao-promo-title">{copy.title}</h2>
+      <p class="kuaibao-promo-pitch">{copy.pitch}</p>
+      <div class="kuaibao-promo-ctas">
+        <a class="kuaibao-cta kuaibao-cta-primary" href={kuaibaoShow.youtubePlaylist} target="_blank" rel="noopener noreferrer">
+          {copy.watch}
+        </a>
+        <a class="kuaibao-cta" href={kuaibaoShow.spotify} target="_blank" rel="noopener noreferrer">
+          {copy.spotify}
+        </a>
+        <a class="kuaibao-cta" href={kuaibaoShow.rss} target="_blank" rel="noopener noreferrer">
+          {copy.rss}
+        </a>
+        <a class="kuaibao-cta" href={moreHref}>
+          {copy.more}
+        </a>
+      </div>
+    </div>
+
+    <div class="kuaibao-player" data-youtube-id={ep.youtubeId} data-iframe-title={copy.iframeTitle}>
+      <button type="button" class="kuaibao-play" aria-label={copy.playLabel}>
+        <img
+          src={thumb}
+          alt={copy.playLabel}
+          width="480"
+          height="360"
+          loading="eager"
+          decoding="async"
+          onerror="if (!this.dataset.fallback) { this.dataset.fallback = '1'; this.src = this.src.replace('hqdefault', 'mqdefault'); }"
+        />
+        <span class="kuaibao-play-btn" aria-hidden="true">▶</span>
+        <span class="kuaibao-ep-badge">{copy.badge}</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.kuaibao-player').forEach((el) => {
+    if (el.dataset.bound) return;
+    el.dataset.bound = '1';
+    const btn = el.querySelector<HTMLButtonElement>('.kuaibao-play');
+    btn?.addEventListener('click', () => {
+      const id = el.getAttribute('data-youtube-id');
+      if (!id) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.title = el.getAttribute('data-iframe-title') || 'YouTube';
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('loading', 'lazy');
+      el.replaceChildren(iframe);
+    });
+  });
+</script>
+
+<style>
+  .kuaibao-promo {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 60%, #16213e 100%);
+    color: #f8fafc;
+    padding: 20px 0 16px;
+    border-bottom: 1px solid rgba(249, 168, 37, 0.28);
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .kuaibao-promo-inner {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 340px);
+    gap: 24px 32px;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .kuaibao-promo-copy {
+    min-width: 0;
+  }
+
+  .kuaibao-promo-eyebrow {
+    display: inline-block;
+    margin: 0 0 8px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: rgba(249, 168, 37, 0.18);
+    border: 1px solid rgba(249, 168, 37, 0.55);
+    color: #f9a825;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .kuaibao-promo-title {
+    margin: 0 0 8px;
+    font-size: 1.45rem;
+    line-height: 1.3;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #fff;
+    overflow-wrap: break-word;
+  }
+
+  .kuaibao-promo-pitch {
+    margin: 0 0 16px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: #cbd5e1;
+    overflow-wrap: break-word;
+  }
+
+  .kuaibao-promo-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .kuaibao-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  .kuaibao-cta:hover {
+    border-color: rgba(249, 168, 37, 0.8);
+    color: #f9a825;
+  }
+
+  .kuaibao-cta-primary {
+    background: #f9a825;
+    border-color: #f9a825;
+    color: #1a1a2e;
+  }
+
+  .kuaibao-cta-primary:hover {
+    background: #ffb83b;
+    border-color: #ffb83b;
+    color: #1a1a2e;
+  }
+
+  .kuaibao-player {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0b1220;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(249, 168, 37, 0.35);
+  }
+
+  .kuaibao-player iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .kuaibao-play {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background: #0b1220;
+  }
+
+  .kuaibao-play img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .kuaibao-play-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    background: rgba(26, 26, 46, 0.82);
+    border: 2px solid #f9a825;
+    color: #f9a825;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    padding-left: 4px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .kuaibao-play:hover .kuaibao-play-btn,
+  .kuaibao-play:focus-visible .kuaibao-play-btn {
+    background: #f9a825;
+    color: #1a1a2e;
+  }
+
+  .kuaibao-ep-badge {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(26, 26, 46, 0.88);
+    color: #f9a825;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: 720px) {
+    .kuaibao-promo {
+      padding: 14px 0 12px;
+    }
+    .kuaibao-promo-inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+      padding: 0 20px;
+    }
+    .kuaibao-promo-title {
+      font-size: 1.2rem;
+    }
+    .kuaibao-promo-pitch {
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+    .kuaibao-player {
+      order: -1;
+    }
+    .kuaibao-promo-ctas {
+      width: 100%;
+    }
+    .kuaibao-cta {
+      padding: 7px 12px;
+      font-size: 0.8125rem;
+      flex: 1 1 calc(50% - 8px);
+      box-sizing: border-box;
+    }
+  }
+
+  :global(.hero-after-kuaibao.hero-section) {
+    padding-top: 28px;
+  }
+</style>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import KuaibaoPromo from '../../components/KuaibaoPromo.astro';
 import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articlesEn', ({ data }) => !data.archived);
@@ -11,9 +12,11 @@ const hasArticles = allArticles.length > 0;
   lang="en"
   description="LaunchDock — Step-by-step interactive AI tutorials. Learn how to run OpenClaw from scratch. The first English-language visual tutorial site for OpenClaw."
 >
+  <KuaibaoPromo lang="en" />
+
   <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <div class="max-w-[900px] mx-auto px-6 py-20 text-center">
+  <section class="relative overflow-hidden hero-after-kuaibao">
+    <div class="max-w-[900px] mx-auto px-6 pt-8 pb-20 text-center">
       <div class="flex justify-center mb-6">
         <img src="/logo.png" alt="LaunchDock" class="w-40 md:w-56 h-auto" />
       </div>
