@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// TODO: Apple Podcasts 尚未送審，上架後再補連結（目前不放網址）。
+const links = [
+  { label: 'YouTube 播放清單', note: '所有集數都在這裡', href: 'https://www.youtube.com/playlist?list=PLOEkqRg9_ZDk' },
+  { label: 'Spotify', note: '用 Podcast 的方式收聽', href: 'https://open.spotify.com/show/6tSd8u5FX9XhHRZEUzvMvO' },
+  { label: 'Podcast RSS', note: '貼進你習慣的 Podcast App', href: 'https://podcast.launchdock.app/feed.xml' },
+  { label: 'YouTube 頻道「跟著Joseph學AI」', note: '更多 AI 實作影片', href: 'https://www.youtube.com/@跟著Joseph學AI' },
+];
+---
+
+<BaseLayout
+  title="藍鴨快報"
+  lang="zh-tw"
+  description="藍鴨快報：來自 X 最新的 AI 新聞。每天約 3 分鐘，整理 X 上最新的 AI 消息，由 Joseph 主持、小薇搭檔。"
+>
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold mb-2">藍鴨快報</h1>
+    <p class="text-text-secondary mb-6">來自 X 最新的 AI 新聞</p>
+
+    <div class="prose">
+      <h2>這是什麼？</h2>
+      <p>
+        AI 的消息每天都在冒出來，而且大多先出現在 X 上。
+        我們把這些消息整理成每天約 3 分鐘的快報，由 Joseph 主持、小薇搭檔，
+        讓你在通勤或喝咖啡的空檔，輕鬆跟上最新動態。
+      </p>
+
+      <h2>在哪裡收看／收聽</h2>
+      <ul>
+        {links.map((l) => (
+          <li>
+            <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
+            <span> — {l.note}</span>
+          </li>
+        ))}
+      </ul>
+
+      <h2>最新一集</h2>
+      <p>2026/11/13</p>
+      <ul>
+        <li><a href="https://youtu.be/H7tk0zcjDko" target="_blank" rel="noopener noreferrer">在 YouTube 觀看</a></li>
+        <li><a href="https://podcast.launchdock.app/episodes/2026-11-13/" target="_blank" rel="noopener noreferrer">Podcast 單集頁</a></li>
+      </ul>
+
+      <h2>聯絡我們</h2>
+      <p>
+        想給節目建議、或有想聊的 AI 話題，歡迎來信：
+        <a href="mailto:podcast@launchdock.app">podcast@launchdock.app</a>
+      </p>
+    </div>
+  </div>
+</BaseLayout>

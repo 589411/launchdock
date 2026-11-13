@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// TODO: Apple Podcasts is not submitted yet; add the link once it is live (no URL for now).
+const links = [
+  { label: 'YouTube playlist', note: 'every episode in one place', href: 'https://www.youtube.com/playlist?list=PLOEkqRg9_ZDk' },
+  { label: 'Spotify', note: 'listen as a podcast', href: 'https://open.spotify.com/show/6tSd8u5FX9XhHRZEUzvMvO' },
+  { label: 'Podcast RSS', note: 'paste into your favorite podcast app', href: 'https://podcast.launchdock.app/feed.xml' },
+  { label: 'YouTube channel (跟著Joseph學AI)', note: 'more hands-on AI videos', href: 'https://www.youtube.com/@跟著Joseph學AI' },
+];
+---
+
+<BaseLayout
+  title="藍鴨快報 (Blue Duck Briefing)"
+  lang="en"
+  description="藍鴨快報 — the latest AI news from X in about 3 minutes a day, hosted by Joseph with co-host Xiaowei. Episodes are in Mandarin Chinese."
+>
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold mb-2">藍鴨快報</h1>
+    <p class="text-text-secondary mb-6">Blue Duck Briefing — the latest AI news from X</p>
+
+    <div class="prose">
+      <h2>What is it?</h2>
+      <p>
+        AI news moves fast, and much of it shows up on X first.
+        We boil it down into a roughly 3-minute daily briefing, hosted by Joseph with Xiaowei as co-host,
+        so you can catch up over a coffee or on your commute. Episodes are in Mandarin Chinese.
+      </p>
+
+      <h2>Watch or listen</h2>
+      <ul>
+        {links.map((l) => (
+          <li>
+            <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
+            <span> — {l.note}</span>
+          </li>
+        ))}
+      </ul>
+
+      <h2>Latest episode</h2>
+      <p>2026-11-13</p>
+      <ul>
+        <li><a href="https://youtu.be/H7tk0zcjDko" target="_blank" rel="noopener noreferrer">Watch on YouTube</a></li>
+        <li><a href="https://podcast.launchdock.app/episodes/2026-11-13/" target="_blank" rel="noopener noreferrer">Podcast episode page</a></li>
+      </ul>
+
+      <h2>Contact</h2>
+      <p>
+        Feedback or topics you'd like us to cover? Write to
+        <a href="mailto:podcast@launchdock.app">podcast@launchdock.app</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
