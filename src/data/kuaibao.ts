@@ -15,8 +15,8 @@ export const kuaibaoShow = {
 
 /** Bump `date` (YYYY-MM-DD) and `youtubeId` when the new daily episode goes live. */
 export const latestKuaibaoEpisode = {
-  date: '2026-11-15',
-  youtubeId: 'oyif8x7YwPA',
+  date: '2026-11-16',
+  youtubeId: 'pg8oT_suGZQ',
 } as const;
 
 /** Stable short links. Always 302 to the current `latestKuaibaoEpisode` after deploy. */
