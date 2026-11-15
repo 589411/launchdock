@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  kuaibaoYoutubeWatchUrl,
+  formatKuaibaoDate,
+} from '../data/kuaibao';
+import {
+  aiNotesWeeksNewestFirst,
+  formatWeekLabel,
+} from '../data/ai-notes';
+
+const weeks = aiNotesWeeksNewestFirst();
+---
+
+<BaseLayout
+  title="AI 學習筆記"
+  lang="zh-tw"
+  description="每天看藍鴨快報，累積你的 AI 學習筆記。從每日快報記下的 AI 名詞，按週整理，連回該集與相關文章。"
+>
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <p class="text-sm text-text-muted mb-3">
+      <a href="/kuaibao/" class="hover:text-accent2 transition-colors">藍鴨快報</a>
+      <span class="mx-1.5 opacity-50">/</span>
+      <span>AI 學習筆記</span>
+    </p>
+    <h1 class="text-3xl font-bold mb-2">AI 學習筆記</h1>
+    <p class="text-text-secondary text-lg mb-8">每天看藍鴨快報，累積你的 AI 學習筆記</p>
+
+    <div class="prose mb-10">
+      <p>
+        每天約 3 分鐘的快報，不只是聽新聞。我們會從當天內容挑 1 到 2 個名詞，用一句白話記下來。
+        筆記先按日累積，每週跟著週報整理上線。
+        有意義相同的藍鴨文章，就放「延伸閱讀」；主題相近、但不是同一件事的，會標成「相關閱讀」，並寫出差別。
+      </p>
+    </div>
+
+    {weeks.length === 0 ? (
+      <p class="text-text-secondary">筆記還在累積，請先看<a href="/kuaibao/">最新一集快報</a>。</p>
+    ) : (
+      weeks.map((week) => (
+        <section class="mb-12">
+          <h2 class="text-xl font-bold mb-4">
+            {formatWeekLabel(week.start, week.end, 'zh-tw')}
+          </h2>
+          <div class="space-y-4">
+            {week.entries.map((note) => (
+              <article class="rounded-xl bg-surface-light border border-surface-lighter p-5">
+                <h3 class="text-lg font-bold mb-2">{note.term}</h3>
+                <p class="text-text-secondary leading-relaxed mb-3">{note.plain}</p>
+                <p class="text-sm text-text-muted">
+                  出現在
+                  <a
+                    href={kuaibaoYoutubeWatchUrl(note.youtubeId)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:text-accent2"
+                  >
+                    {formatKuaibaoDate(note.date, 'zh-tw')} 藍鴨快報
+                  </a>
+                  <span class="mx-1">／</span>
+                  <a
+                    href={note.podcastUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:text-accent2"
+                  >
+                    Podcast 單集
+                  </a>
+                </p>
+                {note.articleUrl && (
+                  <p class="text-sm mt-2">
+                    延伸閱讀：
+                    <a href={note.articleUrl} class="hover:text-accent2">
+                      {note.articleTitle || note.articleUrl}
+                    </a>
+                  </p>
+                )}
+                {note.related.map((item) => (
+                  <p class="text-sm mt-2 text-text-secondary">
+                    相關閱讀：
+                    <a href={item.url} class="hover:text-accent2">{item.title}</a>
+                    <span> — {item.why}</span>
+                  </p>
+                ))}
+              </article>
+            ))}
+          </div>
+        </section>
+      ))
+    )}
+  </div>
+</BaseLayout>

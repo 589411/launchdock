@@ -53,6 +53,12 @@ const isEn = lang === 'en';
           {isEn ? 'Blue Duck Briefing' : '藍鴨快報'}
         </a>
         <a
+          href={isEn ? '/en/ai-notes/' : '/ai-notes/'}
+          class="text-text-muted hover:text-accent2 transition-colors text-sm"
+        >
+          {isEn ? 'AI notes' : 'AI 筆記'}
+        </a>
+        <a
           href="https://github.com/589411/launchdock"
           target="_blank"
           rel="noopener noreferrer"

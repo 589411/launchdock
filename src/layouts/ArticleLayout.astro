@@ -7,6 +7,7 @@ import EmotionFeedback from '../components/EmotionFeedback.tsx';
 import SectionReactions from '../components/SectionReactions.tsx';
 import ArticleQA from '../components/ArticleQA.tsx';
 import RelatedArticles from '../components/RelatedArticles.astro';
+import KuaibaoAppearance from '../components/KuaibaoAppearance.astro';
 import ShareToLine from '../components/ShareToLine.astro';
 import PageViewTracker from '../components/PageViewTracker.tsx';
 import { sceneKeyToLabel, difficultyKeyToLabel, type Locale } from '../i18n/ui';
@@ -135,6 +136,8 @@ const homeName = lang === 'en' ? 'LaunchDock' : '藍鴨 LaunchDock';
     <div class="mt-12 pt-8 border-t border-surface-lighter">
       <EmotionFeedback client:load slug={slug} />
     </div>
+
+    <KuaibaoAppearance slug={slug} lang={lang} />
 
     <!-- Related Articles (auto-generated from concepts.yaml) -->
     <div class="mt-10">

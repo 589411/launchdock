@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  kuaibaoYoutubeWatchUrl,
+  formatKuaibaoDate,
+} from '../../data/kuaibao';
+import {
+  aiNotesWeeksNewestFirst,
+  formatWeekLabel,
+} from '../../data/ai-notes';
+
+const weeks = aiNotesWeeksNewestFirst();
+---
+
+<BaseLayout
+  title="AI Learning Notes"
+  lang="en"
+  description="Watch Blue Duck Briefing each day and build your AI learning notes. Terms are in Traditional Chinese, as in the show."
+>
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <p class="text-sm text-text-muted mb-3">
+      <a href="/en/kuaibao/" class="hover:text-accent2 transition-colors">Blue Duck Briefing</a>
+      <span class="mx-1.5 opacity-50">/</span>
+      <span>AI Learning Notes</span>
+    </p>
+    <h1 class="text-3xl font-bold mb-2">AI Learning Notes</h1>
+    <p class="text-text-secondary text-lg mb-8">Watch Blue Duck Briefing each day, and build your AI learning notes.</p>
+
+    <div class="prose mb-10">
+      <p>
+        Each weekday episode is about three minutes, in Mandarin Chinese.
+        We pick one or two terms from that day's stories and write a plain one-line explanation.
+        Notes accumulate daily and go live weekly with the Saturday weekly report.
+        When a LaunchDock article covers the same idea, we link it as further reading.
+        A similar-but-different article is labeled as related reading, with the difference spelled out.
+      </p>
+    </div>
+
+    {weeks.length === 0 ? (
+      <p class="text-text-secondary">Notes are still accumulating. See the <a href="/en/kuaibao/">latest episode</a>.</p>
+    ) : (
+      weeks.map((week) => (
+        <section class="mb-12">
+          <h2 class="text-xl font-bold mb-4">
+            {formatWeekLabel(week.start, week.end, 'en')}
+          </h2>
+          <div class="space-y-4">
+            {week.entries.map((note) => (
+              <article class="rounded-xl bg-surface-light border border-surface-lighter p-5">
+                <h3 class="text-lg font-bold mb-2">{note.term}</h3>
+                <p class="text-text-secondary leading-relaxed mb-3">{note.plain}</p>
+                <p class="text-sm text-text-muted">
+                  From
+                  <a
+                    href={kuaibaoYoutubeWatchUrl(note.youtubeId)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:text-accent2"
+                  >
+                    Blue Duck Briefing {formatKuaibaoDate(note.date, 'en')}
+                  </a>
+                  <span class="mx-1">/</span>
+                  <a
+                    href={note.podcastUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:text-accent2"
+                  >
+                    podcast episode
+                  </a>
+                </p>
+                {note.articleUrl && (
+                  <p class="text-sm mt-2">
+                    Further reading:
+                    <a href={note.articleUrl} class="hover:text-accent2">
+                      {note.articleTitle || note.articleUrl}
+                    </a>
+                  </p>
+                )}
+                {note.related.map((item) => (
+                  <p class="text-sm mt-2 text-text-secondary">
+                    Related reading:
+                    <a href={item.url} class="hover:text-accent2">{item.title}</a>
+                    <span> — {item.why}</span>
+                  </p>
+                ))}
+              </article>
+            ))}
+          </div>
+        </section>
+      ))
+    )}
+  </div>
+</BaseLayout>

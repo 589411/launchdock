@@ -1,0 +1,38 @@
+---
+import { notesForArticleSlug } from '../data/ai-notes';
+import { kuaibaoYoutubeWatchUrl, formatKuaibaoDate } from '../data/kuaibao';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  slug: string;
+  lang?: Locale;
+}
+
+const { slug, lang = 'zh-tw' } = Astro.props;
+const notes = notesForArticleSlug(slug);
+const isEn = lang === 'en';
+---
+
+{notes.length > 0 && (
+  <aside class="mt-10 rounded-xl bg-surface-light border border-surface-lighter p-5">
+    <h2 class="text-lg font-bold mb-3">
+      {isEn ? 'Featured in Blue Duck Briefing' : '出現在藍鴨快報'}
+    </h2>
+    <ul class="space-y-2 text-sm text-text-secondary">
+      {notes.map((note) => (
+        <li>
+          <a
+            href={kuaibaoYoutubeWatchUrl(note.youtubeId)}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-accent2"
+          >
+            {formatKuaibaoDate(note.date, isEn ? 'en' : 'zh-tw')}
+          </a>
+          <span> — {note.term}</span>
+          <span class="text-text-muted">（{note.plain}）</span>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}
