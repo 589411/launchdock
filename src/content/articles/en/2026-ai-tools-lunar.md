@@ -23,6 +23,18 @@ stuckOptions:
 
 Getting chased around by "yet another new AI tool"? This piece does not hand you a shopping list. It gives you a way of thinking about tools: tools change, but what you are really building is your own work system.
 
+This article also has a companion video (about 10 minutes and 45 seconds, in Traditional Chinese), hosted by Joseph and 小薇 on the "跟著Joseph學AI" channel. You can watch it here, or [open it on YouTube](https://www.youtube.com/watch?v=hTpNhOv8MpM).
+
+<div class="video-wrapper">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/hTpNhOv8MpM?rel=0"
+    title="AI 只是用來問問題嗎？讓它做事，從這裡開始"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div>
+
 Under your feet is a stretch of land nobody has worked yet. Your mission is simple: get settled, dig out something valuable, and make a life here. Start with whatever you have in your hands.
 
 ## 1. Start with the small shovel

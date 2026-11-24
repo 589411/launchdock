@@ -24,6 +24,18 @@ stuckOptions:
 
 想用 AI 做事，卻老被「又出了新工具」追著跑？這篇不給你採購清單，給的是一個看待工具的方法：工具會換，你真正要蓋的是自己的工作系統。
 
+這篇也有一支對應影片（約 10 分 45 秒），由「跟著Joseph學AI」的 Joseph 與小薇主持。想先在這裡看，或到 [YouTube 開啟](https://www.youtube.com/watch?v=hTpNhOv8MpM) 都可以。
+
+<div class="video-wrapper">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/hTpNhOv8MpM?rel=0"
+    title="AI 只是用來問問題嗎？讓它做事，從這裡開始"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div>
+
 腳下是一整片還沒人開墾的土地。你的任務很單純：在這裡站穩，挖出有價值的東西，把日子過起來。手上有什麼，就從什麼開始。
 
 ## 一、先拿起小鏟子
