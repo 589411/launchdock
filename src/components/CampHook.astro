@@ -1,0 +1,243 @@
+---
+import type { Locale } from '../i18n/ui';
+import { CAMP_HOOK_TITLE_EN, CAMP_HOOK_TITLE_ZH, CAMP_PAGE_HREF } from '../data/camp';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'zh-tw' } = Astro.props;
+const isEn = lang === 'en';
+// zh: camp explainer page. en: no English page yet, keep the existing events notify path.
+const notifyHref = isEn ? '/en/events/' : CAMP_PAGE_HREF;
+
+const copy = isEn
+  ? {
+      eyebrow: 'Blue Duck Coaching Camp',
+      title: CAMP_HOOK_TITLE_EN,
+      pitch:
+        'Built around Google (Gmail, Calendar, and Drive) and Notion, with lessons for ChatGPT, Claude, Gemini, and Grok. The camp is taught in Traditional Chinese. Register your interest and we will let you know when it opens.',
+      cta: 'Get a start notification',
+      moreLabel: 'What the first three weeks cover',
+      formatTitle: 'How it works',
+      format:
+        'Each unit starts with a demo video, then you practice with a prepared dataset. Every exercise has a checklist and a reference answer. Units open week by week as you progress.',
+      week0Title: 'Week 0',
+      week0:
+        'Review your past AI conversations, find your own usage patterns, and write a system prompt that is yours.',
+      week1Title: 'Week 1',
+      week1:
+        'Let your AI read Gmail, Calendar, and Drive in read-only mode, and turn unreplied mail, schedule conflicts, and file figures into a weekly briefing.',
+      week2Title: 'Week 2',
+      week2:
+        'Connect Notion, build your own “My 100 Days” task board, and have the AI write a weekly review and help you set priorities.',
+      takeawayTitle: 'What you leave with',
+      takeaway:
+        'Your own system prompt, an AI assistant connected to Google and Notion, a “My 100 Days” task board, plus weekly task cards and exercises.',
+    }
+  : {
+      eyebrow: '藍鴨陪跑營',
+      title: CAMP_HOOK_TITLE_ZH,
+      pitch:
+        '以 Google（Gmail、日曆、雲端硬碟）和 Notion 為核心；ChatGPT、Claude、Gemini、Grok 都有教學。有興趣的話，可以先登記，開跑時再通知你。',
+      cta: '想收到開跑通知',
+      moreLabel: '前三週會做什麼',
+      formatTitle: '上課方式',
+      format:
+        '每單元先看示範影片，再用練習資料實作；每題都有檢核標準和參考答案。單元依進度逐週開放。',
+      week0Title: 'Week 0',
+      week0:
+        '先分析自己過去的 AI 對話，找出使用模式，寫出屬於自己的 system prompt。',
+      week1Title: 'Week 1',
+      week1:
+        '讓 AI 用唯讀方式讀 Gmail、日曆、雲端硬碟，把待回信、行程衝突、檔案數字整理成一份一週簡報。',
+      week2Title: 'Week 2',
+      week2:
+        '接上 Notion，建立自己的「我的 100 天」任務板，請 AI 寫週回顧、幫忙排優先順序。',
+      takeawayTitle: '學員會拿到',
+      takeaway:
+        '自己的 system prompt、接好 Google 和 Notion 的 AI 助理、「我的 100 天」任務板，以及每週可以照做的任務卡和題目。',
+    };
+---
+
+<section class="camp-hook" aria-labelledby="camp-hook-title">
+  <div class="camp-hook-inner">
+    <p class="camp-hook-eyebrow">{copy.eyebrow}</p>
+    <h2 id="camp-hook-title" class="camp-hook-title">{copy.title}</h2>
+    <p class="camp-hook-pitch">{copy.pitch}</p>
+    <a class="camp-hook-cta" href={notifyHref}>{copy.cta}</a>
+
+    <details class="camp-hook-more">
+      <summary>{copy.moreLabel}</summary>
+      <div class="camp-hook-more-body">
+        <p><strong>{copy.formatTitle}</strong> {copy.format}</p>
+        <p><strong>{copy.week0Title}</strong> {copy.week0}</p>
+        <p><strong>{copy.week1Title}</strong> {copy.week1}</p>
+        <p><strong>{copy.week2Title}</strong> {copy.week2}</p>
+        <p><strong>{copy.takeawayTitle}</strong> {copy.takeaway}</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<style>
+  .camp-hook {
+    background: linear-gradient(135deg, #0f3460 0%, #1a4a8a 100%);
+    color: #ffffff;
+    padding: 22px 0 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .camp-hook-inner {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  .camp-hook-eyebrow {
+    display: inline-block;
+    margin: 0 0 10px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .camp-hook-title {
+    margin: 0 0 8px;
+    font-size: 1.55rem;
+    line-height: 1.3;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    overflow-wrap: break-word;
+  }
+
+  .camp-hook-pitch {
+    margin: 0 0 16px;
+    max-width: 40em;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #ffffff;
+    opacity: 0.92;
+    overflow-wrap: break-word;
+  }
+
+  .camp-hook-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #0f3460;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid #ffffff;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .camp-hook-cta:hover,
+  .camp-hook-cta:focus-visible {
+    background: #1a4a8a;
+    color: #ffffff;
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+  }
+
+  .camp-hook-more {
+    margin-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 10px;
+  }
+
+  .camp-hook-more summary {
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #ffffff;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    user-select: none;
+  }
+
+  .camp-hook-more summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .camp-hook-more summary::before {
+    content: '';
+    width: 0.45em;
+    height: 0.45em;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    transform: rotate(-45deg);
+    transition: transform 0.15s;
+    flex-shrink: 0;
+  }
+
+  .camp-hook-more[open] summary::before {
+    transform: rotate(45deg);
+  }
+
+  .camp-hook-more-body {
+    padding: 4px 0 8px;
+    max-width: 42em;
+  }
+
+  .camp-hook-more-body p {
+    margin: 0 0 10px;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #ffffff;
+    opacity: 0.94;
+  }
+
+  .camp-hook-more-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .camp-hook-more-body strong {
+    display: inline;
+    font-weight: 700;
+    margin-right: 0.35em;
+  }
+
+  @media (max-width: 720px) {
+    .camp-hook {
+      padding: 16px 0 14px;
+    }
+
+    .camp-hook-inner {
+      padding: 0 20px;
+    }
+
+    .camp-hook-title {
+      font-size: 1.28rem;
+    }
+
+    .camp-hook-pitch {
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+
+    .camp-hook-cta {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+</style>

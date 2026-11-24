@@ -6,6 +6,7 @@ import PopularArticlesHome from '../components/PopularArticlesHome.tsx';
 import EventList from '../components/EventList.tsx';
 import homeFaq from '../data/home-faq.ts';
 import KuaibaoPromo from '../components/KuaibaoPromo.astro';
+import CampHook from '../components/CampHook.astro';
 import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.archived);
@@ -54,6 +55,7 @@ const articlesMeta = allArticles.map(a => ({
   title="首頁"
   description="藍鴨 LaunchDock 是手把手的互動式 AI 教學空間。針對影片太快、文件看不懂、實作卡關等痛點，用可跟做的路線帶你把 OpenClaw 跑起來。全台首創 OpenClaw 繁體中文視覺化教學站。"
 >
+  <CampHook lang="zh-tw" />
   <KuaibaoPromo lang="zh-tw" />
 
   <!-- Hero Section -->
