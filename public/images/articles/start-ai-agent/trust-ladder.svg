@@ -1,0 +1,38 @@
+<svg viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f3460"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="798" height="438" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="28" y="40" font-size="20" font-weight="bold" fill="#0f3460">信任是一階一階爬上去的</text>
+
+  <rect x="28" y="290" width="170" height="100" rx="10" fill="#ffffff" stroke="#8b949e"/>
+  <text x="44" y="318" font-size="13" fill="#8b949e">第 1 階</text>
+  <text x="44" y="344" font-size="17" font-weight="bold" fill="#24292f">小任務</text>
+  <text x="44" y="368" font-size="13" fill="#24292f">10–20 分鐘、能自己驗</text>
+
+  <rect x="228" y="225" width="170" height="165" rx="10" fill="#ffffff" stroke="#1f6feb"/>
+  <text x="244" y="253" font-size="13" fill="#1f6feb">第 2 階</text>
+  <text x="244" y="279" font-size="17" font-weight="bold" fill="#24292f">看得到</text>
+  <text x="244" y="303" font-size="13" fill="#24292f">讓它讀到你的檔案</text>
+  <text x="244" y="325" font-size="13" fill="#24292f">一次只開一扇門</text>
+
+  <rect x="428" y="160" width="170" height="230" rx="10" fill="#ffffff" stroke="#1976d2"/>
+  <text x="444" y="188" font-size="13" fill="#1976d2">第 3 階</text>
+  <text x="444" y="214" font-size="17" font-weight="bold" fill="#24292f">成習慣</text>
+  <text x="444" y="238" font-size="13" fill="#24292f">把規矩寫下來</text>
+  <text x="444" y="260" font-size="13" fill="#24292f">下次直接貼</text>
+
+  <rect x="628" y="95" width="148" height="295" rx="10" fill="#f1f8f4" stroke="#2e7d32"/>
+  <text x="644" y="123" font-size="13" fill="#2e7d32">第 4 階</text>
+  <text x="644" y="149" font-size="17" font-weight="bold" fill="#24292f">放手一點</text>
+  <text x="644" y="173" font-size="13" fill="#24292f">任務稍微大一點</text>
+  <text x="644" y="195" font-size="13" fill="#24292f">結果仍然自己驗</text>
+
+  <line x1="202" y1="340" x2="224" y2="340" stroke="#0f3460" stroke-width="2.5" marker-end="url(#a)"/>
+  <line x1="402" y1="340" x2="424" y2="340" stroke="#0f3460" stroke-width="2.5" marker-end="url(#a)"/>
+  <line x1="602" y1="340" x2="624" y2="340" stroke="#0f3460" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <text x="28" y="420" font-size="12" fill="#8b949e">launchdock.app</text>
+</svg>

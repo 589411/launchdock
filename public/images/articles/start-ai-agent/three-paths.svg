@@ -1,0 +1,40 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f3460"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="798" height="398" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="28" y="40" font-size="20" font-weight="bold" fill="#0f3460">讓 AI 看得到你的東西：三條路</text>
+
+  <rect x="24" y="64" width="232" height="250" rx="10" fill="#f1f8f4" stroke="#2e7d32"/>
+  <text x="44" y="94" font-size="13" fill="#2e7d32">第 1 條（先走這條）</text>
+  <text x="44" y="120" font-size="17" font-weight="bold" fill="#24292f">直接上傳</text>
+  <text x="44" y="152" font-size="13" fill="#24292f">把檔案拖進對話框</text>
+  <text x="44" y="174" font-size="13" fill="#24292f">不用設定、不用授權</text>
+  <text x="44" y="214" font-size="12.5" fill="#2e7d32">＋ 最簡單、最可控</text>
+  <text x="44" y="236" font-size="12.5" fill="#d32f2f">－ 每次要自己拖一次</text>
+
+  <line x1="262" y1="189" x2="282" y2="189" stroke="#0f3460" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <rect x="288" y="64" width="232" height="250" rx="10" fill="#eef4ff" stroke="#1f6feb"/>
+  <text x="308" y="94" font-size="13" fill="#1f6feb">第 2 條</text>
+  <text x="308" y="120" font-size="17" font-weight="bold" fill="#24292f">連接器</text>
+  <text x="308" y="152" font-size="13" fill="#24292f">授權它讀某個服務</text>
+  <text x="308" y="174" font-size="13" fill="#24292f">一次只接一個</text>
+  <text x="308" y="214" font-size="12.5" fill="#2e7d32">＋ 不用每次自己拖檔案</text>
+  <text x="308" y="236" font-size="12.5" fill="#d32f2f">－ 要授權、方案可能有限制</text>
+
+  <line x1="526" y1="189" x2="546" y2="189" stroke="#0f3460" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <rect x="552" y="64" width="224" height="250" rx="10" fill="#ffffff" stroke="#8b949e"/>
+  <text x="572" y="94" font-size="13" fill="#8b949e">第 3 條</text>
+  <text x="572" y="120" font-size="17" font-weight="bold" fill="#24292f">Chrome 插件</text>
+  <text x="572" y="152" font-size="13" fill="#24292f">讓它看你開著的網頁</text>
+  <text x="572" y="174" font-size="13" fill="#24292f">權限選「每一步都問我」</text>
+  <text x="572" y="214" font-size="12.5" fill="#2e7d32">＋ 看得到網頁內容</text>
+  <text x="572" y="236" font-size="12.5" fill="#d32f2f">－ 碰得到你登入的帳號</text>
+
+  <text x="28" y="350" font-size="13" fill="#57606a">由左到右：設定越來越多、能做的事越來越多、要顧的風險也越來越多</text>
+  <text x="28" y="384" font-size="12" fill="#8b949e">launchdock.app</text>
+</svg>
