@@ -3,10 +3,15 @@
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY') || '';
 const FROM_EMAIL = Deno.env.get('FROM_EMAIL') || 'LaunchDock <noreply@launchdock.app>';
 
+export function isResendConfigured(): boolean {
+  return Boolean(RESEND_API_KEY);
+}
+
 export interface SendEmailParams {
   to: string;
   subject: string;
   html: string;
+  text?: string;
   replyTo?: string;
 }
 
@@ -16,7 +21,7 @@ export interface SendEmailResult {
   error?: string;
 }
 
-export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams): Promise<SendEmailResult> {
+export async function sendEmail({ to, subject, html, text, replyTo }: SendEmailParams): Promise<SendEmailResult> {
   if (!RESEND_API_KEY) {
     return { ok: false, error: 'RESEND_API_KEY not configured' };
   }
@@ -32,6 +37,7 @@ export async function sendEmail({ to, subject, html, replyTo }: SendEmailParams)
       to: [to],
       subject,
       html,
+      ...(text ? { text } : {}),
       ...(replyTo ? { reply_to: replyTo } : {}),
     }),
   });

@@ -1,5 +1,6 @@
 ---
 import type { Locale } from '../i18n/ui';
+import NewsletterSignup from './NewsletterSignup.tsx';
 
 interface Props {
   lang?: Locale;
@@ -8,6 +9,11 @@ interface Props {
 const { lang = 'zh-tw' } = Astro.props;
 const year = new Date().getFullYear();
 const isEn = lang === 'en';
+const path = Astro.url.pathname;
+const hideSubscribeForm =
+  /\/subscribe\/?$/.test(path) ||
+  path.includes('/subscribe/confirm') ||
+  path.includes('/unsubscribe');
 ---
 
 <footer class="border-t border-surface-lighter">
@@ -19,7 +25,7 @@ const isEn = lang === 'en';
           {isEn ? 'LaunchDock — Get your hands dirty, but not alone' : '藍鴨 LaunchDock — 弄髒雙手，但不孤單'}
         </span>
       </div>
-      <div class="flex items-center gap-4">
+      <div class="flex flex-wrap items-center justify-center gap-4">
         <a
           href={isEn ? 'https://lab.launchdock.app/en/' : 'https://lab.launchdock.app'}
           target="_blank"
@@ -53,6 +59,12 @@ const isEn = lang === 'en';
           {isEn ? 'Blue Duck Briefing' : '藍鴨快報'}
         </a>
         <a
+          href={isEn ? '/en/subscribe/' : '/subscribe/'}
+          class="text-text-muted hover:text-accent2 transition-colors text-sm"
+        >
+          {isEn ? 'Newsletter' : '訂閱週報'}
+        </a>
+        <a
           href="https://github.com/589411/launchdock"
           target="_blank"
           rel="noopener noreferrer"
@@ -68,6 +80,19 @@ const isEn = lang === 'en';
         </a>
       </div>
     </div>
+    {!hideSubscribeForm && (
+      <div class="mt-8 pt-6 border-t border-surface-lighter max-w-md mx-auto">
+        <p class="text-sm font-semibold text-[#0f3460] mb-1 text-center">
+          {isEn ? 'Blue Duck weekly newsletter' : '訂閱藍鴨週報'}
+        </p>
+        <p class="text-xs text-text-muted mb-3 text-center">
+          {isEn
+            ? 'A headline and summary, plus a link to the full article. Confirm by email; unsubscribe anytime.'
+            : '每期標題、摘要與全文連結。確認信點過才算訂閱，可隨時退訂。'}
+        </p>
+        <NewsletterSignup client:visible source="footer" variant="compact" lang={isEn ? 'en' : 'zh-tw'} />
+      </div>
+    )}
     <p class="text-center text-text-muted text-xs mt-4">
       &copy; {year} 藍鴨 LaunchDock. Built with Astro.
     </p>

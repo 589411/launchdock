@@ -1,0 +1,30 @@
+---
+import NewsletterSignup from './NewsletterSignup.tsx';
+import type { Locale } from '../i18n/ui';
+
+interface Props {
+  lang?: Locale;
+  source: 'home' | 'article' | 'footer';
+  variant?: 'full' | 'compact';
+}
+
+const { lang = 'zh-tw', source, variant = 'full' } = Astro.props;
+const isEn = lang === 'en';
+---
+
+<section class="newsletter-block rounded-2xl border border-[#1a4a8a]/25 bg-white overflow-hidden">
+  <div class="bg-[#0f3460] text-white px-5 py-3">
+    <p class="text-xs tracking-wider font-semibold m-0">{isEn ? 'LAUNCHDOCK WEEKLY' : 'LAUNCHDOCK 藍鴨週報'}</p>
+  </div>
+  <div class="p-5 md:p-6">
+    <h2 id="newsletter-heading" class="text-xl font-bold text-[#0f3460] mb-2">
+      {isEn ? 'Subscribe to the weekly newsletter' : '訂閱藍鴨週報'}
+    </h2>
+    <p class="text-sm text-text-secondary leading-relaxed mb-4">
+      {isEn
+        ? 'Each issue is a headline plus a short summary, with a link to the full article on the site. Free, confirm by email, unsubscribe anytime. This is not a daily news digest.'
+        : '每期用標題與摘要帶你看懂技術變化，有興趣再點進網站全文。免費，送出後會寄確認信，可隨時退訂。這不是每日新聞摘要。'}
+    </p>
+    <NewsletterSignup client:load source={source} variant={variant} lang={isEn ? 'en' : 'zh-tw'} />
+  </div>
+</section>

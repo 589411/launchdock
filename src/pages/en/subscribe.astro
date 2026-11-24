@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsletterSignup from '../../components/NewsletterSignup.tsx';
+---
+
+<BaseLayout
+  lang="en"
+  title="Subscribe to the Blue Duck weekly newsletter"
+  description="Subscribe to the Blue Duck weekly newsletter: a headline, a short summary, and a link to the full article. Free; confirm by email; unsubscribe anytime."
+>
+  <div class="max-w-[560px] mx-auto px-4 py-12">
+    <p class="text-sm font-semibold text-[#1a4a8a] mb-2">Free · Confirm by email · Unsubscribe anytime</p>
+    <h1 class="text-3xl font-bold mb-3 text-[#0f3460]">Subscribe to the weekly newsletter</h1>
+    <p class="text-text-secondary mb-6 leading-relaxed">
+      Each issue uses a headline and two or three sentences to explain a change worth noticing,
+      then links to the full article or tutorial. Steps and prompts stay on the site, not in the email.
+      This is not a daily news digest.
+    </p>
+
+    <div class="rounded-2xl border border-[#1a4a8a]/25 bg-white p-5 mb-6">
+      <NewsletterSignup client:load source="subscribe_page" variant="full" lang="en" />
+    </div>
+
+    <ul class="text-sm text-text-secondary space-y-2 leading-relaxed">
+      <li>📬 <strong class="text-text-primary">About once a week</strong>; we may skip a week if there isn’t a good topic.</li>
+      <li>✅ <strong class="text-text-primary">Double opt-in</strong>: you are not subscribed until you click the confirmation email.</li>
+      <li>🚪 <strong class="text-text-primary">Unsubscribe anytime</strong> from a link in the email footer — no login.</li>
+      <li>🗞️ This is the weekly newsletter, <strong class="text-text-primary">not a daily digest</strong>.</li>
+    </ul>
+  </div>
+</BaseLayout>

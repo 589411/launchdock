@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
+const anonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY ?? '';
+const isDev = import.meta.env.DEV;
+---
+
+<BaseLayout
+  title="退訂藍鴨週報"
+  description="退訂藍鴨週報。免登入，點一次就生效。"
+  noindex={true}
+>
+  <div class="max-w-[560px] mx-auto px-4 py-16 text-center">
+    <div id="nl-unsub" data-url={supabaseUrl} data-key={anonKey} data-dev={isDev ? '1' : '0'}>
+      <h1 class="text-2xl font-bold text-[#0f3460] mb-3">退訂藍鴨週報</h1>
+      <p class="text-text-secondary mb-6 leading-relaxed">點下面按鈕後，這個信箱就不會再收到藍鴨週報。不必登入。</p>
+      <button
+        type="button"
+        id="nl-unsub-btn"
+        class="rounded-lg bg-[#0f3460] px-6 py-2.5 text-sm font-bold text-white hover:bg-[#1a4a8a] transition-colors"
+      >確認退訂</button>
+      <p id="nl-unsub-msg" class="mt-4 text-sm text-text-secondary hidden"></p>
+    </div>
+    <p class="mt-8">
+      <a href="/" class="text-[#1a4a8a] underline underline-offset-2">回首頁</a>
+    </p>
+  </div>
+
+  <script is:inline>
+      (function () {
+        var box = document.getElementById('nl-unsub');
+        var btn = document.getElementById('nl-unsub-btn');
+        var msg = document.getElementById('nl-unsub-msg');
+        if (!box || !btn) return;
+        if (box.getAttribute('data-dev') === '1' && new URLSearchParams(location.search).get('state') === 'done') {
+          box.innerHTML = '<h1 class="text-2xl font-bold text-[#0f3460] mb-3">已退訂</h1><p class="text-text-secondary leading-relaxed">這個信箱已從藍鴨週報名單移除，不會再收到週報。若之後想再訂，可隨時回訂閱頁重新申請。</p>';
+          return;
+        }
+        var token = new URLSearchParams(location.search).get('t') || '';
+        var url = box.getAttribute('data-url') || '';
+        var key = box.getAttribute('data-key') || '';
+
+        if (!/^[A-Za-z0-9_-]{20,128}$/.test(token)) {
+          btn.disabled = true;
+          btn.classList.add('opacity-60');
+          if (msg) { msg.textContent = '這個退訂連結無效。請從最近一封週報重新點一次。'; msg.classList.remove('hidden'); }
+          return;
+        }
+
+        btn.addEventListener('click', function () {
+          btn.disabled = true;
+          fetch(url + '/functions/v1/newsletter-unsubscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', apikey: key, Authorization: 'Bearer ' + key },
+            body: JSON.stringify({ token: token })
+          }).then(function (res) { return res.json().then(function (d) { return { ok: res.ok, d: d }; }); })
+            .then(function (r) {
+              if (r.ok && r.d && r.d.status === 'unsubscribed') {
+                box.innerHTML = '<h1 class="text-2xl font-bold text-[#0f3460] mb-3">已退訂</h1><p class="text-text-secondary leading-relaxed">這個信箱已從藍鴨週報名單移除，不會再收到週報。若之後想再訂，可隨時回訂閱頁重新申請。</p>';
+              } else {
+                btn.disabled = false;
+                if (msg) { msg.textContent = '退訂失敗，請稍後再試，或來信 info@launchdock.app。'; msg.classList.remove('hidden'); }
+              }
+            })
+            .catch(function () {
+              btn.disabled = false;
+              if (msg) { msg.textContent = '暫時無法連線，請稍後再試。'; msg.classList.remove('hidden'); }
+            });
+        });
+      })();
+    </script>
+</BaseLayout>

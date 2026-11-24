@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
+const anonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY ?? '';
+---
+
+<BaseLayout
+  title="確認訂閱藍鴨週報"
+  description="確認訂閱藍鴨週報。"
+  noindex={true}
+>
+  <div class="max-w-[560px] mx-auto px-4 py-16 text-center">
+    <div id="nl-confirm" class="text-text-secondary" data-url={supabaseUrl} data-key={anonKey}>
+      <p class="text-lg">正在確認訂閱⋯</p>
+    </div>
+    <p class="mt-8">
+      <a href="/articles/" class="text-[#1a4a8a] underline underline-offset-2">看看文章</a>
+      <span class="text-text-muted mx-2">·</span>
+      <a href="/" class="text-[#1a4a8a] underline underline-offset-2">回首頁</a>
+    </p>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var box = document.getElementById('nl-confirm');
+      if (!box) return;
+      var token = new URLSearchParams(location.search).get('t') || '';
+      var url = box.getAttribute('data-url') || '';
+      var key = box.getAttribute('data-key') || '';
+
+      function show(html) { box.innerHTML = html; }
+
+      if (!/^[A-Za-z0-9_-]{20,128}$/.test(token) || !url || !key) {
+        show('<h1 class="text-2xl font-bold text-[#0f3460] mb-3">連結無效</h1><p>請從確認信重新點一次，或回到訂閱頁再申請一次。</p>');
+        return;
+      }
+
+      fetch(url + '/functions/v1/newsletter-confirm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: key, Authorization: 'Bearer ' + key },
+        body: JSON.stringify({ token: token })
+      }).then(function (res) { return res.json().then(function (d) { return { ok: res.ok, d: d }; }); })
+        .then(function (r) {
+          if (r.ok && r.d && r.d.status === 'confirmed') {
+            show('<h1 class="text-2xl font-bold text-[#0f3460] mb-3">訂閱完成</h1><p>之後每期藍鴨週報會寄到這個信箱。每封信底部都有退訂連結。</p>');
+          } else if (r.ok && r.d && r.d.status === 'already_confirmed') {
+            show('<h1 class="text-2xl font-bold text-[#0f3460] mb-3">已經訂閱過了</h1><p>這個信箱已在週報名單裡，不必再確認一次。</p>');
+          } else if (r.d && r.d.error === 'expired') {
+            show('<h1 class="text-2xl font-bold text-[#0f3460] mb-3">確認信已過期</h1><p>請回到訂閱頁再填一次，我們會寄一封新的確認信（48 小時內有效）。</p><p class="mt-4"><a href="/subscribe/" class="text-[#1a4a8a] underline">重新訂閱</a></p>');
+          } else {
+            show('<h1 class="text-2xl font-bold text-[#0f3460] mb-3">連結無效</h1><p>請從確認信重新點一次，或回到訂閱頁再申請一次。</p>');
+          }
+        })
+        .catch(function () {
+          show('<h1 class="text-2xl font-bold text-[#0f3460] mb-3">暫時無法確認</h1><p>請稍後再點一次信裡的連結。</p>');
+        });
+    })();
+  </script>
+</BaseLayout>

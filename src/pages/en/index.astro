@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsletterBlock from '../../components/NewsletterBlock.astro';
 import KuaibaoPromo from '../../components/KuaibaoPromo.astro';
 import CampHook from '../../components/CampHook.astro';
 import { getCollection } from 'astro:content';
@@ -106,5 +107,9 @@ const hasArticles = allArticles.length > 0;
         </div>
       </div>
     )}
+  </section>
+
+  <section class="max-w-[900px] mx-auto px-6 pb-16" aria-labelledby="newsletter-heading">
+    <NewsletterBlock lang="en" source="home" />
   </section>
 </BaseLayout>

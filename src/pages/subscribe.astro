@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterSignup from '../components/NewsletterSignup.tsx';
+---
+
+<BaseLayout
+  title="訂閱藍鴨週報"
+  description="訂閱藍鴨週報：每期標題、摘要與網站全文連結。免費，送出後會寄確認信，可隨時退訂。"
+>
+  <div class="max-w-[560px] mx-auto px-4 py-12">
+    <p class="text-sm font-semibold text-[#1a4a8a] mb-2">免費・確認後才訂閱・可退訂</p>
+    <h1 class="text-3xl font-bold mb-3 text-[#0f3460]">訂閱藍鴨週報</h1>
+    <p class="text-text-secondary mb-6 leading-relaxed">
+      每期用標題與 2–3 句摘要，說明這一週值得注意的技術變化，再連到網站全文或教學。
+      完整步驟與提示詞放在網站，不整份貼在信裡。這不是每日新聞摘要。
+    </p>
+
+    <div class="rounded-2xl border border-[#1a4a8a]/25 bg-white p-5 mb-6">
+      <NewsletterSignup client:load source="subscribe_page" variant="full" />
+    </div>
+
+    <ul class="text-sm text-text-secondary space-y-2 leading-relaxed">
+      <li>📬 <strong class="text-text-primary">約每週一封</strong>，沒有適合的題材時可能休刊。</li>
+      <li>✅ <strong class="text-text-primary">雙重確認</strong>：送出後要到信箱點確認信才算訂閱。</li>
+      <li>🚪 <strong class="text-text-primary">隨時退訂</strong>：每封信底部都有免登入退訂連結。</li>
+      <li>🗞️ 這是「藍鴨週報」，<strong class="text-text-primary">不是每日 X 摘要</strong>。</li>
+    </ul>
+  </div>
+</BaseLayout>

@@ -7,6 +7,7 @@ import EmotionFeedback from '../components/EmotionFeedback.tsx';
 import SectionReactions from '../components/SectionReactions.tsx';
 import ArticleQA from '../components/ArticleQA.tsx';
 import RelatedArticles from '../components/RelatedArticles.astro';
+import NewsletterBlock from '../components/NewsletterBlock.astro';
 import ShareToLine from '../components/ShareToLine.astro';
 import PageViewTracker from '../components/PageViewTracker.tsx';
 import { sceneKeyToLabel, difficultyKeyToLabel, type Locale } from '../i18n/ui';
@@ -145,6 +146,10 @@ const homeName = lang === 'en' ? 'LaunchDock' : '藍鴨 LaunchDock';
         scene={frontmatter.scene}
         lang={lang}
       />
+    </div>
+
+    <div class="mt-10">
+      <NewsletterBlock lang={lang} source="article" />
     </div>
 
     <!-- Q&A Section (replaces GitHub Discussions) -->
