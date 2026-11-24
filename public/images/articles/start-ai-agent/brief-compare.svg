@@ -1,0 +1,26 @@
+<svg viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <rect x="1" y="1" width="798" height="438" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="28" y="40" font-size="20" font-weight="bold" fill="#0f3460">同一件事，兩張點餐單</text>
+
+  <rect x="24" y="64" width="360" height="290" rx="10" fill="#ffffff" stroke="#d32f2f"/>
+  <text x="44" y="94" font-size="13" fill="#d32f2f">沒說清楚</text>
+  <text x="44" y="126" font-size="14" fill="#24292f">「幫我整理這些報價單。」</text>
+  <text x="44" y="170" font-size="13" fill="#24292f">它得自己猜：</text>
+  <text x="44" y="194" font-size="13" fill="#24292f">・整理成什麼格式？</text>
+  <text x="44" y="216" font-size="13" fill="#24292f">・哪些欄位要留？</text>
+  <text x="44" y="238" font-size="13" fill="#24292f">・缺資料怎麼辦？</text>
+  <text x="44" y="260" font-size="13" fill="#24292f">・做完幾份才停？</text>
+  <text x="44" y="320" font-size="13" fill="#d32f2f">結果：看起來有做，但不是你要的</text>
+
+  <rect x="416" y="64" width="360" height="290" rx="10" fill="#f1f8f4" stroke="#2e7d32"/>
+  <text x="436" y="94" font-size="13" fill="#2e7d32">說清楚</text>
+  <text x="436" y="126" font-size="14" fill="#24292f">① 先讀檔，列出廠商、品項、金額</text>
+  <text x="436" y="152" font-size="14" fill="#24292f">② 如果缺金額，標「待確認」，別猜</text>
+  <text x="436" y="178" font-size="14" fill="#24292f">③ 每一份都照同一格式做</text>
+  <text x="436" y="204" font-size="14" fill="#24292f">④ 做完貼成一張表</text>
+  <text x="436" y="230" font-size="14" fill="#24292f">⑤ 不確定就停下來問我</text>
+  <text x="436" y="320" font-size="13" fill="#2e7d32">結果：你只要驗收，不用重做</text>
+
+  <text x="28" y="392" font-size="13" fill="#57606a">差別不在字數，在於你有沒有把「怎麼判斷」講出來</text>
+  <text x="28" y="422" font-size="12" fill="#8b949e">launchdock.app</text>
+</svg>

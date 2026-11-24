@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-11-24T02:25:14.639Z",
+  "_generated": "2026-11-24T02:35:19.218Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -475,6 +475,27 @@
       ],
       "concepts_referenced": [],
       "link": "/articles/caffeinate-keep-mac-awake/"
+    },
+    {
+      "slug": "start-ai-agent",
+      "title": "怎麼請 AI 當你的助理？從「讓它看得到你的東西」開始",
+      "description": "不用寫程式，先做一件小事。第一次請 AI 幫忙，別丟大案子：先挑一件 10–20 分鐘、結果你能自己驗的小事，讓它看得到你的檔案，再把工作講成「流程、條件、迴圈」，並把規矩存下來。這篇帶你從上傳檔案開始，走完第一件小任務。",
+      "scene": "基礎使用",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "Agent",
+        "MCP",
+        "Prompt",
+        "設定"
+      ],
+      "prerequisites": [
+        "chrome-ai-extensions"
+      ],
+      "modules": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/start-ai-agent/"
     },
     {
       "slug": "openclaw-model-config",
