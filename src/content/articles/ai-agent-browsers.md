@@ -1,11 +1,11 @@
 ---
-title: "AI 會自己操作網頁了：Comet、Atlas 到完整 Computer Use 瀏覽器選擇清單"
-description: "瀏覽器不再只是『顯示網頁』，而是會自己點按鈕、填表單、把任務做完。Perplexity Comet、ChatGPT Atlas 到底差在哪？這篇幫你一次選對。"
+title: "AI 會自己操作網頁了：Comet 到 Computer Use 瀏覽器選擇清單（ChatGPT Atlas 已停用）"
+description: "瀏覽器不再只是『顯示網頁』，而是會自己點按鈕、填表單、把任務做完。這篇幫你選對 Agent 瀏覽器；注意 ChatGPT Atlas 已停用，2026-11-24 更新。"
 contentType: "guide"
 scene: "鴨編的碎碎念"
 difficulty: "入門"
 createdAt: "2026-06-27"
-verifiedAt: "2026-06-27"
+verifiedAt: "2026-11-24"
 archived: false
 order: 1
 prerequisites: ["ai-tool-landscape"]
@@ -17,12 +17,14 @@ stuckOptions:
   "安全會不會有問題": ["AI 自己操作我的帳號安全嗎？", "什麼是提示注入？"]
 ---
 
+> ⚠️ **2026-11-24 更正**：OpenAI 已停用獨立的 **ChatGPT Atlas** 瀏覽器。[官方幫助中心](https://help.openai.com/en/articles/20001371-chatgpt-atlas-retirement)寫明 Atlas「has been retired and no longer receives updates」（已停用、不再更新）。[官方 release notes](https://help.openai.com/en/articles/6825453-chatgpt-release-notes) 在 2026-07-09 宣布停用，並寫明 Atlas「scheduled to stop working on August 9, 2026」（預計 2026-08-09 停止運作）。本文原本把 Atlas 當成可選的現役產品，下方已改寫；想用 ChatGPT 操作網頁，請改用 ChatGPT 桌面版或 ChatGPT 瀏覽器擴充功能，安裝與權限設定見〈[Chrome 插件怎麼裝](/articles/chrome-ai-extensions/)〉。
+
 ## 你是不是也有這個感覺？
 
 最近一直聽到有人在問：
 
 - 「聽說 Perplexity 出了一個會自己操作網頁的瀏覽器 Comet？」
-- 「OpenAI 的 Atlas 跟 Chrome 到底差在哪？」
+- 「之前很紅的 OpenAI Atlas 現在還能用嗎？」（答案：已停用，見上方更正）
 - 「這些『AI 瀏覽器』那麼多，我到底該裝哪一個？」
 
 別急。這一波叫做 **Agent（AI 代理）瀏覽器**，背後其實是同一個概念——**Computer Use**。先搞懂它在解決什麼問題，你就不會被一堆產品名稱淹沒。
@@ -63,18 +65,18 @@ stuckOptions:
 
 <!-- @img: comet-browser | Perplexity Comet 瀏覽器介面 -->
 
-#### 2. ChatGPT Atlas —— 自動化任務最強
+#### 2. ChatGPT Atlas —— ⛔ 已停用（2026-11-24 更正）
+
+> **不要再去找 Atlas 安裝。** OpenAI 在 2026-07-09 宣布停用這個獨立瀏覽器，官方 release notes 寫明「scheduled to stop working on August 9, 2026」；幫助中心現在寫明它「has been retired and no longer receives updates」。OpenAI 把相關能力放到 ChatGPT 桌面版與 ChatGPT 瀏覽器擴充功能。官方說明：[ChatGPT Atlas retirement](https://help.openai.com/en/articles/20001371-chatgpt-atlas-retirement)、[ChatGPT release notes](https://help.openai.com/en/articles/6825453-chatgpt-release-notes)。
 
 | 項目 | 說明 |
 |------|------|
-| 誰做的 | OpenAI（ChatGPT 的公司） |
-| 最大優點 | Agent 執行任務最深，會記住偏好、串接 ChatGPT 歷史 |
-| 限制 | 目前**只有 Mac 版**，最好用的 Agent 功能要**付費** |
-| 適合 | 已用 ChatGPT 付費版、想讓 AI 真的幫你做事的 Mac 使用者 |
+| 現況 | 已停用，不再更新 |
+| 原本的定位 | OpenAI 做的 AI 瀏覽器，主打 Agent 自動執行任務（原本只有 Mac 版） |
+| 現在怎麼辦 | 改用 ChatGPT 桌面版，或在你現有的瀏覽器裝 ChatGPT 擴充功能 |
+| 教學 | 〈[Chrome 插件怎麼裝、怎麼設權限](/articles/chrome-ai-extensions/)〉 |
 
-<!-- @img: chatgpt-atlas | ChatGPT Atlas 瀏覽器介面 -->
-
-> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **怎麼選**：查資料、做研究 → **Comet**；要 AI 自動跑一條龍任務（找→比較→訂位→總結）→ **Atlas**。
+> <img src="/images/dock_head_s.png" alt="鴨編" width="24" style="vertical-align: middle;"> **怎麼選**：查資料、做研究 → **Comet**；想用 ChatGPT 操作網頁 → 裝 **ChatGPT 擴充功能**（不是 Atlas）。
 
 #### 3. Dia（The Browser Company）
 
@@ -107,12 +109,12 @@ stuckOptions:
 | 需求 | 推薦 |
 |------|------|
 | 查資料、寫報告 | Comet |
-| 要 AI 自動跑重複網頁任務 | Atlas 或 Fellou |
+| 要 AI 自動跑重複網頁任務 | Fellou，或 ChatGPT 擴充功能（Work 模式） |
 | 只想偶爾叫 AI 讀網頁 | 現有的 Edge / Chrome / Brave 就好 |
 
 **2. 你用什麼系統、願不願意付費？**
 - 只有 Windows 又想免費 → **Comet**（全平台免費）
-- Mac + 已是 ChatGPT 付費用戶 → **Atlas**
+- 已是 ChatGPT 用戶 → 在現有瀏覽器裝 **ChatGPT 擴充功能**（Atlas 已停用）
 
 **3. 你在意隱私 / 控制感嗎？**
 - 怕 AI 亂操作 → 選會「先給你看計畫」的 **Fellou**
@@ -137,7 +139,7 @@ Agent 瀏覽器會**真的替你點擊、填寫、送出**，風險和聊天機�
 
 1. **先裝 Comet**（免費、全平台、上手快），體驗「AI 幫你查資料、整理分頁」。
 2. 習慣後，挑一個**低風險的重複任務**（例如：每天整理某幾個網站的新消息），試試 Agent 自動模式。
-3. 你若是 Mac + ChatGPT 重度使用者，再進階去玩 **Atlas** 的深度自動化。
+3. 你若是 ChatGPT 重度使用者，再進階裝 **ChatGPT 擴充功能**玩自動化（Atlas 已停用，別再找它）。
 4. 全程記住上面的安全原則。
 
 看到任何新的 AI 瀏覽器，你都可以問自己一句話：

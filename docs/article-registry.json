@@ -1,5 +1,5 @@
 {
-  "_generated": "2026-11-10T14:21:43.822Z",
+  "_generated": "2026-11-24T02:25:14.639Z",
   "_description": "Auto-generated from concepts.yaml + article frontmatter. LLM 生成文章時參考此檔案做跨文章連結。執行 node scripts/generate-article-registry.mjs 重新產生。",
   "concepts": {
     "OpenClaw": {
@@ -1298,6 +1298,29 @@
       "link": "/articles/gemini-gas-ordering-system/"
     },
     {
+      "slug": "chrome-ai-extensions",
+      "title": "讓 AI 幫你操作網頁：Claude、ChatGPT、Gemini 的 Chrome 插件怎麼裝、怎麼設權限（附雲端電腦新玩法）",
+      "description": "想讓 AI 幫你讀網頁、點按鈕、填表單，第一步是在 Chrome 裝好它的插件。這篇一次教你 Claude in Chrome、ChatGPT 擴充功能、Gemini in Chrome 三家怎麼裝、哪個方案能用、權限怎麼設才安全，最後再帶你看下一站：各家 AI 自己的雲端電腦和雲端瀏覽器。",
+      "scene": "整合與自動化",
+      "difficulty": "入門",
+      "contentType": "tutorial",
+      "tags": [
+        "Agent",
+        "Anthropic",
+        "OpenAI",
+        "Google",
+        "Chrome",
+        "安全"
+      ],
+      "prerequisites": [
+        "ai-agent-browsers"
+      ],
+      "modules": [],
+      "concepts_defined": [],
+      "concepts_referenced": [],
+      "link": "/articles/chrome-ai-extensions/"
+    },
+    {
       "slug": "mcp-servers-picks",
       "title": "MCP Server 該裝哪些？2026 年 12 個有公信力的精選，加三條不會被下毒的安全鐵律",
       "description": "登錄站上有 12 萬個 MCP Server，但 43% 有命令注入漏洞。鴨編給你三層濾網、12 個官方維護的精選，以及在 Claude Desktop／Claude Code 接上第一個 MCP 的最短路徑。",
@@ -2242,7 +2265,7 @@
     {
       "slug": "2026-ai-tools-lunar",
       "title": "2026 年，怎麼看待 AI 工具：從小鏟子到你的月球基地",
-      "description": "免費版是小鏟子、訂閱是電動工具、限時的最強模型是大型機具。這篇用一則月球拓荒的比喻，講清楚看待 AI 工具的方法：工具會換，你真正要蓋的是自己的工作系統。",
+      "description": "免費版是小鏟子、訂閱是電動工具、剛推出的超強模型像一位總指揮。這篇用一則月球拓荒的比喻，講清楚看待 AI 工具的方法：工具會換，你真正要蓋的是自己的工作系統。",
       "scene": "鴨編的碎碎念",
       "difficulty": "入門",
       "contentType": "guide",
@@ -2300,8 +2323,8 @@
     },
     {
       "slug": "ai-agent-browsers",
-      "title": "AI 會自己操作網頁了：Comet、Atlas 到完整 Computer Use 瀏覽器選擇清單",
-      "description": "瀏覽器不再只是『顯示網頁』，而是會自己點按鈕、填表單、把任務做完。Perplexity Comet、ChatGPT Atlas 到底差在哪？這篇幫你一次選對。",
+      "title": "AI 會自己操作網頁了：Comet 到 Computer Use 瀏覽器選擇清單（ChatGPT Atlas 已停用）",
+      "description": "瀏覽器不再只是『顯示網頁』，而是會自己點按鈕、填表單、把任務做完。這篇幫你選對 Agent 瀏覽器；注意 ChatGPT Atlas 已停用，2026-11-24 更新。",
       "scene": "鴨編的碎碎念",
       "difficulty": "入門",
       "contentType": "guide",

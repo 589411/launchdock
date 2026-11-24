@@ -1,11 +1,11 @@
 ---
-title: "AI Now Operates the Web for You: From Comet and Atlas to a Full Computer-Use Browser Guide"
-description: "Browsers no longer just 'display web pages' — they click buttons, fill forms, and finish tasks themselves. How do Perplexity Comet and ChatGPT Atlas differ? This guide helps you pick the right one."
+title: "AI Now Operates the Web for You: From Comet to a Full Computer-Use Browser Guide (ChatGPT Atlas Is Retired)"
+description: "Browsers no longer just 'display web pages' — they click buttons, fill forms, and finish tasks themselves. This guide helps you pick an agent browser. Note: ChatGPT Atlas has been retired; updated 2026-11-24."
 contentType: "guide"
 scene: "blog"
 difficulty: "beginner"
 createdAt: "2026-06-27"
-verifiedAt: "2026-06-27"
+verifiedAt: "2026-11-24"
 archived: false
 order: 1
 prerequisites: ["ai-tool-landscape"]
@@ -17,12 +17,14 @@ stuckOptions:
   "Are there safety concerns": ["Is it safe to let AI operate my accounts?", "What is prompt injection?"]
 ---
 
+> ⚠️ **Correction, 2026-11-24:** OpenAI has retired its standalone **ChatGPT Atlas** browser. OpenAI's [help center](https://help.openai.com/en/articles/20001371-chatgpt-atlas-retirement) says Atlas "has been retired and no longer receives updates." The [official release notes](https://help.openai.com/en/articles/6825453-chatgpt-release-notes) announced the retirement on 2026-07-09 and stated that Atlas was "scheduled to stop working on August 9, 2026." This article originally presented Atlas as a current option; it's been rewritten below. To have ChatGPT operate web pages, use the ChatGPT desktop app or the ChatGPT browser extension. Setup and permissions are covered in [Let AI Use Websites for You](/articles/chrome-ai-extensions/).
+
 ## Does This Sound Familiar?
 
 Lately, everyone seems to be asking:
 
 - "I heard Perplexity launched Comet, a browser that operates web pages by itself?"
-- "What's the actual difference between OpenAI's Atlas and Chrome?"
+- "Is OpenAI's once-hyped Atlas still usable?" (Answer: no, it's retired. See the correction above.)
 - "There are so many of these 'AI browsers' — which one should I install?"
 
 Take a breath. This new wave is called the **Agent browser**, and underneath they all share one concept: **Computer Use**. Understand what problem it solves, and you won't drown in a sea of product names.
@@ -63,18 +65,18 @@ The Duck Editor splits them into three groups: **AI-native browsers**, **legacy 
 
 <!-- @img: comet-browser | Perplexity Comet browser interface -->
 
-#### 2. ChatGPT Atlas — Strongest for Automating Tasks
+#### 2. ChatGPT Atlas — ⛔ Retired (Correction, 2026-11-24)
+
+> **Don't go looking for an Atlas download.** On 2026-07-09 OpenAI announced it was retiring this standalone browser; the official release notes said it was "scheduled to stop working on August 9, 2026." The help center now says it "has been retired and no longer receives updates." OpenAI moved the related capabilities into the ChatGPT desktop app and the ChatGPT browser extension. Official pages: [ChatGPT Atlas retirement](https://help.openai.com/en/articles/20001371-chatgpt-atlas-retirement), [ChatGPT release notes](https://help.openai.com/en/articles/6825453-chatgpt-release-notes).
 
 | Item | Details |
 |------|---------|
-| Who makes it | OpenAI (the company behind ChatGPT) |
-| Biggest plus | Deepest agentic task execution; remembers preferences and ties into ChatGPT history |
-| Limitation | Currently **Mac only**, and the best agent features require a **paid** plan |
-| Best for | Mac users already on paid ChatGPT who want AI to truly do things |
+| Status | Retired, no more updates |
+| What it was | OpenAI's AI browser focused on agentic task execution (Mac only) |
+| What to do now | Use the ChatGPT desktop app, or install the ChatGPT extension in your current browser |
+| Tutorial | [Let AI Use Websites for You](/articles/chrome-ai-extensions/) |
 
-<!-- @img: chatgpt-atlas | ChatGPT Atlas browser interface -->
-
-> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **How to choose:** Research and lookups → **Comet**; end-to-end automation (find → compare → book → summarize) → **Atlas**.
+> <img src="/images/dock_head_s.png" alt="Duck Editor" width="24" style="vertical-align: middle;"> **How to choose:** Research and lookups → **Comet**; want ChatGPT to operate web pages → install the **ChatGPT extension** (not Atlas).
 
 #### 3. Dia (The Browser Company)
 
@@ -107,12 +109,12 @@ The browser you already use may already have AI built in:
 | Need | Recommendation |
 |------|---------------|
 | Research, writing reports | Comet |
-| Automating repetitive web tasks | Atlas or Fellou |
+| Automating repetitive web tasks | Fellou, or the ChatGPT extension (Work mode) |
 | Just occasionally asking AI to read a page | Your existing Edge / Chrome / Brave is fine |
 
 **2. What OS, and will you pay?**
 - Windows only and want free → **Comet** (free on every platform)
-- Mac + already a paid ChatGPT user → **Atlas**
+- Already a ChatGPT user → install the **ChatGPT extension** in your current browser (Atlas is retired)
 
 **3. Do you care about privacy / control?**
 - Worried about AI clicking the wrong thing → **Fellou** (shows its plan first)
@@ -137,7 +139,7 @@ Agent browsers will **actually click, fill, and submit for you** — a very diff
 
 1. **Install Comet first** (free, cross-platform, easy) and experience "AI helps me research and organize tabs."
 2. Once comfortable, pick a **low-risk repetitive task** (e.g., round up daily news from a few sites) and try Agent mode.
-3. If you're a heavy Mac + ChatGPT user, graduate to **Atlas** for deeper automation.
+3. If you're a heavy ChatGPT user, graduate to the **ChatGPT extension** for automation (Atlas is retired, so don't look for it).
 4. Keep the safety principles above in mind throughout.
 
 Whenever you see a new AI browser, ask yourself one question:
