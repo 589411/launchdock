@@ -1,0 +1,45 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, 'Noto Sans TC', sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f3460"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="798" height="358" rx="12" fill="#f8fafc" stroke="#d0d7de" stroke-width="2"/>
+  <text x="28" y="40" font-size="20" font-weight="bold" fill="#0f3460">AI 操作網頁的三個階段</text>
+
+  <!-- Stage 1 -->
+  <rect x="24" y="64" width="232" height="230" rx="10" fill="#ffffff" stroke="#8b949e"/>
+  <text x="44" y="94" font-size="13" fill="#8b949e">階段 1</text>
+  <text x="44" y="120" font-size="17" font-weight="bold" fill="#24292f">複製貼上</text>
+  <text x="44" y="152" font-size="13" fill="#24292f">你複製網頁 → 貼給 AI</text>
+  <text x="44" y="174" font-size="13" fill="#24292f">AI 回答 → 你自己去點</text>
+  <text x="44" y="214" font-size="12.5" fill="#2e7d32">＋ 最安全</text>
+  <text x="44" y="236" font-size="12.5" fill="#d32f2f">－ 只看得到你貼的那段</text>
+  <text x="44" y="258" font-size="12.5" fill="#d32f2f">－ 什麼都要你動手</text>
+
+  <line x1="262" y1="179" x2="282" y2="179" stroke="#0f3460" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- Stage 2 -->
+  <rect x="288" y="64" width="232" height="230" rx="10" fill="#eef4ff" stroke="#1f6feb"/>
+  <text x="308" y="94" font-size="13" fill="#1f6feb">階段 2（本篇主角）</text>
+  <text x="308" y="120" font-size="17" font-weight="bold" fill="#24292f">Chrome 插件</text>
+  <text x="308" y="152" font-size="13" fill="#24292f">AI 住進你的瀏覽器</text>
+  <text x="308" y="174" font-size="13" fill="#24292f">讀你的分頁、替你點按鈕</text>
+  <text x="308" y="214" font-size="12.5" fill="#2e7d32">＋ 直接用你已登入的帳號</text>
+  <text x="308" y="236" font-size="12.5" fill="#d32f2f">－ 你的電腦要一直開著</text>
+  <text x="308" y="258" font-size="12.5" fill="#d32f2f">－ 碰得到你所有帳號</text>
+
+  <line x1="526" y1="179" x2="546" y2="179" stroke="#0f3460" stroke-width="2.5" marker-end="url(#a)"/>
+
+  <!-- Stage 3 -->
+  <rect x="552" y="64" width="224" height="230" rx="10" fill="#f1f8f4" stroke="#2e7d32"/>
+  <text x="572" y="94" font-size="13" fill="#2e7d32">階段 3（2026 現在）</text>
+  <text x="572" y="120" font-size="17" font-weight="bold" fill="#24292f">AI 自己的雲端電腦</text>
+  <text x="572" y="152" font-size="13" fill="#24292f">AI 在雲端開自己的瀏覽器</text>
+  <text x="572" y="174" font-size="13" fill="#24292f">筆電闔上也繼續做</text>
+  <text x="572" y="214" font-size="12.5" fill="#2e7d32">＋ 跟你的電腦隔開</text>
+  <text x="572" y="236" font-size="12.5" fill="#2e7d32">＋ 可以丟著讓它跑</text>
+  <text x="572" y="258" font-size="12.5" fill="#d32f2f">－ 要另外登入網站</text>
+
+  <text x="28" y="328" font-size="12.5" fill="#57606a">雲端版代表：ChatGPT Work 雲端瀏覽器／Claude Cowork／Gemini Spark（2026-11 查證）</text>
+</svg>
