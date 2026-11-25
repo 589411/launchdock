@@ -10,6 +10,7 @@ const isDev = import.meta.env.DEV;
   title="退訂藍鴨週報"
   description="退訂藍鴨週報。免登入，點一次就生效。"
   noindex={true}
+  hideFooterSubscribe={true}
 >
   <div class="max-w-[560px] mx-auto px-4 py-16 text-center">
     <div id="nl-unsub" data-url={supabaseUrl} data-key={anonKey} data-dev={isDev ? '1' : '0'}>

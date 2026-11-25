@@ -4,13 +4,17 @@ import NewsletterSignup from './NewsletterSignup.tsx';
 
 interface Props {
   lang?: Locale;
+  /** Hide the compact footer signup when the page already has a form. */
+  hideSubscribe?: boolean;
 }
 
-const { lang = 'zh-tw' } = Astro.props;
+const { lang = 'zh-tw', hideSubscribe = false } = Astro.props;
 const year = new Date().getFullYear();
 const isEn = lang === 'en';
 const path = Astro.url.pathname;
+// Pathname fallback keeps subscribe/unsubscribe/confirm clear even if a page forgets the prop.
 const hideSubscribeForm =
+  hideSubscribe ||
   /\/subscribe\/?$/.test(path) ||
   path.includes('/subscribe/confirm') ||
   path.includes('/unsubscribe');

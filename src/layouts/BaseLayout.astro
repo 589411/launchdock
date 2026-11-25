@@ -17,6 +17,8 @@ interface Props {
    * indexed has no business nominating itself as anyone's canonical.
    */
   noindex?: boolean;
+  /** Hide the footer newsletter form (page already has a signup or unsubscribe form). */
+  hideFooterSubscribe?: boolean;
 }
 
 const {
@@ -27,6 +29,7 @@ const {
     : '藍鴨 LaunchDock — 手把手實作的互動式 AI 教學空間，帶你把 OpenClaw 龍蝦 AI Agent 真正跑起來',
   canonicalUrl,
   noindex = false,
+  hideFooterSubscribe = false,
 } = Astro.props;
 
 const htmlLang = lang === 'zh-tw' ? 'zh-TW' : 'en';
@@ -87,7 +90,7 @@ const canonical = canonicalUrl || `${site}${path}`;
     <main class="flex-1">
       <slot />
     </main>
-    <Footer lang={lang} />
+    <Footer lang={lang} hideSubscribe={hideFooterSubscribe} />
     <OutboundTracker />
   </body>
 </html>

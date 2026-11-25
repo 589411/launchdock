@@ -56,7 +56,7 @@ const homeHref = lang === 'en' ? '/en/' : '/';
 const homeName = lang === 'en' ? 'LaunchDock' : '藍鴨 LaunchDock';
 ---
 
-<BaseLayout title={frontmatter.title} description={frontmatter.description} lang={lang}>
+<BaseLayout title={frontmatter.title} description={frontmatter.description} lang={lang} hideFooterSubscribe={true}>
   <PageViewTracker slug={slug} client:only="react" />
   <article class="max-w-[900px] mx-auto px-6 py-10">
     <!-- Branded Breadcrumb for SEO -->
