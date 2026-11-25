@@ -5,6 +5,12 @@
 > 監控（壞連結/缺圖/回饋）往「來自監控」區寫；你或 AI 的點子往「來自規劃」區寫。
 
 ## 🔥 進行中
+- [ ] [內容] **新文章 `ai-keywords-glossary`「AI 關鍵字一次看懂：從 2024 到現在，LLM、Token、Agent、MCP、Skill 各是什麼」中英雙版已寫好，build 綠（211 頁），尚未 commit——等 Joseph 人工 gate**（2026-11-25）。
+      定位：**名詞字典，不是歷史**。站上 `ai-tech-evolution` 已講 Transformer→MCP 的時間軸，所以這篇只按四階段排詞、每詞一句白話＋比喻，深入一律連回既有文章，不重講。
+      零缺圖債：一張手寫 SVG（`ai-four-stages.svg`），0 個 @img。首頁 FAQ 已滿 10 則，**未加入**（若要加，需汰換一則）。
+      **新概念**：`幻覺`、`推理模型`、`工具調用` 已進 `concepts.yaml`（canonical＝本文）。
+      **事實查證**：MCP（2024-11）、Agent Skills（2025-10 推出、2025-12 開放標準）以 WebSearch 確認；o1（2024-09）與 Computer Use（2024-10）是憑記憶，**未經搜尋確認**，Joseph gate 時可順便核對。
+      **待辦**：① Joseph review 後 commit＋push；② 文中「API」未單獨登錄為概念（全站 54 篇提到 API，自動連結會過度），若要做，先決定 canonical。
 - [x] [內容] **新文章 `karpathy-ai-funnel`「全世界用 AI 的人像一座漏斗：你大概站在第幾層？」中英雙版已上線**（2026-10-30，`7d012cb`，Joseph gate 通過）。線上：https://launchdock.app/articles/karpathy-ai-funnel/ ／ https://launchdock.app/en/articles/karpathy-ai-funnel/
       來源＝Karpathy 2026-10-11（美國時間）貼文＋引用的 2026-04-09 舊文，事實只取素材檔；人數比例標明為他的「餐巾紙估算」。
       機械檢查：`npm run registry`、`npm run build` 已過；佔位符掃描 0 命中。主視覺 `ai-use-funnel.png` 由 Codex 生成（930×523、256 色、145KB，無文字無人像）。

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" role="img" aria-label="AI 關鍵字的四個階段：會聊天、會想、會查資料與動手、會接任務">
+  <style>
+    .card { fill: #f4f8ff; stroke: #3b6fd8; stroke-width: 2; }
+    .num { font: 700 15px "PingFang TC","Noto Sans TC",sans-serif; fill: #3b6fd8; }
+    .title { font: 700 20px "PingFang TC","Noto Sans TC",sans-serif; fill: #1d2433; }
+    .time { font: 400 13px "PingFang TC","Noto Sans TC",sans-serif; fill: #5a6478; }
+    .quote { font: 600 15px "PingFang TC","Noto Sans TC",sans-serif; fill: #1d2433; }
+    .terms { font: 400 13px "PingFang TC","Noto Sans TC",sans-serif; fill: #3b6fd8; }
+    .arrow { stroke: #9aa6bd; stroke-width: 2; fill: none; marker-end: url(#ah); }
+  </style>
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#9aa6bd"/>
+    </marker>
+  </defs>
+
+  <!-- Card 1 -->
+  <rect class="card" x="20" y="30" width="195" height="240" rx="14"/>
+  <text class="num" x="40" y="60">第一階段</text>
+  <text class="title" x="40" y="90">會聊天</text>
+  <text class="time" x="40" y="115">2024 年前後</text>
+  <text class="quote" x="40" y="155">「會說，但會亂講」</text>
+  <text class="terms" x="40" y="205">LLM · Token · Prompt</text>
+  <text class="terms" x="40" y="227">Context Window · 幻覺</text>
+
+  <!-- Card 2 -->
+  <rect class="card" x="240" y="30" width="195" height="240" rx="14"/>
+  <text class="num" x="260" y="60">第二階段</text>
+  <text class="title" x="260" y="90">會想</text>
+  <text class="time" x="260" y="115">2024 下半到 2025</text>
+  <text class="quote" x="260" y="155">「先想再答」</text>
+  <text class="terms" x="260" y="205">推理模型 · CoT</text>
+
+  <!-- Card 3 -->
+  <rect class="card" x="460" y="30" width="195" height="240" rx="14"/>
+  <text class="num" x="480" y="60">第三階段</text>
+  <text class="title" x="480" y="90">會查、會動手</text>
+  <text class="time" x="480" y="115">2024 到 2025</text>
+  <text class="quote" x="480" y="155">「能查資料、能按按鈕」</text>
+  <text class="terms" x="480" y="205">RAG · 工具調用</text>
+  <text class="terms" x="480" y="227">Computer Use · MCP</text>
+
+  <!-- Card 4 -->
+  <rect class="card" x="680" y="30" width="180" height="240" rx="14"/>
+  <text class="num" x="700" y="60">第四階段</text>
+  <text class="title" x="700" y="90">會接任務</text>
+  <text class="time" x="700" y="115">2025 到現在</text>
+  <text class="quote" x="700" y="155">「拆步驟，一輪輪做完」</text>
+  <text class="terms" x="700" y="205">Agent · Skill</text>
+  <text class="terms" x="700" y="227">Harness · Loop</text>
+</svg>

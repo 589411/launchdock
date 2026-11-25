@@ -547,3 +547,29 @@ GitHub:
   shortDescEn: "AI capability grows in uneven peaks rather than evenly: it peaks in verifiable, economically valuable domains like math and code, and lags in harder-to-score areas like writing"
   canonicalArticle: "karpathy-ai-funnel"
   relatedArticles: ["which-ai-tool-for-you", "llm-tool-calling-era", "ai-tech-evolution"]
+
+# ── 關鍵字字典（2026-11-25 新增）────────────────────────────
+
+幻覺:
+  displayName: "幻覺（Hallucination）"
+  aliases: ["幻覺", "Hallucination", "hallucination"]
+  shortDesc: "AI 很自信地講出錯誤內容，語氣跟講對時一模一樣；它學的是「怎麼寫得像」，不是「先查證過」"
+  shortDescEn: "When an AI confidently states something wrong, in the same tone it uses when right; it learned how to sound right, not how to check facts"
+  canonicalArticle: "ai-keywords-glossary"
+  relatedArticles: ["rag-explained", "ai-tech-evolution", "prompt-engineering"]
+
+推理模型:
+  displayName: "推理模型（Reasoning Model）"
+  aliases: ["推理模型", "Reasoning Model", "reasoning model"]
+  shortDesc: "回答前先在內部打草稿、把問題想過一輪的模型，例如 OpenAI o1 系列；較慢、較耗 Token，複雜題較準"
+  shortDescEn: "A model that works through a problem internally before answering, such as OpenAI's o1 series; slower and more Token-hungry, but more accurate on hard questions"
+  canonicalArticle: "ai-keywords-glossary"
+  relatedArticles: ["cot-and-reasoning", "token-economics", "ai-tech-evolution"]
+
+工具調用:
+  displayName: "工具調用（Function Calling）"
+  aliases: ["工具調用", "Function Calling", "function calling", "Tool Use", "tool use"]
+  shortDesc: "AI 不自己執行動作，而是提出「請幫我查／開啟某項功能」的要求，由程式執行後把結果交回給 AI"
+  shortDescEn: "The AI doesn't perform actions itself; it requests them (\"please look this up\"), a program runs the request, and the result goes back to the AI"
+  canonicalArticle: "ai-keywords-glossary"
+  relatedArticles: ["llm-tool-calling-era", "mcp-protocol", "ai-agent-anatomy"]
