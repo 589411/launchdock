@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import NewsletterBlock from '../../components/NewsletterBlock.astro';
 import KuaibaoPromo from '../../components/KuaibaoPromo.astro';
-import CampHook from '../../components/CampHook.astro';
 import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articlesEn', ({ data }) => !data.archived);
@@ -14,7 +13,6 @@ const hasArticles = allArticles.length > 0;
   lang="en"
   description="LaunchDock — Step-by-step interactive AI tutorials. Learn how to run OpenClaw from scratch. The first English-language visual tutorial site for OpenClaw."
 >
-  <CampHook lang="en" />
   <KuaibaoPromo lang="en" />
 
   <!-- Hero -->

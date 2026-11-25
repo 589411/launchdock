@@ -1,0 +1,335 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Locale } from '../i18n/ui';
+import {
+  CAMP_HOOK_TITLE_EN,
+  CAMP_HOOK_TITLE_ZH,
+  CAMP_WEEKS_EN,
+  CAMP_WEEKS_ZH,
+} from '../data/camp';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'zh-tw' } = Astro.props;
+const isEn = lang === 'en';
+const title = isEn ? CAMP_HOOK_TITLE_EN : CAMP_HOOK_TITLE_ZH;
+const weeks = isEn ? CAMP_WEEKS_EN : CAMP_WEEKS_ZH;
+
+const copy = isEn
+  ? {
+      docTitle: 'Blue Duck Coaching Camp',
+      description:
+        'Blue Duck Coaching Camp starts in January 2027. A 100-day, 12-week plan that mixes recorded lessons with a coaching cohort, aimed at building your own AI assistant. Taught in Traditional Chinese.',
+      eyebrow: 'Blue Duck Coaching Camp',
+      lead: 'Built around Google (Gmail, Calendar, and Drive) and Notion, with lessons for ChatGPT, Claude, Gemini, and Grok. The aim is to build your own AI assistant. The camp is taught in Traditional Chinese.',
+      formatTitle: 'How it works',
+      format:
+        'The camp mixes recorded lessons with a coaching cohort. Each unit starts with a demo video, then you practice with prepared exercises in the cohort. Every exercise has a checklist and a reference answer. Units open week by week as you progress. Later weeks move from using AI to building your own agent, including workflows and more advanced uses.',
+      coursesTitle: 'The 12-week plan',
+      coursesIntro:
+        'The camp lasts 100 days and 12 weeks. The goal is to go from using AI to building your own assistant, with a practical output each week that a single prompt cannot do. Pre-camp prep is confirmed, as are Weeks 1 and 2. Weeks 3 to 12 are still being planned and may change before the camp starts.',
+      prepLabel: 'Pre-camp prep',
+      confirmed: 'Confirmed',
+      draft: 'In planning',
+      takeawayTitle: 'What you leave with',
+      takeaway:
+        'You start with your own system prompt, an AI assistant connected to Google and Notion, a “My 100 Days” task board, plus weekly task cards and exercises. By the end of the 12 weeks, the aim is a personal AI assistant that can actually run on your real work.',
+      surveyTitle: 'Fill in a survey, get a coupon code',
+      survey:
+        'After you fill in a survey, you can get a coupon code. The survey link, the coupon itself, and how the code is delivered are still being prepared. They will appear here once they are ready.',
+      surveyCta: 'Survey link coming soon',
+    }
+  : {
+      docTitle: '藍鴨陪跑營',
+      description:
+        '藍鴨陪跑營將於 2027 年 1 月開跑。100 天、12 週課程規劃，以錄影課程與陪跑營混合進行，目標是打造你自己的 AI 助理。',
+      eyebrow: '藍鴨陪跑營',
+      lead: '以 Google（Gmail、日曆、雲端硬碟）和 Notion 為核心；ChatGPT、Claude、Gemini、Grok 都有教學。目標是打造你自己的 AI 助理。',
+      formatTitle: '上課方式',
+      format:
+        '採用錄影課程與陪跑營混合的方式進行。每單元先看示範錄影，再在陪跑營裡用練習資料實作；每題都有檢核標準和參考答案。單元依進度逐週開放。後段會帶到如何打造自己的 AI agent，包括工作流與進階應用。',
+      coursesTitle: '12 週課程規劃',
+      coursesIntro:
+        '全程 100 天、12 週。目標是從會用 AI，走到打造你自己的助理；每一週都有一個實作產出，不是靠一句提示詞就能完成的事。開營前準備已確認，Week 1 到 Week 2 也已確認；Week 3 到 Week 12 仍在規劃中，開課前可能調整。',
+      prepLabel: '開營前準備',
+      confirmed: '已確認',
+      draft: '規劃中',
+      takeawayTitle: '學員會拿到',
+      takeaway:
+        '前幾週會先拿到自己的 system prompt、接好 Google 和 Notion 的 AI 助理、「我的 100 天」任務板，以及每週可以照做的任務卡和題目。12 週結束時，目標是讓你自己打造的個人 AI 助理，能在真實工作裡實際跑起來。',
+      surveyTitle: '填問卷，拿優惠碼',
+      survey:
+        '填寫問卷後可以拿到優惠碼。問卷連結、優惠碼內容，以及填完後怎麼拿到碼，都還在準備，確定後會放在這裡。',
+      surveyCta: '問卷連結準備中',
+    };
+---
+
+<BaseLayout title={copy.docTitle} description={copy.description} lang={lang}>
+  <section class="camp-hero" aria-labelledby="camp-page-title">
+    <div class="camp-wrap">
+      <p class="camp-eyebrow">{copy.eyebrow}</p>
+      <h1 id="camp-page-title" class="camp-title">{title}</h1>
+      <p class="camp-lead">{copy.lead}</p>
+    </div>
+  </section>
+
+  <div class="camp-wrap camp-body">
+    <section aria-labelledby="camp-format-title">
+      <h2 id="camp-format-title">{copy.formatTitle}</h2>
+      <p>{copy.format}</p>
+    </section>
+
+    <section aria-labelledby="camp-courses-title">
+      <h2 id="camp-courses-title">{copy.coursesTitle}</h2>
+      <p>{copy.coursesIntro}</p>
+      <ol class="camp-weeks">
+        {weeks.map((item) => (
+          <li>
+            <div class="camp-week-head">
+              <h3>{item.phase === 'prep' ? `${copy.prepLabel}｜${item.title}` : `Week ${item.week}｜${item.title}`}</h3>
+              <span class:list={['camp-badge', item.status === 'confirmed' ? 'is-confirmed' : 'is-draft']}>
+                {item.status === 'confirmed' ? copy.confirmed : copy.draft}
+              </span>
+            </div>
+            <p>{item.body}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section aria-labelledby="camp-takeaway-title">
+      <h2 id="camp-takeaway-title">{copy.takeawayTitle}</h2>
+      <p>{copy.takeaway}</p>
+    </section>
+
+    <section class="camp-survey" aria-labelledby="camp-survey-title">
+      <h2 id="camp-survey-title">{copy.surveyTitle}</h2>
+      <p>{copy.survey}</p>
+      <button type="button" class="camp-survey-btn" disabled>
+        {copy.surveyCta}
+      </button>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .camp-hero {
+    background: linear-gradient(135deg, #0f3460 0%, #1a4a8a 100%);
+    color: #ffffff;
+    padding: 36px 0 32px;
+  }
+
+  .camp-wrap {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  .camp-eyebrow {
+    display: inline-block;
+    margin: 0 0 12px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .camp-title {
+    margin: 0 0 12px;
+    font-size: 1.85rem;
+    line-height: 1.3;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    overflow-wrap: break-word;
+  }
+
+  .camp-lead {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #ffffff;
+    overflow-wrap: break-word;
+  }
+
+  .camp-body {
+    padding-top: 36px;
+    padding-bottom: 56px;
+  }
+
+  .camp-body section + section {
+    margin-top: 32px;
+  }
+
+  .camp-body h2 {
+    margin: 0 0 12px;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+  }
+
+  .camp-body p {
+    margin: 0 0 12px;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    overflow-wrap: break-word;
+  }
+
+  .camp-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .camp-weeks {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .camp-weeks li {
+    margin: 0;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: var(--color-surface-light);
+    border: 1px solid var(--color-surface-lighter);
+  }
+
+  .camp-week-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .camp-weeks h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #0f3460;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+  }
+
+  @media (min-width: 721px) {
+    .camp-week-head {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px 12px;
+    }
+
+    .camp-weeks h3 {
+      flex: 1;
+      padding-right: 8px;
+    }
+  }
+
+  :global(html[data-theme='dark']) .camp-weeks h3 {
+    color: #ffffff;
+  }
+
+  .camp-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .camp-badge.is-confirmed {
+    background: color-mix(in srgb, #0f3460 12%, transparent);
+    color: #0f3460;
+    border: 1px solid color-mix(in srgb, #0f3460 30%, transparent);
+  }
+
+  .camp-badge.is-draft {
+    background: transparent;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-surface-lighter);
+  }
+
+  :global(html[data-theme='dark']) .camp-badge.is-confirmed {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.28);
+  }
+
+  .camp-weeks p {
+    margin: 0;
+  }
+
+  .camp-survey {
+    padding: 24px 20px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #0f3460 0%, #1a4a8a 100%);
+    color: #ffffff;
+  }
+
+  .camp-survey h2,
+  .camp-survey p {
+    color: #ffffff;
+  }
+
+  .camp-survey-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 720px) {
+    .camp-hero {
+      padding: 24px 0 22px;
+    }
+
+    .camp-wrap {
+      padding: 0 20px;
+    }
+
+    .camp-title {
+      font-size: 1.45rem;
+    }
+
+    .camp-lead {
+      font-size: 0.95rem;
+    }
+
+    .camp-body {
+      padding-top: 28px;
+      padding-bottom: 40px;
+    }
+
+    .camp-weeks h3 {
+      font-size: 1rem;
+    }
+
+    .camp-survey-btn {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+</style>

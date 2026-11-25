@@ -1,0 +1,63 @@
+---
+import type { Locale } from '../i18n/ui';
+import {
+  CAMP_NAV_LABEL_EN,
+  CAMP_NAV_LABEL_ZH,
+  CAMP_PAGE_HREF,
+  CAMP_PAGE_HREF_EN,
+} from '../data/camp';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'zh-tw' } = Astro.props;
+const isEn = lang === 'en';
+const href = isEn ? CAMP_PAGE_HREF_EN : CAMP_PAGE_HREF;
+const label = isEn ? CAMP_NAV_LABEL_EN : CAMP_NAV_LABEL_ZH;
+---
+
+<div class="camp-topbar">
+  <div class="camp-topbar-inner">
+    <a href={href}>{label}</a>
+  </div>
+</div>
+
+<style>
+  .camp-topbar {
+    background: #0f3460;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .camp-topbar-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  .camp-topbar a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    color: #ffffff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .camp-topbar a:hover,
+  .camp-topbar a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    outline: none;
+  }
+
+  @media (max-width: 720px) {
+    .camp-topbar-inner {
+      padding: 0 20px;
+    }
+  }
+</style>
