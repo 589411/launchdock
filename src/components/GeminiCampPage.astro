@@ -17,9 +17,15 @@ const copy = isEn
         'Blue Duck Gemini Coaching Camp: use Gemini with Google Workspace (Gmail, Docs, Sheets, Drive, Calendar) to handle office admin and organize data. One topic and one small task each week, with pre-recorded video lessons and a 1-hour online meeting each week.',
       eyebrow: 'Coming soon',
       title: 'Blue Duck Gemini Coaching Camp',
-      lead: 'Connect Gemini to Google Workspace (Gmail, Docs, Sheets, Drive, Calendar) and handle office admin and data organization.',
+      lead: 'Designed for office administrators. Connect Gemini to Google Workspace (Gmail, Docs, Sheets, Drive, Calendar) to handle everyday admin work across email, documents, spreadsheets, and calendars.',
       launchLabel: 'Start date',
       launchValue: 'In preparation. The start date will be announced separately.',
+      audienceTitle: 'Who it is for',
+      audienceItems: [
+        'Office administrators and admin assistants.',
+        'Staff who handle a lot of email, meeting notes, forms, and spreadsheets every day.',
+        'People who want AI to help with repetitive admin work without giving it full control.',
+      ],
       formatTitle: 'How it works',
       formatItems: [
         'One topic and one small task each week.',
@@ -34,20 +40,21 @@ const copy = isEn
       bundleLabel: 'Both months together',
       bundlePrice: 'NT$5,700 (95% of the combined price)',
       advancedNote: 'You do not need to take Basic first, but we recommend it.',
+      outLabel: 'Output:',
       basicWeeksTitle: 'Basic month',
       advancedWeeksTitle: 'Advanced month',
       weeks: {
         basic: [
-          { week: 'W1', title: 'Gmail cleanup and draft replies' },
-          { week: 'W2', title: 'Docs and Drive: meeting notes and documents' },
-          { week: 'W3', title: 'Sheets data cleanup and a one-page summary' },
-          { week: 'W4', title: 'A weekly admin workflow' },
+          { week: 'W1', title: 'Gmail triage and draft replies', output: 'A sorted inbox list and three editable reply drafts.' },
+          { week: 'W2', title: 'Meeting notes and document filing (Docs and Drive)', output: 'One set of meeting notes and a Drive folder organized by a simple rule.' },
+          { week: 'W3', title: 'Sheets cleanup and a one-page summary', output: 'A tidied spreadsheet and a one-page summary for your manager.' },
+          { week: 'W4', title: 'A weekly admin workflow', output: 'One routine you do every week, written as fixed steps.' },
         ],
         advanced: [
-          { week: 'W5', title: 'Calendar and pre-meeting briefs' },
-          { week: 'W6', title: 'Build a reusable Gem' },
-          { week: 'W7', title: 'Tiered permissions: read-only, draft, approval required' },
-          { week: 'W8', title: 'A full week of practical workflows with approval checkpoints' },
+          { week: 'W5', title: 'Calendar and pre-meeting briefs', output: 'A pre-meeting brief with agenda, background, and open items.' },
+          { week: 'W6', title: 'Build a reusable Gem', output: 'A Gem for admin tasks that you can reuse.' },
+          { week: 'W7', title: 'Tiered permissions (read-only, draft, approval required)', output: 'Your own permission table: what Gemini can read, what it can draft, and what needs your approval.' },
+          { week: 'W8', title: 'A full week of practical workflows with approval checkpoints', output: 'One complete admin workflow run for a week, with approval steps built in.' },
         ],
       },
       freeTitle: 'Free places in the first cohort',
@@ -65,9 +72,15 @@ const copy = isEn
         '藍鴨Gemini陪跑營：用 Gemini 串接 Google Workspace（Gmail、Docs、Sheets、Drive、Calendar），處理行政辦公事務與資料整理。每週一個主題、一個小任務，搭配預錄影片與每週 1 小時線上 meeting。',
       eyebrow: '籌備中',
       title: '藍鴨Gemini陪跑營',
-      lead: '用 Gemini 串接 Google Workspace（Gmail、Docs、Sheets、Drive、Calendar），處理行政辦公事務與資料整理。',
+      lead: '專為辦公室行政人員設計。用 Gemini 串接 Google Workspace（Gmail、Docs、Sheets、Drive、Calendar），處理信件、文件、試算表與行事曆的日常行政事務。',
       launchLabel: '開課日期',
       launchValue: '籌備中，開課日期另行公告',
+      audienceTitle: '適合誰',
+      audienceItems: [
+        '辦公室行政人員、行政助理。',
+        '每天要處理大量信件、會議紀錄、表單與試算表的同工。',
+        '想把重複的行政事務交給 AI 協助，但不想把所有權限都交出去的人。',
+      ],
       formatTitle: '課程方式',
       formatItems: [
         '每週一個主題、一個小任務。',
@@ -82,20 +95,21 @@ const copy = isEn
       bundleLabel: '兩個月一起報',
       bundlePrice: 'NT$5,700（9.5 折）',
       advancedNote: '進階不必先上基本，但建議先上。',
+      outLabel: '產出：',
       basicWeeksTitle: '基本月',
       advancedWeeksTitle: '進階月',
       weeks: {
         basic: [
-          { week: 'W1', title: 'Gmail 整理與回信草稿' },
-          { week: 'W2', title: 'Docs＋Drive 會議紀錄與文件' },
-          { week: 'W3', title: 'Sheets 資料整理與一頁摘要' },
-          { week: 'W4', title: '每週行政小流程' },
+          { week: 'W1', title: 'Gmail 收信整理與回信草稿', output: '一份分好類的收件清單，以及 3 封可修改的回信草稿。' },
+          { week: 'W2', title: '會議紀錄與文件歸檔（Docs＋Drive）', output: '一份會議紀錄，以及一個依固定規則整理好的雲端硬碟資料夾。' },
+          { week: 'W3', title: 'Sheets 資料整理與一頁摘要', output: '整理乾淨的試算表，以及一頁給主管看的摘要。' },
+          { week: 'W4', title: '每週行政小流程', output: '一條你每週都會做的行政流程，寫成固定步驟。' },
         ],
         advanced: [
-          { week: 'W5', title: 'Calendar 與會前簡報' },
-          { week: 'W6', title: '打造可重複使用的 Gem' },
-          { week: 'W7', title: '權限分級（唯讀／草稿／需核准）' },
-          { week: 'W8', title: '一整週帶核准關卡的實戰流程' },
+          { week: 'W5', title: 'Calendar 行程與會前簡報', output: '一份會前簡報，列出議程、背景與待決事項。' },
+          { week: 'W6', title: '打造可重複使用的 Gem', output: '一個可以反覆使用的行政用 Gem。' },
+          { week: 'W7', title: '權限分級（唯讀／草稿／需核准）', output: '一張你自己的權限表，寫明 Gemini 能讀什麼、能草擬什麼，以及哪些事必須經你核准。' },
+          { week: 'W8', title: '一整週帶核准關卡的實戰流程', output: '一條跑完整週的行政流程，流程中內建核准關卡。' },
         ],
       },
       freeTitle: '第一梯次免費名額',
@@ -122,6 +136,13 @@ const mailtoHref = `mailto:${GEMINI_CAMP_CONTACT_EMAIL}?subject=${encodeURICompo
   </section>
 
   <div class="gc-wrap gc-body">
+    <section aria-labelledby="gc-audience-title">
+      <h2 id="gc-audience-title">{copy.audienceTitle}</h2>
+      <ul class="gc-list">
+        {copy.audienceItems.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
     <section aria-labelledby="gc-format-title">
       <h2 id="gc-format-title">{copy.formatTitle}</h2>
       <ul class="gc-list">
@@ -153,13 +174,13 @@ const mailtoHref = `mailto:${GEMINI_CAMP_CONTACT_EMAIL}?subject=${encodeURICompo
       <h3 class="gc-sub">{copy.basicWeeksTitle}</h3>
       <ol class="gc-weeks">
         {copy.weeks.basic.map((w) => (
-          <li><span class="gc-week-tag">{w.week}</span>{w.title}</li>
+          <li><span class="gc-week-tag">{w.week}</span><span class="gc-week-body"><strong>{w.title}</strong><span class="gc-week-out">{copy.outLabel} {w.output}</span></span></li>
         ))}
       </ol>
       <h3 class="gc-sub">{copy.advancedWeeksTitle}</h3>
       <ol class="gc-weeks">
         {copy.weeks.advanced.map((w) => (
-          <li><span class="gc-week-tag">{w.week}</span>{w.title}</li>
+          <li><span class="gc-week-tag">{w.week}</span><span class="gc-week-body"><strong>{w.title}</strong><span class="gc-week-out">{copy.outLabel} {w.output}</span></span></li>
         ))}
       </ol>
     </section>
@@ -311,6 +332,26 @@ const mailtoHref = `mailto:${GEMINI_CAMP_CONTACT_EMAIL}?subject=${encodeURICompo
     color: var(--color-text-primary);
     font-weight: 600;
     line-height: 1.5;
+  }
+
+  .gc-week-body {
+    display: block;
+    min-width: 0;
+  }
+
+  .gc-week-body strong {
+    display: block;
+    color: var(--color-text-primary);
+    font-weight: 700;
+  }
+
+  .gc-week-out {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
   }
 
   .gc-week-tag {
