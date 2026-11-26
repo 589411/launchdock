@@ -89,7 +89,7 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
-⭐ **陪跑營改版（2026-11-26 收工）**：已 push 兩個 commit：`25d031f`（導覽列橫幅改為藍鴨Gemini陪跑營、新課程頁、舊 100 天陪跑營路由移至 `docs/archive/ai-100day-camp/`）與 `3dcbd10`（課程改為辦公室行政人員導向：適合誰、每週產出）。**線上狀態**：`/gemini-camp/` 仍是 `25d031f` 的舊版，`3dcbd10` 尚未部署；`/camp/` 與 `/en/camp/` 仍回 200（舊快取或上游殘留，不是 repo 內容）。**明天下一步**：(1) 到 Cloudflare Pages 看最新部署狀態，失敗就修；(2) 線上確認 `3dcbd10` 內容；(3) 決定舊 `/camp/` 是否加 301 轉址到 `/gemini-camp/`（需你同意）；(4) CampPromo 推廣區塊位置待你指出。
+⭐ **Gemini 陪跑營（2026-11-27）**：課程頁已改為辦公室行政導向（`3dcbd10`）；新增「立即預先報名」與「依 Gemini 最新版本微調」說明。**報名功能已寫好、未套用、未部署**：表單 `/gemini-camp/register/`（中英），後端 `supabase/functions/gemini-camp-register`（check 優惠碼＋register 報名扣次數寄信），資料表 migration `018`（未套用到遠端）。折扣：三類免費（100%）、超早鳥 6 折、早鳥 7 折、一般 8 折；每組碼獨立、2 個月有效、可用 5 次；碼不進 repo，由 Joseph 在 SQL Editor 新增（見 `docs/gemini-camp-registration.md`）。**上線前待你決定**：(1) 同意套用 018 migration 與部署 Edge Function；(2) 開優惠碼；(3) 是否加 Turnstile 防灌報名（目前只有 honeypot）。**線上狀態**：`/gemini-camp/` 仍是舊版，`3dcbd10` 尚未部署；`/camp/` 仍回 200（上游殘留）。**待辦**：Cloudflare Pages 部署狀態；舊 `/camp/` 是否 301 到 `/gemini-camp/`（需同意）；CampPromo 位置。
 
 ⭐ **下一個具體動作（2026-11-25）**：Joseph 人工 gate `ai-keywords-glossary`（中英雙版，`src/content/articles/` 與 `en/`）→ 通過後 `git add` 這兩篇＋`ai-four-stages.svg`＋`concepts.yaml`＋`article-registry.json`＋BACKLOG／STATUS，commit 後 push。gate 時順便核對 o1（2024-09）與 Computer Use（2024-10）兩個日期。
 

@@ -64,6 +64,8 @@ const copy = isEn
       ctaBody:
         'Leave us your contact details, and we will get back to you once the course is confirmed.',
       ctaButton: 'Contact us',
+      registerButton: 'Pre-register now',
+      updateNote: 'Gemini is going through a major round of updates. We are tracking each release and will adjust the course content to match the latest version, so what you learn is up to date.',
       ctaSubject: 'Blue Duck Gemini Coaching Camp: I am interested',
     }
   : {
@@ -119,10 +121,13 @@ const copy = isEn
       ctaBody:
         '留下你的聯絡方式，課程確定後我們會再跟你聯繫。',
       ctaButton: '連絡我們',
+      registerButton: '立即預先報名',
+      updateNote: 'Gemini 近期正在密集改版，我們會持續追蹤每次更新，並依最新版本微調課程內容，確保你學的是目前的版本。',
       ctaSubject: '藍鴨Gemini陪跑營：我有興趣',
     };
 
-const mailtoHref = `mailto:${GEMINI_CAMP_CONTACT_EMAIL}?subject=${encodeURIComponent(copy.ctaSubject)}`;
+const registerHref = isEn ? '/en/gemini-camp/register/' : '/gemini-camp/register/';
+const mailtoHref =`mailto:${GEMINI_CAMP_CONTACT_EMAIL}?subject=${encodeURIComponent(copy.ctaSubject)}`;
 ---
 
 <BaseLayout title={copy.docTitle} description={copy.description} lang={lang}>
@@ -136,6 +141,8 @@ const mailtoHref = `mailto:${GEMINI_CAMP_CONTACT_EMAIL}?subject=${encodeURICompo
   </section>
 
   <div class="gc-wrap gc-body">
+    <p class="gc-note-update">{copy.updateNote}</p>
+
     <section aria-labelledby="gc-audience-title">
       <h2 id="gc-audience-title">{copy.audienceTitle}</h2>
       <ul class="gc-list">
@@ -193,7 +200,10 @@ const mailtoHref = `mailto:${GEMINI_CAMP_CONTACT_EMAIL}?subject=${encodeURICompo
     <section class="gc-cta" aria-labelledby="gc-cta-title">
       <h2 id="gc-cta-title">{copy.ctaTitle}</h2>
       <p>{copy.ctaBody}</p>
-      <a class="gc-cta-btn" href={mailtoHref}>{copy.ctaButton}</a>
+      <div class="gc-cta-actions">
+        <a class="gc-cta-btn gc-cta-btn-primary" href={registerHref}>{copy.registerButton}</a>
+        <a class="gc-cta-btn" href={mailtoHref}>{copy.ctaButton}</a>
+      </div>
     </section>
   </div>
 </BaseLayout>
@@ -404,6 +414,39 @@ const mailtoHref = `mailto:${GEMINI_CAMP_CONTACT_EMAIL}?subject=${encodeURICompo
   .gc-cta-btn:hover,
   .gc-cta-btn:focus-visible {
     background: rgba(255, 255, 255, 0.3);
+  }
+
+  .gc-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .gc-cta-actions .gc-cta-btn {
+    margin-top: 0;
+  }
+
+  .gc-cta-btn-primary {
+    background: #ffffff;
+    color: #0f3460;
+    border-color: #ffffff;
+  }
+
+  .gc-cta-btn-primary:hover,
+  .gc-cta-btn-primary:focus-visible {
+    background: #e6eefb;
+  }
+
+  .gc-note-update {
+    margin: 0;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border-left: 4px solid #0f3460;
+    background: var(--color-surface-light);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
   }
 
   @media (min-width: 721px) {
