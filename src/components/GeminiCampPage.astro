@@ -1,0 +1,402 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Locale } from '../i18n/ui';
+import { GEMINI_CAMP_CONTACT_EMAIL } from '../data/gemini-camp';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'zh-tw' } = Astro.props;
+const isEn = lang === 'en';
+
+const copy = isEn
+  ? {
+      docTitle: 'Blue Duck Gemini Coaching Camp',
+      description:
+        'Blue Duck Gemini Coaching Camp: use Gemini with Google Workspace (Gmail, Docs, Sheets, Drive, Calendar) to handle office admin and organize data. One topic and one small task each week, with pre-recorded video lessons and a 1-hour online meeting each week.',
+      eyebrow: 'Coming soon',
+      title: 'Blue Duck Gemini Coaching Camp',
+      lead: 'Connect Gemini to Google Workspace (Gmail, Docs, Sheets, Drive, Calendar) and handle office admin and data organization.',
+      launchLabel: 'Start date',
+      launchValue: 'In preparation. The start date will be announced separately.',
+      formatTitle: 'How it works',
+      formatItems: [
+        'One topic and one small task each week.',
+        'Pre-recorded video lessons.',
+        'A 1-hour online meeting each week. The time is arranged with you directly after the course starts.',
+        'You need your own Gemini subscription. Google AI Pro is recommended.',
+      ],
+      monthsTitle: 'Two months, two levels',
+      basicName: 'Basic',
+      advancedName: 'Advanced',
+      priceUnit: 'NT$3,000 / month',
+      bundleLabel: 'Both months together',
+      bundlePrice: 'NT$5,700 (95% of the combined price)',
+      advancedNote: 'You do not need to take Basic first, but we recommend it.',
+      basicWeeksTitle: 'Basic month',
+      advancedWeeksTitle: 'Advanced month',
+      weeks: {
+        basic: [
+          { week: 'W1', title: 'Gmail cleanup and draft replies' },
+          { week: 'W2', title: 'Docs and Drive: meeting notes and documents' },
+          { week: 'W3', title: 'Sheets data cleanup and a one-page summary' },
+          { week: 'W4', title: 'A weekly admin workflow' },
+        ],
+        advanced: [
+          { week: 'W5', title: 'Calendar and pre-meeting briefs' },
+          { week: 'W6', title: 'Build a reusable Gem' },
+          { week: 'W7', title: 'Tiered permissions: read-only, draft, approval required' },
+          { week: 'W8', title: 'A full week of practical workflows with approval checkpoints' },
+        ],
+      },
+      freeTitle: 'Free places in the first cohort',
+      freeBody:
+        'Staff of social welfare groups, churches, and disability groups, plus full-time staff, get free tuition. This does not include the Gemini subscription fee. Referrals are welcome.',
+      ctaTitle: 'Interested? Leave us your contact details',
+      ctaBody:
+        'Leave us your contact details, and we will get back to you once the course is confirmed.',
+      ctaButton: 'Contact us',
+      ctaSubject: 'Blue Duck Gemini Coaching Camp: I am interested',
+    }
+  : {
+      docTitle: '藍鴨Gemini陪跑營',
+      description:
+        '藍鴨Gemini陪跑營：用 Gemini 串接 Google Workspace（Gmail、Docs、Sheets、Drive、Calendar），處理行政辦公事務與資料整理。每週一個主題、一個小任務，搭配預錄影片與每週 1 小時線上 meeting。',
+      eyebrow: '籌備中',
+      title: '藍鴨Gemini陪跑營',
+      lead: '用 Gemini 串接 Google Workspace（Gmail、Docs、Sheets、Drive、Calendar），處理行政辦公事務與資料整理。',
+      launchLabel: '開課日期',
+      launchValue: '籌備中，開課日期另行公告',
+      formatTitle: '課程方式',
+      formatItems: [
+        '每週一個主題、一個小任務。',
+        '預錄影片課程。',
+        '每週 1 小時線上 meeting，時間在課程開始後直接跟學員約。',
+        '需自備 Gemini 訂閱，建議使用 Google AI Pro。',
+      ],
+      monthsTitle: '兩個月，兩個階段',
+      basicName: '基本',
+      advancedName: '進階',
+      priceUnit: 'NT$3,000 / 月',
+      bundleLabel: '兩個月一起報',
+      bundlePrice: 'NT$5,700（9.5 折）',
+      advancedNote: '進階不必先上基本，但建議先上。',
+      basicWeeksTitle: '基本月',
+      advancedWeeksTitle: '進階月',
+      weeks: {
+        basic: [
+          { week: 'W1', title: 'Gmail 整理與回信草稿' },
+          { week: 'W2', title: 'Docs＋Drive 會議紀錄與文件' },
+          { week: 'W3', title: 'Sheets 資料整理與一頁摘要' },
+          { week: 'W4', title: '每週行政小流程' },
+        ],
+        advanced: [
+          { week: 'W5', title: 'Calendar 與會前簡報' },
+          { week: 'W6', title: '打造可重複使用的 Gem' },
+          { week: 'W7', title: '權限分級（唯讀／草稿／需核准）' },
+          { week: 'W8', title: '一整週帶核准關卡的實戰流程' },
+        ],
+      },
+      freeTitle: '第一梯次免費名額',
+      freeBody:
+        '社福團體、教會、身障團體的工作人員與全職同工，免學費參加（只免學費，不含 Gemini 訂閱費）。歡迎轉介。',
+      ctaTitle: '有興趣？留下聯絡方式',
+      ctaBody:
+        '留下你的聯絡方式，課程確定後我們會再跟你聯繫。',
+      ctaButton: '連絡我們',
+      ctaSubject: '藍鴨Gemini陪跑營：我有興趣',
+    };
+
+const mailtoHref = `mailto:${GEMINI_CAMP_CONTACT_EMAIL}?subject=${encodeURIComponent(copy.ctaSubject)}`;
+---
+
+<BaseLayout title={copy.docTitle} description={copy.description} lang={lang}>
+  <section class="gc-hero" aria-labelledby="gc-title">
+    <div class="gc-wrap">
+      <p class="gc-eyebrow">{copy.eyebrow}</p>
+      <h1 id="gc-title" class="gc-title">{copy.title}</h1>
+      <p class="gc-lead">{copy.lead}</p>
+      <p class="gc-launch"><strong>{copy.launchLabel}：</strong>{copy.launchValue}</p>
+    </div>
+  </section>
+
+  <div class="gc-wrap gc-body">
+    <section aria-labelledby="gc-format-title">
+      <h2 id="gc-format-title">{copy.formatTitle}</h2>
+      <ul class="gc-list">
+        {copy.formatItems.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <section aria-labelledby="gc-months-title">
+      <h2 id="gc-months-title">{copy.monthsTitle}</h2>
+      <div class="gc-prices">
+        <div class="gc-price-card">
+          <h3>{copy.basicName}</h3>
+          <p class="gc-price">{copy.priceUnit}</p>
+        </div>
+        <div class="gc-price-card">
+          <h3>{copy.advancedName}</h3>
+          <p class="gc-price">{copy.priceUnit}</p>
+        </div>
+        <div class="gc-price-card gc-price-bundle">
+          <h3>{copy.bundleLabel}</h3>
+          <p class="gc-price">{copy.bundlePrice}</p>
+        </div>
+      </div>
+      <p class="gc-note">{copy.advancedNote}</p>
+    </section>
+
+    <section aria-labelledby="gc-weeks-title">
+      <h2 id="gc-weeks-title">{copy.basicWeeksTitle} / {copy.advancedWeeksTitle}</h2>
+      <h3 class="gc-sub">{copy.basicWeeksTitle}</h3>
+      <ol class="gc-weeks">
+        {copy.weeks.basic.map((w) => (
+          <li><span class="gc-week-tag">{w.week}</span>{w.title}</li>
+        ))}
+      </ol>
+      <h3 class="gc-sub">{copy.advancedWeeksTitle}</h3>
+      <ol class="gc-weeks">
+        {copy.weeks.advanced.map((w) => (
+          <li><span class="gc-week-tag">{w.week}</span>{w.title}</li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="gc-free" aria-labelledby="gc-free-title">
+      <h2 id="gc-free-title">{copy.freeTitle}</h2>
+      <p>{copy.freeBody}</p>
+    </section>
+
+    <section class="gc-cta" aria-labelledby="gc-cta-title">
+      <h2 id="gc-cta-title">{copy.ctaTitle}</h2>
+      <p>{copy.ctaBody}</p>
+      <a class="gc-cta-btn" href={mailtoHref}>{copy.ctaButton}</a>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .gc-hero {
+    background: linear-gradient(135deg, #0f3460 0%, #1a4a8a 100%);
+    color: #ffffff;
+    padding: 36px 0 32px;
+  }
+
+  .gc-wrap {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  .gc-eyebrow {
+    display: inline-block;
+    margin: 0 0 12px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .gc-title {
+    margin: 0 0 12px;
+    font-size: 1.85rem;
+    line-height: 1.3;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    overflow-wrap: break-word;
+  }
+
+  .gc-lead,
+  .gc-launch {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #ffffff;
+    overflow-wrap: break-word;
+  }
+
+  .gc-body {
+    padding-top: 36px;
+    padding-bottom: 56px;
+  }
+
+  .gc-body section + section {
+    margin-top: 32px;
+  }
+
+  .gc-body h2 {
+    margin: 0 0 12px;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+  }
+
+  .gc-body p,
+  .gc-list li {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    overflow-wrap: break-word;
+  }
+
+  .gc-list {
+    margin: 0;
+    padding-left: 1.25em;
+  }
+
+  .gc-prices {
+    display: grid;
+    gap: 12px;
+  }
+
+  .gc-price-card {
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: var(--color-surface-light);
+    border: 1px solid var(--color-surface-lighter);
+  }
+
+  .gc-price-card h3 {
+    margin: 0 0 4px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #0f3460;
+  }
+
+  .gc-price {
+    margin: 0 !important;
+    font-size: 1.1rem !important;
+    font-weight: 700;
+    color: var(--color-text-primary) !important;
+  }
+
+  .gc-price-bundle {
+    border-color: color-mix(in srgb, #0f3460 40%, transparent);
+  }
+
+  .gc-note {
+    margin-top: 12px !important;
+    font-size: 0.95rem !important;
+  }
+
+  .gc-sub {
+    margin: 16px 0 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  .gc-weeks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  .gc-weeks li {
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: var(--color-surface-light);
+    border: 1px solid var(--color-surface-lighter);
+    color: var(--color-text-primary);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .gc-week-tag {
+    display: inline-block;
+    min-width: 2.5em;
+    margin-right: 8px;
+    color: #0f3460;
+    font-weight: 800;
+  }
+
+  :global(html[data-theme='dark']) .gc-price-card h3,
+  :global(html[data-theme='dark']) .gc-week-tag {
+    color: #ffffff;
+  }
+
+  .gc-free {
+    padding: 20px;
+    border-radius: 14px;
+    border: 1px solid var(--color-surface-lighter);
+    background: var(--color-surface-light);
+  }
+
+  .gc-cta {
+    padding: 24px 20px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #0f3460 0%, #1a4a8a 100%);
+  }
+
+  .gc-cta h2,
+  .gc-cta p {
+    color: #ffffff;
+  }
+
+  .gc-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .gc-cta-btn:hover,
+  .gc-cta-btn:focus-visible {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  @media (min-width: 721px) {
+    .gc-prices {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .gc-hero {
+      padding: 24px 0 22px;
+    }
+
+    .gc-wrap {
+      padding: 0 20px;
+    }
+
+    .gc-title {
+      font-size: 1.45rem;
+    }
+
+    .gc-lead,
+    .gc-launch {
+      font-size: 0.95rem;
+    }
+
+    .gc-body {
+      padding-top: 28px;
+      padding-bottom: 40px;
+    }
+
+    .gc-cta-btn {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+</style>

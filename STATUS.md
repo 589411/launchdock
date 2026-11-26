@@ -89,6 +89,8 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
+⭐ **陪跑營改版（2026-11-26，未 commit、未 push，等 Joseph 看預覽後批准）**：導覽列頂部橫幅已改成「藍鴨Gemini陪跑營」→ `/gemini-camp/`、`/en/gemini-camp/`（新頁：`src/components/GeminiCampPage.astro`，文案只用 Joseph 給的，報名改 mailto `contact@launchdock.app`，開課日期「籌備中」）。`CampTopBar.astro` 與新資料檔 `src/data/gemini-camp.ts` 已改；舊 camp 檔（`camp.ts`、`CampPage.astro`、`/camp/`）**已下架（2026-11-26）**：兩個路由檔移到 `docs/archive/ai-100day-camp/`（恢復步驟見該資料夾 README）；元件 `CampPage.astro` 與資料 `camp.ts` 留在 `src/`，不被任何路由引用、不進 build。build 綠 211 頁，`dist/camp/` 不存在、sitemap 無 `/camp/`。Gemini 頁已移除「金流尚未開放」字句，按鈕改為「連絡我們」。**下一步**：CampPromo 推廣區塊換成 Gemini（repo 內目前找不到 CampPromo 元件，需 Joseph 指出位置）；確認後 commit、push、部署。
+
 ⭐ **下一個具體動作（2026-11-25）**：Joseph 人工 gate `ai-keywords-glossary`（中英雙版，`src/content/articles/` 與 `en/`）→ 通過後 `git add` 這兩篇＋`ai-four-stages.svg`＋`concepts.yaml`＋`article-registry.json`＋BACKLOG／STATUS，commit 後 push。gate 時順便核對 o1（2024-09）與 Computer Use（2024-10）兩個日期。
 
 **2026-10-30 新文章 `karpathy-ai-funnel`（全世界用 AI 的四層漏斗）中英雙版已上線**（`7d012cb`，Joseph gate 通過） ⬅️ 最新
