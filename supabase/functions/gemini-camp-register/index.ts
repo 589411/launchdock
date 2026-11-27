@@ -10,7 +10,9 @@
 
 import { isResendConfigured, sendEmail } from '../_shared/resend.ts';
 import { emailTemplate } from '../_shared/email-template.ts';
-import { corsHeaders, isValidEmail, json, normalizeEmail, serviceClient } from '../_shared/newsletter.ts';
+import {
+  corsHeaders, isValidEmail, json, normalizeEmail, serviceClient,
+} from '../_shared/newsletter.ts';
 
 const PLANS: Record<string, { label: string; price: number }> = {
   basic: { label: '基本月（W1–W4）', price: 3000 },
@@ -29,6 +31,10 @@ const BACKGROUNDS: Record<string, string> = {
 };
 
 const CODE_RE = /^[A-Z0-9-]{4,40}$/;
+
+// 使用者輸入（姓名）放進 HTML 信件前一律跳脫
+const esc = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders(req) });
@@ -127,7 +133,7 @@ Deno.serve(async (req) => {
         title: '✅ 報名資料已收到：藍鴨Gemini陪跑營',
         preheader: '我們已收到你的報名資料',
         body: `
-          <p>嗨 ${name}！</p>
+          <p>嗨 ${esc(name)}！</p>
           <p>我們已收到你的報名資料，內容如下：</p>
           <div style="background: #0f172a; border-radius: 8px; padding: 16px; margin: 16px 0;">
             <p style="margin: 4px 0; font-size: 14px;">方案：${PLANS[plan].label}</p>

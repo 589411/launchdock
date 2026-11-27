@@ -110,6 +110,7 @@ export default function GeminiCampRegisterForm({ lang = 'zh-tw' }: { lang?: Lang
   const [message, setMessage] = useState('');
   const [result, setResult] = useState<{ emailSent: boolean } | null>(null);
 
+
   const listPrice = GEMINI_PLANS[plan].price;
   const percent = couponState.status === 'valid' ? couponState.percent ?? 0 : 0;
   const finalPrice = Math.round((listPrice * (100 - percent)) / 100);
