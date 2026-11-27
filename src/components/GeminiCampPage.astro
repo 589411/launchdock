@@ -15,12 +15,10 @@ const copy = isEn
       docTitle: 'Blue Duck Gemini Coaching Camp',
       description:
         'Blue Duck Gemini Coaching Camp: use Gemini with Google Workspace (Gmail, Docs, Sheets, Drive, Calendar) to handle office admin and organize data. One topic and one small task each week, with pre-recorded video lessons and a 1-hour online meeting each week.',
-      eyebrow: 'Coming soon',
-      slogan: 'Hand the work to AI. Keep your time for the people who matter most.',
+      slogan: 'Hand the work to AI. Keep your time for the people who are most precious to you.',
       title: 'Blue Duck Gemini Coaching Camp',
       lead: 'Designed for office administrators. Connect Gemini to Google Workspace (Gmail, Docs, Sheets, Drive, Calendar) to handle everyday admin work across email, documents, spreadsheets, and calendars.',
-      launchLabel: 'Start date',
-      launchValue: 'In preparation. The start date will be announced separately.',
+      launchValue: 'Gemini has been rolling out frequent major updates. We\'re fine-tuning the course so you learn the latest.',
       audienceTitle: 'Who it is for',
       audienceItems: [
         'Office administrators and admin assistants.',
@@ -66,19 +64,16 @@ const copy = isEn
         'Leave us your contact details, and we will get back to you once the course is confirmed.',
       ctaButton: 'Contact us',
       registerButton: 'Pre-register now',
-      updateNote: 'Gemini is going through a major round of updates. We are tracking each release and will adjust the course content to match the latest version, so what you learn is up to date.',
       ctaSubject: 'Blue Duck Gemini Coaching Camp: I am interested',
     }
   : {
       docTitle: '藍鴨Gemini陪跑營',
       description:
         '藍鴨Gemini陪跑營：用 Gemini 串接 Google Workspace（Gmail、Docs、Sheets、Drive、Calendar），處理行政辦公事務與資料整理。每週一個主題、一個小任務，搭配預錄影片與每週 1 小時線上 meeting。',
-      eyebrow: '籌備中',
-      slogan: '把工作交給 AI，把時間留給最重要的人。',
+      slogan: '把工作交給AI，把時間留給最寶貴的人',
       title: '藍鴨Gemini陪跑營',
       lead: '專為辦公室行政人員設計。用 Gemini 串接 Google Workspace（Gmail、Docs、Sheets、Drive、Calendar），處理信件、文件、試算表與行事曆的日常行政事務。',
-      launchLabel: '開課日期',
-      launchValue: '籌備中，開課日期另行公告',
+      launchValue: 'Gemini 最近密集大改版，我們正在微調課程內容，讓大家學到的是最新的資訊',
       audienceTitle: '適合誰',
       audienceItems: [
         '辦公室行政人員、行政助理。',
@@ -124,7 +119,6 @@ const copy = isEn
         '留下你的聯絡方式，課程確定後我們會再跟你聯繫。',
       ctaButton: '連絡我們',
       registerButton: '立即預先報名',
-      updateNote: 'Gemini 近期正在密集改版，我們會持續追蹤每次更新，並依最新版本微調課程內容，確保你學的是目前的版本。',
       ctaSubject: '藍鴨Gemini陪跑營：我有興趣',
     };
 
@@ -135,17 +129,14 @@ const mailtoHref =`mailto:${GEMINI_CAMP_CONTACT_EMAIL}?subject=${encodeURICompon
 <BaseLayout title={copy.docTitle} description={copy.description} lang={lang}>
   <section class="gc-hero" aria-labelledby="gc-title">
     <div class="gc-wrap">
-      <p class="gc-eyebrow">{copy.eyebrow}</p>
       <h1 id="gc-title" class="gc-title">{copy.title}</h1>
       <p class="gc-slogan">{copy.slogan}</p>
       <p class="gc-lead">{copy.lead}</p>
-      <p class="gc-launch"><strong>{copy.launchLabel}：</strong>{copy.launchValue}</p>
+      <p class="gc-launch">{copy.launchValue}</p>
     </div>
   </section>
 
   <div class="gc-wrap gc-body">
-    <p class="gc-note-update">{copy.updateNote}</p>
-
     <section aria-labelledby="gc-audience-title">
       <h2 id="gc-audience-title">{copy.audienceTitle}</h2>
       <ul class="gc-list">

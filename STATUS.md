@@ -89,7 +89,7 @@ Interface）白話完整介紹」這種同義詞重複＋自我描述，換成 c
 
 ## 下一個具體動作 ⭐
 
-⭐ **Gemini 陪跑營（2026-11-27 部署）**：課程頁與 slogan 已 push（`50c7513`）。migration 018 已套用到正式專案；Edge Function gemini-camp-register 已部署（已移除 Turnstile）；優惠碼已建 4 組（各 5 次、2 個月有效，實際碼只存在 Supabase，不寫進 repo）。報名表單只做意願調查，僅 honeypot。待補：(1) RESEND_API_KEY 疑似未設定，確認信寄不出（報名仍成功）；(2) 線上課程頁與報名頁等 Cloudflare Pages 部署後再確認。
+⭐ **Gemini 陪跑營（2026-11-27 部署）**：課程頁與 slogan 已 push（`50c7513`）。migration 018 已套用到正式專案；Edge Function gemini-camp-register 已部署（已移除 Turnstile）；優惠碼已建 4 組（各 5 次、2 個月有效，實際碼只存在 Supabase，不寫進 repo）。報名表單只做意願調查，僅 honeypot。待補：(1) RESEND_API_KEY 疑似未設定，確認信寄不出（報名仍成功）；(2) 線上課程頁與報名頁等 Cloudflare Pages 部署後再確認。 2026-11-27 文案已改：slogan 對齊宣傳片、移除全站「籌備中」、開課日期行改為微調課程說明。
 
 ⭐ **下一個具體動作（2026-11-25）**：Joseph 人工 gate `ai-keywords-glossary`（中英雙版，`src/content/articles/` 與 `en/`）→ 通過後 `git add` 這兩篇＋`ai-four-stages.svg`＋`concepts.yaml`＋`article-registry.json`＋BACKLOG／STATUS，commit 後 push。gate 時順便核對 o1（2024-09）與 Computer Use（2024-10）兩個日期。
 
