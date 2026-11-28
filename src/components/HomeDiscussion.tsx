@@ -121,10 +121,9 @@ export default function HomeDiscussion() {
 
       let memberMap: Record<string, MemberBadge> = {};
       if (allUserIds.size > 0) {
-        const { data: profiles } = await supabase
-          .from('member_profiles')
-          .select('user_id, display_name, avatar_url, role')
-          .in('user_id', [...allUserIds]);
+        const { data: profiles } = await supabase.rpc('get_member_badges', {
+          p_user_ids: [...allUserIds],
+        });
         for (const p of profiles || []) {
           memberMap[p.user_id] = { display_name: p.display_name, avatar_url: p.avatar_url, role: p.role };
         }

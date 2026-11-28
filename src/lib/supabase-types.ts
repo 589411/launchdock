@@ -411,6 +411,10 @@ export interface Database {
         Args: { event_id_input: string };
         Returns: boolean;
       };
+      get_member_badges: {
+        Args: { p_user_ids: string[] };
+        Returns: { user_id: string; display_name: string; avatar_url: string | null; role: MemberRole }[];
+      };
     };
   };
 }
